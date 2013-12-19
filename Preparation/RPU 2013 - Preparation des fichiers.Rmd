@@ -1,0 +1,288 @@
+RPU 2013 - Préparation des fichiers
+========================================================
+
+Ce document décrit la préparation des données RPU depuis la ptransmission du fichier brut jusqu'à la production d'un fichier directement exploitable par R.
+Mise à jour:
+```{r}
+date()
+```
+
+Nomenclature
+------------
+- *raw* désigne les données brutes
+- *tidy* désigne les données nettoyées
+- la lettre *d* désigne les données. La lettre d peut être suivie de deux ou quatre chiffres désignant le mois. Par ex. *d01* désigne les données du mois de janvier et *d0506* les données des mois de mai et juin.
+- la base de donnée mysql contenant les données du mois s'appelle *rpu* et la table contenant les RPU s'appelle *RPU__* (deux soulignés).
+- les données nettoyées sont sauvegardées sous deux formats
+  - rpu2013_05.txt (rpu+année_mois.txt)
+  - rpu2013d06.Rda (rpu+année+d+mois.Rda)
+
+#### Liste des fichiers
+- le dossier **Fichiers source** contient les fichiers archivés de 2013
+  - dossier *Text* contient la table *rpu__* du mois en format text
+  - dossier *Dump* contient des dump originaux de la base de donnée (source e-santé)
+  - les fichiers *.Rda* contiennent les tables *rpu__* du mois en format binaire
+    - le fichier *rpu2013d1.rda* recense les mois 01 à 04 de 2013
+    - les fichiers *rpu2013dmm.rda* recensent les mois *mm* de 2013 (de 05 à 12)
+  - le **fichier courant** est *rpu2013d01mm.Rda* ou *mm* est le mois courant.
+  
+Origine des données
+-------------------
+Les données sont constituées par les RPU produits par les servives d'urgence. Les RPU sont transmis quotidiennement selon le schéma défini par l' INVS (version 2006) au serveur régional Sagec. Ces données sont gérées par Alsace e-santé (AeS) qui transmets les informations à l'INVS et à Résural. Pour Resural, AeS adresse tous les 5 du mois courant un dump de la table RPU__ du mois précédant, sous la forme d'un fichier .sql.  
+Ce fichier .sql est accessible uniquement sur le réseau interne des HUS via un accès sécurisé au serveur HUS (**TODO** décrire la procédure).  
+Le fichier est récupéré sur ce serveur par Résural.
+
+Transfert des données brutes vers PhpMyAdmin
+--------------------------------------------
+Le fichier récupéré est ensuite importé dans une base de données MySql. La base est crée sur le poste *mint* via *PhpMyAdmin* sous le nom de *rpu*. Par défaut, le fichier récupéré est stocké dans le dossier racine de l'utilisateur, *Dossier personnel/Resural_mai_juin_2013*. Il contient les données pour les mois de:
+- mai: rpu_2013_05_dump.sql (22.7 Mo)
+- juin: rpu_2013_06_dump.sql (23.7 Mo)
+Pour les transférer, on utilise la procédure standard en ligne de commande, commençant par le mois de mai:
+
+cd ~/Documents/Resural/'Stat Resural'/'Fichiers source'/Dump/RPU2013_09
+
+```{}
+jcb@mint1:~$ mysql -u root -pmarion rpu < rpu_2013-09_dump.sql
+```
+Création d'un fichier .my.cfg
+-----------------------------
+Le fichier caché *.my.cfg* (Dossier personnel) contient les identifiants de connexion à la base de données nécéssaires pour R:
+```{}
+[rpu] 
+user = root 
+host = localhost 
+database = rpu 
+password = marion 
+```
+Lecture du fichier dans RStudio
+-------------------------------
+
+### étape 1
+
+Cette étape permet de récupérer les données à partir de la table *rpu__* de la base de données *rpu*. A l'issue, un fichier de travail *rpu2013_05.txt* esr créé. Si ce fichier a déjà été créé, passer directement à l'étape 4.
+
+Chargement des library nécessaires:
+```{r}
+library("RMySQL")
+```
+Création d'un connecteur:
+```{r}
+# con<-dbConnect(MySQL(),group = "rpu") 
+con <- dbConnect(MySQL(),user="root", password="marion",dbname="rpu", host="localhost") 
+```
+Si échec:
+con <- dbConnect(MySQL(),user="root", password="marion",dbname="rpu", host="localhost")  
+ref: http://digitheadslabnotebook.blogspot.fr/2011/08/mysql-and-r.html
+
+
+Liste des tables de la base *rpu*
+```{r}
+dbListTables(con)
+```
+Liste des champs de la table *rpu__*
+```{r}
+dbListFields(con,"RPU__")
+```
+Lecture des enregistrements de la table compris entre le 1er mai et le 31 mai 2013 (cette étape peu être longue):
+```{r}
+ac<-2013  # annee courante
+mc<-11    # mois courant
+
+ms<-mc + 1
+if (ms > 12){
+  ms<-1
+  ac<-ac + 1
+}
+
+mp<-mc - 1
+if(mp < 1){
+  mp<-1
+}
+# conversion en chaines de caracteres
+if (ms < 10){
+  ms<-paste("0",ms,sep="")
+} else ms<-as.character(ms)
+
+if (mc < 10){
+  mc<-paste("0",mc,sep="")
+} else mc<-as.character(mc)
+
+if (mp < 10){
+  mp<-paste("0",mp,sep="")
+} else mp<-as.character(mp)
+
+ac<-as.character(ac)
+
+date1<-paste(ac,"-",mc,"-01",sep="")
+date2<-paste(ac,"-",ms,"-01",sep="")
+
+# rs<-dbSendQuery(con,"SELECT * FROM RPU__ WHERE ENTREE BETWEEN '2013-09-01' AND '2013-10-01' ")
+rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ WHERE ENTREE BETWEEN '",date1,"' AND '",date2,"' ",sep=""))
+
+dx<-fetch(rs,n=-1,encoding = "UTF-8")
+max(dx$ENTREE)
+min(dx$ENTREE)
+```
+Pour la mois de juin on répète les mêmes étapes:
+- jcb@mint1:~$ mysql -u root -pmarion rpu < Resural_mai_juin_2013/rpu_2013_06_dump.sql
+- rs<-dbSendQuery(con,"SELECT * FROM RPU__ WHERE ENTREE BETWEEN '2013-06-01' AND '2013-06-31' ")
+- d06<-fetch(rs,n=-1,encoding = "UTF-8")
+Les deux fichiers peuvent être combinés en un seul avec la commande *rbind*:
+```{}
+d0506<-rbind(d05,d06)
+min(d0506$ENTREE)
+[1] "2013-05-01 00:00:00"
+max(d0506$ENTREE)
+[1] "2013-06-30 23:53:00"
+```
+
+etape 2: nettoyage des données
+------------------------------
+Suppression de la colonne 16, intitulée RAW. Cette colonne a été rajoutée par mr Nold pour stocker le RPU tel que fournit par le SAU:
+```{r}
+dx<-dx[,-16]
+```
+On ramène le nombre de variable à 19.
+
+création de FINESS unique pour un établissement par transformation du finess juridique en finess geographique
+```{r}
+a<-dx$FINESS
+a[a=="670000397"]<-"Sel"
+a[a=="680000684"]<-"Col"
+a[a=="670016237"]<-"Odi"
+a[a=="670000272"]<-"Wis"
+a[a=="680000700"]<-"Geb"
+a[a=="670780055"]<-"Hus"
+a[a=="680000197"]<-"3Fr"
+a[a=="680000627"]<-"Mul"
+a[a=="670000157"]<-"Hag"
+a[a=="680000320"]<-"Dia"
+a[a=="680000395"]<-"Alk"
+a[a=="670000165"]<-"Sav"
+unique(a)
+dx$FINESS<-as.factor(a)
+rm(a)
+```
+Transformation en facteur:
+```{r}
+dx$CODE_POSTAL<-as.factor(dx$CODE_POSTAL)
+dx$COMMUNE<-as.factor(dx$COMMUNE)
+dx$SEXE<-as.factor(dx$SEXE)
+dx$TRANSPORT<-as.factor(dx$TRANSPORT)
+dx$TRANSPORT_PEC<-as.factor(dx$TRANSPORT_PEC)
+dx$GRAVITE<-as.factor(dx$GRAVITE)
+dx$ORIENTATION<-as.factor(dx$ORIENTATION)
+dx$MODE_ENTREE<-factor(dx$MODE_ENTREE,levels=c(0,6,7,8),labels=c('NA','Mutation','Transfert','Domicile'))
+dx$PROVENANCE<-factor(dx$PROVENANCE,levels=c(0,1,2,3,4,5,8),labels=c('NA','MCO','SSR','SLD','PSY','PEA','PEO'))
+dx$MODE_SORTIE<-factor(dx$MODE_SORTIE,levels=c(0,6,7,8,4),labels=c('NA','Mutation','Transfert','Domicile','Décès'))
+dx$DESTINATION<-factor(dx$DESTINATION,levels=c(0,1,2,3,4,6,7),labels=c('NA','MCO','SSR','SLD','PSY','HAD','HMS'))
+```
+Création d'une variable AGE:
+```{r-age1}
+dx$AGE<-floor(as.numeric(as.Date(dx$ENTREE)-as.Date(dx$NAISSANCE))/365)
+summary(dx$AGE)
+```
+Correction des ages supérieurs à 120 ans (3 cas) ou inférieur à 0 (2 cas)
+```{r age}
+dx$AGE[dx$AGE > 120]<-NA
+dx$AGE[dx$AGE < 0]<-NA
+```
+etape 3: sauvegarde des données nettoyées
+-----------------------------------------
+```{r-sauvegarde}
+# write.table(dx,"rpu2013_07.txt",sep=',',quote=TRUE,na="NA")
+mois_courant_file <- paste("rpu",ac,"d",mc,".Rda",sep="")
+save(dx,file = mois_courant_file)
+```
+etape 4: chargement des données sauvegardées
+--------------------------------------------
+```{r}
+# load(mois_courant_file)
+```
+Résumé des tidy datas
+---------------------
+```{r}
+str(dx)
+summary(dx)
+```
+Fusion avec la base annuelle
+-----------------------------
+*d0110* est la base annuelle provisoire
+base_annuelle_courante = rpuAAAAd01MM.Rda où AAAA est l'année courante et MM le mois précédant le mois courant. Ex. si on saisit le mois d'octobre 2013, la base courante est celle qui va du 1er janvier au 30 septembre 2013 => AAAA = 2013 et MM = 09.
+
+Les données de la base annuelle courante sont stockées dans la variable **d1**; (avant octobre 2013 les données sont stockées sous le nom de variable d01xx où xx coresspod au mois courant.)
+
+les données du mois courant sont stockées et restituées dans la variable **dx**
+
+```{r}
+base_annuelle_courante <- paste("d01",mp,sep="")
+bac <- paste("rpu",ac,base_annuelle_courante,".Rda",sep="")
+load(bac)
+
+# new_data <- rbind(d0109,dx)
+new_data <- rbind(d1,dx)
+d1 <- new_data
+
+
+nb_name <- paste("rpu",ac,"d01",mc,".Rda",sep="")
+save(d1, file = nb_name)
+```
+
+SUITE: voir RPU_2013_Preparation.Rmd
+
+Vérification de la complétude des données
+=========================================
+
+Nombre de passages
+------------------
+Tableau croisé des Finess et du nombre de passages quotidiens:
+```{r}
+d<-table(as.Date(dx$ENTREE),dx$FINESS)
+head(d)
+plot(t(d))
+
+d2 <- addmargins(d,c(2,2),FUN = list(Somme=sum,Moyenne=mean))
+write.table(d2, file="data.csv", sep=",", row.names = TRUE, quote = FALSE)
+```
+           3Fr Alk Col Dia Geb Hag Hus Mul Odi Sel Wis
+  2013-05-01  49   8 155  70  40 102 103 132  73  85  29
+  2013-05-02  43  41 180  85  52 104 120 123  72  89  32
+  2013-05-03  36  29 176  64  43  85 116 141  71  82  27
+  2013-05-04  47  11 184  92  42 104  87 151  74  93  34
+  2013-05-05  52  10 190  89  50  91 102 185  93  99  31
+  2013-05-06  50  46 209  97  40  99 138 174  73  98  36
+  
+Lignes où le nombre de données est inférieur à 20:
+```{r}
+df<-data.frame(d)
+a<-df[df$Freq<20,]
+```
+Dernier fichier sauvegardé
+==========================
+octobre 2013:  
+----------
+write.table(d06,"rpu2013_06.txt",sep=',',quote=TRUE,na="NA")
+save(d06,file="rpu2013d06.Rda")
+
+RPU du 1er janvier 2013 au 30 juin 2013:
+----------------------------------------
+d0106<-rbind(d1,d05,d06)
+save(d0106,file="rpu2013d0106.Rda")
+rm(d0106)
+
+Résumé de la mise à jour
+========================
+
+```{r maj,echo=FALSE}
+print(paste("Date: ",date()))
+sessionInfo()
+print(paste("année courante: ",ac))
+print(paste("Mois courant: ",mc))
+print(paste("Base de données upgradée: ",bac))
+print(paste("Fichier du mois courant: ",mois_courant_file))
+print(paste("Nouvelle base de données",nb_name))
+print(paste("- date de début: ",min(d1$ENTREE)))
+print(paste("- date de fin  : ",max(d1$ENTREE)))
+print(paste("Nombre d'enregistrements: ",nrow(d1)))
+```
+

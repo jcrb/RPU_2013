@@ -1,0 +1,841 @@
+RPU 2013 Analyse
+========================================================
+```{r date}
+date()
+```
+source: RPU2013
+Ce document exploite le fichier RData préparé à partir de la table *RPU__* de Sagec. Voir le document *RPU_2013_Preparation.Rmd* du dossier Resural.
+
+Librairies nécessaires:
+-----------------------
+```{r library , message=FALSE}
+library("gdata")
+library("rgrs")
+library("lubridate")
+library("rattle")
+library("epicalc")
+library("zoo")
+library("xts")
+library("xtable")
+library("plotrix")
+library("openintro")
+```
+Chargement des routines perso
+-----------------------------
+```{r routines}
+source("../Routines/mes_fonctions.R")
+```
+Variables globales:
+-------------------
+```{r var_globales}
+mois_courant<-11
+```
+
+Lecture du fichier des données
+---------------------------------------
+On lit le fichier de travail créé:
+```{r Lecture fichier}
+
+# load("../rpu2013.Rda")
+load("../rpu2013d0111.Rda")
+# d1<-d0109
+# rm(d0109)
+
+attach(d1)
+```
+Les données sont enregistrées dans un data.frame appelé *d1*.
+
+Analyse des données
+===================
+```{r analyse_data}
+n<-dim(d1)
+print(n)
+names(d1)
+str(d1)
+summary(d1)
+```
+Stuctures hospitaliéres participantes
+=====================================
+- *Alk* CH d' Alkirch
+- *Col* CH Colmar (Pasteur + Parc)
+- *Dia* Diaconat-Fonderie
+- *3Fr* Clinique des trois frontières
+- *Geb* HUS
+- *Hag* CH de Haguenau
+- *Hus* Hôpiaux Universitaires de Strasbourg
+- *Mul* CH de Mulhouse
+- *Odi* Clinique Ste Odile
+- *Sel* CH de Sélestat
+- *Wis* CH de Wissembourg
+- *Sav* CH de Saverne
+Hôpitaux ne transmettant pas de données:
+- *Tha* CH de Thann
+- *Ann* Clinique Ste Anne
+
+Contribution (en %) des SU à la production de RPU:
+```{r part}
+summary(d1$FINESS)
+a<-table(d1$FINESS)
+round(prop.table(a)*100,digits=2)
+```
+Passages déclarés au serveur régional:
+
+   ALK  | COL  | CTF |  DIA |  GEB |  HUS |  MUL |  ODI |  SAV |  SEL  | TAN |  WIS 
+   ----|-------|-----|------|------|------|-------|------|-----|-------|-----|-----
+  4577 |21353 | 5475 | 3136  |4926 |41561 |20160 | 8417 | 8961 | 9670 | 4840 | 3052
+  
+  First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+Projection sur l'année:
+```{r projection}
+mois_courant<-9
+p<- 12/mois_courant
+summary(d1$FINESS)*p
+sum(summary(d1$FINESS)*p)
+
+t1<-table(d1$FINESS)
+t2<-table(d1$FINESS)*p
+t3<-rbind(t1,t2)
+rownames(t3)<-c("Réalisé","Projection 2013")
+xtable(t(t3))
+```
+### Origine temporelle des données:
+Pour chaque hopital on determine la datela plus basse a partir de laquelle des donn2es sont transmises. Les dates sont donnees en secondes unix => il faut les transformer en dates calendaires
+```{r origine_temporelle}
+b<-tapply(as.Date(d1$ENTREE),d1$FINESS,min)
+c<-as.Date(b,origin="1970-01-01")
+cbind(as.character(sort(c)))
+```
+Exhaustivité des données
+------------------------
+
+#### Jours manquants:a<-as.data.frame(a)
+NB: il manque le 31/05dans d1
+
+On forme une matrice (table) de 365 lignes et 12 colonnes (hopitaux) contenant le nombre de RPU un jour donne pour un hopital. Pour conserver une trace du jour, on ajoute une colonne date. On signale les jours pour lesquels le nombre de RPU est inferieur a 20:
+
+```{r jours_manquants}
+a<-table(as.Date(d1$ENTREE),d1$FINESS)
+a<-as.data.frame.matrix(a)
+head(a)
+# liste par FINESS des jours où le nb de RPU est inférieur à 20:
+# il faut ajouter une colonne date pour que cela fonctionne.
+a$date<-seq(as.Date("2013-01-01"),as.Date("2013-09-29"),1)
+# On initialise une liste de 12 éléments,12 parce que 12 SU
+b<-list(1:12)
+# pour chacun des SU, les jours où le nombre de RPU < 20, on stocke la date (col.13) et le n° du SU
+for(i in 1:12){b[[i]]<-a[a[,i]<20,c(13,i)]}
+str(b)
+# dossier manquants pour guebwiller:
+b[[5]]
+names(b[[5]])
+b[[5]]$date
+# liste des SU incomplets:
+for(i in 1:12){n=length(b[[i]]$date);if(n>0){print(paste(i,names(b[[i]][2]),n,sep=" "))}}
+```
+#### Exhaustivité des items
+Il faut tranformer les valeurs NULL en NA pour pouvoir les comptabiliser. Les valeurs NULL apparaissent pour les factors: DP, MOTIF, TRANSPORT, ORIENTATION,GRAVITE, SORTIE. Il faut les transformer en character pour leur attriber la valeur NA au lieu de NULL:
+```{r exhaustivite}
+a<-as.character(d1$DP)
+a[a=="NULL"]<-NA
+sum(is.na(a))
+mean(is.na(a))
+```
+sum(is.na(a)) retourne le nombre de lignes concernées et *mean(is.na(a))* donne directement le pourcentage de valeurs nulles (R in action pp 356)
+```{r exhaustivite_suite}
+d1$DP<-a
+
+a<-as.character(d1$MOTIF)
+a[a=="NULL"]<-NA
+d1$MOTIF<-a
+
+a<-as.character(d1$TRANSPORT)
+a[a=="NULL"]<-NA
+d1$TRANSPORT<-a
+
+a<-as.character(d1$ORIENTATION)
+a[a=="NULL"]<-NA
+d1$ORIENTATION<-a
+
+a<-as.character(d1$GRAVITE)
+a[a=="NULL"]<-NA
+d1$GRAVITE<-a
+
+a<-as.character(d1$SORTIE)
+a[a=="NULL"]<-NA
+d1$SORTIE<-a
+
+a<-as.character(d1$ENTREE)
+a[a=="NULL"]<-NA
+d1$ENTREE<-a
+```
+Les 2 lignes qui suivent comptent les NA
+```{r compte_NA}
+a<-is.na(d1)
+b<-apply(a,2,mean)
+a<-cbind(sort(round(b*100,2)))
+colnames(a)<-"%"
+a
+```
+MODE_SORTIE (hospitalisation ou retour à domicile): dans 14.86% des cas on ne sait pas ce que devient le patient. Pour sélectionner les hospitalisés et éliminer les NA et les valeurs nulles:
+```{r mode_sortie}
+a<-d1$MODE_SORTIE[MODE_SORTIE=="Mutation" | MODE_SORTIE == "Transfert"]
+a<-na.omit(a)
+a<-as.factor(as.character(a))
+summary(a)
+round(prop.table(table(a))*100,2)
+
+a<-d1[MODE_SORTIE=="Mutation" | MODE_SORTIE == "Transfert",]
+a<-na.omit(a)
+summary(a$DESTINATION)
+summary(as.factor(a$ORIENTATION))
+round(prop.table(table(as.factor(a$ORIENTATION)))*100,2)
+
+tab1(as.factor(a$ORIENTATION),sort.group="decreasing",horiz=TRUE,cex.names = 0.8,xlab="",main="Orientation des patients hospitalisés")
+
+a<-d1[d1$MODE_SORTIE=="Domicile" ,]
+summary(as.factor(a$ORIENTATION))
+t<-table(as.factor(a$ORIENTATION))
+round(prop.table(t)*100,2)
+tab1(as.factor(a$ORIENTATION),sort.group="decreasing",horiz=TRUE,cex.names = 0.8,xlab="",main="Orientation des patients non hospitalisés",missing=F)
+```
+La table ci-dessus liste le devenir des patients non hospitalisés. On note des incohérences: REA, HDT, SI, Med, CHIR, UHCD. La ligne *Missing* correspond aux patients rentrés sur avis médical.
+
+Etude des patients hospitalisés
+--------------------------------
+La rubrique mode de sortie peut se décomposer en 3 éléments
+- *hosp*: patient hospitalisés, cad gardé en milieu de soins par *MUTATION* ou *TRANSFERT*
+- *dom*: retour à domicile ou équivalent
+- *dcd*: patients décédés aux urgences
+Dans l'échantillon *d1* c'est la colonne *MODE_SORTIE* qui renseigne sur le devenir du patient à la sortie des urgences:
+
+```{r mode_sortie2, echo=FALSE}
+print(paste("d1 compte ",nrow(d1)," lignes"))
+```
+Il y a deux façons de former des sous ensembles avec R:
+- sélectionner en utilisant la notation vectorielle: hosp<-d1[d1$MODE_SORTIE=="Mutation" | d1$MODE_SORTIE=="Transfert",]
+- sélectionner avec la méthode **subset**: b<-subset(d1,MODE_SORTIE=="Mutation" | MODE_SORTIE=="Transfert")
+
+La première méthode sélectionne toutes les lignes correspondant aux critères ET celles où le critère vaut *NA*. ie, la méthode 1 retourne un data frame de 39224 lignes et 20 colonnes.
+
+La méthode *subset* ne tient pas compte des lignes où le critère vaut NA. Dans l'exemple, retourne un dataframe de 23473 lignes et 20 colonnes.
+
+```{r subset,echo=TRUE}
+hosp<-d1[d1$MODE_SORTIE=="Mutation" | d1$MODE_SORTIE=="Transfert",]
+dom<-d1[d1$MODE_SORTIE=="Domicile",]
+dcd<-d1[d1$MODE_SORTIE=="Deces",]
+nbna<-nrow(hosp)+nrow(dom)+nrow(dcd)-nrow(d1)
+pna<-round(nbna*100/nrow(d1),2)
+
+print(paste("hosp = ",nrow(hosp)," lignes"))
+print(paste("dom = ",nrow(dom)," lignes"))
+print(paste("dcd = ",nrow(dcd)," lignes"))
+
+print(paste("La différence du nombre de lignes entre d1 et hosp, dom et dcd indique le nmbre de lignes correspondant à NA et qui sont incluses dans le décompte des lignes de chaque sous ensemble: ",nbna,"correspondant aux mode de sortie non renseignés soit ",pna," %"))
+```
+Avec *subset* on élimine ces lignes parasites:
+```{r subset2}
+a<-subset(d1,MODE_SORTIE=="Domicile")
+b<-subset(d1,MODE_SORTIE=="Mutation" | MODE_SORTIE=="Transfert")
+nrow(a)
+nrow(b)
+nrow(d1)-nrow(a)-nrow(b)
+
+print("O")
+t<-table(b$ORIENTATION,b$FINESS,useNA="ifany")
+m1<-margin.table(t,1)
+t2<-cbind(t,m1)
+m2<-margin.table(t2,2)
+rbind(t2,m2)
+
+summary(a$MODE_SORTIE)
+summary(b$MODE_SORTIE)
+```
+- nb total de lignes = 105979
+- total hospitalisés = 21950 +  1523
+- total non hospitalisés = 66755 
+- non réponses = 105979-90228 = 15751
+```{r analyse}
+summary(b$DESTINATION)
+summary(b$ORIENTATION)
+summary(a$DESTINATION)
+summary(a$ORIENTATION)
+```
+
+
+
+
+on forme un dataframe *hosp* des patients hospitalisés par mutation ou transfert:
+```{r hosp}
+ hosp<-d1[d1$MODE_SORTIE=="Mutation" | d1$MODE_SORTIE=="Transfert",]
+summary(d1$MODE_SORTIE)
+prop.table(summary(d1$MODE_SORTIE))*100
+```
+#### Destinations
+```{r hosp_destination}
+summary(hosp$DESTINATION)
+prop.table(summary(hosp$DESTINATION))
+# sans les NA
+table(hosp$DESTINATION)
+prop.table(table(hosp$DESTINATION))*100
+```
+
+#### Orientation des hospitalisés MCO (avec et sans les NA):
+```{r mco}
+a<-as.factor(hosp$ORIENTATION[hosp$DESTINATION=="MCO"])
+a<-summary(a)
+a
+round(prop.table(a)*100,2)
+
+a<-table(hosp$ORIENTATION[hosp$DESTINATION=="MCO"])
+a
+a<-prop.table(a)*100
+a
+sce_chauds<-a["REA"]+a["SI"]+a["SC"]
+print(paste("Services chauds: ",round(sce_chauds,2)," %"))
+mco<-a["CHIR"]+a["MED"]+a["OBST"]
+print(paste("MCO: ",round(mco,2)," %"))
+print(paste("UHTCD: ",round(a["UHCD"],2)," %"))
+print(paste("Atypiques: ",round(a["FUGUE"]+a["PSA"]+a["SCAM"]+a["REO"],2)," %"))
+print(paste("HDT-HO: ",round(a["HDT"]+a["HO"],2)," %"))
+```
+Quelques erreurs de codage:
+- Fugue, HDT, HO, PSA,REO, SCAM devraient être nuls
+dom<-d1
+#### Orientation des patients hospitalisés en Psychiatrie:
+```{r psy}
+a<-summary(hosp$ORIENTATION[hosp$DESTINATION=="PSY"])
+a
+a<-table(hosp$ORIENTATION[hosp$DESTINATION=="PSY"])
+a
+
+a<-d1[d1$DESTINATION=="PSY",]
+a$DESTINATION<-as.character(a$DESTINATION)
+a<-a[!is.na(a$DESTINATION),]
+summary(a$ORIENTATION)
+round(prop.table(summary(a$ORIENTATION))*100,3)
+```
+#### Analyse de l'ensemble de la rubrique **ORIENTATION**
+```{r orientation}
+d1$ORIENTATION<-as.factor(d1$ORIENTATION)
+a<-summary(d1$ORIENTATION)
+a
+a<-round(prop.table(a)*100,4)
+
+sce_chauds<-a["REA"]+a["SI"]+a["SC"]
+print(paste("Services chauds: ",round(sce_chauds,2)," %"))
+mco<-a["CHIR"]+a["MED"]+a["OBST"]
+print(paste("MCO: ",round(mco,2)," %"))
+uhcd<-a["UHCD"]
+print(paste("UHTCD: ",round(uhcd,2)," %"))
+atypique<-a["FUGUE"]+a["PSA"]+a["SCAM"]+a["REO"]
+print(paste("Atypiques: ",round(atypique,2)," %"))
+psy<-a["HDT"]+a["HO"]
+print(paste("HDT-HO: ",round(psy,2)," %"))
+nr<-a["NA's"]
+
+als<-c(mco,uhcd,nr,atypique,sce_chauds,psy)
+lor<-c(49.39,19.12,17.25,8.92,5.24,0.07)
+
+r<-rbind(als,lor)
+barplot(r,las=2,beside=T,legend=T,ylab="% des RPU",xlab="",sub="(Ref. ORULOR 2011 p.50)",names.arg=c("MCO","UHCD","NR","Atypiques","REA","PSY"),main="Orientation des patients hospitalisés",cex.sub=0.6)
+```
+en fonction de l'établissement (NOTE: utilisation de useNA="ifany"):
+```{r orientation_Finess}
+# analyse brute
+t<-table(d1$ORIENTATION,d1$FINESS)
+t
+# analyse brute incluant les NA
+t<-table(d1$ORIENTATION,d1$FINESS,useNA="ifany")
+t
+# cette analyse ne permet pas de séparer les vraies non réponses des retours à domicile
+hosp<-d1[d1$MODE_SORTIE=="Mutation" | d1$MODE_SORTIE=="Transfert",]
+t<-table(hosp$ORIENTATION,hosp$FINESS,useNA="ifany")
+t
+# non hospitalisés
+dom<-d1[d1$MODE_SORTIE=="Domicile",]
+```
+
+
+Adultes
+-------
+Répartition de la population adulte (18 ans et plus)
+```{r adultes}
+a<-d1[AGE > 17,c("AGE","FINESS")]
+boxplot(a$AGE~a$FINESS,main="Patients de 18 ans et plus",col="slategray1")
+```
+
+Mineurs
+-------
+```{r mineurs}
+a<-d1$AGE[d1$AGE<=18]
+#a
+summary(a)
+hist(a,main="Moins de 18 ans",xlab="Age (années)",col="yellow")
+
+a<-d1$AGE[FINESS=="Col" & d1$AGE<18]
+#a
+a<-d1$AGE[FINESS=="Hag" & d1$AGE<18]
+#a
+a<-d1$AGE[FINESS=="Mul" & d1$AGE<18]
+#a
+table(FINESS)
+```
+Durée d'attente
+===============
+On utilise les données de Sélestat comme étude pilote:
+```{r selestat}
+sel<-d1[d1$FINESS=="Sel",]
+e<-ymd_hms(sel$ENTREE)
+s<-ymd_hms(sel$SORTIE)
+q<-s-e
+sel$attente<-q
+summary(as.numeric(q))
+```
+Attente cumulée par jour (pour chaque jour, on cumule les durées d'attente) en mn:
+```{r attente}
+q<-tapply(sel$attente,as.Date(sel$ENTREE),sum,na.rm=TRUE)
+summary(q)
+hist(q,main="Attente cumulée par 24h",xlab="Durée de passage (en mn)",ylab="Fréquence",col="orange")
+
+z<-zoo(q,unique(as.Date(sel$ENTREE)))
+plot(z,main="Attente cumulée par 24h",xlab="Sélestat 2013")
+plot(xts(z))
+plot(rollmean(z, 7),main="Attente cumulée par 24h (moyenne lissée)")
+plot(rollmean(xts(z), 7),main="Attente cumulée (lissée) par 24h",xlab="Durée de passage (en mn)",ylab="Fréquence")
+```
+Ensemble des SAU
+----------------
+attente en mn:
+```{r attente_sau}
+e<-ymd_hms(d1$ENTREE)
+s<-ymd_hms(d1$SORTIE)
+q<-s-e
+d1$passage<-q/60
+
+tapply(d1$passage,d1$FINESS,mean,na.rm=TRUE)
+tapply(d1$passage,d1$FINESS,sd,na.rm=TRUE)
+tapply(d1$passage,d1$FINESS,median,na.rm=TRUE)
+boxplot(as.numeric(d1$passage) ~ d1$FINESS,col="pink")
+```
+attente de moins d'une journée:
+```{r attente1jour}
+h24<-d1[as.numeric(d1$passage)<1000,c("passage","FINESS")]
+boxplot(as.numeric(h24$passage) ~ h24$FINESS,col="pink",main="Durée moyenne de passage (pour t<24h)",ylab="Temps en minutes",xlab="SAU - 2013")
+boxplot(as.numeric(h24$passage) ~ h24$FINESS,col="yellow",range=0,notch=TRUE,border="blue",main="Durée moyenne de passage",ylab="Temps en minutes",xlab="SAU - 2013")
+```
+Maladies infectieuses
+=====================
+Codes CIM 10:
+- bronchiolite: J11
+- Grippe: J11, J10, J09
+- Gastroenterite: A09
+
+Regroupement | Code CIM 10 | Description
+------------ | ------------ | -----------
+Hyperthermies |T67 | Effets de la chaleur et de la lumière
+Hyperthermies | X30 |Exposition à une chaleur naturelle excessive
+Déshydratations |E86 |Hypovolémie
+Hyponatrémies | E871 | Hypo-osmolarité et hyponatrémie
+Malaises | R42 | Etourdissements et éblouissements
+Malaises |R53| Malaise et fatigue
+Malaises | R55| Syncope et collapsus
+Asthme|J45 | Asthme
+Asthme |J46 | Etat de mal asthmatique
+Piqûres arthropodes ou autres |T63 |Effet toxique d’un contact avec un animal venimeux
+Piqûres arthropodes ou autres |W57 |Morsure ou piqûre non venimeuse d’insectes et arthropodes
+Piqûres arthropodes ou autres |X20→X29 | Contact avec des animaux ou des plantes venimeuses
+
+Pendant toute la durée du Plan Canicule, du 1er juin au 31 août.
+
+
+on veut mettre 3 graphiques sur le même dessin
+```{r trois_graphe}
+par(mfrow=c(3,1))
+```
+
+gastro
+------
+```{r gastro}
+gastro<-d1[substr(d1$DP,1,3)=="A09", c("DP","ENTREE")]
+g<-gastro[complete.cases(gastro),]
+g$date<-as.Date(g$ENTREE)
+hist(g$date,breaks=18,freq=TRUE, col="slategray1",main="2013 - Gastroentérites",xlab="")
+g$date2<-ymd_hms(g$ENTREE)
+wg<-week(g$date2)
+barplot(summary(as.factor(wg)))
+```
+bronchiolite
+------------
+```{r bronchiolite}
+bronchio<-d1[substr(d1$DP,1,3)=="J21", c("DP","ENTREE")]
+bronchio<-bronchio[complete.cases(bronchio),]
+bronchio$date<-as.Date(bronchio$ENTREE)
+hist(bronchio$date,breaks=18,freq=TRUE,col="slategray1",main="2013 - Bronchiolites",xlab="")
+```
+Grippe
+------
+```{r grippe}
+grippe<-d1[substr(d1$DP,1,3)=="J11"|substr(d1$DP,1,3)=="J10"|substr(d1$DP,1,3)=="J09", c("DP","ENTREE")]
+grippe<-grippe[complete.cases(grippe),]
+grippe$date<-as.Date(grippe$ENTREE)
+hist(grippe$date,breaks=18,freq=TRUE,col="slategray1",main="2013 - Syndromes grippaux",xlab="")
+
+par(mfrow=c(1,1))
+```
+malaises
+--------
+```{r malaises}
+malaise<-d1[substr(d1$DP,1,3)=="R55", c("DP","ENTREE")]
+malaise<-malaise[complete.cases(malaise),]
+malaise$date<-as.Date(malaise$ENTREE)
+hist(malaise$date,breaks=18,freq=TRUE,col="slategray1")
+```
+malaise selon INVS (canicule):
+```{r malaise_invs}
+malaise<-d1[substr(d1$DP,1,3)=="R55"|substr(d1$DP,1,3)=="R53"|substr(d1$DP,1,3)=="R42", c("DP","ENTREE")]
+malaise<-malaise[complete.cases(malaise),]
+malaise$date<-as.Date(malaise$ENTREE)
+hist(malaise$date,breaks=18,freq=TRUE,col="slategray1",main="Malaises (INVS)")
+ plot(as.factor(malaise$date),col="slategray1",las = 1,main="Malaises (INVS)")
+```
+AVC
+----
+code SIM10: I60 à I64
+**complete.cases** permet de supprimer les enregistrements vides
+```{r avc}
+avc<-d1[substr(d1$DP,1,3)>="I60" & substr(d1$DP,1,3)<="I64",c("DP","ENTREE","FINESS","AGE","SEXE")]
+avc<-avc[complete.cases(avc),]
+nrow(avc)
+summary(avc$FINESS)
+summary(avc$AGE)
+summary(avc$SEXE)
+```
+Le SAU des HUS reçoit peu d' AVC alors que c'est la meilleure filière. Les résultats sont faussés par l'UNV.
+
+Douleur thoracique
+------------------
+code SIM10: I20 à I25
+```{r douleur_tho}
+idm<-d1[substr(d1$DP,1,3)>="I20" & substr(d1$DP,1,3)<="I25",c("DP","ENTREE","FINESS","AGE","SEXE")]
+idm<-idm[complete.cases(idm),]
+nrow(idm)
+summary(idm$FINESS)
+summary(idm$AGE)
+summary(idm$SEXE)
+```
+Lésions traumatiques
+--------------------
+codes CIM10 S00–T98
+```{r trauma}
+trauma<-d1[substr(d1$DP,1,3)>="S00" & substr(d1$DP,1,3)<="T98",c("DP","ENTREE","FINESS","AGE","SEXE")]
+trauma<-trauma[complete.cases(trauma),]
+nrow(trauma)
+summary(trauma$FINESS)
+summary(trauma$AGE)
+summary(trauma$SEXE)
+```
+Etude HUS
+----------------
+```{r HUS}
+geb<-d1[d1$FINESS=="Geb",]
+```
+Orientation des patients 
+```{r geb_orient}
+summary(geb$MODE_SORTIE)
+summary(geb$ORIENTATION)
+```
+Mode d'arrivée aux urgences:
+```{r geb_urg}
+summary(as.factor(geb$TRANSPORT))
+```
+Heure d'arrivée aux urgences
+```{r geb_arrive}
+e<-ymd_hms(geb$ENTREE)
+h<-hour(e)
+summary(h)
+hist(h,breaks=23,xlab="Heures",main="CH HUS - Horaire de fréquentation du SU")
+t<-table(h)
+t2<-as.integer(t)
+c<-clock24.plot(t2,clock.pos=1:24,lwd=3)
+c<-clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+# nécessite la librairie openintro
+clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,poly.col=fadeColor("blue", fade = "10"))
+clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,poly.col=fadeColor("blue", fade = "10"),line.col=fadeColor("blue", fade = "10"))
+```
+Idem pour les sorties
+```{r geb_sorties}
+s<-ymd_hms(geb$SORTIE)
+t3<-as.integer(table(hour(s)))
+clock24.plot(t3,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures de sortie des urgences",show.grid.labels=F)
+```
+Combinaison entrée-sortie
+```{r geb_es}
+t4<-rbind(t2,t3)
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"))
+fadeBlue<-fadeColor("blue", fade = "15")
+fadeRed<-fadeColor("red", fade = "15")
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c(fadeRed,fadeBlue),poly.col=c(fadeRed,fadeBlue))
+```
+Entrées selon la période du jour: nuit profonde NP (0h-8h = 1), journée JO (8h-20h = 2), soir SR (20h-24h = 3). La date/heure d'entrée est transformée en heure entière par la fonction *hour*. hest à son tour segmenté en 3 périodes.
+```{r geb jour}
+e<-ymd_hms(geb$ENTREE)
+h<-hour(e)
+b<-cut(h,c(0,8,20,24),labels=c("NP","JO","SR"))
+bp<-summary(as.factor(b))
+barplot(bp)
+round(prop.table(bp)*100,2)
+barplot(round(prop.table(bp)*100,2),ylab="% des passages",sub="NP = 0h-8h",ylim=c(0,100),main="CH HUS\n Passages nuit profonde - jour - soirée")
+t<-table(geb$GRAVITE,b)
+t
+barplot(t,beside=T,col=1:7)
+```
+Mode sortie en fonction de la période
+```{r geb_sortie_periode}
+t<-table(geb$MODE_SORTIE,b)
+t
+t<-table(geb$ORIENTATION,b)
+```
+CCL: à HUS tout le monde rentre à la maison !
+
+#### Calcul des heures d'arrivées pour l'ensemble des établissements
+```{r total arrivee}
+e<-ymd_hms(d1$ENTREE)
+h<-hour(e)
+summary(h)
+hist(h,breaks=23,xlab="Heures",main="Alsace - Horaire de fréquentation du SU")
+t<-table(h)
+als_entree<-as.integer(t)
+c<-clock24.plot(als_entree,clock.pos=1:24,lwd=3,show.grid.labels=F)
+c<-clock24.plot(als_entree,clock.pos=1:24,rp.type="p",main="Alsace",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+```
+#### Comparaison Alsace - HUS
+Les calculs sont exprimés en %
+```{r als-geb}
+e<-ymd_hms(geb$ENTREE)
+h<-hour(e)
+t<-table(h)
+t2<-as.integer(t)
+t4<-rbind(prop.table(t2),prop.table(als_entree))
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - HUS (rouge)",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"),radial.lim=c(0,0.1))
+legend(0.09,-0.09,c("CH","Alsace"),col=c("red","blue"),lty=1,cex=0.8)
+
+# Profil entrées de HUS versus le profil régional
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - HUS (rouge)",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red",fadeBlue),poly.col=c(NA,fadeBlue),radial.lim=c(0,0.1))
+
+```
+#### Comparaison Alsace - Wissembourg
+```{r als-wis}
+wis<-d1[d1$FINESS=="Wis",]
+e<-ymd_hms(wis$ENTREE)
+h<-hour(e)
+t<-table(h)
+t2<-as.integer(t)
+t4<-rbind(prop.table(t2),prop.table(als_entree))
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - CH de Wissembourg",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"),radial.lim=c(0,0.1))
+legend(0.09,-0.09,c("CH","Alsace"),col=c("red","blue"),lty=1,cex=0.8)
+```
+#### comparaison Alsace - HUS
+```{r alsace_hus}
+hus<-d1[d1$FINESS=="Hus",]
+e<-ymd_hms(hus$ENTREE)
+h<-hour(e)
+t<-table(h)
+t2<-as.integer(t)
+t4<-rbind(prop.table(t2),prop.table(als_entree))
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - CHU Strasbourg",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"),radial.lim=c(0,0.1))
+legend(0.09,-0.09,c("CH","Alsace"),col=c("red","blue"),lty=1,cex=0.8)
+```
+#### Test de la fonction*passages*
+```{r passages}
+par(mfrow = c(2, 2))
+source("./mes_fonctions.R")
+passages("Hus","HUS",sens=3)
+passages("Mul","CH Mulhouse",sens=3)
+passages("Col","CH Colmar",sens=3)
+passages("Hag","CH Haguenau",sens=3)
+
+passages("Sel","CH Selestat",sens=3)
+passages("Odi","Clinique Ste Odile",sens=3)
+passages("Dia","Diaconnat - Fonderie",sens=3)
+passages("Tan","CH Thann",sens=3)
+
+passages("3Fr","Trois frontières",sens=3)
+passages("Alk","CH Alkirch",sens=3)
+passages("Sav","CH Saverne",sens=3)
+par(mfrow = c(1, 1))
+```
+
+Etude HUS
+----------------
+```{r hus}
+Hus<-d1[d1$FINESS=="Hus",]
+nrow(Hus)
+min(Hus$ENTREE)
+max(Hus$ENTREE)
+```
+comparaison entre RPU attendu et RPU transmis. Nécessite le fichier *sau2013*. Les données sont dans le dataframe *d*. Les données hus sont isolées dans *dhus*
+```{r hus_attendu}
+load("../SAU2013/sau2013.Rda")
+dhus<-d[d$hop=="HUS",]
+sum(dhus$TOTAL.passages,na.rm=T)
+
+# hus.serv: DU des Hus. HTP adultes, HTP gynéco, HTP pédiatrie, NHC et CCOM (Sos mains)
+hus.serv<-as.factor(dhus$ser2)
+summary(hus.serv)
+tapply(dhus$TOTAL.passages,hus.serv,sum)
+# RPU uniquement du au SU HTP et NHC
+hus.rpu<-subset(dhus,ser2=="aHTP" | ser2=="NHC")
+n<-sum(hus.rpu$TOTAL.passages)
+print("Prévision2013:")
+n * 3
+
+a<-c(nrow(Hus),n)
+names(a)=c("RPU déclarés","RPU Attendus")
+barplot(a,main="HUS - 1er quadrimestre 2013")
+a[1]*100/a[2]
+```
+Les urgences pédiatriques sont divisées en 2, médicales et chirurgicales. Il y a donc 2 données par jour
+```{r hus_ped}
+hus.ped<-subset(dhus,ser2=="pHTP")
+nped<-sum(hus.ped$TOTAL.passages)
+print("Prévision2013:")
+nped * 3
+
+print("Total adulte + pédiatrie:")
+ntot<- n + nped
+ntot
+print("total annuel:")
+ntot*3
+```
+
+
+Orientation des patients 
+```{r Hus_orient}
+summary(Hus$MODE_SORTIE)
+mean(is.na(Hus$MODE_SORTIE))
+summary(Hus$ORIENTATION)
+mean(is.na(Hus$ORIENTATION))
+
+mean(is.na(Hus$MOTIF))
+mean(is.na(Hus$DESTINATION))
+mean(is.na(Hus$TRANSPORT_PEC))
+mean(is.na(Hus$PROVENANCE))
+mean(is.na(Hus$TRANSPORT))
+mean(is.na(Hus$MODE_ENTREE))
+mean(is.na(Hus$COMMUNE))
+mean(is.na(Hus$GRAVITE))
+mean(is.na(Hus$DP))
+
+```
+Mode d'arrivée aux urgences:
+```{r Hus_urg}
+summary(as.factor(Hus$TRANSPORT))
+mean(is.na(Hus$TRANSPORT))
+```
+Heure d'arrivée aux urgences
+```{r Hus_arrive}
+e<-ymd_hms(Hus$ENTREE)
+h<-hour(e)
+summary(h)
+hist(h,breaks=23,xlab="Heures",main="CH HUS - Horaire de fréquentation du SU",col=c(rep(1,8),rep(2,12),rep(3,4)))
+t<-table(h)
+t2<-as.integer(t)
+c<-clock24.plot(t2,clock.pos=1:24,lwd=3)
+c<-clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+# nécessite la librairie openintro
+clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,poly.col=fadeColor("blue", fade = "10"))
+clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,poly.col=fadeColor("blue", fade = "10"),line.col=fadeColor("blue", fade = "10"))
+```
+Idem pour les sorties
+```{r Hus_sorties}
+s<-ymd_hms(Hus$SORTIE)
+mean(is.na(s))
+t3<-as.integer(table(hour(s)))
+clock24.plot(t3,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures de sortie des urgences",show.grid.labels=F)
+```
+Combinaison entrée-sortie
+```{r Hus_es}
+t4<-rbind(t2,t3)
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"))
+fadeBlue<-fadeColor("blue", fade = "15")
+fadeRed<-fadeColor("red", fade = "15")
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c(fadeRed,fadeBlue),poly.col=c(fadeRed,fadeBlue))
+```
+Entrées selon la période du jour: nuit profonde NP (0h-8h = 1), journée JO (8h-20h = 2), soir SR (20h-24h = 3). La date/heure d'entrée est transformée en heure entière par la fonction *hour*. hest à son tour segmenté en 3 périodes.
+```{r Hus jour}
+e<-ymd_hms(Hus$ENTREE)
+h<-hour(e)
+b<-cut(h,c(0,8,20,24),labels=c("NP","JO","SR"))
+bp<-summary(as.factor(b))
+barplot(bp)
+round(prop.table(bp)*100,2)
+barplot(round(prop.table(bp)*100,2),ylab="% des passages",sub="NP = 0h-8h",ylim=c(0,100),main="CH HUS\n Passages nuit profonde - jour - soirée")
+t<-table(Hus$GRAVITE,b)
+t
+barplot(t,beside=T,col=1:5,main="Gravité en fonction de la période")
+legend(1,2000,c(1:5),col=c(1:5),pch=15,cex=0.8)
+```
+Mode sortie en fonction de la période
+```{r Hus_sortie_periode}
+t<-table(Hus$MODE_SORTIE,b)
+t
+t<-table(Hus$ORIENTATION,b)
+```
+
+Comparaison Mode de sortie - Gravite
+------------------------------------
+```{r sortie_ccmu}
+a<-table(d1$MODE_SORTIE,d1$GRAVITE)
+a
+```
+
+Comparaison Orientation - Gravite
+------------------------------------
+  
+```{r orientation_ gravite}
+a<-table(d1$ORIENTATION,d1$GRAVITE)
+a
+xtable(a)
+```
+
+Age et gravité
+--------------
+On fabrique une nouvelle colonne appelée **cat** qui partage la coleene *age* en 4 catégories. La première categorie comence a -1 pour prendre en compte les moins de 1 an.
+
+```{r age_cat}
+d1$cat<-cut(d1$AGE,c(-1,15,50,75,120),labels=c("Jeunes","Adultes","Agés","Très agés"))
+table(d1$cat,d1$GRAVITE)
+barplot(table(d1$GRAVITE))
+
+barplot(round(prop.table(table(d1$cat,d1$GRAVITE),margin=1)*100,2),beside=T,xlab="CCMU",ylab="% du groupe",main="CCMU par groupe d'age",col=c(1:4))
+legend("topright",legend=c("< 15 ans","15 à 50 ans","50 à 75","> 75 ans"),cex=0.8,pch=15,col=c(1:4))
+
+barplot(round(prop.table(table(d1$cat,d1$GRAVITE),margin=2)*100,2),beside=T,xlab="CCMU",ylab="% du groupe",main="Répartition des ages par CCMU",col=c(1:4))
+
+```
+Représentation sous forme de barres emplilées avec légende  
+- on restreint l'espace de dessin en augmentant la marge de gauche
+- on dessine les barres en utilisant la marge 2 comme diviseur. Ainsi chaque barre représente un % de 0 à 100 à laquelle contribe chaque catégorie d'age
+- on rétablit la marge de droite
+- on dessine la légende en supprimant l'encadrement de celle-ci.
+
+```{r reparition_age_cat}
+par(mar=c(5,4,4,8))
+barplot(round(prop.table(table(d1$cat,d1$GRAVITE),margin=2)*100,2),beside=FALSE,xlab="CCMU",ylab="% du groupe",main="Répartition des ages par CCMU",col=c(1:4))
+par(mar=c(5,4,4,2))
+legend(x=8.5,y=100,legend=c("< 15 ans","15 à 50 ans","50 à 75","> 75 ans"),cex=0.8,pch=15,col=c(1:4),bty="n")
+```
+
+
+
+
+
+
+
+
