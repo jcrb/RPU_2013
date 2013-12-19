@@ -1,0 +1,140 @@
+RPU2013 Analyse 2
+========================================================
+
+On forme une séquence de 365 dates allant du 1er janvier au 31 décembre. Days(1) est égal au nombre de secondes dans 1 journée:
+```{r init}
+library("lubridate")
+library("zoo")
+library("xts")
+
+b1<-as.Date("2013-01-01")
+b2<-as.Date("2013-12-31")
+b<-seq(b1,b2,1)
+```
+Le tout est transformé en type de jour (dimanche = 1). Summary donne le nombre de type de jours en 2013
+```{r jour}
+b3<-wday(b)
+b4<-summary(as.factor(b3))
+b4
+```
+```{r load}
+load("../rpu2013d0111.Rda")
+# d1<-d0109
+# rm(d0109)
+
+# nombre de RPU par type de jour de la semaine:
+e<-ymd_hms(d1$ENTREE)
+a<-summary(as.factor(wday(e)))
+a
+# nb de RPU par type de jour divisé par le nombre de fois où ce jour apparait dans l'année:
+round(a/b4,1)
+
+barplot(a,xlab="Jour de la semaine (1 = dimanche)",ylab="Nombre de RPU")
+barplot(round(a/b4,1))
+```
+
+Utilisation de zoo - moyenne mobile (moving average)
+====================================================
+nécessite lubridate
+
+on part de 
+```{r entree}
+e<-ymd_hms(d1$ENTREE)
+```
+
+on arrondit au jour entier:  
+```{r day}
+f<-round_date(e,"day")
+e[1]
+f[1]
+g<-summary(as.factor(f))
+g
+```
+
+Cela donne:
+e[1]
+[1] "2013-01-01 00:04:00 UTC"
+
+[1] "2013-01-01 UTC"
+
+ g<-summary(as.factor(f))
+ 
+ on crée une nouvelle variable **count** qui attribue à chaque enregistrement la valeur 1. Puis on utilise la fonction *aggregate* pour faire la somme des visites aux SU par jour:
+ ```{r count}
+d1$count<-1
+ g<-aggregate(d1$count,by=list(as.factor(f)),FUN=sum)
+```
+ 
+ On obtient une matrice de 121 lignes (1er janvier au 1er mai) et 2 colonnes, la date (*Group.1*) et le nombre de visites (*x*)
+ 
+ On fabrique un objet *série temporelle*:
+ ```{r ts}
+h<-ts(g,start=c(2013,1),frequency=365)
+  summary(h)
+  plot(h[,2],ylab="Nb. de passages aux Urgences",main="Passages aux SU en 2013")
+```
+  
+ On fabrique un objet *zoo*:
+ ```{r zoo}
+  h2<-zoo(h)
+  summary(h2)
+  plot(h2[,2],ylab="Nb. de passages aux Urgences",main="Passages aux SU en 2013",xlab="Jours")
+   legend("bottomleft","moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+  lines(rollmean(h2[,2],7),col="red")
+ ```
+ 
+  meilleure solution
+  ------------------
+  on fabrique un objet **a** qui dait la somme par date des passages aux urgences:
+  ```{r a}
+  a<-tapply(e,as.Date(d1$ENTREE),length)
+   a[1:10]
+  ```
+  
+  vérification:
+  a[1:10]
+2013-01-01 2013-01-02 2013-01-03 2013-01-04 2013-01-05 2013-01-06 2013-01-07 2013-01-08 2013-01-09 2013-01-10 
+       884        801        686        704        722        691        876        694        683        673 
+       
+On supprime l'enregistrement 121 correspondant au 1er mai et qui ne contient qu'un élément:
+a[121]  2013-05-01 1 
+a<-a[-121]
+
+
+```{r zoo2}
+  a1<-summary(a)
+  a1
+   
+  z<-zoo(a,unique(as.Date(d1$ENTREE)))
+  plot(z,ylab="Nb. de passages aux Urgences",main="Passages aux SU en 2013",xlab="Période")
+  legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+  lines(rollmean(z[,2],7),col="red")
+```
+  
+Variante avec *xts*
+-------------------
+```{r xts}
+ x<-as.xts(z)
+ plot(x)
+ legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+ lines(rollmean(xts(z),7),col="red")
+```
+
+utilisation de rollapply
+------------------------
+rollapply permet d'appliquer une fonction à une moyenne mobile. On calcule la moyenne mobile sur 7 jours ainsi que son écart-type (ze). Puis on dessine la courbe moyenne (m) ainsi que les 2 courbes correspongant à l'écart-type sup (zes) et inférieur (zei)
+
+calcul de l'écart-type:
+```{r rooapply}
+r<-rollapply(z,7,sd)
+z<-zoo(a,unique(as.Date(d1$ENTREE)))
+m<- rollapply(z, 7, mean)
+plot(xts(m),ylim=c(600,1200))
+ze<-rollapply(z, 7, sd)
+zes<-m+ze
+zei<-m-ze
+plot(xts(m),ylim=c(600,1200),ylab="Nb. de passages aux Urgences",main="Passages aux SU en 2013",xlab="Moyenne lissée")
+lines(xts(zes),col="red")
+lines(xts(zei),col="red")
+legend("topleft",legend=c("moyenne lissée","écart-type"),col=c("black","red"),lty=1,cex=0.8,bty="n")
+```
