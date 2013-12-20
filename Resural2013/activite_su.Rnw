@@ -1,0 +1,73 @@
+% activite_su.Rnw
+% Courbe d'activité régionale
+\index{Activité régionale}
+ 
+%note\footnote{activite_su_Rnw}
+
+\section{Variation du nombre total de passages journaliers}
+\index{Passages@journaliers}
+
+<<passages_totaux,echo=FALSE,results='asis'>>=
+e<-as.Date(d1$ENTREE)
+q<-tapply(e,yday(e),length)
+plot(q,type="l")
+a<-xsummary(q,xtable=TRUE,tl="Passages totaux",tc="Passages totaux",lab="tab:pt")
+
+z<-zoo(q,unique(as.Date(d1$ENTREE)))
+plot(z,main="Passages totaux")
+plot(xts(z),main="Passages totaux")
+lines(rollmean(xts(z), 7),col="red",lwd=2)
+copyright()
+@
+
+
+\section{Variation du pourcentage journalier de retour à domicile}
+\index{Retour à domicile}
+
+Le nombre de retours à domicile est obtenu à partir de la rubrique MODE\_SORTIE. Il s'agit en fait des patients qui n'ont pas été hospitalisés. Sont également comptabilisé dans cette rubrique les sorties atypiques.
+
+Les variation du retour journalier à domicile sont calculés de la manière suivante:
+\begin{description}
+  \item[numérateur] somme quotidienne où MODE\_SORTIE == Domicile
+  \item[dénominateur] somme quotidienne des ENTREE (correspond à q)
+\end{description}
+
+<<retour_dom,echo=FALSE,results='asis'>>=
+q2<-tapply(d1[d1$MODE_SORTIE=="Domicile",6],yday(d1[d1$MODE_SORTIE == "Domicile", 6]),length)
+#head(q2)
+q3<-q2/q
+a<-xsummary(q3,xtable=TRUE,tl="Retours à domicile - patients n'ayant été ni hospitalisés, ni transférés dans un autre établissement. Ce taux est plus faible en début d'année, lorsque les épisodes de tension sont plus fréquents.",tc="Retour à domicile",lab="tab:rd")
+plot(q3,type="l",main="Retours à domicile")
+@
+
+On refait le calcul de q en tenant compte des non réponses:
+<<retour_dom2,echo=FALSE,results='asis'>>=
+q4<-tapply(d1[!is.na(d1$MODE_SORTIE),6],yday(d1[!is.na(d1$MODE_SORTIE), 6]),length)
+#head(q4)
+q5<-q2/q4
+#head(q5)
+a<-summary(q5,xtable=TRUE,tl="Retours à domicile sans les non réponses",tc="Passages totaux sans les non réponses",lab="tab:rdsansNA")
+plot(q3,type="l",main="Taux de retour à domicile\n(non réponses exclues)",ylab="Fréquence",xlab="Jours")
+@
+
+Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) est une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
+
+<<hospit,echo=FALSE,results='asis'>>=
+q7<-1-q2/q4
+#head(q7)
+
+xsummary(q7,xtable=TRUE,tl="Hospitalisations (ou transferts) sans les non réponses",tc="Hospitalisations",lab="tab:hosp")
+
+z <- zoo(q7, unique(as.Date(d1$ENTREE)))
+plot(xts(z),main="Taux d'hospitalisation\n(non réponses exclues)",ylab="Fréquence",xlab="Période (moyenne lissée sur 7 jours")
+lines(rollmean(xts(z), 7), col = "blue",lwd=2)
+@
+
+
+Le taux de réponse pour cet item est de
+<<retour_dom3,echo=FALSE,results='asis'>>=
+q6<-q4/q
+a<-summary(q6,xtable=TRUE,tl="Activité des SU et non réponses - dans environ 15% des cas, on ne sait pas ce que devient le patient.",tc="Activité des SU et non réponses",lab="tab:NAsu")
+plot(q6,type="l",main="Taux réponse à l'item 'MODE SORTIE'",col="light green")
+@
+\index{exhaustivité@mode de sortie}

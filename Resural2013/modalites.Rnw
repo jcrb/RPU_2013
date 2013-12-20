@@ -1,0 +1,54 @@
+% modalites.Rnw
+% modalités d'admission MODE_ENTREE
+
+\index{Mode d'entrée}
+
+\section*{Origine des patients}
+% REMARQUE dans environ 300 dossiers du mois de juin, l'item transfert est écrit "transfe  rt" ce qui nécessite un recodage.
+
+L'immense majorité des patients provient du domicile ou son équivalent. Une très faible part des passages aux urgences sont le fait de transferts d'autres établissements ou de mutations en provenance d'autres services du même établissement.
+
+<<mode_entree,echo=FALSE ,results='asis'>>=
+d1$MODE_ENTREE[as.character(d1$MODE_ENTREE)=="Transfe  rt"]<-"Transfert"
+a<-tab1(factor(d1$MODE_ENTREE),main="Origine des patients (en %)",ylab="Pourcentage",bar.values = "percent",missing=FALSE)
+a$first.line<-"Origine des patients"
+missing<-a$output.table[4,2]
+xtable(a$output.table,caption=c("Origine des patients. Les deux colonnes de droite mesurent l'origine (en pourcentage) selon que l'on prenne en compte ou non les valeurs manquantes. ","Origine des patients"),label="origine")
+@
+
+Dans \Sexpr{missing} \% des cas, l'origine du patient n'est pas précisée.
+
+\section*{Mode de transport}
+\index{Mode de transport}
+
+La grande majorité des patients arrivent aux urgences par leurs propres moyens (PERSO). Lorsqu'ils font appel à un tiers, il s'agit le plus souvent d'une ambulance privée (AMBU), puis du SDIS (AMBU). Les transports par un vecteur médicalisé (SMUR) ou héliporté (HELI) sont rares. Enfin l'utilisation des forces de l'ordre (FO) comme moyen de transport reste marginale.
+
+<<transport,echo=FALSE ,results='asis'>>=
+a<-tab1(d1$TRANSPORT,main="Mode de transport vers l'hôpital (en %)",ylab="Pourcentage",bar.values = "percent",missing=FALSE)
+missing <- a$output.table[7, 2]
+xtable(a$output.table,caption=c("Moyens de transport utilisés pour se rendre à l'hôpital. Les deux colonnes de droite mesurent la fréquence du moyen utilise (en pourcentage) selon que l'on prenne en compte ou non les valeurs manquantes. ","Moyens de transport"),label="transport")
+
+@
+
+Dans \Sexpr{missing} \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpial n'est pas précisé.
+
+\section*{Origine géographique}
+
+<<origine_geo,echo=FALSE>>=
+n<-length(d1$CODE_POSTAL)
+cp_als<-1
+cp_hals<-2
+cp_monde<-3
+# cp_als<-subset(d1,as.character(CODE_POSTAL) >= "67000" & as.character(CODE_POSTAL) <"69000",2)
+# cp_hals<-subset(d1,as.character(CODE_POSTAL) < "67000" | as.character(CODE_POSTAL) >= "69000",2)
+# cp_monde<-subset(d1,as.character(CODE_POSTAL)=="99999")
+# a<-month(as.Date(cp_monde$ENTREE))
+# barplot(table(a),main="Patients habitant hors de France",xlab="Mois",ylab="Nombre")
+@
+Les patients consultant aux urgences sont majoritairement issus de la région Alsace. Mais l'origine est très diverse, aussi bien en provenance des autres départements français qu'hors de France:
+% \begin{itemize}
+%   \item Alsace: \Sexpr{cp_als} (\Sexpr(round(cp_als*100/n,2) \%))
+%   \item hors Alsace: \Sexpr{cp_hals}
+%   \item dont hors de France: \Sexpr{cp_monde}
+% \end{itemize}
+

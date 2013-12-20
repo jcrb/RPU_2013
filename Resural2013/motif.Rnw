@@ -1,0 +1,51 @@
+% motif.Rnw
+
+\index{motif de consultation}
+
+Le motif de consultation est l'un des items les plus mal renseigné. Cela est du en partie à l'absence de règles formelles concernant la saisie de cet élément. Une recommandation du ministère de la santé (juin 2013 \cite{12,13}) demande que le thésaurus 2013 de la SFMU \cite{9} soit utilisé.
+
+Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{recours} liste environ \emph{150} motifs de recours aux urgences avec leur correspondance CIM10, répartis en 17 groupes. Aucune méthode n'est parfaite mais cette page constitue une bonne base d'harmonisation des données.
+
+
+<<motifss,echo=FALSE,results='asis'>>=
+c<-tapply(!is.na(d1$MOTIF),d1$FINESS,mean)
+
+xtable(data.frame(t(round(c*100,2))),caption=c("Taux de réponse à l'item motif de consultation selon le services d'urgence","motif de consultation"),label="lab:motif")
+
+barplot(sort(round(c*100,2)),main="Taux de renseignement de l'item 'Motif de consultation'",ylab="pourcentage",xlab="Services d'urgence")
+
+barplot(sort(round(c*100,2),decreasing=TRUE),main="Taux de renseignement de l'item 'Motif de consultation'",xlab="pourcentage",ylab="Services d'urgence",horiz=TRUE,las=2)
+@
+
+\index{exhaustivité@motif}
+Le motif de consultation nest pas renseigné dans \Sexpr{round(mean(c)*100,2)} \% des cas (table \ref{lab:motif}).
+
+Seuls six établissements ont un taux d'exhaustivité supérieur à 80\% pour cette rubrique.
+
+Cependant seuls quelques établissements saisissent cette information sous forme normalisée qui permet de l'exploiter. Dans les autres cas il s'agit de codes propre à l'établissement ou de texte libre inexploitable.
+
+Données non renseignées:
+\begin{itemize}
+  \item Guebwiller
+  \item HUS
+  \item Ste Anne
+  \item Tann
+\end{itemize}
+
+Données renseignées mais inexploitables:
+\begin{itemize}
+  \item Colmar
+  \item Sélestat
+  \item Haguenau
+\end{itemize}
+
+Données renseignées, exploitables mais à mettre en conformité avec le thésaurus:
+\begin{itemize}
+  \item Mulhouse
+  \item Wissembourg
+  \item Altkirch (exhaustivité)
+  \item Saverne
+  \item Ste Odile
+  \item Diaconnat Fonderie
+  \item Trois Frontières
+\end{itemize}

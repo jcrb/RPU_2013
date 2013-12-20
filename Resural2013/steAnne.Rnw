@@ -1,0 +1,115 @@
+% steAnne.Rnw
+\index{SU Sainte Anne}
+\index{Sainte Anne@SU }
+
+<<setup_steAnne,echo=FALSE,cache=FALSE,message=FALSE,warning=FALSE>>=
+# path2<-"../../SU_stAnne/"
+# load(paste(path2,"stAnne2013.Rda",sep=""))
+load("../../SU_stAnne/StAnne2013.Rda")
+n<-sum(data$total)
+
+s<-sapply(data[,4:10],sum)
+p<-round(s/s[4]*100,2)
+x <- rbind(s,p)
+
+s<-summary(data$total)
+
+hospitalise <- sum(s[5:7]) # hospitalisés + UHCD + transferts
+tx_hospit <- round(sum(s[5:7]/s[4])*100,2)
+tx_hospit
+nb_1an <- s[1]
+nb_1_75 <- s[2]                   
+nb_75 <- s[3]
+nb_hospitalise <- s[5]
+nb_uhcd <- s[6]
+nb_transfert <- s[7]
+p_1an <- p[1]                   
+p_1_75 <- s[2]                   
+p_75 <- s[3]
+                   
+date1<-min(data$date)
+date2<-max(data$date)
+                   
+hospit<-round(sum(s[5:7]/s[4])*100,2)
+
+data$hosp<-(data[8]+data[9]+data[10])/data[7]
+# creation d'une colonne taux hospitalisation
+hosp<-(data[8]+data[9]+data[10])/data[7]
+names(hosp)<-"tx_hosp"
+data<-cbind(data,hosp)
+names(data)
+summary(data$hosp)
+
+@
+
+Le SU Sainte Anne a reçu en 2013 un total de \np{\Sexpr{n}} consultants, soit en moyenne \Sexpr{s[3]} par jour.
+
+<<st_anne,echo=FALSE,results='asis'>>=
+xtable(x)
+@
+
+\subsection{Taux moyen de passages}
+
+<<stAnne_tx_moyen_passages,echo=FALSE>>=
+
+ts<-zoo(as.matrix(data[4:10]),data$date)
+head(ts)
+plot(ts)
+lines(rollmean(ts, 7),col="red",lwd=2)
+
+ma <- rollmean(ts, 7)
+plot(ma, main="Moyenne lissée sur 7 jours")
+
+ts<-xts(as.matrix(data[4:10]),data$date)
+head(ts)
+plot(ts$total,main="Clinique Ste Anne",xlab="Passages quotidiens au SU",ylab="Nombre")
+lines(rollmean(ts$total, 7),col="red",lwd=2)
+
+@
+
+\subsection{Taux d'hospitalisation}
+
+Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mutations, transferts et UHCD.} est de \Sexpr{tx_hospit}\% par jour.
+
+<<hospit_stAnne,echo=FALSE>>=
+ts<-zoo(data$tx_hosp,data$date)
+head(ts)
+plot(ts,ylab="Taux hospitalisation",xlab="2013",main="SU Ste Anne - Taux d'hospitalisation",col="lightblue")
+lines(rollmean(ts, 7),col="blue",lwd=2)
+@
+
+\subsection{Total des passages}
+
+<<stAnne_tot_passages,echo=FALSE>>=
+t<-sum(data$total)
+t
+summary(data$total)
+# ecart-type
+sd(data$total)
+boxplot(data$total,ylab="nombre",main="SU Ste Anne 2013 - Tous les passages",col="yellow")
+hist(data$total,main="SAU Sainte-Anne",xlab="Passages",ylab="Fréquence",col="green")
+@
+
+\subsection{Passages de 1 à 75 ans}
+
+<<stAnne_1_75_passages,echo=FALSE>>=
+t<-sum(data$entre1_75ans)
+t
+summary(data$entre1_75ans)
+sd(data$entre1_75ans)
+boxplot(data$entre1_75ans,ylab="nombre",main="SU Ste Anne 2013 - 1 à de 75ans",col="yellow")
+hist(data$entre1_75ans,main="SAU Sainte-Anne",xlab="Passages entre 1 et 75 ans",ylab="Fréquence",col="green")
+@
+
+
+\subsection{Passages des plus de 75 ans}
+
+<<stAnne_sup75_passages,echo=FALSE>>=
+t<-sum(data$sup75ans)
+t
+summary(data$sup75ans)
+sd(data$sup75ans)
+boxplot(data$sup75ans,ylab="nombre",main="SU Ste Anne 2013 - Plus de 75ans",col="yellow")
+hist(data$sup75ans,main="SAU Sainte-Anne",xlab="Passages des plus de 75 ans",ylab="Fréquence",col="lightblue")
+@
+

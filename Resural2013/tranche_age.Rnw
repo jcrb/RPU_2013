@@ -1,0 +1,8 @@
+% tranche-age.Rnw
+
+<<tranche,echo=FALSE,results='asis'>>=
+age<-cut(d1$AGE,breaks=c(-1,0.99,14,74,84,110),labels=c("Moins de 1 an","De 1 à 15 ans","De 15 à 75 ans","de 75 à 85 ans","Plus de 85 ans"))
+a<-tapply(d1$AGE,age,length)
+xtable(as.data.frame(a),caption=c("Répartition des RPU par tranches d'age","Répartition des RPU par tranches d'age"),label="tab:tranche")
+barplot(a,main="Répartition des RPU par tranches d'age",ylab="Nombre")
+@

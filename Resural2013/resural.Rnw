@@ -1,0 +1,10 @@
+% resural.Rnw
+\index{RESURAL}
+
+Le réseau des urgences en Alsace (RESURAL) est une association à but non lucratif, de droit local Alsace-Moselle, dont les statuts sont déposés au tribunal de Strasbourg. Le réseau a été fondé en août 2008. En son membre de droit les services d'urgence intra et extra-hospitaliers, adultes et pédiatriques, possédant une autorisation d'exercer cette spécialité, délivrée par l'agence régionale de santé (ARS). \index{ARS}
+
+Elle est domiciliée aux Hôpitaux Universitaires de Strasbourg.
+
+Elle est dirigée par un conseil d'administration et représentée par son preésident, le Docteur Bruno Goulesque.
+
+Son fonctionnement est assuré par une équipe de coordination, composée d'un médecin coordinateur à mi-temps et d'une assistante à mi-temps. Cette équipe est opérationnelle depuis le 1er février 2013.

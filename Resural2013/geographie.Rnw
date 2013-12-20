@@ -1,0 +1,309 @@
+% geographie.Rnw
+
+L'Alsace est la plus petite région de France (n°42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chef-lieu sont respectivement Strasbourg et Colmar.La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
+
+La région est divisée en quatre secteurs sanitaires er douze tritoires de proximité.
+
+\section{Les secteurs sanitaires}
+\index{Alsace!secteurs sanitaires}
+\index{Secteurs sanitaires}
+
+L'alsace est divisée en quatre secteurs sanitaires
+\begin{enumerate}
+  \item secteur 1: Haguenau, Wissembourg et Saverne
+  \item secteur 2: Strasbourg
+  \item secteur 3: Sélestat et Colmar. C'est un territoire qui est à cheval sur les deux départements d'Alsace.
+  \item secteur 4: Mulhouse
+\end{enumerate}
+
+<<carte_secteurs_sanitaires,echo=FALSE,message=FALSE,error=FALSE>>=
+# fond de carte des territoires de santé + villes principales
+ 
+load("../als_ts.Rda")
+ plot(ctss)
+ load("../tsvilles.Rda")
+ points(tsvilles[,2]*100,tsvilles[,3]*100,pch=20,col="blue")
+ text(tsvilles[,2]*100,tsvilles[,3]*100,tsvilles[,1],cex=0.6,pos=4)
+ for(i in 1:4){
+ # name<-ctss@polygons[[i]]@ID
+ name<-as.character(i)
+ x<-ctss@polygons[[i]]@labpt[1]
+ y<-ctss@polygons[[i]]@labpt[2]
+ symbols(x,y,circles=1,inches=.15,add=T,fg="red")
+ text(x,y,name,cex=0.9,col="red",font=2)
+}
+
+ title(main="Secteur sanitaires d'Alsace")
+@
+
+
+\section{Les territoires de proximité}
+\index{Alsace!territoires de proximité}
+\index{Territoires de proximité}
+
+Il existe douze territoires de proximité:
+\begin{enumerate}
+  \item territoire 1: Wissembourg
+  \item territoire 2: Haguenau
+  \item territoire 3: Saverne
+  \item territoire 4: Strasbourg
+  \item territoire 5: Molsheim-Schirmeck
+  \item territoire 6: Sélestat-Obernai
+  \item territoire 7: Colmar
+  \item territoire 8: Guebwiller
+  \item territoire 9: Thann
+  \item territoire 10: Mulhouse
+  \item territoire 11: Altkirch
+  \item territoire 12: Saint-Louis
+\end{enumerate}
+
+% carte des territoires de santé
+\begin{figure}[ht]
+ \centering
+ \includegraphics[height=15cm,keepaspectratio=true]{../figure/zone_proximite.png}
+ % image.: 0x0 pixel, 0dpi, nanxnan cm, bb=
+ \caption{L'Alsace compte 12 territoires de proximité}
+ \label{fig:zp}
+\end{figure}
+
+\section{Démographie}
+\subsection{Généralités}
+\index{Alsace!démographie}
+
+En France, les populations légales sont calculées par l'INSEE sur la base de définitions réglementaires à partir de recensement de la population. 
+Les populations légales millésimées 2010 entrent en vigueur le 1er janvier 2013.  
+
+\subsubsection{Le concept de population municipale}
+
+Ce document utilise la \emph{Population municipale} \ref{Population_municipale} \index{Population@Population!municipale}  qui est la nouvelle dénomination de la population sans double comptes et qui correspond à la notion de \emph{population} utilisée usuellement en statistique.
+Le chiffre est donc inférieur de celui de la \emph{Population totale} qui est égale à la somme de la population municipale et de la population comptée à part d'une commune.
+Les chiffres de l'INSEE sont les suivants \footnote{http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/france-regions.asp?annee=2010}:
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline 
+Région & Population\tabularnewline
+\hline 
+\hline 
+France métropolitaine et DOM & 64 612 939\tabularnewline
+\hline 
+Dont France métropolitaine & 62 765 235\tabularnewline
+\hline 
+Alsace & 1 845 687\tabularnewline
+\hline 
+Bas-Rhin & 1 095 905\tabularnewline
+\hline 
+Haut-Rhin & 749 782\tabularnewline
+\hline 
+\end{tabular}
+\caption[Populations légales 2010]{Populations légales 2010 des régions de France métropolitaine, Population
+municipale (Source : Recensement de la population 2010 - Limites territoriales
+au 1er janvier 2012) }
+\label{pop2010}
+\end{center}
+\end{table}
+
+\subsection{Classes d'age}
+Depuis la mise en place des serveurs régionaux, on a pris l'habitude de diviser la population en trois catégories selon l'age:
+\begin{enumerate}
+  \item Les moins de un an
+  \item de 1 an à 75 ans
+  \item les plus de 75 ans
+\end{enumerate}
+
+Les calculs sont effectués à partir du fichier \texttt{BTT\_TD\_POP1B\_2010} de l'INSEE qui recense l'ensemble de la population par commune et par tranches de un an. La version utilisée est celle du 1er janvier 2010 (tab.\ref{pop}). Le secteur de proximité de Strasbourg qui est aussi le plus peuplé, compte le plus grand nombre de personnes de 75 ans et plus (figure \ref{fig:75ans} page \pageref{fig:75ans})
+
+<<test,echo=FALSE>>=
+pop0<-21655
+pop1_75<-1677958
+pop75<-146074
+pop1_15<-309641
+pop15_75<-1368317
+pop75_85<-108426
+pop85<-37647
+
+pop.als.2010.totale<-1115226 + 765634
+pop_als_2010_municipale<-1095905 + 749782
+pop.67.2010.municipale<-1095905
+pop.68.2010.municipale<-749782
+
+ppop0<-as.numeric(round(pop0*100/pop_als_2010_municipale,2))
+ppop1_75<-as.numeric(round(pop1_75*100/pop_als_2010_municipale,2))
+ppop75<-as.numeric(round(pop75*100/pop_als_2010_municipale,2))
+@
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|r|r|}
+  \hline
+  Tranche d'age & Abréviation & Effectif & Pourcentage \\
+  \hline
+  \hline
+   Moins de 1 an & pop0 & \np{\Sexpr{as.character(pop0)}} & \Sexpr{as.character(ppop0)} \\
+   De 1 à 75 ans & pop1\_75 & \np{\Sexpr{as.character(pop1_75)}} & \Sexpr{as.character(ppop1_75)} \\
+   Plus de 75 ans& pop75 & \np{\Sexpr{as.character(pop75)}} & \Sexpr{as.character(ppop75)} \\
+   \hline
+   Total & pop\_tot & \np{\Sexpr{as.character(pop_als_2010_municipale)}} & 100.00 \\
+  \hline
+\end{tabular}
+\caption{Classe d'age en Alsace (janvier 2010)}
+\label{pop}
+\end{center}
+\end{table}
+
+% carte des plus de 75 ans
+\begin{figure}[ht]
+ \centering
+ \includegraphics[height=15cm,keepaspectratio=true]{../figure/75ans.png}
+ % image.: 0x0 pixel, 0dpi, nanxnan cm, bb=
+ \caption[Répartition des 75 ans et plus]{Les personnes de 75 ans et plus en Alsace en fonction du territoire de proximté (en pourcentage du nombre total de 75 ans et plus).}
+ \label{fig:75ans}
+\end{figure}
+
+\section{Les services d'accueil des urgences (SAU)}
+\index{Services d'urgence!en Alsace}
+\index{Alsace!services d'urgence}
+
+L'autorisation de pratiquer la médecine d'urgence est délivrée par l'ARS en cohérence avec le schéma régional de l'organisation des soins (SROS) dont les dispositions pour la période 2012-2016 ont été précisées par l'arrêté du 30 janvier 2012 \cite{14} et du 23 mai 2013 \cite{15}.
+
+Rélementairement, le CSP reconnait deux types de structures pouvant être autorisées à prendre en charge directement des patients pouvant relever d'une situation d'urgence
+\begin{enumerate}
+  \item les structures d'urgence (SU). Le CSP reconnait quatre types d'autorisations qui peuvent être dissociées:
+    \begin{itemize}
+      \item SAMU
+      \item SMUR
+      \item SU
+      \item SU pédiatrique
+    \end{itemize}
+
+  \item les plateaux techniques spécialisés d'accès direct (PTSAD: article R 6123-32-6 CSP) qui sont de quatres types en Alsace:
+    \begin{itemize}
+      \item Urgences main
+      \item Urgences cardiologiques
+      \item Urgences neuro vasculaires
+      \item Poly-traumatisés
+    \end{itemize}
+\end{enumerate}
+
+On peut trouver des PTSAD avec une autorisation SU mais qui ne concerne que la spécialité du plateau technique, des PTSAD non labellisé SU, des SU non labellisés pédiatriques mais ayant une activité pédiatrique exclusive.
+
+A la date du 23 mai 2013, l'Alsace compte 18 établissements ou structures autorisés pour l'activité de soins de médecine d'urgence (article R6123-1 du CSP) dont deux ayant une activité de PTDAD exclusive \cite{15}, 1 établissement labellisé SU pédiatrique.
+
+En pratique, à la question qui prend en charge 24h sur 24 des problèmes aigus de santé et/ou de permanence des soins, on se ramène a une listede 14 établissements pratiquant la médecine d'urgence au sens où on l'entend communément. Trois établissements ont une activité multisite. Au final cela représente 18 sites Les trois villes les plus importantes de la région concentrent la totalité des PTSAD.
+
+Celle-ci se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Le SROS 2 avait introduit une distinction entre les services accueillant les urgences en fonction de leurs capacités et plateau technique. On distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser,même si elle n'a plus cours officiellement. 
+
+La clinique du Diaconat de Strasbourg,bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lequelles elle dispose d'une labellisation FESUM \footnote{Federation Européenne des Services d'Urgence de la Main}
+
+On prend également en compte la clinique Saint-Luc de Schirmeck qui fait fonctionner une policlinique recevant plus de \np{8000} passages par an. Officiellement, cet établissement de santé ne dispose pas de cette autorisation bien qu'elle en effectue la mission et est le seul établissement de proximité de la zone Molsheim-Schirmeck.
+
+Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'est pas inclu dans les implantations de services d'urgence.
+
+Sont officiellement labellisés 18 sites (en y incluant SOS main Diaconnat mais pas la clinique St Luc). Ces données sont résumées dans le tableau \ref{tab:sualsace} page \pageref{tab:sualsace}
+
+\begin{landscape}
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+\hline 
+Territoire & ZProximité & Etablissement & FINESS J & Site & FINESS G & SU & SU Ped & SMUR & SAMU\tabularnewline
+\hline 
+\hline 
+ \multirow{3}{*}{1} & Wissembourg & CH Wissembourg &  & id &  & oui &  & oui & \tabularnewline
+\cline{2-10} 
+ & Haguenau & CH Haguenau &  & id &  & oui &  & oui & \tabularnewline
+\cline{2-10} 
+ & Saverne & CH Saverne &  & id &  & oui &  & oui & \tabularnewline
+\hline 
+\multirow{7}{*}{2} & \multirow{6}{*}{Strasbourg} & \multirow{3}{*}{HUS} &  & NHC &  & oui &  &  & \tabularnewline
+\cline{4-10} 
+ &  &  &  & HTP &  & oui & oui & oui%
+\footnote{SMUR Néonatal%
+} & \tabularnewline
+\cline{4-10} 
+ &  &  &  & PL &  &  &  & oui & oui\tabularnewline
+\cline{3-10} 
+ &  & Ste Anne &  & id &  & oui &  &  & \tabularnewline
+\cline{3-10} 
+ &  & Ste Odile &  & id &  & oui &  &  & \tabularnewline
+\cline{3-10} 
+ &  & Diaconnat &  & id &  & oui%
+\footnote{SOS Mains%
+} &  &  & \tabularnewline
+\cline{2-10} 
+ & Schirmeck & St Luc &  & id &  &  &  &  & \tabularnewline
+\hline 
+\multirow{4}{*}{3} & Sélestat & CH Sélestat &  & id &  & oui &  & oui & \tabularnewline
+\cline{2-10} 
+ & \multirow{2}{*}{Colmar} & \multirow{2}{*}{CH Colmar} &  & HC &  & oui &  & oui & \tabularnewline
+\cline{4-10} 
+ &  &  &  & Parc &  &  & oui &  & \tabularnewline
+\cline{2-10} 
+ & Guebwiller & CH Guebwiller &  & id &  & oui &  &  & \tabularnewline
+\hline 
+\multirow{5}{*}{4} & \multirow{3}{*}{Mulhouse} & \multirow{2}{*}{CH Mulhouse} &  & EM &  & oui & oui & oui & oui\tabularnewline
+\cline{4-10} 
+ &  &  &  & St Louis &  & oui &  & oui%
+\footnote{antenne SMUR%
+} & \tabularnewline
+\cline{3-10} 
+ &  & Diaconnat-F &  & id &  & oui &  &  & \tabularnewline
+\cline{2-10} 
+ & Thann & CH Thann &  & id &  & oui &  &  & \tabularnewline
+\cline{2-10} 
+ & Altkirch & CH Altkirch &  & id &  & oui &  &  & \tabularnewline
+\hline
+\end{tabular}
+ \caption[Structures d'urgence]{Services d'urgence d'Alsace}
+
+\label{tab:sualsace}
+\end{center}
+\end{table}
+\end{landscape}
+
+\begin{figure}[ht]
+ \centering
+ <<carte_sau_2,echo=FALSE,message=FALSE>>=
+# fond de carte des territoires de santé
+load("../als_ts.Rda")
+plot(ctss)
+title(main="Service d'urgences d'Alsace")
+# surimpression des SAU
+hopitaux<-"../Fichiers source/Hopitaux2lambert/hopitaux_alsace.csv"
+h<-read.csv(hopitaux,header=TRUE,sep=",")
+for(i in 1:nrow(h)){points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");text(h$lam_lon[i],h$lam_lat[i],labels=h$hopital[i],cex=0.8,pos=h$pos[i])}
+@
+ \caption[Services d'urgenced'Alsace]{L'Alsace compte 14 services d'urgence labellisés sur 15 sites.}
+ \label{fig:su_alsace}
+\end{figure}
+
+
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|c|c|l|}
+  \hline
+& Finess utilisé & Finess géographique & Finess Juridique & Structure \\
+  \hline
+  \hline
+1 & 670780055 &   & 670780055 & HUS \\
+2 & 670780543 & 670000272 & 670780543 & CH Wissembourg \\
+3 & 670000397 & 670000397  & 670780691 & CH Selestat \\
+4 & 670780337 & 670000157 & 670780337 & CH Haguenau \\
+5 &   & 670000165 & 670780345 & CH Saverne \\
+6 & 670016237  & 670016237  & 670016211 & Clinique ste Odile \\
+7 &   & 670780212 & 670014604 & Clinique Ste Anne \\
+8 & 680000973 & 680000684 & 680000973 & CH Colmar \\
+9 & 680000197  & 680000197  & 680000049 & Clinique des trois frontières \\
+10 & 680000486 & 680000544  & 680000395 & CH Altkirch \\
+11 & 680000700 & 680000700 & 680001005 & CH Guebwiller \\
+12 & 680000627 & 680000627 & 680000486 & CH Mulhouse FG \\
+13 &   & 680000601 & 680000437 & CH Thann \\
+14 &   & 680000320  & 680000643 & Diaconat-Fonderie (St Sauveur) \\
+\hline
+\end{tabular}
+\caption{Service d'accueil des urgences d'Alsace}
+\label{summary}
+\end{center}
+\end{table}

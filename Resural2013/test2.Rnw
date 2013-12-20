@@ -1,0 +1,89 @@
+% test2.Rnw
+
+L'activité horaire des services d'urgence en Alsace est totalement superposable à celui de l'ensemble des SU (figure \ref{passage:als} page \pageref{passage:als}). L'activité diminue fortement en nuit profonde à partir de une heure du matin pour redémarrer vers 9 heures et s'intensifier progressivement en matinée. Après un premier pic en fin de matinée, la croissance reprend pour culminer vers 19 heures, puis décroître lentement jusqu'en fin de soirée.
+
+Ce phénomène cyclique se répète tous les jours selon un profil immuable. La projection de ces données sur un graphique en radar représentant les 24 tranches horaires (figure \ref{radar:als} page \pageref{radar:als}) montre qu'il existe trois pics d'égale amplitude à 11, 15 et 19 heures. Ce point mérite d'être analysé car s'il se confirme, cela pourrait indiquer que le pointage de 11 heures permet d'avoir une prévision sur l'intensité de la fréquentation avant la garde du soir. On peut en rapprocher le fait que la médiane des passages se situe vers 14h, c'est à dire qu'au ointage de 15 heures on peut évaluer la quantité totale de patients qui vont se présenter dans les heures qui viennent.
+
+%----------------------------------------------------------------------------- Summary
+Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
+<<fig24,echo=FALSE,comment="",results='asis'>>=
+e<-ymd_hms(d1$ENTREE)
+h<-hour(e)
+a<-xsummary(h,xtable=T,tl="Résumé des horaires de passage aux urgences",tc="horaires de passage",lab="tab:24")
+@
+
+% \input{../blah.gen}
+%---------------------------------------------------------------------- HISTOGRAMME
+
+\begin{figure}
+\begin{center}
+<<test23, echo=FALSE,fig = TRUE,fig.height=5>>=
+hist(h,breaks=23,xlab="Heures",ylab="Nombre de passages",main="Alsace - Horaire de fréquentation du SU",col="pink")
+@
+\end{center}
+\caption{Horaires d'arrivée aux urgences en Alsace 2013}
+\label{passage:als}
+\end{figure}
+%---------------------------------------------------------------------------- RADAR 1
+
+\begin{figure}
+\begin{center}
+<<test25, echo=FALSE,fig = TRUE,fig.height=10,warning=FALSE>>=
+t<-table(h)
+als_entree<-as.integer(t)
+par(mfrow = c(2, 1))
+c<-clock24.plot(als_entree,clock.pos=0:23,lwd=3,show.grid.labels=F,line.col="green")
+c<-clock24.plot(als_entree,clock.pos=0:23,rp.type="p",main="Alsace",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col="green",lwd=3)
+par(mfrow = c(1, 1))
+@
+\end{center}
+\caption{Horaires d'arrivée aux urgences en Alsace 2013}
+\label{radar:als}
+\end{figure}
+
+%---------------------------------------------------------Radar HUS
+\begin{figure}
+\begin{center}
+  <<test2, echo=FALSE,fig = TRUE,fig.height=5,warning=FALSE>>=
+    passages("Hus","HUS",sens=3)
+    @
+\end{center}
+\caption{HUS: répartition des arrivées et départs aux urgences}
+\label{passage:hus}
+\end{figure}
+
+%---------------------------------------------------------Radar Colmar
+\begin{figure}
+\begin{center}
+  <<test26, echo=FALSE,fig = TRUE,fig.height=10,warning=FALSE>>=
+    par(mfrow = c(3, 2))
+    passages("Col","CH Colmar",sens=3)
+    passages("Mul","CH Mulhouse",sens=3)
+    passages("Geb","CH Guebwiller",sens=3)
+    passages("3Fr","Trois Frontières",sens=3)
+    passages("Alk","CH Altkirch",sens=3)
+    passages("Dia","Diaconnat-Fonderie",sens=3)
+    par(mfrow = c(1, 1))
+    @
+\end{center}
+\caption{Secteurs 3 et 4: répartition des arrivées et départs aux urgences}
+\label{passage:col}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+  <<test27, echo=FALSE,fig = TRUE,fig.height=10,warning=FALSE>>=
+    par(mfrow = c(3, 2))
+    passages("Wis","CH Wissembourg",sens=3)
+    passages("Hag","CH Haguenau",sens=3)
+    passages("Sav","CH Saverne",sens=3)
+    passages("Sel","CH Sélestat",sens=3)
+    passages("Hus","HUS",sens=3)
+    passages("Odi","Ste Odile",sens=3)
+    par(mfrow = c(1, 1))
+    @
+\end{center}
+\caption{Secteurs 1 et 2: répartition des arrivées et départs aux urgences}
+\label{passage:secteur12}
+\end{figure}
+

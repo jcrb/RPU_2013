@@ -1,0 +1,279 @@
+CH Wissembourg
+========================================================
+
+Ligne 21 remplacer **Wis* par l'hôpital de son choix.
+
+```{r prologue,cache=TRUE,warning=FALSE}
+source("../prologue.R")
+source("../../mes_fonctions.R")
+
+date()
+pt <-nrow(d1)
+# population totale
+pt
+```
+Récupération des données
+========================
+```{r init}
+library("epicalc")
+library("lubridate")
+source("odds.R")
+HOP<-d1[d1$FINESS == "Col",]
+n <- nrow(HOP)
+```
+### Passages en 2013: `r n`
+
+Mode de sortie
+--------------
+```{r sortie}
+a<-summary(HOP$MODE_SORTIE)
+a
+tab1(HOP$MODE_SORTIE)
+hosp <- as.numeric(a["Mutation"] + a["Transfert"])
+hosp
+total <- as.numeric(hosp + a["Domicile"])
+total
+ratio_hosp <- round(hosp * 100 / as.numeric(a["Domicile"]))
+ratio_hosp
+tx_hosp <- round(hosp * 100 / total)
+tx_hosp
+```
+
+Destination
+-----------
+```{r destination}
+a<-summary(HOP$DESTINATION)
+a
+tab1(HOP$DESTINATION)
+
+```
+
+
+Orientation
+-----------
+```{r orientation}
+summary(HOP$ORIENTATION)
+
+#on supprime les NA
+a<-HOP$ORIENTATION[!is.na(HOP$ORIENTATION)]
+tab1(a,horiz=T,main="Orientation des patients",xlab="Nombre")
+```
+
+Age
+----
+
+```{r age}
+age_local<-HOP$AGE
+s <- summary(age_local)
+
+c <- cut(age_local,breaks=c(-1,1,75,150),labels=c("1 an","1 à 75 ans","sup 75 ans"),ordered_result=TRUE)
+a <- summary(c)
+a
+
+c2 <- cut(age_local, breaks = c(-1,19,75,120), labels = c("Pédiatrie","Adultes","Gériatrie"))
+b <- summary(c2)
+b
+```
+### Age moyen: `r s["Mean"]`  
+### Pédiatrie: `r b["Pédiatrie"]`  (`r round(b["Pédiatrie"]*100/n)` %)
+### Gériatrie: `r b["Gériatrie"]`  (`r round(b["Gériatrie"]*100/n)` %)
+
+```{r age2}
+
+# region: chiffre pour toute l'Alsace
+# local: HOP
+region<-d1$AGE
+
+hist(region,freq=F)
+hist(age_local, add=T,col="blue",freq=F,main="Histogramme des ages")
+abline(v=median(region,na.rm=T),col="red")
+abline(v=median(s,na.rm=T),col="green")
+legend("topright",legend=c("médiane régionale","médiane locale"),col=c("red","green"),lty=1)
+
+# moins de 1 an / total
+local<-HOP$AGE[HOP$AGE < 1]
+length(local) * 100 /n
+region<-d1$AGE[d1$AGE < 1]
+length(region) * 100 / pt
+
+# on forme une matrice carrée de 2 lignes et 2 colonnes:
+# on saisi d'abord la colonne 1, puis 2
+# pour une saisie par ligne mettre byrow=TRUE
+M1 <- matrix(c(length(a),n,length(region),pt), nrow = 2,byrow=FALSE)
+M1
+chisq.test(M1)
+p<-M1[1,1]/n
+q<-M1[1,2]/pt
+or<-p*(1-q)/q*(1-p)
+p
+q
+or
+
+calcOddsRatio(M1,referencerow=2)
+calcRelativeRisk(M1)
+
+# 75 ans et plus
+
+a<-HOP$AGE[HOP$AGE > 74]
+length(a) * 100 /n           # % de la pop locale de 75 ans qui passa au SU
+region<-d1$AGE[d1$AGE > 74]
+length(region) * 100 / pt    # % de 75 ans dans la pop alsacienne qui consulte au SU
+
+hist(a,main="75 ans et plus",xlab="age",col="pink")
+summary(a)
+boxplot(a,col="pink",main="75 ans et plus",ylab="Age (années)")
+
+# calcul manuel de l'odds-ratio
+
+M1 <- matrix(c(length(a),n-length(a),length(region),pt-length(region)), nrow = 2,byrow=FALSE)
+M1
+chisq.test(M1)
+p<-M1[1,1]/n
+q<-M1[1,2]/pt
+or<-(p*(1-q))/(q*(1-p))
+p
+q
+or
+
+# calcul del'OR et du risque relatif avec formules:
+
+calcOddsRatio(M1,referencerow=2)
+calcRelativeRisk(M1)
+chisq.test(M1)
+fisher.test(M1)
+
+# graphe de l'OR
+
+odds <- calcOddsRatio(M1,referencerow=2,quiet=TRUE)
+or <- odds[1]
+lower <- odds[2]
+upper <- odds[3]
+y <- 0.5
+if(lower > 1) limiteInf <- 0.5 else limiteInf <- lower - 0.5
+plot(or,y,pch=19,col="darkblue",xlab="odds-ratio", ylab="",axes=FALSE,main="Patients de 75 ans et plus",xlim=c(limiteInf,upper+0.5))
+axis(1)
+abline(v=1, lty="dashed")
+lines(c(lower,upper),c(y,y),col="royalblue")
+
+```
+
+sex ratio
+-----------
+```{r sexe,fig.height=3}
+sexew <- HOP$SEXE
+local <- summary(sexew)
+local
+srw <- round(local[3]/local[1],3)
+
+sexer <- d1$SEXE
+region <- summary(sexer)
+region
+srr <- round(region[3]/region[1],3)
+
+M1<-matrix(c(local[3],local[1],region[3],region[1]),nrow=2)
+colnames(M1) <- c("Local","Alsace")
+rownames(M1) <- c("Hommes","Femmes")
+M1
+calcOddsRatio(M1,referencerow=2)
+or <- calcOddsRatio(M1,referencerow=2,quiet=TRUE)
+
+plot(or[1],1,pch=19,col="darkblue",xlab="odds-ratio", ylab="",axes=FALSE)
+axis(1)
+abline(v=1, lty="dashed")
+lines(c(or[2],or[3]),c(1,1),col="royalblue")
+```
+sex-ratio local = `r srw`  
+sex-ratio régional = `r srr`  
+odds-ratio = `r or[1]` [`r or[2]`-`r or[3]`]
+
+Le sex-ratio est légèrement inférieur à celui de la région mais pas signficativement différent
+
+Horaires
+---------
+```{r horaires}
+e<-hour(HOP$ENTREE)
+a<-cut(e,breaks=c(0,7,19,23),labels=c("nuit profonde","journée","soirée"))
+b <- summary(a)
+```
+
+### Soirée `r round(b['soirée']*100/length(e),2)` %
+
+### Nuit profonde `r round(b['nuit profonde']*100/length(e),2)` %
+
+On fait la somme du vendredi 20 heures au lundi matin 8 heures. Dimanche = 1
+```{r weekend}
+d <-  HOP$ENTREE[wday(HOP$ENTREE)==1 | wday(HOP$ENTREE)==7 | (wday(HOP$ENTREE)==6 & hour(HOP$ENTREE)>19) | (wday(HOP$ENTREE)==2 & hour(HOP$ENTREE)<8)]
+f<-summary(as.factor(wday(d)))
+
+```
+### Week-end: `r length(d)` dossiers (`r round(length(d)*100/n,2)` %)
+
+Gravité
+--------
+```{r gravite}
+d <-  HOP$GRAVITE
+a <- summary(d)
+```
+
+### CCMU 1: `r a[1]` (`r round(a[1]*100/sum(a))` %)
+
+### CCMU 4 & 5: `r a[4]+a[5]` (`r round((a[4]+a[5])*100/sum(a))` %)
+
+Durée de prise en charge
+-------------------------
+```{r presence}
+e<-ymd_hms(HOP$ENTREE)
+s<-ymd_hms(HOP$SORTIE)
+
+HOP$presence <- s - e
+HOP$presence[d1$presence < 0]<-NA
+
+#  HOP$presence est de type "difftime" est peut s'exprimer en minutes ou en secondes. Si nécessaire on convertit les secondes en minutes:
+if(units(HOP$presence) == "secs")
+  HOP$presence <- HOP$presence/60
+
+a <- summary(as.numeric(HOP$presence))
+
+# on limite la durée de présence limitée à 1 jours
+troisJours <- HOP[as.numeric(HOP$presence) < 1440 * 1, "presence"]
+hist(as.numeric(troisJours),breaks=40,main="Durée de présence",xlab="Temps (minutes)",ylab="Nombre",col="green")
+
+# histogramme avec toutes les données:
+hist(as.numeric(HOP$presence),breaks=40,main="Durée de présence",xlab="Temps (minutes)",ylab="Nombre",col="green")
+
+
+q <- HOP$presence[as.numeric(HOP$presence) < 4*60]
+h <- HOP[HOP$MODE_SORTIE=="Mutation" | HOP$MODE_SORTIE=="Transfert","presence"]
+sh <- summary(as.numeric(h))
+sh
+dom <- HOP[HOP$MODE_SORTIE=="Domicile","presence"]
+sdom <- summary(as.numeric(dom))
+```
+### Moyenne: `r a["Mean"]` minutes
+
+### Médiane: `r a["Median"]` minutes
+
+### % en moins de 4 heures: `r length(q)` (`r round(length(q)*100/length(HOP$presence))` %)
+
+### si hospitalisé: `r sh["Mean"]` minutes
+
+### si retour à domicile: `r sdom["Mean"]` minutes
+
+### Taux hospitalisation: `r round(length(h)*100/n,2)` %
+
+TOP 5 des pathologies
+---------------------
+### Médicales
+
+### Traumatiques
+```{r trauma}
+trauma<-HOP[substr(HOP$DP,1,3) >= "S00" & substr(HOP$DP,1,4) <="T65",]
+head(trauma$DP)
+t <- summary(as.factor(trauma$DP))
+head(sort(t,decreasing=T),6)
+```
+traumato: `r nrow(trauma)` soit `r round(nrow(trauma)*100/n)` %  
+Lésions les plus fréquentes: `r head(sort(t,decreasing=T),6)`  
+
+
+### Chirurgicales

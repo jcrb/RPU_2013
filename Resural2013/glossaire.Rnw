@@ -1,0 +1,74 @@
+% glossaire.Rnw
+
+\glossary{AIT Accident (Vasculaire) Ischemique Transitoire}
+
+
+
+\subsection*{AIT}
+\index{AIT}
+Accident (Vasculaire) Ischemique Transitoire
+
+\subsection*{ANTARES}
+\index{ANTARES}
+Adaptation Nationale des Trasmissions Aux Risques Et Secours
+
+\subsection*{AR}
+\index{AR}
+Ambulance de Réanimation (voir UMH)
+
+\subsection*{ARS}
+\index{ARS}
+Agence Régionale de Santé
+
+\subsection*{AVC}
+\index{Accident Vasculaire Cérébral}
+
+\subsection*{Population}
+\index{Population}
+
+\subsection*{Population comptée à part}
+\index{Population@Population!comptée à part}
+Le concept de population comptée à part est défini par le décret n°2003-485 publié au Journal officiel du 8 juin 2003, relatif au recensement de la population.
+La population comptée à part comprend certaines personnes dont la résidence habituelle (au sens du décret) est dans une autre commune mais qui ont conservé une résidence sur le territoire de la commune :
+1. Les mineurs dont la résidence familiale est dans une autre commune mais qui résident, du fait de leurs études, dans la commune.
+2. Les personnes ayant une résidence familiale sur le territoire de la commune et résidant dans une communauté d'une autre commune, dès lors que la communauté relève de l'une des catégories suivantes :
+- services de moyen ou de long séjour des établissements publics ou privés de santé, établissements sociaux de moyen ou de long séjour, maisons de retraite, foyers et résidences sociales ;
+- communautés religieuses ;
+- casernes ou établissements militaires.
+3. Les personnes majeures âgées de moins de 25 ans ayant leur résidence familiale sur le territoire de la commune et qui résident dans une autre commune pour leurs études.
+4. Les personnes sans domicile fixe rattachées à la commune au sens de la loi du 3 janvier 1969 et non recensées dans la commune. \cite{8}
+
+
+\subsection*{Population totale}
+\index{Population@Population!totale}r
+Le concept de *population totale* est défini par le décret n°2003-485 publié au Journal officiel du 8 juin 2003, relatif au recensement de la population.
+
+La population totale d'une commune est égale à la somme de la population municipale et de la population comptée à part de la commune.
+La population totale d'un ensemble de communes est égale à la somme des populations totales des communes qui le composent.
+La population totale est une population légale à laquelle de très nombreux textes législatifs ou réglementaires font référence. A la différence de la population municipale, elle n'a pas d'utilisation statistique car elle comprend des doubles comptes dès lors que l'on s'intéresse à un ensemble de plusieurs communes \cite{7}.
+
+\subsection*{Population municipale}
+\index{Population@Population!municipale}
+Le concept de *population municipale* est défini par le décret n°2003-485 publié au Journal officiel du 8 juin 2003, relatif au recensement de la population.
+La population municipale comprend les personnes ayant leur résidence habituelle (au sens du décret) sur le territoire de la commune, dans un logement ou une communauté, les personnes détenues dans les établissements pénitentiaires de la commune, les personnes sans-abri recensées sur le territoire de la commune et les personnes résidant habituellement dans une habitation mobile recensée sur le territoire de la commune.
+La population municipale d'un ensemble de communes est égale à la somme des populations municipales des communes qui le composent.
+Le concept de \emph{population municipale} correspond désormais à la notion de \emph{population utilisée usuellement en statistique}. En effet, elle ne comporte pas de doubles comptes : chaque personne vivant en France est comptée une fois et une seule. En 1999, c'était le concept de population sans doubles comptes qui correspondait à la notion de population statistique \cite{6}.
+
+
+\subsection*{Unité urbaine}
+\index{Unité urbaine}
+La notion d'unité urbaine repose sur la continuité du bâti et le nombre d'habitants. On appelle unité urbaine une commune ou un ensemble de communes présentant une zone de bâti continu (pas de coupure de plus de 200 mètres entre deux constructions) qui compte au moins 2 000 habitants.
+Si l'unité urbaine se situe sur une seule commune, elle est dénommée ville isolée. Si l'unité urbaine s'étend sur plusieurs communes, et si chacune de ces communes concentre plus de la moitié de sa population dans la zone de bâti continu, elle est dénommée agglomération multicommunale.
+Sont considérées comme rurales les communes qui ne rentrent pas dans la constitution d'une unité urbaine : les communes sans zone de bâti continu de 2000 habitants, et celles dont moins de la moitié de la population municipale est dans une zone de bâti continu (INSEE \cite{4}).
+
+cellule régionale d’appui et de pilotage sanitaire (CRAPS)
+service zonal de défense et de sécurité (SZDS)
+plateforme de veille et d’urgence sanitaire (PVUS)
+cellule zonale d’appui (CZA). Structure de crise de l’ARS de zone, elle est constituée autour du SZDS qui assure une fonction de coordination en collaboration étroite avec la/les CRAPS activée(s) en ARS.
+Directeur général de la santé (DGS) ou le Haut fonctionnaire de défense et de sécurité (HFDS)
+Centre de crise sanitaire (CCS
+Centre opérationnel zonal renforcé (COZ-R) de l’état-major interministériel de zone de défense et de sécurité (EMIZDS).
+Système d’information sanitaire des alertes et crises (SISAC) de la DGS.
+
+
+

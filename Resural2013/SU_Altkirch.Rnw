@@ -1,0 +1,62 @@
+% SU_Altkirch.Rnw
+
+\index{SU Altkirch}
+\index{Altkirch@SU}
+
+<<recap_alk,echo=FALSE,warning=FALSE>>=
+
+source("../Chapitres/resume.R")
+
+hop <- "Alk"
+
+a <- resume_service(hop,d1=d1)
+x <- a["age_sd"]
+@
+
+% \pm dessine le symboe plus ou moins
+% a["age_min"] donne une date que R n'arrive pas à utiliser. On utilise a[1,2] à la place
+
+\begin{tabular}{|l|c|}
+\hline 
+\multicolumn{2}{|c|}{Centre Hospitalier d'Altkirch}\tabularnewline
+\hline 
+\hline 
+RPU déclarés & \np{\Sexpr{a["n"]}} \tabularnewline
+\hline 
+Date de début & \Sexpr{a[1,2]} \tabularnewline
+\hline 
+Date de fin & \Sexpr{a[1,3]} \tabularnewline
+\hline 
+Age moyen & \Sexpr{a["age_moyen"]} ans \pm $\Sexpr{x}$ \tabularnewline
+\hline 
+RPU pédiatriques & \np{\Sexpr{a["ped"]}} (\Sexpr{a["p_ped"]} \%) \tabularnewline
+\hline 
+RPU gériatriques & \np{\Sexpr{a["ger"]}} (\Sexpr{a["p_ger"]} \%) \tabularnewline
+\hline 
+Durée de passage moyenne & \Sexpr{a["p_mean"]} minutes\tabularnewline
+\hline 
+Durée de passage médiane & \Sexpr{a["p_median"]} minutes\tabularnewline
+\hline 
+Passages de moins de 4 heures & \np{\Sexpr{a["p_4h"]}} (\Sexpr{a["pp_4h"]} \%) \tabularnewline
+\hline 
+Durée de passage si hospitalisation & \Sexpr{a["p_hosp_mean"]} minutes\tabularnewline
+\hline 
+Durée de passage si retour à domicile & \Sexpr{a["p_dom_mean"]} minutes\tabularnewline
+\hline 
+Passages en soirée & \Sexpr{a["p_soir"]} \% \tabularnewline
+\hline 
+Passages en nuit profonde & \Sexpr{a["p_nuitp"]} \% \tabularnewline
+\hline 
+Passages le week-end & \np{\Sexpr{a["n_we"]}} (\Sexpr{a["p_we"]} \%) \tabularnewline
+\hline 
+
+CCMU 1 & \np{\Sexpr{a["n_ccmu1"]}} (\Sexpr{a["p_ccmu1"]} \%) \tabularnewline
+\hline
+CCMU 4 \& 5 & \np{\Sexpr{a["n_ccmu45"]}} (\Sexpr{a["p_ccmu45"]} \%) \tabularnewline
+\hline
+
+\end{tabular}
+
+<<graphe_p_alk,echo=FALSE,fig.height=6>>=
+presence_hist(hop,d1)
+@

@@ -1,0 +1,103 @@
+Motif de consultation
+========================================================
+
+Le motif de consultation est l'un des items les plus mal renseigné. Cela est du en partie à l'absence de règles formelles concernant la saisie de cet élément. Une recommandation du ministère de la santé demande que la thésaurus 2013 de la SFMU [ref.9] soit utilisé.
+
+Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet **recours** liste environ *150* motifs de recours aux urgences avec leur correspondance CIM10. Aucune méthode n'est parfaite mais cette page constitue une bonne base d'harmonisation des données.
+
+```{r init, message=FALSE,cache=TRUE}
+getwd()
+source("../prologue.R")
+
+d1<-foo(path)
+names(d1)
+nrow(d1)
+
+```
+```{r}
+print(annee_courante)
+print(mois_courant)
+d1$MOTIF<-as.factor(d1$MOTIF)
+
+motifs_renseignes<-function(d1,finess){
+  print(head(d1$MOTIF[d1$FINESS == finess]))
+  a<-is.na(d1$MOTIF[d1$FINESS == finess])
+  b<-length(a[a==TRUE])
+  c<-b*100/length(a)
+  print("")
+  print(paste("% de motifs non renseignés:", round(c,2)))
+}
+
+motifs_renseignes(d1,"Mul")
+```
+Ensemble des hôpitaux
+---------------------
+```{r tous}
+
+c<-tapply(!is.na(d1$MOTIF),d1$FINESS,mean)
+round(c*100,2)
+barplot(sort(round(c*100,2)),main="Taux de renseignement de l'item 'Motif de consultation'",ylab="pourcentage",xlab="Services d'urgence")
+```
+Le motif de consultation nest pas renseigné dans `r round(mean(c)*100,2)` % des cas.
+
+barplot(sort(round(c*100,2),decreasing=TRUE),main="Taux de renseignement de l'item 'Motif de consultation'",xlab="pourcentage",ylab="Services d'urgence",horiz=TRUE,las=2)
+
+Altkirch
+-----
+```{r alk}
+motifs_renseignes(d1,"Alk")
+
+```
+
+Wissembourg
+-----
+```{r Wis}
+motifs_renseignes(d1,"Wis")
+
+```
+
+Colmar
+-----
+```{r Col}
+motifs_renseignes(d1,"Col")
+
+```
+
+Mulhouse
+--------
+```{r Mul}
+motifs_renseignes(d1,"Mul")
+
+```
+
+Thann
+--------
+```{r Tha}
+motifs_renseignes(d1,"Thn")
+```
+
+Saverne
+--------
+```{r sav}
+motifs_renseignes(d1,"Sav")
+```
+Selestat
+--------
+```{r sel}
+motifs_renseignes(d1,"Sel")
+```
+Hus
+--------
+```{r hus}
+motifs_renseignes(d1,"Hus")
+```
+Guebwiller
+--------
+```{r geb}
+motifs_renseignes(d1,"Geb")
+```
+St Louis
+--------
+```{r stl}
+motifs_renseignes(d1,"3Fr")
+```

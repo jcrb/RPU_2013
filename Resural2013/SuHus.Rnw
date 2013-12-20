@@ -1,0 +1,41 @@
+% SuHus.Rnw
+% Activité des SU des HUS
+
+\index{SU des HUS}
+\index{HUS@SU}
+
+Les Hôpitaux universitaires de Strasbourg ont une offre étendue en matière d'urgences et seuleument certaines activités génèrent des RPU.
+On compte:
+\begin{enumerate}
+  \item SU adulte du NHC
+  \item SU adulte de HTP
+  \item SU pédiatrique de HTP
+  \item SU SOS mains (CCOM)
+  \item SU Gynéco-obstétrique à HTP
+\end{enumerate}
+Auxquels il faut rajouter les services assurant un accueil des urgences 24h/24h et qui ne transitent pas par les SU. Ce sont les correspondants privilégiés du SAMU 67 et des transporteurs sanitaires (ASSU, VSAV, SMUR):
+\begin{enumerate}
+  \item Réanimations médicales de HTP et NHC
+  \item Réanimations chirurgicales de HTP et NHC
+  \item Réanimation pédiatrique polyvalente de HTP
+  \item Unité neuro-vasculaire (HTP)
+  \item SI cardio-vasculaire (NHC)
+\end{enumerate}
+
+\section{Activité globale}
+
+<<hus,echo=FALSE>>=
+Hus<-d1[d1$FINESS=="Hus",]
+t<-nrow(Hus)
+m1<-min(Hus$ENTREE)
+m2<-max(Hus$ENTREE)
+load("../../SAU2013/sau2013.Rda")
+dhus<-d[d$hop=="HUS",]
+tot<-sum(dhus$TOTAL.passages,na.rm=T)
+hus.serv<-as.factor(dhus$ser2)
+ta<-tapply(dhus$TOTAL.passages,hus.serv,sum)
+@
+
+Entre le \Sexpr{m1} et le \Sexpr{m2}, \np{\Sexpr{t}} RPU ont été transmis, alors que \np{\Sexpr{tot}} dossiers ont été déclarés au serveur régional. 
+\Sexpr{table(ta)}
+

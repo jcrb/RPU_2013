@@ -1,0 +1,132 @@
+% activite_regionale.Rnw
+
+%on fabrique un objet **a** qui fait la somme par date des passages aux urgences:
+<<activite,echo=FALSE>>=
+e<-ymd_hms(d1$ENTREE)
+a<-tapply(e,as.Date(d1$ENTREE),length)
+@
+
+% vérification:
+%   a[1:10]
+% 2013-01-01 2013-01-02 2013-01-03 2013-01-04 2013-01-05 2013-01-06 2013-01-07 2013-01-08 2013-01-09 2013-01-10 
+%        884        801        686        704        722        691        876        694        683        673 
+% On supprime l'enregistrement 211 correspondant au 31 juillet et qui ne contient que 2 éléments:
+%a[211]  2013-07-31 2 
+<<activite2,echo=FALSE>>=
+a<-a[-211]
+  a1<-summary(a)
+@
+% Min. 1 st Qu.  Median    Mean 3rd Qu.    Max. 
+%   642.0   848.0   895.5   883.2   957.0  1050.0 
+
+L'ensemble des SU ont déclaré \np{\Sexpr{length(e)}} passages au \Sexpr{format(max(e),format="%d %B %Y")}, 
+soit une moyenne de \np{\Sexpr{a1[4]}} passages par jour (extrèmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
+
+Passages par secteur sanitaire:
+<<passages_secteur,echo=FALSE>>=
+t<-tapply(d1$ENTREE,d1$secteur,length)
+@
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+ Territoire & RPU déclarés \\ 
+  \hline
+  1 & \np{\Sexpr{t[1]}} \\ 
+  2 & \np{\Sexpr{t[2]}} \\ 
+  3 & \np{\Sexpr{t[3]}} \\ 
+  4 & \np{\Sexpr{t[4]}} \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+Les données du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi q'une part importante des RPU des urgences adulte des HUS.
+
+
+%affichage du graphique
+<<activite plot,echo=FALSE>>=
+z<-zoo(a,unique(as.Date(d1$ENTREE)))
+  plot(z,ylab="Nb. de passages aux Urgences",main="Passages en SU en 2013",xlab="Période")
+  legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+  lines(rollmean(z[,2],7),col="red",lwd=2)
+  # copyright
+  mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
+@
+% Variante avec *xts*
+<<activite plot2,echo=FALSE>>=
+ x<-as.xts(z)
+ plot(x,ylab="Nb. de passages aux Urgences",main="Passages en SU en 2013",xlab="Période")
+legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+lines(rollmean(xts(z),7),col="red",lwd=2)
+# moyenne générale
+abline(h=mean(a),col="blue")
+ mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
+@
+
+\subsection*{En valeur absolue}
+<<val_abs,echo=FALSE,results='asis'>>=
+t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
+t2<-as.matrix(t)
+t2<-cbind(row.names(t),t)
+colnames(t2)<-c("Hôpital","RPU")
+rownames(t2)<-NULL
+
+xtable(t2,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("l","l","r"))
+
+barplot(sort(t),horiz=T,las=2,main="SU 2013: nombre de passages")
+@
+
+\subsection*{En pourcentage}
+<<en_pourcentage,echo=FALSE>>=
+p<-sort(round(prop.table(t)*100,2))
+barplot(p,horiz=T,las=2,xlim=c(0,20),xlab="pourcentage du total",main="SU 2013: nombre de passages (en %)")
+@
+
+\subsection*{Taux de recours aux urgences}
+<<tru,echo=FALSE>>=
+tru2011_lorraine<-0.2345
+tru_estime<-pop.als.2010.totale*tru2011_lorraine
+# tru2013_alsace<-round(length(e)*100/pop.als.2010.totale,2)
+tru2013_alsace<-round(nrow(d1)*100/pop.als.2010.totale,2)
+
+print(tru_estime)
+@
+Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comprte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à \Sexpr{tru_estime}.
+
+Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_alsace}\%.
+
+\subsection*{Activité par mois}
+%------------------------------
+<<parmois>>=
+m<-month(d1$ENTREE,label=TRUE)
+table(m)
+barplot(table(m),ylab="nombre",xlab="mois",main="2013 - Nombre de RPU par mois",names.arg=c("Jan","Fev","Mar","Avr","Mai","Jui","Jul","Aou","Sep","Oct","Nov","Dec"),las=2)
+@
+
+\subsection*{Activité par semaine}
+
+<<label=act_sem,echo=FALSE,results='asis'>>=
+m<-week(d1$ENTREE)
+
+xtable(table(m),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
+
+xtable(t(table(m)),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem2",table.placement = "ht",caption.placement = "top")
+
+barplot(table(m))
+@
+
+\subsection*{Activité par jour de la semaine}
+<<activite_semaine>>=
+m<-wday(d1$ENTREE,label=T)
+table(m)
+barplot(table(m),names.arg=c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam"))
+@
+
+\subsection*{Activité horaire}
+<<activite_heure,echo=FALSE>>=
+h<-hour(d1$ENTREE)
+t<-table(h)
+barplot(table(h),xlab="Heures de la journée",ylab="nombre",main="Répartition des RPU sur le nycthémère")
+@
+
+  

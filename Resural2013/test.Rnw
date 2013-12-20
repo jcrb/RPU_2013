@@ -1,0 +1,10 @@
+%\SweaveOpts{concordance=TRUE}
+\begin{itemize}
+  \item test2.Rnw exemple de graphiques avec label
+\end{itemize}
+
+<<>>=
+n<-dim(d1)
+print(n)
+names(d1)
+@

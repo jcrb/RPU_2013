@@ -1,0 +1,108 @@
+% sortie.Rnw
+
+\section{Mode de sortie}
+\index{Mode de sortie}
+
+Le RPU connaît trois mode de sortie des urgences:
+\begin{enumerate}
+  \item le décès: le patient est déclaré décédé aux urgences.
+  \item le retour à domicile ou ce qui en tient lieu (y compris la voie publique)
+  \item l'hospitalisation (mutation ou transfert)
+  \begin{itemize}
+  \item mutation: le patient est hospitalisé dans une autre unité médicale de la même entité juridique sauf pour les établissements privés visés aux alinéas d et e de l'article L162-22-6 du code de la sécurité sociale.
+  \item transfert: le patient est hospitalisé dans une autre  entité juridique sauf pour les établissements privés visés aux alinéas d et e de l'article L162-22-6 du code de la sécurité sociale.
+\end{itemize}
+\end{enumerate}
+
+% Mode de SORTIE.png: 669x437 pixel, 72dpi, 23.60x15.42 cm, bb=0 0 669 437
+ \begin{figure}[h]
+ \centering
+ \includegraphics[width=9cm,height=7cm,bb=0 0 669 437]{figure/Mode de SORTIE.png}
+ \caption{Modes de sortie}
+\end{figure}
+
+<<sortie, results='asis',warning=FALSE,echo=FALSE>>=
+# drop.levels supprime le level 0 qui est vide et as.character est nécéssaire pour transformer les <na> en "NA" et éviter le plantage de xtable.
+ms<-as.character(drop.levels(d1$MODE_SORTIE))
+ms[is.na(ms)]<-"<NA>"
+t<-table(ms)
+r<-round(prop.table(t)*100,2)
+c<-cbind(t,r)
+colnames(c)<-c("n","%")
+xtable(c,caption = c("Mode de sortie des urgences. <NA> est le nombre de non réponses à cet item","Mode de sortie des urgences"), label = "tab.sortie",align="|l|r|r|",digits = c(0,0,2), table.placement = "ht",caption.placement = "top")
+@
+
+\section{Mode de sortie selon la structure}
+
+Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
+
+<<sortie_structure,echo=FALSE,results='asis'>>=
+t<-round(prop.table(table(d1$FINESS,ms),margin=1)*100,2)
+
+t2<-addmargins(t,margin=2)
+
+xtable(t2,caption = c("Mode de sortie des urgences selon l'établissement (en pourcentage). <NA> est le nombre de non réponses à cet item","Mode de sortie selon l'établissement"), label = "tab.sortie_etab",align="|l|r|r|r|r|r|r|",digits = c(0,2,2,2,2,2,2), table.placement = "ht",caption.placement = "top")
+@
+
+
+\section{Orientation}
+\index{orientation}
+
+Le mode de sortie est affiné par la rubrique ORIENTATION avec la ventilation suivante:
+
+\begin{itemize}
+  \item NA:    Pas d'informations
+  \item MCO:		Hospitalisation conventionnelle
+  \item SSR:		Soins de suite et de réadaptation
+  \item SLD:		Soins de longue durée
+  \item PSY: 		Psychiatrie
+  \item HAD:		Hospitalisation à domicile
+  \item HMS:		Hébergement médico-social
+\end{itemize}
+
+On notera que le retour à domicile proprement dit ne figure pas parmi les items et cette modalité est implicite. On peut supposer que les NA's correspondent à cette modalité. Cependant une ambiguité demeure car les non réponses sont aussi représentées par ce symbole.
+
+<<orientation,echo=TRUE,warning=FALSE>>=
+# drop.levels permet d'éliminer le level 0 qui est nul
+a<-drop.levels(d1$ORIENTATION)
+summary(a)
+
+table(a,useNA="always")
+
+table(d1$DESTINATION,d1$GRAVITE)
+@
+
+\section{Destination}
+\index{destination}
+<<destination,warning=FALSE,results='asis',echo=FALSE>>=
+c<-drop.levels(d1$DESTINATION)
+sc<-summary(c)
+tc<-round(prop.table(table(c,dnn="%"))*100,2)
+xtable(tc,caption = "Destination des patients non rentrés à domicile après leur passage aux urgences", label = "tab.dest.hosp")
+
+c<-as.character(c)
+c[is.na(c)]<-"DOM"
+tcna<-round(prop.table(table(c,dnn="%"))*100,3)
+xtable(tcna,caption = "Devenir des patients à la sortie des urgences. DOM représentent ceux qui sont repartis vers leur domicile ou ce qui en tient lieu (sous l'hypothèse que toutes les non réponses correspondent à un retour à domicile).", label = "tab.dest")
+@
+
+\section{Incohérences}
+\ref{sortie:erreurs}
+On isole le groupe "mode de sortie = domicile) et on relève les résultats de l'item "orientation":
+<<fausses_sorties>>=
+a<-d1[d1$MODE_SORTIE=="Domicile" ,]
+summary(as.factor(a$ORIENTATION))
+t<-table(as.factor(a$ORIENTATION))
+round(prop.table(t)*100,2)
+tab1(as.factor(a$ORIENTATION),sort.group="decreasing",horiz=TRUE,cex.names = 0.8,xlab="",main="Orientation des patients non hospitalisés",missing=F)
+@
+Certaines orientations sont incompatibles avec une non hospitalisation:
+\begin{itemize}
+  \item HO
+  \item Obstétrique
+  \item Soins continus, soins intensifs et réanimation
+  \item UHCD, médecine et chirurgie
+  
+\end{itemize}
+
+

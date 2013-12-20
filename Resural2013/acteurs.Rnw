@@ -1,0 +1,65 @@
+% acteurs.Rnw
+
+% penser au secteur libéral
+
+\section{Exhaustivité quantitative}
+
+<<origine,echo=FALSE>>=
+hop<-c("Clinique des 3 frontières","CH Altkirch","CH Colmar","Diaconat Fonderie","CH Guebwiller","CH Haguenau","Hôpitaux Universitaires de Strasbourg","CH Mulhouse","Clinique Ste Odile","CH Sélestat","CH Wissembourg","CH Saverne")
+@
+On dédinit l'exhaustivité quantitative comme le nombre de RPU transmis par rapport au nombre de passages réels.
+Les données proviennent des RPU produits par les hôpitaux d'Alsace ayant l'autorisation de faire fonctionner un service d'urgence (SU). La liste des structures hospitalières ayant fournit des informations alimentant le présent rapport est fournie par la table \ref{tab1}, page \pageref{tab1}.
+
+Tous ces hôpitaux fournissent des données depuis le premier janvier 2013 sauf le CH Saverne qui a commencé en Juillet 2013.
+
+Deux structures ne fournissent pas encore de RPU. Il s'agit de la clinique Sainte-Anne à Strasbourg (Groupe hospitalier Saint-Vincent) et du Centre Hospitalier de Thann.
+
+Certaines données peuvent être recoupées avec celles du serveur régional mis en place en 2006 par l'ARS: 
+
+\fbox{Voir SAU2013}
+
+<<tab1, echo=FALSE, results='asis' >>=
+a<-table(d1$FINESS)
+b<-round(prop.table(a)*100,digits=2)
+d<-tapply(as.Date(d1$ENTREE),d1$FINESS,min)
+d<-as.Date(d,origin="1970-01-01")
+d<-format(d,"%d/%m/%Y")               
+c<-cbind(a,b,hop,d)
+colnames(c)<-c("n","%","Hôpitaux","Date d'inclusion")
+xtable(c, caption = "Structures hospitalières participantes en 2013", label = "tab1",align="|l|r|r|l|r|",digits = c(0,0,2,0,0), table.placement = "ht",caption.placement = "top")
+@
+
+\section{Exhaustivité qualitative}
+
+L'exhaustivité qualitative correspond à la fois à la complétude des items et à la cohérence de réponses.
+
+Les informations de nature administrative (code postal, commune d'origine, sexe, date de naissance,\dots ) sont correctement renseignées avec une exhaustivité de $100\%$.
+
+Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
+
+<<label=tab2,echo=FALSE,results='asis'>>=
+a<-is.na(d1)
+b<-round(apply(a,2,mean)*100,2)
+b<-sort(b)
+b<-cbind(b)
+colnames(b)<-"%"
+
+xtable(b,caption = "Données manquantes en 2013", label = "tab2", table.placement = "ht",caption.placement = "top",align="|l|r|")
+@
+
+Les informations sont résumées dans la table \ref{tab2}, page \pageref{tab2}.
+
+\section{Diagramme de complétude}
+
+On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l'exhaustivité qualitative des données. Chaque item du RPU est représenté par le rayon d'une roue, gradué de 0 à 100\%. Sur chaque rayon, les points obtenus sont reliés entre eux pour dessiner un polygone qui figue la physionomie de l'ensemble des données.
+
+<<radar,echo=FALSE>>=
+fadeBlue<-fadeColor("blue", fade = "15")
+fadeRed<-fadeColor("red", fade = "15")
+
+a<-apply(is.na(d1),2,mean)
+round(a*100,2)
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
+@
+
+Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données sont à interpréter avec prudence. Ainsi l'item 4 qui correspond au mode de sortie ne distingue pas les non réponses des vrais retours à domicile (se reporter à la discussion page \pageref{ref:sortie})

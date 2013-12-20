@@ -1,0 +1,254 @@
+% duree_passage.Rnw
+
+La durée de passage est le temps compris entre la date d'entrée et celle de sortie. Il s'agit d'une durée de transit total. Les données transmises par les RPU ne permettent pas de calculer les temps d'attente.
+
+\subsection{Cas général}
+
+<< passages_comment,echo=FALSE>>=
+e<-ymd_hms(d1$ENTREE)
+s<-ymd_hms(d1$SORTIE)
+d1$presence<-(s-e)/60 # transforme les secondes en mn
+summary1 <- summary(as.numeric(d1$presence))
+# suppression des valeurs négatives
+d1$presence[d1$presence < 0]<-NA
+d1$presence <- as.numeric(d1$presence)
+summary2 <- summary(d1$presence)
+et2 <- round(sd(d1$presence,na.rm=T),2)
+completion <- round(1 - summary2["NA's"]/nrow(d1)*100,2)
+@
+
+La dispersion des durées de passage est très importante, variant de \Sexpr{summary1["Min."]} à \np{\Sexpr{summary1["Max."]}} minutes. Les valeurs négatives sont considérées comme des valeurs manquantes. 
+Finalement \Sexpr{summary2["NA's"]} ne sont pas renseignées (exhaustivité de \Sexpr{completion} \% des RPU). 
+La durée de passage moyenne est de \Sexpr{summary2["Mean"]} minutes (ecart-type \Sexpr{et2} minutes)
+Une transformation logarithmique des données permet de mieux représenter l'histogramme des durées de passage. 
+
+\begin{figure}[ht!]
+ \centering
+<<log_passages,echo=FALSE>>=
+hist(log10(as.numeric(d1$presence)),ylab="nombre", xlab="Logarithme de la durée de présence en mn", main="Durée de présence au SU en 2013")
+@
+ \caption{Durée de passage (log 10)}
+\end{figure}
+
+la transformation log produit une courbe normale où lamajorité des consultants ont une durée de présence comprise entre 10 et 1000 minutes (environ 17 heures). On nettoie les données en supprimant les enregistrements où presence = NA, puis on forme 3 sous-groupes:
+\begin{itemize}
+  \item a moins de 10 mn
+  \item b de 10 à 1000 mn
+  \item c plus de 1000 mn
+\end{itemize}
+
+<<passage_clean,echo=FALSE>>=
+d2<-d1[!is.na(d1$presence),]
+a<-d2$presence[d2$presence < 10]
+c<-d2$presence[d2$presence > 1000]
+b<-d2$presence[d2$presence > 9 & d2$presence < 1001]
+t<-length(a)+length(b)+length(c)
+clean<-round(length(b)*100/t,2)
+summary3 <- summary(b)
+et3 <- sd(b)
+summary3
+@
+
+Les durées de présences inférieures à 10 minutes proviennent à plus de 90\% des HUS (Erreur logicielle signalée au CRIH):
+<<passages_erronés>>= 
+# Origine despatients restants moins de 10 mn: ils proviennent majoritairement des HUS:
+a<-d2[d2$presence < 10,"FINESS"]
+rbind(table(a),round(prop.table(table(a))*100,2))
+# Plus de 90% proviennent des HUS
+@
+
+Finalement, on conserve le groupe $b$ qui regroupe la majorité (\Sexpr{clean}\%) des patients. On trouve dans ce groupe une durée de présence de \Sexpr{summary3["Mean"]} minutes (écart-type \Sexpr{et3} minutes, médiane \Sexpr{summary3["Median"]}).
+
+\begin{figure}[ht!]
+ \centering
+<<passages_clean_hist,echo=FALSE>>=
+hist(b,ylab="nombre", xlab="Durée de présence (mn)", main=paste("Durée de présence au SU (2013) n =",length(b)),sub="Sont exclus les patients présents moins de 10 mn ou plus de 1000 mn")
+@
+ \caption{Durée de passage aux urgences}
+\end{figure}
+
+\subsection{Moyenne des durées de passages par jour}
+
+<<duree_moyenne_passage,echo=FALSE>>=
+# Moyenne des durées de passages par jour
+# ---------------------------------------
+
+# On ne garde que les passages > 10 mn et < 1000 mn
+b<-d2[d2$presence > 9 & d2$presence < 1001,c("ENTREE","presence")]
+# on calcule la moyenne des passages par jour
+c<-tapply(b$presence,as.Date(b$ENTREE),mean)
+# on fabrique un vecteur de date
+d<-unique(as.Date(b$ENTREE))
+a<-zoo(c,d)
+@
+
+\begin{figure}[ht!]
+ \centering
+<<graphe_duree_moyenne_passage,echo=FALSE>>=
+plot(a,ylab="durée (minutes)",main="Durée moyenne de passage - 2013",xlab="Année 2013",col="lightblue")
+lines(rollmean(a,7),col="blue")
+lines(rollapply(a,7,function(x) mean(x) + sd(x)),col="red")
+lines(rollapply(a,7,function(x) mean(x) - sd(x)),col="red")
+@
+ \caption{Durée moyenne de passage aux urgences en 2013}
+\end{figure}
+
+<<menage,echo=FALSE>>=
+rm(d2)
+@
+\subsection{Cas particulier de Selestat}
+
+<<passage,echo=FALSE>>=
+
+#' Cas prticulier de Sélestat
+#'@param e date entrée 
+#'@param s date de sortie
+#'@param limite min(date:heure)pour l'année courante. Toutes les dates inférieures à limite sont transformée en NA.
+#'@param sel$p s-e temps de présence en minutes
+#'@details on fait un test avec Sélestat
+
+sel<-d1[d1$FINESS=="Sel",c("ENTREE","SORTIE","AGE","GRAVITE","ORIENTATION","DESTINATION")]
+e<-ymd_hms(sel$ENTREE)
+s<-ymd_hms(sel$SORTIE)
+limite<-ymd_hms("2013-01-01 00:00:00")
+s[s < limite]<-ymd_hms("na")
+sel$p<-as.numeric(s-e)
+summary(sel$p)
+hist(as.numeric(sel$p),xlab="temps de passage (mn)",main="Histogramme du temps de passage (tous patients)")
+@
+
+% RPU_2013_analyse à partir de la ligne 382
+
+\section*{Selon l'heure}
+
+Une période de 24 heures est habituellement divisée de la manière suivante:
+\begin{enumerate}
+  \item \emph{journée} de 8 heures à 20 heures
+  \item \emph{soirée} de 20 heures à minuit
+  \item  \emph{nuit profonde} de 0 heures à 8 heures
+\end{enumerate}
+
+<<duree_heure_old,echo=FALSE>>=
+# periode<-cut(hour(sel$ENTREE),breaks=c(0,8,20,24),labels=c("nuit profonde","journée","soirée"))
+# summary(periode)
+# barplot(summary(periode),main="Passages selon la période de la journée")
+# tapply(sel$p,periode,mean,na.rm=TRUE)
+# boxplot(sel$p~periode,main="Durée de passage selon la période de la journée")
+@
+
+<<duree_heure,echo=FALSE>>=
+periode<-cut(hour(d1$ENTREE),breaks=c(0,8,20,24),labels=c("nuit profonde","journée","soirée"))
+summary(periode)
+barplot(summary(periode),main="Passages selon la période de la journée")
+tapply(d1$presence,periode,mean,na.rm=TRUE)
+boxplot(d1$presence~periode,main="Durée de passage selon la période de la journée",outline=F)
+
+# uniquement sr le groupe b (10 à 1000  mn). outline=F empeche l'affichage des outliners
+periode<-cut(hour(b$ENTREE),breaks=c(0,8,20,24),labels=c("nuit profonde","journée","soirée"))
+tapply(b$presence,periode,mean,na.rm=TRUE)
+boxplot(b$presence~periode,main="Durée de passage selon la période de la journée",sub="Groupe 10 à 1000 mn",ylab="durée de passage",outline=F)
+@
+
+\section*{Selon l'âge}
+
+Le temps de passage augmente avec l'age.
+<<duree_age,echo=FALSE>>=
+#'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
+
+#
+# uniquement sélestat
+#
+tranche_age<-cut(sel$AGE,breaks=c(-1,15,75,max(sel$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))
+summary(tranche_age)
+tapply(sel$p,tranche_age,mean,na.rm=TRUE)
+boxplot(sel$p~tranche_age,ylab="Temps (en mn)",main="Durée de passage en fonction de l'age",col="yellow")
+
+#
+#' Tout le groupe
+#
+tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))
+summary(tranche_age)
+tapply(d1$presence,tranche_age,mean,na.rm=TRUE)
+# outline=F empeche l'affichage des outliners
+boxplot(d1$presence~tranche_age,ylab="Temps (en mn)",main="Durée de passage en fonction de l'age",col="yellow",outline=F)
+@
+
+\section*{Selon le jour de la semaine}
+<<duree_semaine,echo=TRUE>>=
+tapply(sel$p,wday(e,label=TRUE),mean,na.rm=TRUE)
+# selon le jour et la période
+t<-table(periode,wday(e,label=TRUE))
+t
+
+# tout le groupe
+tapply(d1$presence,wday(e,label=TRUE),mean,na.rm=TRUE)
+boxplot(d1$presence ~ wday(e,label=TRUE),outline=F,ylab="durée de présence moyenne (mn)",main="Durée de présence moyenne selon le jour de la semaine")
+@
+
+\subsection*{Pourcentage de passages en moins de 4 heures par établissement}
+
+<<moins_4h,echo=FALSE>>=
+#'@param h4 quatre heures = 240 minutes
+#'@param a durées de présence qui sont différentes de NA
+#'@param n nombre de durées de présence qui sont différentes de NA
+#'@param p proportion de durée de passage < 4 heures
+
+h4<-240
+a<-sel$p[!is.na(sel$p)]
+n<-length(a)
+m4<-a[a<h4]
+b<-length(m4)
+p<-round(b*100/n,2)
+
+# pour tout le groupe
+h4<-240
+a<-d1$presence[!is.na(d1$presence)]
+n2<-length(a)
+m4<-a[a<h4]
+b2<-length(m4)
+p2<-round(b2*100/n2,2)
+@
+
+A Sélestat, \Sexpr{p}\% des patients quittent les urgences en moins de quatre heures.
+
+Pour l'ensemble des patients d'Alsace, \Sexpr{p2}\% quittent les urgences en moins de quatre heures.
+
+
+\section*{Selon l'orientation}
+<<duree_orientation,echo=FALSE>>=
+tapply(sel$p,sel$ORIENTATION,mean,na.rm=TRUE)
+
+#'@details on transdorme les NA en DOM pour mesurer le temps moyen si retour à domicile. On fait l'hypothèse que NA = dom.
+sel$DESTINATION<-as.character(sel$DESTINATION)
+sel$DESTINATION[is.na(sel$DESTINATION)]<-"DOM"
+tapply(sel$p,sel$DESTINATION,mean,na.rm=TRUE)
+
+#
+# pour tout le groupe
+#
+# durée d'attente moyenne selon l'orientation
+
+tapply(d1$presence,d1$ORIENTATION,mean,na.rm=TRUE)
+
+#'@details on transdorme les NA en DOM pour mesurer le temps moyen si retour à domicile. On fait l'hypothèse que NA = dom.
+d1$DESTINATION<-as.character(d1$DESTINATION)
+d1$DESTINATION[is.na(d1$DESTINATION)]<-"DOM"
+tapply(d1$presence,d1$DESTINATION,mean,na.rm=TRUE)
+boxplot(d1$presence ~ d1$DESTINATION,outline=F,main="Durée de passage selon la destination",ylab="Durée de passage (mn)")
+@
+
+
+\section*{Selon la gravité}
+<<duree_gravite,echo=FALSE>>=
+tapply(sel$p,sel$GRAVITE,mean,na.rm=TRUE)
+
+# pour tout le groupe
+tapply(d1$presence,d1$GRAVITE,mean,na.rm=TRUE)
+boxplot(d1$presence ~ d1$GRAVITE,,outline=F,main="Durée de présence selon la gravité",ylab="durée de présence",xlab="Gravité en unités CCMU")
+@
+
+\section*{Selon la structure}
+\subsection{CH Sélestat}
+<<duree_structure,echo=FALSE>>=
+summary(sel$p)
+@

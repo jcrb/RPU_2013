@@ -1,0 +1,118 @@
+<!doctype HTML>
+<html>
+  <head>
+    <link rel='stylesheet' href='/home/jcb/R/i686-pc-linux-gnu-library/3.0/rCharts/libraries/rickshaw/css/rickshaw.min.css'>
+    <link rel='stylesheet' href='/home/jcb/R/i686-pc-linux-gnu-library/3.0/rCharts/libraries/rickshaw/css/jquery-ui.css'>
+    
+    <script src='/home/jcb/R/i686-pc-linux-gnu-library/3.0/rCharts/libraries/rickshaw/js/d3.v2.min.js' type='text/javascript'></script>
+    <script src='/home/jcb/R/i686-pc-linux-gnu-library/3.0/rCharts/libraries/rickshaw/js/rickshaw.min.js' type='text/javascript'></script>
+    <script src='/home/jcb/R/i686-pc-linux-gnu-library/3.0/rCharts/libraries/rickshaw/js/jquery.min.js' type='text/javascript'></script>
+    <script src='/home/jcb/R/i686-pc-linux-gnu-library/3.0/rCharts/libraries/rickshaw/js/jquery-ui.min.js' type='text/javascript'></script>
+    
+    <style>
+    .chart_container {
+        position: relative;
+        display: inline-block;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .rChart {
+        display: inline-block;
+        margin-left: 40px;
+    }
+   .yAxis {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+   }
+   .legend {
+        position: absolute;
+        top: 0;
+        right: -160px;
+        vertical-align: top;
+    }
+    .slider {
+      margin-left: 40px;
+      margin-top: 12px;
+    }
+    </style>
+    
+  </head>
+  <body>
+    <div class='chart_container'>
+      <div id='yAxischarta2d6c70b8f8' class='yAxis'></div>
+      <div id='charta2d6c70b8f8' class='rChart rickshaw'></div>
+      <div id='xAxischarta2d6c70b8f8' class='xAxis'></div>
+      <div id='legendcharta2d6c70b8f8' class='legend'></div>
+      <div id='slidercharta2d6c70b8f8' class='slider'></div>
+    </div>
+    
+    <script type='text/javascript'> 
+  var palette = new Rickshaw.Color.Palette({ scheme: "colorwheel" });
+  var chartParams = {
+ "dom": "charta2d6c70b8f8",
+"width":            540,
+"height":            240,
+"scheme": "colorwheel",
+"colors": "steelblue",
+"series": [
+ {
+ "data": [
+ {
+ "x":              0,
+"y":             40 
+},
+{
+ "x":              1,
+"y":             49 
+},
+{
+ "x":              2,
+"y":             17 
+},
+{
+ "x":              3,
+"y":             42 
+} 
+],
+"name": "y",
+"info": {
+ "0": [
+              0 
+],
+"1": [
+              1 
+],
+"2": [
+              2 
+],
+"3": [
+              3 
+] 
+},
+"color": "steelblue" 
+} 
+],
+"renderer": "area",
+"id": "charta2d6c70b8f8" 
+}
+  chartParams.element = document.querySelector('#charta2d6c70b8f8')
+  
+  var graphcharta2d6c70b8f8 = new Rickshaw.Graph(chartParams);
+  
+  graphcharta2d6c70b8f8.render();
+  
+  
+
+
+
+
+
+
+  
+  graphcharta2d6c70b8f8.render();
+  
+</script> 
+    
+  </body>
+</html>

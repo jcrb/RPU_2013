@@ -1,0 +1,347 @@
+\documentclass[12pt,english,french,twoside]{report}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+% inclu un fichier de bibliothèques
+\include{rpu_2012.sty}
+
+% la directive suivante permet d'utiliser le séparateur de milliers. 
+%Deux formulation sont utilisables mais exclusives l'une de l'autre. L'instruction "autolanguage" permet d'utiliser \nombre{} ou \np{}
+% exemple: L'ensemble des SU ont déclaré \np{\Sexpr{length(e)}} passages en 2013
+%\usepackage{numprint}
+\usepackage[autolanguage,np]{numprint}
+
+% la ligne qui suit donne un titre interne au document pdf et crée des liens cliquables en bleu sur les tables et figures
+\usepackage[pdftitle={RPU2012-Resural}, colorlinks=true, linkcolor=blue,citecolor=blue, urlcolor=blue, linktocpage=true, breaklinks=true]{hyperref}
+
+\usepackage[left=4cm,right=3cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{graphicx}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{xcolor} 
+\usepackage{hyperref} 
+\usepackage{tikz} 
+% Mise en page
+% LE zone gauche page paire
+% CE zone médiane page paire
+% RE zone droite page paire
+% LO zone gauche page impaire
+% CO zone médiane page impaire
+% RO zone droite page impaire
+% fancyhead gère le haut de page
+% fancyfoot gère le bas de page
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LE,CE,RE,LO,CO,RO]{}
+\fancyhead[LE,RO]{\scshape\thepage}
+\fancyhead[CE]{\scshape\leftmark}
+\fancyhead[CO]{\scshape\rightmark}
+
+\fancyfoot[CE]{Document de travail - non validé}
+\fancyfoot[CO]{Document de travail - non validé}
+
+\usepackage{fancyvrb}
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+
+\usepackage{makeidx}
+\makeindex
+
+\bibliographystyle{plain}
+
+\makeglossary
+%\makeindex -s glossaire.ist RPU2013.glo -o RPU2013.glx
+
+% \newenvironment{leglossaire}{\begin{list}{}{%
+%   \setlength{\labelwidth}{.5\textwidth}%
+%   \setlength{\labelsep}{-.8\labelwidth}%
+%   \setlength{\itemindent}{\parindent}%
+%   \setlength{\leftmargin}{25pt}%
+%   \setlength{\rightmargin}{0pt}%
+%   \setlength{\itemsep}{.8\baselineskip}%
+%   \renewcommand{\makelabel}[1]{\boiteentreeglossaire{##1}}}}
+% {\end{list}}
+%       
+% \newcommand{boiteentreeglossaire}[1]{%
+%   \parbox[b]{\labelwidth}{%
+%   \setlength{\fboxsep}{3pt}%
+%   \setlength{\fboxrule}{.4pt}%
+%   \shadow{\sffamily#1}\\\hfill\mbox{}}}
+
+% Définitions de constantes
+<<constantes,echo=FALSE>>=
+pop.als.2010.totale<-1115226 + 765634
+pop.als.2010.municipale<-1095905 + 749782
+@
+
+% Commandes
+\providecommand{\tabularnewline}{\\} % compatibilité avec Lyx
+%\newcommand{\cette_annee}{\ensuremath{\mathbb{2013\xspace}}}
+
+\begin{document}
+
+\title{Analyse des données RPU 2013 de la région Alsace}
+\author{RESURAL\thanks{Réseau des urgences en Alsace - Equipe de coordination Dr J.C.
+Bartier \& Madame Christine Hecker}}
+\date{\today}
+\maketitle
+
+%\SweaveOpts{concordance=TRUE}
+%\SweaveOpts{fig.path='./figure/rpu2013-', comment=NA, prompt=FALSE}
+
+% page de garde n°2
+%------------------
+\newpage
+\chapter*{}
+\vfill
+<<session,echo=FALSE,results='asis'>>=
+toLatex(sessionInfo())
+@
+% Making a derivative work?
+% You are encouraged to leave this page entirely intact.
+\noindent $\copyright$ RESURAL 2013. This content is available under a Creative Commons Attribution-ShareAlike 3.0 Unported United States license. License details are available at the Creative Commons website: \url{http://www.creativecommons.org} \\
+
+\noindent For license and attribution guidance, see \url{http://www.openintro.org/perm/stat2nd_v2.txt}
+
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+<<setup,echo=FALSE,cache=FALSE,message=FALSE,warning=FALSE>>=
+# setwd("~/Documents/Resural/Stat Resural/RPU_2012")
+# setwd("~/rdev/RPU2012")
+library("gdata")
+library("rgrs")
+library("lubridate")
+library("xtable")
+library("stargazer")
+library("knitr")
+source("../../mes_fonctions.R")
+
+library("rattle")
+library("epicalc")
+library("zoo")
+library("xts")
+library("plotrix")
+library("openintro")
+library("sp")
+
+path<-"../"
+if(!exists("d1")) {
+  load(paste(path,"rpu2013d0111.Rda",sep=""))
+#   d1<-d0109
+#   rm(d0109)
+}
+# d1<-d1[d1$ENTREE < "2013-11-01",]
+
+# load("../rpu2013d0108.Rda")
+# d1<-d0108
+# rm(d0108)
+attach(d1)
+
+# On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
+
+d1$secteur[d1$FINESS %in% c("Wis","Hag","Sav")]<-1
+d1$secteur[d1$FINESS %in% c("Hus","Odi")]<-2
+d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
+d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
+@
+%======================================================== PARTIE 1
+\part{Le Réseau des urgences en Alsace}
+\newpage
+
+\chapter{Historique}
+<<child='historique.Rnw'>>=
+@
+
+\newpage
+\chapter{Organisation géographique}
+<<child='geographie.Rnw'>>=
+@
+
+\newpage
+\chapter{Les acteurs}
+<<child='acteurs.Rnw'>>=
+@
+
+\newpage
+\chapter{RESURAL}
+<<child='resural.Rnw'>>=
+@
+
+\newpage
+\chapter{L'observatoire des urgences en Alsace (ORUDAL)}
+<<child='orudal.Rnw'>>=
+@
+
+\newpage
+\chapter{Le Résumé du passage aux urgences}
+<<child='rpu.Rnw'>>=
+@
+
+%========================================================== PARTIE 2
+\part{Activité des services d'urgence d'Alsace}
+
+\newpage
+\chapter{Activité régionale totale}
+\section{Nombre total de passages}
+<<child='activite_regionale.Rnw'>>=
+@
+\section{Passages aux urgences}
+<<child='test2.Rnw'>>=
+@
+
+\subsection{Passages par tranches d'âge}
+<<child='tranche_age.Rnw'>>=
+@
+
+\newpage
+\chapter{Motif de consultation}
+<<child='motif.Rnw'>>=
+@
+
+\newpage
+\chapter{Modalité d'admission}
+<<child='modalites.Rnw'>>=
+@
+
+\newpage
+\chapter{Durée de passage}
+<<child='duree_passage.Rnw'>>=
+@
+
+\newpage
+\chapter{Codage diagnostique}
+<<child='cim10.Rnw'>>=
+@
+
+\newpage
+\chapter{Modalités de sortie}
+<<child='sortie.Rnw'>>=
+@
+
+\newpage
+\chapter{Modalités d'orientation}
+<<child='orientation.Rnw'>>=
+@
+
+\newpage
+\chapter{Courbes d'activité régionale}
+<<child='activite_su.Rnw'>>=
+@
+
+%===================================================================== PARTIE 3
+\part{Activité par service d'urgence}
+
+\newpage
+
+\chapter{SU Wissembourg}
+<<child='SU_Wissembourg.Rnw'>>=
+@
+
+\chapter{SU Haguenau}
+<<child='SU_Haguenau.Rnw'>>=
+@
+
+\chapter{SU Saverne}
+<<child='SU_Saverne.Rnw'>>=
+@
+
+\chapter{SU Sainte Odile}
+<<child='SuSteOdile.Rnw'>>=
+@
+
+\chapter{SU des Hôpitaux universitaires}
+<<child='SuHus.Rnw'>>=
+@
+
+\chapter{SU Sainte Anne}
+<<child='steAnne.Rnw'>>=
+@
+\chapter{Polyclinique Saint-Luc}
+<<child='SU_stluc.Rnw'>>=
+@
+\chapter{SU Sélestat}
+<<child='SU_Selestat.Rnw'>>=
+@
+\chapter{SU Colmar}
+<<child='SU_Colmar.Rnw'>>=
+@
+\chapter{SU Guebwiller}
+<<child='SU_Guebwiller.Rnw'>>=
+@
+\chapter{SU Thann}
+
+\chapter{SU Altkirch}
+<<child='SU_Altkirch.Rnw'>>=
+@
+
+\chapter{SU Emile Muller}
+<<child='SU_EMuller.Rnw'>>=
+@
+
+\chapter{SU Diaconnat-Fonderie}
+<<child='SU_Fonderie.Rnw'>>=
+@
+
+\chapter{SU Saint Louis}
+<<child='SU_3Frontiere.Rnw'>>=
+@
+
+%===================================================================== PARTIE 4
+\part{Activité des SAMU d'Alsace}
+
+% A décommenter pour la partie technique uniquement
+
+% \chapter{Test un}
+% <<child='test.Rnw'>>=
+% @
+
+% \chapter{test deux}
+% <<>>=
+% str(d1)
+% summary(d1)
+% @
+
+%\index{test}
+%\index{Eclipse@Eclipse!solaire}
+%\index{Orbite!périgée@périgée}
+
+%===================================================================== PARTIE 5
+\part{Annexes}
+
+\newpage
+\appendix
+\chapter{Méthodologie}
+<<child='methodologie.Rnw'>>=
+@
+
+\newpage
+\chapter{Glossaire}
+<<child='glossaire.Rnw'>>=
+@
+
+\newpage
+\chapter{RPU}
+
+\newpage
+\chapter{A propos de ce document}
+<<child='apropos.Rnw'>>=
+@
+
+\newpage
+\chapter{Bibliographie}
+\bibliography{../../rpu}
+
+\newpage
+\chapter{Index}
+\printindex
+
+\end{document}

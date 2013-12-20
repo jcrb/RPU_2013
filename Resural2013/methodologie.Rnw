@@ -1,0 +1,64 @@
+% methodologie.Rnw
+
+\section*{Taux de passage aux urgences}
+\index{Taux de passage aux urgences}
+  \begin{displaymath}
+    \frac{\text{Nombre de passages déclarés par les SU}}{\text{Population globale d'Alsace}}
+  \end{displaymath}
+
+\section*{Taux de recours aux urgences}
+\index{Taux de recours aux urgences}
+\begin{displaymath}
+    \frac{\text{Nombre de passages d' Alsace}}{\text{Population globale d'Alsace}}
+  \end{displaymath}
+Le Nombre de passages d' Alsace est la somme des passages dans les SU alsacien ET des passages de résidents alsacien dans des SU limitrophes.
+
+\section*{Taux d'intervention régional}
+\index{Taux d'intervention régional}
+\begin{displaymath}
+    \frac{\text{Nombre de patients pris en charge par les SMUR d'Alsace}\linebreak[4] \text{ quelque soit le code postal du lieu d'intervention}}{\text{Population globale d'Alsace}}
+  \end{displaymath}
+
+\section*{Taux de recours régional}
+\index{Taux de recours régional}
+\begin{displaymath}
+    \frac{\text{Nombre de patients pris en charge par un SMUR dont l'intervention a lieu sur le territoire régional }}{\text{Population globale d'Alsace}}
+  \end{displaymath}
+
+\section*{Rapport de masculinité ou sex-ratio}
+\index{sex ratio}
+\index{rapport de masculinité}
+\begin{displaymath}
+    \frac{\text{Nombre d'Hommes}}{\text{Nombre de Femmes}} \times 100
+\end{displaymath}
+
+Une valeur supérieure à 1 indique qu'il y a plus d'hommes que de femmes.
+
+\section*{Définition de la semaine}
+\index{semaine (définition de la)}
+La semaine est définie comme la péride complémentaire du week-end. La semaine s'étend du lundi $08:00$ heures au vendredi $19:59$.
+
+\section*{Définition du Week-end}
+\index{week-end (définition)}
+L'offre de soins comme la fréquentation des SU n'est pas identique en coiurs de semaine et en fin de semaine. C'est pourquoi est introduite la notion temporelle de week-end.
+Le week-end est défini comme la période allant du vendredi soir 20h au lundi matin 07h59.
+
+\section*{Moyenne mobile}
+\index{moyenne mobile}
+Une moyenne mobile permet de lisser une série de valeurs, permettant de gommer des fluctuations temporelles. La moyenne mobile d'odre $7$ est très utilisée pour analyser les données temporelles. Elle permet notamment d'atténuer les pics de fréquentation des SU le week-end.
+\begin{displaymath}
+    \frac{\text{somme des passages 7 jours consécutifs}}{7}
+\end{displaymath}
+Les moyennes mobiles sont généralement présentées sous forme "glissante", c'est à dire sous la forme d'une succession de groupe de sept éléments, décalés d'une journée.
+
+\section*{Pondération annuelle et mensuelle}
+Le nombre de jour dans un mois est variable d'un mois à l'autre. Il en va de même pour le nombre de jours d'une année, où du nombre de répétitions d'un jour donné de la semaine.
+
+\section*{Passages pédiatriques}
+\index{passages pédiatriques}
+Passages ayant donné lieu à la création d'un RPU et dont l'ages est compris entre 0 et 18 ans inclus.
+
+\section*{Passages gériatriques}
+\index{passages gériatriques}
+Passages ayant donné lieu à la création d'un RPU et dont l'ages est supérieur ou égal à 75 ans.
+

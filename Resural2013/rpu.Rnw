@@ -1,0 +1,136 @@
+% rpu.Rnw
+
+\index{RPU}
+\index{Résumé du passage aux urgences}
+
+La création du résumé des passages aux urgences (RPU) remonte à 2002 \cite{11}. Sur la base d'un projet pilote mené par l'ORUMIP, la DHOS, à l'initiative de son directeur Edouard Couty, lance sur la base du volontariat, la collecte des RPU.
+
+\section*{RPU}
+
+% Les Résumés de Passage aux Urgences (RPU) ont été transmis par le Centre Hospitalier de Sélestat à partir de 2008. 
+% La table \emph{rpu} du serveur de test comporte \Sexpr{nrow(d2)} lignes et \Sexpr{ncol(d2)} colonnes. La période érudiée couvre toute l'année 2009 s'étend (du \Sexpr{d2$date_entree[1]} au \Sexpr{d2$date_entree[nrow(d2)]}), ce qui correspond à toutes les entrées de cette année. Les RPU sont saisis selon la version 5 du cahier des charges transmis par l'INVS (version du 31 janvier 2007).
+% \\
+Chaque passage aux urgences donne lieu à la création d'un RPU qui collecte les informations suivantes:
+\begin{enumerate}
+  \item l'établissement de santé, siège du SAU (FINESS géographique)
+  \item code postal de résidence
+  \item commune de résidence
+  \item date de naissance
+  \item sexe
+  \item date et heure d'entrée
+  \item mode d'entrée
+  \item provenance du patient
+  \item mode de transport
+  \item mode de prise en charge
+  \item le motif de recours aux urgences
+  \item la gravité
+  \item le diagnostic principal
+  \item le(s) diagnostic(s) associé(s)
+  \item les actes médicaux
+  \item le mode de sortie
+  \item l'orientation du patient
+  \item date et heure de sortie
+\end{enumerate}
+
+%%%%%%%%%%%%%%
+\subsubsection{L'identifiant (ID)}
+%%%%%%%%%%%%%%
+
+Ils'agit d'un code unique caractérisant le RPU. Il ne fait pas partie de la définition de l'INVS.Il a été rajouté par SAGEC à l'origine du serveur régional pour retrouver l'enregistrement en cas de problème et faciliter laliaison avec d'autres rubriques comme les diagnostiques associés.
+
+%%%%%%%%%%%%%%
+\subsubsection{L'établissement de santé}
+%%%%%%%%%%%%%%
+
+\index{FINESS}
+Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas quel FINESS utiliser et on trouve des FINESS juridiques et géographiques. Nous recommandons d'utiliser le FINESS géographique qi permet d'identifier la structure d'origine quand il s'agit d'établissements multisites.
+
+%%%%%%%%%%%%%%
+\subsubsection{Le code postal de résidence}
+%%%%%%%%%%%%%%
+
+\index{code postal}
+Lorsque le lieu de résidence se situe hors des limites du territoire national, il faut indiquer par convention $99999$.
+Si le code postal précis est inconnu : le numéro du département suivi de 999
+Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}
+Si le département ou le pays de résidence est inconnu : 99999
+
+%%%%%%%%%%%%%%
+\subsubsection{le motif de recours aux urgences}
+%%%%%%%%%%%%%%
+
+\index{motif de recours}
+Il faut utiliser l'un des motifs de recours préconisé par le ministère de la santé \cite{13} et codifiés par la SFMU. La dernière version est la version de juin 2013 du thésaurus de la SFMU accessible sur le site internet de cette dernière. Il comporte une liste d'environ $150$ recours avec leur équivalence CIM10.
+
+%%%%%%%%%%%%%%
+\subsubsection{Le mode de sortie}
+%%%%%%%%%%%%%%
+
+\index{mode de sortie}
+\index{retour à domicile}
+\label{ref:sortie}
+Les patients quittent les urgences soit parcequ'ils ne nécessitent pas d'hospitalisation (c'est un \emph{retour à domicile}), soit parcequ'ils sont hospitalisé dans la structure hospitalière (c'est une \emph{mutation}\index{mutation}) ou dans un autre établissement (on parle alors de \emph{transfert}\index{transfert}). Enfin il peut s'agir d'un \emph{décès}\index{décès} dans le service d'urgence.
+
+\begin{itemize}
+  \item « 6 » Mutation : le malade est hospitalisé vers une autre unité médicale de la même
+entité juridique \footnote{Dans les établissements privés visés aux alinéas d et e de l'article L162-22-6 du code de la sécurité sociale (CSS), si le patient provient d’un autre établissement de la même entité juridique, le mode desortie à utiliser est le 7}
+  \item « 7 » Transfert : le malade est hospitalisé dans une autre entité juridique
+  \item « 8 » Domicile : le malade retourne au domicile ou son substitut, tel une
+structure d'hébergement médico-social.
+  \item « 9 » Décès : le malade décède aux urgences
+\end{itemize}
+
+Cette rubrique est détaillée par les items \emph{destination} et \emph{orientation}
+
+%%%%%%%%%%%%%%
+\subsubsection{Destination}
+%%%%%%%%%%%%%%
+
+En cas de sortie par mutation ou transfert, il peut s'agir:
+\begin{itemize}
+  \item « 1 » Hospitalisation dans une unité de soins de courte durée (MCO)\index{MCO}
+  \item « 2 » Hospitalisation dans une unité de soins de suite ou de réadaptation (SSR)\index{SSR}
+  \item « 3 » Hospitalisation dans une unité de soins de longue durée (SLD)\index{SLD}
+  \item « 4 » Hospitalisation dans une unité de psychiatrie (PSY)\index{PSY}
+\end{itemize}
+
+En cas de sortie au domicile
+\begin{itemize}
+  \item « 6 » Retour au domicile dans le cadre d’une hospitalisation à domicile (HAD)\index{HAD}
+  \item « 7 » Retour vers une structure d'hébergement médico-social (HMS)\index{HMS}
+\end{itemize}
+
+On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne saitpas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
+
+%%%%%%%%%%%%%%
+\subsubsection{Orientation}
+%%%%%%%%%%%%%%
+
+\index{orientation}
+L'orientation précise le devenir ou les circonstances associées. Cette rubrique est complémentaire du \emph{mode de sortie}. Malheureusement, elle souffre de la mêmelimitation:le retour à domicile simple est implicite.
+
+\begin{enumerate}
+  \item En cas de sortie par mutation ou transfert
+    \begin{itemize}
+      \item « HDT » hospitalisation sur la demande d’un tiers
+      \item « HO » hospitalisation d’office
+      \item « SC » hospitalisation dans une unité de Surveillance Continue
+      \item « SI » hospitalisation dans une unité de Soins Intensifs
+      \item « REA » hospitalisation dans une unité de Réanimation
+      \item « UHCD » hospitalisation dans une unité d’hospitalisation de courte durée
+      \item « MED » hospitalisation dans une unité de Médecine hors SC, SI, REA
+      \item « CHIR» hospitalisation dans une unité de Chirurgie hors SC, SI, REA
+      \item « OBST» hospitalisation dans une unité d’Obstétrique hors SC, SI, REA
+    \end{itemize}
+
+  \item En cas de sortie au domicile
+    \begin{itemize}
+      \item « FUGUE » sortie du service à l’insu du personnel soignant
+      \item « SCAM » sortie contre avis médical
+      \item « PSA » partie sans attendre prise en charge
+      \item « REO » réorientation directe sans soins (ex vers consultation spécialisée ou   lorsque le service d’accueil administratif est fermée)
+    \end{itemize}
+
+\end{enumerate}
+
+

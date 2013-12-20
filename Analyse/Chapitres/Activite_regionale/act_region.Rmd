@@ -1,0 +1,145 @@
+RPU 2013 Analyse
+========================================================
+```{r date}
+date()
+```
+source: RPU2013
+Ce document exploite le fichier RData préparé à partir de la table *RPU__* de Sagec. Voir le document *RPU_2013_Preparation.Rmd* du dossier Resural.
+
+EN FONCTION DU MOIS MODIFIER LES LIGNES 12, 38, 39, 40 ET 66 
+
+Variables globales:
+-------------------
+```{r var_globales}
+source("../prologue.R")
+
+```
+
+Activité régionale
+-----------------------------
+```{r routines}
+wd<-getwd()
+# setwd("~/Documents/Resural/Stat Resural/RPU2013/Chapitres/Activite_regionale")
+# source(paste(path,"mes_fonctions.R",sep=""))
+```
+Librairies nécessaires:
+-----------------------
+```{r library , message=FALSE}
+load_libraries()
+```
+
+Lecture du fichier des données
+---------------------------------------
+On lit le fichier de travail créé:
+```{r Lecture fichier,cache=TRUE}
+d1<-foo(path)
+
+# if(!exists("d1")) {
+# load(paste(path,"rpu2013d0109.Rda",sep=""))
+# d1<-d0109
+# rm(d0109)
+# }
+```
+Analyse des données
+===================
+
+entrées par secteur sanitaire
+-----------------------------
+On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
+```{r secteur_rpu,echo=FALSE}
+d1$secteur[d1$FINESS %in% c("Wis","Hag","Sav")]<-1
+d1$secteur[d1$FINESS %in% c("Hus","Odi")]<-2
+d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
+d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
+```
+Nombre de RPU par secteur de santé
+```{r rpu_par_secteur}
+tapply(d1$ENTREE,d1$secteur,length)
+```
+Remarques:
+- secteur 2, manque St Anne, pediatrie HTP, une partie des RPU HUS adulte
+
+
+entrées totales
+---------------
+```{r analyse}
+# d1<-d1[d1$ENTREE<"2013-10-01",]
+
+e<-as.Date(d1$ENTREE)
+q<-tapply(e,yday(e),length)
+mean(q) # nb moyen de passages
+plot(q,type="l")
+
+z<-zoo(q,unique(as.Date(d1$ENTREE)))
+plot(z)
+
+plot(xts(z), main="Activité quotidienne des Services d'urgence\nen Alsace",ylab="nombre de passages",minor.ticks=FALSE)
+lines(rollmean(xts(z), 7),col="red",lwd=2)
+copyright()
+
+plot(z, col="gray45", main="Activité quotidienne des Services d'urgence\nen Alsace",ylab="nombre de passages",xlab="Année 2013")
+lines(rollmean(z, 7),col="red",lwd=2)
+abline(h = mean(q), col = "blue")
+copyright()
+legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+```
+Variables:
+- *e* vecteur contenant les dates d'entrées depuis le début de l'année
+- *q* vecteur contenant le nombre d'entrées par jour depuis le début de l'année
+- *q2* vecteur contenant le nombre de retours à domiciles par jour
+- *q3* vecteur contenant la proportion de retours à domicile par rapport au nombre d'entrées, par jour (taux)
+- *q4* vecteur contenant le nombre de retours à domiciles par jour en excluant les non réponses (NA)
+- *q5* vecteur contenant la proportion de retours à domicile par rapport au nombre d'entrées, par jour (taux), en excluant les non réponses (NA)
+- *q6* taux de non réponses
+- *q7* vecteur contenant le taux d'hospitalisation par jour (miroir de q5)
+
+Retour à domicile
+-----------------
+Les variation du retour journalier à domicile sont calculés de la manière suivante:
+- numérateur = somme quotidienne où MODE_SOTIE == Domicile
+- dénominateur = somme quotidienne des ENTREE (correspod à q)
+```{r retour_dom}
+q2<-tapply(d1[d1$MODE_SORTIE=="Domicile",6],yday(d1[d1$MODE_SORTIE == "Domicile", 6]),length)
+head(q2)
+q3<-q2/q
+summary(q3)
+plot(q3,type="l")
+copyright()
+```
+On refait le calcul de q en tenant compte des non réponses:
+```{r sauf_na}
+q4<-tapply(d1[!is.na(d1$MODE_SORTIE),6],yday(d1[!is.na(d1$MODE_SORTIE), 6]),length)
+head(q4)
+q5<-q2/q4
+head(q5)
+summary(q5)
+plot(q5,type="l",main="Taux de retour à domicile\n(non réponses exclues)",ylab="Fréquence",xlab="Jours")
+copyright()
+
+z <- zoo(q5, unique(as.Date(d1$ENTREE)))
+plot(z,main="Taux de retour à domicile\n(non réponses exclues)",ylab="Fréquence",xlab="Période (moyenne lissée sur 7 jours")
+plot(xts(z))
+lines(rollmean(xts(z), 7), col = "red",lwd=2)
+copyright()
+```
+Taux d'hospitalisation
+----------------------
+c'est le complément (miroir) du précédent:
+```{r taux_hospitalisation}
+q7<-1-q2/q4
+head(q7)
+summary(q7)
+z <- zoo(q7, unique(as.Date(d1$ENTREE)))
+plot(xts(z),main="Taux d'hospitalisation en Alsace à partir des SU\n(non réponses exclues)",ylab="Fréquence",xlab="Période (moyenne lissée sur 7 jours")
+lines(rollmean(xts(z), 7), col = "blue",lwd=2)
+copyright()
+```
+
+Taux de non réponses:
+```{r non_rep}
+q6<-q4/q
+head(q6)
+summary(q6)
+```
+Vendenheim1
+

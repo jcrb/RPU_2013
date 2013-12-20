@@ -1,0 +1,55 @@
+acteurs
+========================================================
+
+On s'intéresse au taux de complétude des données. Pour cela on compte le nombre de non-réponses (NA) pour chacun des 20 items. Le résultat est stocké dans le vecteur **a**. On obtient un vecteur de pourcentage correspondant aux taux de non réponses. On affiche l'inverse, 1-a, correspondant au taux de complétude des RPU transmis. Le tout est présenté sous forme d'un diagramme en *radar* à 20 branches.
+-**a** matrice de 20 colonnes et *n* lignes, *n* = nombre de RPU
+-**b**matrice identique mais pour le mis de septembre
+
+```{r acteurs}
+getwd()
+source("prologue.R")
+d1<-foo("../")
+
+a<-apply(is.na(d1),2,mean)
+round(a*100,2)
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col="red",radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
+```
+Deux ou plusieurs polygones
+---------------------------
+On compare les résultats de lannée à ceux du mois de septembre:
+- on dessinne une première grille comme précédemment.Le polygone est tracé en rouge.
+- on trace un second polygone en bleu qui représente lesdonnées du mois de septembre. Pour qe le second polygone vienne en surimpression sans effacer lepremier, on ajoute l'instruction **add=TRUE**. Il faut également laisser **radial.lim** pour que les deux polygones soient à la même échelle.
+```{r poly2}
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col="red",radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
+
+load("../rpu2013d09.Rda")
+b<-apply(is.na(d09),2,mean)
+radial.plot(1-b,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col="blue",radial.lim=c(0,1),add=T)
+```
+Comparaison par hôpital:
+```{r radar_hopital}
+fadeBlue<-fadeColor("blue", fade = "15")
+fadeRed<-fadeColor("red", fade = "15")
+
+hus<-d1[d1$FINESS=="Hus",]
+b<-apply(is.na(hus),2,mean)
+
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeRed,radial.lim=c(0,1),main="Taux de complétude des RPU transmis (HUS)",poly.col = fadeRed)
+radial.plot(1-b,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue, poly.col=fadeBlue,radial.lim=c(0,1),add=T)
+
+# Wissembourg
+
+wis<-d1[d1$FINESS=="Wis",]
+b<-apply(is.na(wis),2,mean)
+
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeRed,radial.lim=c(0,1),main="Taux de complétude des RPU transmis (Wissembourg)",poly.col = fadeRed)
+radial.plot(1-b,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue, poly.col=fadeBlue,radial.lim=c(0,1),add=T)
+
+# Colmar
+
+col<-d1[d1$FINESS=="Col",]
+b<-apply(is.na(col),2,mean)
+
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeRed,radial.lim=c(0,1),main="Taux de complétude des RPU transmis (Colmar)",poly.col = fadeRed)
+radial.plot(1-b,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue, poly.col=fadeBlue,radial.lim=c(0,1),add=T)
+```

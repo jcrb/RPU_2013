@@ -1,0 +1,67 @@
+
+BALISEDEFINITIONCP Code postal de résidenceCOMMUNENom de la commune de résidenceNAISSANCEDate de naissance (JJ/MM/AAAA) – vide correspond à incertainSEXEM/F/I (pour indéterminé)ENTREEDate et heure d’entrée (JJ/MM/AAAA – HH :MM)MODE D’ENTREEPMSI 6/7/8 
+6 = mutation
+7 = transfert
+8 = domicilePROVENANCEPMSI 1/2/3/4/5/8 
+En cas d’entrée par mutation ou transfert
+	1 = en provenance d’une unité de soins de courte durée (MCO)
+	2 = en provenance d’une unité de soins de suite ou de réadaptation 
+	3 = en provenance d’une unité de soins de longue durée
+	4 = en provenance d’une unité de psychiatrie
+
+En cas d’entrée à partir du domicile
+	5 = prise en charge aux urgences autres que pour des raisons organisationnelles
+	8 = prise en charge aux urgences pour des raisons organisationnelles
+TRANSPORTMode de transport : PERS/AMBU/VSAB/SMUR/HELI/FO
+PERSO : moyens personnels (à pied, en taxi, voiture personnelle…)
+AMBU : ambulance publique ou privée
+VSAB : véhicule de secours et d’aide aux blessés
+SMUR : véhicule de service mobile d’urgence et de réanimation
+HELI : hélicoptère
+FO : force de l’ordre (police, gendarmerie)
+MOTIFTHESAURUS SFMUGRAVITE CCMU 1/2/3/4/5/P/D
+1 = état lésionnel ou pronostic fonctionnel jugé stable après le premier examen clinique éventuellement complété d’actes diagnostiques réalisés et interprétés aux lits du malade, abstention d’actes complémentaires ou de thérapeutique.
+P = Idem CCMU 1 avec problème dominant psychiatrique ou psychologique isolé ou associé à une pathologie somatique jugée stable.
+2 = état lésionnel ou pronostic fonctionnel jugé stable, réalisation d’actes complémentaires aux urgences en dehors des actes diagnostiques éventuellement réalisés et interprétés aux lits du malade et/ou d’actes thérapeutiques.
+3 = état lésionnel ou pronostic fonctionnel jugé susceptible de s’aggraver aux urgences sans mettre en jeu le pronostic vital.
+4 = situation pathologique engageant le pronostic vital aux urgences sans manœuvre de réanimation initiée ou poursuivie dès l’entrée aux urgences.
+5 = situation pathologique engageant le pronostic vital aux urgences avec initiation ou poursuite de manœuvres de réanimation dès l’entrée aux urgences.
+D = patient décédé à l’entrée aux urgences sans avoir pu bénéficier d’initiation ou poursuite de manœuvres de réanimation aux urgences.
+DPDiagnostic principal CODE CIM10LISTE DADiagnostic associés CODE CIM10LISTE ACTESActes réalisés aux urgences CODE CCAMSORTIEDate et heure de sortie (JJ/MM/AAAA – HH :MM)MODE DE SORTIEMode de sortie PMSI 6/7/8/9 
+6 = Mutation
+7= transfert
+8 = domicile
+9 = décès
+DESTINATION
+
+Destination PMSI 1/2/3/4/6/7 
+En cas de sortie par mutation ou transfert
+	1 = hosp dans une unité de soins de courte durée (MCO)
+	2 = hosp dans une unité de suite ou de réadaptation
+	3 = hosp dans une unité de soins de longue durée
+	4 = hosp dans une unité de psychiatrie
+
+En cas de sortie au domicile
+	6 = retour au domicile dans le cadre d’une hospitalisation à domicile
+	7 = retour vers une structure d’hébergement médico-social
+ORIENTOrientation FUGUE/SCAM/PAS/REO/SC/SI/REA/UHCD/MED/CHIR/OBST/HDT/HO 
+En cas de sortie par mutation ou transfert
+	HDT : hospitalisation sur la demande d’un tiers
+	HO : hospitalisation d’office
+	SC : hosp dans une unité de surveillance continue
+	SI : hosp dans une unité de soins intensifs
+	REA : hosp dans une unité de réanimation
+
+	UHCD : hosp dans une unité d’hosp de courte durée
+	MED : hosp dans une unité de médecine (hors SC, SI, REA)
+	CHIR : hosp dans une unité de chirurgie (hors SC, SI, REA)
+	OBST : hosp dans une unité d’obstétrique (hors SC, SI, REA)
+
+En cas de sortie au domicile
+	FUGUE : sortie du service à l’insu du personnel soignant
+	SCAM : sortie contre avis médical
+	PSA : partie sans attendre prise en charge
+	REO : réorientation directe (ex : vers consultation spécialisée)
+
+
+

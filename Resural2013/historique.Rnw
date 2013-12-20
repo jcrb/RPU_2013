@@ -1,0 +1,5 @@
+% historique.Rnw
+
+Le Réseau des Urgences en Alsace a été créé en août 2008 sous forme d'une association de droit local dans la foulée de la circulaire de 2007.
+
+\index{RESURAL!historique}

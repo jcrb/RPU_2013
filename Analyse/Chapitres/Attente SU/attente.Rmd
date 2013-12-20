@@ -1,0 +1,189 @@
+Attente au SU
+========================================================
+```{r date}
+date()
+```
+Variables globales:
+-------------------
+Charge le fichier source **d1**
+```{r var_globales}
+source("../prologue.R")
+wd
+nrow(d1)
+```
+Librairies nécessaires:
+-----------------------
+```{r library , message=FALSE}
+load_libraries()
+```
+Heure d'arrivée aux urgences
+```{r geb_arrive}
+geb<-d1[d1$FINESS=="Geb",]
+e<-ymd_hms(geb$ENTREE)
+h<-hour(e)
+summary(h)
+hist(h,breaks=23,xlab="Heures",main="CH HUS - Horaire de fréquentation du SU")
+t<-table(h)
+t2<-as.integer(t)
+c<-clock24.plot(t2,clock.pos=1:24,lwd=3)
+c<-clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+# nécessite la librairie openintro
+clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,poly.col=fadeColor("blue", fade = "10"))
+clock24.plot(t2,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,poly.col=fadeColor("blue", fade = "10"),line.col=fadeColor("blue", fade = "10"))
+```
+Idem pour les sorties
+```{r geb_sorties}
+s<-ymd_hms(geb$SORTIE)
+t3<-as.integer(table(hour(s)))
+clock24.plot(t3,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures de sortie des urgences",show.grid.labels=F)
+```
+Durée de présence
+-----------------
+La durée de présence est calculée en secondes. Il faut la diviser par 60 pour avoir des minutes:
+```{r presence}
+e<-ymd_hms(d1$ENTREE)
+s<-ymd_hms(d1$SORTIE)
+d1$presence<-s-e
+d1$presence<-(s-e)/60
+summary(as.numeric(d1$presence))
+# suppression des valeurs négatives
+d1$presence[d1$presence < 0]<-NA
+d1$presence <- as.numeric(d1$presence)
+summary(d1$presence)
+hist(log10(as.numeric(d1$presence)),ylab="nombre", xlab="Logarithme de la durée de présence en mn", main="Durée de présence au SU en 2013")
+
+# la transformation log produit une courbe normale où lamajorité des consultants ont une durée de présence comprise entre 10 et 1000 minutes (environ 17 heures). On nettoie les données en supprimant les enregistrements où presence = NA, puis on forme 3 sous-groupes:
+# - a moins de 10 mn
+# - b de 10 à 1000 mn
+# - c plus de 1000 mn
+d2<-d1[!is.na(d1$presence),]
+a<-d2$presence[d2$presence < 10]
+c<-d2$presence[d2$presence > 1000]
+b<-d2$presence[d2$presence > 9 & d2$presence < 1001]
+length(a)
+length(b)
+length(c)
+
+summary(b)
+hist(b,ylab="nombre", xlab="Durée de présence (mn)", main=paste("Durée de présence au SU (2013) n =",length(b)),sub="Sont exclus les patients présents moins de 10 mn ou plus de 1000 mn")
+
+# Origine despatients restants moins de 10 mn: ils proviennent majoritairement des HUS:
+a<-d2[d2$presence < 10,"FINESS"]
+rbind(table(a),round(prop.table(table(a))*100,2))
+# Plus de 90% proviennent des HUS
+```
+Moyenne des durées de passages par jour
+---------------------------------------
+```{rmoyenne_passages}
+# On ne garde que les passages > 10 mn et < 1000 mn
+b<-d2[d2$presence > 9 & d2$presence < 1001,c("ENTREE","presence")]
+# on calcule la moyenne des passages par jour
+c<-tapply(b$presence,as.Date(b$ENTREE),mean)
+# on fabrique un vecteur de date
+d<-unique(as.Date(b$ENTREE))
+a<-zoo(c,d)
+plot(a,ylab="durée (minutes)",main="Durée moyenne de passage - 2013",xlab="Année 2013",col="lightblue")
+lines(rollmean(a,7),col="blue")
+lines(rollapply(a,7,function(x) mean(x) + sd(x)),col="red")
+lines(rollapply(a,7,function(x) mean(x) - sd(x)),col="red")
+```
+
+
+Combinaison entrée-sortie
+```{r geb_es}
+t4<-rbind(t2,t3)
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"))
+fadeBlue<-fadeColor("blue", fade = "15")
+fadeRed<-fadeColor("red", fade = "15")
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="HUS",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c(fadeRed,fadeBlue),poly.col=c(fadeRed,fadeBlue))
+```
+Entrées selon la période du jour: nuit profonde NP (0h-8h = 1), journée JO (8h-20h = 2), soir SR (20h-24h = 3). La date/heure d'entrée est transformée en heure entière par la fonction *hour*. hest à son tour segmenté en 3 périodes.
+```{r geb jour}
+e<-ymd_hms(geb$ENTREE)
+h<-hour(e)
+b<-cut(h,c(0,8,20,24),labels=c("NP","JO","SR"))
+bp<-summary(as.factor(b))
+barplot(bp)
+round(prop.table(bp)*100,2)
+barplot(round(prop.table(bp)*100,2),ylab="% des passages",sub="NP = 0h-8h",ylim=c(0,100),main="CH HUS\n Passages nuit profonde - jour - soirée")
+t<-table(geb$GRAVITE,b)
+t
+barplot(t,beside=T,col=1:7)
+```
+Mode sortie en fonction de la période
+```{r geb_sortie_periode}
+t<-table(geb$MODE_SORTIE,b)
+t
+t<-table(geb$ORIENTATION,b)
+```
+CCL: à HUS tout le monde rentre à la maison !
+
+#### Calcul des heures d'arrivées pour l'ensemble des établissements
+```{r total arrivee}
+e<-ymd_hms(d1$ENTREE)
+h<-hour(e)
+summary(h)
+hist(h,breaks=23,xlab="Heures",main="Alsace - Horaire de fréquentation du SU")
+t<-table(h)
+als_entree<-as.integer(t)
+c<-clock24.plot(als_entree,clock.pos=1:24,lwd=3,show.grid.labels=F)
+c<-clock24.plot(als_entree,clock.pos=1:24,rp.type="p",main="Alsace",xlab="Heures d'arrivée aux urgences",show.grid.labels=F)
+```
+#### Comparaison Alsace - HUS
+Les calculs sont exprimés en %
+```{r als-geb}
+e<-ymd_hms(geb$ENTREE)
+h<-hour(e)
+t<-table(h)
+t2<-as.integer(t)
+t4<-rbind(prop.table(t2),prop.table(als_entree))
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - HUS (rouge)",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"),radial.lim=c(0,0.1))
+legend(0.09,-0.09,c("CH","Alsace"),col=c("red","blue"),lty=1,cex=0.8)
+
+# Profil entrées de HUS versus le profil régional
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - HUS (rouge)",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red",fadeBlue),poly.col=c(NA,fadeBlue),radial.lim=c(0,0.1))
+
+```
+#### Comparaison Alsace - Wissembourg
+```{r als-wis}
+wis<-d1[d1$FINESS=="Wis",]
+e<-ymd_hms(wis$ENTREE)
+h<-hour(e)
+t<-table(h)
+t2<-as.integer(t)
+t4<-rbind(prop.table(t2),prop.table(als_entree))
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - CH de Wissembourg",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"),radial.lim=c(0,0.1))
+legend(0.09,-0.09,c("CH","Alsace"),col=c("red","blue"),lty=1,cex=0.8)
+```
+#### comparaison Alsace - HUS
+```{r}
+hus<-d1[d1$FINESS=="Hus",]
+e<-ymd_hms(hus$ENTREE)
+h<-hour(e)
+t<-table(h)
+t2<-as.integer(t)
+t4<-rbind(prop.table(t2),prop.table(als_entree))
+clock24.plot(t4,clock.pos=1:24,rp.type="p",main="Alsace - CHU Strasbourg",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col=c("red","blue"),radial.lim=c(0,0.1))
+legend(0.09,-0.09,c("CH","Alsace"),col=c("red","blue"),lty=1,cex=0.8)
+```
+#### Test de la fonction*passages*
+```{r passages}
+par(mfrow = c(2, 2))
+source("./mes_fonctions.R")
+passages("Hus","HUS",sens=3)
+passages("Mul","CH Mulhouse",sens=3)
+passages("Col","CH Colmar",sens=3)
+passages("Hag","CH Haguenau",sens=3)
+
+passages("Sel","CH Selestat",sens=3)
+passages("Odi","Clinique Ste Odile",sens=3)
+passages("Dia","Diaconnat - Fonderie",sens=3)
+passages("Tan","CH Thann",sens=3)
+
+passages("3Fr","Trois frontières",sens=3)
+passages("Alk","CH Alkirch",sens=3)
+passages("Sav","CH Saverne",sens=3)
+par(mfrow = c(1, 1))
+```
+

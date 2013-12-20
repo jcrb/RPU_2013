@@ -1,0 +1,562 @@
+%
+
+<<init, echo=FALSE>>=
+#'@param dp liste brute des diagnostics
+#'@param dpr liste des diag sans les NA. Les intitulés sont standardisés par suppression du point. Ainsi I60.9 devient I609 (méthode gsub)
+#'@param ndp nombre de DP bruts (NA inclus)
+#'@param ndpr nombre de DP renseignés
+#'@note Certaines Cim10 sont accompagnées de libellés en clair qui entraînent un plantage de gsub. Voir correction d'erreur plus bas.
+
+diag<-d1$DP
+
+dp<-d1$DP
+ndp<-length(dp)
+dpr<-dp[!is.na(dp)]
+ndpr<-length(dpr)
+
+# correction d'erreurs:
+dpr[37807]<-"N10"
+dpr[47689]<-"R06.0"
+dpr[68023]<-"C61"
+dpr[73924]<-"N10"
+
+dpr<-gsub(".","",dpr,fixed=TRUE)
+total<-ndpr
+ex<-round(ndpr * 100/ndp,2)
+
+# il faut définir l'année courante
+annee<-2013
+@
+
+Les motifs de recours aux urgences sont exprimés en fonction de la classification CIM10 \cite{10}.
+\index{motif de recours}
+\footnote{Classification Internationale des Maladies, 10ème révision (La CIM10 comporte environ 36000 maladies).}.
+\url{http://apps.who.int/classifications/icd10/browse/2008/fr}
+Le fichier comporte \np{\Sexpr{ndpr}} diagnostics principaux différents.
+répartis en \Sexpr{length(unique(dpr))} classes de diagnostics.
+La comparaison entre le nombre de RPU reçus et le nombre de diagnostics renseignés permet d'établir l'exhaustivité des CIM10 à \Sexpr{ex}\% \index{exhaustivité!CIM10}
+
+
+\section{Cim10}
+
+Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10. Le tableau qui suit indique pour chaque chapitre, le nombre total de cas rapportés, le pourcentage par rapport à l'ensemble, et le pourcentage de cas déduction faite de la traumatologie. En effet celleci représente environ la moitié des cas et il parait intéressant de séparer les pathologies traumatiques des non traumatiques.
+
+<< table_cim10,echo=FALSE>>=
+
+traumato<-length(d1[substr(dpr,1,1)=="S" | substr(dpr,1,1)=="T",1])
+cardio<-length(d1[substr(dpr,1,1)=="I",1])
+infec<-length(d1[substr(dpr,1,1)=="A" | substr(dpr,1,1)=="B",1])
+respi<-length(d1[substr(dpr,1,1)=="J",1])
+neuro<-length(d1[substr(dpr,1,1)=="G",1])
+digestif<-length(d1[substr(dpr,1,1)=="K",1])
+cancer<-length(d1[substr(dpr,1,1)=="C" | (substr(dpr,1,3)>="D00" & substr(dpr,1,3)<"D50"),1])
+autre<-length(d1[substr(dpr,1,1)=="Z",1])
+oeil<-length(d1[substr(dpr,1,3)>="H00" & substr(dpr,1,3) <="H59" ,1])
+orl<-length(d1[substr(dpr,1,3)>"H59" & substr(dpr,1,3) <="H95",1])
+os<-length(d1[substr(dpr,1,1)=="M",1])
+peau<-length(d1[substr(dpr,1,1)=="L",1])
+psy<-length(d1[substr(dpr,1,1)=="F",1])
+genital<-length(d1[substr(dpr,1,1)=="N",1])
+obst<-length(d1[substr(dpr,1,1)=="O",1])
+nne<-length(d1[substr(dpr,1,1)=="P",1])
+cong<-length(d1[substr(dpr,1,1)=="Q",1])
+labo<-length(d1[substr(dpr,1,1)=="R",1])
+morta<-length(d1[substr(dpr,1,1)>="V" & substr(dpr,1,1)<"z",1])
+sang<-length(d1[substr(dpr,1,3)>="D50" & substr(dpr,1,3)<"D59",1])
+meta<-length(d1[substr(dpr,1,1)=="E",1])
+codeU <- length(d1[substr(dpr,1,1)=="U",1])
+@
+
+
+%round(prop.table(tr)*100,digits=2)
+
+\begin{longtable}{|c|c|m{4cm}|c|c|c|}
+ \hline
+ Chapitre & Bloc & Titre & N & \% total  & \% non trauma \\
+ \hline
+ 
+I & A00–B99 & Certaines maladies infectieuses et parasitaires & \Sexpr{infec} & \Sexpr{round(infec*100/total,digits=2)} & \Sexpr{round(infec*100/(total-traumato),digit=2)} \\
+ II&C00–D48&Tumeurs&\Sexpr{cancer}&\Sexpr{round(cancer*100/total,digits=2)}&\Sexpr{round(cancer*100/(total-traumato),digits=2)}\\
+ 
+III&D50–D89&Maladies du sang et des organes hématopoïétiques et certains troubles du système immunitaire&\Sexpr{sang}&\Sexpr{round(sang*100/total,digits=2)}&\Sexpr{round(sang*100/(total-traumato),digits=2)}\\
+
+IV&E00–E90&Maladies endocriniennes, nutritionnelles et métaboliques&\Sexpr{meta}&\Sexpr{round(meta*100/total,digits=2)}&\Sexpr{round(meta*100/(total-traumato),digits=2)}\\
+
+V&F00–F99&Troubles mentaux et du comportement&\Sexpr{psy}&\Sexpr{round(psy*100/total,digits=2)}&\Sexpr{round(psy*100/(total-traumato),digits=2)}\\
+
+VI&G00–G99&Maladies du système nerveux&\Sexpr{neuro}&\Sexpr{round(neuro*100/total,digits=2)}&\Sexpr{round(neuro*100/(total-traumato),digits=2)}\\
+
+VII & H00–H59 & Maladies de l'oeil et de ses annexes & \Sexpr{oeil} & \Sexpr{round(oeil*100/total,digits=2)}&\Sexpr{round(oeil*100/(total-traumato),digits=2)}\\
+
+VIII&H60–H95&Maladies de l'oreille et de l'apophyse mastoïde&\Sexpr{orl}&\Sexpr{round(orl*100/total,digits=2)}&\Sexpr{round(orl*100/(total-traumato),digits=2)}\\
+
+IX&I00–I99&Maladies de l'appareil circulatoire&\Sexpr{cardio}&\Sexpr{round(cardio*100/total,digits=2)}&\Sexpr{round(cardio*100/(total-traumato),digits=2)}\\
+
+X&J00–J99&Maladies de l'appareil respiratoire&\Sexpr{respi}&\Sexpr{round(respi*100/total,digits=2)}&\Sexpr{round(respi*100/(total-traumato),digits=2)}\\
+
+XI&K00–K93&Maladies de l'appareil digestif&\Sexpr{digestif}&\Sexpr{round(digestif*100/total,digits=2)}&\Sexpr{round(digestif*100/(total-traumato),digits=2)}\\
+
+XII&L00–L99&Maladies de la peau et du tissu cellulaire souscutané&\Sexpr{peau}&\Sexpr{round(peau*100/total,digits=2)}&\Sexpr{round(peau*100/(total-traumato),digits=2)}\\
+
+XIII&M00–M99&Maladies du système ostéoarticulaire, des muscles et du tissu conjonctif&\Sexpr{os}&\Sexpr{round(os*100/total,digits=2)}&\Sexpr{round(os*100/(total-traumato),digits=2)}\\
+
+XIV&N00–N99&Maladies de l'appareil génitourinaire&\Sexpr{genital}&\Sexpr{round(genital*100/total,digits=2)}&\Sexpr{round(genital*100/(total-traumato),digits=2)}\\
+
+XV&O00–O99&Grossesse, accouchement et puerpéralité&\Sexpr{obst}&\Sexpr{round(obst*100/total,digits=2)}&\Sexpr{round(obst*100/(total-traumato),digits=2)}\\
+
+XVI&P00–P96&Certaines affections dont l'origine se situe dans la période périnatale&\Sexpr{nne}&\Sexpr{round(nne*100/total,digits=2)}&\Sexpr{round(nne*100/(total-traumato),digits=2)}\\
+
+% XVII&Q00–Q99&Malformations congénitales et anomalies chromosomiques&\Sexpr{cong}&\Sexpr{round(cong*100/total,digits=2)}&\Sexpr{round(cong*100/(total-traumato),digits=2)}\\
+
+XVIII&R00–R99&Symptômes, signes et résultats anormaux d'examens cliniques et de laboratoire, non classés ailleurs&\Sexpr{labo}&\Sexpr{round(labo*100/total,digits=2)}&\Sexpr{round(labo*100/(total-traumato),digits=2)}\\
+
+XIX&S00–T98&Lésions traumatiques, empoisonnements et certaines autres conséquences de causes externes&\Sexpr{traumato}&\Sexpr{round(traumato*100/total,digits=2)}& \\
+
+XX&V01–Y98&Causes externes de morbidité et de mortalité& \Sexpr{morta}&\Sexpr{round(morta*100/total,digits=2)}&\Sexpr{round(morta*100/(total-traumato),digits=2)}\\
+
+XXI&Z00–Z99&Facteurs influant sur l'état de santé et motifs de recours aux services de santé&\Sexpr{autre}&\Sexpr{round(autre*100/total,digits=2)}&\Sexpr{round(autre*100/total,digits=2)}\\
+
+XXII&U00–U99&Codes d'utilisation particulière & \Sexpr{codeU}&\Sexpr{round(codeU*100/total,digits=2)}&\Sexpr{round(codeU*100/total,digits=2)}\\
+
+  \hline
+\end{longtable}
+
+
+
+<<class_cim10,echo=FALSE>>=
+a<-substr(dpr,1,1)
+tab1(a,horiz=T,sort.group="decreasing",main="Classes dignostiques de la CIM10")
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Etude des AVC}
+\index{AVC}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Les AVC sont définis par la nomenclature I60 à I64, G45 Accidents ischémiques cérébraux transitoires (sauf G45.4 amnésie transitoire) et syndromes apparentés et G46 Syndromes vasculaires cérébraux au cours de maladies cérébrovasculaires
+
+La prévention et la prise en charge des accidents vasculaires cérébraux  Annexes 
+juin 2009
+
+Annexe : Liste exhaustive des codes CIM10 d’AVC
+
+\begin{longtable}{|l|l|}
+ \hline
+ Code & libellé\\
+ \hline
+ G450 & Syndrome vertébrobasilaire \\
+ G451 & Syndrome carotidien (hémisphérique) \\
+ G452 & Accident ischémique transitoire de territoires artériels précérébraux multiples et bilatéraux \\
+ G453 & Amaurose fugace \\
+ G454 & Amnésie globale transitoire : NON RETENU \\
+ G458 & Autres accidents ischémiques cérébraux transitoires et syndromes apparentés \\
+ G459 & Accident ischémique cérébral transitoire, sans précision \\
+ I600 & Hémorragie sousarachnoïdienne de labifurcation et du siphon carotidien \\
+ I601 & Hémorragie sousarachnoïdienne de l'artère cérébrale moyenne \\
+ I602 & Hémorragie sousarachnoïdienne de l'artère communicante antérieure \\
+ I603 & Hémorragie sousarachnoïdienne del'artère communicante postérieure \\
+ I604 & Hémorragie sousarachnoïdienne de l'artère basilaire \\
+ I605 & Hémorragie sousarachnoïdienne de l'artère vertébrale \\
+ I606 & Hémorragie sousarachnoïdienne d'autres artères intracrâniennes \\
+ I607 & Hémorragie sousarachnoïdienne d'une artère intracrânienne, sans précision \\
+ I608 & Autres hémorragies sousarachnoïdiennes \\
+ I609 & Hémorragie sousarachnoïdienne, sans précision \\
+ I610 & Hémorragie intracérébrale hémisphérique, souscorticale \\
+ I611 & Hémorragie intracérébrale hémisphérique, corticale \\
+ I612 & Hémorragie intracérébrale hémisphérique, non précisée \\
+ I613 & Hémorragie intracérébrale du tronc cérébral \\
+ I614 & Hémorragie intracérébrale cérébelleuse \\
+ I615 & Hémorragie intracérébrale intraventriculaire \\
+ I616 & Hémorragie intracérébrale,localisations multiples \\
+ I618 & Autres hémorragies intracérébrales \\
+ I619 & Hémorragie intracérébrale, sans précision \\
+ I620 & Hémorragie sousdurale (aiguë) (non traumatique) \\
+ I621 & Hémorragie extradurale non traumatique \\
+ I629 & Hémorragie intracrânienne (non traumatique), sans précision \\
+ I630 & Infarctus cérébral dû à une thrombose des artères précérébrales \\
+ I631 & Infarctus cérébral dû à une embolie des artères précérébrales \\
+ I632 & Infarctus cérébral dû à une occlusion ou sténose des artères précérébrales,de mécanisme non précisé \\
+ I633 & Infarctus cérébral dû à une thrombose des artères cérébrales \\
+ I634 & Infarctus cérébral dû à une embolie des artères cérébrales \\
+ I635 & Infarctus cérébral dû à une occlusion ou sténose des artères cérébrales, demécanisme non précisé \\
+ I636 & Infarctus cérébral dû à une thrombose veineuse cérébrale, non pyogène \\
+ I638 & Autres infarctus cérébraux \\
+ I639 & Infarctus cérébral, sans précision \\
+ I64 & Accident vasculaire cérébral, non précisé comme étant hémorragique ou par infarctus \\
+ G460 & Syndrome de l'artère cérébrale moyenne (I66.0) (1) \\
+ G461 & Syndrome de l'artère cérébrale antérieure (I66.1) (1) \\
+ G462 & Syndrome de l'artère cérébrale postérieure (I66.2) (1) \\
+ G463 & Syndromes vasculaires du tronc cérébral (I60I67) (1) \\
+ G464 & Syndrome cérébelleux vasculaire (I60I67) (1) \\
+ G465 & Syndrome lacunaire moteur pur (I60I67) (1) \\
+ G466 & Syndrome lacunaire sensitif pur (I60I67) (1) \\
+ G467 & Autres syndromes lacunaires (I60I67) (1) \\
+ G468 & Autres syndromes vasculaires cérébraux au cours de maladies cérébrovasculaires (I60I67) (1) \\
+  \hline
+\end{longtable}
+
+<<df_avc,echo=TRUE>>=
+# Création d'un dataframe DP
+dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT")]
+# correction d'erreurs:
+dpr$DP[37807]<-"N10"
+dpr$DP[47689]<-"R06.0"
+dpr$DP[68023]<-"C61"
+dpr$DP[73924]<-"N10"
+# un peu de ménage:
+dpr$DP<-gsub(".","",as.character(dpr$DP),fixed=TRUE)
+dpr$DP<-gsub("+","",as.character(dpr$DP),fixed=TRUE)
+# extraction d'un DF avc:
+AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45" ,]
+@
+
+\subsection*{Horaire des AVC}
+\index{AVC!heure}
+
+Horaire des AVC, à comparer avec:
+\begin{itemize}
+  \item les crises d'épilepsie
+  \item la pression athmosphérique
+\end{itemize}
+
+<<heure_avc,echo=FALSE>>=
+
+h<-hour(AVC$ENTREE)
+hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée")
+tab1(h,missing=FALSE,main="Heures d'admission des AVC")
+@
+
+\subsection*{Selon le jour de la semaine}
+\index{AVC!age}
+
+<<avc_jour_semaine,echo=FALSE>>=
+library("gdata")
+w<-wday(AVC$ENTREE,label=TRUE)
+levels(w)<-c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
+table(w)
+round( prop.table(table(w))*100,2)
+
+# plot(w,main="AVC selon le jour de la semaine")
+# abline(h=nrow(AVC)/7,col="red")
+# on rordonne pour que la semaine commence le lundi
+w2<-reorder(w,new.order=c("Lun","Mar","Mer","Jeu","Ven","Sam","Dim"))
+plot(w2,main="AVC selon le jour de la semaine")
+abline(h=nrow(AVC)/7,col="red")
+@
+Proportion théorique = 14.28\% par jour de la semaine.
+
+\subsection*{AVC et age}
+\index{AVC!age}
+<<avs_age,echo=FALSE>>=
+summary(AVC$AGE)
+@
+Le rapport de 2009 donne age moyen = 70.5 et age médian = 75 ans.
+
+\subsection*{AVC et sexe}
+\index{AVC!sexe}
+<<avc_sexe,echo=FALSE>>=
+summary(AVC$SEXE)
+hist(AVC$AGE,main="Répartition des AVC",col="pink",xlab="Age en années")
+t<-table(AVC$AGE)
+barplot(t,main="AVC - Répartition des ages")
+t<-table(AVC$SEXE,AVC$AGE)
+barplot(t,col=c("red","white","darkblue"),main="Répartion des AVC selon l'age et le sexe",legend=TRUE)
+barplot(t,col=c("yellow","white","red"),main="Répartion des AVC selon l'age et le sexe",legend=TRUE,beside=TRUE)
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Accidents ischiémiques transitoires (AIT)}
+\index{AIT}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Recommandations pour la sélection des données PMSI MCO concernant l’AVC (Juin 2009)
+
+\begin{longtable}{|l|l|}
+ \hline
+ Code & libellé\\
+ \hline
+G450 & Syndrome vertébro-basilaire \\
+G451 & Syndrome carotidien (hémisphérique) \\
+G452 & Accident ischémique transitoire de territoires artériels précérébraux multiples et bilatéraux \\
+G453  & Amaurose fugace \\
+G458  & Autres accidents ischémiques cérébraux transitoires et syndromes apparentés \\
+G459  & Accident ischémique cérébral transitoire, sans précision \\  
+  \hline
+\end{longtable}
+
+Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour tout diagnostic d'AIT.
+\index{AIT!thésaurus}
+
+<<ait,echo=FALSE>>=
+ait<-dpr$DP[substr(dpr$DP,1,3)=="G45" & substr(dpr$DP,1,4)!="G454"]
+tab1(ait,missing=FALSE)
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pneumonies}
+\index{pneumonies}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<pneumo_intro,echo=FALSE,message=FALSE>>=
+
+library("epitools")
+source("../mes_fonctions.R")
+
+pneumo<-dpr[substr(dpr$DP,1,4)=="J159" ,]
+p<-summary(pneumo$AGE)
+print("Pneumonies et AGE")
+p
+@
+
+Les pneumopaties bactériennes sans précision sont cotées J15.9 Dans la CIM10.
+\Sexpr{nrow(pneumo)} diagnostics de ce type ont été portés au SAU en \Sexpr{annee}.
+
+Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus.
+
+<<pneumo,echo=FALSE,message=FALSE>>=
+
+# copyright<-"© 2013 Résural"
+seq3.r<-colorbrewer.palette(3,"seq","r")
+
+a<-epigraphe(pneumo$ENTREE,min.date="2013-01-01", strata = pneumo$SEXE,col=seq3.r[3:1],main="Infections respiratoires",xlab="",ylab="Nombre de RPU")
+@
+
+En fonction de la gravité (CCMU):
+<<echo=FALSE>>=
+summary(as.factor(pneumo$GRAVITE))
+@
+
+En fonction de la destination:
+<<echo=FALSE>>=
+summary(as.factor(pneumo$DESTINATION))
+@
+
+En fonction de l'orientation:
+<<echo=FALSE>>=
+summary(pneumo$ORIENTATION)
+@
+
+Deux patients porteurs de problèmes respiratoires sont orienté en chirurgie : erreur ou manque de place en médecine ?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Syndrome grippal}
+\index{syndrome grippal}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<grippe,echo=FALSE>>=
+grippe<-d1[substr(d1$DP,1,3)=="J11"|substr(d1$DP,1,3)=="J10"|substr(d1$DP,1,3)=="J09", c("DP","ENTREE")]
+grippe<-grippe[complete.cases(grippe),]
+grippe$date<-as.Date(grippe$ENTREE)
+hist(grippe$date,breaks=18,freq=TRUE,col="slategray1",main="2013 - Syndromes grippaux",xlab="")
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Asthme}
+\index{Asthme}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Classification selon la CIM10:
+\begin{itemize}
+  \item J45.0 Asthme à prédominance allergique
+  \item J45.1 Asthme non allergique
+  \item J45.8 Asthme associé 
+  \item J45.9 Asthme, sans précision
+  \item J46   Etat de mal asthmatique
+\end{itemize}
+
+<<asthme,echo=FALSE,results='asis'>>=
+asthme<-dpr[substr(dpr$DP,1,3)=="J45" | substr(dpr$DP,1,3)=="J46",]
+n<-nrow(asthme)
+xtable(table(as.factor(asthme$DP)))
+
+# Francisation de tab1 et utilisation avec xtable. La première ligne dessine le graphe sans afficher la tableau. Ce dernier est francisé puis affiché via xtable
+
+x<-tab1(asthme$DP,sort.group="increasing",main="Distribution des diagnostics d'asthme")
+dimnames(x$output.table)[[2]]<-c("Fréquence","Pourcentage","Pourcentage Cumul.")
+xtable(x$output.table,caption=c("Répartition des diagnostics d'asthme chez les patients ayant consulté un  SU, en région Alsace en 2013","Répartition des diagnostics d'asthme"),label="tab:asthme")
+@
+
+On note \np{\Sexpr{n}} cas d'asthme en 2013.
+
+<<asthme2,echo=FALSE,results='asis'>>=
+
+s<-week(asthme$ENTREE)
+barplot(table(s),main="Crises d'asthme - 2013",xlab="Semaines")
+x<-tab1(s,main="Fréquence des crises d'asthme")
+colnames(x$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+xtable(x$output.table,caption=c("Fréquence des crises d'asthme par semaine en 2013","Fréquence des crises d'asthme"),label="tab:freq_asthme")
+@
+
+
+La population des patients consultant pour une crise d'astme est jeune (voir table \ref{tab:age_asthme} page \pageref{tab:age_asthme}).
+
+<<asthme3,echo=FALSE,results='asis'>>=
+xtable(resume(asthme$AGE),caption=c("Age de la population consultant pour crise d'asthme","Asthme et age"),label="tab:age_asthme")
+
+x<-t(resume(asthme$GRAVITE))
+rownames(x)<-""
+xtable(x,caption=c("Gravité de la crise d'asthme en fonction de la CCMU","Asthme et CCMU"),label="tab:ccmu_asthme")
+
+ms<-summary(asthme$MODE_SORTIE)
+hospit<-ms[2] + ms[3]
+dom<-ms[4]
+tx_hospit<-round(hospit/(hospit+dom)*100,2)
+
+orient<-summary(asthme$ORIENTATION)
+svce_chauds<-orient["REA"]+orient["SI"]+orient["SC"]
+svce_conv<-orient["MED"]+orient["CHIR"]+orient["OBST"]
+svce_porte<-orient["UHCD"]
+svce_psy<-orient["HO"]+orient["HDT"]
+atypique<-orient["FUGUE"]+orient["PSA"]+orient["SCAM"]+orient["REO"]
+@
+
+Les crises sont de gravité moyenne avec une prédominance de CCMU 2 et 3 (voir table \ref{tab:ccmu_asthme} page \pageref{tab:ccmu_asthme}).
+Cependant le taux d'hospitalisation est important: \Sexpr{tx_hospit} \%.
+\np{\Sexpr{svce_chauds}} patients ont été orientés vers un service "chaud" (Réanimation, sins intensifs ou continus) soit \Sexpr{round(svce_chauds*100/(svce_chauds+svce_conv+svce_porte),2)} \% des patients hospitalisés pour asthme.
+
+Le bulletin épidémiologique (Le point épidémiologique du 24 octobre 2013 - Surveillance épidémiologique de la Cire Lorraine-Alsace) clôt la surveillance de l’asthme. Pour l’association SOS Médecins de Strasbourg, l’activité liée à l’asthme a été particulièrement marqué de mi-avril (semaine 16) à fin mai(semaine 22) puis en semaine 40. Concernant l’association de Mulhouse, seule une forte augmentation en semaine 39 a été observée depuis début avril.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bronchiolite}
+\index{Bronchiolite}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+CIM10: Bronchiolite aiguë
+
+Inclus:
+    avec bronchospasme
+\begin{itemize}
+  \item J21.0 Bronchiolite aiguë due au virus respiratoire syncytial [VRS]
+  \item J21.8 Bronchiolite aiguë due à d'autres micro-organismes précisés
+  \item J21.9 Bronchiolite aiguë, sans précision
+\end{itemize}
+
+<<bron>>=
+bron<-dpr[substr(dpr$DP,1,3)=="J21" ,]
+m<-month(bron$ENTREE,label=T)
+barplot(table(m),main="Bronchiolites - 2013",xlab="Mois")
+s<-week(bron$ENTREE)
+barplot(table(s),main="Bronchiolites - 2013",xlab="Semaines")
+summary(bron)
+@
+
+Surreprésentation de Mul  
+taux hospitalisation: 50\%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Intoxication au CO}
+\index{Intoxication au CO}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+CIM10 = T58
+
+<<co>>=
+co<-dpr[substr(dpr$DP,1,3)=="T58" ,]
+m<-month(co$ENTREE,label=T)
+table(m)
+barplot(table(m),main="Intoxication au CO - 2013",xlab="Mois")
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Malaises}
+\index{malaise}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+<<malaises,echo=FALSE>>=
+malaise<-d1[substr(d1$DP,1,3)=="R55", c("DP","ENTREE")]
+malaise<-malaise[complete.cases(malaise),]
+malaise$date<-as.Date(malaise$ENTREE)
+hist(malaise$date,breaks=18,freq=TRUE,col="slategray1")
+@
+
+malaise selon INVS (canicule):
+
+<<malaises_invs,echo=FALSE>>=
+malaise<-d1[substr(d1$DP,1,3)=="R55"|substr(d1$DP,1,3)=="R53"|substr(d1$DP,1,3)=="R42", c("DP","ENTREE")]
+malaise<-malaise[complete.cases(malaise),]
+malaise$date<-as.Date(malaise$ENTREE)
+hist(malaise$date,breaks=18,freq=TRUE,col="slategray1",main="Malaises (INVS)")
+ plot(as.factor(malaise$date),col="slategray1",las = 1,main="Malaises (INVS)")
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Marqueurs de canicule}
+\index{Canicule@marqueurs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Données hospitalières : nombre quotidien de passages dans des services d'urgence hospitaliers pour un diagnostic de malaise (codes Cim10 R42, R53 et R55), d'hyperthermie et autres effets directs de la chaleur (codes Cim10 T67 et X30), de déshydratation (code Cim10 E86) et d'hyponatrémie (code Cim10 E871)
+
+- X30  Exposition à une chaleur naturelle excessive
+- E86  Déplétion du volume du plasma ou du liquide extracellulaire, Déshydratation sauf choc hypovolémique
+
+<<canicule,echo=FALSE>>=
+canicule<-dpr[substr(dpr$DP,1,3)=="T67", c("DP","ENTREE")]
+canicule<-canicule[complete.cases(canicule),]
+canicule$date<-as.Date(canicule$ENTREE)
+hist(canicule$date,breaks=18,freq=TRUE,col="slategray1",main="Pathologies liées à la chaleur",ylab="Nombre",xlab="",sub="Code CIM10 T67.0 à T67.9")
+canicule$DP<-gsub(".","",canicule$DP,fixed=TRUE)
+tab1(canicule$DP,xlab="Fréquence",main="Pathologies liées à la chaleur")
+
+
+canicule<-dpr[substr(dpr$DP,1,3)=="T67"|substr(dpr$DP,1,3)=="X30"|substr(dpr$DP,1,3)=="E86"|substr(dpr$DP,1,3)=="E871", c("DP","ENTREE")]
+canicule<-canicule[complete.cases(canicule),]
+canicule$date<-as.Date(canicule$ENTREE)
+hist(canicule$date,breaks=18,freq=TRUE,col="slategray1",main="Pathologies liées à la chaleur",ylab="Nombre",xlab="",sub="")
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Gastro-entérites}
+\index{Gastroentérites}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+CIM10 A09 : Diarrhée et gastro-entérite d'origine présumée infectieuse
+
+Inclus: Catarrhe intestinale (Colite,Entérite, Gastro-entérite,SAI hémorragique,septique), Diarrhée (SAI,dysentérique,épidémique), Maladie diarrhéique infectieuse SAI.
+Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies dues à des bactéries, des protozoaires, des virus et d'autres agents infectieux précisés (A00-A08)  
+
+<<ge>>=
+ge<-dpr[substr(dpr$DP,1,3)=="A09" ,]
+summary(ge)
+table(ge$FINESS,ge$DP)
+hist(ge$AGE,main="Gasto-entérites - 2013",xlab="Age (années)", ylab="nombre",col="gray90")
+boxplot(ge$AGE,col="yellow",main="Gastro-entérite",ylab="age (années)")
+m<-month(ge$ENTREE,label=T)
+x<-barplot(table(m),main="Gestro-entérites - 2013",xlab="Mois")
+lines(x=x,y=table(m),col="red")
+@
+
+
+NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On utilise lines avec les valeurs suivantes:
+- x = abcisse des colonnes. Elles sont contenues dans l'objet barplot. On peut les recueillir eplicitement par la fonction *str* (str(x)).
+- y = ordonnées des barres, récupérées avec la fonction *table* qui agglomère les données par mois
+Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
+
+calculs à la manière de l'INVS
+
+nombre de diagnostics de GE / nb total de diagnostics par semaine:
+<<invs>>=
+mge<-month(ge$ENTREE,label=T)
+mtot<-month(dpr$ENTREE,label=T)
+summary(mtot)
+summary(mge)
+a<-round(summary(mge)*100/summary(mtot),2)
+a
+barplot(a)
+@
+
+
+dpt: tous les cas de traumato (S00 à T98)
+
+dpnp:tous les cas de médecine  
+
+<<trauma>>=
+dpt<-dpr[substr(dpr$DP,1,3)>="S00" & substr(dpr$DP,1,3)<"T99", ]  
+dpnt<-dpr[substr(dpr$DP,1,3) < "S00" | substr(dpr$DP,1,3)>"T98", ]  
+mnt<-month(dpnt$ENTREE,label=T)  
+a<-round(summary(mge)*100/summary(mnt),2)  
+a 
+@
+
+ 
