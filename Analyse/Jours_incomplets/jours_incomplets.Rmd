@@ -1,0 +1,33 @@
+Jours incomplets
+========================================================
+
+
+#### Jours manquants:a<-as.data.frame(a)
+```{r jours_manquants}
+load("rpu2013d0107.Rda")
+d2<-d0107
+rm(d0107)
+
+a<-table(as.Date(d2$ENTREE),d2$FINESS)
+a<-as.data.frame.matrix(a)
+head(a)
+# liste par FINESS des jours où le nb de RPU est inférieur à 20:
+# il faut ajouter une colonne date pour que cela fonctionne.
+a$date<-seq(as.Date("2013-01-01"),as.Date("2013-07-30"),1)
+# On initialise une liste de 12 éléments,12 parce que 12 SU
+b<-list(1:12)
+# pour chacun des SU, les jours où le nombre de RPU < 20, on stocke la date (col.13) et le n° du SU
+for(i in 1:12){b[[i]]<-a[a[,i]<20,c(13,i)]}
+str(b)
+# dossier manquants pour guebwiller:
+b[[5]]
+names(b[[5]])
+b[[5]]$date
+# liste des SU incomplets:
+for(i in 1:12){n=length(b[[i]]$date);if(n>0){print(paste(i,names(b[[i]][2]),n,sep=" "))}}
+b[[11]]
+b[[8]]
+b[[7]]
+
+rm(d2)
+```
