@@ -52,12 +52,13 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
+
 % inclu un fichier de bibliothèques
 \include{rpu_2012.sty}
 
 % la directive suivante permet d'utiliser le séparateur de milliers. 
-%Deux formulation sont utilisables mais exclusives l'une de l'autre. L'instruction "autolanguage" permet d'utiliser \nombre{} ou \np{}
-% exemple: L'ensemble des SU ont déclaré \np{length(e)} passages en 2013
+% Deux formulation sont utilisables mais exclusives l'une de l'autre. L'instruction "autolanguage" permet d'utiliser \nombre{} ou \np{}
+% exemple: L'ensemble des SU ont déclaré \np{123456} passages en 2013
 %\usepackage{numprint}
 \usepackage[autolanguage,np]{numprint}
 
@@ -107,6 +108,7 @@
 \makeglossary
 %\makeindex -s glossaire.ist RPU2013.glo -o RPU2013.glx
 
+
 % \newenvironment{leglossaire}{\begin{list}{}{%
 %   \setlength{\labelwidth}{.5\textwidth}%
 %   \setlength{\labelsep}{-.8\labelwidth}%
@@ -127,12 +129,17 @@
 
 
 
+
 % Commandes
 \providecommand{\tabularnewline}{\\} % compatibilité avec Lyx
 %\newcommand{\cette_annee}{\ensuremath{\mathbb{2013\xspace}}}
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 
+
+
+%====================================== DEBUT =========================================
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
+%\SweaveOpts{concordance=TRUE}
 
 \title{Analyse des données RPU 2013 de la région Alsace}
 \author{RESURAL\thanks{Réseau des urgences en Alsace - Equipe de coordination Dr J.C.
@@ -148,6 +155,7 @@ Bartier \& Madame Christine Hecker}}
 \newpage
 \chapter*{}
 \vfill
+
 \begin{itemize}\raggedright
   \item R version 3.0.2 (2013-09-25), \verb|x86_64-pc-linux-gnu|
   \item Locale: \verb|LC_CTYPE=fr_FR.UTF-8|, \verb|LC_NUMERIC=C|, \verb|LC_TIME=fr_FR.UTF-8|, \verb|LC_COLLATE=fr_FR.UTF-8|, \verb|LC_MONETARY=fr_FR.UTF-8|, \verb|LC_MESSAGES=fr_FR.UTF-8|, \verb|LC_PAPER=fr_FR.UTF-8|, \verb|LC_NAME=C|, \verb|LC_ADDRESS=C|, \verb|LC_TELEPHONE=C|, \verb|LC_MEASUREMENT=fr_FR.UTF-8|, \verb|LC_IDENTIFICATION=C|
@@ -157,6 +165,8 @@ Bartier \& Madame Christine Hecker}}
   \item Loaded via a namespace (and not attached): evaluate~0.5.1,
     formatR~0.10, stringr~0.6.2, tools~3.0.2
 \end{itemize}
+
+
 
 
 % Making a derivative work?
@@ -170,6 +180,57 @@ Bartier \& Madame Christine Hecker}}
 \listoftables
 \listoffigures
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# setwd('~/Documents/Resural/Stat Resural/RPU_2012') setwd('~/rdev/RPU2012')}
+\hlkwd{library}\hlstd{(}\hlstr{"gdata"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"rgrs"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"lubridate"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"xtable"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"stargazer"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"knitr"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"rattle"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"epicalc"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"zoo"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"xts"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"plotrix"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"openintro"}\hlstd{)}
+\hlkwd{library}\hlstd{(}\hlstr{"sp"}\hlstd{)}
+
+\hlkwd{source}\hlstd{(}\hlstr{"../Routines/mes_fonctions.R"}\hlstd{)}
+
+\hlstd{path} \hlkwb{<-} \hlstr{"../"}
+\hlkwa{if} \hlstd{(}\hlopt{!}\hlkwd{exists}\hlstd{(}\hlstr{"d1"}\hlstd{)) \{}
+    \hlkwd{load}\hlstd{(}\hlkwd{paste}\hlstd{(path,} \hlstr{"rpu2013d0111.Rda"}\hlstd{,} \hlkwc{sep} \hlstd{=} \hlstr{""}\hlstd{))}
+\hlstd{\}}
+\hlkwd{attach}\hlstd{(d1)}
+\hlkwd{nrow}\hlstd{(d1)}
+\end{alltt}
+\begin{verbatim}
+## [1] 301767
+\end{verbatim}
+\begin{alltt}
+\hlcom{# On creé une colonne supplémentaire *secteur* qui indique à quel secteur}
+\hlcom{# sanitaire correspond le RPU:}
+
+\hlstd{d1}\hlopt{$}\hlstd{secteur[d1}\hlopt{$}\hlstd{FINESS} \hlopt{%in%} \hlkwd{c}\hlstd{(}\hlstr{"Wis"}\hlstd{,} \hlstr{"Hag"}\hlstd{,} \hlstr{"Sav"}\hlstd{)]} \hlkwb{<-} \hlnum{1}
+\hlstd{d1}\hlopt{$}\hlstd{secteur[d1}\hlopt{$}\hlstd{FINESS} \hlopt{%in%} \hlkwd{c}\hlstd{(}\hlstr{"Hus"}\hlstd{,} \hlstr{"Odi"}\hlstd{)]} \hlkwb{<-} \hlnum{2}
+\hlstd{d1}\hlopt{$}\hlstd{secteur[d1}\hlopt{$}\hlstd{FINESS} \hlopt{%in%} \hlkwd{c}\hlstd{(}\hlstr{"Sel"}\hlstd{,} \hlstr{"Col"}\hlstd{,} \hlstr{"Geb"}\hlstd{)]} \hlkwb{<-} \hlnum{3}
+\hlstd{d1}\hlopt{$}\hlstd{secteur[d1}\hlopt{$}\hlstd{FINESS} \hlopt{%in%} \hlkwd{c}\hlstd{(}\hlstr{"Mul"}\hlstd{,} \hlstr{"Alk"}\hlstd{,} \hlstr{"3Fr"}\hlstd{,} \hlstr{"Dia"}\hlstd{)]} \hlkwb{<-} \hlnum{4}
+
+\hlkwd{names}\hlstd{(d1)}
+\end{alltt}
+\begin{verbatim}
+##  [1] "id"            "CODE_POSTAL"   "COMMUNE"       "DESTINATION"  
+##  [5] "DP"            "ENTREE"        "EXTRACT"       "FINESS"       
+##  [9] "GRAVITE"       "MODE_ENTREE"   "MODE_SORTIE"   "MOTIF"        
+## [13] "NAISSANCE"     "ORIENTATION"   "PROVENANCE"    "SEXE"         
+## [17] "SORTIE"        "TRANSPORT"     "TRANSPORT_PEC" "AGE"          
+## [21] "secteur"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
 
 %======================================================== PARTIE 1
@@ -177,6 +238,7 @@ Bartier \& Madame Christine Hecker}}
 \newpage
 
 \chapter{Historique}
+%\input{historique.Rnw}
 
 % historique.Rnw
 
@@ -187,6 +249,7 @@ Le Réseau des Urgences en Alsace a été créé en août 2008 sous forme d'une 
 
 \newpage
 \chapter{Organisation géographique}
+% \input{geographie.Rnw}
 
 % geographie.Rnw
 
@@ -426,9 +489,20 @@ Territoire & ZProximité & Etablissement & FINESS J & Site & FINESS G & SU & SU 
 \begin{figure}[ht]
  \centering
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/carte_sau_2} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: impossible d'ouvrir le fichier compressé '../als\_ts.Rda', cause probable : 'Aucun fichier ou dossier de ce type'}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}\end{kframe}
+\includegraphics[width=\maxwidth]{figure/carte_sau_2} 
+\begin{kframe}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: impossible d'ouvrir le fichier '../Fichiers source/Hopitaux2lambert/hopitaux\_alsace.csv' : Aucun fichier ou dossier de ce type}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'h' introuvable}}\end{kframe}
 \end{knitrout}
 
  \caption[Services d'urgenced'Alsace]{L'Alsace compte 14 services d'urgence labellisés sur 15 sites.}
@@ -489,7 +563,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 \fbox{Voir SAU2013}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:37 2013
+% Sat Dec 21 11:32:13 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -525,7 +599,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:37 2013
+% Sat Dec 21 11:32:13 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -787,6 +861,7 @@ L'orientation précise le devenir ou les circonstances associées. Cette rubriqu
 
 
 
+
 %========================================================== PARTIE 2
 \part{Activité des services d'urgence d'Alsace}
 
@@ -851,7 +926,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 \subsection*{En valeur absolue}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:42 2013
+% Sat Dec 21 11:32:18 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -928,7 +1003,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 16.04\%.
 \subsection*{Activité par semaine}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:44 2013
+% Sat Dec 21 11:32:20 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -989,7 +1064,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 16.04\%.
 \label{act_sem}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:45 2013
+% Sat Dec 21 11:32:20 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
@@ -1038,6 +1113,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 16.04\%.
 
   
 
+
 \section{Passages aux urgences}
 
 % test2.Rnw
@@ -1048,21 +1124,10 @@ Ce phénomène cyclique se répète tous les jours selon un profil immuable. La 
 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
-% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:48 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrrrrrr}
-  \hline
- & n & Min & Q25 & Moyenne & E-type & Médiane & Q75 & Max \\ 
-  \hline
- & 301767.00 & 0.00 & 10.00 & 13.90 & 5.60 & 14.00 & 18.00 & 23.00 \\ 
-   \hline
-\end{tabular}
-\caption[horaires de passage]{Résumé des horaires de passage aux urgences} 
-\label{tab:24}
-\end{table}
+\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: impossible de trouver la fonction "{}xsummary"{}}}\end{kframe}
 
 
 % \input{../blah.gen}
@@ -1143,7 +1208,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % tranche-age.Rnw
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:52 2013
+% Sat Dec 21 11:32:28 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1179,7 +1244,7 @@ Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{rec
 
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:52 2013
+% Sat Dec 21 11:32:28 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -1249,7 +1314,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:53 2013
+% Sat Dec 21 11:32:29 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1279,7 +1344,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:34:53 2013
+% Sat Dec 21 11:32:29 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1952,7 +2017,11 @@ Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour to
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: impossible d'ouvrir le fichier '../mes\_fonctions.R' : Aucun fichier ou dossier de ce type}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}\begin{verbatim}
 ## [1] "Pneumonies et AGE"
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       0      62      77      71      85      98
@@ -2036,7 +2105,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:03 2013
+% Sat Dec 21 11:32:39 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2054,7 +2123,7 @@ J450 & 108 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:03 2013
+% Sat Dec 21 11:32:39 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2082,7 +2151,7 @@ On note \np{1204} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:03 2013
+% Sat Dec 21 11:32:39 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2150,7 +2219,7 @@ On note \np{1204} cas d'asthme en 2013.
 La population des patients consultant pour une crise d'astme est jeune (voir table \ref{tab:age_asthme} page \pageref{tab:age_asthme}).
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:03 2013
+% Sat Dec 21 11:32:39 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -2164,7 +2233,7 @@ La population des patients consultant pour une crise d'astme est jeune (voir tab
 \label{tab:age_asthme}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:03 2013
+% Sat Dec 21 11:32:39 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -2517,7 +2586,7 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:05 2013
+% Sat Dec 21 11:32:42 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
@@ -2542,7 +2611,7 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:05 2013
+% Sat Dec 21 11:32:42 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -2631,7 +2700,7 @@ On notera que le retour à domicile proprement dit ne figure pas parmi les items
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:06 2013
+% Sat Dec 21 11:32:42 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2651,7 +2720,7 @@ DOM & 78.81 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:06 2013
+% Sat Dec 21 11:32:42 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2763,21 +2832,9 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
-% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:07 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrrrrrr}
-  \hline
- & n & Min & Q25 & Moyenne & E-type & Médiane & Q75 & Max \\ 
-  \hline
- & 333.00 & 642.00 & 854.00 & 906.20 & 91.90 & 906.00 & 968.00 & 1162.00 \\ 
-   \hline
-\end{tabular}
-\caption[Passages totaux]{Passages totaux} 
-\label{tab:pt}
-\end{table}
+\begin{kframe}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}xsummary"{}}}\end{kframe}
 \includegraphics[width=\maxwidth]{figure/passages_totaux2} 
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux3} 
@@ -2796,21 +2853,10 @@ Les variation du retour journalier à domicile sont calculés de la manière sui
   \item[dénominateur] somme quotidienne des ENTREE (correspond à q)
 \end{description}
 
-% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:08 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrrrrrr}
-  \hline
- & n & Min & Q25 & Moyenne & E-type & Médiane & Q75 & Max \\ 
-  \hline
- & 333.00 & 0.60 & 0.60 & 0.60 & 0.00 & 0.60 & 0.70 & 0.80 \\ 
-   \hline
-\end{tabular}
-\caption[Retour à domicile]{Retours à domicile - patients n'ayant été ni hospitalisés, ni transférés dans un autre établissement. Ce taux est plus faible en début d'année, lorsque les épisodes de tension sont plus fréquents.} 
-\label{tab:rd}
-\end{table}
+\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}xsummary"{}}}\end{kframe}
 \includegraphics[width=\maxwidth]{figure/retour_dom} 
 
 
@@ -2823,23 +2869,10 @@ On refait le calcul de q en tenant compte des non réponses:
 
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) est une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
-% latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:09 2013
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrrrrrr}
-  \hline
- & n & Min & Q25 & Moyenne & E-type & Médiane & Q75 & Max \\ 
-  \hline
- & 333.00 & 0.20 & 0.20 & 0.20 & 0.00 & 0.30 & 0.30 & 0.30 \\ 
-   \hline
-\end{tabular}
-\caption[Hospitalisations]{Hospitalisations (ou transferts) sans les non réponses} 
-\label{tab:hosp}
-\end{table}
-   n Min Q25 Moyenne E-type Médiane Q75 Max
- 333 0.2 0.2     0.2      0     0.3 0.3 0.3
+\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}xsummary"{}}}\end{kframe}
 \includegraphics[width=\maxwidth]{figure/hospit} 
 
 
@@ -2863,7 +2896,7 @@ Le taux de réponse pour cet item est de
 % Su_Wissembourg.Rnw
 
 \index{SU Wissembourg}
-\index{CH de Wissembourg@SU}
+\index{CH de Wissembourg!SU}
 
 
 
@@ -2925,7 +2958,7 @@ CCMU 4 \& 5 & \np{162} (1.395 \%) \tabularnewline
 % Su_Haguenau
 
 \index{SU Hagenau}
-\index{CH de Haguenau@SU}
+\index{CH de Haguenau!SU}
 
 
 
@@ -2987,7 +3020,7 @@ CCMU 4 \& 5 & \np{517} (1.624 \%) \tabularnewline
 % Su_Saverne.Rnw
 
 \index{SU Saverne}
-\index{CH de Saverne@SU}
+\index{CH de Saverne!SU}
 
 
 
@@ -3053,13 +3086,68 @@ CCMU 4 \& 5 & \np{52} (0.524 \%) \tabularnewline
 \index{Ste Odile!SU}
 
 
+
+
+% \pm dessine le symboe plus ou moins
+% a["age_min"] donne une date que R n'arrive pas à utiliser. On utilise a[1,2] à la place
+
+\begin{tabular}{|l|c|}
+\hline 
+\multicolumn{2}{|c|}{SU Sainte Odile}\tabularnewline
+\hline 
+\hline 
+RPU déclarés & \np{23747} \tabularnewline
+\hline 
+Date de début & 2013-01-01 00:09:00 \tabularnewline
+\hline 
+Date de fin & 2013-11-30 23:22:00 \tabularnewline
+\hline 
+Age moyen & 34.3 ans \pm $NA$ \tabularnewline
+\hline 
+RPU pédiatriques & \np{6843} (28.82 \%) \tabularnewline
+\hline 
+RPU gériatriques & \np{1217} (5.12 \%) \tabularnewline
+\hline 
+Durée de passage moyenne & 95 minutes\tabularnewline
+\hline 
+Durée de passage médiane & 76 minutes\tabularnewline
+\hline 
+Passages de moins de 4 heures & \np{23080} (97 \%) \tabularnewline
+\hline 
+Durée de passage si hospitalisation & 105 minutes\tabularnewline
+\hline 
+Durée de passage si retour à domicile & 94.6 minutes\tabularnewline
+\hline 
+Passages en soirée & 17.99 \% \tabularnewline
+\hline 
+Passages en nuit profonde & 5.63 \% \tabularnewline
+\hline 
+Passages le week-end & \np{8432} (35.51 \%) \tabularnewline
+\hline 
+
+CCMU 1 & \np{1004} (4.23 \%) \tabularnewline
+\hline
+CCMU 4 \& 5 & \np{7} (0.029 \%) \tabularnewline
+\hline
+
+\end{tabular}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graphe_odi} 
+
+\end{knitrout}
+
+
+
 \chapter{SU des Hôpitaux universitaires}
 
 % SuHus.Rnw
 % Activité des SU des HUS
 
 \index{SU des HUS}
-\index{HUS@SU}
+\index{HUS!SU}
+\index{Hôpitaux Universitaires de Strasbourg!SU}
 
 Les Hôpitaux universitaires de Strasbourg ont une offre étendue en matière d'urgences et seuleument certaines activités génèrent des RPU.
 On compte:
@@ -3093,7 +3181,7 @@ Entre le 2013-01-01 00:11:00 et le 2013-11-30 23:57:00, \np{33907} RPU ont été
 
 % steAnne.Rnw
 \index{SU Sainte Anne}
-\index{Sainte Anne@SU }
+\index{Sainte Anne!SU }
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -3117,7 +3205,7 @@ Entre le 2013-01-01 00:11:00 et le 2013-11-30 23:57:00, \np{33907} RPU ont été
 Le SU Sainte Anne a reçu en 2013 un total de \np{12139} consultants, soit en moyenne 40 par jour.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Tue Dec 17 18:35:13 2013
+% Sat Dec 21 11:32:50 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3247,7 +3335,7 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 % SU_Selestat.Rnw
 \index{SU Sélestat}
-\index{Sélestat@SU}
+\index{Sélestat!SU}
 
 
 
@@ -3368,7 +3456,7 @@ CCMU 4 \& 5 & \np{698} (1.173 \%) \tabularnewline
 % SU_Guebwiller.Rnw
 
 \index{SU Guebwiller}
-\index{Guebwiller@SU}
+\index{Guebwiller!SU}
 
 
 
@@ -3432,7 +3520,7 @@ CCMU 4 \& 5 & \np{18} (0.129 \%) \tabularnewline
 % SU_Altkirch.Rnw
 
 \index{SU Altkirch}
-\index{Altkirch@SU}
+\index{Altkirch!SU}
 
 
 
@@ -3498,7 +3586,12 @@ CCMU 4 \& 5 & \np{0} (0 \%) \tabularnewline
 \index{SU CH Mulhouse}
 \index{CH Mulhouse@SU}
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}\end{kframe}
+\end{knitrout}
 
 
 % \pm dessine le symboe plus ou moins
@@ -3558,7 +3651,7 @@ CCMU 4 \& 5 & \np{1422} (2.789 \%) \tabularnewline
 % SU_Fonderie.Rnw
 
 \index{SU Diaconnat-Fonderie}
-\index{Diaconnat-Fonderie@SU}
+\index{Diaconnat-Fonderie!SU}
 
 
 
@@ -3620,7 +3713,7 @@ CCMU 4 \& 5 & \np{17} (0.063 \%) \tabularnewline
 % SU_3Frontiere.Rnw
 
 \index{SU des trois frontières}
-\index{Clinique des trois frontières@SU}
+\index{Clinique des trois frontières!SU}
 
 
 
@@ -3875,5 +3968,6 @@ Le logiciel R est interfacé avec le traitement de texte Latex par l'intermédia
 \newpage
 \chapter{Index}
 \printindex
+
 
 \end{document}

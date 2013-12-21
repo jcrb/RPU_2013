@@ -4,7 +4,7 @@
 
 <<recap_col,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Col"
 

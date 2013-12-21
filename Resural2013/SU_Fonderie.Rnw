@@ -1,11 +1,11 @@
 % SU_Fonderie.Rnw
 
 \index{SU Diaconnat-Fonderie}
-\index{Diaconnat-Fonderie@SU}
+\index{Diaconnat-Fonderie!SU}
 
 <<recap_dia,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Dia"
 

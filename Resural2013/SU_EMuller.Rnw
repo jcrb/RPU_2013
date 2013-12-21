@@ -1,13 +1,13 @@
 % SU_EMuller.Rnw
 
 \index{SU Emile Muller}
-\index{Emile Muller@SU}
+\index{Emile Muller!SU}
 \index{SU CH Mulhouse}
-\index{CH Mulhouse@SU}
+\index{CH Mulhouse!SU}
 
 <<recap_mul,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Mul"
 

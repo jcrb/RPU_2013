@@ -1,11 +1,11 @@
 % SU_Guebwiller.Rnw
 
 \index{SU Guebwiller}
-\index{Guebwiller@SU}
+\index{Guebwiller!SU}
 
 <<recap_gueb,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Geb"
 

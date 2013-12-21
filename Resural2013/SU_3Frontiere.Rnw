@@ -1,11 +1,11 @@
 % SU_3Frontiere.Rnw
 
 \index{SU des trois frontières}
-\index{Clinique des trois frontières@SU}
+\index{Clinique des trois frontières!SU}
 
 <<recap_3fr,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "3Fr"
 

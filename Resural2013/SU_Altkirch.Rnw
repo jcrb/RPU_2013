@@ -1,11 +1,11 @@
 % SU_Altkirch.Rnw
 
 \index{SU Altkirch}
-\index{Altkirch@SU}
+\index{Altkirch!SU}
 
 <<recap_alk,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Alk"
 

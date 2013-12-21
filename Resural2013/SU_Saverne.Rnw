@@ -1,11 +1,11 @@
 % Su_Saverne.Rnw
 
 \index{SU Saverne}
-\index{CH de Saverne@SU}
+\index{CH de Saverne!SU}
 
 <<recap_sav,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Sav"
 

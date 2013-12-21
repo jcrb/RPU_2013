@@ -3,12 +3,13 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage[utf8]{inputenc}
+
 % inclu un fichier de bibliothèques
 \include{rpu_2012.sty}
 
 % la directive suivante permet d'utiliser le séparateur de milliers. 
-%Deux formulation sont utilisables mais exclusives l'une de l'autre. L'instruction "autolanguage" permet d'utiliser \nombre{} ou \np{}
-% exemple: L'ensemble des SU ont déclaré \np{\Sexpr{length(e)}} passages en 2013
+% Deux formulation sont utilisables mais exclusives l'une de l'autre. L'instruction "autolanguage" permet d'utiliser \nombre{} ou \np{}
+% exemple: L'ensemble des SU ont déclaré \np{\Sexpr{123456}} passages en 2013
 %\usepackage{numprint}
 \usepackage[autolanguage,np]{numprint}
 
@@ -58,6 +59,7 @@
 \makeglossary
 %\makeindex -s glossaire.ist RPU2013.glo -o RPU2013.glx
 
+
 % \newenvironment{leglossaire}{\begin{list}{}{%
 %   \setlength{\labelwidth}{.5\textwidth}%
 %   \setlength{\labelsep}{-.8\labelwidth}%
@@ -80,11 +82,16 @@ pop.als.2010.totale<-1115226 + 765634
 pop.als.2010.municipale<-1095905 + 749782
 @
 
+
 % Commandes
 \providecommand{\tabularnewline}{\\} % compatibilité avec Lyx
 %\newcommand{\cette_annee}{\ensuremath{\mathbb{2013\xspace}}}
 
+
+
+%====================================== DEBUT =========================================
 \begin{document}
+%\SweaveOpts{concordance=TRUE}
 
 \title{Analyse des données RPU 2013 de la région Alsace}
 \author{RESURAL\thanks{Réseau des urgences en Alsace - Equipe de coordination Dr J.C.
@@ -100,9 +107,12 @@ Bartier \& Madame Christine Hecker}}
 \newpage
 \chapter*{}
 \vfill
+
 <<session,echo=FALSE,results='asis'>>=
 toLatex(sessionInfo())
 @
+
+
 % Making a derivative work?
 % You are encouraged to leave this page entirely intact.
 \noindent $\copyright$ RESURAL 2013. This content is available under a Creative Commons Attribution-ShareAlike 3.0 Unported United States license. License details are available at the Creative Commons website: \url{http://www.creativecommons.org} \\
@@ -114,7 +124,7 @@ toLatex(sessionInfo())
 \listoftables
 \listoffigures
 
-<<setup,echo=FALSE,cache=FALSE,message=FALSE,warning=FALSE>>=
+<<setup,echo=TRUE,cache=FALSE,message=FALSE,warning=FALSE>>=
 # setwd("~/Documents/Resural/Stat Resural/RPU_2012")
 # setwd("~/rdev/RPU2012")
 library("gdata")
@@ -123,8 +133,6 @@ library("lubridate")
 library("xtable")
 library("stargazer")
 library("knitr")
-source("../../mes_fonctions.R")
-
 library("rattle")
 library("epicalc")
 library("zoo")
@@ -133,18 +141,14 @@ library("plotrix")
 library("openintro")
 library("sp")
 
-path<-"../"
+source("../Routines/mes_fonctions.R")
+
+path <- "../"
 if(!exists("d1")) {
   load(paste(path,"rpu2013d0111.Rda",sep=""))
-#   d1<-d0109
-#   rm(d0109)
 }
-# d1<-d1[d1$ENTREE < "2013-11-01",]
-
-# load("../rpu2013d0108.Rda")
-# d1<-d0108
-# rm(d0108)
 attach(d1)
+nrow(d1)
 
 # On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
 
@@ -152,17 +156,22 @@ d1$secteur[d1$FINESS %in% c("Wis","Hag","Sav")]<-1
 d1$secteur[d1$FINESS %in% c("Hus","Odi")]<-2
 d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
 d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
+
+names(d1)
 @
+
 %======================================================== PARTIE 1
 \part{Le Réseau des urgences en Alsace}
 \newpage
 
 \chapter{Historique}
+%\input{historique.Rnw}
 <<child='historique.Rnw'>>=
 @
 
 \newpage
 \chapter{Organisation géographique}
+% \input{geographie.Rnw}
 <<child='geographie.Rnw'>>=
 @
 
@@ -186,6 +195,7 @@ d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 <<child='rpu.Rnw'>>=
 @
 
+
 %========================================================== PARTIE 2
 \part{Activité des services d'urgence d'Alsace}
 
@@ -194,6 +204,7 @@ d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 \section{Nombre total de passages}
 <<child='activite_regionale.Rnw'>>=
 @
+
 \section{Passages aux urgences}
 <<child='test2.Rnw'>>=
 @
@@ -343,5 +354,6 @@ d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 \newpage
 \chapter{Index}
 \printindex
+
 
 \end{document}

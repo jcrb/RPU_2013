@@ -19,9 +19,9 @@ L'alsace est divisée en quatre secteurs sanitaires
 <<carte_secteurs_sanitaires,echo=FALSE,message=FALSE,error=FALSE>>=
 # fond de carte des territoires de santé + villes principales
  
-load("../als_ts.Rda")
+load("../Data/als_ts.Rda")
  plot(ctss)
- load("../tsvilles.Rda")
+ load("../Data/tsvilles.Rda")
  points(tsvilles[,2]*100,tsvilles[,3]*100,pch=20,col="blue")
  text(tsvilles[,2]*100,tsvilles[,3]*100,tsvilles[,1],cex=0.6,pos=4)
  for(i in 1:4){

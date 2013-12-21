@@ -1,11 +1,11 @@
 % Su_Wissembourg.Rnw
 
 \index{SU Wissembourg}
-\index{CH de Wissembourg@SU}
+\index{CH de Wissembourg!SU}
 
 <<recap_wis,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Wis"
 

@@ -1,10 +1,10 @@
 % SU_Selestat.Rnw
 \index{SU Sélestat}
-\index{Sélestat@SU}
+\index{Sélestat!SU}
 
 <<recap_sel,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Sel"
 

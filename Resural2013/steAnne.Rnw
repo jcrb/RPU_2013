@@ -1,6 +1,6 @@
 % steAnne.Rnw
 \index{SU Sainte Anne}
-\index{Sainte Anne@SU }
+\index{Sainte Anne!SU }
 
 <<setup_steAnne,echo=FALSE,cache=FALSE,message=FALSE,warning=FALSE>>=
 # path2<-"../../SU_stAnne/"

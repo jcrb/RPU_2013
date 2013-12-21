@@ -1,11 +1,11 @@
 % Su_Haguenau
 
 \index{SU Hagenau}
-\index{CH de Haguenau@SU}
+\index{CH de Haguenau!SU}
 
 <<recap_hag,echo=FALSE,warning=FALSE>>=
 
-source("../Chapitres/resume.R")
+source("../Analyse/Chapitres/resume.R")
 
 hop <- "Hag"
 

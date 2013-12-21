@@ -2,7 +2,8 @@
 % Activité des SU des HUS
 
 \index{SU des HUS}
-\index{HUS@SU}
+\index{HUS!SU}
+\index{Hôpitaux Universitaires de Strasbourg!SU}
 
 Les Hôpitaux universitaires de Strasbourg ont une offre étendue en matière d'urgences et seuleument certaines activités génèrent des RPU.
 On compte:
