@@ -27,7 +27,7 @@ Date de début & \Sexpr{a[1,2]} \tabularnewline
 \hline 
 Date de fin & \Sexpr{a[1,3]} \tabularnewline
 \hline 
-Age moyen & \Sexpr{a["age_moyen"]} ans \pm $\Sexpr{x}$ \tabularnewline
+Age moyen & \Sexpr{a["age_moyen"]} ans $\pm \Sexpr{x}$ \tabularnewline
 \hline 
 RPU pédiatriques & \np{\Sexpr{a["ped"]}} (\Sexpr{a["p_ped"]} \%) \tabularnewline
 \hline 

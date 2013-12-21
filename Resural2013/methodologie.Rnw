@@ -1,5 +1,7 @@
 % methodologie.Rnw
 
+La plupart des définitions proposées sont celles données par l'ORUMIP et l'ORUPACA.
+
 \section*{Taux de passage aux urgences}
 \index{Taux de passage aux urgences}
   \begin{displaymath}
@@ -11,7 +13,7 @@
 \begin{displaymath}
     \frac{\text{Nombre de passages d' Alsace}}{\text{Population globale d'Alsace}}
   \end{displaymath}
-Le Nombre de passages d' Alsace est la somme des passages dans les SU alsacien ET des passages de résidents alsacien dans des SU limitrophes.
+Le Nombre de passages en Alsace est la somme des passages dans les SU alsacien ET des passages de résidents alsacien dans des SU limitrophes (\footnote{pas disponible}).
 
 \section*{Taux d'intervention régional}
 \index{Taux d'intervention régional}
@@ -36,16 +38,16 @@ Une valeur supérieure à 1 indique qu'il y a plus d'hommes que de femmes.
 
 \section*{Définition de la semaine}
 \index{semaine (définition de la)}
-La semaine est définie comme la péride complémentaire du week-end. La semaine s'étend du lundi $08:00$ heures au vendredi $19:59$.
+La semaine est définie comme la période complémentaire du week-end. La semaine s'étend du lundi $08:00$ heures au vendredi $19:59$.
 
 \section*{Définition du Week-end}
 \index{week-end (définition)}
-L'offre de soins comme la fréquentation des SU n'est pas identique en coiurs de semaine et en fin de semaine. C'est pourquoi est introduite la notion temporelle de week-end.
+L'offre de soins comme la fréquentation des SU n'est pas identique en cours de semaine et en fin de semaine. C'est pourquoi est introduite la notion temporelle de week-end.
 Le week-end est défini comme la période allant du vendredi soir 20h au lundi matin 07h59.
 
 \section*{Moyenne mobile}
 \index{moyenne mobile}
-Une moyenne mobile permet de lisser une série de valeurs, permettant de gommer des fluctuations temporelles. La moyenne mobile d'odre $7$ est très utilisée pour analyser les données temporelles. Elle permet notamment d'atténuer les pics de fréquentation des SU le week-end.
+Une moyenne mobile permet de lisser une série de valeurs, permettant de gommer des fluctuations temporelles. La moyenne mobile d'ordre $7$ est très utilisée pour analyser les données temporelles. Elle permet notamment d'atténuer les pics de fréquentation des SU le week-end.
 \begin{displaymath}
     \frac{\text{somme des passages 7 jours consécutifs}}{7}
 \end{displaymath}
@@ -56,9 +58,22 @@ Le nombre de jour dans un mois est variable d'un mois à l'autre. Il en va de m�
 
 \section*{Passages pédiatriques}
 \index{passages pédiatriques}
-Passages ayant donné lieu à la création d'un RPU et dont l'ages est compris entre 0 et 18 ans inclus.
+Passages ayant donné lieu à la création d'un RPU et dont l'age est compris entre 0 et 18 ans inclus.
 
 \section*{Passages gériatriques}
 \index{passages gériatriques}
-Passages ayant donné lieu à la création d'un RPU et dont l'ages est supérieur ou égal à 75 ans.
+Passages ayant donné lieu à la création d'un RPU et dont l'age est supérieur ou égal à 75 ans.
+
+\section*{Journée}
+\index{Journée}
+La journée est définie comme la plage horaire s'étendant de 8h à 19h59.
+
+\section*{Soirée}
+\index{Soirée}
+La soirée est définie comme la plage horaire s'étendant de 20 heures à 23h59.
+
+\section*{Nuit profonde}
+\index{Nuit profonde}
+La nuit profonde est définie comme la plage horaire s'étendant de 0h à 7h59.
+
 

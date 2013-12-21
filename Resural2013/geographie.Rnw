@@ -1,8 +1,8 @@
 % geographie.Rnw
 
-L'Alsace est la plus petite région de France (n°42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chef-lieu sont respectivement Strasbourg et Colmar.La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
+L'Alsace est la plus petite région de France (n°42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chef-lieu sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
 
-La région est divisée en quatre secteurs sanitaires er douze tritoires de proximité.
+La région est divisée en quatre secteurs sanitaires et douze territoires de proximité.
 
 \section{Les secteurs sanitaires}
 \index{Alsace!secteurs sanitaires}
@@ -57,10 +57,12 @@ Il existe douze territoires de proximité:
   \item territoire 12: Saint-Louis
 \end{enumerate}
 
+Chaque territoire dispose d'un établissement de santé de référence.
+
 % carte des territoires de santé
 \begin{figure}[ht]
  \centering
- \includegraphics[height=15cm,keepaspectratio=true]{../figure/zone_proximite.png}
+ \includegraphics[height=15cm,keepaspectratio=true]{../doc/cartographie/RPU2013_Carto_Pop/figure/zone_proximite.png}
  % image.: 0x0 pixel, 0dpi, nanxnan cm, bb=
  \caption{L'Alsace compte 12 territoires de proximité}
  \label{fig:zp}
@@ -155,7 +157,7 @@ ppop75<-as.numeric(round(pop75*100/pop_als_2010_municipale,2))
 % carte des plus de 75 ans
 \begin{figure}[ht]
  \centering
- \includegraphics[height=15cm,keepaspectratio=true]{../figure/75ans.png}
+ \includegraphics[height=15cm,keepaspectratio=true]{../doc/cartographie/RPU2013_Carto_Pop/figure/75ans.png}
  % image.: 0x0 pixel, 0dpi, nanxnan cm, bb=
  \caption[Répartition des 75 ans et plus]{Les personnes de 75 ans et plus en Alsace en fonction du territoire de proximté (en pourcentage du nombre total de 75 ans et plus).}
  \label{fig:75ans}
@@ -194,9 +196,9 @@ En pratique, à la question qui prend en charge 24h sur 24 des problèmes aigus 
 
 Celle-ci se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Le SROS 2 avait introduit une distinction entre les services accueillant les urgences en fonction de leurs capacités et plateau technique. On distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser,même si elle n'a plus cours officiellement. 
 
-La clinique du Diaconat de Strasbourg,bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lequelles elle dispose d'une labellisation FESUM \footnote{Federation Européenne des Services d'Urgence de la Main}
+La clinique du Diaconat de Strasbourg (groupe des "Cliniques de Strasbourg"),bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lequelles elle dispose d'une labellisation FESUM \footnote{Federation Européenne des Services d'Urgence de la Main}. Il en est de même pour la clinique Diaconat-Roosevelt de Mulhouse (groupe "Fondation de la maison du Diaconat" )
 
-On prend également en compte la clinique Saint-Luc de Schirmeck qui fait fonctionner une policlinique recevant plus de \np{8000} passages par an. Officiellement, cet établissement de santé ne dispose pas de cette autorisation bien qu'elle en effectue la mission et est le seul établissement de proximité de la zone Molsheim-Schirmeck.
+Le réseau prend également en compte la clinique Saint-Luc de Schirmeck (groupe hospitalier Saint Vincent) qui fait fonctionner une policlinique recevant plus de \np{8000} passages par an. Officiellement, cet établissement de santé ne dispose pas d' autorisation de type SU bien qu'elle en effectue la mission et est le seul établissement de proximité de la zone Molsheim-Schirmeck.
 
 Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'est pas inclu dans les implantations de services d'urgence.
 

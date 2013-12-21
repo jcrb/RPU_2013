@@ -1,0 +1,2651 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>RPU 2013 - Cartographie &amp; Population</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>RPU 2013 - Cartographie &amp; Population</h1>
+
+<h1>Notes de cartographie</h1>
+
+<h2>références utiles</h2>
+
+<ul>
+<li>dossier stat Resural/carto&amp;pop.rmd
+
+<ul>
+<li>carto67.rda</li>
+<li>carto68.rda</li>
+<li>carto_alsace.rda</li>
+</ul></li>
+<li><a href="http://help.nceas.ucsb.edu/r:spatial">http://help.nceas.ucsb.edu/r:spatial</a> comment utiliser les ressources de R</li>
+</ul>
+
+<p>Les données cartographiques proviennent la base BD Carto de l&#39;IGN dans sa version open data
+.
+Zone | Système géodésique | Ellipsoïde associé | Projection | Unité | Résolution | Système altimétrique
+&mdash;|&mdash;|&mdash;|&mdash;|&mdash;|&mdash;|&mdash;
+France continentale | RGF93 | IAG GRS 1980 | Lambert-93 | m | cm | IGN 1969 </p>
+
+<p>doc technique: <a href="http://pro.ign.fr/sites/default/files/DC_GEOFLA_1-1.pdf">http://pro.ign.fr/sites/default/files/DC_GEOFLA_1-1.pdf</a>
+Les données en Lambert93 peuvent être converties en WGS84 et réciproquement par le logiciel Circée.</p>
+
+<p>teléchargements: <a href="http://www.ign.fr/institut/actualites/open-data-donnees-lign-disponibles-licence-etalab">http://www.ign.fr/institut/actualites/open-data-donnees-lign-disponibles-licence-etalab</a></p>
+
+<h2>Fichier ville de la base <em>pma</em></h2>
+
+<p>Fichier exporté de la base <em>pma</em> sous le nom de <em>ville.csv</em> (5/6/2013). Il contient toutes les villes connues de Sagec.</p>
+
+<pre><code class="r">file &lt;- &quot;../data/ville.csv&quot;
+v &lt;- read.csv(file, header = TRUE, sep = &quot;,&quot;)
+names(v)
+</code></pre>
+
+<pre><code>##  [1] &quot;ville_ID&quot;          &quot;ville_nom&quot;         &quot;ville_insee&quot;      
+##  [4] &quot;ville_zip&quot;         &quot;ville_lambertX&quot;    &quot;ville_lambertY&quot;   
+##  [7] &quot;departement_ID&quot;    &quot;region_ID&quot;         &quot;zone_ID&quot;          
+## [10] &quot;pays_ID&quot;           &quot;ville_longitude&quot;   &quot;ville_latitude&quot;   
+## [13] &quot;canton_ID&quot;         &quot;arrondissement_ID&quot; &quot;admin_ID&quot;         
+## [16] &quot;territoire_sante&quot;  &quot;secteur_apa_ID&quot;    &quot;secteur_Smur_ID&quot;  
+## [19] &quot;secteur_Adps_ID&quot;   &quot;secteur_Vsav_ID&quot;   &quot;zone_proximite&quot;
+</code></pre>
+
+<p>On ne retient que les villes d&#39;Alsace, c&#39;est à dire celles appartenant à la région 42. On sauvegarde le dataframe dans la variable <strong>va</strong> (924 lignes et 21 colonnes)</p>
+
+<pre><code class="r">va &lt;- v[v$region_ID == &quot;42&quot;, ]
+</code></pre>
+
+<h4>villes où la ZP est manquante:</h4>
+
+<pre><code class="r">a &lt;- va[va$zone_proximite == 0, c(1:3)]
+a
+</code></pre>
+
+<pre><code>##      ville_ID             ville_nom ville_insee
+## 145       161               Rouffac          NA
+## 151       168         Bad Krozingen          NA
+## 154       171              Breisach          NA
+## 1044     1061              AVENHEIM       67015
+## 1045     1062            BEHLENHEIM       67024
+## 1046     1063            BIRLENBACH       67042
+## 1047     1064  BISCHTROFF-SUR-SARRE       67376
+## 1049     1066           BREMMELBACH       67064
+## 1050     1067       EBERBACH-WOERTH       67114
+## 1051     1068              GIMBRETT       67157
+## 1052     1069             GRIESBACH       67170
+## 1053     1070 GRIESBACH-LE-BASTBERG       67171
+## 1054     1071         HERMERSWILLER       67193
+## 1055     1072             HOHWILLER       67211
+## 1056     1073              IMBSHEIM       67219
+## 1057     1074      KLEINFRANKENHEIM       67243
+## 1058     1075            KUHLENDORF       67251
+## 1059     1076         LEITERSWILLER       67262
+## 1060     1077             MATTSTALL       67284
+## 1061     1078            MITSCHDORF       67294
+</code></pre>
+
+<h4>mise en forme:</h4>
+
+<ul>
+<li>on élimine les communes sans territoire de proximité (anciennes communes)</li>
+<li><em>zone_proximite</em> est transformé en facteur</li>
+<li><em>territoire_sante</em> est transformé en facteur</li>
+</ul>
+
+<pre><code class="r">va &lt;- va[va$zone_proximite &gt; 0, ]
+va$zone_proximite &lt;- as.factor(va$zone_proximite)
+va$territoire_sante &lt;- as.factor(va$territoire_sante)
+</code></pre>
+
+<h4>Sauvegarde: (&ldquo;/home/jcb/Documents/Resural/Stat Resural/RPU2013/villes.RData&rdquo;)</h4>
+
+<pre><code class="r">save(va, file = &quot;villes.RData&quot;)
+</code></pre>
+
+<p>load(&ldquo;villes.RData&rdquo;)</p>
+
+<p>notes:</p>
+
+<ul>
+<li>certaines communes ont fusionné avec d&#39;autres. Liste des anciennes communes du bas-rhin: <a href="https://fr.wikipedia.org/wiki/Liste_des_anciennes_communes_du_Bas-Rhin">https://fr.wikipedia.org/wiki/Liste_des_anciennes_communes_du_Bas-Rhin</a></li>
+<li>l67 comte 527 communes. Voir: <a href="http://fr.wikipedia.org/wiki/Liste_des_communes_du_Bas-Rhin">http://fr.wikipedia.org/wiki/Liste_des_communes_du_Bas-Rhin</a> (liste des communes, code postal, code insee, arrondissement, canton et communauté dé de commune)</li>
+<li>le 68 compte 377 communes. Voir: <a href="http://fr.wikipedia.org/wiki/Liste_des_communes_du_Haut-Rhin">http://fr.wikipedia.org/wiki/Liste_des_communes_du_Haut-Rhin</a></li>
+<li>l&#39;Alsace compte 527 + 377 = 904 communes</li>
+<li><em>Hoffe*n est une commune française, située dans le département du Bas-Rhin et la région Alsace. La commune a fusionné avec les villages de *Hermerswiller</em> et de <em>Leiterswiller</em> le 1er janvier 1975.</li>
+<li>Depuis le 1er mai 1972, <em>Schnersheim</em> regroupe les communes associées d&#39;<em>Avenheim</em> et de <em>Kleinfrankenheim</em>.</li>
+<li><em>Truchtersheim</em>: Depuis le 15 juillet 1974, la commune est fusionnée avec l&#39;ancienne commune de <em>Behlenheim</em>.</li>
+</ul>
+
+<p>Résultats:</p>
+
+<pre><code class="r">summary(va$zone_proximite)
+</code></pre>
+
+<pre><code>##   1   2   3   4   5   6   7   8   9  10  11  12 
+## 111  94  45  96  64  34 104  42 158  54  50  52
+</code></pre>
+
+<h2>Combinaisons des fichiers</h2>
+
+<p>On forme un fichier commun avec</p>
+
+<ul>
+<li>pop67: fichier INSEE de 2010</li>
+<li>pop68: fichier INSEE de 2010</li>
+<li>va
+de façon a avoir dans une même base les zones de proximité (va) et les populations correspondantes:</li>
+<li>base1: merging de <em>va</em> et de <em>pop67</em></li>
+<li>base2: merging de <em>va</em> et de <em>pop68</em>
+base1 et base2 sont fusionné en un seul fichier <em>base</em>, puis supprimés.</li>
+</ul>
+
+<pre><code class="r">load(&quot;~/Documents/Resural/Stat Resural/carto&amp;pop/pop68.rda&quot;)
+</code></pre>
+
+<pre><code>## Warning: impossible d&#39;ouvrir le fichier compressé
+## &#39;/home/jcb/Documents/Resural/Stat Resural/carto&amp;pop/pop68.rda&#39;, cause
+## probable : &#39;Aucun fichier ou dossier de ce type&#39;
+</code></pre>
+
+<pre><code>## Error: impossible d&#39;ouvrir la connexion
+</code></pre>
+
+<pre><code class="r">load(&quot;~/Documents/Resural/Stat Resural/carto&amp;pop/pop67.rda&quot;)
+</code></pre>
+
+<pre><code>## Warning: impossible d&#39;ouvrir le fichier compressé
+## &#39;/home/jcb/Documents/Resural/Stat Resural/carto&amp;pop/pop67.rda&#39;, cause
+## probable : &#39;Aucun fichier ou dossier de ce type&#39;
+</code></pre>
+
+<pre><code>## Error: impossible d&#39;ouvrir la connexion
+</code></pre>
+
+<pre><code class="r">base1 &lt;- merge(va, pop67, by.x = &quot;ville_insee&quot;, by.y = &quot;insee&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;pop67&#39; introuvable
+</code></pre>
+
+<pre><code class="r">base2 &lt;- merge(va, pop68, by.x = &quot;ville_insee&quot;, by.y = &quot;insee&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;pop68&#39; introuvable
+</code></pre>
+
+<pre><code class="r">base &lt;- rbind(base1, base2)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">names(base)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">rm(base1, base2)
+</code></pre>
+
+<pre><code>## Warning: objet &#39;base1&#39; introuvable
+## Warning: objet &#39;base2&#39; introuvable
+</code></pre>
+
+<p>Note: le résultat pourrait être simplifié car des colonnes sont redondantes;</p>
+
+<p>Communes où la zone de proximité est manquante:</p>
+
+<pre><code class="r">a &lt;- base[base$zone_proximite == 0, c(1, 3)]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a
+</code></pre>
+
+<pre><code>##      ville_ID             ville_nom ville_insee
+## 145       161               Rouffac          NA
+## 151       168         Bad Krozingen          NA
+## 154       171              Breisach          NA
+## 1044     1061              AVENHEIM       67015
+## 1045     1062            BEHLENHEIM       67024
+## 1046     1063            BIRLENBACH       67042
+## 1047     1064  BISCHTROFF-SUR-SARRE       67376
+## 1049     1066           BREMMELBACH       67064
+## 1050     1067       EBERBACH-WOERTH       67114
+## 1051     1068              GIMBRETT       67157
+## 1052     1069             GRIESBACH       67170
+## 1053     1070 GRIESBACH-LE-BASTBERG       67171
+## 1054     1071         HERMERSWILLER       67193
+## 1055     1072             HOHWILLER       67211
+## 1056     1073              IMBSHEIM       67219
+## 1057     1074      KLEINFRANKENHEIM       67243
+## 1058     1075            KUHLENDORF       67251
+## 1059     1076         LEITERSWILLER       67262
+## 1060     1077             MATTSTALL       67284
+## 1061     1078            MITSCHDORF       67294
+</code></pre>
+
+<p>corrections:</p>
+
+<pre><code class="r">base$zone_proximite[53] &lt;- 3
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">base$territoire_sante[53] &lt;- 1
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+base$zone_proximite[572] &lt;- 1
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">base$territoire_sante[572] &lt;- 4
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+base$zone_proximite[57] &lt;- 3
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<h4>Sauvegarde de <em>base</em>:</h4>
+
+<pre><code class="r">save(base, file = &quot;base.Rda&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<p>load(&ldquo;base.Rda&rdquo;)</p>
+
+<h4>Définitions INSEE</h4>
+
+<p>La *populatio*n d&#39;une commune comprend :</p>
+
+<ul>
+<li>la population des résidences principales ;</li>
+<li>la population des communautés de la commune ;</li>
+<li>les personnes sans abri ou vivant dans des habitations mobiles</li>
+</ul>
+
+<p>Le concept de <em>population totale</em> est défini par le décret n°2003-485 publié au Journal officiel du 8 juin 2003, relatif au recensement de la population.</p>
+
+<p>La population totale d&#39;une commune est égale à la somme de la population municipale et de la population comptée à part de la commune.</p>
+
+<p>La population totale d&#39;un ensemble de communes est égale à la somme des populations totales des communes qui le composent.</p>
+
+<p>La population totale est une population légale à laquelle de très nombreux textes législatifs ou réglementaires font référence. A la différence de la population municipale, elle n&#39;a pas d&#39;utilisation statistique car elle comprend des doubles comptes dès lors que l&#39;on s&#39;intéresse à un ensemble de plusieurs communes.</p>
+
+<p>Le concept de <em>population municipale</em> est défini par le décret n°2003-485 publié au Journal officiel du 8 juin 2003, relatif au recensement de la population.
+La population municipale comprend les personnes ayant leur résidence habituelle (au sens du décret) sur le territoire de la commune, dans un logement ou une communauté, les personnes détenues dans les établissements pénitentiaires de la commune, les personnes sans-abri recensées sur le territoire de la commune et les personnes résidant habituellement dans une habitation mobile recensée sur le territoire de la commune.
+La population municipale d&#39;un ensemble de communes est égale à la somme des populations municipales des communes qui le composent.</p>
+
+<p>Le concept de <em>population municipale correspond désormais à la notion de population utilisée usuellement en statistique</em>. En effet, elle ne comporte pas de doubles comptes : chaque personne vivant en France est comptée une fois et une seule. En 1999, c&#39;était le concept de population sans doubles comptes qui correspondait à la notion de population statistique.</p>
+
+<p>source: <a href="http://www.insee.fr/fr/methodes/default.asp?page=definitions/population-municipale-rrp.htm">http://www.insee.fr/fr/methodes/default.asp?page=definitions/population-municipale-rrp.htm</a></p>
+
+<p>Le concept de <em>population comptée à part</em> est défini par le décret n°2003-485 publié au Journal officiel du 8 juin 2003, relatif au recensement de la population.
+La population comptée à part comprend certaines personnes dont la résidence habituelle (au sens du décret) est dans une autre commune mais qui ont conservé une résidence sur le territoire de la commune :
+1. Les mineurs dont la résidence familiale est dans une autre commune mais qui résident, du fait de leurs études, dans la commune.
+2. Les personnes ayant une résidence familiale sur le territoire de la commune et résidant dans une communauté d&#39;une autre commune, dès lors que la communauté relève de l&#39;une des catégories suivantes :</p>
+
+<ul>
+<li>services de moyen ou de long séjour des établissements publics ou privés de santé, établissements sociaux de moyen ou de long séjour, maisons de retraite, foyers et résidences sociales ;</li>
+<li>communautés religieuses ;</li>
+<li>casernes ou établissements militaires.</li>
+<li>Les personnes majeures âgées de moins de 25 ans ayant leur résidence familiale sur le territoire de la commune et qui résident dans une autre commune pour leurs études.</li>
+<li>Les personnes sans domicile fixe rattachées à la commune au sens de la loi du 3 janvier 1969 et non recensées dans la commune.</li>
+</ul>
+
+<p>source: <a href="http://www.insee.fr/fr/methodes/default.asp?page=definitions/popul-comptee-a-part-rrp.htm">http://www.insee.fr/fr/methodes/default.asp?page=definitions/popul-comptee-a-part-rrp.htm</a></p>
+
+<h4>population de la région:</h4>
+
+<pre><code class="r">n &lt;- sum(base$Population.totale)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">n
+</code></pre>
+
+<pre><code>## Error: objet &#39;n&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pop.tot &lt;- sum(base$Population.totale)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pop.municipale &lt;- sum(base$Population.municipale)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pop.municipale
+</code></pre>
+
+<pre><code>## Error: objet &#39;pop.municipale&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pop.a.part &lt;- sum(base$Population.comptée.à.part)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pop.a.part
+</code></pre>
+
+<pre><code>## Error: objet &#39;pop.a.part&#39; introuvable
+</code></pre>
+
+<p>Pour les raisons expliquées plus haut, les calculs statistiques font référence à la population <strong>municipale</strong>.</p>
+
+<h4>Population par territoire de proximité:</h4>
+
+<p>ATTENTION: les territoires de proximité sont dans l&#39;ordre de SAGEC qui n&#39;est pas celui de l&#39;ARS</p>
+
+<pre><code class="r">territoire.prox &lt;- c(&quot;Altkirch&quot;, &quot;Colmar&quot;, &quot;Guebwiller&quot;, &quot;Haguenau&quot;, &quot;Molsheim-Schirmeck&quot;, 
+    &quot;Mulhouse&quot;, &quot;Sélestat-Obernai&quot;, &quot;Saint-Louis&quot;, &quot;Saverne&quot;, &quot;Strasbourg&quot;, 
+    &quot;Thann&quot;, &quot;Wissembourg&quot;)
+
+# no des territoires de proximité
+no_tp &lt;- c(11, 7, 8, 2, 5, 10, 6, 12, 3, 4, 9, 1)
+
+effectif &lt;- tapply(base$Population.municipale, as.factor(base$zone_proximite), 
+    sum, na.rm = TRUE)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r"># on élimine la colonne 0 qui ne contient que NA effectif&lt;-effectif[-1]
+effectif
+</code></pre>
+
+<pre><code>## Error: objet &#39;effectif&#39; introuvable
+</code></pre>
+
+<pre><code class="r">names(effectif) &lt;- territoire.prox
+</code></pre>
+
+<pre><code>## Error: objet &#39;effectif&#39; introuvable
+</code></pre>
+
+<pre><code class="r">effectif
+</code></pre>
+
+<pre><code>## Error: objet &#39;effectif&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pourcentage &lt;- round(prop.table(effectif) * 100, 2)
+</code></pre>
+
+<pre><code>## Error: objet &#39;effectif&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pourcentage
+</code></pre>
+
+<pre><code>## Error: objet &#39;pourcentage&#39; introuvable
+</code></pre>
+
+<pre><code class="r">c &lt;- cbind(no_tp, effectif, pourcentage)
+</code></pre>
+
+<pre><code>## Error: objet &#39;effectif&#39; introuvable
+</code></pre>
+
+<pre><code class="r">c
+</code></pre>
+
+<pre><code>## function (..., recursive = FALSE)  .Primitive(&quot;c&quot;)
+</code></pre>
+
+<pre><code class="r">save(c, file = &quot;data_tp.R&quot;)
+
+barplot(sort(effectif), cex.names = 0.8, xlab = &quot;&quot;, las = 2, ylab = &quot;Effectifs&quot;, 
+    main = &quot;Répartition de la population par territoire de proximité&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;effectif&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+barplot(sort(pourcentage), cex.names = 0.8, las = 2, xlab = &quot;&quot;, ylab = &quot;% de la population totale&quot;, 
+    main = &quot;Répartition de la population par territoire de proximité&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;pourcentage&#39; introuvable
+</code></pre>
+
+<p>Commentaires:</p>
+
+<ul>
+<li>le territoire  de proximité de Strasbourg est le plus important et regroupe plus du quart de la population alsacienne</li>
+<li>les territoires de santé de Wissembourg et de Thann sont les moins peuplés.</li>
+<li>les territoires de proximité de Haguenau et Colmar sont sensiblement identiques</li>
+<li>Strasbourg, Mulhouse et Colmar regrouppent 50% de la population.</li>
+</ul>
+
+<h2>Créer une zone de proximité</h2>
+
+<p>On fait la liste de tous les codes INSEE de la zone de proximité1:</p>
+
+<pre><code class="r">zip1 &lt;- base$ville_insee[base$zone_proximite == 1]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">head(zip1)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip1&#39; introuvable
+</code></pre>
+
+<p>Puis on fait la liste des villes correspondant à ces codes:</p>
+
+<pre><code class="r">b &lt;- paste(zip1, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- base$ville_nom[base$ville_insee %in% b]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a[1:5]
+</code></pre>
+
+<pre><code>## Error: undefined columns selected
+</code></pre>
+
+<h2>essai de carto associée:</h2>
+
+<p>La méthode dessine tous les polygones présents qui répondent à un critère de sélection. On utilise le fichier <em>carto_alsace.rda</em> qui produit un objet <em>SpatialPolygonsDataFrame</em> appelé <em>als</em>.</p>
+
+<pre><code class="r">library(&quot;maptools&quot;)
+</code></pre>
+
+<pre><code>## Loading required package: foreign
+## Loading required package: sp
+## Loading required package: grid
+## Loading required package: lattice
+## Checking rgeos availability: FALSE
+##      Note: when rgeos is not available, polygon geometry     computations in maptools depend on gpclib,
+##      which has a restricted licence. It is disabled by default;
+##      to enable gpclib, type gpclibPermit()
+</code></pre>
+
+<pre><code class="r">load(&quot;/home/jcb/Documents/Resural/Stat Resural/carto&amp;pop/carto_alsace.rda&quot;)
+</code></pre>
+
+<pre><code>## Warning: impossible d&#39;ouvrir le fichier compressé
+## &#39;/home/jcb/Documents/Resural/Stat Resural/carto&amp;pop/carto_alsace.rda&#39;,
+## cause probable : &#39;Aucun fichier ou dossier de ce type&#39;
+</code></pre>
+
+<pre><code>## Error: impossible d&#39;ouvrir la connexion
+</code></pre>
+
+<p>L&#39;objet <em>als</em> se compose de deux parties principales:</p>
+
+<ul>
+<li>un slot cartographique constitué de polygones élémentaires correspondant au contour des communes.</li>
+<li>un slot de data présentées sous forme d&#39;un dataframe et accessible via <em>als@data</em> et qui se compose des éléments suivants:</li>
+</ul>
+
+<pre><code class="r">names(als)
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<p>Les colonnes <em>CODE_ARR</em> et <em>CODE_CANT</em> sont numérotés de la même façon pour les deux départements ce qui induit des erreurs lors du tracé des arrondissements et des canton. Il est donc nécessaire de les renuméroter:</p>
+
+<pre><code class="r">a &lt;- paste(als@data$CODE_DEPT, als@data$CODE_ARR, sep = &quot;&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">als@data$CODE_ARR &lt;- as.factor(a)
+</code></pre>
+
+<pre><code>## Error: &#39;x&#39; must be atomic for &#39;sort.list&#39;
+## Have you called &#39;sort&#39; on a list?
+</code></pre>
+
+<pre><code class="r">als@data$CODE_CANT &lt;- as.factor(paste(als@data$CODE_DEPT, als@data$CODE_CANT, 
+    sep = &quot;&quot;))
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<p>Puis de tracer la carte en sélectionnant la zone à afficher dans la variable <em>IDs</em>. D&#39;une manière générale on peut ajouter des colonnes supplémentaires dans le dataframe de l&#39;objet spatial (a@data$ma_variable) puis de créer une carte en fonction de cette variable.</p>
+
+<pre><code class="r">contour3 &lt;- unionSpatialPolygons(als, IDs = als@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour3, col = c(&quot;springgreen3&quot;, &quot;steelblue3&quot;))
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour3&#39; introuvable
+</code></pre>
+
+<pre><code class="r">title(main = &quot;2 Départements en Alsace&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">legend(&quot;bottomleft&quot;, legend = &quot;Haut-Rhin&quot;, bty = &quot;n&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">legend(&quot;topleft&quot;, legend = &quot;Bas-Rhin&quot;, bty = &quot;n&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">
+contour &lt;- unionSpatialPolygons(als, IDs = als@data$CODE_ARR)
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<pre><code class="r">title(main = &quot;13 Arrondissements d&#39;Alsace&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">
+contour2 &lt;- unionSpatialPolygons(als, IDs = als@data$CODE_CANT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour2, main = &quot;75 Cantons d&#39;Alsace&quot;)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">main = &quot;75 Cantons d&#39;Alsace&quot;
+</code></pre>
+
+<h4>Note sur <em>unionSpatialPolygons</em></h4>
+
+<p>La fonction agrège des polygones dans un objet <em>SpatialPolygons</em>, conformément au vecteur des <em>IDs</em> qui contient la liste des polygones à agréger; les limites internes sont dissoutes par la fonction <em>gUnaryUnion</em> du package <em>rgeos</em>. Si le package <em>rgeos</em> n&#39;est pas disponible  mais que le package <em>gpclib</em> l&#39;est et que les conditions d&#39;utilisation de la license sont satisfaites, alors la méthode <em>union</em> est utilisée.</p>
+
+<p>unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=FALSE)</p>
+
+<ul>
+<li>SpP: SpatialPolygons source</li>
+<li>IDs: vecteur des polygones à inclure. Il doit être égal au nombre de slots polygons de SpRs. Ce peut être un vecteur de caractères, d&#39;integer, ou de factor (essayer table(factor(IDs)) for a sanity check). Il peut contenir des NA pour les objets qu&#39;on ne souhaite pas inclure dans l&#39;union.</li>
+</ul>
+
+<p>On obtient un <em>SpatialPolygons</em> appelé <em>contour</em> formé de 4 slots: <em>polygons</em>, <em>plotorder</em>, <em>bbox</em> et <em>proj4agrs</em>. Le slot <em>polygons</em> contient 8 polygones</p>
+
+<h4>Coloriage spécifique d&#39;une zone</h4>
+
+<p>On veut rprésenter la carte des arrondissements (objet <em>contour</em>) avec 2 couleurs pour chaque département. On utilise le <em>Spatial polygon</em> contour (cf carto_alsace ci-dessus) qui contient 13 polygones. On crée un vecteur contenant 13 couleurs: &ldquo;springgreen3&rdquo; si l&#39;arrondissement appartient au 67 et &ldquo;steelblue3&rdquo; sinon. Puis on dessinne la carte en couleur: </p>
+
+<pre><code class="r">cols &lt;- ifelse(substr(names(contour), 1, 2) == &quot;67&quot;, &quot;springgreen3&quot;, &quot;steelblue3&quot;)
+plot(contour, col = cols)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<p>Petit test pour comprendre la fonction <strong>merge</strong>:</p>
+
+<pre><code class="r">a &lt;- data.frame(id = c(1:10), name = c(&quot;annie&quot;, &quot;bruno&quot;, &quot;charles&quot;, &quot;denis&quot;, 
+    &quot;émilie&quot;, &quot;francine&quot;, &quot;gaelle&quot;, &quot;henri&quot;, &quot;isabelle&quot;, &quot;joseph&quot;))
+b &lt;- data.frame(id = c(1:4), notes = c(10, 15, 14, 13))
+a
+</code></pre>
+
+<pre><code>##    id     name
+## 1   1    annie
+## 2   2    bruno
+## 3   3  charles
+## 4   4    denis
+## 5   5   émilie
+## 6   6 francine
+## 7   7   gaelle
+## 8   8    henri
+## 9   9 isabelle
+## 10 10   joseph
+</code></pre>
+
+<pre><code class="r">b
+</code></pre>
+
+<pre><code>##   id notes
+## 1  1    10
+## 2  2    15
+## 3  3    14
+## 4  4    13
+</code></pre>
+
+<pre><code class="r">merge(a, b, by.x = &quot;id&quot;, by.y = &quot;id&quot;)
+</code></pre>
+
+<pre><code>##   id    name notes
+## 1  1   annie    10
+## 2  2   bruno    15
+## 3  3 charles    14
+## 4  4   denis    13
+</code></pre>
+
+<pre><code class="r">d &lt;- merge(a, b, by.x = &quot;id&quot;, by.y = &quot;id&quot;, all.x = TRUE)
+</code></pre>
+
+<h4>Les options de plot.SpatialPolygon</h4>
+
+<pre><code class="r">plot(contour[1])
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">plot(contour[1], border = &quot;blue&quot;)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">plot(contour[1], border = &quot;blue&quot;, col = &quot;yellow&quot;)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">plot(contour[1], border = &quot;blue&quot;, col = &quot;yellow&quot;, density = 5)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">plot(contour[1], border = &quot;blue&quot;, col = &quot;yellow&quot;, density = 5, angle = 90)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">plot(contour[1], border = &quot;blue&quot;, col = &quot;yellow&quot;, density = 5, angle = 90, axes = TRUE)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">plot(contour[1], border = &quot;blue&quot;, col = &quot;yellow&quot;, density = 5, angle = 90, axes = TRUE, 
+    lty = 3)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">text(coordinates(contour), labels = row.names(contour))
+</code></pre>
+
+<pre><code>## Error: unable to find an inherited method for function &#39;coordinates&#39; for
+## signature &#39;&quot;function&quot;&#39;
+</code></pre>
+
+<pre><code class="r">plot(contour[1], border = &quot;blue&quot;, col = &quot;yellow&quot;, density = 5, angle = 90, axes = TRUE, 
+    lty = 3)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<pre><code class="r">text(coordinates(contour[1]), labels = &quot;Haguenau&quot;)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;obj&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;coordinates&#39; : Erreur dans contour[1] : objet de type &#39;closure&#39; non indiçable
+</code></pre>
+
+<h4>la méthode <em>coordinates</em> de SpatialPolygon</h4>
+
+<p>Retourne les coordonnées du barycentre du polygone. Pour l&#39;illuster on forme le vecteur des chef-lieu des arrondissement d&#39;Alsace dans l&#39;ordre définit par R.</p>
+
+<pre><code class="r">a &lt;- coordinates(contour)
+</code></pre>
+
+<pre><code>## Error: unable to find an inherited method for function &#39;coordinates&#39; for
+## signature &#39;&quot;function&quot;&#39;
+</code></pre>
+
+<pre><code class="r">a
+</code></pre>
+
+<pre><code>##    id     name
+## 1   1    annie
+## 2   2    bruno
+## 3   3  charles
+## 4   4    denis
+## 5   5   émilie
+## 6   6 francine
+## 7   7   gaelle
+## 8   8    henri
+## 9   9 isabelle
+## 10 10   joseph
+</code></pre>
+
+<pre><code class="r">arrondissements &lt;- c(&quot;Haguenau&quot;, &quot;Molsheim&quot;, &quot;Saverne&quot;, &quot;Sélestat&quot;, &quot;Strasbourg-campagne&quot;, 
+    &quot;Wissembourg&quot;, &quot;Strasbourg&quot;, &quot;Altkirch&quot;, &quot;Colmar&quot;, &quot;Guegwiller&quot;, &quot;Mulhouse&quot;, 
+    &quot;Ribeauvillé&quot;, &quot;Thann&quot;)
+a &lt;- cbind(a, arrondissements)
+</code></pre>
+
+<pre><code>## Error: arguments imply differing number of rows: 10, 13
+</code></pre>
+
+<pre><code class="r">a
+</code></pre>
+
+<pre><code>##    id     name
+## 1   1    annie
+## 2   2    bruno
+## 3   3  charles
+## 4   4    denis
+## 5   5   émilie
+## 6   6 francine
+## 7   7   gaelle
+## 8   8    henri
+## 9   9 isabelle
+## 10 10   joseph
+</code></pre>
+
+<pre><code class="r">plot(contour, border = &quot;blue&quot;, col = &quot;wheat&quot;, axes = TRUE, lty = 1)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<pre><code class="r">text(coordinates(contour), labels = arrondissements, cex = 0.6)
+</code></pre>
+
+<pre><code>## Error: unable to find an inherited method for function &#39;coordinates&#39; for
+## signature &#39;&quot;function&quot;&#39;
+</code></pre>
+
+<pre><code class="r">legend(&quot;topleft&quot;, legend = &quot;Les arrondissements d&#39;Alsace&quot;, bty = &quot;n&quot;, adj = -0.5)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<p>a&lt;-coordinates(contour)</p>
+
+<h2>Contour de la zone de proximié n°1</h2>
+
+<p>(code INSEE stockés dans b) dans la région Alsace</p>
+
+<pre><code class="r">library(&quot;maptools&quot;)
+b &lt;- paste(zip1, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- base$ville_nom[base$ville_insee %in% b]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">contour &lt;- unionSpatialPolygons(als, IDs = als@data$INSEE_COM %in% b)
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<p>Contour de la zone de proximié n°1 (seule)</p>
+
+<pre><code class="r">
+b &lt;- paste(zip1, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- base$ville_nom[base$ville_insee %in% b]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp1 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp1)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<p><em>zp1</em> est également un <em>SpatialPolygonsDataFrame</em> qui contient les mêmes éléments que l&#39;élément racine:</p>
+
+<pre><code class="r">names(zp1)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<p>On peut donc lui appliquer les mêmes fonctions. Par exemple on peut tracer une figure qui représente les contours de la zone de proximité:</p>
+
+<pre><code class="r">contour &lt;- unionSpatialPolygons(zp1, IDs = zp1@data$CODE_ARR)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour, axes = T)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<p><em>contour</em> est un <em>SpatialPolygons</em>.</p>
+
+<p>Il est possible de superposer les 2 graphiques en ajoutant add=TRUE:</p>
+
+<pre><code class="r">plot(contour, axes = T, xlab = &quot;axe x&quot;, col = &quot;red&quot;)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<pre><code class="r">plot(zp1, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<p>modifier l&#39;aspect:</p>
+
+<ul>
+<li>lty = 1 (normal), 2, 3, 4, 5&hellip; (pointillés)</li>
+<li>lwd = 1 épaisseur du trait</li>
+<li>fg = &ldquo;red&rdquo; couleur des axes</li>
+<li>bg = &ldquo;blue&rdquo; couleur de fond de l&#39;image</li>
+<li>col = &ldquo;green&rdquo; couleur de fond du polygone. col=NA or col=&ldquo;transparent&rdquo; pour un fond transparent.</li>
+<li>border = &ldquo;red&rdquo; couleur de la bordure</li>
+</ul>
+
+<p>exemple:</p>
+
+<pre><code class="r">plot(zp1, axes = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour, axes = T, lty = 1, lwd = 2, fg = &quot;blue&quot;, border = &quot;red&quot;, add = T)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<p>Certains caractères accentués posent des pb comme dans <em>préfecture</em>:</p>
+
+<pre><code class="r">summary(zp1$STATUT)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;object&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;summary&#39; : Erreur : objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<p>Avec la fonction <em>gsub</em>, on remplace les caractères anormaux par <em>e</em>:</p>
+
+<pre><code class="r">zp1$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp1$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">summary(as.factor(zp1$STATUT))
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;object&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;summary&#39; : Erreur dans is.factor(x) : objet &#39;zp1&#39; introuvable
+## Calls: as.factor -&gt; is.factor
+</code></pre>
+
+<p>Il est alorspossible de récupérer les coordonées de la sous-préfecture. Il faut d&#39;abord récupérer le dataframe associé à zp1. NB il faut multiplier les coordonnées x et y par 100 pour être cohérent avec la carte. pch = 19 désigne le symbole rond plein.</p>
+
+<pre><code class="r">a &lt;- zp1@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">head(a)
+</code></pre>
+
+<pre><code>##   id     name
+## 1  1    annie
+## 2  2    bruno
+## 3  3  charles
+## 4  4    denis
+## 5  5   émilie
+## 6  6 francine
+</code></pre>
+
+<pre><code class="r">
+sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+sp
+</code></pre>
+
+<pre><code>## [1] id   name
+## &lt;0 rows&gt; (or 0-length row.names)
+</code></pre>
+
+<pre><code class="r">
+x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+
+plot(contour)
+</code></pre>
+
+<pre><code>## Error: argument &#39;length.out&#39; must be of length 1
+</code></pre>
+
+<pre><code class="r">points(x, y, pch = 19, col = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<p>Les zones de proximités officielles sont dans le fichier zp.csv</p>
+
+<pre><code class="r"># zpo&lt;-read.csv(&#39;zp.csv&#39;,header=TRUE, sep=&#39;,&#39;)
+zpo &lt;- read.csv(&quot;~/Documents/Resural/Stat Resural/RPU2013/cartograhie/data/zp.csv&quot;, 
+    header = TRUE, sep = &quot;,&quot;)
+names(zpo)
+</code></pre>
+
+<pre><code>## [1] &quot;CODE.DEP&quot;                         &quot;CODE.COMMUNE&quot;                    
+## [3] &quot;LIBELLE.DES.COMMUNES&quot;             &quot;LIBELLE.DES.TERRITOIRES.DE.SANTE&quot;
+## [5] &quot;CODE.ZONES.DE.PROXIMITE&quot;          &quot;LIBELLE.DES.ZONES.DE.PROXIMITE&quot;
+</code></pre>
+
+<pre><code class="r">print(&quot;Nb de communes par territoire de santé&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;Nb de communes par territoire de santé&quot;
+</code></pre>
+
+<pre><code class="r">a &lt;- zpo$LIBELLE.DES.TERRITOIRES.DE.SANTE
+summary(a)
+</code></pre>
+
+<pre><code>## TERRITOIRE DE SANTE 1 TERRITOIRE DE SANTE 2 TERRITOIRE DE SANTE 3 
+##                   306                   144                   213 
+## TERRITOIRE DE SANTE 4 
+##                   241
+</code></pre>
+
+<pre><code class="r">print(&quot;Nb de communes par territoire de proximité&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;Nb de communes par territoire de proximité&quot;
+</code></pre>
+
+<pre><code class="r">a &lt;- zpo$LIBELLE.DES.ZONES.DE.PROXIMITE
+summary(a)
+</code></pre>
+
+<pre><code>##           ALTKIRCH             COLMAR         GUEBWILLER 
+##                111                 94                 42 
+##           HAGUENAU MOLSHEIM SCHIRMECK           MULHOUSE 
+##                 90                 92                 40 
+##   OBERNAI-SELESTAT        SAINT-LOUIS            SAVERNE 
+##                101                 40                162 
+##         STRASBOURG              THANN        WISSEMBOURG 
+##                 28                 50                 54
+</code></pre>
+
+<p>NB: la numérotation ARS des territoires de proximité de proximité ne correspond pas à celle de Sagec. Le code commune du fichier zpo correspond au code INSEE.</p>
+
+<h2>Utilisation du fichier <em>zpo</em> à la place du fichier <em>ville</em></h2>
+
+<p>Crée un objet <em>zone de proximité 2</em>, en dessine le contour ainsi que le chef lieu:</p>
+
+<pre><code class="r">zpo &lt;- read.csv(&quot;~/Documents/Resural/Stat Resural/RPU2013/cartograhie/data/zp.csv&quot;, 
+    header = TRUE, sep = &quot;,&quot;)
+base1 &lt;- merge(zpo, pop67, by.x = &quot;CODE.COMMUNE&quot;, by.y = &quot;insee&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;pop67&#39; introuvable
+</code></pre>
+
+<pre><code class="r">base2 &lt;- merge(zpo, pop68, by.x = &quot;CODE.COMMUNE&quot;, by.y = &quot;insee&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;pop68&#39; introuvable
+</code></pre>
+
+<pre><code class="r">base &lt;- rbind(base1, base2)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">rm(base1, base2)
+</code></pre>
+
+<pre><code>## Warning: objet &#39;base1&#39; introuvable
+## Warning: objet &#39;base2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">names(base)
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+# spécifique de la zone de proximité 2
+zip2 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 2]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip2, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp2 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp2)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour2 &lt;- unionSpatialPolygons(zp2, IDs = zp2@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour2)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">save(contour2, file = &quot;ZPHag.Rda&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;contour2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp2$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp2$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp2@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">
+# positionnement du CH Haguenau
+x &lt;- 1050806.723
+y &lt;- 6865868.72
+nom &lt;- &quot;CH Haguenau&quot;
+points(x, y, pch = 19, col = &quot;red&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">
+library(&quot;pixmap&quot;)
+</code></pre>
+
+<pre><code>## Error: there is no package called &#39;pixmap&#39;
+</code></pre>
+
+<pre><code class="r">img &lt;- &quot;../../Fichiers source/logos/hop11.pnm&quot;
+hop &lt;- read.pnm(img)
+</code></pre>
+
+<pre><code>## Error: impossible de trouver la fonction &quot;read.pnm&quot;
+</code></pre>
+
+<pre><code class="r">plot(contour2)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour2&#39; introuvable
+</code></pre>
+
+<pre><code class="r">x &lt;- 2.5
+y &lt;- 2.5
+addlogo(hop, px = c(x, x + 0.5), py = c(y, y + 0.5), asp = 1)
+</code></pre>
+
+<pre><code>## Error: impossible de trouver la fonction &quot;addlogo&quot;
+</code></pre>
+
+<pre><code class="r"># plot(hop, add = TRUE)
+
+str(hop)
+</code></pre>
+
+<pre><code>## Error: objet &#39;hop&#39; introuvable
+</code></pre>
+
+<pre><code class="r">pin &lt;- par(&quot;pin&quot;)
+pin
+</code></pre>
+
+<pre><code>## [1] 5.76 5.16
+</code></pre>
+
+<pre><code class="r">usr &lt;- par(&quot;usr&quot;)
+usr
+</code></pre>
+
+<pre><code>## [1] 0 1 0 1
+</code></pre>
+
+<pre><code class="r">
+x.asp &lt;- (hop@size[2] * (usr[2] - usr[1])/pin[1])
+</code></pre>
+
+<pre><code>## Error: objet &#39;hop&#39; introuvable
+</code></pre>
+
+<pre><code class="r">y.asp &lt;- (hop@size[1] * (usr[4] - usr[3])/pin[2])
+</code></pre>
+
+<pre><code>## Error: objet &#39;hop&#39; introuvable
+</code></pre>
+
+<pre><code class="r">x.asp
+</code></pre>
+
+<pre><code>## Error: objet &#39;x.asp&#39; introuvable
+</code></pre>
+
+<pre><code class="r">y.asp
+</code></pre>
+
+<pre><code>## Error: objet &#39;y.asp&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 3 (Saverne)</h2>
+
+<pre><code class="r">zip3 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 3]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip3, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip3&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp3 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp3)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp3&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour3 &lt;- unionSpatialPolygons(zp3, IDs = zp3@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp3&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour3)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour3&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp3$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp3$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp3&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp3@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp3&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour2, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour2&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 4</h2>
+
+<pre><code class="r">zip4 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 4]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip4, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip4&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp4 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp4)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp4&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour4 &lt;- unionSpatialPolygons(zp4, IDs = zp4@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp4&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour4)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour4&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp4$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp4$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp4&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp4@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp4&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Prefecture de region&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 3)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour4, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour4&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 1 (Wissembourg)</h2>
+
+<pre><code class="r">zip1 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 1]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip1, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp1 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp1)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour1 &lt;- unionSpatialPolygons(zp1, IDs = zp1@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour1)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp1$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp1$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp1@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour1, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour1&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 5 (Molsheim)</h2>
+
+<pre><code class="r">zip5 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 5]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip5, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip5&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp5 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp5)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp5&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour5 &lt;- unionSpatialPolygons(zp5, IDs = zp5@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp5&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour5)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour5&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp5$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp5$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp5&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp5@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp5&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour5, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour5&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 6 (Selestat)</h2>
+
+<pre><code class="r">zip6 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 6]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip6, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip6&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp6 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp6)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp6&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour6 &lt;- unionSpatialPolygons(zp6, IDs = zp6@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp6&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour6)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour6&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp6$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp6$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp6&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp6@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp6&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour6, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour6&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 7 (Colmar)</h2>
+
+<pre><code class="r">zip7 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 7]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip7, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip7&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp7 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp7)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp7&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour7 &lt;- unionSpatialPolygons(zp7, IDs = zp7@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp7&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour7)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour7&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp7$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp7$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp7&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp7@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp7&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour7, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour7&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 8 (Guebwiller)</h2>
+
+<pre><code class="r">zip8 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 8]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip8, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip8&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp8 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp8)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp8&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour8 &lt;- unionSpatialPolygons(zp8, IDs = zp8@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp8&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour8)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour8&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp8$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp8$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp8&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp8@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp8&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour8, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour8&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 9 (Thann)</h2>
+
+<pre><code class="r">zip9 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 9]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip9, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip9&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp9 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp9)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp9&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour9 &lt;- unionSpatialPolygons(zp9, IDs = zp9@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp9&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour9)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour9&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp9$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp9$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp9&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp9@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp9&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour9, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour9&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 10 (Mulhouse)</h2>
+
+<pre><code class="r">zip10 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 10]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip10, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip10&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp10 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp10)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp10&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour10 &lt;- unionSpatialPolygons(zp10, IDs = zp10@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp10&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour10)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour10&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp10$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp10$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp10&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp10@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp10&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour10, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour10&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 11 (Altkirch)</h2>
+
+<pre><code class="r">zip11 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 11]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip11, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip11&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp11 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp11)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp11&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour11 &lt;- unionSpatialPolygons(zp11, IDs = zp11@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp11&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour11)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour11&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp11$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp11$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp11&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp11@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp11&#39; introuvable
+</code></pre>
+
+<pre><code class="r">sp &lt;- a[a$STATUT == &quot;Sous-prefecture&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- sp$X_CHF_LIEU * 100
+y &lt;- sp$Y_CHF_LIEU * 100
+nom &lt;- sp$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour11, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour11&#39; introuvable
+</code></pre>
+
+<h2>Zone de proximité 12</h2>
+
+<pre><code class="r">zip12 &lt;- base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE == 12]
+</code></pre>
+
+<pre><code>## Error: objet &#39;base&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- paste(zip12, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zip12&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp12 &lt;- als[als@data$INSEE_COM %in% b, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp12)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp12&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+contour12 &lt;- unionSpatialPolygons(zp12, IDs = zp12@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp12&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(contour12)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour12&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+zp12$STATUT &lt;- gsub(&quot;\xe9&quot;, &quot;e&quot;, zp12$STATUT, fixed = F)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp12&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a &lt;- zp12@data
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp12&#39; introuvable
+</code></pre>
+
+<pre><code class="r">b &lt;- a[a$NOM_COMM == &quot;SAINT-LOUIS&quot;, ]
+</code></pre>
+
+<pre><code>## Error: $ operator is invalid for atomic vectors
+</code></pre>
+
+<pre><code class="r">x &lt;- b$X_CHF_LIEU * 100
+y &lt;- b$Y_CHF_LIEU * 100
+nom &lt;- b$NOM_COMM
+points(x, y, pch = 19, col = 1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">text(x, y, labels = nom, cex = 0.8, pos = 2)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">plot(contour12, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;contour12&#39; introuvable
+</code></pre>
+
+<h1>Analyse de la superficie</h1>
+
+<h4>superficie de l&#39;Alsace en km2:</h4>
+
+<p>surface&lt;-sum(als$SUPERFICIE)/100</p>
+
+<h4>superficie de l&#39;arrondissement 1</h4>
+
+<p>s1&lt;-als[als$CODE_ARR==&ldquo;1&rdquo;,&ldquo;SUPERFICIE&rdquo;]
+summary(s1)
+names(s1)
+sum(s1$SUPERFICIE)/100</p>
+
+<h4>Merging des fichiers <em>als</em> et <em>base</em></h4>
+
+<p>On fusionne les tables als et base sur la colonne INSEE, ce qui permet de mettre dans la même table las zones de proximite, la surface et la population.
+names(als)
+names(base)
+colonne commune <em>als$INSEE_COM</em> et <em>base$ville_insee</em>
+base_als&lt;-merge(base,als,by.x=&ldquo;ville_insee&rdquo;,by.y=&ldquo;INSEE_COM&rdquo;)
+names(base_als)
+Surface de la zone de proximité 1 (Altkirch)
+szp1&lt;-als[base_als$zone_proximite==&ldquo;1&rdquo;,&ldquo;SUPERFICIE&rdquo;]
+sum(szp1$SUPERFICIE)/100
+[1] 818.17
+Pour tous les territoires de proximité (faire une fonction et un dataframe):
+s&lt;-0;for(i in 1:12){szp&lt;-als[base_als$zone_proximite==i,&ldquo;SUPERFICIE&rdquo;];s1&lt;-sum(szp$SUPERFICIE)/100;;s&lt;-s+s1;print(paste(i,&ldquo; -&gt;&rdquo;,s1,s,sep=&ldquo; &rdquo;))}</p>
+
+<p>à transfomer en fonction:
+s&lt;-0;for(i in 1:12){szp&lt;-als[base_als$zone_proximite==i,&ldquo;SUPERFICIE&rdquo;];s[i]&lt;-sum(szp$SUPERFICIE)/100;s&lt;-s+s[i];print(paste(i,&ldquo; -&gt;&rdquo;,s[i],&ldquo;(&rdquo;,s,&ldquo;)&rdquo;,sep=&ldquo; &rdquo;))}</p>
+
+<h4>Merging des fichiers <em>als</em> et <em>zpo</em></h4>
+
+<ul>
+<li>als est le fichier shapefile des données alsace. Sa partie donnée est accessible via <em>als@data</em> par exemple  names(als@data). Les communes sont repérées par <em>INSEE_COM</em></li>
+<li><em>zpo</em> est le fichier des zones de proximité. Les communes sont repérées par <em>CODE.COMMUNE</em></li>
+<li>on fait un merging des 2 fichiers sur ces colonnes:</li>
+</ul>
+
+<pre><code class="r">zpals &lt;- merge(zpo, als, by.x = &quot;CODE.COMMUNE&quot;, by.y = &quot;INSEE_COM&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<p>en fait on obtient un simple dataframe et pas un spatialPolygon. Pour que celà fonctionne il faut merger uniquement les data:
+zpals&lt;-als
+zpals@data&lt;-merge(zpals@data,zpo,by.x=&ldquo;INSEE_COM&rdquo;,by.y=&ldquo;CODE.COMMUNE&rdquo;)
+zp&lt;-zpals[zpals$CODE.ZONES.DE.PROXIMITE==1,]</p>
+
+<p>Le merging fonctionne mais les datas ne correspondent plus au shapefile ?</p>
+
+<p>soluttion trouvée:<br/>
+Let df = data frame, sp = spatial polygon object and by = name or column number of common column. You can then merge the data frame into the sp object using the following line of code</p>
+
+<p>sp@data = data.frame(sp@data, df[match(sp@data[,by], df[,by]),])</p>
+
+<p>Here is how the code works. The match function inside aligns the columns so that order is preserved. So when we merge it with sp@data, order is correctly preserved. A quick check to see if the code has worked is to inspect the two columns corresponding to the common column and see if they are identical (the common columns get duplicated and it is easy to remove the copy, but i keep it as it is a good check):</p>
+
+<pre><code class="r">zpals &lt;- als
+</code></pre>
+
+<pre><code>## Error: objet &#39;als&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zpals@data &lt;- data.frame(zpals@data, zpo[match(zpals@data[, &quot;INSEE_COM&quot;], zpo[, 
+    &quot;CODE.COMMUNE&quot;]), ])
+</code></pre>
+
+<pre><code>## Error: objet &#39;zpals&#39; introuvable
+</code></pre>
+
+<pre><code class="r">zp &lt;- zpals[zpals$CODE.ZONES.DE.PROXIMITE == 1, ]
+</code></pre>
+
+<pre><code>## Error: objet &#39;zpals&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(zp)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;zp&#39; introuvable
+</code></pre>
+
+<p>Ca marche!!! auteur: <a href="http://stackoverflow.com/users/235349/ramnath">http://stackoverflow.com/users/235349/ramnath</a> (Ramnath Vaidyanathan is an Assistant Professor of Operations Management at the Desautels Faculty of Management, McGill University. He got his PhD from the Wharton School and worked at McKinsey &amp; Co prior to that. )</p>
+
+<p>Dessin  du contour: nécessite la package <em>maptools</em><br/>
+czp = contour de la zone de proximité:</p>
+
+<pre><code class="r">library(&quot;maptools&quot;)
+czp &lt;- unionSpatialPolygons(zp, IDs = zp@data$CODE_DEPT)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zp&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(czp)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;czp&#39; introuvable
+</code></pre>
+
+<pre><code class="r">title(main = &quot;Zone de proximité de Wissembourg&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code>#### Dessin du contour de l&#39;ensemble des zones de proximité (czps)
+
+```r
+czps &lt;- unionSpatialPolygons(zpals, IDs = zpals$CODE.ZONES.DE.PROXIMITE)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zpals&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(czps)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;czps&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(czps, col = c(&quot;red&quot;, &quot;yellow&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;orange&quot;))
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;czps&#39; introuvable
+</code></pre>
+
+<pre><code class="r">title(main = &quot;Zone de proximité en Alsace&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<h4>Dessin du contour des territoires de santé (ctss)</h4>
+
+<pre><code class="r">ctss &lt;- unionSpatialPolygons(zpals, IDs = zpals$LIBELLE.DES.TERRITOIRES.DE.SANTE)
+</code></pre>
+
+<pre><code>## Error: objet &#39;zpals&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(ctss)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;ctss&#39; introuvable
+</code></pre>
+
+<pre><code class="r">title(main = &quot;Territoires de santé en Alsace&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">save(ctss, file = &quot;als_ts.Rda&quot;)
+</code></pre>
+
+<pre><code>## Error: objet &#39;ctss&#39; introuvable
+</code></pre>
+
+<h4>Dessin territoires de santé (ctss) et des zones de proximité (czps)</h4>
+
+<pre><code class="r">plot(czps)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;czps&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(ctss, border = &quot;red&quot;, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;ctss&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+plot(ctss, col = c(&quot;yellow&quot;, &quot;blue&quot;, &quot;green&quot;, &quot;orange&quot;), border = &quot;red&quot;, add = T)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;ctss&#39; introuvable
+</code></pre>
+
+<pre><code class="r">plot(czps, add = TRUE)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;czps&#39; introuvable
+</code></pre>
+
+<p>essais avec les couleurs:</p>
+
+<ul>
+<li>plot(ctss,col=heat.colors(4))</li>
+<li>plot(czps,col=heat.colors(12))</li>
+<li>plot(czps,col=terrain.colors(12))</li>
+<li>plot(czps,col=topo.colors(12))</li>
+<li>plot(czps,col=cm.colors(12))</li>
+</ul>
+
+<p>essai avec &ldquo;RColorBrewer&rdquo;</p>
+
+<pre><code class="r">library(&quot;RColorBrewer&quot;)
+wp &lt;- brewer.pal(12, &quot;Set3&quot;)
+plot(czps, col = wp)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;czps&#39; introuvable
+</code></pre>
+
+<pre><code class="r">title(main = &quot;Zone de proximité en Alsace&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<p>couleurs prop. au % de 75 ans:<br/>
+Le % des 75 ans par zone de proximité est donné par <em>pbc</em> (voir carto&amp;pop)<br/>
+pbc
+     1      2      3      4      5      6      7      8      9     10     11     12 
+ 3.425 11.743  4.161 10.036  4.785 14.772  8.449  4.212  6.863 24.431  4.071  3.051<br/>
+avec l&#39;ordre suivant:<br/>
+altk, colmar, gueb, hag, mols, mul, obernai, stlouis, saverne, stras,thann, wiss (ordre alphabétique = ordre de l&#39;ARS)<br/>
+ce qui donne par tranche de 5% arrondi
+c
+ [1] 1 3 1 3 1 3 2 1 2 5 1 1</p>
+
+<p>Or l&#39;ordre d&#39;affichage des polygones est le suivant:<br/>
+czps@plotOrder
+ [1]  6 10  9  5  8  3 11  1 12  2  7  4</p>
+
+<p>Peut-on changer l&#39;ordre d&#39;affichage ?</p>
+
+<p>c&lt;-c(3,5,2,1,1,1,1,1,1,3,2,3)</p>
+
+<p>names(czps)
+ [1] &ldquo;1&rdquo;  &ldquo;10&rdquo; &ldquo;11&rdquo; &ldquo;12&rdquo; &ldquo;2&rdquo;  &ldquo;3&rdquo;  &ldquo;4&rdquo;  &ldquo;5&rdquo;  &ldquo;6&rdquo;  &ldquo;7&rdquo;  &ldquo;8&rdquo;  &ldquo;9&rdquo; </p>
+
+<p><em>czps</em> dessine les <em>zp</em> dans l&#39;ordre suivant:  </p>
+
+<ul>
+<li>wis, mul, alt, stl, hag, sav, str, mols, obe, col, gue, tha</li>
+<li>en chiffre: 12,6,1,8,4,9,10,5,7,2,3,11
+ce qui donne le vecteur de couleur:<br/></li>
+</ul>
+
+<pre><code class="r">c &lt;- c(1, 3, 1, 1, 3, 2, 5, 1, 2, 3, 1, 1)
+palette(gray(5:0/5))
+plot(czps, col = c)
+</code></pre>
+
+<pre><code>## Error: erreur d&#39;évaluation de l&#39;argument &#39;x&#39; lors de la sélection d&#39;une méthode pour la fonction &#39;plot&#39; : Erreur : objet &#39;czps&#39; introuvable
+</code></pre>
+
+<pre><code class="r">title(main = &quot;Répartition des 75 ans et plus&quot;, xlab = &quot;Chiffres INSEE 2010&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">legend(&quot;topleft&quot;, col = gray(5:0/5), legend = c(&quot;0-5%&quot;, &quot;5-10%&quot;, &quot;10-15%&quot;, &quot;15-20%&quot;, 
+    &quot;20-25%&quot;), pch = 15, cex = 0.8, bty = &quot;n&quot;)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<pre><code class="r">mtext(&quot;© RESURAL 2013&quot;, cex = 0.6, side = 4, line = -1, adj = 0.1)
+</code></pre>
+
+<pre><code>## Error: plot.new has not been called yet
+</code></pre>
+
+<p>NB: pour déterminer l&#39;ordre de traçage, on utilise la méthode suivante:
+col&lt;-c(1,2,2,2,2,2,2,2,2,2,2,2,2)
+ plot(czps,col=col)
+ col&lt;-c(2,1,2,2,2,2,2,2,2,2,2,2,2)
+ plot(czps,col=col)
+ col&lt;-c(2,2,1,2,2,2,2,2,2,2,2,2,2)
+ plot(czps,col=col)
+ col&lt;-c(2,2,2,1,2,2,2,2,2,2,2,2,2)
+ plot(czps,col=col)
+ col&lt;-c(2,2,2,2,1,2,2,2,2,2,2,2,2)
+ plot(czps,col=col)
+ col&lt;-c(2,2,2,2,2,1,2,2,2,2,2,2,2)
+ plot(czps,col=col)
+col&lt;-c(2,2,2,2,2,2,1,2,2,2,2,2,2)
+plot(czps,col=col)
+col&lt;-c(2,2,2,2,2,2,2,1,2,2,2,2,2) 
+plot(czps,col=col)
+col&lt;-c(2,2,2,2,2,2,2,2,1,2,2,2,2)
+plot(czps,col=col)
+col&lt;-c(2,2,2,2,2,2,2,2,2,1,2,2,2)
+plot(czps,col=col)
+col&lt;-c(2,2,2,2,2,2,2,2,2,2,1,2,2)
+plot(czps,col=col)
+col&lt;-c(2,2,2,2,2,2,2,2,2,2,2,1,2)
+plot(czps,col=col)
+col&lt;-c(2,2,2,2,2,2,2,2,2,2,2,2,1)
+plot(czps,col=col)</p>
+
+<h2>Utilisation des cartes pré-enregistrées</h2>
+
+<pre><code class="r"># fond de carte des territoires de santé
+load(&quot;als_ts.Rda&quot;)
+plot(ctss)
+</code></pre>
+
+<p><img src="data:image/png;base64,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" alt="plot of chunk carto generale"/> </p>
+
+<pre><code class="r"># surimpression des SAU
+hopitaux &lt;- &quot;../../Fichiers source/Hopitaux2lambert/hopitaux_alsace.csv&quot;
+h &lt;- read.csv(hopitaux, header = TRUE, sep = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## Warning: impossible d&#39;ouvrir le fichier &#39;../../Fichiers
+## source/Hopitaux2lambert/hopitaux_alsace.csv&#39; : Aucun fichier ou dossier de
+## ce type
+</code></pre>
+
+<pre><code>## Error: impossible d&#39;ouvrir la connexion
+</code></pre>
+
+<pre><code class="r">for (i in 1:nrow(h)) {
+    points(h$lam_lon[i], h$lam_lat[i], pch = 19, col = &quot;red&quot;)
+    text(h$lam_lon[i], h$lam_lat[i], labels = h$hopital[i], cex = 0.8, pos = h$pos[i])
+}
+</code></pre>
+
+<pre><code>## Error: objet &#39;h&#39; introuvable
+</code></pre>
+
+</body>
+
+</html>
+

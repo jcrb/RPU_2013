@@ -9,6 +9,11 @@ Table des matières
 
 Notes techniques
 ================
+RStudio
+-------
+- Tools/project options/Sweave weave Rnw file using *choisir* **knitr**
+- symbole plus ou moins: $\pm \Sexpr{x}$ (ne pas oublier les parenthèses)
+
 Librairies
 ----------
 #### gdata

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>OSM et leaflet</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>OSM et leaflet</h1>
+
+<p><em>Leaflet</em> est un moteur de rendu en javascript d&#39;OSM. </p>
+
+<p>La bibliothèque est récupérale à cette adresse <em>leafletjs.com.</em> <a href="http://leafletjs.com/">http://leafletjs.com/</a><br/>
+Septembre 2013: version 0.6.4</p>
+
+<p>Le dossier avec les démos est à la racine du serveur: <em>http://localhost/html/Leaflet/test.html</em></p>
+
+<h2>Leaflet et OSM</h2>
+
+<p><a href="http://switch2osm.org/using-tiles/getting-started-with-leaflet/">http://switch2osm.org/using-tiles/getting-started-with-leaflet/</a></p>
+
+<p>Leaflet est plus facile à manipuler qu&#39;openlayers et c&#39;est un bon choix pour faire de l&#39;affichage de cartes simple.</p>
+
+<p>Le programme de demo basique est <em>test.html</em><br/>
+Remarque: on ne peut pas zoomer au max, poiurquoi ?</p>
+
+<h2>Leaflet et CloudMade</h2>
+
+<p>Il affiche des tiles fournis par le site <em>CloudMade</em> qui nécessite une inscription (gratuite). En échange de l&#39;inscription, on reçoit une clé pour afficher les cartes:</p>
+
+<ul>
+<li><a href="http://account.cloudmade.com/user">http://account.cloudmade.com/user</a></li>
+<li>pass: vendenheim</li>
+<li>API key: 11c32d61dbb14ff89322b9cab7413a8f. </li>
+</ul>
+
+<p>Leaflet fournit plusieurs démos (<a href="http://leafletjs.com/examples/quick-start.html">http://leafletjs.com/examples/quick-start.html</a>) dont l&#39;une explique comment interfacer avec un tel portable</p>
+
+<p>Démo perso sur le serveur:</p>
+
+<ul>
+<li>http://localhost/html/Leaflet/main.html</li>
+</ul>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+&lt;!-- En-tête du document  --&gt;
+
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+
+  &lt;meta name=&quot;title&quot; content=&quot;Titre de la page&quot; /&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;description de la page&quot;
+  &lt;meta name=&quot;keywords&quot; content=&quot;mots-clé1, mots-clé2, ...&quot;
+
+  &lt;!-- Indexer et suivre --&gt;
+  &lt;meta name=&quot;robots&quot; content=&quot;index,follow&quot; /&gt;
+
+ &lt;link rel=&quot;stylesheet&quot; href=&quot;http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css&quot; /&gt;
+ &lt;!--[if lte IE 8]&gt;
+     &lt;link rel=&quot;stylesheet&quot; href=&quot;http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css&quot; /&gt;
+ &lt;![endif]--&gt;
+&lt;script src=&quot;http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js&quot;&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;!-- CORPS DE LA PAGE  --&gt;
+  &lt;p&gt;Bienvenue sur ma page web&lt;/p&gt;
+  &lt;div id=&quot;map&quot; style=&quot;width: 1300px; height: 700px&quot;&gt;&lt;/div&gt;
+  &lt;script&gt;
+var APIkey=&#39;11c32d61dbb14ff89322b9cab7413a8f&#39; &lt;!-- BC9A493B41014CAABB98F0471D759707--&gt;
+
+function onClick(e) { alert(&#39;help&#39;);}
+
+&lt;!--  map.on(&#39;click&#39;, function(e) { alert(e.latlng); }); --&gt;
+
+
+var map = L.map(&#39;map&#39;).setView([48.534099,7.737703], 13);
+
+L.tileLayer(&#39;http://{s}.tile.cloudmade.com/&#39;+APIkey+&#39;/997/256/{z}/{x}/{y}.png&#39;, {
+        maxZoom: 18,
+            attribution: &#39;Map data &amp;copy; &lt;a href=&quot;http://openstreetmap.org&quot;&gt;OpenStreetMap&lt;/a&gt; contributors, &lt;a href=&quot;http://creativecommons.org/licenses/by-sa/2.0/&quot;&gt;CC-BY-SA&lt;/a&gt;, Imagery © &lt;a               href=&quot;http://cloudmade.com&quot;&gt;CloudMade&lt;/a&gt;&#39;
+        }).addTo(map);
+
+L.marker([48.534099,7.737703]).addTo(map).bindPopup(&quot;&lt;b&gt;Zone Explosion&lt;/b&gt;&lt;br /&gt;Quartier Leclerc&quot;).openPopup();
+
+
+&lt;!-- exemple d&#39;alerte --&gt;
+var popup = L.popup();
+function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent(&quot;Vous avez cliqué à  &quot; + e.latlng.toString())
+                .openOn(map);
+        }
+map.on(&#39;click&#39;, onMapClick);
+</code></pre>
+
+</body>
+
+</html>
+
