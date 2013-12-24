@@ -67,24 +67,24 @@
 \contentsline {section}{\numberline {19.1}Activit\IeC {\'e} globale}{125}{section.19.1}
 \contentsline {chapter}{\numberline {20}SU Sainte Anne}{126}{chapter.20}
 \contentsline {subsection}{\numberline {20.0.1}Taux moyen de passages}{126}{subsection.20.0.1}
-\contentsline {subsection}{\numberline {20.0.2}Taux d'hospitalisation}{129}{subsection.20.0.2}
-\contentsline {subsection}{\numberline {20.0.3}Total des passages}{130}{subsection.20.0.3}
-\contentsline {subsection}{\numberline {20.0.4}Passages de 1 \IeC {\`a} 75 ans}{132}{subsection.20.0.4}
-\contentsline {subsection}{\numberline {20.0.5}Passages des plus de 75 ans}{134}{subsection.20.0.5}
-\contentsline {chapter}{\numberline {21}Polyclinique Saint-Luc}{137}{chapter.21}
-\contentsline {chapter}{\numberline {22}SU S\IeC {\'e}lestat}{138}{chapter.22}
-\contentsline {chapter}{\numberline {23}SU Colmar}{140}{chapter.23}
-\contentsline {chapter}{\numberline {24}SU Guebwiller}{142}{chapter.24}
-\contentsline {chapter}{\numberline {25}SU Thann}{144}{chapter.25}
-\contentsline {chapter}{\numberline {26}SU Altkirch}{145}{chapter.26}
-\contentsline {chapter}{\numberline {27}SU Emile Muller}{147}{chapter.27}
-\contentsline {chapter}{\numberline {28}SU Diaconnat-Fonderie}{149}{chapter.28}
-\contentsline {chapter}{\numberline {29}SU Saint Louis}{151}{chapter.29}
-\contentsline {part}{IV\hspace {1em}Activit\IeC {\'e} des SAMU d'Alsace}{153}{part.4}
-\contentsline {part}{V\hspace {1em}Annexes}{154}{part.5}
-\contentsline {chapter}{\numberline {A}M\IeC {\'e}thodologie}{155}{appendix.A}
-\contentsline {chapter}{\numberline {B}Glossaire}{158}{appendix.B}
-\contentsline {chapter}{\numberline {C}RPU}{161}{appendix.C}
-\contentsline {chapter}{\numberline {D}A propos de ce document}{162}{appendix.D}
-\contentsline {chapter}{\numberline {E}Bibliographie}{163}{appendix.E}
-\contentsline {chapter}{\numberline {F}Index}{166}{appendix.F}
+\contentsline {subsection}{\numberline {20.0.2}Taux d'hospitalisation}{128}{subsection.20.0.2}
+\contentsline {subsection}{\numberline {20.0.3}Total des passages}{129}{subsection.20.0.3}
+\contentsline {subsection}{\numberline {20.0.4}Passages de 1 \IeC {\`a} 75 ans}{130}{subsection.20.0.4}
+\contentsline {subsection}{\numberline {20.0.5}Passages des plus de 75 ans}{130}{subsection.20.0.5}
+\contentsline {chapter}{\numberline {21}Polyclinique Saint-Luc}{131}{chapter.21}
+\contentsline {chapter}{\numberline {22}SU S\IeC {\'e}lestat}{132}{chapter.22}
+\contentsline {chapter}{\numberline {23}SU Colmar}{134}{chapter.23}
+\contentsline {chapter}{\numberline {24}SU Guebwiller}{136}{chapter.24}
+\contentsline {chapter}{\numberline {25}SU Thann}{138}{chapter.25}
+\contentsline {chapter}{\numberline {26}SU Altkirch}{139}{chapter.26}
+\contentsline {chapter}{\numberline {27}SU Emile Muller}{141}{chapter.27}
+\contentsline {chapter}{\numberline {28}SU Diaconnat-Fonderie}{143}{chapter.28}
+\contentsline {chapter}{\numberline {29}SU Saint Louis}{145}{chapter.29}
+\contentsline {part}{IV\hspace {1em}Activit\IeC {\'e} des SAMU d'Alsace}{147}{part.4}
+\contentsline {part}{V\hspace {1em}Annexes}{148}{part.5}
+\contentsline {chapter}{\numberline {A}M\IeC {\'e}thodologie}{149}{appendix.A}
+\contentsline {chapter}{\numberline {B}Glossaire}{152}{appendix.B}
+\contentsline {chapter}{\numberline {C}RPU}{155}{appendix.C}
+\contentsline {chapter}{\numberline {D}A propos de ce document}{156}{appendix.D}
+\contentsline {chapter}{\numberline {E}Bibliographie}{157}{appendix.E}
+\contentsline {chapter}{\numberline {F}Index}{160}{appendix.F}
