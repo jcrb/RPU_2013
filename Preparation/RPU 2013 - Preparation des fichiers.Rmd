@@ -54,6 +54,9 @@ host = localhost
 database = rpu 
 password = marion 
 ```
+On peut lister son contenu: jcb@XPS:~$ cat $HOME/.my.cnf
+
+
 Lecture du fichier dans RStudio
 -------------------------------
 
@@ -67,8 +70,8 @@ library("RMySQL")
 ```
 Création d'un connecteur:
 ```{r}
-# con<-dbConnect(MySQL(),group = "rpu") 
-con <- dbConnect(MySQL(),user="root", password="marion",dbname="rpu", host="localhost") 
+con<-dbConnect(MySQL(),group = "rpu") 
+# con <- dbConnect(MySQL(),user="root", password="marion",dbname="rpu", host="localhost") 
 ```
 Si échec:
 con <- dbConnect(MySQL(),user="root", password="marion",dbname="rpu", host="localhost")  
@@ -88,10 +91,12 @@ Lecture des enregistrements de la table compris entre le 1er mai et le 31 mai 20
 ac<-2013  # annee courante
 mc<-11    # mois courant
 
+ac2 <- ac
+
 ms<-mc + 1
 if (ms > 12){
   ms<-1
-  ac<-ac + 1
+  ac2<-ac + 1
 }
 
 mp<-mc - 1
@@ -114,7 +119,7 @@ if (mp < 10){
 ac<-as.character(ac)
 
 date1<-paste(ac,"-",mc,"-01",sep="")
-date2<-paste(ac,"-",ms,"-01",sep="")
+date2<-paste(ac2,"-",ms,"-01",sep="")
 
 # rs<-dbSendQuery(con,"SELECT * FROM RPU__ WHERE ENTREE BETWEEN '2013-09-01' AND '2013-10-01' ")
 rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ WHERE ENTREE BETWEEN '",date1,"' AND '",date2,"' ",sep=""))
