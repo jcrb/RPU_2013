@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Thu Dec 19 23:33:51 2013"
+## [1] "Mon Dec 23 14:05:21 2013"
 ```
 
 source: RPU2013
@@ -248,7 +248,7 @@ xtable(t(t3))
 
 ```
 ## % latex table generated in R 3.0.2 by xtable 1.7-1 package
-## % Thu Dec 19 23:33:57 2013
+## % Mon Dec 23 14:05:33 2013
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{rrr}
@@ -1696,23 +1696,11 @@ t2 <- as.integer(t)
 c <- clock24.plot(t2, clock.pos = 1:24, lwd = 3)
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk geb_arrive](figure/geb_arrive2.png) 
 
 ```r
 c <- clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk geb_arrive](figure/geb_arrive3.png) 
@@ -1723,22 +1711,12 @@ clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
     show.grid.labels = F, poly.col = fadeColor("blue", fade = "10"))
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk geb_arrive](figure/geb_arrive4.png) 
 
 ```r
 clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F, poly.col = fadeColor("blue", fade = "10"), line.col = fadeColor("blue", 
         fade = "10"))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk geb_arrive](figure/geb_arrive5.png) 
@@ -1752,12 +1730,6 @@ clock24.plot(t3, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
     show.grid.labels = F)
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk geb_sorties](figure/geb_sorties.png) 
 
 Combinaison entrée-sortie
@@ -1768,23 +1740,11 @@ clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
     show.grid.labels = F)
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk geb_es](figure/geb_es1.png) 
 
 ```r
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F, line.col = c("red", "blue"))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk geb_es](figure/geb_es2.png) 
@@ -1795,11 +1755,6 @@ fadeRed <- fadeColor("red", fade = "15")
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F, line.col = c(fadeRed, fadeBlue), poly.col = c(fadeRed, 
         fadeBlue))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk geb_es](figure/geb_es3.png) 
@@ -1903,23 +1858,11 @@ als_entree <- as.integer(t)
 c <- clock24.plot(als_entree, clock.pos = 1:24, lwd = 3, show.grid.labels = F)
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk total arrivee](figure/total_arrivee2.png) 
 
 ```r
 c <- clock24.plot(als_entree, clock.pos = 1:24, rp.type = "p", main = "Alsace", 
     xlab = "Heures d'arrivée aux urgences", show.grid.labels = F)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk total arrivee](figure/total_arrivee3.png) 
@@ -1936,15 +1879,6 @@ t4 <- rbind(prop.table(t2), prop.table(als_entree))
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "Alsace - HUS (rouge)", 
     xlab = "Heures d'arrivée aux urgences", show.grid.labels = F, line.col = c("red", 
         "blue"), radial.lim = c(0, 0.1))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 legend(0.09, -0.09, c("CH", "Alsace"), col = c("red", "blue"), lty = 1, cex = 0.8)
 ```
 
@@ -1956,11 +1890,6 @@ legend(0.09, -0.09, c("CH", "Alsace"), col = c("red", "blue"), lty = 1, cex = 0.
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "Alsace - HUS (rouge)", 
     xlab = "Heures d'arrivée aux urgences", show.grid.labels = F, line.col = c("red", 
         fadeBlue), poly.col = c(NA, fadeBlue), radial.lim = c(0, 0.1))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk als-geb](figure/als-geb2.png) 
@@ -1977,15 +1906,6 @@ t4 <- rbind(prop.table(t2), prop.table(als_entree))
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "Alsace - CH de Wissembourg", 
     xlab = "Heures d'arrivée aux urgences", show.grid.labels = F, line.col = c("red", 
         "blue"), radial.lim = c(0, 0.1))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 legend(0.09, -0.09, c("CH", "Alsace"), col = c("red", "blue"), lty = 1, cex = 0.8)
 ```
 
@@ -2003,15 +1923,6 @@ t4 <- rbind(prop.table(t2), prop.table(als_entree))
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "Alsace - CHU Strasbourg", 
     xlab = "Heures d'arrivée aux urgences", show.grid.labels = F, line.col = c("red", 
         "blue"), radial.lim = c(0, 0.1))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 legend(0.09, -0.09, c("CH", "Alsace"), col = c("red", "blue"), lty = 1, cex = 0.8)
 ```
 
@@ -2035,42 +1946,9 @@ source("./mes_fonctions.R")
 
 ```r
 passages("Hus", "HUS", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Mul", "CH Mulhouse", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Col", "CH Colmar", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Hag", "CH Haguenau", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk passages](figure/passages1.png) 
@@ -2078,44 +1956,14 @@ passages("Hag", "CH Haguenau", sens = 3)
 ```r
 
 passages("Sel", "CH Selestat", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Odi", "Clinique Ste Odile", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Dia", "Diaconnat - Fonderie", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Tan", "CH Thann", sens = 3)
 ```
 
 ```
 ## Warning: All formats failed to parse. No formats found.
 ## Warning: All formats failed to parse. No formats found.
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk passages](figure/passages2.png) 
@@ -2123,35 +1971,8 @@ passages("Tan", "CH Thann", sens = 3)
 ```r
 
 passages("3Fr", "Trois frontières", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Alk", "CH Alkirch", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 passages("Sav", "CH Saverne", sens = 3)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
-```r
 par(mfrow = c(1, 1))
 ```
 
@@ -2529,23 +2350,11 @@ t2 <- as.integer(t)
 c <- clock24.plot(t2, clock.pos = 1:24, lwd = 3)
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk Hus_arrive](figure/Hus_arrive2.png) 
 
 ```r
 c <- clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F)
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk Hus_arrive](figure/Hus_arrive3.png) 
@@ -2556,22 +2365,12 @@ clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
     show.grid.labels = F, poly.col = fadeColor("blue", fade = "10"))
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk Hus_arrive](figure/Hus_arrive4.png) 
 
 ```r
 clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F, poly.col = fadeColor("blue", fade = "10"), line.col = fadeColor("blue", 
         fade = "10"))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk Hus_arrive](figure/Hus_arrive5.png) 
@@ -2593,12 +2392,6 @@ clock24.plot(t3, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
     show.grid.labels = F)
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk Hus_sorties](figure/Hus_sorties.png) 
 
 Combinaison entrée-sortie
@@ -2609,23 +2402,11 @@ clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
     show.grid.labels = F)
 ```
 
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-```
-
 ![plot of chunk Hus_es](figure/Hus_es1.png) 
 
 ```r
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F, line.col = c("red", "blue"))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk Hus_es](figure/Hus_es2.png) 
@@ -2636,11 +2417,6 @@ fadeRed <- fadeColor("red", fade = "15")
 clock24.plot(t4, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
     show.grid.labels = F, line.col = c(fadeRed, fadeBlue), poly.col = c(fadeRed, 
         fadeBlue))
-```
-
-```
-## Warning: 'x' is NULL so the result will be NULL
-## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk Hus_es](figure/Hus_es3.png) 
@@ -2770,7 +2546,7 @@ xtable(a)
 
 ```
 ## % latex table generated in R 3.0.2 by xtable 1.7-1 package
-## % Thu Dec 19 23:34:23 2013
+## % Mon Dec 23 14:06:20 2013
 ## \begin{table}[ht]
 ## \centering
 ## \begin{tabular}{rrrrrrrr}

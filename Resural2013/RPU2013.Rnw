@@ -2,7 +2,8 @@
 \usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[utf8]{inputenc}
+% \usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc} 
 
 % inclu un fichier de bibliothèques
 \include{rpu_2012.sty}
@@ -165,13 +166,11 @@ names(d1)
 \newpage
 
 \chapter{Historique}
-%\input{historique.Rnw}
 <<child='historique.Rnw'>>=
 @
 
 \newpage
 \chapter{Organisation géographique}
-% \input{geographie.Rnw}
 <<child='geographie.Rnw'>>=
 @
 
@@ -349,7 +348,7 @@ names(d1)
 
 \newpage
 \chapter{Bibliographie}
-\bibliography{../../rpu}
+\bibliography{../rpu}
 
 \newpage
 \chapter{Index}

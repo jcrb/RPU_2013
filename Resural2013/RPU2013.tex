@@ -51,7 +51,8 @@
 \usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage[utf8]{inputenc}
+% \usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc} 
 
 % inclu un fichier de bibliothèques
 \include{rpu_2012.sty}
@@ -157,7 +158,7 @@ Bartier \& Madame Christine Hecker}}
 \vfill
 
 \begin{itemize}\raggedright
-  \item R version 3.0.2 (2013-09-25), \verb|x86_64-pc-linux-gnu|
+  \item R version 3.0.2 (2013-09-25), \verb|x86_64-redhat-linux-gnu|
   \item Locale: \verb|LC_CTYPE=fr_FR.UTF-8|, \verb|LC_NUMERIC=C|, \verb|LC_TIME=fr_FR.UTF-8|, \verb|LC_COLLATE=fr_FR.UTF-8|, \verb|LC_MONETARY=fr_FR.UTF-8|, \verb|LC_MESSAGES=fr_FR.UTF-8|, \verb|LC_PAPER=fr_FR.UTF-8|, \verb|LC_NAME=C|, \verb|LC_ADDRESS=C|, \verb|LC_TELEPHONE=C|, \verb|LC_MEASUREMENT=fr_FR.UTF-8|, \verb|LC_IDENTIFICATION=C|
   \item Base packages: base, datasets, graphics, grDevices,
     methods, stats, utils
@@ -189,6 +190,10 @@ Bartier \& Madame Christine Hecker}}
 \hlkwd{library}\hlstd{(}\hlstr{"lubridate"}\hlstd{)}
 \hlkwd{library}\hlstd{(}\hlstr{"xtable"}\hlstd{)}
 \hlkwd{library}\hlstd{(}\hlstr{"stargazer"}\hlstd{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'stargazer'}}\begin{alltt}
 \hlkwd{library}\hlstd{(}\hlstr{"knitr"}\hlstd{)}
 \hlkwd{library}\hlstd{(}\hlstr{"rattle"}\hlstd{)}
 \hlkwd{library}\hlstd{(}\hlstr{"epicalc"}\hlstd{)}
@@ -238,7 +243,6 @@ Bartier \& Madame Christine Hecker}}
 \newpage
 
 \chapter{Historique}
-%\input{historique.Rnw}
 
 % historique.Rnw
 
@@ -249,11 +253,10 @@ Le Réseau des Urgences en Alsace a été créé en août 2008 sous forme d'une 
 
 \newpage
 \chapter{Organisation géographique}
-% \input{geographie.Rnw}
 
 % geographie.Rnw
 
-L'Alsace est la plus petite région de France (n°42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chef-lieu sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
+L'Alsace est la plus petite région de France (n42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chef-lieu sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
 
 La région est divisée en quatre secteurs sanitaires et douze territoires de proximité.
 
@@ -565,7 +568,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 \fbox{Voir SAU2013}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:16 2013
+% Tue Dec 24 16:47:26 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -601,7 +604,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:17 2013
+% Tue Dec 24 16:47:27 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -657,9 +660,7 @@ On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l
 ##       secteur 
 ##          0.00
 \end{verbatim}
-
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: 'x' is NULL so the result will be NULL\\\#\# Warning: 'x' is NULL so the result will be NULL}}\end{kframe}
+\end{kframe}
 \includegraphics[width=\maxwidth]{figure/radar} 
 
 \end{knitrout}
@@ -928,7 +929,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 \subsection*{En valeur absolue}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:22 2013
+% Tue Dec 24 16:47:39 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -1005,7 +1006,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 16.04\%.
 \subsection*{Activité par semaine}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:24 2013
+% Tue Dec 24 16:47:43 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1066,7 +1067,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 16.04\%.
 \label{act_sem}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:24 2013
+% Tue Dec 24 16:47:44 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
@@ -1210,7 +1211,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % tranche-age.Rnw
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:32 2013
+% Tue Dec 24 16:47:59 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1246,7 +1247,7 @@ Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{rec
 
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:32 2013
+% Tue Dec 24 16:47:59 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -1316,7 +1317,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:32 2013
+% Tue Dec 24 16:48:00 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1346,7 +1347,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:32 2013
+% Tue Dec 24 16:48:00 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2107,7 +2108,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:43 2013
+% Tue Dec 24 16:48:22 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2125,7 +2126,7 @@ J450 & 108 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:43 2013
+% Tue Dec 24 16:48:22 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2153,7 +2154,7 @@ On note \np{1204} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:43 2013
+% Tue Dec 24 16:48:22 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2221,7 +2222,7 @@ On note \np{1204} cas d'asthme en 2013.
 La population des patients consultant pour une crise d'astme est jeune (voir table \ref{tab:age_asthme} page \pageref{tab:age_asthme}).
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:43 2013
+% Tue Dec 24 16:48:22 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -2235,7 +2236,7 @@ La population des patients consultant pour une crise d'astme est jeune (voir tab
 \label{tab:age_asthme}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:43 2013
+% Tue Dec 24 16:48:22 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -2588,17 +2589,17 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:45 2013
+% Tue Dec 24 16:48:27 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
   \hline
  & n & \% \\ 
   \hline
-Décès & 2 & 0.00 \\ 
+$<$NA$>$ & 43837 & 14.53 \\ 
+  Décès & 2 & 0.00 \\ 
   Domicile & 193831 & 64.23 \\ 
   Mutation & 59601 & 19.75 \\ 
-  $<$NA$>$ & 43837 & 14.53 \\ 
   Transfert & 4496 & 1.49 \\ 
    \hline
 \end{tabular}
@@ -2613,25 +2614,25 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:45 2013
+% Tue Dec 24 16:48:27 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
   \hline
- & Décès & Domicile & Mutation & $<$NA$>$ & Transfert & Sum \\ 
+ & $<$NA$>$ & Décès & Domicile & Mutation & Transfert & Sum \\ 
   \hline
-3Fr & 0.00 & 91.07 & 1.48 & 7.33 & 0.12 & 100.00 \\ 
-  Alk & 0.00 & 80.61 & 15.27 & 1.66 & 2.46 & 100.00 \\ 
-  Col & 0.00 & 73.12 & 23.03 & 1.98 & 1.87 & 100.00 \\ 
-  Dia & 0.00 & 82.36 & 9.77 & 7.29 & 0.58 & 100.00 \\ 
-  Geb & 0.00 & 48.89 & 1.98 & 47.88 & 1.24 & 99.99 \\ 
-  Hag & 0.00 & 56.63 & 23.87 & 14.92 & 4.57 & 99.99 \\ 
-  Hus & 0.00 & 2.29 & 54.74 & 42.97 & 0.00 & 100.00 \\ 
-  Mul & 0.00 & 61.95 & 14.22 & 23.58 & 0.25 & 100.00 \\ 
-  Odi & 0.00 & 93.75 & 0.00 & 1.86 & 4.39 & 100.00 \\ 
-  Sel & 0.01 & 79.02 & 20.96 & 0.01 & 0.00 & 100.00 \\ 
-  Wis & 0.00 & 75.88 & 22.21 & 0.66 & 1.25 & 100.00 \\ 
-  Sav & 0.00 & 69.38 & 19.35 & 10.18 & 1.09 & 100.00 \\ 
+3Fr & 7.33 & 0.00 & 91.07 & 1.48 & 0.12 & 100.00 \\ 
+  Alk & 1.66 & 0.00 & 80.61 & 15.27 & 2.46 & 100.00 \\ 
+  Col & 1.98 & 0.00 & 73.12 & 23.03 & 1.87 & 100.00 \\ 
+  Dia & 7.29 & 0.00 & 82.36 & 9.77 & 0.58 & 100.00 \\ 
+  Geb & 47.88 & 0.00 & 48.89 & 1.98 & 1.24 & 99.99 \\ 
+  Hag & 14.92 & 0.00 & 56.63 & 23.87 & 4.57 & 99.99 \\ 
+  Hus & 42.97 & 0.00 & 2.29 & 54.74 & 0.00 & 100.00 \\ 
+  Mul & 23.58 & 0.00 & 61.95 & 14.22 & 0.25 & 100.00 \\ 
+  Odi & 1.86 & 0.00 & 93.75 & 0.00 & 4.39 & 100.00 \\ 
+  Sel & 0.01 & 0.01 & 79.02 & 20.96 & 0.00 & 100.00 \\ 
+  Wis & 0.66 & 0.00 & 75.88 & 22.21 & 1.25 & 100.00 \\ 
+  Sav & 10.18 & 0.00 & 69.38 & 19.35 & 1.09 & 100.00 \\ 
    \hline
 \end{tabular}
 \caption[Mode de sortie selon l'établissement]{Mode de sortie des urgences selon l'établissement (en pourcentage). <NA> est le nombre de non réponses à cet item} 
@@ -2702,7 +2703,7 @@ On notera que le retour à domicile proprement dit ne figure pas parmi les items
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:45 2013
+% Tue Dec 24 16:48:28 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2722,7 +2723,7 @@ DOM & 78.81 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:45 2013
+% Tue Dec 24 16:48:28 2013
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3174,8 +3175,8 @@ Auxquels il faut rajouter les services assurant un accueil des urgences 24h/24h 
 
 
 
-Entre le 2013-01-01 00:11:00 et le 2013-11-30 23:57:00, \np{33907} RPU ont été transmis, alors que \np{91652} dossiers ont été déclarés au serveur régional. 
-1, 1, 1, 1
+Entre le 2013-01-01 00:11:00 et le 2013-11-30 23:57:00, \np{33907} RPU ont été transmis, alors que \np{70001} dossiers ont été déclarés au serveur régional. 
+1, 1, 1, 1, 1
 
 
 
@@ -3187,35 +3188,50 @@ Entre le 2013-01-01 00:11:00 et le 2013-11-30 23:57:00, \np{33907} RPU ont été
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] NA
-##  [1] "date"         "finess"       "service"      "inf1an"      
-##  [5] "entre1_75ans" "sup75ans"     "total"        "hospitalises"
-##  [9] "UHCD"         "tranferts"    "hosp"         "tx_hosp"
-##   hospitalises  
-##  Min.   :0.000  
-##  1st Qu.:0.125  
-##  Median :0.181  
-##  Mean   :0.175  
-##  3rd Qu.:0.218  
-##  Max.   :0.345
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'object' lors de la sélection d'une méthode pour la fonction 'summary' : Erreur dans data\$total : objet de type 'closure' non indiçable}}\begin{verbatim}
+## [1] 300
 \end{verbatim}
-\end{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hosp' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hosp' introuvable}}\begin{verbatim}
+## NULL
+\end{verbatim}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'object' lors de la sélection d'une méthode pour la fonction 'summary' : Erreur dans data\$hosp : objet de type 'closure' non indiçable}}\end{kframe}
 \end{knitrout}
 
 
-Le SU Sainte Anne a reçu en 2013 un total de \np{12139} consultants, soit en moyenne 40 par jour.
+Le SU Sainte Anne a reçu en 2013 un total de \np{1204} consultants, soit en moyenne 1 par jour.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sat Dec 21 18:16:54 2013
+% Tue Dec 24 16:48:46 2013
 \begin{table}[ht]
 \centering
-\begin{tabular}{rrrrrrrr}
+\begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
   \hline
- & inf1an & entre1\_75ans & sup75ans & total & hospitalises & UHCD & tranferts \\ 
+ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 & 50 & 51 & 52 & 53 & 54 & 55 & 56 & 57 & 58 & 59 & 60 & 61 & 62 & 63 & 64 & 65 & 66 & 67 & 68 & 69 & 70 & 71 & 72 & 73 & 74 & 75 & 76 & 77 & 78 & 79 & 80 & 81 & 82 & 83 & 84 & 85 & 86 & 87 & 88 & 89 & 90 & 91 & 92 & 93 & 94 & 95 & 96 & 97 & 98 & 99 & 100 & 101 & 102 & 103 & 104 & 105 & 106 & 107 & 108 & 109 & 110 & 111 & 112 & 113 & 114 & 115 & 116 & 117 & 118 & 119 & 120 & 121 & 122 & 123 & 124 & 125 & 126 & 127 & 128 & 129 & 130 & 131 & 132 & 133 & 134 & 135 & 136 & 137 & 138 & 139 & 140 & 141 & 142 & 143 & 144 & 145 & 146 & 147 & 148 & 149 & 150 & 151 & 152 & 153 & 154 & 155 & 156 & 157 & 158 & 159 & 160 & 161 & 162 & 163 & 164 & 165 & 166 & 167 & 168 & 169 & 170 & 171 & 172 & 173 & 174 & 175 & 176 & 177 & 178 & 179 & 180 & 181 & 182 & 183 & 184 & 185 & 186 & 187 & 188 & 189 & 190 & 191 & 192 & 193 & 194 & 195 & 196 & 197 & 198 & 199 & 200 & 201 & 202 & 203 & 204 & 205 & 206 & 207 & 208 & 209 & 210 & 211 & 212 & 213 & 214 & 215 & 216 & 217 & 218 & 219 & 220 & 221 & 222 & 223 & 224 & 225 & 226 & 227 & 228 & 229 & 230 & 231 & 232 & 233 & 234 & 235 & 236 & 237 & 238 & 239 & 240 & 241 & 242 & 243 & 244 & 245 & 246 & 247 & 248 & 249 & 250 & 251 & 252 & 253 & 254 & 255 & 256 & 257 & 258 & 259 & 260 & 261 & 262 & 263 & 264 & 265 & 266 & 267 & 268 & 269 & 270 & 271 & 272 & 273 & 274 & 275 & 276 & 277 & 278 & 279 & 280 & 281 & 282 & 283 & 284 & 285 & 286 & 287 & 288 & 289 & 290 & 291 & 292 & 293 & 294 & 295 & 296 & 297 & 298 & 299 & 300 & 301 & 302 & 303 & 304 & 305 & 306 & 307 & 308 & 309 & 310 & 311 & 312 & 313 & 314 & 315 & 316 & 317 & 318 & 319 & 320 & 321 & 322 & 323 & 324 & 325 & 326 & 327 & 328 & 329 & 330 & 331 & 332 & 333 & 334 & 335 & 336 & 337 & 338 & 339 & 340 & 341 & 342 & 343 & 344 & 345 & 346 & 347 & 348 & 349 & 350 & 351 & 352 & 353 & 354 & 355 & 356 & 357 & 358 & 359 & 360 & 361 & 362 & 363 & 364 & 365 & 366 & 367 & 368 & 369 & 370 & 371 & 372 & 373 & 374 & 375 & 376 & 377 & 378 & 379 & 380 & 381 & 382 & 383 & 384 & 385 & 386 & 387 & 388 & 389 & 390 & 391 & 392 & 393 & 394 & 395 & 396 & 397 & 398 & 399 & 400 & 401 & 402 & 403 & 404 & 405 & 406 & 407 & 408 & 409 \\ 
   \hline
-s & 211.00 & 10611.00 & 1317.00 & 12139.00 & 4.00 & 1925.00 & 174.00 \\ 
-  p & 1.74 & 87.41 & 10.85 & 100.00 & 0.03 & 15.86 & 1.43 \\ 
+s & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 1.00 & 2.00 & 2.00 & 2.00 & 2.00 & 2.00 & 2.00 & 2.00 & 2.00 & 2.00 & 2.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 3.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 4.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 5.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 6.00 & 7.00 & 7.00 & 7.00 & 7.00 & 7.00 & 7.00 & 7.00 & 7.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 8.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 9.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 10.00 & 11.00 & 11.00 & 11.00 & 11.00 & 11.00 & 11.00 & 11.00 & 11.00 & 11.00 & 12.00 & 13.00 & 13.00 & 15.00 & 15.00 & 16.00 & 16.00 & 16.00 & 13.00 & 15.00 & 15.00 & 15.00 & 14.00 & 14.00 & 14.00 & 14.00 & 14.00 & 14.00 & 14.00 & 14.00 & 14.00 & 14.00 & 14.00 & 16.00 & 16.00 & 17.00 & 15.00 & 13.00 & 13.00 & 13.00 & 16.00 & 16.00 & 14.00 & 17.00 & 15.00 & 15.00 & 15.00 & 13.00 & 17.00 & 14.00 & 17.00 & 14.00 & 14.00 & 14.00 & 16.00 & 16.00 & 16.00 & 17.00 & 16.00 & 16.00 & 16.00 & 16.00 & 17.00 & 17.00 & 17.00 & 15.00 & 15.00 & 13.00 & 13.00 & 13.00 & 18.00 & 18.00 & 18.00 & 18.00 & 18.00 & 18.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 19.00 & 20.00 & 20.00 & 20.00 & 20.00 & 20.00 & 20.00 & 20.00 & 21.00 & 21.00 & 21.00 & 21.00 & 21.00 & 21.00 & 21.00 & 21.00 & 22.00 & 22.00 & 22.00 & 22.00 & 22.00 & 23.00 & 23.00 & 23.00 & 23.00 & 23.00 & 23.00 & 23.00 & 24.00 & 24.00 & 24.00 & 24.00 & 24.00 & 24.00 & 24.00 & 25.00 & 25.00 & 26.00 & 26.00 & 26.00 & 26.00 & 27.00 & 27.00 & 27.00 & 27.00 & 27.00 & 27.00 & 28.00 & 28.00 & 28.00 & 28.00 & 28.00 & 29.00 & 29.00 & 29.00 & 30.00 & 30.00 & 31.00 & 31.00 & 31.00 & 31.00 & 32.00 & 32.00 & 32.00 & 32.00 & 34.00 & 36.00 & 37.00 & 37.00 & 37.00 & 37.00 & 37.00 & 37.00 & 37.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 38.00 & 39.00 & 39.00 & 39.00 & 39.00 & 39.00 & 39.00 & 39.00 & 39.00 & 39.00 & 40.00 & 40.00 & 40.00 & 40.00 & 40.00 & 40.00 & 40.00 & 40.00 & 40.00 & 40.00 & 40.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 41.00 & 42.00 & 42.00 & 42.00 & 42.00 & 42.00 & 42.00 & 42.00 & 42.00 & 43.00 & 43.00 & 43.00 & 43.00 & 43.00 & 43.00 & 43.00 & 43.00 & 43.00 & 44.00 & 44.00 & 44.00 & 44.00 & 44.00 & 45.00 & 45.00 & 45.00 & 45.00 & 45.00 & 45.00 & 45.00 & 46.00 & 46.00 & 46.00 & 46.00 & 46.00 & 46.00 & 46.00 & 46.00 & 46.00 & 47.00 & 47.00 & 47.00 & 47.00 & 47.00 & 47.00 & 47.00 & 47.00 & 47.00 & 47.00 & 47.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 & 48.00 \\ 
+  p & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 100.00 & 200.00 & 200.00 & 200.00 & 200.00 & 200.00 & 200.00 & 200.00 & 200.00 & 200.00 & 200.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 300.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 400.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 500.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 600.00 & 700.00 & 700.00 & 700.00 & 700.00 & 700.00 & 700.00 & 700.00 & 700.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 800.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 900.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1000.00 & 1100.00 & 1100.00 & 1100.00 & 1100.00 & 1100.00 & 1100.00 & 1100.00 & 1100.00 & 1100.00 & 1200.00 & 1300.00 & 1300.00 & 1500.00 & 1500.00 & 1600.00 & 1600.00 & 1600.00 & 1300.00 & 1500.00 & 1500.00 & 1500.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1400.00 & 1600.00 & 1600.00 & 1700.00 & 1500.00 & 1300.00 & 1300.00 & 1300.00 & 1600.00 & 1600.00 & 1400.00 & 1700.00 & 1500.00 & 1500.00 & 1500.00 & 1300.00 & 1700.00 & 1400.00 & 1700.00 & 1400.00 & 1400.00 & 1400.00 & 1600.00 & 1600.00 & 1600.00 & 1700.00 & 1600.00 & 1600.00 & 1600.00 & 1600.00 & 1700.00 & 1700.00 & 1700.00 & 1500.00 & 1500.00 & 1300.00 & 1300.00 & 1300.00 & 1800.00 & 1800.00 & 1800.00 & 1800.00 & 1800.00 & 1800.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 1900.00 & 2000.00 & 2000.00 & 2000.00 & 2000.00 & 2000.00 & 2000.00 & 2000.00 & 2100.00 & 2100.00 & 2100.00 & 2100.00 & 2100.00 & 2100.00 & 2100.00 & 2100.00 & 2200.00 & 2200.00 & 2200.00 & 2200.00 & 2200.00 & 2300.00 & 2300.00 & 2300.00 & 2300.00 & 2300.00 & 2300.00 & 2300.00 & 2400.00 & 2400.00 & 2400.00 & 2400.00 & 2400.00 & 2400.00 & 2400.00 & 2500.00 & 2500.00 & 2600.00 & 2600.00 & 2600.00 & 2600.00 & 2700.00 & 2700.00 & 2700.00 & 2700.00 & 2700.00 & 2700.00 & 2800.00 & 2800.00 & 2800.00 & 2800.00 & 2800.00 & 2900.00 & 2900.00 & 2900.00 & 3000.00 & 3000.00 & 3100.00 & 3100.00 & 3100.00 & 3100.00 & 3200.00 & 3200.00 & 3200.00 & 3200.00 & 3400.00 & 3600.00 & 3700.00 & 3700.00 & 3700.00 & 3700.00 & 3700.00 & 3700.00 & 3700.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3800.00 & 3900.00 & 3900.00 & 3900.00 & 3900.00 & 3900.00 & 3900.00 & 3900.00 & 3900.00 & 3900.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4000.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4100.00 & 4200.00 & 4200.00 & 4200.00 & 4200.00 & 4200.00 & 4200.00 & 4200.00 & 4200.00 & 4300.00 & 4300.00 & 4300.00 & 4300.00 & 4300.00 & 4300.00 & 4300.00 & 4300.00 & 4300.00 & 4400.00 & 4400.00 & 4400.00 & 4400.00 & 4400.00 & 4500.00 & 4500.00 & 4500.00 & 4500.00 & 4500.00 & 4500.00 & 4500.00 & 4600.00 & 4600.00 & 4600.00 & 4600.00 & 4600.00 & 4600.00 & 4600.00 & 4600.00 & 4600.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4700.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 & 4800.00 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -3226,49 +3242,66 @@ s & 211.00 & 10611.00 & 1317.00 & 12139.00 & 4.00 & 1925.00 & 174.00 \\
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-##            inf1an entre1_75ans sup75ans total hospitalises UHCD tranferts
-## 2013-01-01      2           27        1    30            0    5         0
-## 2013-01-02      0           30        6    36            0    7         0
-## 2013-01-03      2           26        5    33            0    9         0
-## 2013-01-04      1           25        6    32            0    8         1
-## 2013-01-05      1           28        4    33            0    7         1
-## 2013-01-06      0           28        3    31            0    4         0
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\begin{verbatim}
+##                                                                                                                            
+## 1 function (data = NA, start = 1, end = numeric(), frequency = 1,                                                          
+## 2     deltat = 1, ts.eps = getOption("ts.eps"), class = if (nseries >                                                      
+## 3         1) c("mts", "ts", "matrix") else "ts", names = if (!is.null(dimnames(data))) colnames(data) else paste("Series", 
+## 4         seq(nseries)))                                                                                                   
+## 5 {                                                                                                                        
+## 6     if (is.data.frame(data))
 \end{verbatim}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages1} 
+\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages} 
 \begin{kframe}
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: Can't plot lines for multivariate zoo object}}\end{kframe}
-\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages2} 
-\begin{kframe}\begin{verbatim}
-##            inf1an entre1_75ans sup75ans total hospitalises UHCD tranferts
-## 2013-01-01      2           27        1    30            0    5         0
-## 2013-01-02      0           30        6    36            0    7         0
-## 2013-01-03      2           26        5    33            0    9         0
-## 2013-01-04      1           25        6    32            0    8         1
-## 2013-01-05      1           28        4    33            0    7         1
-## 2013-01-06      0           28        3    31            0    4         0
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages3} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}x"{} : attempt to define invalid zoo object}}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}x"{} : attempt to define invalid zoo object}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur : objet 'ma' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\begin{verbatim}
+##                                                                                                                            
+## 1 function (data = NA, start = 1, end = numeric(), frequency = 1,                                                          
+## 2     deltat = 1, ts.eps = getOption("ts.eps"), class = if (nseries >                                                      
+## 3         1) c("mts", "ts", "matrix") else "ts", names = if (!is.null(dimnames(data))) colnames(data) else paste("Series", 
+## 4         seq(nseries)))                                                                                                   
+## 5 {                                                                                                                        
+## 6     if (is.data.frame(data))
+\end{verbatim}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur dans ts\$total : objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 \end{knitrout}
 
 
 \subsection{Taux d'hospitalisation}
 
-Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mutations, transferts et UHCD.} est de NA\% par jour.
+Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mutations, transferts et UHCD.} est de 300\% par jour.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## 2013-01-01 2013-01-02 2013-01-03 2013-01-04 2013-01-05 2013-01-06 
-##     0.1667     0.1944     0.2727     0.2812     0.2424     0.1290
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\begin{verbatim}
+##                                                                                                                            
+## 1 function (data = NA, start = 1, end = numeric(), frequency = 1,                                                          
+## 2     deltat = 1, ts.eps = getOption("ts.eps"), class = if (nseries >                                                      
+## 3         1) c("mts", "ts", "matrix") else "ts", names = if (!is.null(dimnames(data))) colnames(data) else paste("Series", 
+## 4         seq(nseries)))                                                                                                   
+## 5 {                                                                                                                        
+## 6     if (is.data.frame(data))
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/hospit_stAnne} 
+\begin{kframe}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}x"{} : attempt to define invalid zoo object}}\end{kframe}
 \end{knitrout}
 
 
@@ -3276,17 +3309,20 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 12139
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    22.0    34.0    40.0    39.9    45.0    69.0
-## [1] 7.961
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\begin{verbatim}
+## [1] 33907
 \end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/stAnne_tot_passages1} 
 
-\includegraphics[width=\maxwidth]{figure/stAnne_tot_passages2} 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'object' lors de la sélection d'une méthode pour la fonction 'summary' : Erreur dans data\$total : objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 \end{knitrout}
 
 
@@ -3294,17 +3330,20 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 10611
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    18.0    30.0    34.0    34.9    40.0    63.0
-## [1] 7.41
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\begin{verbatim}
+## [1] 33907
 \end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages1} 
 
-\includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages2} 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'object' lors de la sélection d'une méthode pour la fonction 'summary' : Erreur dans data\$entre1\_75ans : objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 \end{knitrout}
 
 
@@ -3313,17 +3352,20 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 1317
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    0.00    3.00    4.00    4.33    6.00   12.00
-## [1] 2.283
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\begin{verbatim}
+## [1] 33907
 \end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/stAnne_sup75_passages1} 
 
-\includegraphics[width=\maxwidth]{figure/stAnne_sup75_passages2} 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'object' lors de la sélection d'une méthode pour la fonction 'summary' : Erreur dans data\$sup75ans : objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 \end{knitrout}
 
 
@@ -3975,7 +4017,7 @@ Le logiciel R est interfacé avec le traitement de texte Latex par l'intermédia
 
 \newpage
 \chapter{Bibliographie}
-\bibliography{../../rpu}
+\bibliography{../rpu}
 
 \newpage
 \chapter{Index}

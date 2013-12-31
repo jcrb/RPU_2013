@@ -1,3 +1,12 @@
 .Rproj.user
 .Rhistory
 .RData
+Analyse/Chapitres/Cim10/cache/*
+Analyse/Chapitres/Activite_regionale/cache/*
+Analyse/Chapitres/CH_Wissembourg/cache/*
+Analyse/Chapitres/Diag_principal/cache/*
+Analyse/Chapitres/Mode_sortie/cache/*
+Analyse/Chapitres/Motif/cache/*
+Analyse/Chapitres/Tranches_age/cache/*
+
+cache/*
