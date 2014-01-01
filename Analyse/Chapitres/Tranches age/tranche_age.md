@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Wed Nov 13 11:03:53 2013"
+## [1] "Tue Dec 31 18:21:11 2013"
 ```
 
 Variables globales:
@@ -17,22 +17,7 @@ source("../prologue.R")
 ```
 
 ```
-## gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
-## 
-## gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
-## 
-## Attaching package: 'gdata'
-## 
-## L'objet suivant est masqué from 'package:stats':
-## 
-##     nobs
-## 
-## L'objet suivant est masqué from 'package:utils':
-## 
-##     object.size
-## 
 ## Loading required package: questionr
-## Loading required namespace: car
 ## 
 ## Attaching package: 'rgrs'
 ## 
@@ -71,16 +56,34 @@ source("../prologue.R")
 ```
 
 ```
-## [1] "Fichier courant: rpu2013d0110.Rda"
+## [1] "Fichier courant: rpu2013d0111.Rda"
+```
+
+```
+## Warning: impossible d'ouvrir le fichier compressé
+## '../../rpu2013d0111.Rda', cause probable : 'Aucun fichier ou dossier de ce
+## type'
+```
+
+```
+## Error: impossible d'ouvrir la connexion
 ```
 
 ```r
 d1 <- foo(path)
+```
+
+```
+## Error: la promesse est déjà en cours d'évaluation : référence récursive
+## d'argument par défaut ou problème antérieur ?
+```
+
+```r
 nrow(d1)
 ```
 
 ```
-## [1] 276452
+## Error: objet 'd1' introuvable
 ```
 
 Activité régionale
@@ -93,6 +96,15 @@ wd <- getwd()
 source(paste(path, "mes_fonctions.R", sep = ""))
 ```
 
+```
+## Warning: impossible d'ouvrir le fichier '../../mes_fonctions.R' : Aucun
+## fichier ou dossier de ce type
+```
+
+```
+## Error: impossible d'ouvrir la connexion
+```
+
 Librairies nécessaires:
 -----------------------
 
@@ -100,25 +112,68 @@ Librairies nécessaires:
 load_libraries()
 ```
 
+```
+## Error: impossible de trouver la fonction "load_libraries"
+```
+
+Données Age
+-----------
+
+```r
+a <- summary(d1$AGE)
+```
+
+```
+## Error: objet 'd1' introuvable
+```
+
+**Age moyen** NA  
+**Age médian** NA  
 
 Le découpage en tranches d'age est le même que celui utilisé pour la population générale (voir demographie2.Rmd)
 
 
 ```r
-age <- cut(d1$AGE, breaks = c(-1, 0.99, 14, 74, 84, 110), labels = c("Moins de 1 an", 
+age1 <- cut(d1$AGE, breaks = c(-1, 0.99, 14, 74, 84, 110), labels = c("Moins de 1 an", 
     "De 1 à 15 ans", "De 15 à 75 ans", "de 75 à 85 ans", "Plus de 85 ans"))
-a <- tapply(d1$AGE, age, length)
+```
+
+```
+## Error: objet 'd1' introuvable
+```
+
+```r
+
+age2 <- cut(d1$AGE, breaks = c(-1, 17, 74, 110), labels = c("Pédiatrie", "Age moyen", 
+    "Gériatrie"))
+```
+
+```
+## Error: objet 'd1' introuvable
+```
+
+```r
+
+a <- tapply(d1$AGE, age1, length)
+```
+
+```
+## Error: objet 'age1' introuvable
+```
+
+```r
 a
 ```
 
 ```
-##  Moins de 1 an  De 1 à 15 ans De 15 à 75 ans de 75 à 85 ans Plus de 85 ans 
-##           7151          50031         176834          24836          17576
+## [1] "0011"
 ```
 
 ```r
 barplot(a, main = "Répartition des RPU par tranches d'age", ylab = "Nombre")
 ```
 
-![plot of chunk tranches](figure/tranches.png) 
+```
+## Error: argument non numérique pour un opérateur binaire
+```
 

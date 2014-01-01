@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
 
 <title>Répartition des passages par tranches d&#39;age</title>
 
@@ -183,7 +184,7 @@ hljs.initHighlightingOnLoad();
 <pre><code class="r">date()
 </code></pre>
 
-<pre><code>## [1] &quot;Wed Nov 13 11:03:53 2013&quot;
+<pre><code>## [1] &quot;Tue Dec 31 18:21:11 2013&quot;
 </code></pre>
 
 <h2>Variables globales:</h2>
@@ -191,22 +192,7 @@ hljs.initHighlightingOnLoad();
 <pre><code class="r">source(&quot;../prologue.R&quot;)
 </code></pre>
 
-<pre><code>## gdata: read.xls support for &#39;XLS&#39; (Excel 97-2004) files ENABLED.
-## 
-## gdata: read.xls support for &#39;XLSX&#39; (Excel 2007+) files ENABLED.
-## 
-## Attaching package: &#39;gdata&#39;
-## 
-## L&#39;objet suivant est masqué from &#39;package:stats&#39;:
-## 
-##     nobs
-## 
-## L&#39;objet suivant est masqué from &#39;package:utils&#39;:
-## 
-##     object.size
-## 
-## Loading required package: questionr
-## Loading required namespace: car
+<pre><code>## Loading required package: questionr
 ## 
 ## Attaching package: &#39;rgrs&#39;
 ## 
@@ -244,14 +230,28 @@ hljs.initHighlightingOnLoad();
 ##     cars
 </code></pre>
 
-<pre><code>## [1] &quot;Fichier courant: rpu2013d0110.Rda&quot;
+<pre><code>## [1] &quot;Fichier courant: rpu2013d0111.Rda&quot;
+</code></pre>
+
+<pre><code>## Warning: impossible d&#39;ouvrir le fichier compressé
+## &#39;../../rpu2013d0111.Rda&#39;, cause probable : &#39;Aucun fichier ou dossier de ce
+## type&#39;
+</code></pre>
+
+<pre><code>## Error: impossible d&#39;ouvrir la connexion
 </code></pre>
 
 <pre><code class="r">d1 &lt;- foo(path)
-nrow(d1)
 </code></pre>
 
-<pre><code>## [1] 276452
+<pre><code>## Error: la promesse est déjà en cours d&#39;évaluation : référence récursive
+## d&#39;argument par défaut ou problème antérieur ?
+</code></pre>
+
+<pre><code class="r">nrow(d1)
+</code></pre>
+
+<pre><code>## Error: objet &#39;d1&#39; introuvable
 </code></pre>
 
 <h2>Activité régionale</h2>
@@ -262,27 +262,67 @@ nrow(d1)
 source(paste(path, &quot;mes_fonctions.R&quot;, sep = &quot;&quot;))
 </code></pre>
 
+<pre><code>## Warning: impossible d&#39;ouvrir le fichier &#39;../../mes_fonctions.R&#39; : Aucun
+## fichier ou dossier de ce type
+</code></pre>
+
+<pre><code>## Error: impossible d&#39;ouvrir la connexion
+</code></pre>
+
 <h2>Librairies nécessaires:</h2>
 
 <pre><code class="r">load_libraries()
 </code></pre>
 
-<p>Le découpage en tranches d&#39;age est le même que celui utilisé pour la population générale (voir demographie2.Rmd)</p>
-
-<pre><code class="r">age &lt;- cut(d1$AGE, breaks = c(-1, 0.99, 14, 74, 84, 110), labels = c(&quot;Moins de 1 an&quot;, 
-    &quot;De 1 à 15 ans&quot;, &quot;De 15 à 75 ans&quot;, &quot;de 75 à 85 ans&quot;, &quot;Plus de 85 ans&quot;))
-a &lt;- tapply(d1$AGE, age, length)
-a
+<pre><code>## Error: impossible de trouver la fonction &quot;load_libraries&quot;
 </code></pre>
 
-<pre><code>##  Moins de 1 an  De 1 à 15 ans De 15 à 75 ans de 75 à 85 ans Plus de 85 ans 
-##           7151          50031         176834          24836          17576
+<h2>Données Age</h2>
+
+<pre><code class="r">a &lt;- summary(d1$AGE)
+</code></pre>
+
+<pre><code>## Error: objet &#39;d1&#39; introuvable
+</code></pre>
+
+<p><strong>Age moyen</strong> NA<br/>
+<strong>Age médian</strong> NA  </p>
+
+<p>Le découpage en tranches d&#39;age est le même que celui utilisé pour la population générale (voir demographie2.Rmd)</p>
+
+<pre><code class="r">age1 &lt;- cut(d1$AGE, breaks = c(-1, 0.99, 14, 74, 84, 110), labels = c(&quot;Moins de 1 an&quot;, 
+    &quot;De 1 à 15 ans&quot;, &quot;De 15 à 75 ans&quot;, &quot;de 75 à 85 ans&quot;, &quot;Plus de 85 ans&quot;))
+</code></pre>
+
+<pre><code>## Error: objet &#39;d1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+age2 &lt;- cut(d1$AGE, breaks = c(-1, 17, 74, 110), labels = c(&quot;Pédiatrie&quot;, &quot;Age moyen&quot;, 
+    &quot;Gériatrie&quot;))
+</code></pre>
+
+<pre><code>## Error: objet &#39;d1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">
+a &lt;- tapply(d1$AGE, age1, length)
+</code></pre>
+
+<pre><code>## Error: objet &#39;age1&#39; introuvable
+</code></pre>
+
+<pre><code class="r">a
+</code></pre>
+
+<pre><code>## [1] &quot;0011&quot;
 </code></pre>
 
 <pre><code class="r">barplot(a, main = &quot;Répartition des RPU par tranches d&#39;age&quot;, ylab = &quot;Nombre&quot;)
 </code></pre>
 
-<p><img src="data:image/png;base64,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" alt="plot of chunk tranches"/> </p>
+<pre><code>## Error: argument non numérique pour un opérateur binaire
+</code></pre>
 
 </body>
 
