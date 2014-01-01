@@ -2,26 +2,16 @@ Répartition des passages par tranches d'age
 ========================================================
 ```{r date}
 date()
+wd<-getwd()
+wd
 ```
 Variables globales:
 -------------------
 ```{r var_globales}
 source("../prologue.R")
-d1<-foo(path)
 nrow(d1)
 ```
-Activité régionale
------------------------------
-```{r routines}
-wd<-getwd()
-# setwd("~/Documents/Resural/Stat Resural/RPU2013/Chapitres/Activite_regionale")
-source(paste(path,"mes_fonctions.R",sep=""))
-```
-Librairies nécessaires:
------------------------
-```{r library , message=FALSE}
-load_libraries()
-```
+
 Données Age
 -----------
 ```{r age}
@@ -30,25 +20,81 @@ a <- summary(d1$AGE)
 **Age moyen** `r a["Mean"]`  
 **Age médian** `r a["Median"]`  
 
+Tranches d'age
+--------------
+
+La méthode **cut** permet de diviser le vecteur *age* en classes. Le résultat est un *factor*.
+
+Syntaxe des intervalles:
+- $[0,5] <=> 0 <= X <= 5 <=> 0, 1, 2, 3, 4, 5$
+- $(0,5] <=> 0 <= X < 5 <=> 0, 1, 2, 3, 4$  cut(...., right = FALSE)
+- $[0,5) <=> 0 < X <= 5 <=> 1, 2, 3, 4, 5$  cut(...., right = TRUE)
+
+Intervalles pré-réglés:
+- age1: 
+- age2: 
+- age3: intervalles de classe allant de 0 à 95 ans par tranches de 5 ans, borne sup de l'intervalle exclue. Le premier intervalle va de 0 à 4, le second de 5 à 9, le dernier va de 90 à 94. O ajoute un sernier intervalle pour toutes les valeurs supérieures ou égales à 95. Deux façons d'afficher les résultats:
+- *table()* affiche les résultats groupés par catégories, mais pas les NA's.
+- *summary()* idem + les NA's.
+
 Le découpage en tranches d'age est le même que celui utilisé pour la population générale (voir demographie2.Rmd)
 
-```{r tranches}
-age1<-cut(d1$AGE,breaks=c(-1,0.99,14,74,84,110),labels=c("Moins de 1 an","De 1 à 15 ans","De 15 à 75 ans","de 75 à 85 ans","Plus de 85 ans"))
+```{r tranche_age1}
 
-age2<-cut(d1$AGE,breaks=c(-1, 17, 74, 110),labels=c("Pédiatrie","Age moyen","Gériatrie"))
-
+age1 <- cut(d1$AGE,breaks=c(-1,0.99,14,74,84,110),labels=c("Moins de 1 an","De 1 à 15 ans","De 15 à 75 ans","de 75 à 85 ans","Plus de 85 ans"))
 a<-tapply(d1$AGE, age1, length)
 a
 barplot(a,main="Répartition des RPU par tranches d'age",ylab="Nombre")
 
+```
+### Age2
+```{r tranche_age2}
+age2 <- cut(d1$AGE,breaks=c(-1, 17, 74, 110),labels=c("Pédiatrie","Age moyen","Gériatrie"))
 t1 <- table(age2)
 t2 <- round(prop.table(table(age2))*100,2)
-a <- rbind
+a <- rbind(t1,t2)
 rownames(a) <- c("n", "%")
 a
 ```
+
+
+### Age3
+```{r tranche_age3}
+# age3
+#------
+# construction du vecteur x des labels ("0-4","5-9", ...)
+# inc = incrément
+# intervalle = no de l'intervalle (le premier vaut 1)
+# i = borne inférieure de l'intervalle
+# j = borne sup de l'intervalle
+# x = vecteur des labels
+inc <- 5
+intervalle <- 1
+i <- 0
+j <- i + inc - 1
+x <- 1
+while(j < 94){
+  x[intervalle] <- paste(i, "-", j, sep="")
+  i <- j + 1
+  j <- i + inc - 1
+  intervalle <- intervalle + 1
+}
+x[intervalle + 1] <- "> 94"
+# construction du vecteur age3
+brek <- c( seq(from = 0, to = 95, by = 5),120)
+age3 <- cut(d1$AGE, breaks =  brek, include.lowest=F, right=F, labels = x)
+# Affichage
+barplot(table(age3))
+barplot(round(prop.table(table(age3))*100,2), ylab = "% de la population")
+#-------------------------------------------------------------------------
+
+```
+
+
 Centenaires
 -----------
+todo: centenaires en Alsace
+
 ```{r centenaires}
 centenaire <- d1$AGE[d1$AGE > 99]
 n_centenaire <- length(centenaire)
@@ -61,7 +107,25 @@ Sex ratio
 ```{r sr}
 a <- table(d1$SEXE, as.factor(d1$AGE))
 sr <- a[3,]/a[1,]
-plot(sr[0:103], type = "l", xlabel = "Age (années)", ylabel = "Sex ratio")
+sr
+plot(sr[0:103], type = "l", xlab = "Age (années)", ylab = "Sex ratio", las = 2)
 abline(h = 1, col="red")
+abline(v = 77, col="blue")
+```
+Même calcul avec des tanches d'age de 5 ans
+```{r sr5}
+d1$age3 <- cut(d1$AGE, breaks =  brek, include.lowest=F, right=F, labels = x)
+a <- table(d1$SEXE, d1$age3)
+a
+#  NOTE: à quoi correspondent les NA ? Si on refait les calculs en ajoutant une rubrique entre -1 et 0, on réduit le nomfre de NA a 10 mais on ne modifie pas le npmbre de cas par catégorie:
+# brek <- c( -1, seq(from = 0, to = 95, by = 5),120)
+# d2 <- d1[,c("AGE","SEXE")]
+# d2$age3 <- cut(d2$AGE, breaks =  brek, include.lowest=F, right=F)
+# summary(d2$age3)
+
+ sr <- a[3,]/a[1,]
+ plot(sr, type = "l", xlab = "Tranches d'Age (années)", ylab = "Sex ratio")
+abline(h = 1, col="red")
+
 ```
 

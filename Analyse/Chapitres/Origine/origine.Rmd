@@ -1,0 +1,18 @@
+Origine des patients
+========================================================
+```{r date}
+date()
+wd<-getwd()
+wd
+```
+Variables globales:
+-------------------
+```{r var_globales}
+source("../prologue.R")
+nrow(d1)
+```
+x <- as.character(d1$CODE_POSTAL)
+a <- x[substr(x,1,2) == "57"]
+length(a)
+
+a <- x[substr(x,1,2) == c("57","54","88","90")]
