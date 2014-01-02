@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Wed Jan  1 19:28:46 2014"
+## [1] "Thu Jan  2 12:55:33 2014"
 ```
 
 ```r
@@ -68,17 +68,9 @@ source("../prologue.R")
 ## [1] "Fichier courant: rpu2013d0111.Rda"
 ```
 
-```
-## Warning: impossible d'ouvrir le fichier '../../../mes_fonctions.R' : Aucun
-## fichier ou dossier de ce type
-```
-
-```
-## Error: impossible d'ouvrir la connexion
-```
-
 ```r
-nrow(d1)
+N <- nrow(d1)
+N
 ```
 
 ```
@@ -108,7 +100,7 @@ Syntaxe des intervalles:
 
 Intervalles pré-réglés:
 - age1: 
-- age2: 
+- age2: 3 catégories (Pédiatrie, Adulte, Gériatrie)
 - age3: intervalles de classe allant de 0 à 95 ans par tranches de 5 ans, borne sup de l'intervalle exclue. Le premier intervalle va de 0 à 4, le second de 5 à 9, le dernier va de 90 à 94. O ajoute un sernier intervalle pour toutes les valeurs supérieures ou égales à 95. Deux façons d'afficher les résultats:
 - *table()* affiche les résultats groupés par catégories, mais pas les NA's.
 - *summary()* idem + les NA's.
@@ -138,9 +130,18 @@ barplot(a, main = "Répartition des RPU par tranches d'age", ylab = "Nombre")
 ### Age2
 
 ```r
-age2 <- cut(d1$AGE, breaks = c(-1, 17, 74, 110), labels = c("Pédiatrie", "Age moyen", 
+age2 <- cut(d1$AGE, breaks = c(-1, 17, 74, 110), labels = c("Pédiatrie", "Adulte < 75 ans", 
     "Gériatrie"))
 t1 <- table(age2)
+mp <- barplot(prop.table(t1) * 100, ylab = "Pourcentage de la population", main = "Répartition des consultants en 2013", 
+    col = "lavender")
+mtext(side = 1, at = mp, line = -2, text = paste(round(prop.table(t1) * 100, 
+    0), "%", sep = ""), col = "blue")
+```
+
+![plot of chunk tranche_age2](figure/tranche_age2.png) 
+
+```r
 t2 <- round(prop.table(table(age2)) * 100, 2)
 a <- rbind(t1, t2)
 rownames(a) <- c("n", "%")
@@ -148,9 +149,9 @@ a
 ```
 
 ```
-##   Pédiatrie Age moyen Gériatrie
-## n  72568.00 182665.00  46494.00
-## %     24.05     60.54     15.41
+##   Pédiatrie Adulte < 75 ans Gériatrie
+## n  72568.00       182665.00  46494.00
+## %     24.05           60.54     15.41
 ```
 
 
@@ -167,24 +168,35 @@ intervalle <- 1
 i <- 0
 j <- i + inc - 1
 x <- 1
-while (j < 94) {
+while (j < 95) {
     x[intervalle] <- paste(i, "-", j, sep = "")
     i <- j + 1
     j <- i + inc - 1
     intervalle <- intervalle + 1
 }
-x[intervalle + 1] <- "> 94"
+x[intervalle] <- "> 94"
+x
+```
+
+```
+##  [1] "0-4"   "5-9"   "10-14" "15-19" "20-24" "25-29" "30-34" "35-39"
+##  [9] "40-44" "45-49" "50-54" "55-59" "60-64" "65-69" "70-74" "75-79"
+## [17] "80-84" "85-89" "90-94" "> 94"
+```
+
+```r
 # construction du vecteur age3
 brek <- c(seq(from = 0, to = 95, by = 5), 120)
 age3 <- cut(d1$AGE, breaks = brek, include.lowest = F, right = F, labels = x)
 # Affichage
-barplot(table(age3))
+barplot(table(age3), las = 2)
 ```
 
 ![plot of chunk tranche_age3](figure/tranche_age31.png) 
 
 ```r
-barplot(round(prop.table(table(age3)) * 100, 2), ylab = "% de la population")
+barplot(round(prop.table(table(age3)) * 100, 2), ylab = "% de la population", 
+    las = 2, xlab = "", main = "Pourcentage de consultants par tranche d'age")
 ```
 
 ![plot of chunk tranche_age3](figure/tranche_age32.png) 
@@ -194,6 +206,11 @@ barplot(round(prop.table(table(age3)) * 100, 2), ylab = "% de la population")
 ```
 
 
+Taux de recours aux urgences par tranches d'age
+-----------------------------------------------
+Nécessite de connaître la répartition de la population par tranches d'age.
+
+Todo: voir fichier population.
 
 Centenaires
 -----------
@@ -207,6 +224,7 @@ n_centenaire <- length(centenaire)
 centenaire <- d1[d1$AGE > 99, c("AGE", "SEXE")]
 ```
 
+En 2013, **208 centenaires** ont été pris en charge par les services d'urgence (0.07 % des RPU).
 
 Sex ratio
 ---------
@@ -247,7 +265,8 @@ sr
 ```
 
 ```r
-plot(sr[0:103], type = "l", xlab = "Age (années)", ylab = "Sex ratio", las = 2)
+plot(sr[0:103], type = "l", xlab = "Age (années)", ylab = "Sex ratio", las = 2, 
+    col = "green", lwd = 2)
 abline(h = 1, col = "red")
 abline(v = 77, col = "blue")
 ```
@@ -269,7 +288,7 @@ a
 ##   I     0     1     0     2     0     0     0     0     0     0     0
 ##   M 16408  8965  9290  9597 11201 10962 10465  9229  9955  8978  8276
 ##    
-##     55-59 60-64 65-69 70-74 75-79 80-84 85-89  <NA>  > 94
+##     55-59 60-64 65-69 70-74 75-79 80-84 85-89 90-94  > 94
 ##   F  6761  6156  4801  5029  6566  8430  7988  4481   849
 ##   I     0     0     0     0     0     1     0     0     0
 ##   M  7679  7603  5964  5657  6083  6173  3976  1702   275
@@ -283,7 +302,8 @@ a
 # breaks = brek, include.lowest=F, right=F) summary(d2$age3)
 
 sr <- a[3, ]/a[1, ]
-plot(sr, type = "l", xlab = "Tranches d'Age (années)", ylab = "Sex ratio")
+plot(sr, type = "l", xlab = "Tranches d'Age (années)", ylab = "Sex ratio", 
+    col = "green", lwd = 2)
 abline(h = 1, col = "red")
 ```
 

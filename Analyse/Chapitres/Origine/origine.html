@@ -184,7 +184,7 @@ hljs.initHighlightingOnLoad();
 <pre><code class="r">date()
 </code></pre>
 
-<pre><code>## [1] &quot;Wed Jan  1 19:44:12 2014&quot;
+<pre><code>## [1] &quot;Thu Jan  2 13:05:03 2014&quot;
 </code></pre>
 
 <pre><code class="r">wd &lt;- getwd()
@@ -245,6 +245,86 @@ wd
 
 <pre><code>## [1] 301767
 </code></pre>
+
+<h2>Données générales</h2>
+
+<pre><code class="r">x &lt;- as.character(d1$CODE_POSTAL)
+a &lt;- x[substr(x, 1, 2) == &quot;57&quot;]
+length(a)
+</code></pre>
+
+<pre><code>## [1] 2827
+</code></pre>
+
+<h2>Origine géographique des patients</h2>
+
+<p>On récupère le no du département, puis on fait un summary trié par ordre croissant</p>
+
+<pre><code class="r">b &lt;- as.factor(substr(x, 1, 2))
+a &lt;- sort(summary(b))
+
+ap &lt;- round(prop.table(a) * 100, 2)
+c &lt;- rbind(a, ap)
+rownames(c) &lt;- c(&quot;n&quot;, &quot;%&quot;)
+c
+</code></pre>
+
+<pre><code>##   96 48 23 09 32 98 19 47 36 46 58 12 05 53 65 16 43 87 15 24 61 81    18
+## n  1  4  5  8  8  8  9  9 10 10 10 11 12 12 12 13 13 14 15 15 15 15 18.00
+## %  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0.01
+##      85    17    20    82    86    07    40    04    26    03    22    37
+## n 18.00 19.00 20.00 20.00 21.00 22.00 22.00 25.00 25.00 27.00 27.00 27.00
+## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01
+##      11    41    64    14    28    50    72    89    56    45    30    39
+## n 28.00 29.00 30.00 31.00 32.00 32.00 32.00 32.00 33.00 34.00 35.00 35.00
+## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01
+##      49    52    79    10    08    27    84    73    00    42    80    55
+## n 37.00 37.00 39.00 40.00 43.00 43.00 43.00 44.00 45.00 45.00 45.00 50.00
+## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.02
+##      35    66    02    44    31    83    97    60    01    71    33    51
+## n 51.00 54.00 56.00 56.00 59.00 60.00 60.00 64.00 66.00 66.00 67.00 71.00
+## %  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02
+##      74    21    29    34    38    62    63     06     91     95     13
+## n 78.00 79.00 79.00 79.00 86.00 89.00 90.00 102.00 104.00 104.00 115.00
+## %  0.03  0.03  0.03  0.03  0.03  0.03  0.03   0.03   0.03   0.03   0.04
+##       94     93     78     76     70     92     69     77     59     75
+## n 118.00 127.00 130.00 143.00 153.00 154.00 174.00 183.00 256.00 282.00
+## %   0.04   0.04   0.04   0.05   0.05   0.05   0.06   0.06   0.08   0.09
+##      25    54     88     90      99      57        67        68
+## n 300.0 305.0 491.00 560.00 1653.00 2827.00 124304.00 166458.00
+## %   0.1   0.1   0.16   0.19    0.55    0.94     41.19     55.16
+</code></pre>
+
+<pre><code class="r">
+org_als &lt;- as.numeric(ap[&quot;67&quot;] + ap[&quot;68&quot;])
+org_lim &lt;- as.numeric(ap[&quot;57&quot;] + ap[&quot;54&quot;] + ap[&quot;88&quot;] + ap[&quot;90&quot;])
+</code></pre>
+
+<h4>Patient domiciliés en Alsace: 96.35 %</h4>
+
+<h4>Patient domicilés dans les départements voisins: 1.39 %</h4>
+
+<p>La majorité des passages aux urgences sont le fait de résidents alsaciens. La fréquentation hors région ne représente que 3.65 % des passages. La Moselle (57) est le département extra régional le plus représenté. Cette situation s&#39;explique par les liens forts qui unissent l&#39;Alsace-Moselle au travers du Concordat.</p>
+
+<h2>Passages en provenance des départements limitrophes</h2>
+
+<p>Moselle, Meurthe et Moselle, Vosges, Territoire de Belfort</p>
+
+<pre><code class="r">a &lt;- x[substr(x, 1, 2) %in% c(&quot;57&quot;, &quot;54&quot;, &quot;88&quot;, &quot;90&quot;)]
+b &lt;- as.factor(substr(a, 1, 2))
+summary(b)
+</code></pre>
+
+<pre><code>##   54   57   88   90 
+##  305 2827  491  560
+</code></pre>
+
+<h3>TODO</h3>
+
+<ul>
+<li>carte de France avec origines</li>
+<li>carte de la région + départements limitrophes</li>
+</ul>
 
 </body>
 

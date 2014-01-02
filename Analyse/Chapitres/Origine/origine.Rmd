@@ -11,8 +11,46 @@ Variables globales:
 source("../prologue.R")
 nrow(d1)
 ```
+
+Données générales
+-----------------
+```{r origine_general}
 x <- as.character(d1$CODE_POSTAL)
 a <- x[substr(x,1,2) == "57"]
 length(a)
 
-a <- x[substr(x,1,2) == c("57","54","88","90")]
+```
+
+Origine géographique des patients
+---------------------------------
+On récupère le no du département, puis on fait un summary trié par ordre croissant
+```{r origine}
+b <- as.factor(substr(x,1,2))
+a <- sort(summary(b))
+
+ap <- round(prop.table(a)*100,2)
+c <- rbind(a,ap)
+rownames(c) <- c("n","%")
+c
+
+org_als <- as.numeric(ap["67"] + ap["68"])
+org_lim <- as.numeric(ap["57"] + ap["54"] + ap["88"] + ap["90"] )
+```
+#### Patient domiciliés en Alsace: `r org_als` %
+
+#### Patient domicilés dans les départements voisins: `r org_lim` %
+
+La majorité des passages aux urgences sont le fait de résidents alsaciens. La fréquentation hors région ne représente que `r 100-org_als` % des passages. La Moselle (57) est le département extra régional le plus représenté. Cette situation s'explique par les liens forts qui unissent l'Alsace-Moselle au travers du Concordat.
+
+Passages en provenance des départements limitrophes
+---------------------------------------------------
+Moselle, Meurthe et Moselle, Vosges, Territoire de Belfort
+
+```{r limitrophe}
+a <- x[substr(x,1,2) %in% c("57","54","88","90")]
+b <- as.factor(substr(a,1,2))
+summary(b)
+```
+### TODO
+- carte de France avec origines
+- carte de la région + départements limitrophes

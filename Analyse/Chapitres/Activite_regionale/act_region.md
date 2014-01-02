@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Wed Dec 18 09:42:14 2013"
+## [1] "Thu Jan  2 14:00:55 2014"
 ```
 
 source: RPU2013
@@ -82,6 +82,10 @@ Librairies nécessaires:
 load_libraries()
 ```
 
+```
+## Error: impossible de trouver la fonction "load_libraries"
+```
+
 
 Lecture du fichier des données
 ---------------------------------------
@@ -110,7 +114,7 @@ tapply(d1$ENTREE, d1$secteur, length)
 
 ```
 ##     1     2     3     4 
-## 47482 52785 85762 90423
+## 53362 57654 91905 98846
 ```
 
 Remarques:
@@ -129,7 +133,7 @@ mean(q)  # nb moyen de passages
 ```
 
 ```
-## [1] 912.4
+## [1] 906.2
 ```
 
 ```r
@@ -151,10 +155,17 @@ plot(z)
 plot(xts(z), main = "Activité quotidienne des Services d'urgence\nen Alsace", 
     ylab = "nombre de passages", minor.ticks = FALSE)
 lines(rollmean(xts(z), 7), col = "red", lwd = 2)
-copyright()
 ```
 
 ![plot of chunk analyse](figure/analyse3.png) 
+
+```r
+copyright()
+```
+
+```
+## Error: impossible de trouver la fonction "copyright"
+```
 
 ```r
 
@@ -163,6 +174,13 @@ plot(z, col = "gray45", main = "Activité quotidienne des Services d'urgence\nen
 lines(rollmean(z, 7), col = "red", lwd = 2)
 abline(h = mean(q), col = "blue")
 copyright()
+```
+
+```
+## Error: impossible de trouver la fonction "copyright"
+```
+
+```r
 legend("topleft", legend = "moyenne lissée", col = "red", lty = 1, cex = 0.8, 
     bty = "n")
 ```
@@ -208,10 +226,17 @@ summary(q3)
 
 ```r
 plot(q3, type = "l")
-copyright()
 ```
 
 ![plot of chunk retour_dom](figure/retour_dom.png) 
+
+```r
+copyright()
+```
+
+```
+## Error: impossible de trouver la fonction "copyright"
+```
 
 On refait le calcul de q en tenant compte des non réponses:
 
@@ -242,16 +267,23 @@ summary(q5)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.674   0.729   0.749   0.751   0.773   0.827
+##   0.674   0.727   0.749   0.750   0.772   0.827
 ```
 
 ```r
 plot(q5, type = "l", main = "Taux de retour à domicile\n(non réponses exclues)", 
     ylab = "Fréquence", xlab = "Jours")
-copyright()
 ```
 
 ![plot of chunk sauf_na](figure/sauf_na1.png) 
+
+```r
+copyright()
+```
+
+```
+## Error: impossible de trouver la fonction "copyright"
+```
 
 ```r
 
@@ -265,10 +297,17 @@ plot(z, main = "Taux de retour à domicile\n(non réponses exclues)", ylab = "Fr
 ```r
 plot(xts(z))
 lines(rollmean(xts(z), 7), col = "red", lwd = 2)
-copyright()
 ```
 
 ![plot of chunk sauf_na](figure/sauf_na3.png) 
+
+```r
+copyright()
+```
+
+```
+## Error: impossible de trouver la fonction "copyright"
+```
 
 Taux d'hospitalisation
 ----------------------
@@ -290,7 +329,7 @@ summary(q7)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.173   0.227   0.251   0.249   0.271   0.326
+##   0.173   0.228   0.251   0.250   0.273   0.326
 ```
 
 ```r
@@ -298,10 +337,17 @@ z <- zoo(q7, unique(as.Date(d1$ENTREE)))
 plot(xts(z), main = "Taux d'hospitalisation en Alsace à partir des SU\n(non réponses exclues)", 
     ylab = "Fréquence", xlab = "Période (moyenne lissée sur 7 jours")
 lines(rollmean(xts(z), 7), col = "blue", lwd = 2)
-copyright()
 ```
 
 ![plot of chunk taux_hospitalisation](figure/taux_hospitalisation.png) 
+
+```r
+copyright()
+```
+
+```
+## Error: impossible de trouver la fonction "copyright"
+```
 
 
 Taux de non réponses:
@@ -322,7 +368,7 @@ summary(q6)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.783   0.834   0.854   0.855   0.872   0.949
+##   0.783   0.835   0.854   0.855   0.872   0.949
 ```
 
 Vendenheim1

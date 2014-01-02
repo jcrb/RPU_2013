@@ -1,0 +1,79 @@
+Répartition de l'activité
+========================================================
+```{r date}
+date()
+wd<-getwd()
+wd
+```
+Variables globales:
+-------------------
+```{r var_globales}
+source("../prologue.R")
+N <- nrow(d1)
+N
+
+mois_f <- c("Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre")
+mois_c <- c("Jan","Fév","Mar","Avr","Mai","Jui","Jul","Aou","Sep","Oct","Nov","Déc")
+trimestre_f <- c("trim.1","trim.2","trim.3","trim.4")
+semaine_f <- c("Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
+```
+
+Activité mensuelle
+--------------------
+
+```{r act_mois}
+m <- month(d1$ENTREE, label=TRUE, abbr=F)
+tm <- table(m)
+
+nb_mois <- length(tm[tm>0])
+mois_mean <- N/nb_mois
+
+names(tm) <- mois_f
+tm
+barplot(tm, las=2, ylab="")
+
+which.max(tm)
+mois_max <- names(which.max(tm))
+
+which.min(tm[tm>0])
+mois_min <- names(which.min(tm[tm>0]))
+
+```
+- Mois le plus actif: `r mois_max ` (`r max(tm)`)
+- Mois le moins actif: `r mois_min ` (`r min(tm[tm>0])`)
+- Moyenne mensuelle: `r mois_mean`
+
+Activité trimesrielle
+---------------------
+
+```{r trimestre}
+q <- quarter(d1$ENTREE)
+tq <- table(q)
+names(tq) <- trimestre_f
+tq
+barplot(prop.table(tq)*100, main="2013 - Activité trimestrielle")
+abline(h=25, col="blue")
+```
+- moyenne trimestrielle théorique: `r N/4`
+
+Activité par jour de semaine
+----------------------------
+```{r week}
+s <- wday(d1$ENTREE)
+sf <- s
+sf[s=="1"] <- 7
+sf[s=="2"] <- 1
+sf[s=="3"] <- 2
+sf[s=="4"] <- 3
+sf[s=="5"] <- 4
+sf[s=="6"] <- 5
+sf[s=="7"] <- 6
+
+ts <- table(sf)
+names(ts) <- semaine_f
+ts
+barplot(ts)
+
+boxplot(as.numeric(as.Date(d1$ENTREE)) ~ sf, las=2, col="yellow", names=semaine_f, main="Activité selon le jour de la semaine", notch=TRUE)
+```
+

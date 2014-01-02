@@ -7,25 +7,36 @@ On s'intéresse au taux de complétude des données. Pour cela on compte le nomb
 
 ```{r acteurs}
 getwd()
-source("prologue.R")
-d1<-foo("../")
+source("../prologue.R")
 
 a<-apply(is.na(d1),2,mean)
 round(a*100,2)
 radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col="red",radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
+
 ```
+
 Deux ou plusieurs polygones
 ---------------------------
 On compare les résultats de lannée à ceux du mois de septembre:
-- on dessinne une première grille comme précédemment.Le polygone est tracé en rouge.
+- on dessine une première grille comme précédemment.Le polygone est tracé en rouge.
 - on trace un second polygone en bleu qui représente lesdonnées du mois de septembre. Pour qe le second polygone vienne en surimpression sans effacer lepremier, on ajoute l'instruction **add=TRUE**. Il faut également laisser **radial.lim** pour que les deux polygones soient à la même échelle.
 ```{r poly2}
 radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col="red",radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
 
-load("../rpu2013d09.Rda")
+# load("../rpu2013d09.Rda")
+d09 <- d1[d1$ENTREE >= "2013-09-01" & d1$ENTREE  <= "2013-09-30",]
 b<-apply(is.na(d09),2,mean)
 radial.plot(1-b,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col="blue",radial.lim=c(0,1),add=T)
 ```
+Taux de comolétude du mois
+--------------------------
+```{r completude_mois}
+c <- rbind(a,b)
+c
+barplot(1-c, beside=T, las=2, col=c("lavender","blue"),ylab="Taux de complétude", main="Taux de complétude des RPU")
+legend("topright", legend=c("taux annuel","taux mensuel"), col=c("lavender","blue"), pch=15)
+```
+
 Comparaison par hôpital:
 ```{r radar_hopital}
 fadeBlue<-fadeColor("blue", fade = "15")

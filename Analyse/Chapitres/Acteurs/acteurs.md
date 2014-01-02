@@ -11,30 +11,15 @@ getwd()
 ```
 
 ```
-## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU2013/Chapitres"
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Acteurs"
 ```
 
 ```r
-source("prologue.R")
+source("../prologue.R")
 ```
 
 ```
-## gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
-## 
-## gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
-## 
-## Attaching package: 'gdata'
-## 
-## L'objet suivant est masqué from 'package:stats':
-## 
-##     nobs
-## 
-## L'objet suivant est masqué from 'package:utils':
-## 
-##     object.size
-## 
 ## Loading required package: questionr
-## Loading required namespace: car
 ## 
 ## Attaching package: 'rgrs'
 ## 
@@ -73,11 +58,10 @@ source("prologue.R")
 ```
 
 ```
-## [1] "Fichier courant: rpu2013d0110.Rda"
+## [1] "Fichier courant: rpu2013d0111.Rda"
 ```
 
 ```r
-d1 <- foo("../")
 
 a <- apply(is.na(d1), 2, mean)
 round(a * 100, 2)
@@ -85,13 +69,13 @@ round(a * 100, 2)
 
 ```
 ##            id   CODE_POSTAL       COMMUNE   DESTINATION            DP 
-##          0.00          0.00          0.00         78.86         33.60 
+##          0.00          0.00          0.00         78.81         34.17 
 ##        ENTREE       EXTRACT        FINESS       GRAVITE   MODE_ENTREE 
-##          0.00          0.00          0.00         14.30         10.15 
+##          0.00          0.00          0.00         14.50         10.01 
 ##   MODE_SORTIE         MOTIF     NAISSANCE   ORIENTATION    PROVENANCE 
-##         14.60         36.52          0.00         80.07         35.36 
+##         14.53         36.72          0.00         80.04         35.81 
 ##          SEXE        SORTIE     TRANSPORT TRANSPORT_PEC           AGE 
-##          0.00          9.24         22.78         25.75          0.00
+##          0.00          9.15         23.43         26.05          0.00
 ```
 
 ```r
@@ -99,12 +83,19 @@ radial.plot(1 - a, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col 
     radial.lim = c(0, 1), main = "Taux de complétude des RPU transmis")
 ```
 
+```
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
+```
+
 ![plot of chunk acteurs](figure/acteurs.png) 
+
 
 Deux ou plusieurs polygones
 ---------------------------
 On compare les résultats de lannée à ceux du mois de septembre:
-- on dessinne une première grille comme précédemment.Le polygone est tracé en rouge.
+- on dessine une première grille comme précédemment.Le polygone est tracé en rouge.
 - on trace un second polygone en bleu qui représente lesdonnées du mois de septembre. Pour qe le second polygone vienne en surimpression sans effacer lepremier, on ajoute l'instruction **add=TRUE**. Il faut également laisser **radial.lim** pour que les deux polygones soient à la même échelle.
 
 ```r
@@ -112,38 +103,58 @@ radial.plot(1 - a, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col 
     radial.lim = c(0, 1), main = "Taux de complétude des RPU transmis")
 ```
 
-![plot of chunk poly2](figure/poly2.png) 
-
-```r
-
-load("../rpu2013d09.Rda")
 ```
-
-```
-## Warning: impossible d'ouvrir le fichier compressé '../rpu2013d09.Rda',
-## cause probable : 'Aucun fichier ou dossier de ce type'
-```
-
-```
-## Error: impossible d'ouvrir la connexion
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ```r
+
+# load('../rpu2013d09.Rda')
+d09 <- d1[d1$ENTREE >= "2013-09-01" & d1$ENTREE <= "2013-09-30", ]
 b <- apply(is.na(d09), 2, mean)
-```
-
-```
-## Error: objet 'd09' introuvable
-```
-
-```r
 radial.plot(1 - b, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col = "blue", 
     radial.lim = c(0, 1), add = T)
 ```
 
 ```
-## Error: objet 'b' introuvable
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
 ```
+
+![plot of chunk poly2](figure/poly2.png) 
+
+Taux de comolétude du mois
+--------------------------
+
+```r
+c <- rbind(a, b)
+c
+```
+
+```
+##   id CODE_POSTAL   COMMUNE DESTINATION     DP ENTREE EXTRACT FINESS
+## a  0           0 1.326e-05      0.7881 0.3417      0       0      0
+## b  0           0 0.000e+00      0.7908 0.4032      0       0      0
+##   GRAVITE MODE_ENTREE MODE_SORTIE  MOTIF NAISSANCE ORIENTATION PROVENANCE
+## a  0.1450     0.10007      0.1453 0.3672         0      0.8004     0.3581
+## b  0.1676     0.08547      0.1416 0.4042         0      0.8063     0.4098
+##   SEXE  SORTIE TRANSPORT TRANSPORT_PEC       AGE
+## a    0 0.09154    0.2343        0.2605 3.314e-05
+## b    0 0.09890    0.2966        0.2932 0.000e+00
+```
+
+```r
+barplot(1 - c, beside = T, las = 2, col = c("lavender", "blue"), ylab = "Taux de complétude", 
+    main = "Taux de complétude des RPU")
+legend("topright", legend = c("taux annuel", "taux mensuel"), col = c("lavender", 
+    "blue"), pch = 15)
+```
+
+![plot of chunk completude_mois](figure/completude_mois.png) 
+
 
 Comparaison par hôpital:
 
@@ -157,8 +168,21 @@ b <- apply(is.na(hus), 2, mean)
 radial.plot(1 - a, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col = fadeRed, 
     radial.lim = c(0, 1), main = "Taux de complétude des RPU transmis (HUS)", 
     poly.col = fadeRed)
+```
+
+```
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
+```
+
+```r
 radial.plot(1 - b, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col = fadeBlue, 
     poly.col = fadeBlue, radial.lim = c(0, 1), add = T)
+```
+
+```
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk radar_hopital](figure/radar_hopital1.png) 
@@ -173,8 +197,21 @@ b <- apply(is.na(wis), 2, mean)
 radial.plot(1 - a, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col = fadeRed, 
     radial.lim = c(0, 1), main = "Taux de complétude des RPU transmis (Wissembourg)", 
     poly.col = fadeRed)
+```
+
+```
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
+```
+
+```r
 radial.plot(1 - b, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col = fadeBlue, 
     poly.col = fadeBlue, radial.lim = c(0, 1), add = T)
+```
+
+```
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk radar_hopital](figure/radar_hopital2.png) 
@@ -189,8 +226,21 @@ b <- apply(is.na(col), 2, mean)
 radial.plot(1 - a, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col = fadeRed, 
     radial.lim = c(0, 1), main = "Taux de complétude des RPU transmis (Colmar)", 
     poly.col = fadeRed)
+```
+
+```
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
+```
+
+```r
 radial.plot(1 - b, rp.type = "p", radial.pos = NULL, labels = c(1:20), line.col = fadeBlue, 
     poly.col = fadeBlue, radial.lim = c(0, 1), add = T)
+```
+
+```
+## Warning: 'x' is NULL so the result will be NULL
+## Warning: 'x' is NULL so the result will be NULL
 ```
 
 ![plot of chunk radar_hopital](figure/radar_hopital3.png) 

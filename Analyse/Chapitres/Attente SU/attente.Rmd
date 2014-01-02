@@ -17,11 +17,49 @@ Librairies nécessaires:
 load_libraries()
 ```
 Heure d'arrivée aux urgences
-```{r geb_arrive}
-geb<-d1[d1$FINESS=="Geb",]
-e<-ymd_hms(geb$ENTREE)
+```{r sau_arrive}
+
+e<-ymd_hms(d1$ENTREE)
 h<-hour(e)
-summary(h)
+sh <- table(as.factor(h))
+sh
+psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages (en pourcentages)\n en fonction de l'heure d'entrée du patient aux urgences", ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+```
+
+```{r sau_depart}
+# Sorties
+s<-ymd_hms(d1$SORTIE)
+h<-hour(s)
+sh <- table(as.factor(h))
+sh
+psh <- plot(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), ylab="Pourcentage", xlab="Heure de sortie", main="Répartition des passages (en pourcentages)\n en fonction de l'heure de sortie du patient aux urgences", ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+```
+
+```{r sau_arrive_depart}
+# Entées et sorties
+h<-hour(e)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages (en pourcentages)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+
+h<-hour(s)
+sh <- table(as.factor(h))
+lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+
+legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+
+```
+
+CHU
+----
+```{r chu_arrive}
 hist(h,breaks=23,xlab="Heures",main="CH HUS - Horaire de fréquentation du SU")
 t<-table(h)
 t2<-as.integer(t)

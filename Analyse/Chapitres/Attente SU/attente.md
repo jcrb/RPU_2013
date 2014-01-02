@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Sat Dec 14 10:49:42 2013"
+## [1] "Thu Jan  2 22:51:07 2014"
 ```
 
 Variables globales:
@@ -65,7 +65,7 @@ wd
 ```
 
 ```
-## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU2013/Chapitres/Attente SU"
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Attente SU"
 ```
 
 ```r
@@ -83,25 +83,108 @@ Librairies nécessaires:
 load_libraries()
 ```
 
+```
+## Error: impossible de trouver la fonction "load_libraries"
+```
+
 Heure d'arrivée aux urgences
 
 ```r
-geb <- d1[d1$FINESS == "Geb", ]
-e <- ymd_hms(geb$ENTREE)
+
+e <- ymd_hms(d1$ENTREE)
 h <- hour(e)
-summary(h)
+sh <- table(as.factor(h))
+sh
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       0      10      14      14      18      23
+## 
+##     0     1     2     3     4     5     6     7     8     9    10    11 
+##  6244  5020  4027  3424  2992  2857  3160  5383 12112 17291 19803 18885 
+##    12    13    14    15    16    17    18    19    20    21    22    23 
+## 16240 17125 19532 18861 18530 19368 19457 18148 17816 14882 12217  8393
 ```
+
+```r
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages (en pourcentages)\n en fonction de l'heure d'entrée du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+```
+
+![plot of chunk sau_arrive](figure/sau_arrive.png) 
+
+
+
+```r
+# Sorties
+s <- ymd_hms(d1$SORTIE)
+h <- hour(s)
+sh <- table(as.factor(h))
+sh
+```
+
+```
+## 
+##     0     1     2     3     4     5     6     7     8     9    10    11 
+##  9144  6913  5318  4054  2973  2427  2040  5553  5231  8754 12683 15080 
+##    12    13    14    15    16    17    18    19    20    21    22    23 
+## 15465 13735 15237 19463 17431 17723 18174 16788 16003 14998 15116 13840
+```
+
+```r
+psh <- plot(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure de sortie", main = "Répartition des passages (en pourcentages)\n en fonction de l'heure de sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+```
+
+![plot of chunk sau_depart](figure/sau_depart.png) 
+
+
+
+```r
+# Entées et sorties
+h <- hour(e)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages (en pourcentages)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+h <- hour(s)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 2)
+```
+
+![plot of chunk sau_arrive_depart](figure/sau_arrive_depart.png) 
+
+
+CHU
+----
 
 ```r
 hist(h, breaks = 23, xlab = "Heures", main = "CH HUS - Horaire de fréquentation du SU")
 ```
 
-![plot of chunk geb_arrive](figure/geb_arrive1.png) 
+![plot of chunk chu_arrive](figure/chu_arrive1.png) 
 
 ```r
 t <- table(h)
@@ -115,7 +198,7 @@ c <- clock24.plot(t2, clock.pos = 1:24, lwd = 3)
 ## Warning: 'x' is NULL so the result will be NULL
 ```
 
-![plot of chunk geb_arrive](figure/geb_arrive2.png) 
+![plot of chunk chu_arrive](figure/chu_arrive2.png) 
 
 ```r
 c <- clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
@@ -128,7 +211,7 @@ c <- clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heu
 ## Warning: 'x' is NULL so the result will be NULL
 ```
 
-![plot of chunk geb_arrive](figure/geb_arrive3.png) 
+![plot of chunk chu_arrive](figure/chu_arrive3.png) 
 
 ```r
 # nécessite la librairie openintro
@@ -141,7 +224,7 @@ clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
 ## Warning: 'x' is NULL so the result will be NULL
 ```
 
-![plot of chunk geb_arrive](figure/geb_arrive4.png) 
+![plot of chunk chu_arrive](figure/chu_arrive4.png) 
 
 ```r
 clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d'arrivée aux urgences", 
@@ -154,12 +237,19 @@ clock24.plot(t2, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures d
 ## Warning: 'x' is NULL so the result will be NULL
 ```
 
-![plot of chunk geb_arrive](figure/geb_arrive5.png) 
+![plot of chunk chu_arrive](figure/chu_arrive5.png) 
 
 Idem pour les sorties
 
 ```r
 s <- ymd_hms(geb$SORTIE)
+```
+
+```
+## Error: objet 'geb' introuvable
+```
+
+```r
 t3 <- as.integer(table(hour(s)))
 clock24.plot(t3, clock.pos = 1:24, rp.type = "p", main = "HUS", xlab = "Heures de sortie des urgences", 
     show.grid.labels = F)
@@ -351,6 +441,13 @@ Entrées selon la période du jour: nuit profonde NP (0h-8h = 1), journée JO (8
 
 ```r
 e <- ymd_hms(geb$ENTREE)
+```
+
+```
+## Error: objet 'geb' introuvable
+```
+
+```r
 h <- hour(e)
 b <- cut(h, c(0, 8, 20, 24), labels = c("NP", "JO", "SR"))
 bp <- summary(as.factor(b))
@@ -365,7 +462,7 @@ round(prop.table(bp) * 100, 2)
 
 ```
 ##    NP    JO    SR  NA's 
-## 11.37 77.98  9.22  1.42
+## 12.92 73.25 11.76  2.07
 ```
 
 ```r
@@ -377,19 +474,22 @@ barplot(round(prop.table(bp) * 100, 2), ylab = "% des passages", sub = "NP = 0h-
 
 ```r
 t <- table(geb$GRAVITE, b)
+```
+
+```
+## Error: objet 'geb' introuvable
+```
+
+```r
 t
 ```
 
 ```
-##    b
-##        NP    JO    SR
-##   1    88   618    76
-##   2  1470 10122  1196
-##   3    16    54     3
-##   4     3    11     3
-##   5     0     0     1
-##   D     0     1     0
-##   P     4    18     2
+## h
+##     0     1     2     3     4     5     6     7     8     9    10    11 
+##  9144  6913  5318  4054  2973  2427  2040  5553  5231  8754 12683 15080 
+##    12    13    14    15    16    17    18    19    20    21    22    23 
+## 15465 13735 15237 19463 17431 17723 18174 16788 16003 14998 15116 13840
 ```
 
 ```r
@@ -402,21 +502,30 @@ Mode sortie en fonction de la période
 
 ```r
 t <- table(geb$MODE_SORTIE, b)
+```
+
+```
+## Error: objet 'geb' introuvable
+```
+
+```r
 t
 ```
 
 ```
-##            b
-##               NP   JO   SR
-##   NA           0    0    0
-##   Mutation    71  165   24
-##   Transfert   29  129   12
-##   Domicile   717 5684  339
-##   Décès        0    0    0
+## h
+##     0     1     2     3     4     5     6     7     8     9    10    11 
+##  9144  6913  5318  4054  2973  2427  2040  5553  5231  8754 12683 15080 
+##    12    13    14    15    16    17    18    19    20    21    22    23 
+## 15465 13735 15237 19463 17431 17723 18174 16788 16003 14998 15116 13840
 ```
 
 ```r
 t <- table(geb$ORIENTATION, b)
+```
+
+```
+## Error: objet 'geb' introuvable
 ```
 
 CCL: à HUS tout le monde rentre à la maison !
@@ -472,6 +581,13 @@ Les calculs sont exprimés en %
 
 ```r
 e <- ymd_hms(geb$ENTREE)
+```
+
+```
+## Error: objet 'geb' introuvable
+```
+
+```r
 h <- hour(e)
 t <- table(h)
 t2 <- as.integer(t)
