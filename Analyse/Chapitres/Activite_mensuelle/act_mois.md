@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Thu Jan  2 19:05:07 2014"
+## [1] "Fri Jan  3 17:46:09 2014"
 ```
 
 ```r
@@ -88,6 +88,18 @@ semaine_f <- c("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi",
     "Dimanche")
 ```
 
+Activité globale
+----------------
+
+```r
+b <- as.Date(max(d1$ENTREE))
+a <- as.Date(min(d1$ENTREE))
+n_jours <- as.numeric(b - a)
+moyenne_passages <- N/n_jours
+```
+
+- Nombre de passages: **301767**
+- Nombre de passages par jour: **906**
 
 Activité mensuelle
 --------------------
@@ -196,7 +208,7 @@ ts
 ```
 
 ```r
-barplot(ts)
+barplot(prop.table(ts) * 100, main = "Répartition des passages (en pourcentage) selon le jour de la semaine")
 ```
 
 ![plot of chunk week](figure/week1.png) 

@@ -17,6 +17,16 @@ mois_c <- c("Jan","Fév","Mar","Avr","Mai","Jui","Jul","Aou","Sep","Oct","Nov","
 trimestre_f <- c("trim.1","trim.2","trim.3","trim.4")
 semaine_f <- c("Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
 ```
+Activité globale
+----------------
+```{r act_globale}
+b <- as.Date(max(d1$ENTREE))
+a <- as.Date(min(d1$ENTREE))
+n_jours <- as.numeric(b-a)
+moyenne_passages <- N/n_jours
+```
+- Nombre de passages: **`r N`**
+- Nombre de passages par jour: **`r round(moyenne_passages,0)`**
 
 Activité mensuelle
 --------------------
@@ -72,7 +82,7 @@ sf[s=="7"] <- 6
 ts <- table(sf)
 names(ts) <- semaine_f
 ts
-barplot(ts)
+barplot(prop.table(ts) * 100, main="Répartition des passages (en pourcentage) selon le jour de la semaine")
 
 boxplot(as.numeric(as.Date(d1$ENTREE)) ~ sf, las=2, col="yellow", names=semaine_f, main="Activité selon le jour de la semaine", notch=TRUE)
 ```

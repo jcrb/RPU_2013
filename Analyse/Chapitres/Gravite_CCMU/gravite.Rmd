@@ -1,0 +1,60 @@
+Gravité - CCMU
+========================================================
+```{r date}
+date()
+```
+Variables globales:
+-------------------
+Charge le fichier source **d1**
+```{r var_globales}
+source("../prologue.R")
+wd
+N <- nrow(d1)
+N
+```
+Librairies nécessaires:
+-----------------------
+```{r library , message=FALSE}
+load_libraries
+gravite <- d1$GRAVITE
+```
+
+Analyse CCMU régionale
+----------------------
+```{r analyse_ccmu}
+
+t <- table(gravite)
+pt <- round(prop.table(t)*100, 2)
+g <- rbind(t,pt)
+rownames(g) <- c("n","%")
+g
+
+tx_urg <- sum(pt[3:5])
+```
+Taux d'urgences réelles: **`r tx_urg` %**
+
+Analyse CCMU par département
+----------------------------
+On forme un dataframe de 3 colonnes, puis on réduit le cose postal à celui du département
+
+```{r ccmu_dep}
+g <- d1[, c("GRAVITE","FINESS")]
+g$dep[g$FINESS %in% c("Wis","Hag","Sav","Hus","Sel","Odi")] <- 67
+g$dep[is.na(g$dep)] <- 68
+t <- table(g$GRAVITE, g$dep)
+pt <- round(prop.table(t)*100, 2)
+br <- sum(pt[3:5,1])
+hr <- sum(pt[3:5,2])
+br
+hr
+a <- pt[3:5,]
+apply(a,2,sum)
+
+```
+Analyse par établissement
+-------------------------
+```{r ccmu_etb}
+t <- table(g$GRAVITE, g$FINESS)
+pt <- round(prop.table(t)*100, 2)
+```
+

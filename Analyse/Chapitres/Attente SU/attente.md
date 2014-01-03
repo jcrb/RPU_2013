@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Thu Jan  2 22:51:07 2014"
+## [1] "Fri Jan  3 19:25:26 2014"
 ```
 
 Variables globales:
@@ -69,7 +69,8 @@ wd
 ```
 
 ```r
-nrow(d1)
+N <- nrow(d1)
+N
 ```
 
 ```
@@ -88,6 +89,9 @@ load_libraries()
 ```
 
 Heure d'arrivée aux urgences
+----------------------------
+Inspiré du rapport activité de l'OruLim
+
 
 ```r
 
@@ -107,7 +111,7 @@ sh
 
 ```r
 psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
-    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages (en pourcentages)\n en fonction de l'heure d'entrée du patient aux urgences", 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages (en pourcentage)\n en fonction de l'heure d'entrée du patient aux urgences", 
     ylim = c(0, 10))
 prsh <- prop.table(sh) * 100
 for (i in 1:24) {
@@ -137,7 +141,7 @@ sh
 
 ```r
 psh <- plot(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), 
-    ylab = "Pourcentage", xlab = "Heure de sortie", main = "Répartition des passages (en pourcentages)\n en fonction de l'heure de sortie du patient aux urgences", 
+    ylab = "Pourcentage", xlab = "Heure de sortie", main = "Répartition des passages (en pourcentage)\n en fonction de l'heure de sortie du patient aux urgences", 
     ylim = c(0, 10))
 prsh <- prop.table(sh) * 100
 for (i in 1:24) {
@@ -154,7 +158,7 @@ for (i in 1:24) {
 h <- hour(e)
 sh <- table(as.factor(h))
 psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
-    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages (en pourcentages)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
     ylim = c(0, 10))
 prsh <- prop.table(sh) * 100
 for (i in 1:24) {
@@ -171,10 +175,323 @@ for (i in 1:24) {
 }
 
 legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
-    lty = 2)
+    lty = 1)
 ```
 
 ![plot of chunk sau_arrive_depart](figure/sau_arrive_depart.png) 
+
+
+Diurne - Nocturne
+-----------------------
+- diurne: 8h - 19h59
+- nocturne: 20h - 7h59
+
+```r
+h <- hour(e)
+t <- table(h)  # t[1] correspond à t0
+e_nocturne <- sum(t[1:8]) + sum(t[21:24])
+e_diurne <- sum(t[9:20])
+n <- e_diurne + e_nocturne
+admission_diurne <- round(e_diurne * 100/n, 2)
+
+h <- hour(s)
+t <- table(h)  # t[1] correspond à t0
+s_nocturne <- sum(t[1:8]) + sum(t[21:24])
+s_diurne <- sum(t[9:20])
+n <- s_diurne + s_nocturne
+sortie_diurne <- round(s_diurne * 100/n, 2)
+```
+
+admission diurne: 71.36 %
+
+**Recours nocturne: 28.64 %**
+
+sortie diurne: 64.11 %
+
+ratio entrée/sortie diurne: 1.23
+
+ratio entrée/sortie nocturne: 0.88
+
+Entrée - sorties pédiatriques
+-----------------------------
+
+NOTE: faire une fonction gébérique
+
+
+```r
+e <- ymd_hms(d1$ENTREE[d1$AGE < 18])
+h <- hour(e)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages pédiatriques (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+s <- ymd_hms(d1$SORTIE[d1$AGE < 18])
+h <- hour(s)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 1)
+```
+
+![plot of chunk es_pediatriques](figure/es_pediatriques.png) 
+
+
+
+Entrée - sorties adultes
+-----------------------------
+
+NOTE: faire une fonction gébérique
+
+
+```r
+e <- ymd_hms(d1$ENTREE[d1$AGE >= 18 & d1$AGE < 75])
+h <- hour(e)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages adultes (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+s <- ymd_hms(d1$SORTIE[d1$AGE >= 18 & d1$AGE < 75])
+h <- hour(s)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 1)
+```
+
+![plot of chunk es_adultes](figure/es_adultes.png) 
+
+
+Entrée - sorties gériatriques
+-----------------------------
+
+NOTE: faire une fonction générique
+
+
+```r
+e <- ymd_hms(d1$ENTREE[d1$AGE > 74])
+h <- hour(e)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages gériatriques (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+s <- ymd_hms(d1$SORTIE[d1$AGE > 74])
+h <- hour(s)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 1)
+```
+
+![plot of chunk es_geriatrique](figure/es_geriatrique.png) 
+
+
+
+Semaine - Week-end
+--------------------
+- semaine: du lundi 8h au vendredi 19h59
+- week-end: du vendredi 20h au lundi 7h59
+
+
+```r
+e_dom
+```
+
+```
+## Error: objet 'e_dom' introuvable
+```
+
+```r
+# admissions
+semaine <- e[wday(e) %in% c(3:5) | (wday(e) == 2 & hour(e) > 7) | (wday(e) == 
+    6 & hour(e) < 20)]
+weekend <- e[wday(e) %in% c(7, 1) | (wday(e) == 6 & hour(e) > 19) | (wday(e) == 
+    2 & hour(e) < 8)]
+n_se <- length(semaine)
+n_we <- length(weekend)
+
+# sorties
+s_semaine <- s[wday(s) %in% c(3:5) | (wday(s) == 2 & hour(s) > 7) | (wday(s) == 
+    6 & hour(s) < 20)]
+s_weekend <- s[wday(s) %in% c(7, 1) | (wday(s) == 6 & hour(s) > 19) | (wday(s) == 
+    2 & hour(s) < 8)]
+n_sse <- length(s_semaine)
+n_swe <- length(s_weekend)
+
+# graphe entrées semaine/we
+
+h <- hour(semaine)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages en semaine (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+h <- hour(weekend)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 1)
+```
+
+![plot of chunk sem_we](figure/sem_we1.png) 
+
+```r
+
+# graphue des sorties semaine/we
+
+h <- hour(s_semaine)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages le week-end (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+h <- hour(s_weekend)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 1)
+```
+
+![plot of chunk sem_we](figure/sem_we2.png) 
+
+- entrées en semaine 32956
+- entrées le weekend: 13588
+- pourcentage des entrées en semaine: 70.81 %
+- **Part d'activité de week-end: 
+
+```
+
+Error in base::parse(text = code, srcfile = NULL) : 
+  1:31: entrée inattendu(e)
+1: round(n_we*100/(n_se+n_we),2) %
+                                  ^
+
+```
+
+***
+- sorties en semaine 34220
+- sorties le weekend: 18883
+- pourcentage de sorties en semaine: 64.44
+
+Entrées sorties des hospitalisés
+--------------------------------
+
+```r
+e_hosp <- d1$ENTREE[d1$MODE_SORTIE %in% c("Mutation", "Transfert")]
+s_hosp <- d1$SORTIE[d1$MODE_SORTIE %in% c("Mutation", "Transfert")]
+
+h <- hour(e_hosp)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages des patients hospitalisés (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+h <- hour(s_hosp)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 1)
+```
+
+![plot of chunk es_hosp](figure/es_hosp.png) 
+
+
+Entrées sorties des retours à domicile
+--------------------------------------
+
+```r
+e_dom <- d1$ENTREE[d1$MODE_SORTIE %in% c("Domicile")]
+s_dom <- d1$SORTIE[d1$MODE_SORTIE %in% c("Domicile")]
+
+h <- hour(e_dom)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh) * 100, type = "l", col = "red", xlim = c(0, 24), 
+    ylab = "Pourcentage", xlab = "Heure d'entrée", main = "Répartition des passages des retours à domicile (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", 
+    ylim = c(0, 10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+h <- hour(s_dom)
+sh <- table(as.factor(h))
+lines(prop.table(sh) * 100, type = "l", col = "blue", xlim = c(0, 24), , ylim = c(0, 
+    10))
+prsh <- prop.table(sh) * 100
+for (i in 1:24) {
+    segments(psh[i], -0.25, psh[i], prsh[i])
+}
+
+legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"), 
+    lty = 1)
+```
+
+![plot of chunk es_dom](figure/es_dom.png) 
+
+
+
 
 
 CHU
@@ -283,13 +600,16 @@ summary(as.numeric(d1$presence))
 ```r
 # suppression des valeurs négatives
 d1$presence[d1$presence < 0] <- NA
+# suppression des valeurs supérieures à 4 jours (5760 minutes)
+d1$presence[d1$presence > 5760] <- NA
 d1$presence <- as.numeric(d1$presence)
-summary(d1$presence)
+sdp <- summary(d1$presence)
+sdp
 ```
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##       0      54     110     163     204    9870   27627
+##       0      54     110     163     204    5710   27630
 ```
 
 ```r
@@ -330,7 +650,7 @@ length(c)
 ```
 
 ```
-## [1] 2537
+## [1] 2534
 ```
 
 ```r
@@ -370,6 +690,9 @@ rbind(table(a), round(prop.table(table(a)) * 100, 2))
 ```r
 # Plus de 90% proviennent des HUS
 ```
+
+**Durée moyenne de présence: 163 mn**  
+**Durée médiane de présence: 110 mn**
 
 Moyenne des durées de passages par jour
 ---------------------------------------
@@ -487,9 +810,9 @@ t
 ```
 ## h
 ##     0     1     2     3     4     5     6     7     8     9    10    11 
-##  9144  6913  5318  4054  2973  2427  2040  5553  5231  8754 12683 15080 
+##  5914  4164  3098  2344  1626  1353  1275  4646  3856  6569  9361 11030 
 ##    12    13    14    15    16    17    18    19    20    21    22    23 
-## 15465 13735 15237 19463 17431 17723 18174 16788 16003 14998 15116 13840
+## 11457  9751 10128 12944 12635 13074 13497 12350 11825 10454 10004  8886
 ```
 
 ```r
@@ -515,9 +838,9 @@ t
 ```
 ## h
 ##     0     1     2     3     4     5     6     7     8     9    10    11 
-##  9144  6913  5318  4054  2973  2427  2040  5553  5231  8754 12683 15080 
+##  5914  4164  3098  2344  1626  1353  1275  4646  3856  6569  9361 11030 
 ##    12    13    14    15    16    17    18    19    20    21    22    23 
-## 15465 13735 15237 19463 17431 17723 18174 16788 16003 14998 15116 13840
+## 11457  9751 10128 12944 12635 13074 13497 12350 11825 10454 10004  8886
 ```
 
 ```r

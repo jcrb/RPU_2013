@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Thu Jan  2 12:55:33 2014"
+## [1] "Fri Jan  3 18:01:34 2014"
 ```
 
 ```r
@@ -154,7 +154,30 @@ a
 ## %     24.05           60.54     15.41
 ```
 
+- Pédiatrie: **
 
+```
+
+Error in base::parse(text = code, srcfile = NULL) : 
+  1:16: entrée inattendu(e)
+1: round(t2[1],0) %
+                   ^
+
+```
+
+**
+- Gériatrie: **
+
+```
+
+Error in base::parse(text = code, srcfile = NULL) : 
+  1:16: entrée inattendu(e)
+1: round(t2[3],0) %
+                   ^
+
+```
+
+**
 
 ### Age3
 
@@ -230,6 +253,9 @@ Sex ratio
 ---------
 
 ```r
+a <- table(d1$SEXE)
+sex_ratio <- a["M"]/a["F"]
+
 a <- table(d1$SEXE, as.factor(d1$AGE))
 sr <- a[3, ]/a[1, ]
 sr
@@ -272,6 +298,8 @@ abline(v = 77, col = "blue")
 ```
 
 ![plot of chunk sr](figure/sr.png) 
+
+**Se-ratio: 1.11**
 
 Même calcul avec des tanches d'age de 5 ans
 

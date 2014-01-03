@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=9" >
 
-<title>Origine des patients</title>
+<title>Gravité - CCMU</title>
 
 <style type="text/css">
 body, td {
@@ -179,22 +179,17 @@ hljs.initHighlightingOnLoad();
 </head>
 
 <body>
-<h1>Origine des patients</h1>
+<h1>Gravité - CCMU</h1>
 
 <pre><code class="r">date()
 </code></pre>
 
-<pre><code>## [1] &quot;Fri Jan  3 18:05:35 2014&quot;
-</code></pre>
-
-<pre><code class="r">wd &lt;- getwd()
-wd
-</code></pre>
-
-<pre><code>## [1] &quot;/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Origine&quot;
+<pre><code>## [1] &quot;Fri Jan  3 20:21:15 2014&quot;
 </code></pre>
 
 <h2>Variables globales:</h2>
+
+<p>Charge le fichier source <strong>d1</strong></p>
 
 <pre><code class="r">source(&quot;../prologue.R&quot;)
 </code></pre>
@@ -240,91 +235,73 @@ wd
 <pre><code>## [1] &quot;Fichier courant: rpu2013d0111.Rda&quot;
 </code></pre>
 
-<pre><code class="r">nrow(d1)
+<pre><code class="r">wd
+</code></pre>
+
+<pre><code>## [1] &quot;/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Gravite_CCMU&quot;
+</code></pre>
+
+<pre><code class="r">N &lt;- nrow(d1)
+N
 </code></pre>
 
 <pre><code>## [1] 301767
 </code></pre>
 
-<h2>Données générales</h2>
+<h2>Librairies nécessaires:</h2>
 
-<pre><code class="r">x &lt;- as.character(d1$CODE_POSTAL)
-a &lt;- x[substr(x, 1, 2) == &quot;57&quot;]
-length(a)
+<pre><code class="r">load_libraries
 </code></pre>
 
-<pre><code>## [1] 2827
+<pre><code>## Error: objet &#39;load_libraries&#39; introuvable
 </code></pre>
 
-<h2>Origine géographique des patients</h2>
-
-<p>On récupère le no du département, puis on fait un summary trié par ordre croissant</p>
-
-<pre><code class="r">b &lt;- as.factor(substr(x, 1, 2))
-a &lt;- sort(summary(b))
-
-ap &lt;- round(prop.table(a) * 100, 2)
-c &lt;- rbind(a, ap)
-rownames(c) &lt;- c(&quot;n&quot;, &quot;%&quot;)
-c
+<pre><code class="r">gravite &lt;- d1$GRAVITE
 </code></pre>
 
-<pre><code>##   96 48 23 09 32 98 19 47 36 46 58 12 05 53 65 16 43 87 15 24 61 81    18
-## n  1  4  5  8  8  8  9  9 10 10 10 11 12 12 12 13 13 14 15 15 15 15 18.00
-## %  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0.01
-##      85    17    20    82    86    07    40    04    26    03    22    37
-## n 18.00 19.00 20.00 20.00 21.00 22.00 22.00 25.00 25.00 27.00 27.00 27.00
-## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01
-##      11    41    64    14    28    50    72    89    56    45    30    39
-## n 28.00 29.00 30.00 31.00 32.00 32.00 32.00 32.00 33.00 34.00 35.00 35.00
-## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01
-##      49    52    79    10    08    27    84    73    00    42    80    55
-## n 37.00 37.00 39.00 40.00 43.00 43.00 43.00 44.00 45.00 45.00 45.00 50.00
-## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.02
-##      35    66    02    44    31    83    97    60    01    71    33    51
-## n 51.00 54.00 56.00 56.00 59.00 60.00 60.00 64.00 66.00 66.00 67.00 71.00
-## %  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02
-##      74    21    29    34    38    62    63     06     91     95     13
-## n 78.00 79.00 79.00 79.00 86.00 89.00 90.00 102.00 104.00 104.00 115.00
-## %  0.03  0.03  0.03  0.03  0.03  0.03  0.03   0.03   0.03   0.03   0.04
-##       94     93     78     76     70     92     69     77     59     75
-## n 118.00 127.00 130.00 143.00 153.00 154.00 174.00 183.00 256.00 282.00
-## %   0.04   0.04   0.04   0.05   0.05   0.05   0.06   0.06   0.08   0.09
-##      25    54     88     90      99      57        67        68
-## n 300.0 305.0 491.00 560.00 1653.00 2827.00 124304.00 166458.00
-## %   0.1   0.1   0.16   0.19    0.55    0.94     41.19     55.16
+<h2>Analyse CCMU</h2>
+
+<pre><code class="r">
+t &lt;- table(gravite)
+pt &lt;- round(prop.table(t) * 100, 2)
+g &lt;- rbind(t, pt)
+rownames(g) &lt;- c(&quot;n&quot;, &quot;%&quot;)
+g
+</code></pre>
+
+<pre><code>##          1      2        3       4      5     D       P
+## n 34437.00 183174 35175.00 3157.00 794.00 34.00 1230.00
+## %    13.35     71    13.63    1.22   0.31  0.01    0.48
 </code></pre>
 
 <pre><code class="r">
-org_als &lt;- as.numeric(ap[&quot;67&quot;] + ap[&quot;68&quot;])
-org_lim &lt;- as.numeric(ap[&quot;57&quot;] + ap[&quot;54&quot;] + ap[&quot;88&quot;] + ap[&quot;90&quot;])
+tx_urg &lt;- sum(pt[3:5])
 </code></pre>
 
-<h4>Patient domiciliés en Alsace: 96.35 %</h4>
+<p>Taux d&#39;urgences réelles: <strong>15.16 %</strong></p>
 
-<h4>Patient domicilés dans les départements voisins: 1.39 %</h4>
+<h2>Analyse CCMU par département</h2>
 
-<p>La majorité des passages aux urgences sont le fait de résidents alsaciens. La fréquentation hors région ne représente que 3.65 % des passages. La Moselle (57) est le département extra régional le plus représenté. Cette situation s&#39;explique par les liens forts qui unissent l&#39;Alsace-Moselle au travers du Concordat.</p>
+<p>On forme un dataframe de 3 colonnes, puis on réduit le cose postal à celui du département</p>
 
-<h2>Passages en provenance des départements limitrophes</h2>
-
-<p>Moselle, Meurthe et Moselle, Vosges, Territoire de Belfort</p>
-
-<pre><code class="r">a &lt;- x[substr(x, 1, 2) %in% c(&quot;57&quot;, &quot;54&quot;, &quot;88&quot;, &quot;90&quot;)]
-b &lt;- as.factor(substr(a, 1, 2))
-summary(b)
+<pre><code class="r">g &lt;- d1[, c(&quot;GRAVITE&quot;, &quot;FINESS&quot;)]
+g$dep[g$FINESS %in% c(&quot;Wis&quot;, &quot;Hag&quot;, &quot;Sav&quot;, &quot;Hus&quot;, &quot;Sel&quot;, &quot;Odi&quot;)] &lt;- 67
+g$dep[is.na(g$dep)] &lt;- 68
+t &lt;- table(g$GRAVITE, g$dep)
+pt &lt;- round(prop.table(t) * 100, 2)
+br &lt;- sum(pt[3:5, 1])
+hr &lt;- sum(pt[3:5, 2])
+br
 </code></pre>
 
-<pre><code>##   54   57   88   90 
-##  305 2827  491  560
+<pre><code>## [1] 6.66
 </code></pre>
 
-<h3>TODO</h3>
+<pre><code class="r">hr
+</code></pre>
 
-<ul>
-<li>carte de France avec origines</li>
-<li>carte de la région + départements limitrophes</li>
-</ul>
+<pre><code>## [1] 8.5
+</code></pre>
 
 </body>
 
