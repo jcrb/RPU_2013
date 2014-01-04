@@ -54,13 +54,14 @@ age2 <- cut(d1$AGE,breaks=c(-1, 17, 74, 110),labels=c("Pédiatrie","Adulte < 75 
 t1 <- table(age2)
 mp <- barplot(prop.table(t1)*100, ylab="Pourcentage de la population", main="Répartition des consultants en 2013", col="lavender")
 mtext(side=1, at=mp, line=-2, text=paste(round(prop.table(t1)*100,0), "%",sep=""), col="blue")
+
 t2 <- round(prop.table(table(age2))*100,2)
 a <- rbind(t1,t2)
 rownames(a) <- c("n", "%")
 a
 ```
-- Pédiatrie: **`r round(t2[1],0) %`**
-- Gériatrie: **`r round(t2[3],0) %`**
+- Pédiatrie: **`r round(t2[1],0)` %**
+- Gériatrie: **`r round(t2[3],0)` %**
 
 ### Age3
 ```{r tranche_age3}
@@ -74,26 +75,59 @@ a
 # x = vecteur des labels
 inc <- 5
 intervalle <- 1
+lim_sup <- 100
 i <- 0
 j <- i + inc - 1
 x <- 1
-while(j < 95){
+while(j < lim_sup){
   x[intervalle] <- paste(i, "-", j, sep="")
   i <- j + 1
   j <- i + inc - 1
   intervalle <- intervalle + 1
 }
-x[intervalle] <- "> 94"
+x[intervalle] <- "100+"
 x
 # construction du vecteur age3
-brek <- c( seq(from = 0, to = 95, by = 5),120)
+brek <- c( seq(from = 0, to = lim_sup, by = 5),120)
 age3 <- cut(d1$AGE, breaks =  brek, include.lowest=F, right=F, labels = x)
+t_age3 <- table(age3)
 # Affichage
-barplot(table(age3), las = 2)
-barplot(round(prop.table(table(age3))*100,2), ylab = "% de la population", las = 2, xlab="", main="Pourcentage de consultants par tranche d'age")
+barplot(t_age3, las = 2)
+barplot(round(prop.table(t_age3)*100,2), ylab = "% de la population", las = 2, xlab="", main="Pourcentage de consultants par tranche d'age")
 #-------------------------------------------------------------------------
-
 ```
+
+Recours aux urgences par age et par sexe
+----------------------------------------
+La table *ts* est reformatée pour supprimer la colonne *I* et pour mettre la colonne *H* en premier de manière à être cohérent avec la présentation de l'INSEE.
+
+```{r tranche_sexe}
+ts <- table(age3, d1$SEXE)
+ts <- cbind(ts[,3], ts[,1])
+colnames(ts)<- c("H","F")
+ts
+```
+Pyramide des ages des consultants
+---------------------------------
+```{r pyr_consult}
+# graduations echelle des x: de 0 à 70000 par pas de 10000
+rl <- seq(0,17000,1000)
+# labels centraux
+agelabels<-c("0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90-94","95-99","100+")
+# gap = écartement entre les colonnes en unité prop au graphique
+pyramid.plot(lx= ts[,1], rx= ts[,2], labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1500, main="Pyramide des ages des passages aux urgences", unit="nombre", labelcex=0.8, laxlab=rl, raxlab=rl)
+
+# en pourcentages
+
+round(prop.table(ts) * 100, 2)
+
+rl <- seq(0, 6, 1)
+l <- ts[,1] * 100 / sum(ts)
+r <- ts[,2] * 100 / sum(ts)
+pyr.urg <- pyramid.plot(lx= l, rx= r, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages des passages aux urgences", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl, add=TRUE)
+pyr.urg 
+```
+
 
 Taux de recours aux urgences par tranches d'age
 -----------------------------------------------
@@ -103,7 +137,6 @@ Todo: voir fichier population.
 
 Centenaires
 -----------
-todo: centenaires en Alsace
 
 ```{r centenaires}
 centenaire <- d1$AGE[d1$AGE > 99]
@@ -111,7 +144,8 @@ n_centenaire <- length(centenaire)
 
 centenaire <- d1[d1$AGE > 99, c("AGE","SEXE")]
 ```
-En 2013, **`r n_centenaire` centenaires** ont été pris en charge par les services d'urgence (`r round(n_centenaire*100/N,2)` % des RPU).
+En 2013, **`r n_centenaire` centenaires** ont été pris en charge par les services d'urgence (`r round(n_centenaire*100/N,2)` % des RPU).  
+Le recensement 2010 fait état de **358** centenaires en Alsace. Le taux de recours aux urgences pour cette population particulière s'élève à `r round(n_centenaire * 100 / 358, 2)` %.
 
 Sex ratio
 ---------
@@ -143,5 +177,56 @@ a
  plot(sr, type = "l", xlab = "Tranches d'Age (années)", ylab = "Sex ratio", col="green", lwd=2)
 abline(h = 1, col="red")
 
+```
+
+Pyramide des ages
+-----------------
+
+```{r pyramide}
+file<-"~/Documents/Resural/Stat Resural/population_alsace/pop_legale_2010/rp2010_POP1B_n1_REG-42.csv"
+doc<-read.table(file,header=TRUE,sep=",", skip = 9)
+# on supprime la dernière ligne qui correspond au total
+doc <- doc[-nrow(doc),]
+head(doc)
+
+# couleur du fond
+par(bg="#eedd55")
+# graduations echelle des x: de 0 à 70000 par pas de 10000
+rl <- seq(0,70000,10000)
+# labels centraux
+agelabels<-c("0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90-94","95-99","100+")
+# gap = écartement entre les colonnes en unité prop au graphique
+pyramid.plot(lx=doc$Hommes, rx=doc$Femmes, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=6000, main="Pyramide des ages en Alsace (INSEE 2010)", unit="nombre", labelcex=0.8, laxlab=rl, raxlab=rl)
+par( bg= "white")
+
+# en pourcentage
+n <- sum(doc$Hommes,doc$Femmes) # pop totale
+rl <- seq(0,6,1)
+r <- doc$Hommes * 100 / n
+l <- doc$Femmes * 100 / n
+pyr.regionale <- pyramid.plot(lx=r, rx=l, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages en Alsace (INSEE 2010)", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl)
+pyr.regionale
+```
+On peut superposer les deux pyramides
+--------------------------------------
+pyr.regionale en premier puis pyr.urg
+```{r teg_urg}
+myred <- adjustcolor("red", alpha.f = 0.3)
+myblue <- adjustcolor("blue", alpha.f = 0.3)
+
+n <- sum(doc$Hommes,doc$Femmes) # pop totale
+rl <- seq(0,6,1)
+r <- doc$Hommes * 100 / n
+l <- doc$Femmes * 100 / n
+pyr.regionale <- pyramid.plot(lx=r, rx=l, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages en Alsace (INSEE 2010)", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl, lxcol= myblue, rxcol= myblue)
+pyr.regionale
+
+rl <- seq(0, 6, 1)
+l <- ts[,1] * 100 / sum(ts)
+r <- ts[,2] * 100 / sum(ts)
+pyr.urg <- pyramid.plot(lx= l, rx= r, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages des passages aux urgences", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl, ,lxcol=myred, rxcol=myred, add=TRUE)
+pyr.urg 
+
+legend("topleft", legend=c("Région","Urgences"), col=c(myblue,myred), pch=15)
 ```
 

@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Fri Jan  3 18:01:34 2014"
+## [1] "Sat Jan  4 20:09:59 2014"
 ```
 
 ```r
@@ -142,6 +142,7 @@ mtext(side = 1, at = mp, line = -2, text = paste(round(prop.table(t1) * 100,
 ![plot of chunk tranche_age2](figure/tranche_age2.png) 
 
 ```r
+
 t2 <- round(prop.table(table(age2)) * 100, 2)
 a <- rbind(t1, t2)
 rownames(a) <- c("n", "%")
@@ -154,30 +155,8 @@ a
 ## %     24.05           60.54     15.41
 ```
 
-- Pédiatrie: **
-
-```
-
-Error in base::parse(text = code, srcfile = NULL) : 
-  1:16: entrée inattendu(e)
-1: round(t2[1],0) %
-                   ^
-
-```
-
-**
-- Gériatrie: **
-
-```
-
-Error in base::parse(text = code, srcfile = NULL) : 
-  1:16: entrée inattendu(e)
-1: round(t2[3],0) %
-                   ^
-
-```
-
-**
+- Pédiatrie: **24 %**
+- Gériatrie: **15 %**
 
 ### Age3
 
@@ -188,38 +167,40 @@ Error in base::parse(text = code, srcfile = NULL) :
 # labels
 inc <- 5
 intervalle <- 1
+lim_sup <- 100
 i <- 0
 j <- i + inc - 1
 x <- 1
-while (j < 95) {
+while (j < lim_sup) {
     x[intervalle] <- paste(i, "-", j, sep = "")
     i <- j + 1
     j <- i + inc - 1
     intervalle <- intervalle + 1
 }
-x[intervalle] <- "> 94"
+x[intervalle] <- "100+"
 x
 ```
 
 ```
 ##  [1] "0-4"   "5-9"   "10-14" "15-19" "20-24" "25-29" "30-34" "35-39"
 ##  [9] "40-44" "45-49" "50-54" "55-59" "60-64" "65-69" "70-74" "75-79"
-## [17] "80-84" "85-89" "90-94" "> 94"
+## [17] "80-84" "85-89" "90-94" "95-99" "100+"
 ```
 
 ```r
 # construction du vecteur age3
-brek <- c(seq(from = 0, to = 95, by = 5), 120)
+brek <- c(seq(from = 0, to = lim_sup, by = 5), 120)
 age3 <- cut(d1$AGE, breaks = brek, include.lowest = F, right = F, labels = x)
+t_age3 <- table(age3)
 # Affichage
-barplot(table(age3), las = 2)
+barplot(t_age3, las = 2)
 ```
 
 ![plot of chunk tranche_age3](figure/tranche_age31.png) 
 
 ```r
-barplot(round(prop.table(table(age3)) * 100, 2), ylab = "% de la population", 
-    las = 2, xlab = "", main = "Pourcentage de consultants par tranche d'age")
+barplot(round(prop.table(t_age3) * 100, 2), ylab = "% de la population", las = 2, 
+    xlab = "", main = "Pourcentage de consultants par tranche d'age")
 ```
 
 ![plot of chunk tranche_age3](figure/tranche_age32.png) 
@@ -227,6 +208,117 @@ barplot(round(prop.table(table(age3)) * 100, 2), ylab = "% de la population",
 ```r
 # -------------------------------------------------------------------------
 ```
+
+
+Recours aux urgences par age et par sexe
+----------------------------------------
+La table *ts* est reformatée pour supprimer la colonne *I* et pour mettre la colonne *H* en premier de manière à être cohérent avec la présentation de l'INSEE.
+
+
+```r
+ts <- table(age3, d1$SEXE)
+ts <- cbind(ts[, 3], ts[, 1])
+colnames(ts) <- c("H", "F")
+ts
+```
+
+```
+##           H     F
+## 0-4   16408 12837
+## 5-9    8965  7005
+## 10-14  9290  7733
+## 15-19  9597  8561
+## 20-24 11201  9998
+## 25-29 10962  8949
+## 30-34 10465  8069
+## 35-39  9229  7129
+## 40-44  9955  7577
+## 45-49  8978  7286
+## 50-54  8276  7110
+## 55-59  7679  6761
+## 60-64  7603  6156
+## 65-69  5964  4801
+## 70-74  5657  5029
+## 75-79  6083  6566
+## 80-84  6173  8430
+## 85-89  3976  7988
+## 90-94  1702  4481
+## 95-99   203   723
+## 100+     72   126
+```
+
+Pyramide des ages des consultants
+---------------------------------
+
+```r
+# graduations echelle des x: de 0 à 70000 par pas de 10000
+rl <- seq(0, 17000, 1000)
+# labels centraux
+agelabels <- c("0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", 
+    "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", 
+    "80-84", "85-89", "90-94", "95-99", "100+")
+# gap = écartement entre les colonnes en unité prop au graphique
+pyramid.plot(lx = ts[, 1], rx = ts[, 2], labels = agelabels, top.labels = c("Hommes", 
+    "Age", "Femmes"), gap = 1500, main = "Pyramide des ages des passages aux urgences", 
+    unit = "nombre", labelcex = 0.8, laxlab = rl, raxlab = rl)
+```
+
+```
+## [1] 5.1 4.1 4.1 2.1
+```
+
+```r
+
+# en pourcentages
+
+round(prop.table(ts) * 100, 2)
+```
+
+```
+##          H    F
+## 0-4   5.44 4.25
+## 5-9   2.97 2.32
+## 10-14 3.08 2.56
+## 15-19 3.18 2.84
+## 20-24 3.71 3.31
+## 25-29 3.63 2.97
+## 30-34 3.47 2.67
+## 35-39 3.06 2.36
+## 40-44 3.30 2.51
+## 45-49 2.98 2.41
+## 50-54 2.74 2.36
+## 55-59 2.54 2.24
+## 60-64 2.52 2.04
+## 65-69 1.98 1.59
+## 70-74 1.87 1.67
+## 75-79 2.02 2.18
+## 80-84 2.05 2.79
+## 85-89 1.32 2.65
+## 90-94 0.56 1.48
+## 95-99 0.07 0.24
+## 100+  0.02 0.04
+```
+
+```r
+
+rl <- seq(0, 6, 1)
+l <- ts[, 1] * 100/sum(ts)
+r <- ts[, 2] * 100/sum(ts)
+pyr.urg <- pyramid.plot(lx = l, rx = r, labels = agelabels, top.labels = c("Hommes", 
+    "Age", "Femmes"), gap = 1, main = "Pyramide des ages des passages aux urgences", 
+    unit = "%", labelcex = 0.8, laxlab = rl, raxlab = rl, add = TRUE)
+```
+
+![plot of chunk pyr_consult](figure/pyr_consult.png) 
+
+```r
+pyr.urg
+```
+
+```
+## [1] 4 2 4 2
+```
+
 
 
 Taux de recours aux urgences par tranches d'age
@@ -237,7 +329,6 @@ Todo: voir fichier population.
 
 Centenaires
 -----------
-todo: centenaires en Alsace
 
 
 ```r
@@ -247,7 +338,8 @@ n_centenaire <- length(centenaire)
 centenaire <- d1[d1$AGE > 99, c("AGE", "SEXE")]
 ```
 
-En 2013, **208 centenaires** ont été pris en charge par les services d'urgence (0.07 % des RPU).
+En 2013, **208 centenaires** ont été pris en charge par les services d'urgence (0.07 % des RPU).  
+Le recensement 2010 fait état de **358** centenaires en Alsace. Le taux de recours aux urgences pour cette population particulière s'élève à 58.1 %.
 
 Sex ratio
 ---------
@@ -299,7 +391,7 @@ abline(v = 77, col = "blue")
 
 ![plot of chunk sr](figure/sr.png) 
 
-**Se-ratio: 1.11**
+**Sex-ratio: 1.11**
 
 Même calcul avec des tanches d'age de 5 ans
 
@@ -316,10 +408,10 @@ a
 ##   I     0     1     0     2     0     0     0     0     0     0     0
 ##   M 16408  8965  9290  9597 11201 10962 10465  9229  9955  8978  8276
 ##    
-##     55-59 60-64 65-69 70-74 75-79 80-84 85-89 90-94  > 94
-##   F  6761  6156  4801  5029  6566  8430  7988  4481   849
-##   I     0     0     0     0     0     1     0     0     0
-##   M  7679  7603  5964  5657  6083  6173  3976  1702   275
+##     55-59 60-64 65-69 70-74 75-79 80-84 85-89 90-94 95-99  100+
+##   F  6761  6156  4801  5029  6566  8430  7988  4481   723   126
+##   I     0     0     0     0     0     1     0     0     0     0
+##   M  7679  7603  5964  5657  6083  6173  3976  1702   203    72
 ```
 
 ```r
@@ -336,5 +428,119 @@ abline(h = 1, col = "red")
 ```
 
 ![plot of chunk sr5](figure/sr5.png) 
+
+
+Pyramide des ages
+-----------------
+
+
+```r
+file <- "~/Documents/Resural/Stat Resural/population_alsace/pop_legale_2010/rp2010_POP1B_n1_REG-42.csv"
+doc <- read.table(file, header = TRUE, sep = ",", skip = 9)
+# on supprime la dernière ligne qui correspond au total
+doc <- doc[-nrow(doc), ]
+head(doc)
+```
+
+```
+##                X Hommes Femmes Ensemble
+## 1 Moins de 5 ans  55914  53240   109154
+## 2      5 à 9 ans  56840  54235   111075
+## 3    10 à 14 ans  56710  54357   111067
+## 4    15 à 19 ans  58843  56599   115441
+## 5    20 à 24 ans  58106  59818   117924
+## 6    25 à 29 ans  57879  59193   117072
+```
+
+```r
+
+# couleur du fond
+par(bg = "#eedd55")
+# graduations echelle des x: de 0 à 70000 par pas de 10000
+rl <- seq(0, 70000, 10000)
+# labels centraux
+agelabels <- c("0-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", 
+    "40-44", "45-49", "50-54", "55-59", "60-64", "65-69", "70-74", "75-79", 
+    "80-84", "85-89", "90-94", "95-99", "100+")
+# gap = écartement entre les colonnes en unité prop au graphique
+pyramid.plot(lx = doc$Hommes, rx = doc$Femmes, labels = agelabels, top.labels = c("Hommes", 
+    "Age", "Femmes"), gap = 6000, main = "Pyramide des ages en Alsace (INSEE 2010)", 
+    unit = "nombre", labelcex = 0.8, laxlab = rl, raxlab = rl)
+```
+
+![plot of chunk pyramide](figure/pyramide1.png) 
+
+```
+## [1] 5.1 4.1 4.1 2.1
+```
+
+```r
+par(bg = "white")
+
+# en pourcentage
+n <- sum(doc$Hommes, doc$Femmes)  # pop totale
+rl <- seq(0, 6, 1)
+r <- doc$Hommes * 100/n
+l <- doc$Femmes * 100/n
+pyr.regionale <- pyramid.plot(lx = r, rx = l, labels = agelabels, top.labels = c("Hommes", 
+    "Age", "Femmes"), gap = 1, main = "Pyramide des ages en Alsace (INSEE 2010)", 
+    unit = "%", labelcex = 0.8, laxlab = rl, raxlab = rl)
+```
+
+![plot of chunk pyramide](figure/pyramide2.png) 
+
+```r
+pyr.regionale
+```
+
+```
+## [1] 4 2 4 2
+```
+
+On peut superposer les deux pyramides
+--------------------------------------
+pyr.regionale en premier puis pyr.urg
+
+```r
+myred <- adjustcolor("red", alpha.f = 0.3)
+myblue <- adjustcolor("blue", alpha.f = 0.3)
+
+n <- sum(doc$Hommes, doc$Femmes)  # pop totale
+rl <- seq(0, 6, 1)
+r <- doc$Hommes * 100/n
+l <- doc$Femmes * 100/n
+pyr.regionale <- pyramid.plot(lx = r, rx = l, labels = agelabels, top.labels = c("Hommes", 
+    "Age", "Femmes"), gap = 1, main = "Pyramide des ages en Alsace (INSEE 2010)", 
+    unit = "%", labelcex = 0.8, laxlab = rl, raxlab = rl, lxcol = myblue, rxcol = myblue)
+pyr.regionale
+```
+
+```
+## [1] 5.1 4.1 4.1 2.1
+```
+
+```r
+
+rl <- seq(0, 6, 1)
+l <- ts[, 1] * 100/sum(ts)
+r <- ts[, 2] * 100/sum(ts)
+pyr.urg <- pyramid.plot(lx = l, rx = r, labels = agelabels, top.labels = c("Hommes", 
+    "Age", "Femmes"), gap = 1, main = "Pyramide des ages des passages aux urgences", 
+    unit = "%", labelcex = 0.8, laxlab = rl, raxlab = rl, , lxcol = myred, rxcol = myred, 
+    add = TRUE)
+pyr.urg
+```
+
+```
+## [1] 4 2 4 2
+```
+
+```r
+
+legend("topleft", legend = c("Région", "Urgences"), col = c(myblue, myred), 
+    pch = 15)
+```
+
+![plot of chunk teg_urg](figure/teg_urg.png) 
 
 
