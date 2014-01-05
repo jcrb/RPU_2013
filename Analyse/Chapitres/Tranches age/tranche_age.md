@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Sat Jan  4 20:09:59 2014"
+## [1] "Sun Jan  5 16:18:46 2014"
 ```
 
 ```r
@@ -323,9 +323,55 @@ pyr.urg
 
 Taux de recours aux urgences par tranches d'age
 -----------------------------------------------
-Nécessite de connaître la répartition de la population par tranches d'age.
+Nécessite de connaître la répartition de la population par tranches d'age. On forme le rapport nb consultants / pop correspondante.
 
-Todo: voir fichier population.
+Todo: voir fichier population. BTT_TD_POP1B_2010.txt
+
+On récupère le fichier de l'insee qui donne les chiffres régionaux par tranches de 1 an. Ce fichier couvre toute la France, il faut donc isoler l'alsace (code REG = 42). La virgule décimale doit êtrre remplacée par le point décimal.
+```{alsace}
+file<-"~/Documents/Resural/Stat Resural/population_alsace/pop_legale_2011/BTT_TD_POP1B_2010.txt"
+doc<-read.table(file,header=TRUE,sep=";")
+alsace <- doc[doc$REG == 42,]
+alsace$NB <- gsub(",", ".", alsace$NB, fixed = TRUE)
+save(alsace,file="pop_alsace_2010.Rda")
+rm(doc)
+```
+```
+> head(alsace)
+        NIVEAU CODGEO REG DEP C_AGED10 C_SEXE       NB
+3857428    COM  67001  42  67        0      1 4,244738
+3857429    COM  67001  42  67        0      2 6,367107
+3857430    COM  67001  42  67        1      1 11,67303
+3857431    COM  67001  42  67        1      2 6,367107
+3857432    COM  67001  42  67        2      1 8,489476
+3857433    COM  67001  42  67        2      2 7,428292
+```
+
+On récupère le fichier *alsace* d'ou on extrait **pop_als** qui liste le nombre d'individus par classe d'age, de 0 à 100 ans et plus. On forme la variable **pop_urg**, qui liste le nombre de consultants alsaciens par classe d'age, que l'on ramène à 100 pour être comparable à *pop_als*.
+
+Le rapport des deux vecteurs indique le taux de recours par classe d'age:
+
+
+```r
+load("../../../pop_alsace_2010.Rda")
+pop_als <- tapply(as.numeric(alsace$NB), alsace$C_AGED10, sum)
+rm(alsace)
+
+pop_urg <- d1$AGE
+pop_urg[pop_urg > 100] <- 100
+pop_urg <- table(as.factor(pop_urg))
+
+tx <- round(pop_urg * 100/pop_als, 2)
+tx_moyen <- sum(pop_urg)/sum(pop_als)
+plot(tx, ylab = "Taux de recours aux urgences (%)", xlab = "Age (années", main = "Recours aux urgences en Alsace", 
+    col = "blue")
+abline(h = tx_moyen * 100, col = "red", lty = 2)
+legend(0, 100, legend = "Taux moyen", col = "red", lty = 2, bty = "n")
+```
+
+![plot of chunk alsace_recours](figure/alsace_recours.png) 
+
+#### taux moyen de recours aux urgences: 16.35 %
 
 Centenaires
 -----------
@@ -432,7 +478,7 @@ abline(h = 1, col = "red")
 
 Pyramide des ages
 -----------------
-
+Onrécupère le fichier de l'insee qui donne les chiffres régionaux par tranches de 5 ans:
 
 ```r
 file <- "~/Documents/Resural/Stat Resural/population_alsace/pop_legale_2010/rp2010_POP1B_n1_REG-42.csv"
@@ -544,3 +590,4 @@ legend("topleft", legend = c("Région", "Urgences"), col = c(myblue, myred),
 ![plot of chunk teg_urg](figure/teg_urg.png) 
 
 
+TODO: voir également le package **Pyramid**

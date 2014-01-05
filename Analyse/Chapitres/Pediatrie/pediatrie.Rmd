@@ -1,0 +1,16 @@
+Pédiatrie
+========================================================
+
+```{r date,echo=FALSE}
+date()
+wd<-getwd()
+wd
+```
+Variables globales:
+-------------------
+```{r var_globales}
+source("../prologue.R")
+N <- nrow(d1)
+```
+Nombre de dossiers: `r N`
+
