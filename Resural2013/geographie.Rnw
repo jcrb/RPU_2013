@@ -268,11 +268,11 @@ Territoire & ZProximité & Etablissement & FINESS J & Site & FINESS G & SU & SU 
  \centering
  <<carte_sau_2,echo=FALSE,message=FALSE>>=
 # fond de carte des territoires de santé
-load("../als_ts.Rda")
+load("../Data/als_ts.Rda")
 plot(ctss)
 title(main="Service d'urgences d'Alsace")
 # surimpression des SAU
-hopitaux<-"../Fichiers source/Hopitaux2lambert/hopitaux_alsace.csv"
+hopitaux<-"../Data/Hopitaux2lambert/hopitaux_alsace.csv"
 h<-read.csv(hopitaux,header=TRUE,sep=",")
 for(i in 1:nrow(h)){points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");text(h$lam_lon[i],h$lam_lat[i],labels=h$hopital[i],cex=0.8,pos=h$pos[i])}
 @

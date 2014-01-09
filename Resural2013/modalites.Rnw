@@ -9,6 +9,7 @@
 L'immense majorité des patients provient du domicile ou son équivalent. Une très faible part des passages aux urgences sont le fait de transferts d'autres établissements ou de mutations en provenance d'autres services du même établissement.
 
 <<mode_entree,echo=FALSE ,results='asis'>>=
+
 d1$MODE_ENTREE[as.character(d1$MODE_ENTREE)=="Transfe  rt"]<-"Transfert"
 a<-tab1(factor(d1$MODE_ENTREE),main="Origine des patients (en %)",ylab="Pourcentage",bar.values = "percent",missing=FALSE)
 a$first.line<-"Origine des patients"
@@ -27,7 +28,6 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 a<-tab1(d1$TRANSPORT,main="Mode de transport vers l'hôpital (en %)",ylab="Pourcentage",bar.values = "percent",missing=FALSE)
 missing <- a$output.table[7, 2]
 xtable(a$output.table,caption=c("Moyens de transport utilisés pour se rendre à l'hôpital. Les deux colonnes de droite mesurent la fréquence du moyen utilise (en pourcentage) selon que l'on prenne en compte ou non les valeurs manquantes. ","Moyens de transport"),label="transport")
-
 @
 
 Dans \Sexpr{missing} \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpial n'est pas précisé.
@@ -51,4 +51,3 @@ Les patients consultant aux urgences sont majoritairement issus de la région Al
 %   \item hors Alsace: \Sexpr{cp_hals}
 %   \item dont hors de France: \Sexpr{cp_monde}
 % \end{itemize}
-

@@ -32,7 +32,7 @@ plot(pg, main = paste("Nombre de passages en fonction de l'age en",an_c), ylab =
 
 Gériatrie et sexe
 ------------------
-```{r sexe_geriatrie}
+```{r sexe_geriatrie,results='asis'}
 sg <- table(g$SEXE)
 sg <- sg[-2]
 psg <- round(prop.table(sg)*100,2)
@@ -40,5 +40,35 @@ b <- rbind(sg,psg)
 rownames(b) <- c("n","%")
 
 sex_ratio <- round(sg["M"]/sg["F"],2)
-```
 
+xtable(b)
+```
+Le sex-ratio est de `r sex_ratio`
+
+Taux hospitalisation
+--------------------
+
+```{r hospit_geriatrie}
+a <- table(g$MODE_SORTIE)
+a <- c(a[2]+a[3],a[4],a[5])
+b <- round(prop.table(a)*100, 2)
+c <- rbind(a,b)
+colnames(c) <- c("Hospitalisation", "Domicile", "Décès")
+rownames(c) <- c("n","%")
+c
+```
+- Taux hospitalisation: `r c[2,1]` %.
+
+Durée de présence
+-----------------
+
+```{r pres_geriatrie}
+e <- ymd_hms(g$ENTREE)
+s<-ymd_hms(g$SORTIE)
+g$presence<-s-e
+g$presence<-(s-e)/60
+a <- summary(as.numeric(g$presence))
+```
+- Durée de présence moyenne: `r a['Mean']` mn.
+- Durée de présence médiane: `r a['Median']` mn.
+- Durée de présence la plus longue: `r a['Max.']/1440` jours.

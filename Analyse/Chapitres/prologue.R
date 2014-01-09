@@ -38,7 +38,7 @@ foo<-function(path="",file=file){
 #' Variables globales:
 #' -------------------
 
-mois_courant <- 11
+mois_courant <- 12
 annee_courante <- 2013
 path <- "../../../../"
 a=paste("00",mois_courant,sep="")

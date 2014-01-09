@@ -1,0 +1,71 @@
+% geriatrie.Rnw
+
+\index{Gériatrie}
+
+<<ger_init,echo=FALSE>>=
+g <-d1[d1$AGE > 74,]
+n_g <- nrow(g)
+@
+
+Les 75 ans et plus représentent $\Sexpr{n_g}$ passages en \Sexpr{ an_c} soit $\Sexpr{ round(0.5 + n_g/n_jours, 0)}$ passages par jour.
+
+% nombre de passages en fonction sde l'age
+
+<<passages_geriatrie,echo=FALSE,fig.height=5>>=
+pg <- table (as.factor(g$AGE))
+plot(pg, main = paste("Nombre de passages en fonction de l'age en",an_c), ylab = "Fréquence", xlab = "Age (années)", col="blue")
+@
+
+% Gériatrie et sexe
+
+<<sexe_geriatrie,echo=FALSE,results='asis'>>=
+sg <- table(g$SEXE)
+sg <- sg[-2] # retire les sexes indéterminés
+psg <- round(prop.table(sg)*100,2)
+b <- rbind(sg,psg)
+rownames(b) <- c("n","%")
+
+sex_ratio <- round(sg["M"]/sg["F"],2)
+
+xtable(b)
+@
+
+\index{sex-ratio!en gériatrie}
+
+Le sex-ratio est de $\Sexpr{sex_ratio}$
+
+% Taux d'hospitalisation
+
+<<hosp_geriatrie,echo=FALSE,results='asis'>>=
+a <- table(g$MODE_SORTIE)
+a <- c(a[2] + a[3], a[4], a[5])
+b <- round(prop.table(a) * 100, 2)
+c <- rbind(a, b)
+colnames(c) <- c("Hospitalisation", "Domicile", "Décès")
+rownames(c) <- c("n", "%")
+
+ xtable(c)
+@
+
+Le taux d'hospitalisation est de $\Sexpr{c[2,1]}$ \%.
+
+% Durée de présence
+
+<<pres_geriatrique,echo=FALSE>>=
+e <- ymd_hms(g$ENTREE)
+s<-ymd_hms(g$SORTIE)
+g$presence<-s-e
+g$presence<-(s-e)/60
+a <- g$presence[g$presence > 30]
+a <- summary(as.numeric(a))
+h <- paste(as.integer(a['Mean']/60),":",a['Mean']%%60,sep="")
+@
+
+\begin{itemize}
+  \item Durée de présence moyenne: $\Sexpr{ a['Mean']}$ minutes soit \Sexpr{h} heures.
+  \item Durée de présence médiane: $\Sexpr{ a['Median']}$ minutes.
+  \item Durée de présence la plus longue: $\Sexpr{ a['Max.']/1440}$ jours.
+\end{itemize}
+
+Note: on ne retient que les durées de présence supérieures à 30 minutes.
+

@@ -1,0 +1,13 @@
+% pediatrie.Rnw
+\index{Pédiatrie}
+
+<<ped_init,echo=FALSE>>=
+an_c <- "2013"
+n_jours <- as.numeric(max(as.Date(d1$ENTREE))-min(as.Date(d1$ENTREE)))
+N <- nrow(d1)
+
+p <-d1[d1$AGE < 18,]
+n_p <- nrow(p)
+@
+
+Les moins de 18 ans représentent $\Sexpr{n_p}$ passages en \Sexpr{ an_c} soit $\Sexpr{ round(0.5 + n_p/n_jours, 0)}$ passages par jour.

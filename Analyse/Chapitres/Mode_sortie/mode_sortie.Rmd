@@ -33,9 +33,9 @@ On forme un sous-groupe **ms** constitué des RPU dont l'item *DESTINATION* est 
 (non nul):
 ----------------------------------------------------------------------------------------
 ```{r ms,echo=TRUE}
-ms<-d1[!is.na(d1$MODE_SORTIE),]
-non_renseigne<-nrow(d1)-nrow(ms)
-prop_non_renseigne<-round(non_renseigne*100/nrow(d1),2)
+ms <- d1[!is.na(d1$MODE_SORTIE),]
+non_renseigne <- nrow(d1)-nrow(ms)
+prop_non_renseigne <- round(non_renseigne*100/nrow(d1),2)
 ```
 On obtient un sous-groupe de `r nrow(ms)` RPU. Il y a donc `r non_renseigne` RPU non renseignés soit `r prop_non_renseigne` % de l'effectif.
 

@@ -1,3 +1,7 @@
+
+#===========================================================================
+# Constantes
+#===========================================================================
 #'@title Constantes
 #'
 pop.als.2010.totale<-1115226 + 765634
@@ -13,6 +17,9 @@ pop15_75<-1368317
 pop75_85<-108426
 pop85<-37647
 
+#===========================================================================
+# load_libraries
+#===========================================================================
 #'@title load_libraries
 #'@description charge les librairies nécessaires
 #'
@@ -30,6 +37,9 @@ load_libraries<-function(){
   library("maptools")
 }
 
+#===========================================================================
+# resume
+#===========================================================================
 #'@title resume
 #'@description affiche un résummée de données continues
 #'@param x vecteur de données
@@ -54,6 +64,9 @@ resume<-function (x)
   return(r)
 }
 
+#===========================================================================
+# copyrigth
+#===========================================================================
 #'@title copyrigth
 #'@author JcB
 #'@description Place un copyright Resural sur un graphique. 
@@ -70,6 +83,9 @@ copyright<-function(an ="2013",side=4,line=-1,cex=0.8){
   mtext(titre,side=side,line=line,cex=cex)
 }
 
+#===========================================================================
+# epigraphe
+#===========================================================================
 #'@title epigraphe
 #'@author JcB
 #'@description dessine une courbe épidémiologique du nombre de cas d'une maladie
@@ -100,6 +116,9 @@ epigraphe<-function(x,format = "%Y-%m-%d", strata = NULL,
   return(xv)
 }
 
+#===========================================================================
+# summaries
+#===========================================================================
 # fonction summaries()
 
 summaries<-function()
@@ -107,6 +126,9 @@ summaries<-function()
 
 }
 
+#===========================================================================
+# passages
+#===========================================================================
 #'@title passages
 #'@author JcB
 #'@description dessine la fréquentationd'un service d'urgence sous la forme 
@@ -148,6 +170,9 @@ passages<-function(hop,hop_name="CH",col="blue",sens=1,main="")
   legend(0.09,-0.09,legende,col=col,lty=1,cex=0.8)
 }
 
+#===========================================================================
+# mysql2resural
+#===========================================================================
 #'@title mysql2resural
 #'@author
 #'@description lit dans la base de données mySql les enregistrements correspondants à
