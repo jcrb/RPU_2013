@@ -228,3 +228,17 @@ mysql2resural<-function(an,mois)
   write.table(d06,"rpu2013_06.txt",sep=',',quote=TRUE,na="NA")
   save(d06,file="rpu2013d06.Rda")
 }
+
+#===========================================================================
+# Sex Ratio
+#===========================================================================
+#'@title sr
+sr <- function(){
+  sg <- table(g$SEXE)
+  sg <- sg[-2] # retire les sexes indéterminés
+  psg <- round(prop.table(sg)*100,2)
+  b <- rbind(sg,psg)
+  rownames(b) <- c("n","%")
+  
+  sex_ratio <- round(sg["M"]/sg["F"],2)
+}

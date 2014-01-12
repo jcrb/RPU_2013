@@ -89,7 +89,7 @@ dbListFields(con,"RPU__")
 Lecture des enregistrements de la table compris entre le 1er mai et le 31 mai 2013 (cette étape peu être longue):
 ```{r}
 ac<-2013  # annee courante
-mc<-11    # mois courant
+mc<-12    # mois courant
 
 ac2 <- ac
 

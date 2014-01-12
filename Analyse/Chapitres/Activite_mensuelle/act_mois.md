@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Fri Jan  3 17:46:09 2014"
+## [1] "Sun Jan 12 19:29:26 2014"
 ```
 
 ```r
@@ -65,7 +65,7 @@ source("../prologue.R")
 ```
 
 ```
-## [1] "Fichier courant: rpu2013d0111.Rda"
+## [1] "Fichier courant: rpu2013d0112.Rda"
 ```
 
 ```r
@@ -74,7 +74,7 @@ N
 ```
 
 ```
-## [1] 301767
+## [1] 330594
 ```
 
 ```r
@@ -98,8 +98,47 @@ n_jours <- as.numeric(b - a)
 moyenne_passages <- N/n_jours
 ```
 
-- Nombre de passages: **301767**
-- Nombre de passages par jour: **906**
+- Nombre de passages: **330594**
+- Nombre de passages par jour: **908**
+
+Activité par établissement
+--------------------------
+
+```r
+t <- table(d1$FINESS)
+t
+```
+
+```
+## 
+##   3Fr   Alk   Col   Dia   Geb   Hag   Hus   Mul   Odi   Sel   Wis   Sav 
+## 15688  7126 64758 29469 15103 34414 37018 56195 25963 19790 12646 12424
+```
+
+```r
+
+# par établissement et par mois
+t2 <- table(d1$FINESS, month(as.Date(d1$ENTREE)))
+t2
+```
+
+```
+##      
+##          1    2    3    4    5    6    7    8    9   10   11   12
+##   3Fr 1333 1255 1318 1306 1320 1466 1428 1326 1261 1237 1181 1257
+##   Alk    0    0    0  891  842 1026 1056  737  774  681  450  669
+##   Col 5486 5214 5484 5657 5550 5762 5745 5373 4825 5421 4986 5255
+##   Dia 2445 2205 2466 2489 2473 2617 2543 2461 2444 2480 2353 2493
+##   Geb 1216 1070 1239 1282 1081 1481 1537 1301 1244 1292 1157 1203
+##   Hag 2993 2656 2979 2999 2873 3033 3082 2927 2765 2877 2650 2580
+##   Hus 3408 2993 3423 3271 3203 3052 3174 2974 2795 2782 2832 3111
+##   Mul 3188 4606 4082 4914 4702 5419 4786 4922 4935 4989 4439 5213
+##   Odi 2106 1889 2258 2161 2241 2302 2313 2057 2201 2182 2037 2216
+##   Sel 2444 2181 2634 2426 2520 2715 2650  932    0    0    0 1288
+##   Wis  990  935 1054 1032 1094 1165 1199 1052 1055 1062  975 1033
+##   Sav    0    0    0    0    0    0  590 2271 2389 2410 2255 2509
+```
+
 
 Activité mensuelle
 --------------------
@@ -120,7 +159,7 @@ tm
 ##   Janvier   Février      Mars     Avril       Mai      Juin   Juillet 
 ##     25609     25004     26937     28428     27899     30038     30103 
 ##      Août Septembre   Octobre  Novembre  Décembre 
-##     28333     26688     27413     25315         0
+##     28333     26688     27413     25315     28827
 ```
 
 ```r
@@ -156,7 +195,7 @@ mois_min <- names(which.min(tm[tm > 0]))
 
 - Mois le plus actif: Juillet (30103)
 - Mois le moins actif: Février (25004)
-- Moyenne mensuelle: 2.7433 &times; 10<sup>4</sup>
+- Moyenne mensuelle: 2.755 &times; 10<sup>4</sup>
 
 Activité trimesrielle
 ---------------------
@@ -171,7 +210,7 @@ tq
 
 ```
 ## trim.1 trim.2 trim.3 trim.4 
-##  77550  86365  85124  52728
+##  77550  86365  85124  81555
 ```
 
 ```r
@@ -181,7 +220,7 @@ abline(h = 25, col = "blue")
 
 ![plot of chunk trimestre](figure/trimestre.png) 
 
-- moyenne trimestrielle théorique: 7.5442 &times; 10<sup>4</sup>
+- moyenne trimestrielle théorique: 8.2648 &times; 10<sup>4</sup>
 
 Activité par jour de semaine
 ----------------------------
@@ -204,7 +243,7 @@ ts
 
 ```
 ##    Lundi    Mardi Mercredi    Jeudi Vendredi   Samedi Dimanche 
-##    45693    42301    41089    42434    42004    44697    43549
+##    50873    46805    44527    46262    45825    48272    48030
 ```
 
 ```r

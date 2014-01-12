@@ -28,6 +28,17 @@ moyenne_passages <- N/n_jours
 - Nombre de passages: **`r N`**
 - Nombre de passages par jour: **`r round(moyenne_passages,0)`**
 
+Activité par établissement
+--------------------------
+```{r act_etablissement}
+t <- table(d1$FINESS)
+t
+
+# par établissement et par mois
+t2 <- table(d1$FINESS, month(as.Date(d1$ENTREE)))
+t2
+```
+
 Activité mensuelle
 --------------------
 
