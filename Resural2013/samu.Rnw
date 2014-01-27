@@ -1,0 +1,170 @@
+% samu.Rnw
+
+\index{SAMU d'Alsace!activité}
+
+<<init_samu,echo=FALSE>>=
+library("xts")
+library("zoo")
+library("lubridate")
+library("xtable")
+
+load("../Data/samu_archive.Rda")
+
+pop67 <- 1095905
+pop68 <- 749782
+pop.als.2010.municipale<-1095905 + 749782
+
+# on met à NA les enregistrements où le nombre d'affaires < 10
+d[d$affaires < 10,] <- NA
+
+# année courante et nb de jours
+an_c <- 2013
+# par convention on débute au 1er janvier 2006
+d <- d[year(d$date) < an_c+1,]
+date_origine <- min(year(d$date),na.rm=T)
+# nb d'années présentes
+periode <- an_c - date_origine + 1
+
+j1 <- as.Date(paste0(an_c,"-01-01"))
+j2 <- as.Date(paste0(an_c,"-12-31"))
+n <- as.numeric(j2-j1)
+
+# nombre d'année dans la base:
+t <-table(year(d$date))
+@
+
+\chapter{Activité des SAMU alsacien}
+
+Les données proviennent du serveur régional SAGEC. Les informations sont transmises au serveur par les deux SAMU, sur la base des informations demandées par l'ARH en 2005, sous forme d'une synthèse quotidienne:
+\begin{itemize}
+  \item date
+  \item nombre d'affaires régulées
+  \item nombre d'interventions primaires
+  \item nombre d'interventions secondaires
+  \item nombre de transport de néonatalogie
+  \item nombre de transfert infirmier inter hospitaliers
+  \item nombre de transports par ambulances privées demandés par le SAMU
+  \item nombre de transport par VSAV demandés par le SAMU
+  \item nombre de conseils médicaux
+  \item nombre de visites de médecins déclenchées par le Centre 15
+\end{itemize}
+La base de données est renseignées depuis le mois de juillet 2005. En 2012, une difficulté au niveau de l'hôpital de Mulhouse a entraîné un arrêt complet des transmissions pendant 6 mois en en 2013, une erreur logicielle à provoqué la transmissions de données erronées en provenance du SAMU 67 du 24 avril au 1er novembre 2013. Les données 2013 sont globalement sous estimées.
+
+Le interventions SMUR sont égales à la somme des interventions primaires et secondaires.
+
+
+<<samu_global,echo=FALSE,results='asis',fig.width=8>>=
+
+# nombre d'affaires par an:
+taf <- tapply(d$affaires, year(d$date), sum)
+# primaires
+tpr <- tapply(d$primaires, year(d$date), sum)
+# secondaires
+tse <- tapply(d$secondaires, year(d$date), sum)
+# SMUR
+tsm <- tpr+tse
+d$SMUR <- d$primaires + d$secondaires
+# ASSU
+tas <- tapply(d$ASSU, year(d$date), sum)
+# VSAV
+tvs <- tapply(d$VSAV, year(d$date), sum)
+# Conseils
+tco <- tapply(d$conseils, year(d$date), sum)
+# visites
+tme <- tapply(d$Medecins, year(d$date), sum)
+
+t <- rbind(taf,tco,tsm,tas,tvs,tme)
+rownames(t) <- c("Affaires","Conseils","SMUR","ASSU","VSAV","Médecins")
+
+xtable(t, digits=0)
+
+# Boxplot de l'activité
+#----------------------
+moy_als <- tapply(d$affaires, year(d$date), mean) # activité moyenne par
+boxplot(d$affaires ~ year(d$date), main = "Activité des SAMU Alsaciens", ylab = "Nombre d'affaires")
+
+for (i in 1:periode) { points(i, moy_als[i], col = "red")} # met act.moy sous forme de rond rouges
+# on ajoute la date où le nb d'affaires est le plus grand. Pour cela on trie les jours par ordre décroissant et les jours les plus actifs se trouvent en tête
+ord <- order(d$affaires, decreasing = TRUE)
+text(4, d$affaires[ord[1]], d$date[ord[1]], cex = 0.6, pos = 4)
+@
+
+Après une période de stabilité (2006-2011), l'activité augmente à nouveaux à partir de 2011.
+
+<<smur,echo=FALSE,results='asis',fig.width=8>>=
+# Boxplot de l'activité SMUR
+#---------------------------
+moy_als <- tapply(d$SMUR, year(d$date), mean) # activité moyenne par
+boxplot(d$SMUR ~ year(d$date), main = "Activité des SMUR Alsaciens", ylab = "Nombre de sorties SMUR")
+for (i in 1:periode) { points(i, moy_als[i], col = "red")} # met act.moy sous forme de rond rouges
+# on ajoute la date où le nb d'SMUR est le plus grand. Pour cela on trie les jours par ordre décroissant et les jours les plus actifs se trouvent en tête
+ord <- order(d$SMUR, decreasing = TRUE)
+text(4, d$SMUR[ord[1]], d$date[ord[1]], cex = 0.6, pos = 4)
+@
+
+\section*{Activité des SAMU alsacien en \Sexpr{an_c}}
+
+<<activite_anc,echo=FALSE>>=
+anc <- d[year(d$date)==an_c,]
+
+n_af <- sum(anc$affaires, na.rm=T)
+n_sm <- sum(anc$primaires, na.rm=T) + sum(anc$secondaires, na.rm=T)
+n_cs <- sum(anc$conseils, na.rm=T)
+n_me <- sum(anc$Medecins, na.rm=T)
+@
+
+\begin{boxedminipage}{10cm}
+\begin{itemize}
+  \item nombre d'affaires: \np{\Sexpr{round(n_af * 10000 / pop.als.2010.municipale,0)}} pour \np{10000} habitants.
+  \item nombre de sorties SMUR: \np{\Sexpr{round(n_sm * 10000 / pop.als.2010.municipale,0)}} pour \np{10000} habitants.
+  \item nombre de conseils médicaux: \np{\Sexpr{round(n_cs * 10000 / pop.als.2010.municipale,0)}} pour \np{10000} habitants.
+  \item nombre d'envoi de médecins:  \np{\Sexpr{round(n_me * 10000 / pop.als.2010.municipale,0)}} pour \np{10000} habitants.
+\end{itemize}
+\end{boxedminipage}
+
+<<samu67,echo=FALSE,fig.width=8>>=
+
+s67 <- d[d$service == "SAMU 67",]
+# supprime les lignes dupliquées:
+s67 <- s67[!duplicated(s67$date),]
+
+s68 <- d[d$service == "SAMU 68",]
+# supprime les lignes dupliquées:
+s68 <- s68[!duplicated(s68$date),]
+
+x <- d[d$date < "2013-04-24" | d$date > "2013-11-01", c("date", "affaires")]
+
+boxplot(x$affaires ~ year(x$date), main = "Activité du SAMU 67", ylab = "Nombre d'affaires", 
+    sub = "2013 = MOIS 1-4 et 11-12", col = c("red", "red", "red", "red", "red", "red", "red", "yellow"))
+@
+
+<<samu67_2,echo=FALSE,fig.width=8>>=
+boxplot(s67$affaires ~ year(s67$date), main = "Activité du SAMU 67", ylab = "Nombre d'affaires", 
+    sub = "2013 = MOIS 1-4 et 11-12", col = c("red", "red", "red", "red", "red", "red", "red", "yellow"))
+@
+
+Activité comparée des deux SAMU
+
+<<samu6768,echo=FALSE,fig.width=8>>=
+boxplot(x$affaires ~ year(x$date), main = "Activité des SAMU d'Alsace", ylab = "Nombre d'affaires", 
+    sub = "MOIS 1-4 et 11-12", col = c("red", "red", "red", "red", "red", "red", 
+        "red", "yellow", "red"), at = 1:8 - 0.3, boxwex = 0.25, outline = FALSE)
+
+boxplot(s68$affaires ~ year(s68$date), col = "green", add = TRUE, at = 1:8 + 
+    0.1, boxwex = 0.25, names = c("", "", "", "", "", "", "", ""), outline = FALSE)
+
+legend(1, 1400, c("SAMU 67 ", "SAMU 68"), fill = c("red", "green"))
+@
+
+L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. Le SAMU 68 a une activité inférieure à celle du SAMU 67 mais connait une croissance très forte ces dernières années qui a fait progresser de façon marquée son taux de recours.
+\index{SAMU!taux de  recours}
+
+<<recours,echo=FALSE,results='asis'>>=
+taf67 <- tapply(s67$affaires, year(s67$date), sum)
+taf68 <- tapply(s68$affaires, year(s68$date), sum)
+rec67 <- round(taf67*100/pop67,2)
+rec68 <- round(taf68*100/pop68,2)
+t <- rbind(rec67,rec68)
+rownames(t) <- c("67","68")
+xtable(t, caption=c("Taux de recours des SAMU 67 et 68. Si le taux de recours du SAMU 68 est plus faible que celui du SAMU 67, il connait une forte progression (les années 20122 et 2012 sont incomplètes pourle 68).","Taux de recours des SAMU"), label="fig.rec")
+@

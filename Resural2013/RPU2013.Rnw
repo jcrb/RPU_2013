@@ -51,6 +51,7 @@
 \usepackage{multirow}
 \usepackage{array}
 \usepackage{tabularx}
+\usepackage{boxedminipage}
 
 \usepackage{makeidx}
 \makeindex
@@ -330,6 +331,9 @@ N <- nrow(d1)
 
 %===================================================================== PARTIE 5
 \part{Activité des SAMU d'Alsace}
+
+<<child='samu.Rnw'>>=
+@
 
 % A décommenter pour la partie technique uniquement
 

@@ -54,6 +54,10 @@ ref: http://www.omegahat.org/RCurl/FAQ.html
 Création d'un tableau avec *cbind* et une matrice (et xtable pour pdf): voir exhaustivité des données
 
 ### Tables
+
+#### Tables trop larges
+Les tables trop larges pour tenir sur une largeur de page, on la scinde en deux (pas trouvé d'autre solution). Exemple dans sau_rpu.Rnw.
+
 #### Transformer une *table* en *dataframe*:
 
 as.data.frame.matrix(ma_table)
@@ -145,6 +149,16 @@ Nécessite le package **epicalc**
 - noms des lignes: row.names(a$output.table)
 - nom des colonnes: colnames(a$output.table)
 - franciser le nom des colonnes: colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+
+#### Supprimer la notation scientifique
+Par défaut R transforme tout nombre supérieur à 10^5 en notation scientifique. Voir **?option** puis *scipen* pour explication (et http://yihui.name/knitr/demo/output/).
+ex: options(scipen = 6, digits = 2) Accepté par knitr rt Sweave. A mettre en début de programme.
+
+#### Mettre un espace comme séparateur de milliers
+A mettre en début de document. Source: http://stackoverflow.com/questions/18965637/set-global-thousand-separator-on-knitr
+knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=" ")
+})
 
 #### notes sur les spatialPolygons
 > str(poly)
