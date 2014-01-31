@@ -55,6 +55,8 @@ Analyse par établissement
 -------------------------
 ```{r ccmu_etb}
 t <- table(g$GRAVITE, g$FINESS)
-pt <- round(prop.table(t)*100, 2)
+pt <- round(prop.table(t, margin=2)*100, 2)
+cbind(t, pt)
 ```
+On note des disparités importantes entre établissements.
 

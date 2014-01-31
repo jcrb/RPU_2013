@@ -1,4 +1,4 @@
-\documentclass[12pt,english,french,twoside]{report}
+\documentclass[12pt,english,french,twoside]{book}
 \usepackage[francais]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -95,6 +95,9 @@ pop.als.2010.municipale<-1095905 + 749782
 \begin{document}
 %\SweaveOpts{concordance=TRUE}
 
+
+\frontmatter
+
 %\title{Analyse des données RPU 2013 de la région Alsace}
 \title{Activité des structures d'urgence en Alsace \\Rapport annuel 2013}
 \author{RESURAL\thanks{Réseau des urgences en Alsace - Equipe de coordination Dr J.C.
@@ -108,7 +111,7 @@ Bartier \& Madame Christine Hecker}}
 % page de garde n°2
 %------------------
 \newpage
-\chapter*{}
+%\chapter*{}
 \vfill
 
 <<session,echo=FALSE,results='asis'>>=
@@ -122,6 +125,7 @@ toLatex(sessionInfo())
 
 \noindent For license and attribution guidance, see \url{http://www.openintro.org/perm/stat2nd_v2.txt}
 
+\mainmatter
 
 \tableofcontents
 \listoftables
@@ -174,9 +178,24 @@ n_jours <- as.numeric(max(as.Date(d1$ENTREE))-min(as.Date(d1$ENTREE)))
 N <- nrow(d1)
 @
 
-%======================================================== PARTIE 1
+% ************************
+% *                      *  
+% *        PREFACE       * 
+% *                      *
+% ************************
+
+\chapter*{Préface}
+<<child='preface.Rnw'>>=
+@
+
+% ************************
+% *                      *  
+% *      PARTIE 1        * 
+% *                      *
+% ************************
+
 \part{Le Réseau des urgences en Alsace}
-\newpage
+%\newpage
 
 \chapter{Historique}
 <<child='historique.Rnw'>>=
@@ -376,6 +395,8 @@ N <- nrow(d1)
 \newpage
 \chapter{Bibliographie}
 \bibliography{../rpu}
+
+\backmatter
 
 \newpage
 \chapter{Index}

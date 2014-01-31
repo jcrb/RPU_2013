@@ -1,0 +1,7 @@
+% preface.Rnw
+
+Ce document analyse les Résumé de Passages aux Urgences (RPU) transmis en \Sexpr{anc} au réseau des urgences en Alsace. C'est le premier du genre et comme tel il forcément bien imparfait, à la fois qualitativement et quantitativement.
+
+Ce travail puise sa source das les travaux des observatoires des urgences qui nous ont précédés dans cette démarche et qui sont nos modèles: ORUMIP, ORUPACA, ORULIM et ORULOR.
+
+Il est le reflet du travail accompli par les professionnels de santé au profit des habitants de l'Alsace et d'ailleurs. Que soient remerciés les équipes de hôpitaux et cliniques de Wissembourg, Haguenau, Saverne, Strasbourg, Sélestat, Colmar, Guebwiller, Thann, Altkirch et Saint-Louis qui ont recueillis les informations nécessaires et leur transmission. Ces remerciements englobent également Alasace e-santé qui assure le stockage et la diffusion des RPU vers Resural et l'InVS, ainsi qu'aux autres membres de l'Observatoire des urgences en Alsace (ORUDAL), l'ARS Alsace, la CIRE Lorraine-Alsace et le collège de médecine d'urgence du Nord-Est (CMUNE).

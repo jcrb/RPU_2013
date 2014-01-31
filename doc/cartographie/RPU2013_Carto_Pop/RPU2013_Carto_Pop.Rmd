@@ -83,8 +83,9 @@ de façon a avoir dans une même base les zones de proximité (va) et les popula
 - base2: merging de *va* et de *pop68*
 base1 et base2 sont fusionné en un seul fichier *base*, puis supprimés.
 ```{r base_create}
-load("~/Documents/Resural/Stat Resural/carto&pop/pop68.rda")
-load("~/Documents/Resural/Stat Resural/carto&pop/pop67.rda")
+getwd()
+load("../../Demographie/pop68.rda")
+load("../../Demographie/pop67.rda")
 base1<-merge(va,pop67,by.x="ville_insee",by.y="insee")
 base2<-merge(va,pop68,by.x="ville_insee",by.y="insee")
 base<-rbind(base1,base2)
@@ -151,9 +152,10 @@ source: http://www.insee.fr/fr/methodes/default.asp?page=definitions/popul-compt
 
 #### population de la région:
 ```{r pop_region}
-n<-sum(base$Population.totale)
-n
+
 pop.tot<-sum(base$Population.totale)
+n <- pop.tot
+pop.tot
 pop.municipale<-sum(base$Population.municipale)
 pop.municipale
 pop.a.part<- sum(base$Population.comptée.à.part)
@@ -209,7 +211,7 @@ essai de carto associée:
 La méthode dessine tous les polygones présents qui répondent à un critère de sélection. On utilise le fichier *carto_alsace.rda* qui produit un objet *SpatialPolygonsDataFrame* appelé *als*.
 ```{r als}
 library("maptools")
-load("/home/jcb/Documents/Resural/Stat Resural/carto&pop/carto_alsace.rda")
+load("../../cartographie/carto_alsace.rda")
 ```
 L'objet *als* se compose de deux parties principales:
 - un slot cartographique constitué de polygones élémentaires correspondant au contour des communes.
@@ -369,7 +371,7 @@ text(x,y,labels=nom,cex=0.8,pos=3)
 Les zones de proximités officielles sont dans le fichier zp.csv
 ```{r zpo}
 # zpo<-read.csv("zp.csv",header=TRUE, sep=",")
-zpo<-read.csv("~/Documents/Resural/Stat Resural/RPU2013/cartograhie/data/zp.csv",header=TRUE, sep=",")
+zpo<-read.csv("../../cartographie/data/zp.csv",header=TRUE, sep=",")
 names(zpo)
 print("Nb de communes par territoire de santé")
 a<-zpo$LIBELLE.DES.TERRITOIRES.DE.SANTE
@@ -709,7 +711,9 @@ s<-0;for(i in 1:12){szp<-als[base_als$zone_proximite==i,"SUPERFICIE"];s1<-sum(sz
 à transfomer en fonction:
 s<-0;for(i in 1:12){szp<-als[base_als$zone_proximite==i,"SUPERFICIE"];s[i]<-sum(szp$SUPERFICIE)/100;s<-s+s[i];print(paste(i," ->",s[i],"(",s,")",sep=" "))}
 
-#### Merging des fichiers *als* et *zpo*
+#### Merging des fichiers *als* et *title(main="2 Départements en Alsace")
+legend("bottomleft",legend="Haut-Rhin",bty="n")
+legend("topleft",legend="Bas-Rhin",bty="n")*
 
 - als est le fichier shapefile des données alsace. Sa partie donnée est accessible via *als@data* par exemple  names(als@data). Les communes sont repérées par *INSEE_COM*
 - *zpo* est le fichier des zones de proximité. Les communes sont repérées par *CODE.COMMUNE*

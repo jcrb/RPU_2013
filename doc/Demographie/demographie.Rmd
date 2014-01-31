@@ -1,0 +1,121 @@
+Demographie
+========================================================
+
+Ce document rassemble les données pertinentes concernant la population d'Alsace.
+
+Les données source sont celles de l'INSEE. La date de référence est le 1er janvier 2010. 
+Deouis le 1er janvier 2014 la population légale est celle du recensement 2011. Pour les RPU2013, les données 2010 restent la référence.
+
+On crée les fichiers newPop67, 68 et Alsace.  
+
+NE PPAS MODIFIER CES FICHIERS. UTILISER DEMOGRAPHIE2.Rnw pour exploiter les données
+
+Dernière compilation: 5/10/2013
+
+
+Notes sur les populations
+=========================
+
+utilisation du recensement 2010
+-------------------------------
+
+- dossier stat Resural/carto&pop.rmd
+  - pop67.rda
+  - pop68.rda
+- source INSEE
+  - http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/france-regions.asp?annee=2010
+  - http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/france
+-departements.asp?annee=2010 (fichier excel)
+  - http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/departement.asp?dep=67&annee=2010
+  - http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/departement.asp?dep=68&annee=2010
+  - Liste des cantons, communes, arrondissements, pays: http://www.insee.fr/fr/methodes/nomenclatures/cog/telechargement.asp
+
+- rp2010_POP1B_n2_DEP-67.xls population totale par sexe et age (tranches de 1 an) pour BR. Source: http://www.insee.fr/fr/themes/tableau_local.asp?ref_id=POP1B&millesime=2010&niveau=2&nivgeo=DEP&codgeo=67
+
+- http://www.insee.fr/fr/themes/tableau_local.asp?ref_id=POP1B&millesime=2010&niveau=2&nivgeo=DEP&codgeo=68 Idem pour le HR
+
+- Alsace, POP1B - Population totale par sexe et âge (Âge quinquennal): http://www.insee.fr/fr/themes/tableau_local.asp?ref_id=POP1B&millesime=2010&nivgeo=REG&typesearch=territoire&codgeo=Alsace+%2842%29&territoire=OK
+
+- Alsace POP1B - Population totale par sexe et âge (Âge détaillé): http://www.insee.fr/fr/themes/tableau_local.asp?ref_id=POP1B&millesime=2010&niveau=2&nivgeo=REG&codgeo=42
+
+- Dep67.xls: Code région, Nom de la région, Code département, Code arrondissement,Code canton, Code commune	Nom de la commune, Population municipale, Population comptée à part,Population totale
+
+- rp2010_POP1B_n1_REG-42.xls: population de la région alsace par tranches de 5 ans et par sexe. Les données sont au format *csv*. Les lignes 1 à 9 ne contiennent pas de data. La ligne 10 correspond au header. Utilisation: pyramide des ages, 
+
+- rp2010_POP1B_n1_DEP-67.xls: idem pour le 67
+
+- rp2010_POP1B_n1_DEP-68.xls: idem pour le 68
+
+- rp2010_POP1B_n2_REG-42.xls: idem mais par tranches de 1 an.
+
+- rp2010_POP1B_n2_DEP-67.xls: population du 67 par tranches age de 1 an.
+
+- rp2010_POP1B_n2_DEP-68.xls: population du 68 par tranches age de 1 an.
+
+
+
+  
+  
+Création des fichiers newPop
+----------------------------
+- Le fichier **BTT_TD_POP1B_2010.txt** 
+  - dans le dossier *OpenData* 
+  - contient les données du dernier recensement de la population (2010) **par tranche d'age de 1 an, sexe et commune**.
+  - Le source INSEE se trouve à la page *Accueil>Thèmes>Population>Évolution e...>Population et lieu de résidence antérieure - 2010 (Bases tableaux détaillés)* du site de l'Insee 
+  - à l'adresse http://www.insee.fr/fr/themes/detail.asp?reg_id=99&ref_id=td-population-10
+
+Le fichier *BTT_TD_POP1B_2010.txt* est une matrice de plus de 5 millions de lignes et 7 colonne. On en extrait les données propres à l'Alsace sous la forme de 3 fichiers:
+- newPop67 pour le bas-Rhin
+- newPop68 pour le haut-Rhin
+- newPopAlsace pour la région
+En format Texte, chaque ligne comporte les informations relatives aux champs suivants, séparées par le caractère ';'. 
+
+```{r tranches_age,results='asis'}
+library("xtable")
+# file<-"~/Documents/Open Data/Population 2008/BTT_TD_POP1B_2010.txt"
+file<-"~/Documents/Resural/Stat Resural/population_alsace/pop_legale_2011/BTT_TD_POP1B_2010.txt"
+doc<-read.table(file,header=TRUE,sep=";")
+head(doc)
+str(doc)
+# population du bas-Rhin
+newPop67<-doc[as.character(doc$CODGEO) > "66999" & as.character(doc$CODGEO) < "68000",]
+# remplacement de la virgule par le point décimal
+newPop67$NB<-as.numeric(gsub(",",".",newPop67$NB,fixed=TRUE))
+sum(newPop67$NB)
+# idem pour les autres
+newPop68<-doc[as.character(doc$CODGEO) > "67999" & as.character(doc$CODGEO) < "69000",]
+newPop68$NB<-as.numeric(gsub(",",".",newPop68$NB,fixed=TRUE))
+sum(newPop68$NB)
+newPopAlsace<-rbind(newPop67,newPop68)
+sum(newPopAlsace$NB)
+#ménage
+rm(doc)
+
+# Sauvegarde
+save(newPop67,file="newPop67.Rda")
+save(newPop68,file="newPop68.Rda")
+save(newPopAlsace,file="newPopAlsace.Rda")
+```
+
+Age
+---
+
+L'âge est la durée écoulée depuis la naissance. Il peut être calculé selon deux définitions :
+- l'âge par génération (ou âge atteint dans l'année ou encore âge en différence de millésimes) est la différence entre
+l'année de collecte de l'information et l'année de naissance ;
+- l'âge en années révolues est l'âge atteint au dernier anniversaire.
+Par exemple, à la date du 1er janvier 2006, un individu né le 10 octobre 1925 est âgé de 81 ans en âge atteint dans
+l'année et de 80 ans si l'on considère son âge en années révolues.
+Les résultats du recensement de la population sont désormais présentés en utilisant l'âge en années révolues.
+Remarque(s)
+Les résultats du recensement de la population de 1999 et des recensements antérieurs étaient présentés en utilisant
+l'âge en différence de millésimes.
+Désormais, depuis 2004, lorsque les données des recensements sont comparées, les âges sont tous exprimés en
+années révolues.
+
+utilisation du recensement 2011
+-------------------------------
+
+- dossier: pop_legale_2011 dans /home/jcb/Documents/Resural/Stat Resural/population_alsace
+
+
