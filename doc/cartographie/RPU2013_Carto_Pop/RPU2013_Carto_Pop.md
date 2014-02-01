@@ -97,6 +97,14 @@ va$territoire_sante <- as.factor(va$territoire_sante)
 #### Sauvegarde: ("/home/jcb/Documents/Resural/Stat Resural/RPU2013/villes.RData")
 
 ```r
+getwd()
+```
+
+```
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop"
+```
+
+```r
 save(va, file = "villes.RData")
 ```
 
@@ -203,7 +211,48 @@ base$zone_proximite[57] <- 3
 #### Sauvegarde de *base*:
 
 ```r
-save(base, file = "base.Rda")
+names(base)
+```
+
+```
+##  [1] "ville_insee"               "ville_ID"                 
+##  [3] "ville_nom"                 "ville_zip"                
+##  [5] "ville_lambertX"            "ville_lambertY"           
+##  [7] "departement_ID"            "region_ID"                
+##  [9] "zone_ID"                   "pays_ID"                  
+## [11] "ville_longitude"           "ville_latitude"           
+## [13] "canton_ID"                 "arrondissement_ID"        
+## [15] "admin_ID"                  "territoire_sante"         
+## [17] "secteur_apa_ID"            "secteur_Smur_ID"          
+## [19] "secteur_Adps_ID"           "secteur_Vsav_ID"          
+## [21] "zone_proximite"            "Code.région"              
+## [23] "Nom.de.la.région"          "Code.département"         
+## [25] "Code.arrondissement"       "Code.canton"              
+## [27] "Code.commune"              "Nom.de.la.commune"        
+## [29] "Population.municipale"     "Population.comptée.à.part"
+## [31] "Population.totale"
+```
+
+```r
+getwd()
+```
+
+```
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop"
+```
+
+```r
+save(base, file = "doc/Demographie/base.Rda")
+```
+
+```
+## Warning: impossible d'ouvrir le fichier compressé
+## 'doc/Demographie/base.Rda', cause probable : 'Aucun fichier ou dossier de
+## ce type'
+```
+
+```
+## Error: impossible d'ouvrir la connexion
 ```
 
 load("base.Rda")
@@ -354,6 +403,14 @@ c
 ```
 
 ```r
+getwd()
+```
+
+```
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop"
+```
+
+```r
 save(c, file = "data_tp.R")
 
 barplot(sort(effectif), cex.names = 0.8, xlab = "", las = 2, ylab = "Effectifs", 
@@ -402,8 +459,12 @@ a[1:5]
 ## 1246 Levels:  Aachen Aargau Aberdeen ACHENHEIM Achern ADAMSWILLER ... Zurich (Suisse)
 ```
 
+
 essai de carto associée:
-------------------------
+========================
+
+ref: http://help.nceas.ucsb.edu/r:spatial
+
 La méthode dessine tous les polygones présents qui répondent à un critère de sélection. On utilise le fichier *carto_alsace.rda* qui produit un objet *SpatialPolygonsDataFrame* appelé *als*.
 
 ```r
@@ -427,6 +488,21 @@ L'objet *als* se compose de deux parties principales:
 - un slot de data présentées sous forme d'un dataframe et accessible via *als@data* et qui se compose des éléments suivants:
 
 ```r
+str(als, max.level = 2)
+```
+
+```
+## Formal class 'SpatialPolygonsDataFrame' [package "sp"] with 5 slots
+##   ..@ data       :'data.frame':	904 obs. of  18 variables:
+##   ..@ polygons   :List of 904
+##   .. .. [list output truncated]
+##   ..@ plotOrder  : int [1:904] 19 99 82 1 86 55 319 582 315 135 ...
+##   ..@ bbox       : num [1:2, 1:2] 987503 6710919 1082671 6895581
+##   .. ..- attr(*, "dimnames")=List of 2
+##   ..@ proj4string:Formal class 'CRS' [package "sp"] with 1 slots
+```
+
+```r
 names(als)
 ```
 
@@ -440,8 +516,10 @@ names(als)
 Les colonnes *CODE_ARR* et *CODE_CANT* sont numérotés de la même façon pour les deux départements ce qui induit des erreurs lors du tracé des arrondissements et des canton. Il est donc nécessaire de les renuméroter:
 
 ```r
-a <- paste(als@data$CODE_DEPT, als@data$CODE_ARR, sep = "")
-als@data$CODE_ARR <- as.factor(a)
+# a<-paste(als@data$CODE_DEPT,als@data$CODE_ARR,sep='')
+# als@data$CODE_ARR<-as.factor(a)
+als@data$CODE_ARR <- as.factor(paste(als@data$CODE_DEPT, als@data$CODE_ARR, 
+    sep = ""))
 als@data$CODE_CANT <- as.factor(paste(als@data$CODE_DEPT, als@data$CODE_CANT, 
     sep = ""))
 ```
@@ -471,6 +549,15 @@ legend("topleft", legend = "Bas-Rhin", bty = "n")
 ```r
 
 contour <- unionSpatialPolygons(als, IDs = als@data$CODE_ARR)
+names(contour)
+```
+
+```
+##  [1] "672" "673" "674" "675" "676" "677" "678" "681" "682" "683" "684"
+## [12] "685" "686"
+```
+
+```r
 plot(contour)
 title(main = "13 Arrondissements d'Alsace")
 ```
@@ -486,11 +573,26 @@ plot(contour2, main = "75 Cantons d'Alsace")
 ![plot of chunk carto_alsace](figure/carto_alsace3.png) 
 
 ```r
-main = "75 Cantons d'Alsace"
+
+contour_com <- unionSpatialPolygons(als, IDs = als@data$CODE_COMM)
+plot(contour_com, main = "Communes d'Alsace")
 ```
+
+![plot of chunk carto_alsace](figure/carto_alsace4.png) 
 
 
 #### Note sur *unionSpatialPolygons*
+
+Function readShapePoly creates object of class “S4”. S4 sub-objects are referred as “slots” and can be listed with the function getSlots of R: 
+
+getSlots("SpatialPolygonsDataFrame")
+        data     polygons    plotOrder         bbox  proj4string 
+"data.frame"       "list"    "integer"     "matrix"        "CRS"
+
+The slots can be extracted with the code @ (instead of $ in S3). Auxiliary information is in the slot data:
+
+str(mydata@data)
+
 La fonction agrège des polygones dans un objet *SpatialPolygons*, conformément au vecteur des *IDs* qui contient la liste des polygones à agréger; les limites internes sont dissoutes par la fonction *gUnaryUnion* du package *rgeos*. Si le package *rgeos* n'est pas disponible  mais que le package *gpclib* l'est et que les conditions d'utilisation de la license sont satisfaites, alors la méthode *union* est utilisée.
 
 unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=FALSE)
@@ -499,6 +601,12 @@ unionSpatialPolygons(SpP, IDs, threshold=NULL, avoidGEOS=FALSE, avoidUnaryUnion=
 - IDs: vecteur des polygones à inclure. Il doit être égal au nombre de slots polygons de SpRs. Ce peut être un vecteur de caractères, d'integer, ou de factor (essayer table(factor(IDs)) for a sanity check). Il peut contenir des NA pour les objets qu'on ne souhaite pas inclure dans l'union.
 
 On obtient un *SpatialPolygons* appelé *contour* formé de 4 slots: *polygons*, *plotorder*, *bbox* et *proj4agrs*. Le slot *polygons* contient 8 polygones
+
+Pour décomposer l'objet *contour* on peut utiliser:
+- out <- lapply( contour@polygons , slot , "Polygons" )
+qui retourne une lise de 13 éléments, chacun contenant les caractéristiques d'un arrondissement:
+- out[1]
+NB: voir la vignette **sp** pour ub exemple de création d'un objet spatialpolygon à partir de polygones élémentaires.
 
 #### Coloriage spécifique d'une zone
 On veut rprésenter la carte des arrondissements (objet *contour*) avec 2 couleurs pour chaque département. On utilise le *Spatial polygon* contour (cf carto_alsace ci-dessus) qui contient 13 polygones. On crée un vecteur contenant 13 couleurs: "springgreen3" si l'arrondissement appartient au 67 et "steelblue3" sinon. Puis on dessinne la carte en couleur: 
@@ -953,6 +1061,14 @@ plot(zp2)
 
 contour2 <- unionSpatialPolygons(zp2, IDs = zp2@data$CODE_DEPT)
 plot(contour2)
+getwd()
+```
+
+```
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop"
+```
+
+```r
 save(contour2, file = "ZPHag.Rda")
 
 zp2$STATUT <- gsub("\xe9", "e", zp2$STATUT, fixed = F)
@@ -1506,6 +1622,18 @@ title(main = "Zone de proximité en Alsace")
 
 ![plot of chunk czps_1](figure/czps_12.png) 
 
+```r
+getwd()
+```
+
+```
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop"
+```
+
+```r
+save(czps, file = "zone_proximite.Rda")
+```
+
 #### Dessin du contour des territoires de santé (ctss)
 
 ```r
@@ -1515,6 +1643,14 @@ title(main = "Territoires de santé en Alsace")
 ```
 
 ![plot of chunk ctss_1](figure/ctss_1.png) 
+
+```r
+getwd()
+```
+
+```
+## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop"
+```
 
 ```r
 save(ctss, file = "als_ts.Rda")
@@ -1654,4 +1790,133 @@ for (i in 1:nrow(h)) {
 ```
 ## Error: objet 'h' introuvable
 ```
+
+Zones en tension
+=================
+
+load("czps.Rda")
+
+**à imprimer**: http://rstudio-pubs-static.s3.amazonaws.com/4587_38cdf11d13d240c6b5973d1061fa991f.html
+
+Dessine une carte météo de la région indiquant le niveau de tension dans chaque zone de proximité.
+
+col <- rep("green",12)
+col[6]<-"red"
+col[8]<-"orange"
+
+1 = Wissembourg
+2 = Mulhouse
+3 = Altkirch
+4 = St Louis
+5 = Haguenau
+6 = Saverne
+7 = Strasbourg
+8 = Schirmeck
+9 = Selestat
+10 = Colmar
+11 = Guebwiller
+12 = Thann
+
+
+```r
+tension <- c(1, 1, 1, 1, 1, 1, 2, 1, 3, 2, 1, 1)
+col <- rep("grey", 12)
+for (i in 1:12) {
+    if (tension[i] == 1) {
+        col[i] = "green"
+    } else if (tension[i] == 2) {
+        col[i] = "orange"
+    } else if (tension[i] == 3) {
+        col[i] = "red"
+    }
+}
+
+# Création d'un dataframe contenant le nom et les coordonnées de la ville
+# chef lieu de la zone de proximité et la position d'affichage par rapport à
+# son barycentre. Ce data frame est sauvegardé pour un usage ultérieur.
+
+a <- als@data
+villes <- c("WISSEMBOURG", "SAVERNE", "HAGUENAU", "STRASBOURG", "SCHIRMECK", 
+    "SELESTAT", "COLMAR", "GUEBWILLER", "THANN", "ALTKIRCH", "MULHOUSE", "SAINT-LOUIS")
+pos <- c(1, 1, 1, 1, 4, 3, 4, 4, 2, 2, 4, 4)
+d <- ""
+for (i in 1:length(villes)) {
+    b <- a[a$NOM_COMM == villes[i], c(6, 7)] * 100
+    c <- cbind(villes[i], b[1], b[2])
+    d <- rbind(d, c)
+}
+```
+
+```
+## Warning: invalid factor level, NA generated
+```
+
+```r
+d <- d[-1, ]
+d <- cbind(d, pos)
+print(d)
+```
+
+```
+##         villes[i] X_CHF_LIEU Y_CHF_LIEU pos
+## 5067  WISSEMBOURG    1061400    6893200   1
+## 15808     SAVERNE    1020500    6857800   1
+## 508      HAGUENAU    1051300    6868000   1
+## 5769   STRASBOURG    1049900    6842000   1
+## 56      SCHIRMECK    1011600    6828100   4
+## 3351     SELESTAT    1030300    6804700   3
+## 4900       COLMAR    1024100    6784500   4
+## 14212  GUEBWILLER    1014400    6764700   4
+## 11525       THANN    1007000    6753100   2
+## 12326    ALTKIRCH    1018200    6733200   2
+## 12323    MULHOUSE    1024900    6747600   4
+## 5443  SAINT-LOUIS    1042900    6730400   4
+```
+
+```r
+save(d, file = "zp_villes.Rda")
+
+# dessin de la carte avec les zonzes de proximité. Mettre axes=F en
+# production. Les axes sont utiles pour positionner des éléments comme la
+# rose des vents ou l'échelle. On peut s'aider de la fct locator(). Les
+# distances sont en mètres.
+plot(czps, col = col, axes = F)
+# Dessin des villes et de leurs noms. Le cast as.numeric est indispensable
+# pour que les coordonnée soient interprétées comme des chiffres
+for (i in 1:length(villes)) {
+    points(d[i, 2], d[i, 3], pch = 19, col = "blue")
+    text(x = as.numeric(d[i, 2]), y = as.numeric(d[i, 3]), labels = d[i, 1], 
+        cex = 0.6, pos = d[i, 4])
+}
+# Dessin de la rose des vents. Arrow = 1ou 2; offset = coordonnées de la
+# grille; scale = échelle du dessin (pifométrique); plot.grid=F sinon le
+# dessin ne s'affiche pas
+SpatialPolygonsRescale(layout.north.arrow(1), offset = c(9e+05, 6850000), scale = 15000, 
+    col = "grey", plot.grid = F)
+# Dessin de l'échelle. layout.scale.bar() est un objet de type
+# SpatialPolygons qui dessine 2 rectangles unitaires mitoyens(0,0,1,1) =
+# (0,0,0.5,0.05) + (0.5,0,1,0.05). Ramené à l'échelle de la carte IGN c'est
+# un rectangle de 1m de long et 5 cm de haut, divisé en son milieu. Le
+# paramètre scale permet de grossir l'échelle pour qu'elle soit visible sir
+# le dessin. Le paramètre fill permet de choisir la couleur de chacun des
+# rectangles (de base noir et transparent). L'abcisse de départ de l'échelle
+# se règle avec axes=T ou locator()
+SpatialPolygonsRescale(layout.scale.bar(), offset = c(1100000, 6750000), height = 0.05, 
+    scale = 50000, fill = c("transparent", "black"), plot.grid = F)
+# Légende de l'échelle, à priori 0. La coordonnées x doit être les mêmes que
+# offset ci-dessus. La ccod.Y est légèrement décalée vers le haut
+text(1100000, 6750000 + 5000, "0", cex = 0.6)
+# légende de fin de l'échelle. On veut une échelle de 50 km, il faut donc
+# décaler l'abscisse du point de 50000 par rapport à l'origine (les coord.
+# Lambert sont en mètres)
+text(1100000 + 50000, 6753387 + 2000, "50 km", cex = 0.6)
+# Legend
+legend("topleft", legend = c("Pas de tension", "Surcharge", "Tension avérée", 
+    "Pas d'informations"), col = c("green", "orange", "red", "grey"), pch = 15)
+# title permet de mettre un titre et un sous*titre au graphique
+title("Carte des tensions en Alsace", sub = format(Sys.time(), "%a %d %b %Y %H:%M:%S"))
+```
+
+![plot of chunk tensions](figure/tensions.png) 
+
 
