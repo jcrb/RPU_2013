@@ -35,12 +35,16 @@
 % RO zone droite page impaire
 % fancyhead gère le haut de page
 % fancyfoot gère le bas de page
+% \leftmark contient le nom du chapitre courant en majuscules (défini par la commande \chaptermark )
+% \rightmark contient le nom de la section courante en majuscules (défini par \sectionmark )
+% \markboth contient le nom du chapitre courant tel qu’il apparaît dans la table des matières
+% le nom du chapitre sur la page de gauche et le nom de la section courante sur la page de droite
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead[LE,CE,RE,LO,CO,RO]{}
 \fancyhead[LE,RO]{\scshape\thepage}
-\fancyhead[CE]{\scshape\leftmark}
-\fancyhead[CO]{\scshape\rightmark}
+\fancyhead[RE]{\scshape\leftmark} 
+\fancyhead[LO]{\scshape\rightmark}
 
 \fancyfoot[CE]{Document de travail - non validé}
 \fancyfoot[CO]{Document de travail - non validé}
@@ -110,14 +114,19 @@ Bartier \& Madame Christine Hecker}}
 
 % page de garde n°2
 %------------------
+%
+% nouvelle page + repousse le texte en bas de page
+% noindent supprime le retrait automatique
+
 \newpage
-%\chapter*{}
-\vfill
+~\vfill
+%\vspace*{7.5cm}
 
 <<session,echo=FALSE,results='asis'>>=
 toLatex(sessionInfo())
 @
 
+Copyright \copyright{} 2013-2014 RESURAL et les contributeurs.
 
 % Making a derivative work?
 % You are encouraged to leave this page entirely intact.
@@ -125,6 +134,11 @@ toLatex(sessionInfo())
 
 \noindent For license and attribution guidance, see \url{http://www.openintro.org/perm/stat2nd_v2.txt}
 
+% ************************
+% *                      *  
+% * PARTIE PRINCIPALE    * 
+% *                      *
+% ************************
 \mainmatter
 
 \tableofcontents
@@ -150,6 +164,14 @@ library("sp")
 
 source("../Routines/mes_fonctions.R")
 
+# Pour supprimer la notation scientifique:
+options(scipen = 6, digits = 2)
+
+# Pour imposer un péparateur de milliers:
+knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=" ")
+})
+
 #========================================================================
 
 mois_courant <- 12
@@ -163,7 +185,7 @@ if(!exists("d1")) {
   load(paste(path,"rpu",annee_courante, "d01",mois_courant, ".Rda",sep=""))
 }
 attach(d1)
-nrow(d1)
+# nrow(d1)
 
 # On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
 
@@ -227,7 +249,11 @@ N <- nrow(d1)
 @
 
 
-%========================================================== PARTIE 2
+% ************************
+% *                      *  
+% *      PARTIE 2        * 
+% *                      *
+% ************************
 \part{Activité des services d'urgence d'Alsace}
 
 \newpage
@@ -279,7 +305,11 @@ N <- nrow(d1)
 <<child='activite_su.Rnw'>>=
 @
 
-%===================================================================== PARTIE 3
+% ************************
+% *                      *  
+% *      PARTIE 3        * 
+% *                      *
+% ************************
 \part{Analyse thématique} 
 \newpage
 
@@ -290,7 +320,11 @@ N <- nrow(d1)
 <<child='geriatrie.Rnw'>>=
 @
 
-%===================================================================== PARTIE 4
+% ************************
+% *                      *  
+% *      PARTIE 4        * 
+% *                      *
+% ************************
 \part{Activité par service d'urgence}
 
 \newpage
@@ -348,7 +382,11 @@ N <- nrow(d1)
 <<child='SU_3Frontiere.Rnw'>>=
 @
 
-%===================================================================== PARTIE 5
+% ************************
+% *                      *  
+% *      PARTIE 5        * 
+% *                      *
+% ************************
 \part{Activité des SAMU d'Alsace}
 
 <<child='samu.Rnw'>>=
@@ -370,7 +408,11 @@ N <- nrow(d1)
 %\index{Eclipse@Eclipse!solaire}
 %\index{Orbite!périgée@périgée}
 
-%===================================================================== PARTIE 6
+% ************************
+% *                      *  
+% *      PARTIE 6        * 
+% *                      *
+% ************************
 \part{Annexes}
 
 \newpage

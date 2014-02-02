@@ -84,12 +84,16 @@
 % RO zone droite page impaire
 % fancyhead gère le haut de page
 % fancyfoot gère le bas de page
+% \leftmark contient le nom du chapitre courant en majuscules (défini par la commande \chaptermark )
+% \rightmark contient le nom de la section courante en majuscules (défini par \sectionmark )
+% \markboth contient le nom du chapitre courant tel qu’il apparaît dans la table des matières
+% le nom du chapitre sur la page de gauche et le nom de la section courante sur la page de droite
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead[LE,CE,RE,LO,CO,RO]{}
 \fancyhead[LE,RO]{\scshape\thepage}
-\fancyhead[CE]{\scshape\leftmark}
-\fancyhead[CO]{\scshape\rightmark}
+\fancyhead[RE]{\scshape\leftmark} 
+\fancyhead[LO]{\scshape\rightmark}
 
 \fancyfoot[CE]{Document de travail - non validé}
 \fancyfoot[CO]{Document de travail - non validé}
@@ -158,9 +162,13 @@ Bartier \& Madame Christine Hecker}}
 
 % page de garde n°2
 %------------------
+%
+% nouvelle page + repousse le texte en bas de page
+% noindent supprime le retrait automatique
+
 \newpage
-%\chapter*{}
-\vfill
+~\vfill
+%\vspace*{7.5cm}
 
 \begin{itemize}\raggedright
   \item R version 3.0.2 (2013-09-25), \verb|x86_64-pc-linux-gnu|
@@ -174,6 +182,7 @@ Bartier \& Madame Christine Hecker}}
 
 
 
+Copyright \copyright{} 2013-2014 RESURAL et les contributeurs.
 
 % Making a derivative work?
 % You are encouraged to leave this page entirely intact.
@@ -181,19 +190,18 @@ Bartier \& Madame Christine Hecker}}
 
 \noindent For license and attribution guidance, see \url{http://www.openintro.org/perm/stat2nd_v2.txt}
 
+% ************************
+% *                      *  
+% * PARTIE PRINCIPALE    * 
+% *                      *
+% ************************
 \mainmatter
 
 \tableofcontents
 \listoftables
 \listoffigures
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 340338
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+
 
 
 % ************************
@@ -206,7 +214,7 @@ Bartier \& Madame Christine Hecker}}
 
 % preface.Rnw
 
-Ce document analyse les Résumé de Passages aux Urgences (RPU) transmis en 2013 au réseau des urgences en Alsace. C'est le premier du genre et comme tel il forcément bien imparfait, à la fois qualitativement et quantitativement.
+Ce document analyse les Résumé de Passages aux Urgences (RPU) transmis en 2 013 au réseau des urgences en Alsace. C'est le premier du genre et comme tel il forcément bien imparfait, à la fois qualitativement et quantitativement.
 
 Ce travail puise sa source das les travaux des observatoires des urgences qui nous ont précédés dans cette démarche et qui sont nos modèles: ORUMIP, ORUPACA, ORULIM et ORULOR.
 
@@ -351,11 +359,11 @@ Les calculs sont effectués à partir du fichier \texttt{BTT\_TD\_POP1B\_2010} d
   Tranche d'age & Abréviation & Effectif & Pourcentage \\
   \hline
   \hline
-   Moins de 1 an & pop0 & \np{21655} & 1.17 \\
-   De 1 à 75 ans & pop1\_75 & \np{1677958} & 90.91 \\
-   Plus de 75 ans& pop75 & \np{146074} & 7.91 \\
+   Moins de 1 an & pop0 & \np{21 655} & 1.17 \\
+   De 1 à 75 ans & pop1\_75 & \np{1 677 958} & 90.91 \\
+   Plus de 75 ans& pop75 & \np{146 074} & 7.91 \\
    \hline
-   Total & pop\_tot & \np{1845687} & 100.00 \\
+   Total & pop\_tot & \np{1 845 687} & 100.00 \\
   \hline
 \end{tabular}
 \caption{Classe d'age en Alsace (janvier 2010)}
@@ -539,7 +547,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 \fbox{Voir SAU2013}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:28 2014
+% Sun Feb  2 20:10:44 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -575,7 +583,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:29 2014
+% Sun Feb  2 20:10:44 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -621,15 +629,15 @@ On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 ##            id   CODE_POSTAL       COMMUNE   DESTINATION            DP 
-##          0.00          0.00          0.00         78.74         33.75 
+##           0.0           0.0           0.0          78.7          33.8 
 ##        ENTREE       EXTRACT        FINESS       GRAVITE   MODE_ENTREE 
-##          0.00          0.00          0.00         14.37          9.45 
+##           0.0           0.0           0.0          14.4           9.4 
 ##   MODE_SORTIE         MOTIF     NAISSANCE   ORIENTATION    PROVENANCE 
-##         14.02         35.75          0.00         79.95         35.05 
+##          14.0          35.8           0.0          80.0          35.0 
 ##          SEXE        SORTIE     TRANSPORT TRANSPORT_PEC           AGE 
-##          0.00          8.91         23.30         25.50          0.00 
+##           0.0           8.9          23.3          25.5           0.0 
 ##       secteur 
-##          0.00
+##           0.0
 \end{verbatim}
 
 
@@ -838,7 +846,11 @@ L'orientation précise le devenir ou les circonstances associées. Cette rubriqu
 
 
 
-%========================================================== PARTIE 2
+% ************************
+% *                      *  
+% *      PARTIE 2        * 
+% *                      *
+% ************************
 \part{Activité des services d'urgence d'Alsace}
 
 \newpage
@@ -862,8 +874,8 @@ L'orientation précise le devenir ou les circonstances associées. Cette rubriqu
 % Min. 1 st Qu.  Median    Mean 3rd Qu.    Max. 
 %   642.0   848.0   895.5   883.2   957.0  1050.0 
 
-L'ensemble des SU ont déclaré \np{340338} passages au 31 décembre 2013, 
-soit une moyenne de \np{935} passages par jour (extrèmes 642 et \np{1180})
+L'ensemble des SU ont déclaré \np{340 338} passages au 31 décembre 2 013, 
+soit une moyenne de \np{935} passages par jour (extrèmes 642 et \np{1 180})
 
 Passages par secteur sanitaire:
 
@@ -874,10 +886,10 @@ Passages par secteur sanitaire:
   \hline
  Territoire & RPU déclarés \\ 
   \hline
-  1 & \np{59484} \\ 
-  2 & \np{62981} \\ 
-  3 & \np{109395} \\ 
-  4 & \np{108478} \\ 
+  1 & \np{59 484} \\ 
+  2 & \np{62 981} \\ 
+  3 & \np{109 395} \\ 
+  4 & \np{108 478} \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -902,7 +914,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 \subsection*{En valeur absolue}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:33 2014
+% Sun Feb  2 20:10:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -948,9 +960,9 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 \end{kframe}
 \end{knitrout}
 
-Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comprte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à \ensuremath{4.4106\times 10^{5}}.
+Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comprte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à 441 062.
 
-Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18.09\%.
+Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 
 \subsection*{Activité par mois}
 %------------------------------
@@ -979,7 +991,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18.09\%.
 \subsection*{Activité par semaine}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:36 2014
+% Sun Feb  2 20:10:51 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1045,7 +1057,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18.09\%.
 \label{act_sem}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:36 2014
+% Sun Feb  2 20:10:51 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
@@ -1189,7 +1201,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % tranche-age.Rnw
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:42 2014
+% Sun Feb  2 20:10:57 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1225,7 +1237,7 @@ Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{rec
 
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:42 2014
+% Sun Feb  2 20:10:57 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -1246,7 +1258,7 @@ Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{rec
 
 
 \index{exhaustivité@motif}
-Le motif de consultation nest pas renseigné dans 55.16 \% des cas (table \ref{lab:motif}).
+Le motif de consultation nest pas renseigné dans 55 \% des cas (table \ref{lab:motif}).
 
 Seuls six établissements ont un taux d'exhaustivité supérieur à 80\% pour cette rubrique.
 
@@ -1295,7 +1307,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:42 2014
+% Sun Feb  2 20:10:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1325,7 +1337,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:42 2014
+% Sun Feb  2 20:10:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1348,7 +1360,7 @@ AMBU & 44176.00 & 13.00 & 16.90 \\
 
 
 
-Dans 23.3 \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpial n'est pas précisé.
+Dans 23 \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpial n'est pas précisé.
 
 \section*{Origine géographique}
 
@@ -1369,14 +1381,20 @@ Les patients consultant aux urgences sont majoritairement issus de la région Al
 
 La durée de passage est le temps compris entre la date d'entrée et celle de sortie. Il s'agit d'une durée de transit total. Les données transmises par les RPU ne permettent pas de calculer les temps d'attente.
 
-\subsection{Cas général}
+% ************************
+% *                      *  
+% *    Cas général       * 
+% *                      *
+% ************************
+
+\section{Cas général}
 
 
 
 
-La dispersion des durées de passage est très importante, variant de -247 à \np{9870} minutes. Les valeurs négatives sont considérées comme des valeurs manquantes. 
-Finalement \ensuremath{3.0344\times 10^{4}} ne sont pas renseignées (exhaustivité de -7.92 \% des RPU). 
-La durée de passage moyenne est de 163 minutes (ecart-type 194.17 minutes)
+La dispersion des durées de passage est très importante, variant de -247 à \np{9 870} minutes. Les valeurs négatives sont considérées comme des valeurs manquantes. 
+Finalement 30 344 durées ne sont pas renseignées (exhaustivité de 91 \% des RPU). 
+La durée de passage moyenne est de 163 minutes (ecart-type 194 minutes)
 Une transformation logarithmique des données permet de mieux représenter l'histogramme des durées de passage. 
 
 \begin{figure}[ht!]
@@ -1417,9 +1435,9 @@ Les durées de présences inférieures à 10 minutes proviennent à plus de 90\%
 \hlkwd{rbind}\hlstd{(}\hlkwd{table}\hlstd{(a),} \hlkwd{round}\hlstd{(}\hlkwd{prop.table}\hlstd{(}\hlkwd{table}\hlstd{(a))} \hlopt{*} \hlnum{100}\hlstd{,} \hlnum{2}\hlstd{))}
 \end{alltt}
 \begin{verbatim}
-##         3Fr   Alk    Col    Dia    Geb    Hag      Hus    Mul    Odi   Sel
-## [1,] 179.00 64.00 283.00 246.00 108.00 165.00 21430.00 442.00 108.00 42.00
-## [2,]   0.77  0.27   1.21   1.05   0.46   0.71    91.59   1.89   0.46  0.18
+##         3Fr   Alk   Col   Dia    Geb    Hag   Hus   Mul    Odi   Sel
+## [1,] 179.00 64.00 283.0 246.0 108.00 165.00 21430 442.0 108.00 42.00
+## [2,]   0.77  0.27   1.2   1.1   0.46   0.71    92   1.9   0.46  0.18
 ##         Wis    Sav
 ## [1,] 151.00 179.00
 ## [2,]   0.65   0.77
@@ -1431,7 +1449,7 @@ Les durées de présences inférieures à 10 minutes proviennent à plus de 90\%
 \end{knitrout}
 
 
-Finalement, on conserve le groupe $b$ qui regroupe la majorité (91.57\%) des patients. On trouve dans ce groupe une durée de présence de 164 minutes (écart-type 146.7791 minutes, médiane 120).
+Finalement, on conserve le groupe $b$ qui regroupe la majorité (92\%) des patients. On trouve dans ce groupe une durée de présence de 164 minutes (écart-type 147 minutes, médiane 120).
 
 \begin{figure}[ht!]
  \centering
@@ -1444,7 +1462,13 @@ Finalement, on conserve le groupe $b$ qui regroupe la majorité (91.57\%) des pa
  \caption{Durée de passage aux urgences}
 \end{figure}
 
-\subsection{Moyenne des durées de passages par jour}
+% ************************
+% *                      *  
+% * Durée de passage     * 
+% *                      *
+% ************************
+
+\section{Moyenne des durées de passages par jour}
 
 
 
@@ -1473,14 +1497,29 @@ Finalement, on conserve le groupe $b$ qui regroupe la majorité (91.57\%) des pa
 ##       1      84     135     159     212    1050     874
 \end{verbatim}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/passage} 
-
 \end{knitrout}
 
 
+\begin{figure}[ht!]
+ \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/hist_tous_passages} 
+
+\end{knitrout}
+
+ \caption{Histogramme du passage à Sélestat en 2013 (29 534 patients)}
+\end{figure}
+
 % RPU_2013_analyse à partir de la ligne 382
 
-\section*{Selon l'heure}
+% ************************
+% *                      *  
+% *   Selon l'heure      * 
+% *                      *
+% ************************
+
+\section{Selon l'heure}
 
 Une période de 24 heures est habituellement divisée de la manière suivante:
 \begin{enumerate}
@@ -1492,31 +1531,118 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Feb  2 20:11:03 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & nuit profonde & journée & soirée \\ 
+  \hline
+N & 44074.00 & 249610.00 & 39653.00 \\ 
+  \% & 13.22 & 74.88 & 11.90 \\ 
+   \hline
+\end{tabular}
+\caption[Fréquentation des SU et période]{Fréquentation des urgences et période de la journée} 
+\label{tab:freq_periode}
+\end{table}
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Feb  2 20:11:03 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & nuit profonde & journée & soirée \\ 
+  \hline
+mn & 172.68 & 160.66 & 161.96 \\ 
+  \% & 34.86 & 32.44 & 32.70 \\ 
+   \hline
+\end{tabular}
+\caption[Durée de présence et période]{Durée  moyenne de présence (mn) et période de la journée} 
+\label{duree_periode}
+\end{table}
+
+
+
+\begin{figure}[ht!]
+ \centering
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## nuit profonde       journée        soirée          NA's 
-##         44074        249610         39653          7001
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/duree_heure1} 
-\begin{kframe}\begin{verbatim}
-## nuit profonde       journée        soirée 
-##         172.7         160.7         162.0
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/duree_heure2} 
-\begin{kframe}\begin{verbatim}
-## nuit profonde       journée        soirée 
-##         182.7         160.8         158.6
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/duree_heure3} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/bp_periode} 
 
 \end{knitrout}
 
+ \caption{Passages selon la période de la journée}
+ \label{fig:bp_periode}
+\end{figure}
 
-\section*{Selon l'âge}
+Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.\pageref{fig:bp_periode}).
+
+
+\begin{figure}[ht!]
+ \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/periode_2} 
+
+\end{knitrout}
+
+ \caption{Passages selon la période de la journée}
+ \label{fig:bp_periode2}
+\end{figure}
+
+
+\begin{figure}[ht!]
+ \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/periode_1} 
+
+\end{knitrout}
+
+ \caption{Passages selon la période de la journée}
+ \label{fig:bp_periode1}
+\end{figure}
+
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Feb  2 20:11:04 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & nuit profonde & journée & soirée \\ 
+  \hline
+mn & 182.65 & 160.84 & 158.57 \\ 
+  \% & 36.38 & 32.04 & 31.58 \\ 
+   \hline
+\end{tabular}
+\caption{Durée moyenne de présence pour le groupe b (10-1000 mn)} 
+\label{b_periode}
+\end{table}
+
+
+
+Durée moyenne de présence pour le groupe b (10-1000 mn) (fig. \ref{b_periode} pp.\pageref{b_periode}).
+
+\begin{figure}[ht!]
+ \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/periode_4} 
+
+\end{knitrout}
+
+ \caption{Passages selon la période de la journée}
+\end{figure}
+
+
+% ************************
+% *                      *  
+% *     Selon l'age      * 
+% *                      *
+% ************************
+
+\section{Selon l'âge}
 
 Le temps de passage augmente avec l'age.
 \begin{knitrout}
@@ -1525,120 +1651,226 @@ Le temps de passage augmente avec l'age.
 ## 15 ans et moins     16 à 74 ans  75 ans et plus 
 ##            7400           18269            3865
 ## 15 ans et moins     16 à 74 ans  75 ans et plus 
-##           114.5           160.2           242.5
+##             115             160             242
 \end{verbatim}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/duree_age1} 
-\begin{kframe}\begin{verbatim}
-## 15 ans et moins     16 à 74 ans  75 ans et plus            NA's 
-##           74739          215694           49895              10
-## 15 ans et moins     16 à 74 ans  75 ans et plus 
-##           113.2           168.4           220.4
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/duree_age2} 
-
 \end{knitrout}
 
 
-\section*{Selon le jour de la semaine}
+\begin{figure}[ht!]
+ \centering
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlkwd{tapply}\hlstd{(sel}\hlopt{$}\hlstd{p,} \hlkwd{wday}\hlstd{(e,} \hlkwc{label} \hlstd{=} \hlnum{TRUE}\hlstd{), mean,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
-\end{alltt}
-\begin{verbatim}
-##   Sun   Mon  Tues   Wed Thurs   Fri   Sat 
-## 142.2 170.5 163.7 160.4 162.5 158.4 158.6
-\end{verbatim}
-\begin{alltt}
-\hlcom{# selon le jour et la période}
-\hlstd{t} \hlkwb{<-} \hlkwd{table}\hlstd{(periode,} \hlkwd{wday}\hlstd{(e,} \hlkwc{label} \hlstd{=} \hlnum{TRUE}\hlstd{))}
-\end{alltt}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/age_selestat} 
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: all arguments must have the same length}}\begin{alltt}
-\hlstd{t}
-\end{alltt}
-\begin{verbatim}
-## [1] 309994
-\end{verbatim}
-\begin{alltt}
-\hlcom{# tout le groupe}
-\hlkwd{tapply}\hlstd{(d1}\hlopt{$}\hlstd{presence,} \hlkwd{wday}\hlstd{(e,} \hlkwc{label} \hlstd{=} \hlnum{TRUE}\hlstd{), mean,} \hlkwc{na.rm} \hlstd{=} \hlnum{TRUE}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: arguments must have same length}}\begin{alltt}
-\hlkwd{boxplot}\hlstd{(d1}\hlopt{$}\hlstd{presence} \hlopt{~} \hlkwd{wday}\hlstd{(e,} \hlkwc{label} \hlstd{=} \hlnum{TRUE}\hlstd{),} \hlkwc{outline} \hlstd{= F,} \hlkwc{ylab} \hlstd{=} \hlstr{"durée de présence moyenne (mn)"}\hlstd{,}
-    \hlkwc{main} \hlstd{=} \hlstr{"Durée de présence moyenne selon le jour de la semaine"}\hlstd{)}
-\end{alltt}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: variable lengths differ (found for 'wday(e, label = TRUE)')}}\end{kframe}
 \end{knitrout}
 
+ \caption{Durée de passage en fonction de l'âge}
+\end{figure}
 
-\subsection*{Pourcentage de passages en moins de 4 heures par établissement}
-
-
-
-
-A Sélestat, 81.19\% des patients quittent les urgences en moins de quatre heures.
-
-Pour l'ensemble des patients d'Alsace, 80.45\% quittent les urgences en moins de quatre heures.
+15 ans et moins     16 à 74 ans  75 ans et plus            NA's 
+          74739          215694           49895              10 
+15 ans et moins     16 à 74 ans  75 ans et plus 
+            113             168             220 
 
 
-\section*{Selon l'orientation}
+
+\begin{figure}[ht!]
+ \centering
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-##  CHIR FUGUE   HDT    HO   MED  OBST   PSA   REA   REO    SC  SCAM    SI 
-## 184.6 222.3 169.0    NA 224.5 167.6 172.1 202.3    NA 186.0 187.4 196.5 
-##  UHCD 
-## 188.4
-##   DOM   MCO   SLD 
-## 144.5 212.5 233.3
-##   CHIR  FUGUE    HDT     HO    MED   OBST    PSA    REA    REO     SC 
-## 239.33 230.40 229.06 224.77 262.76 234.94 170.33 210.98  86.22 167.79 
-##   SCAM     SI   UHCD 
-## 266.67 253.45  88.99
-##   DOM   HAD   HMS   MCO   PSY   SLD   SSR 
-## 155.9 162.0 506.6 183.1 324.2 241.7 320.3
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/duree_orientation} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/age_groupe2} 
 
 \end{knitrout}
 
+ \caption{Durée de passage en fonction de l'âge}
+\end{figure}
+
+% *************************
+% *                       *  
+% * Selon le jour semaine * 
+% *                       *
+% *************************
+
+\section{Selon le jour de la semaine}
+
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Feb  2 20:11:05 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & Sun & Mon & Tues & Wed & Thurs & Fri & Sat \\ 
+  \hline
+mn & 149.57 & 171.64 & 166.81 & 162.74 & 163.07 & 164.10 & 161.53 \\ 
+  \% & 13.13 & 15.06 & 14.64 & 14.28 & 14.31 & 14.40 & 14.18 \\ 
+   \hline
+\end{tabular}
+\caption[Durée de présence et jour de la semaine]{Durée de présence et selon le jour de la semaine. Temps passé en minutes (mn) aux urgences en fonction du jour} 
+\label{tab:jour_semaine}
+\end{table}
 
 
-\section*{Selon la gravité}
+Il existe une relation entre le jour de la semaine et la durée de présence aux urgences (table \ref{tab:jour_semaine} pp.\pageref{tab:jour_semaine}).
+
+\begin{figure}[ht!]
+ \centering
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-##      1      2      3      4      5      D      P 
-## 102.20 149.49 216.64 210.85 202.09  63.33 155.34
-##     1     2     3     4     5     D     P 
-## 120.2 159.4 228.3 219.6 177.3 190.5 222.3
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/duree_gravite} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/bp_jour_presence} 
 
 \end{knitrout}
 
+ \caption{Durée de passage en fonction du jour de la semaine}
+ \label{duree_jour}
+\end{figure}
+Il existe une relation entre la destination et la durée de présence aux urgences (fig. \ref{duree_jour} pp.\pageref{duree_jour}).
 
-\section*{Selon la structure}
-\subsection{CH Sélestat}
+
+% ************************
+% *                      *  
+% * Moins de 4 heures    * 
+% *                      *
+% ************************
+\subsection{Pourcentage de passages en moins de 4 heures par établissement}
+
+
+
+
+Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de quatre heures.
+
+% ************************
+% *                      *  
+% * Selon l'orientation  * 
+% *                      *
+% ************************
+
+\section{Selon l'orientation}
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Feb  2 20:11:06 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrrrrrrrr}
+  \hline
+ & CHIR & FUGUE & HDT & HO & MED & OBST & PSA & REA & REO & SC & SCAM & SI & UHCD \\ 
+  \hline
+mn & 239.33 & 230.40 & 229.06 & 224.77 & 262.76 & 234.94 & 170.33 & 210.98 & 86.22 & 167.79 & 266.67 & 253.45 & 88.99 \\ 
+  \% & 8.98 & 8.64 & 8.59 & 8.43 & 9.86 & 8.81 & 6.39 & 7.91 & 3.23 & 6.29 & 10.00 & 9.51 & 3.34 \\ 
+   \hline
+\end{tabular}
+\caption[Durée de présence et orientation]{Durée de présence et orientation. Temps passé en minutes (mn) aux urgences en fonction de l'orientation à l'issue de la prise en charge} 
+\label{tab:duree_orientation}
+\end{table}
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Feb  2 20:11:07 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & DOM & HAD & HMS & MCO & PSY & SLD & SSR \\ 
+  \hline
+mn & 155.95 & 162.00 & 506.65 & 183.09 & 324.22 & 241.71 & 320.30 \\ 
+  \% & 8.23 & 8.55 & 26.75 & 9.67 & 17.12 & 12.76 & 16.91 \\ 
+   \hline
+\end{tabular}
+\caption[Durée de présence et destination]{Durée de présence et destination. Temps passé en minutes (mn) aux urgences en fonction de la destination à l'issue de la prise en charge} 
+\label{tab:duree_destination}
+\end{table}
+
+
+
+Il existe une relation entre l'orientation et la durée de présence aux urgences (table \ref{tab:duree_orientation} pp.\pageref{tab:duree_orientation}).
+
+Il existe une relation entre la destination et la durée de présence aux urgences (table \ref{tab:duree_destination} pp.\pageref{tab:duree_destination}).
+
+\begin{figure}[ht!]
+ \centering
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##       1      84     135     159     212    1050     874
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/bp_duree_dest} 
+
 \end{knitrout}
 
+ \caption{Durée de passage en fonction de la destination}
+ \label{duree_dest}
+\end{figure}
+Il existe une relation entre la destination et la durée de présence aux urgences (fig. \ref{duree_dest} pp.\pageref{duree_dest}).
+
+% ************************
+% *                      *  
+% * Selon la gravité     * 
+% *                      *
+% ************************
+
+\section{Selon la gravité}
+
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Sun Feb  2 20:11:07 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & 1 & 2 & 3 & 4 & 5 & D & P \\ 
+  \hline
+mn & 120.19 & 159.35 & 228.28 & 219.64 & 177.34 & 190.49 & 222.27 \\ 
+  \% & 9.12 & 12.09 & 17.33 & 16.67 & 13.46 & 14.46 & 16.87 \\ 
+   \hline
+\end{tabular}
+\caption[Durée de présence et gravité]{Durée de présence et gravité. Temps passé en minutes (mn) aux urgences en fonction de la CCMU} 
+\label{duree_gravite}
+\end{table}
+
+
+Il existe une relation entre la gravité et la durée de présence aux urgences (table \ref{duree_gravite} pp.\pageref{duree_gravite}).
+
+\begin{figure}[ht!]
+ \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/duree_gravite2} 
+
+\end{knitrout}
+
+ \caption{Durée de passage en fonction de la gravité exprimée en unité CCMU}
+ \label{toucan}
+\end{figure}
+
+
+% ************************
+% *                      *  
+% * Selon la structure   * 
+% *                      *
+% ************************
+
+% \section{Selon la structure}
+% \subsection{CH Sélestat}
+% <<duree_structure,echo=FALSE>>=
+% summary(sel$p)
+% @
+% 
+% selon la gravité:
+% <<duree_gravite_sel,echo=FALSE>>=
+% tapply(sel$p,sel$GRAVITE,mean,na.rm=TRUE)
+% @
+% 
+% selon l'orientation
+% <<duree_orientation_sel,echo=FALSE>>=
+% tapply(sel$p,sel$ORIENTATION,mean,na.rm=TRUE)
+% 
+% #'@details on transforme les NA en DOM pour mesurer le temps moyen si retour à domicile. On fait l'hypothèse que NA = dom.
+% sel$DESTINATION<-as.character(sel$DESTINATION)
+% sel$DESTINATION[is.na(sel$DESTINATION)]<-"DOM"
+% tapply(sel$p,sel$DESTINATION,mean,na.rm=TRUE)
+% @
+% 
+% A Sélestat, p\% des patients quittent les urgences en moins de quatre heures.
+% 
+% <<duree_semaine,echo=TRUE>>=
+% tapply(sel$p,wday(e,label=TRUE),mean,na.rm=TRUE)
+% # selon le jour et la période
+% t<-table(periode,wday(e,label=TRUE))
+% t
+% @
 
 
 \newpage
@@ -1653,9 +1885,9 @@ Les motifs de recours aux urgences sont exprimés en fonction de la classificati
 \index{motif de recours}
 \footnote{Classification Internationale des Maladies, 10ème révision (La CIM10 comporte environ 36000 maladies).}.
 \url{http://apps.who.int/classifications/icd10/browse/2008/fr}
-Le fichier comporte \np{225473} diagnostics principaux différents.
-répartis en 4834 classes de diagnostics.
-La comparaison entre le nombre de RPU reçus et le nombre de diagnostics renseignés permet d'établir l'exhaustivité des CIM10 à 66.25\% \index{exhaustivité!CIM10}
+Le fichier comporte \np{225 473} diagnostics principaux différents.
+répartis en 4 834 classes de diagnostics.
+La comparaison entre le nombre de RPU reçus et le nombre de diagnostics renseignés permet d'établir l'exhaustivité des CIM10 à 66\% \index{exhaustivité!CIM10}
 
 
 \section{Cim10}
@@ -1673,32 +1905,32 @@ Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10.
  Chapitre & Bloc & Titre & N & \% total  & \% non trauma \\
  \hline
  
-I & A00–B99 & Certaines maladies infectieuses et parasitaires & 10562 & 4.68 & 10.95 \\
- II&C00–D48&Tumeurs&1072&0.48&1.11\\
+I & A00–B99 & Certaines maladies infectieuses et parasitaires & 10 562 & 4.7 & 11 \\
+ II&C00–D48&Tumeurs&1 072&0.48&1.1\\
  
 III&D50–D89&Maladies du sang et des organes hématopoïétiques et certains troubles du système immunitaire&487&0.22&0.5\\
 
-IV&E00–E90&Maladies endocriniennes, nutritionnelles et métaboliques&2475&1.1&2.57\\
+IV&E00–E90&Maladies endocriniennes, nutritionnelles et métaboliques&2 475&1.1&2.6\\
 
-V&F00–F99&Troubles mentaux et du comportement&12076&5.36&12.52\\
+V&F00–F99&Troubles mentaux et du comportement&12 076&5.4&13\\
 
-VI&G00–G99&Maladies du système nerveux&6677&2.96&6.92\\
+VI&G00–G99&Maladies du système nerveux&6 677&3&6.9\\
 
-VII & H00–H59 & Maladies de l'oeil et de ses annexes & 6937 & 3.08&7.19\\
+VII & H00–H59 & Maladies de l'oeil et de ses annexes & 6 937 & 3.1&7.2\\
 
-VIII&H60–H95&Maladies de l'oreille et de l'apophyse mastoïde&5015&2.22&5.2\\
+VIII&H60–H95&Maladies de l'oreille et de l'apophyse mastoïde&5 015&2.2&5.2\\
 
-IX&I00–I99&Maladies de l'appareil circulatoire&13635&6.05&14.14\\
+IX&I00–I99&Maladies de l'appareil circulatoire&13 635&6&14\\
 
-X&J00–J99&Maladies de l'appareil respiratoire&24027&10.66&24.91\\
+X&J00–J99&Maladies de l'appareil respiratoire&24 027&11&25\\
 
-XI&K00–K93&Maladies de l'appareil digestif&18153&8.05&18.82\\
+XI&K00–K93&Maladies de l'appareil digestif&18 153&8.1&19\\
 
-XII&L00–L99&Maladies de la peau et du tissu cellulaire souscutané&6841&3.03&7.09\\
+XII&L00–L99&Maladies de la peau et du tissu cellulaire souscutané&6 841&3&7.1\\
 
-XIII&M00–M99&Maladies du système ostéoarticulaire, des muscles et du tissu conjonctif&20583&9.13&21.34\\
+XIII&M00–M99&Maladies du système ostéoarticulaire, des muscles et du tissu conjonctif&20 583&9.1&21\\
 
-XIV&N00–N99&Maladies de l'appareil génitourinaire&11668&5.17&12.1\\
+XIV&N00–N99&Maladies de l'appareil génitourinaire&11 668&5.2&12\\
 
 XV&O00–O99&Grossesse, accouchement et puerpéralité&415&0.18&0.43\\
 
@@ -1706,13 +1938,13 @@ XVI&P00–P96&Certaines affections dont l'origine se situe dans la période pér
 
 % XVII&Q00–Q99&Malformations congénitales et anomalies chromosomiques&cong&round(cong*100/total,digits=2)&round(cong*100/(total-traumato),digits=2)\\
 
-XVIII&R00–R99&Symptômes, signes et résultats anormaux d'examens cliniques et de laboratoire, non classés ailleurs&52556&23.31&54.48\\
+XVIII&R00–R99&Symptômes, signes et résultats anormaux d'examens cliniques et de laboratoire, non classés ailleurs&52 556&23&54\\
 
-XIX&S00–T98&Lésions traumatiques, empoisonnements et certaines autres conséquences de causes externes&129011&57.22& \\
+XIX&S00–T98&Lésions traumatiques, empoisonnements et certaines autres conséquences de causes externes&129 011&57& \\
 
-XX&V01–Y98&Causes externes de morbidité et de mortalité& 6127&2.72&6.35\\
+XX&V01–Y98&Causes externes de morbidité et de mortalité& 6 127&2.7&6.3\\
 
-XXI&Z00–Z99&Facteurs influant sur l'état de santé et motifs de recours aux services de santé&9930&4.4&4.4\\
+XXI&Z00–Z99&Facteurs influant sur l'état de santé et motifs de recours aux services de santé&9 930&4.4&4.4\\
 
 XXII&U00–U99&Codes d'utilisation particulière & 0&0&0\\
 
@@ -1727,34 +1959,34 @@ XXII&U00–U99&Codes d'utilisation particulière & 0&0&0\\
 \begin{kframe}\begin{verbatim}
 ## a :  
 ##         Frequency Percent Cum. percent
-## S           76382    33.9         33.9
-## R           34900    15.5         49.4
-## J           15471     6.9         56.2
-## M           13643     6.1         62.3
-## K           12082     5.4         67.6
-## T            9206     4.1         71.7
-## I            8960     4.0         75.7
-## F            8071     3.6         79.3
-## H            7966     3.5         82.8
-## N            7809     3.5         86.3
-## Z            6606     2.9         89.2
-## A            4660     2.1         91.3
-## L            4581     2.0         93.3
-## G            4402     2.0         95.2
-## B            2218     1.0         96.2
-## W            1905     0.8         97.1
-## E            1630     0.7         97.8
-## D            1423     0.6         98.4
-## Y             945     0.4         98.8
-## X             710     0.3         99.2
-## V             597     0.3         99.4
-## C             522     0.2         99.7
-## O             281     0.1         99.8
-## P             254     0.1         99.9
-## r             130     0.1         99.9
-## Q              93     0.0        100.0
-## k              26     0.0        100.0
-##   Total    225473   100.0        100.0
+## S           76382    33.9           34
+## R           34900    15.5           49
+## J           15471     6.9           56
+## M           13643     6.1           62
+## K           12082     5.4           68
+## T            9206     4.1           72
+## I            8960     4.0           76
+## F            8071     3.6           79
+## H            7966     3.5           83
+## N            7809     3.5           86
+## Z            6606     2.9           89
+## A            4660     2.1           91
+## L            4581     2.0           93
+## G            4402     2.0           95
+## B            2218     1.0           96
+## W            1905     0.8           97
+## E            1630     0.7           98
+## D            1423     0.6           98
+## Y             945     0.4           99
+## X             710     0.3           99
+## V             597     0.3           99
+## C             522     0.2          100
+## O             281     0.1          100
+## P             254     0.1          100
+## r             130     0.1          100
+## Q              93     0.0          100
+## k              26     0.0          100
+##   Total    225473   100.0          100
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -1906,8 +2138,8 @@ Horaire des AVC, à comparer avec:
 ## Dim Lun Mar Mer Jeu Ven Sam 
 ## 321 465 454 398 396 407 347
 ## w
-##   Dim   Lun   Mar   Mer   Jeu   Ven   Sam 
-## 11.51 16.68 16.28 14.28 14.20 14.60 12.45
+## Dim Lun Mar Mer Jeu Ven Sam 
+##  12  17  16  14  14  15  12
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/avc_jour_semaine} 
@@ -1922,7 +2154,7 @@ Proportion théorique = 14.28\% par jour de la semaine.
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##     1.0    62.0    75.0    71.4    84.0   112.0
+##       1      62      75      71      84     112
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2004,16 +2236,16 @@ Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour to
 {\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}\begin{verbatim}
 ## [1] "Pneumonies et AGE"
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##     0.0    61.0    77.0    70.9    85.0    98.0
+##       0      61      77      71      85      98
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
 
 
 Les pneumopaties bactériennes sans précision sont cotées J15.9 Dans la CIM10.
-840 diagnostics de ce type ont été portés au SAU en 2013.
+840 diagnostics de ce type ont été portés au SAU en 2 013.
 
-Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age moyen est de 70.9 ans et la moitié de ces patients ont 77 ans et plus.
+Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age moyen est de 71 ans et la moitié de ces patients ont 77 ans et plus.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
@@ -2085,7 +2317,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:53 2014
+% Sun Feb  2 20:11:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2103,7 +2335,7 @@ J450 & 132 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:53 2014
+% Sun Feb  2 20:11:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2124,14 +2356,14 @@ J458 & 8.00 & 0.60 & 0.60 \\
 
 
 
-On note \np{1388} cas d'asthme en 2013.
+On note \np{1 388} cas d'asthme en 2013.
 
 
 \includegraphics[width=\maxwidth]{figure/asthme21} 
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:53 2014
+% Sun Feb  2 20:11:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2204,7 +2436,7 @@ On note \np{1388} cas d'asthme en 2013.
 La population des patients consultant pour une crise d'astme est jeune (voir table \ref{tab:age_asthme} page \pageref{tab:age_asthme}).
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:53 2014
+% Sun Feb  2 20:11:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -2218,7 +2450,7 @@ La population des patients consultant pour une crise d'astme est jeune (voir tab
 \label{tab:age_asthme}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:53 2014
+% Sun Feb  2 20:11:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -2235,8 +2467,8 @@ La population des patients consultant pour une crise d'astme est jeune (voir tab
 
 
 Les crises sont de gravité moyenne avec une prédominance de CCMU 2 et 3 (voir table \ref{tab:ccmu_asthme} page \pageref{tab:ccmu_asthme}).
-Cependant le taux d'hospitalisation est important: 38.39 \%.
-\np{88} patients ont été orientés vers un service "chaud" (Réanimation, sins intensifs ou continus) soit 18.72 \% des patients hospitalisés pour asthme.
+Cependant le taux d'hospitalisation est important: 38 \%.
+\np{88} patients ont été orientés vers un service "chaud" (Réanimation, sins intensifs ou continus) soit 19 \% des patients hospitalisés pour asthme.
 
 Le bulletin épidémiologique (Le point épidémiologique du 24 octobre 2013 - Surveillance épidémiologique de la Cire Lorraine-Alsace) clôt la surveillance de l’asthme. Pour l’association SOS Médecins de Strasbourg, l’activité liée à l’asthme a été particulièrement marqué de mi-avril (semaine 16) à fin mai(semaine 22) puis en semaine 40. Concernant l’association de Mulhouse, seule une forte augmentation en semaine 39 a été observée depuis début avril.
 
@@ -2282,14 +2514,14 @@ Inclus:
 ##                     67600  : 16                      3Fr    : 12  
 ##                     67160  : 12                      Geb    :  2  
 ##                     (Other):286                      (Other):  5  
-##     GRAVITE     ORIENTATION     MODE_SORTIE       AGE       SEXE   
-##  2      :301   MED    :128   NA       :  0   Min.   : 0.0   F:238  
-##  3      :188   SC     :115   Mutation :250   1st Qu.: 0.0   I:  0  
-##  1      : 66   REA    :  4   Transfert:  0   Median : 0.0   M:329  
-##  4      :  6   UHCD   :  4   Domicile :271   Mean   : 1.1          
-##  5      :  3   PSA    :  1   Décès    :  0   3rd Qu.: 0.0          
-##  (Other):  0   (Other):  1   NA's     : 46   Max.   :93.0          
-##  NA's   :  3   NA's   :314                                         
+##     GRAVITE     ORIENTATION     MODE_SORTIE       AGE     SEXE   
+##  2      :301   MED    :128   NA       :  0   Min.   : 0   F:238  
+##  3      :188   SC     :115   Mutation :250   1st Qu.: 0   I:  0  
+##  1      : 66   REA    :  4   Transfert:  0   Median : 0   M:329  
+##  4      :  6   UHCD   :  4   Domicile :271   Mean   : 1          
+##  5      :  3   PSA    :  1   Décès    :  0   3rd Qu.: 0          
+##  (Other):  0   (Other):  1   NA's     : 46   Max.   :93          
+##  NA's   :  3   NA's   :314                                       
 ##  TRANSPORT  
 ##  AMBU : 13  
 ##  FO   :  0  
@@ -2377,14 +2609,14 @@ Données hospitalières : nombre quotidien de passages dans des services d'urgen
 \begin{kframe}\begin{verbatim}
 ## canicule$DP : 
 ##         Frequency Percent Cum. percent
-## T670           57    73.1         73.1
-## T671            8    10.3         83.3
-## T672            3     3.8         87.2
-## T676            2     2.6         89.7
-## T677            6     7.7         97.4
-## T678            1     1.3         98.7
-## T679            1     1.3        100.0
-##   Total        78   100.0        100.0
+## T670           57    73.1           73
+## T671            8    10.3           83
+## T672            3     3.8           87
+## T676            2     2.6           90
+## T677            6     7.7           97
+## T678            1     1.3           99
+## T679            1     1.3          100
+##   Total        78   100.0          100
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/canicule3} 
@@ -2417,14 +2649,14 @@ Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies du
 ##                     68500  :  81                      Geb    : 150  
 ##                     67160  :  70                      Sel    : 123  
 ##                     (Other):1570                      (Other): 207  
-##     GRAVITE      ORIENTATION      MODE_SORTIE        AGE        SEXE    
-##  2      :1768   MED    : 248   NA       :   0   Min.   :  0.0   F:1331  
-##  1      : 589   UHCD   : 129   Mutation : 439   1st Qu.:  1.0   I:   0  
-##  3      : 261   SC     :  31   Transfert:   3   Median :  4.0   M:1321  
-##  4      :  14   CHIR   :   4   Domicile :1960   Mean   : 17.4           
-##  5      :   0   HO     :   1   Décès    :   0   3rd Qu.: 26.0           
-##  (Other):   0   (Other):   5   NA's     : 250   Max.   :100.0           
-##  NA's   :  20   NA's   :2234                                            
+##     GRAVITE      ORIENTATION      MODE_SORTIE        AGE      SEXE    
+##  2      :1768   MED    : 248   NA       :   0   Min.   :  0   F:1331  
+##  1      : 589   UHCD   : 129   Mutation : 439   1st Qu.:  1   I:   0  
+##  3      : 261   SC     :  31   Transfert:   3   Median :  4   M:1321  
+##  4      :  14   CHIR   :   4   Domicile :1960   Mean   : 17           
+##  5      :   0   HO     :   1   Décès    :   0   3rd Qu.: 26           
+##  (Other):   0   (Other):   5   NA's     : 250   Max.   :100           
+##  NA's   :  20   NA's   :2234                                          
 ##  TRANSPORT   
 ##  AMBU : 241  
 ##  FO   :   0  
@@ -2534,8 +2766,8 @@ dpnp:tous les cas de médecine
 \hlstd{a}
 \end{alltt}
 \begin{verbatim}
-##  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec 
-## 2.65 2.07 2.17 2.20 1.59 1.38 1.40 1.86 1.58 1.44 1.37 3.01
+## Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
+## 2.6 2.1 2.2 2.2 1.6 1.4 1.4 1.9 1.6 1.4 1.4 3.0
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2571,7 +2803,7 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:56 2014
+% Sun Feb  2 20:11:12 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
@@ -2596,7 +2828,7 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:56 2014
+% Sun Feb  2 20:11:12 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -2685,7 +2917,7 @@ On notera que le retour à domicile proprement dit ne figure pas parmi les items
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:56 2014
+% Sun Feb  2 20:11:13 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2705,7 +2937,7 @@ DOM & 78.74 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:03:56 2014
+% Sun Feb  2 20:11:13 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2871,7 +3103,11 @@ Le taux de réponse pour cet item est de
 \index{exhaustivité@mode de sortie}
 
 
-%===================================================================== PARTIE 3
+% ************************
+% *                      *  
+% *      PARTIE 3        * 
+% *                      *
+% ************************
 \part{Analyse thématique} 
 \newpage
 
@@ -2883,7 +3119,7 @@ Le taux de réponse pour cet item est de
 
 
 
-Les moins de 18 ans représentent $82650$ passages en 2013 soit $228$ passages par jour.
+Les moins de 18 ans représentent $82 650$ passages en 2 013 soit $228$ passages par jour.
 
 \chapter{Gériatrie}
 
@@ -2894,7 +3130,7 @@ Les moins de 18 ans représentent $82650$ passages en 2013 soit $228$ passages p
 
 
 
-Les 75 ans et plus représentent $52512$ passages en 2013 soit $145$ passages par jour.
+Les 75 ans et plus représentent $52 512$ passages en 2 013 soit $145$ passages par jour.
 
 % nombre de passages en fonction sde l'age
 
@@ -2908,7 +3144,7 @@ Les 75 ans et plus représentent $52512$ passages en 2013 soit $145$ passages pa
 % Gériatrie et sexe
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:04:03 2014
+% Sun Feb  2 20:11:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -2930,7 +3166,7 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:04:03 2014
+% Sun Feb  2 20:11:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2945,7 +3181,7 @@ n & 26592.00 & 16271.00 & 1.00 \\
 
 
 
-Le taux d'hospitalisation est de $62.04$ \%.
+Le taux d'hospitalisation est de $62$ \%.
 
 % Durée de présence
 
@@ -2955,14 +3191,18 @@ Le taux d'hospitalisation est de $62.04$ \%.
 \begin{itemize}
   \item Durée de présence moyenne: $276$ minutes soit 4:36 heures.
   \item Durée de présence médiane: $220$ minutes.
-  \item Durée de présence la plus longue: $3.0278$ jours.
+  \item Durée de présence la plus longue: $3$ jours.
 \end{itemize}
 
 Note: on ne retient que les durées de présence supérieures à 30 minutes.
 
 
 
-%===================================================================== PARTIE 4
+% ************************
+% *                      *  
+% *      PARTIE 4        * 
+% *                      *
+% ************************
 \part{Activité par service d'urgence}
 
 \newpage
@@ -2985,38 +3225,38 @@ Note: on ne retient que les durées de présence supérieures à 30 minutes.
 \multicolumn{2}{|c|}{SU de Wissembourg}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{12646} \tabularnewline
+RPU déclarés & \np{12 646} \tabularnewline
 \hline 
-Date de début & 2013-01-01 01:11:00 \tabularnewline
+Date de début & 2 013-01-01 01:11:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:33:00 \tabularnewline
+Date de fin & 2 013-12-31 23:33:00 \tabularnewline
 \hline 
-Age moyen & 42.7 ans $\pm 26.98$ \tabularnewline
+Age moyen & 43 ans $\pm 27$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{3202} (25.32 \%) \tabularnewline
+RPU pédiatriques & \np{3 202} (25 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{2190} (17.32 \%) \tabularnewline
+RPU gériatriques & \np{2 190} (17 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 133 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 93 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{11089} (88 \%) \tabularnewline
+Passages de moins de 4 heures & \np{11 089} (88 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 217 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 105 minutes\tabularnewline
 \hline 
-Passages en soirée & 14.61 \% \tabularnewline
+Passages en soirée & 15 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 7.43 \% \tabularnewline
+Passages en nuit profonde & 7.4 \% \tabularnewline
 \hline 
-Passages le week-end & \np{4368} (34.54 \%) \tabularnewline
+Passages le week-end & \np{4 368} (35 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{828} (6.55 \%) \tabularnewline
+CCMU 1 & \np{828} (6.5 \%) \tabularnewline
 \hline
-CCMU 4 \& 5 & \np{174} (1.376 \%) \tabularnewline
+CCMU 4 \& 5 & \np{174} (1.4 \%) \tabularnewline
 \hline
 
 \end{tabular}
@@ -3047,38 +3287,38 @@ CCMU 4 \& 5 & \np{174} (1.376 \%) \tabularnewline
 \multicolumn{2}{|c|}{SU de Haguenau}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{34414} \tabularnewline
+RPU déclarés & \np{34 414} \tabularnewline
 \hline 
-Date de début & 2013-01-01 00:10:00 \tabularnewline
+Date de début & 2 013-01-01 00:10:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:45:00 \tabularnewline
+Date de fin & 2 013-12-31 23:45:00 \tabularnewline
 \hline 
-Age moyen & 48.2 ans $\pm NA$ \tabularnewline
+Age moyen & 48 ans $\pm NA$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{5277} (15.33 \%) \tabularnewline
+RPU pédiatriques & \np{5 277} (15 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{7332} (21.31 \%) \tabularnewline
+RPU gériatriques & \np{7 332} (21 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 352 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 235 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{19998} (58 \%) \tabularnewline
+Passages de moins de 4 heures & \np{19 998} (58 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 397 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 339 minutes\tabularnewline
 \hline 
-Passages en soirée & 18.67 \% \tabularnewline
+Passages en soirée & 19 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 11.94 \% \tabularnewline
+Passages en nuit profonde & 12 \% \tabularnewline
 \hline 
-Passages le week-end & \np{12281} (35.69 \%) \tabularnewline
+Passages le week-end & \np{12 281} (36 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{2885} (8.38 \%) \tabularnewline
+CCMU 1 & \np{2 885} (8.4 \%) \tabularnewline
 \hline
-CCMU 4 \& 5 & \np{558} (1.621 \%) \tabularnewline
+CCMU 4 \& 5 & \np{558} (1.6 \%) \tabularnewline
 \hline
 
 \end{tabular}
@@ -3109,36 +3349,36 @@ CCMU 4 \& 5 & \np{558} (1.621 \%) \tabularnewline
 \multicolumn{2}{|c|}{SU de Saverne}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{12424} \tabularnewline
+RPU déclarés & \np{12 424} \tabularnewline
 \hline 
-Date de début & 2013-07-23 00:17:00 \tabularnewline
+Date de début & 2 013-07-23 00:17:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:09:00 \tabularnewline
+Date de fin & 2 013-12-31 23:09:00 \tabularnewline
 \hline 
-Age moyen & 35.6 ans $\pm 28.29$ \tabularnewline
+Age moyen & 36 ans $\pm 28$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{4603} (37.05 \%) \tabularnewline
+RPU pédiatriques & \np{4 603} (37 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{1691} (13.61 \%) \tabularnewline
+RPU gériatriques & \np{1 691} (14 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 151 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 112 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{10511} (85 \%) \tabularnewline
+Passages de moins de 4 heures & \np{10 511} (85 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 225 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 123 minutes\tabularnewline
 \hline 
-Passages en soirée & 13.9 \% \tabularnewline
+Passages en soirée & 14 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 7.03 \% \tabularnewline
+Passages en nuit profonde & 7 \% \tabularnewline
 \hline 
-Passages le week-end & \np{3834} (30.86 \%) \tabularnewline
+Passages le week-end & \np{3 834} (31 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{338} (2.72 \%) \tabularnewline
+CCMU 1 & \np{338} (2.7 \%) \tabularnewline
 \hline
 CCMU 4 \& 5 & \np{72} (0.58 \%) \tabularnewline
 \hline
@@ -3172,36 +3412,36 @@ CCMU 4 \& 5 & \np{72} (0.58 \%) \tabularnewline
 \multicolumn{2}{|c|}{SU Sainte Odile}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{25963} \tabularnewline
+RPU déclarés & \np{25 963} \tabularnewline
 \hline 
-Date de début & 2013-01-01 00:09:00 \tabularnewline
+Date de début & 2 013-01-01 00:09:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:48:00 \tabularnewline
+Date de fin & 2 013-12-31 23:48:00 \tabularnewline
 \hline 
-Age moyen & 34.3 ans $\pm NA$ \tabularnewline
+Age moyen & 34 ans $\pm NA$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{7488} (28.84 \%) \tabularnewline
+RPU pédiatriques & \np{7 488} (29 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{1332} (5.13 \%) \tabularnewline
+RPU gériatriques & \np{1 332} (5.1 \%) \tabularnewline
 \hline 
-Durée de passage moyenne & 94.4 minutes\tabularnewline
+Durée de passage moyenne & 94 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 75 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{25247} (97 \%) \tabularnewline
+Passages de moins de 4 heures & \np{25 247} (97 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 104 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 94 minutes\tabularnewline
 \hline 
-Passages en soirée & 17.8 \% \tabularnewline
+Passages en soirée & 18 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 5.62 \% \tabularnewline
+Passages en nuit profonde & 5.6 \% \tabularnewline
 \hline 
-Passages le week-end & \np{9192} (35.4 \%) \tabularnewline
+Passages le week-end & \np{9 192} (35 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{1105} (4.26 \%) \tabularnewline
+CCMU 1 & \np{1 105} (4.3 \%) \tabularnewline
 \hline
 CCMU 4 \& 5 & \np{7} (0.027 \%) \tabularnewline
 \hline
@@ -3248,8 +3488,8 @@ Auxquels il faut rajouter les services assurant un accueil des urgences 24h/24h 
 
 
 
-Entre le 2013-01-01 00:11:00 et le 2013-12-31 23:13:00, \np{37018} RPU ont été transmis, alors que \np{121190} dossiers ont été déclarés au serveur régional. 
-1, 1, 1, 1, 1
+Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont été transmis, alors que \np{121 190} dossiers ont été déclarés au serveur régional. 
+1
 
 
 
@@ -3266,22 +3506,22 @@ Entre le 2013-01-01 00:11:00 et le 2013-12-31 23:13:00, \np{37018} RPU ont été
 ##  [1] "date"         "finess"       "service"      "inf1an"      
 ##  [5] "entre1_75ans" "sup75ans"     "total"        "hospitalises"
 ##  [9] "UHCD"         "tranferts"    "hosp"         "tx_hosp"
-##   hospitalises  
-##  Min.   :0.000  
-##  1st Qu.:0.125  
-##  Median :0.178  
-##  Mean   :0.173  
-##  3rd Qu.:0.216  
-##  Max.   :0.345
+##   hospitalises 
+##  Min.   :0.00  
+##  1st Qu.:0.12  
+##  Median :0.18  
+##  Mean   :0.17  
+##  3rd Qu.:0.22  
+##  Max.   :0.34
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
 
 
-Le SU Sainte Anne a reçu en 2013 un total de \np{14661} consultants, soit en moyenne 40 par jour.
+Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 40 par jour.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:04:07 2014
+% Sun Feb  2 20:11:23 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3338,7 +3578,7 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
 ## 2013-01-01 2013-01-02 2013-01-03 2013-01-04 2013-01-05 2013-01-06 
-##     0.1667     0.1944     0.2727     0.2812     0.2424     0.1290
+##       0.17       0.19       0.27       0.28       0.24       0.13
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/hospit_stAnne} 
@@ -3353,8 +3593,8 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \begin{verbatim}
 ## [1] 14661
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    22.0    34.0    40.0    40.2    46.0    69.0
-## [1] 7.986
+##      22      34      40      40      46      69
+## [1] 8
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/stAnne_tot_passages1} 
@@ -3371,8 +3611,8 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \begin{verbatim}
 ## [1] 12805
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    18.0    30.0    34.0    35.1    40.0    63.0
-## [1] 7.48
+##      18      30      34      35      40      63
+## [1] 7.5
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages1} 
@@ -3390,8 +3630,8 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \begin{verbatim}
 ## [1] 1574
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    0.00    3.00    4.00    4.31    6.00   12.00
-## [1] 2.258
+##     0.0     3.0     4.0     4.3     6.0    12.0
+## [1] 2.3
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/stAnne_sup75_passages1} 
@@ -3424,38 +3664,38 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \multicolumn{2}{|c|}{Centre Hospitalier de Sélestat}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{29534} \tabularnewline
+RPU déclarés & \np{29 534} \tabularnewline
 \hline 
-Date de début & 2013-01-01 00:04:00 \tabularnewline
+Date de début & 2 013-01-01 00:04:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:58:00 \tabularnewline
+Date de fin & 2 013-12-31 23:58:00 \tabularnewline
 \hline 
-Age moyen & 38 ans $\pm 26.51$ \tabularnewline
+Age moyen & 38 ans $\pm 27$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{9171} (31.05 \%) \tabularnewline
+RPU pédiatriques & \np{9 171} (31 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{3865} (13.09 \%) \tabularnewline
+RPU gériatriques & \np{3 865} (13 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 159 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 135 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{24143} (82 \%) \tabularnewline
+Passages de moins de 4 heures & \np{24 143} (82 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 213 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 144 minutes\tabularnewline
 \hline 
-Passages en soirée & 16.45 \% \tabularnewline
+Passages en soirée & 16 \% \tabularnewline
 \hline 
 Passages en nuit profonde & 8.9 \% \tabularnewline
 \hline 
-Passages le week-end & \np{10309} (34.91 \%) \tabularnewline
+Passages le week-end & \np{10 309} (35 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{2717} (9.2 \%) \tabularnewline
+CCMU 1 & \np{2 717} (9.2 \%) \tabularnewline
 \hline
-CCMU 4 \& 5 & \np{550} (1.862 \%) \tabularnewline
+CCMU 4 \& 5 & \np{550} (1.9 \%) \tabularnewline
 \hline
 
 \end{tabular}
@@ -3484,38 +3724,38 @@ CCMU 4 \& 5 & \np{550} (1.862 \%) \tabularnewline
 \multicolumn{2}{|c|}{Centre Hospitalier de Colmar}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{64758} \tabularnewline
+RPU déclarés & \np{64 758} \tabularnewline
 \hline 
-Date de début & 2013-01-01 00:19:00 \tabularnewline
+Date de début & 2 013-01-01 00:19:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:56:00 \tabularnewline
+Date de fin & 2 013-12-31 23:56:00 \tabularnewline
 \hline 
-Age moyen & 35.6 ans $\pm 27.65$ \tabularnewline
+Age moyen & 36 ans $\pm 28$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{23832} (36.8 \%) \tabularnewline
+RPU pédiatriques & \np{23 832} (37 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{7785} (12.02 \%) \tabularnewline
+RPU gériatriques & \np{7 785} (12 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 168 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 119 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{49904} (77 \%) \tabularnewline
+Passages de moins de 4 heures & \np{49 904} (77 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 245 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 143 minutes\tabularnewline
 \hline 
-Passages en soirée & 15.75 \% \tabularnewline
+Passages en soirée & 16 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 8.32 \% \tabularnewline
+Passages en nuit profonde & 8.3 \% \tabularnewline
 \hline 
-Passages le week-end & \np{20830} (32.17 \%) \tabularnewline
+Passages le week-end & \np{20 830} (32 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{21093} (32.57 \%) \tabularnewline
+CCMU 1 & \np{21 093} (33 \%) \tabularnewline
 \hline
-CCMU 4 \& 5 & \np{752} (1.161 \%) \tabularnewline
+CCMU 4 \& 5 & \np{752} (1.2 \%) \tabularnewline
 \hline
 
 \end{tabular}
@@ -3545,38 +3785,38 @@ CCMU 4 \& 5 & \np{752} (1.161 \%) \tabularnewline
 \multicolumn{2}{|c|}{Centre Hospitalier de Guebwiller}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{15103} \tabularnewline
+RPU déclarés & \np{15 103} \tabularnewline
 \hline 
-Date de début & 2013-01-01 01:00:00 \tabularnewline
+Date de début & 2 013-01-01 01:00:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 21:35:00 \tabularnewline
+Date de fin & 2 013-12-31 21:35:00 \tabularnewline
 \hline 
-Age moyen & 37.2 ans $\pm 24.49$ \tabularnewline
+Age moyen & 37 ans $\pm 24$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{4537} (30.04 \%) \tabularnewline
+RPU pédiatriques & \np{4 537} (30 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{1531} (10.14 \%) \tabularnewline
+RPU gériatriques & \np{1 531} (10 \%) \tabularnewline
 \hline 
-Durée de passage moyenne & 76.4 minutes\tabularnewline
+Durée de passage moyenne & 76 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 50 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{14565} (96 \%) \tabularnewline
+Passages de moins de 4 heures & \np{14 565} (96 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 113 minutes\tabularnewline
 \hline 
-Durée de passage si retour à domicile & 75.1 minutes\tabularnewline
+Durée de passage si retour à domicile & 75 minutes\tabularnewline
 \hline 
-Passages en soirée & 14.51 \% \tabularnewline
+Passages en soirée & 15 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 6.63 \% \tabularnewline
+Passages en nuit profonde & 6.6 \% \tabularnewline
 \hline 
-Passages le week-end & \np{4963} (32.86 \%) \tabularnewline
+Passages le week-end & \np{4 963} (33 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{881} (5.83 \%) \tabularnewline
+CCMU 1 & \np{881} (5.8 \%) \tabularnewline
 \hline
-CCMU 4 \& 5 & \np{22} (0.146 \%) \tabularnewline
+CCMU 4 \& 5 & \np{22} (0.15 \%) \tabularnewline
 \hline
 
 \end{tabular}
@@ -3609,33 +3849,33 @@ CCMU 4 \& 5 & \np{22} (0.146 \%) \tabularnewline
 \multicolumn{2}{|c|}{Centre Hospitalier d'Altkirch}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{7126} \tabularnewline
+RPU déclarés & \np{7 126} \tabularnewline
 \hline 
-Date de début & 2013-04-01 08:11:00 \tabularnewline
+Date de début & 2 013-04-01 08:11:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:30:00 \tabularnewline
+Date de fin & 2 013-12-31 23:30:00 \tabularnewline
 \hline 
-Age moyen & 41.2 ans $\pm 25.62$ \tabularnewline
+Age moyen & 41 ans $\pm 26$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{1836} (25.76 \%) \tabularnewline
+RPU pédiatriques & \np{1 836} (26 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{986} (13.84 \%) \tabularnewline
+RPU gériatriques & \np{986} (14 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 156 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 110 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{5945} (83 \%) \tabularnewline
+Passages de moins de 4 heures & \np{5 945} (83 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 234 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 139 minutes\tabularnewline
 \hline 
-Passages en soirée & 12.42 \% \tabularnewline
+Passages en soirée & 12 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 7.94 \% \tabularnewline
+Passages en nuit profonde & 7.9 \% \tabularnewline
 \hline 
-Passages le week-end & \np{1494} (20.97 \%) \tabularnewline
+Passages le week-end & \np{1 494} (21 \%) \tabularnewline
 \hline 
 
 CCMU 1 & \np{264} (3.7 \%) \tabularnewline
@@ -3673,38 +3913,38 @@ CCMU 4 \& 5 & \np{0} (0 \%) \tabularnewline
 \multicolumn{2}{|c|}{Centre Hospitalier Emile Muller (Mulhouse)}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{56195} \tabularnewline
+RPU déclarés & \np{56 195} \tabularnewline
 \hline 
-Date de début & 2013-01-07 00:04:00 \tabularnewline
+Date de début & 2 013-01-07 00:04:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:54:00 \tabularnewline
+Date de fin & 2 013-12-31 23:54:00 \tabularnewline
 \hline 
-Age moyen & 35.1 ans $\pm 27.95$ \tabularnewline
+Age moyen & 35 ans $\pm 28$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{20181} (35.91 \%) \tabularnewline
+RPU pédiatriques & \np{20 181} (36 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{6905} (12.29 \%) \tabularnewline
+RPU gériatriques & \np{6 905} (12 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 179 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 144 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{44441} (79 \%) \tabularnewline
+Passages de moins de 4 heures & \np{44 441} (79 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 246 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 165 minutes\tabularnewline
 \hline 
-Passages en soirée & 18.2 \% \tabularnewline
+Passages en soirée & 18 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 10.23 \% \tabularnewline
+Passages en nuit profonde & 10 \% \tabularnewline
 \hline 
-Passages le week-end & \np{19298} (34.34 \%) \tabularnewline
+Passages le week-end & \np{19 298} (34 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{5388} (9.59 \%) \tabularnewline
+CCMU 1 & \np{5 388} (9.6 \%) \tabularnewline
 \hline
-CCMU 4 \& 5 & \np{1551} (2.76 \%) \tabularnewline
+CCMU 4 \& 5 & \np{1 551} (2.8 \%) \tabularnewline
 \hline
 
 \end{tabular}
@@ -3735,33 +3975,33 @@ CCMU 4 \& 5 & \np{1551} (2.76 \%) \tabularnewline
 \multicolumn{2}{|c|}{Clinique Diaconnat-Fonderie (Mulhouse)}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{29469} \tabularnewline
+RPU déclarés & \np{29 469} \tabularnewline
 \hline 
-Date de début & 2013-01-01 00:57:00 \tabularnewline
+Date de début & 2 013-01-01 00:57:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:19:00 \tabularnewline
+Date de fin & 2 013-12-31 23:19:00 \tabularnewline
 \hline 
-Age moyen & 41.6 ans $\pm NA$ \tabularnewline
+Age moyen & 42 ans $\pm NA$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{6304} (21.39 \%) \tabularnewline
+RPU pédiatriques & \np{6 304} (21 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{3762} (12.77 \%) \tabularnewline
+RPU gériatriques & \np{3 762} (13 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 160 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 135 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{24438} (83 \%) \tabularnewline
+Passages de moins de 4 heures & \np{24 438} (83 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 221 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 152 minutes\tabularnewline
 \hline 
-Passages en soirée & 15.97 \% \tabularnewline
+Passages en soirée & 16 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 8.17 \% \tabularnewline
+Passages en nuit profonde & 8.2 \% \tabularnewline
 \hline 
-Passages le week-end & \np{9613} (32.62 \%) \tabularnewline
+Passages le week-end & \np{9 613} (33 \%) \tabularnewline
 \hline 
 
 CCMU 1 & \np{50} (0.17 \%) \tabularnewline
@@ -3797,38 +4037,38 @@ CCMU 4 \& 5 & \np{17} (0.058 \%) \tabularnewline
 \multicolumn{2}{|c|}{Clinique des 3 frontières (Saint-Louis)}\tabularnewline
 \hline 
 \hline 
-RPU déclarés & \np{15688} \tabularnewline
+RPU déclarés & \np{15 688} \tabularnewline
 \hline 
-Date de début & 2013-01-01 00:45:00 \tabularnewline
+Date de début & 2 013-01-01 00:45:00 \tabularnewline
 \hline 
-Date de fin & 2013-12-31 23:46:00 \tabularnewline
+Date de fin & 2 013-12-31 23:46:00 \tabularnewline
 \hline 
-Age moyen & 38.8 ans $\pm NA$ \tabularnewline
+Age moyen & 39 ans $\pm NA$ \tabularnewline
 \hline 
-RPU pédiatriques & \np{3857} (24.59 \%) \tabularnewline
+RPU pédiatriques & \np{3 857} (25 \%) \tabularnewline
 \hline 
-RPU gériatriques & \np{1606} (10.24 \%) \tabularnewline
+RPU gériatriques & \np{1 606} (10 \%) \tabularnewline
 \hline 
 Durée de passage moyenne & 136 minutes\tabularnewline
 \hline 
 Durée de passage médiane & 107 minutes\tabularnewline
 \hline 
-Passages de moins de 4 heures & \np{14049} (90 \%) \tabularnewline
+Passages de moins de 4 heures & \np{14 049} (90 \%) \tabularnewline
 \hline 
 Durée de passage si hospitalisation & 126 minutes\tabularnewline
 \hline 
 Durée de passage si retour à domicile & 131 minutes\tabularnewline
 \hline 
-Passages en soirée & 16.55 \% \tabularnewline
+Passages en soirée & 17 \% \tabularnewline
 \hline 
-Passages en nuit profonde & 10.45 \% \tabularnewline
+Passages en nuit profonde & 10 \% \tabularnewline
 \hline 
-Passages le week-end & \np{5549} (35.37 \%) \tabularnewline
+Passages le week-end & \np{5 549} (35 \%) \tabularnewline
 \hline 
 
-CCMU 1 & \np{1431} (9.12 \%) \tabularnewline
+CCMU 1 & \np{1 431} (9.1 \%) \tabularnewline
 \hline
-CCMU 4 \& 5 & \np{18} (0.115 \%) \tabularnewline
+CCMU 4 \& 5 & \np{18} (0.12 \%) \tabularnewline
 \hline
 
 \end{tabular}
@@ -3841,7 +4081,11 @@ CCMU 4 \& 5 & \np{18} (0.115 \%) \tabularnewline
 
 
 
-%===================================================================== PARTIE 5
+% ************************
+% *                      *  
+% *      PARTIE 5        * 
+% *                      *
+% ************************
 \part{Activité des SAMU d'Alsace}
 
 
@@ -3873,7 +4117,7 @@ Le interventions SMUR sont égales à la somme des interventions primaires et se
 
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:04:15 2014
+% Sun Feb  2 20:11:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3901,14 +4145,14 @@ Après une période de stabilité (2006-2011), l'activité augmente à nouveaux 
 
 
 
-\section*{Activité des SAMU alsacien en 2013}
+\section*{Activité des SAMU alsacien en 2 013}
 
 
 
 
 \begin{boxedminipage}{10cm}
 \begin{itemize}
-  \item nombre d'affaires: \np{2260} pour \np{10000} habitants.
+  \item nombre d'affaires: \np{2 260} pour \np{10000} habitants.
   \item nombre de sorties SMUR: \np{133} pour \np{10000} habitants.
   \item nombre de conseils médicaux: \np{476} pour \np{10000} habitants.
   \item nombre d'envoi de médecins:  \np{292} pour \np{10000} habitants.
@@ -3942,7 +4186,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Fri Jan 31 13:04:15 2014
+% Sun Feb  2 20:11:32 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3976,7 +4220,11 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 %\index{Eclipse@Eclipse!solaire}
 %\index{Orbite!périgée@périgée}
 
-%===================================================================== PARTIE 6
+% ************************
+% *                      *  
+% *      PARTIE 6        * 
+% *                      *
+% ************************
 \part{Annexes}
 
 \newpage

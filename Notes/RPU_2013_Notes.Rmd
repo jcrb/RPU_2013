@@ -104,11 +104,11 @@ Crée des tables en latex:
 <<label=tab2,echo=FALSE,results='asis'>>=  
 Attention pour results mettre *asis* (et non pas *tex* qui correspond à sweawe)  
 
-xtable(c, caption = "Structures hospitalières participantes en 2013", label = "tab1",align="|l|r|r|l|r|",digits = c(0,0,2,0,0), table.placement = "ht",caption.placement = "top")  
+xtable(c, caption = c("intitulé long", "intitulé court"), label = "tab1",align="|l|r|r|l|r|",digits = c(0,0,2,0,0), table.placement = "ht",caption.placement = "top")  
 
 table \ref{tab1}, page \pageref{tab1}.
 
-*xtable* génère une erreur si l'intitulé d'une colonne est *<na>*. Dans ce cas il faut transfoermer les <na> en "NA" et refaire le tableau (voir sortie.rnw par exemple).
+*xtable* génère une erreur si l'intitulé d'une colonne est *<na>*. Dans ce cas il faut transformer les <na> en "NA" et refaire le tableau (voir sortie.rnw par exemple).
 
 
 #### Pour présenter en latex un tableau type *summary*:
@@ -159,6 +159,29 @@ A mettre en début de document. Source: http://stackoverflow.com/questions/18965
 knit_hooks$set(inline = function(x) {
   prettyNum(x, big.mark=" ")
 })
+
+#### tapply et xtable
+t <- round(tapply(d1$presence,d1$GRAVITE,mean,na.rm=TRUE),2)
+p <- round(prop.table(t)*100,2)
+r <- rbind(t,p)
+rownames(r) <- c("mn","%")
+xtable(r, caption=c("Durée de présence et gravité","Durée de présence et gravité"), label = "duree_gravite")
+ou
+x <- xtable(r, caption=c("Durée de présence et gravité","Durée de présence et gravité"), label = "duree_gravite")
+print.xtable {x} permet d'utiliser d'autres arguments notamment longtable.
+
+#### afficher un tableau en Latex
+\begin{figure}[ht!]
+ \centering
+  <<duree_gravite2,echo=FALSE,fig.width=8>>=
+  boxplot(d1$presence ~ d1$GRAVITE,,outline=F,main="Durée de présence selon la gravité",ylab="durée de présence",xlab="Gravité en unités CCMU")
+  @
+ \caption{Durée de passage en fonction de l'âge}
+ \label{toucan}
+\end{figure}
+
+La figure~\ref{toucan} (pp.\pageref{toucan}) montre une photographie de toucan. Le tilde (\~) dans l'exemple ci-dessus est un symbole spécial en Latex. Il représente un espace insécable. Il est utile ici parce qu'il garde « figure » et le numéro quel qu'il soit auquel \\ref se rapporte comme un tout, et ne les coupera pas sur une ligne ou une page lors de la production du document.
+
 
 #### notes sur les spatialPolygons
 > str(poly)
