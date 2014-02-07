@@ -42,7 +42,7 @@ Pour les transférer, on utilise la procédure standard en ligne de commande, co
 cd ~/Documents/Resural/'Stat Resural'/'Fichiers source'/Dump/RPU2013_09
 
 ```{}
-jcb@mint1:~$ mysql -u root -pmarion rpu < rpu_2013-09_dump.sql
+jcb@mint1:~$ mysql -u root -pmarion rpu < rpu_2014-01_dump.sql
 ```
 Création d'un fichier .my.cfg
 -----------------------------
@@ -88,8 +88,8 @@ dbListFields(con,"RPU__")
 ```
 Lecture des enregistrements de la table compris entre le 1er mai et le 31 mai 2013 (cette étape peu être longue):
 ```{r}
-ac<-2013  # annee courante
-mc<-12    # mois courant
+ac<-2014  # annee courante
+mc<-1    # mois courant
 
 ac2 <- ac
 
@@ -199,6 +199,7 @@ etape 3: sauvegarde des données nettoyées
 mois_courant_file <- paste("rpu",ac,"d",mc,".Rda",sep="")
 save(dx,file = mois_courant_file)
 ```
+
 etape 4: chargement des données sauvegardées
 --------------------------------------------
 ```{r}
@@ -286,8 +287,59 @@ print(paste("Mois courant: ",mc))
 print(paste("Base de données upgradée: ",bac))
 print(paste("Fichier du mois courant: ",mois_courant_file))
 print(paste("Nouvelle base de données",nb_name))
-print(paste("- date de début: ",min(d1$ENTREE)))
+print(paste("- date de début: ",min(d1$ENTREE)))rm
 print(paste("- date de fin  : ",max(d1$ENTREE)))
 print(paste("Nombre d'enregistrements: ",nrow(d1)))
+
+table(d1$FINESS)
+
+Comparaison des mois de Janvier
+-------------------------------
+rm(d1)
+# charge l'année 2013 (d1)
+load("~/Documents/Resural/Stat Resural/RPU_2013/rpu2013d0112.Rda")
+# isole le mois de janvier 2013
+d2013_01 <- d1[d1$ENTREE < "2013-02-01",]
+# charge le mois de janvier 2014
+load("~/Documents/Resural/Stat Resural/RPU_2013/rpu2014d01.Rda")
+
+n_2014 <- nrow(dx)
+n_2013 <- nrow(d2013_01)
+
+# différence entre les 2 années
+n_2014-n_2013
+
+# nb moyen de RPU en janvier 2014
+n_2014/31
+n_2013/31
+1 - (n_2014/31)/(n_2013/31)
+
+t2014 <- table(dx$FINESS)
+t2013 <- table(d2013_01$FINESS)
+# entre les 2 tables, l'ordre des colonnes diffère. On aligne la table 2014 sur celle de 2013:
+a <- t2014[c(1,2,3,4,5,6,7,8,9,11,12,10)]
+t2014 <- a
+
+t2013
+t2014
+
+t <- rbind(t2013,t2014)
+rownames(t) <- c("2013","2014")
+t
+
+farben <- c("blue","green")
+barplot(t, beside=T,main="RPU 2014 - RPU02013\nMois de Janvier", col=farben)
+legend("topright", legend=c("2013","2014"), col=farben, pch=15)
+
+a <- t2014-t2013
+a
+f2 <- ifelse(a>0,"green","blue")
+barplot(a, col=f2)
+
 ```
+Commentaires:
+- le mois de janvier a été plutôt calme, hormis un épisode de tension déclaré sur Sélestat au cous de la semaine 
+- 3628 RPU de plus ont été déclarés par rapport à janvier 2013 mais une bonne partie de cette augmentation est due aux hôpitaux d'Alkirch et de Saverne qui n'ont pas déclarés de RPU pour cette période en 2013.
+- le nombre moyen de passages s'établit à 943 contre 826 en 2013 (+ 14%)
+- la clinique ste odile présente une diminution importante mais qui est liée à un défaut de transmission des RPU depuis le 16 janvier. Le problème est en cours de résolution
 
