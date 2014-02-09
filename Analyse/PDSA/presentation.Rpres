@@ -1,0 +1,29 @@
+Etude de l'impact de l'arrêt de la PDSA
+========================================================
+author: Dr JC Bartier - Dr AC Schiber
+
+date: 10 février 2014
+
+Qestion de recherche
+========================================================
+
+For more details on authoring R presentations click the
+**Help** button on the toolbar.
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```

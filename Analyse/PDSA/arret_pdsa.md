@@ -18,27 +18,31 @@ L'autre fichier Excel fournit hier permettra d'interpréter les données en fonc
 
 Initialisation
 --------------
-sam. 08 févr. 2014 (20:12:05)
+dim. 09 févr. 2014 (12:59:00)
 
 On crée deux groupes:
 - soirée (SR) dsr
 - nuit profonde (NP) dnp
 
 
-```r
+{% highlight r %}
 library("lubridate", lib.loc = "/home/jcb/R/x86_64-pc-linux-gnu-library/3.0")
 library("epicalc", lib.loc = "/usr/lib/R/site-library")
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Loading required package: foreign
 ## Loading required package: survival
 ## Loading required package: splines
 ## Loading required package: MASS
 ## Loading required package: nnet
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 load("~/Documents/Resural/Stat Resural/RPU_2013/rpu2013d0112.Rda")
 dx <- d1[, c("ENTREE", "FINESS", "GRAVITE")]
 # groupe soirée
@@ -49,16 +53,16 @@ dnp <- dx[hour(dx$ENTREE) >= 0 & hour(dx$ENTREE) < 8, ]
 dnp$GRP <- "NP"
 # synthèse des deux
 dx2 <- rbind(dsr, dnp)
-```
+{% endhighlight %}
 
 Nombre total de passages
 ------------------------
 
 
-```r
+{% highlight r %}
 n_tot <- nrow(d1)
 n_soirnuit <- nrow(dx2)
-```
+{% endhighlight %}
 
 - total des passages en 2013: 340338
 - entre 20h et 8h: 96874 (28.46 %)
@@ -70,14 +74,14 @@ Analyse CCMU
 ------------
 
 
-```r
+{% highlight r %}
 tab1(dx$GRAVITE, main = "2013 - Gravité (en unités CCMU)", ylab = "Fréquence", 
     xlab = "CCMU")
-```
+{% endhighlight %}
 
-![plot of chunk ccmu](figure/ccmu1.png) 
+![center](/figs/arret_pdsa/ccmu1.png) 
 
-```
+{% highlight text %}
 ## dx$GRAVITE : 
 ##         Frequency   %(NA+)   %(NA-)
 ## 1           38730     11.4     13.3
@@ -89,16 +93,18 @@ tab1(dx$GRAVITE, main = "2013 - Gravité (en unités CCMU)", ylab = "Fréquence"
 ## P            1380      0.4      0.5
 ## NA's        48908     14.4      0.0
 ##   Total    340338    100.0    100.0
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 
 tab1(dsr$GRAVITE, main = "2013 - Groupe soirée (20h - minuit)")
-```
+{% endhighlight %}
 
-![plot of chunk ccmu](figure/ccmu2.png) 
+![center](/figs/arret_pdsa/ccmu2.png) 
 
-```
+{% highlight text %}
 ## dsr$GRAVITE : 
 ##         Frequency   %(NA+)   %(NA-)
 ## 1            6380     10.7     14.4
@@ -110,16 +116,18 @@ tab1(dsr$GRAVITE, main = "2013 - Groupe soirée (20h - minuit)")
 ## P             242      0.4      0.5
 ## NA's        15266     25.7      0.0
 ##   Total     59475    100.0    100.0
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 
 tab1(dnp$GRAVITE, main = "2013 - Groupe nuit profonde (0h - 8h)")
-```
+{% endhighlight %}
 
-![plot of chunk ccmu](figure/ccmu3.png) 
+![center](/figs/arret_pdsa/ccmu3.png) 
 
-```
+{% highlight text %}
 ## dnp$GRAVITE : 
 ##         Frequency   %(NA+)   %(NA-)
 ## 1            4180     11.2     12.2
@@ -131,22 +139,28 @@ tab1(dnp$GRAVITE, main = "2013 - Groupe nuit profonde (0h - 8h)")
 ## P             146      0.4      0.4
 ## NA's         3030      8.1      0.0
 ##   Total     37399    100.0    100.0
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 
 t <- table(dx2$GRP, dx2$GRAVITE)
 t
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##     
 ##          1     2     3     4     5     D     P
 ##   NP  4180 23135  6170   557   175     6   146
 ##   SR  6380 31361  5618   480   115    13   242
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 # on permute les lignes pour que SR précède NP
 a <- t[1, ]
 b <- t[2, ]
@@ -154,32 +168,40 @@ t <- rbind(b, a)
 rownames(t) <- c("SR", "NP")
 pt <- round(prop.table(t, margin = 1) * 100, 2)
 t
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##       1     2    3   4   5  D   P
 ## SR 6380 31361 5618 480 115 13 242
 ## NP 4180 23135 6170 557 175  6 146
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 pt
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##        1     2     3    4    5    D    P
 ## SR 14.43 70.94 12.71 1.09 0.26 0.03 0.55
 ## NP 12.16 67.31 17.95 1.62 0.51 0.02 0.42
-```
+{% endhighlight %}
 
-```r
+
+
+{% highlight r %}
 barplot(pt, beside = TRUE, ylab = "pourcentage", xlab = "CCMU en soirée et nuit profonde", 
     main = "Comparaison des CCMU avant et après minuit")
 legend("topright", legend = c("0h-24h", "24h-8h"), pch = 15, col = c("grey10", 
     "grey90"))
-```
+{% endhighlight %}
 
-![plot of chunk ccmu](figure/ccmu4.png) 
+![center](/figs/arret_pdsa/ccmu4.png) 
 
 
 Analyse des CCMU1 & 2 par mois et semaine
@@ -201,7 +223,7 @@ Analyse des CCMU1 & 2 par mois et semaine
 - t_dnpt: nuit profonde, total par mois
 
 
-```r
+{% highlight r %}
 
 # soirée ----------
 dsr1 <- dsr[!is.na(dsr$GRAVITE) & dsr$GRAVITE == 1, ]
@@ -215,19 +237,19 @@ sr <- rbind(t_dsr1, t_dsr2, t_dsrt)
 barplot(sr, beside = T, ylab = "Freéquence", xlab = "Mois", main = "CCMU 2013 - Soirée")
 legend("topleft", legend = c("CCMU 1", "CCMU 2", "Total RPU"), col = c("gray10", 
     "gray50", "gray90"), pch = 15, bty = "n")
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois1.png) 
+![center](/figs/arret_pdsa/mois1.png) 
 
-```r
+{% highlight r %}
 
 plot(t_dsr1, type = "l", ylim = c(450, 3500), col = "green")
 lines(t_dsr2, ylim = c(450, 3500), col = "blue")
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois2.png) 
+![center](/figs/arret_pdsa/mois2.png) 
 
-```r
+{% highlight r %}
 
 # nuit profonde --------------
 
@@ -242,75 +264,75 @@ sr <- rbind(t_dnp1, t_dnp2, t_dnpt)
 barplot(sr, beside = T, ylab = "Freéquence", xlab = "Mois", main = "CCMU 2013 - Nuit profonde")
 legend("topleft", legend = c("CCMU 1", "CCMU 2", "Total RPU"), col = c("gray10", 
     "gray50", "gray90"), pch = 15, bty = "n")
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois3.png) 
+![center](/figs/arret_pdsa/mois3.png) 
 
-```r
+{% highlight r %}
 
 # essai de couleurs syntaxe brewer.pal(nb de couleurs,'nom de la palette'))
 
 library(RColorBrewer)
 col = brewer.pal(3, "Set2")
 barplot(sr, beside = T, col = brewer.pal(3, "BuGn"))
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois4.png) 
+![center](/figs/arret_pdsa/mois4.png) 
 
-```r
+{% highlight r %}
 
 barplot(sr, beside = T, col = brewer.pal(3, "YlOrRd"))
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois5.png) 
+![center](/figs/arret_pdsa/mois5.png) 
 
-```r
+{% highlight r %}
 
 barplot(sr, beside = T, col = brewer.pal(3, "BuPu"))
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois6.png) 
+![center](/figs/arret_pdsa/mois6.png) 
 
-```r
+{% highlight r %}
 
 barplot(sr, beside = T, col = brewer.pal(3, "GnBu"))
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois7.png) 
+![center](/figs/arret_pdsa/mois7.png) 
 
-```r
+{% highlight r %}
 
 barplot(sr, beside = T, col = brewer.pal(3, "Greys"))
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois8.png) 
+![center](/figs/arret_pdsa/mois8.png) 
 
-```r
+{% highlight r %}
 
 barplot(sr, beside = T, col = brewer.pal(3, "Oranges"))
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois9.png) 
+![center](/figs/arret_pdsa/mois9.png) 
 
-```r
+{% highlight r %}
 
 barplot(sr, beside = T, col = brewer.pal(3, "Purples"))
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois10.png) 
+![center](/figs/arret_pdsa/mois10.png) 
 
-```r
+{% highlight r %}
 
 col = brewer.pal(3, "Blues")
 barplot(sr, beside = T, ylab = "Freéquence", xlab = "Mois", main = "CCMU 2013 - Nuit profonde", 
     col = col)
 legend("topleft", legend = c("CCMU 1", "CCMU 2", "Total RPU"), col = col, pch = 15, 
     bty = "n")
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois11.png) 
+![center](/figs/arret_pdsa/mois11.png) 
 
-```r
+{% highlight r %}
 
 # CCMU1 soirée et nuit profonde ==============================
 
@@ -324,11 +346,11 @@ text(10, mean(t_dsr1) + 10, paste("moyenne", round(mean(t_dsr1), 2)), col = "gre
 text(10, mean(t_dnp1) + 10, paste("moyenne", round(mean(t_dnp1), 2)), col = "blue")
 legend("topleft", legend = c("soirée", "nuit profonde"), col = c("green", "blue"), 
     lty = 1)
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois12.png) 
+![center](/figs/arret_pdsa/mois12.png) 
 
-```r
+{% highlight r %}
 
 # CCMU2 soirée et nuit profonde ==============================
 
@@ -344,15 +366,15 @@ text(10, mean(t_dsr2) + 10, paste("moyenne", round(mean(t_dsr2), 2)), col = "gre
 text(10, mean(t_dnp2) + 10, paste("moyenne", round(mean(t_dnp2), 2)), col = "blue")
 legend("topleft", legend = c("soirée", "nuit profonde"), col = c("green", "blue"), 
     lty = 1)
-```
+{% endhighlight %}
 
-![plot of chunk mois](figure/mois13.png) 
+![center](/figs/arret_pdsa/mois13.png) 
 
 
 Comparaison passages totaux versus CCMU1 et 2
 ---------------------------------------------
 
-```r
+{% highlight r %}
 YL <- c(min(t_dsr1), max(t_dsrt))
 plot(t_dsr1, type = "l", col = "green", ylim = YL, xlab = "Mois", ylab = "RPU", 
     main = "Comparaison passages totaux ~ CCMU 1 & 2 en soirée")
@@ -360,11 +382,11 @@ lines(t_dsrt, ylim = YL, col = "red")
 lines(t_dsr2, ylim = YL, col = "blue")
 legend("topleft", legend = c("total", "CCMU 1", "CCMU 2"), col = c("red", "green", 
     "blue"), lty = 1, bty = "n")
-```
+{% endhighlight %}
 
-![plot of chunk soiree_tot_ccmu](figure/soiree_tot_ccmu1.png) 
+![center](/figs/arret_pdsa/soiree_tot_ccmu1.png) 
 
-```r
+{% highlight r %}
 
 YL <- c(min(t_dnp1), max(t_dnpt))
 plot(t_dnp1, type = "l", col = "green", ylim = YL, xlab = "Mois", ylab = "RPU", 
@@ -373,8 +395,8 @@ lines(t_dnpt, ylim = YL, col = "red")
 lines(t_dnp2, ylim = YL, col = "blue")
 legend("topleft", legend = c("total", "CCMU 1", "CCMU 2"), col = c("red", "green", 
     "blue"), lty = 1, bty = "n")
-```
+{% endhighlight %}
 
-![plot of chunk soiree_tot_ccmu](figure/soiree_tot_ccmu2.png) 
+![center](/figs/arret_pdsa/soiree_tot_ccmu2.png) 
 
 
