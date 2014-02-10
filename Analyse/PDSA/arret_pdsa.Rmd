@@ -1,7 +1,8 @@
 Etude de l'impact de l'arrêt de la PDSA
 ========================================================
 
-Regarder d'une part 
+Regarder d'une part  
+
 1) l'activité pour chaque SU, avec pour le total des passages aux SU
 - le nombre de CCMU 1
 - le nombre de CCMU2
