@@ -921,7 +921,11 @@ col[8]<-"orange"
 12 = Thann
 
 ```{r tensions}
-tension <- c(1,1,1,1,1,1,2,1,3,2,1,1)
+subtitle <- "Semaine 5 (27-2 février 2014)"
+tension <- c(1,2,3,3,1,1,1,1,2,2,2,2)
+# subtitle <- "Semaine 6 (3-9 février 2014)"
+# tension <- c(1,2,2,2,1,1,1,1,2,2,2,2)
+
 col <- rep("grey",12)
 for(i in 1:12){
   if(tension[i] == 1){
@@ -934,38 +938,124 @@ for(i in 1:12){
 
 # Création d'un dataframe contenant le nom et les coordonnées de la ville chef lieu de la zone de proximité et la position d'affichage par rapport à son barycentre. Ce data frame est sauvegardé pour un usage ultérieur.
 
+load("zone_proximite.Rda") # czps
+load("../carto_alsace.rda")# als
 a <- als@data
+
 villes <- c("WISSEMBOURG","SAVERNE","HAGUENAU","STRASBOURG","SCHIRMECK","SELESTAT","COLMAR","GUEBWILLER","THANN","ALTKIRCH","MULHOUSE","SAINT-LOUIS")
 pos <- c(1,1,1,1,4,3,4,4,2,2,4,4)
-d <- ""
+d <- c(NULL,NULL,NULL)
 for(i in 1:length(villes)){
   b <- a[a$NOM_COMM==villes[i], c(6,7)] * 100
   c <- cbind(villes[i],b[1], b[2])
   d <- rbind(d,c)
   }
-d <- d[-1,]
+
 d <- cbind(d,pos)
 print(d)
 save(d, file = "zp_villes.Rda")
 
 # dessin de la carte avec les zonzes de proximité. Mettre axes=F en production. Les axes sont utiles pour positionner des éléments comme la rose des vents ou l'échelle. On peut s'aider de la fct locator(). Les distances sont en mètres.
-plot(czps, col=col, axes=F)
+plot(czps, col=col, axes=TRUE)
 # Dessin des villes et de leurs noms. Le cast as.numeric est indispensable pour que les coordonnée soient interprétées comme des chiffres
 for(i in 1:length(villes)){
   points(d[i,2], d[i,3], pch=19, col="blue")
   text(x=as.numeric(d[i,2]), y=as.numeric(d[i,3]), labels=d[i,1], cex=0.6, pos=d[i,4])
 }
 # Dessin de la rose des vents. Arrow = 1ou 2; offset = coordonnées de la grille; scale = échelle du dessin (pifométrique); plot.grid=F sinon le dessin ne s'affiche pas
-SpatialPolygonsRescale(layout.north.arrow(1), offset= c(900000,6850000), scale = 15000, col="grey",plot.grid=F)
+SpatialPolygonsRescale(layout.north.arrow(1), offset= c(950000,6825000), scale = 15000, col="grey",plot.grid=F)
 # Dessin de l'échelle. layout.scale.bar() est un objet de type SpatialPolygons qui dessine 2 rectangles unitaires mitoyens(0,0,1,1) = (0,0,0.5,0.05) + (0.5,0,1,0.05). Ramené à l'échelle de la carte IGN c'est un rectangle de 1m de long et 5 cm de haut, divisé en son milieu. Le paramètre scale permet de grossir l'échelle pour qu'elle soit visible sir le dessin. Le paramètre fill permet de choisir la couleur de chacun des rectangles (de base noir et transparent). L'abcisse de départ de l'échelle se règle avec axes=T ou locator()
-SpatialPolygonsRescale(layout.scale.bar(), offset=c(1100000,6750000), height = 0.05, scale=50000, fill=c("transparent","black"), plot.grid=F)
+
+x_scale = 1075000
+SpatialPolygonsRescale(layout.scale.bar(), offset=c(x_scale,6750000), height = 0.05, scale=50000, fill=c("transparent","black"), plot.grid=F)
 # Légende de l'échelle, à priori 0. La coordonnées x doit être les mêmes que offset ci-dessus. La ccod.Y est légèrement décalée vers le haut
-text(1100000,6750000 + 5000, "0", cex=0.6)
+text(x_scale,6750000 + 5000, "0", cex=0.6)
 # légende de fin de l'échelle. On veut une échelle de 50 km, il faut donc décaler l'abscisse du point de 50000 par rapport à l'origine (les coord. Lambert sont en mètres)
-text(1100000+50000, 6753387+2000, "50 km", cex=0.6)
+text(x_scale+50000, 6753387+2000, "50 km", cex=0.6)
 # Legend
-legend("topleft", legend=c("Pas de tension","Surcharge","Tension avérée","Pas d'informations"), col=c("green","orange","red","grey"), pch=15)
+legend("topleft", legend=c("Pas de tension","Surcharge","Tension avérée","Pas d'informations"), col=c("green","orange","red","grey"), pch=15, bty="n")
 # title  permet de mettre un titre et un sous*titre au graphique
 title("Carte des tensions en Alsace", sub = format(Sys.time(), "%a %d %b %Y %H:%M:%S"))
 ```
+
+A partir des fichies source:
+----------------------------
+
+Dessine la carte des tensions à partir de deux fichiers (zones de proximités et villes)
+
+```{r zp_source}
+load("zone_proximite.Rda")    # czps
+# load("../carto_alsace.Rda") # als
+load("zp_villes.Rda")         # d
+
+# couleur du territoire de santé (par défaut tout est vert):
+col <- rep("green",12)
+
+# 1 = Wissembourg
+# 2 = Mulhouse
+# 3 = Altkirch
+# 4 = St Louis
+# 5 = Haguenau
+# 6 = Saverne
+# 7 = Strasbourg
+# 8 = Schirmeck
+# 9 = Selestat
+# 10 = Colmar
+# 11 = Guebwiller
+# 12 = Thann
+
+tension <- c(1,2,3,3,1,1,1,1,2,2,2,2)
+subtitle <- "Semaine 5 (27-2 février 2014)"
+
+col <- rep("grey",12)
+for(i in 1:12){
+  if(tension[i] == 1){
+    col[i] = "green"}
+  else if(tension[i] == 2){
+    col[i] = "orange"}
+  else if(tension[i] == 3){
+    col[i] = "red"}
+}
+
+col <- NULL
+plot(czps, col=col, axes=F)
+
+for(i in 1:nrow(d)){
+  points(d[i,2], d[i,3], pch=19, col="blue")
+  text(x=as.numeric(d[i,2]), y=as.numeric(d[i,3]), labels=d[i,1], cex=0.6, pos=d[i,4])
+}
+
+# rose des vents
+SpatialPolygonsRescale(layout.north.arrow(1), offset= c(950000,6850000), scale = 15000, col="grey",plot.grid=F)
+
+# échelle
+x_scale = 1075000
+SpatialPolygonsRescale(layout.scale.bar(), offset=c(x_scale,6750000), height = 0.05, scale=50000, fill=c("transparent","black"), plot.grid=F)
+text(x_scale,6750000 + 5000, "0", cex=0.6)
+text(x_scale + 50000, 6753387+2000, "50 km", cex=0.6)
+
+# Legende
+legend("topleft", legend=c("Pas de tension","Surcharge","Tension avérée","Pas d'informations"), col=c("green","orange","red","grey"), pch=15, bty="n")
+
+# title
+# subtitle <- format(Sys.time(), "%a %d %b %Y %H:%M:%S")
+
+subtitle <- "Semaine n°__ (du __/__/____ au __/__/____)"
+title("Carte des tensions en Alsace", sub = subtitle)
+```
+
+```
+Test de code:
+
+x <- rnorm(100)
+y <- 2*x + rnorm(100)
+```
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 
