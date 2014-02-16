@@ -921,8 +921,8 @@ col[8]<-"orange"
 12 = Thann
 
 ```{r tensions}
-subtitle <- "Semaine 5 (27-2 février 2014)"
-tension <- c(1,2,3,3,1,1,1,1,2,2,2,2)
+subtitle <- "11 février 2014 - Semaine 7 (10 février 2014)"
+tension <- c(1,1,3,0,1,1,1,1,3,2,2,3)
 # subtitle <- "Semaine 6 (3-9 février 2014)"
 # tension <- c(1,2,2,2,1,1,1,1,2,2,2,2)
 
@@ -956,7 +956,7 @@ print(d)
 save(d, file = "zp_villes.Rda")
 
 # dessin de la carte avec les zonzes de proximité. Mettre axes=F en production. Les axes sont utiles pour positionner des éléments comme la rose des vents ou l'échelle. On peut s'aider de la fct locator(). Les distances sont en mètres.
-plot(czps, col=col, axes=TRUE)
+plot(czps, col=col, axes=FALSE)
 # Dessin des villes et de leurs noms. Le cast as.numeric est indispensable pour que les coordonnée soient interprétées comme des chiffres
 for(i in 1:length(villes)){
   points(d[i,2], d[i,3], pch=19, col="blue")
@@ -964,6 +964,7 @@ for(i in 1:length(villes)){
 }
 # Dessin de la rose des vents. Arrow = 1ou 2; offset = coordonnées de la grille; scale = échelle du dessin (pifométrique); plot.grid=F sinon le dessin ne s'affiche pas
 SpatialPolygonsRescale(layout.north.arrow(1), offset= c(950000,6825000), scale = 15000, col="grey",plot.grid=F)
+
 # Dessin de l'échelle. layout.scale.bar() est un objet de type SpatialPolygons qui dessine 2 rectangles unitaires mitoyens(0,0,1,1) = (0,0,0.5,0.05) + (0.5,0,1,0.05). Ramené à l'échelle de la carte IGN c'est un rectangle de 1m de long et 5 cm de haut, divisé en son milieu. Le paramètre scale permet de grossir l'échelle pour qu'elle soit visible sir le dessin. Le paramètre fill permet de choisir la couleur de chacun des rectangles (de base noir et transparent). L'abcisse de départ de l'échelle se règle avec axes=T ou locator()
 
 x_scale = 1075000

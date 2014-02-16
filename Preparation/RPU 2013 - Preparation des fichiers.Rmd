@@ -239,6 +239,8 @@ SUITE: voir RPU_2013_Preparation.Rmd
 Vérification de la complétude des données
 =========================================
 
+**METTRE EN COPIE MR NOLD ET MME BROUSTAL**
+
 Nombre de passages
 ------------------
 Tableau croisé des Finess et du nombre de passages quotidiens:
@@ -291,7 +293,29 @@ print(paste("- date de début: ",min(d1$ENTREE)))rm
 print(paste("- date de fin  : ",max(d1$ENTREE)))
 print(paste("Nombre d'enregistrements: ",nrow(d1)))
 
+# nombre de RPU par établissement
 table(d1$FINESS)
+
+# nombre de non réponses (NA) par rubrique. Application au DP
+rpu_manquants <- function(x){mean(is.na(x))}
+
+# un seul hôpital sur toutes les rubriques du RPU
+
+rubrique <- c("CODE_POSTAL","COMMUNE","DESTINATION","DP","ENTREE","FINESS","GRAVITE","MODE_ENTREE","MODE_SORTIE","MOTIF","NAISSANCE","ORIENTATION","PROVENANCE","SEXE","SORTIE","TRANSPORT","TRANSPORT_PEC")
+
+hop <- "Geb"
+rpu <- d1[d1$FINESS==hop,] # éliminer la colonne FINESS
+item <- "DP"
+for(i in 1:length(rubrique)){
+  a <- paste0(hop,rubrique[i])
+  
+}
+
+# tous les hôpitaux sur un seul item
+x <-tapply(dx$DP, dx$FINESS, z)
+
+sort(round(x * 100, 2)) # DP manquants en %
+sort(round((1-x) * 100, 2)) # taux de complétude en %
 
 Comparaison des mois de Janvier
 -------------------------------
@@ -338,8 +362,17 @@ barplot(a, col=f2)
 
 ```
 Commentaires:
-- le mois de janvier a été plutôt calme, hormis un épisode de tension déclaré sur Sélestat au cous de la semaine 
+- le mois de janvier a été plutôt calme, hormis un épisode de tension déclaré sur Sélestat au cous de la dernière semaine 
 - 3628 RPU de plus ont été déclarés par rapport à janvier 2013 mais une bonne partie de cette augmentation est due aux hôpitaux d'Alkirch et de Saverne qui n'ont pas déclarés de RPU pour cette période en 2013.
 - le nombre moyen de passages s'établit à 943 contre 826 en 2013 (+ 14%)
 - la clinique ste odile présente une diminution importante mais qui est liée à un défaut de transmission des RPU depuis le 16 janvier. Le problème est en cours de résolution
 
+pandoc arret_pdsa.md -o test.tex
+pandoc arret_pdsa.md -o test.pdf
+pandoc arret_pdsa.md -o test.docx
+
+Export Word
+-----------
+
+p <- "pandoc Analyse/PDSA/arret_pdsa.md -o Analyse/PDSA/arret_pdsa.docx"
+system(p)

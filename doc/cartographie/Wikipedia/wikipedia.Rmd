@@ -1,0 +1,46 @@
+---
+layout: post
+title: Liste des communes du Bas-Rhin
+categorie: [leçons]
+tag: [cartographie, R]
+date: 2014-02-15
+---
+
+Récupérer la liste des communes du Bas-Rhin avec R et Wikipedia
+===============================================================
+
+Pour éviter un travail fastidieux de recopie, on souhaite récupérer la liste des communes du bas-Rhin à partir d'un tableau placé dans une page wikipedia. Le tableau se trouve à la [page](http://fr.wikipedia.org/wiki/Liste_des_communes_du_Bas-Rhin).
+
+```{r,comment=""}
+library("XML")
+library("knitr")
+
+cla <- readHTMLTable("http://fr.wikipedia.org/wiki/Liste_des_communes_du_Bas-Rhin",stringsAsFactors = FALSE)
+# nombre de tableaux dans la page
+length(cla)
+# mesure la taille des tableaux. 
+lapply(cla, dim)
+# Celui qui nous intéresse est le 1
+br <- cla[[1]]
+# head(br)
+kable(head(br))
+```
+
+On peut faire la même chose pour le haut-Rhin [page](http://fr.wikipedia.org/wiki/Communes_du_Haut-Rhin). On notera que la structure du tableau nest pas la même.
+
+```{r hr,comment=""}
+file <- "http://fr.wikipedia.org/wiki/Communes_du_Haut-Rhin"
+cla <- readHTMLTable(file,stringsAsFactors = FALSE)
+length(cla)
+lapply(cla, dim)
+hr <- cla[[1]]
+kable(head(hr))
+```
+
+Pour la région alsace (al) on construit un taleau avec les 3 premières colonnes de chacun des tableaux précédents.
+
+```{r al}
+al <- rbind(br[,1:3], hr[,1:3])
+```
+nombre de lignes: `r nrow(al)`
+

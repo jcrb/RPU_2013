@@ -19,17 +19,26 @@ L'autre fichier Excel fournit hier permettra d'interpréter les données en fonc
 
 Initialisation
 --------------
-`r format(Sys.time(), "%a %d %b %Y (%H:%M:%S)")`
+```{rglobals, echo=FALSE,}
+opts_chunk$set(echo = FALSE, warning = FALSE, comment = "", message = FALSE)
+```
+- Auteur: JCB
+- Statut: doc de travail
+- date début: 2014-02-08
+- dernière version: `r format(Sys.time(), "%a %d %b %Y (%H:%M:%S)")`
 
 On crée deux groupes:
-- soirée (SR) dsr
-- nuit profonde (NP) dnp
+- soirée (SR 20h - 24h) dsr 
+- nuit profonde (NP 24h - 8h) dnp
+
+tables crées:
+- dx: date, établissement, CCMU, code postal
 
 ```{r init}
 library("lubridate", lib.loc="/home/jcb/R/x86_64-pc-linux-gnu-library/3.0")
 library("epicalc", lib.loc="/usr/lib/R/site-library")
 load("~/Documents/Resural/Stat Resural/RPU_2013/rpu2013d0112.Rda")
-dx <- d1[,c("ENTREE", "FINESS","GRAVITE")]
+dx <- d1[,c("ENTREE", "FINESS","GRAVITE", "CODE_POSTAL")]
 # groupe soirée
 dsr <- dx[hour(dx$ENTREE) > 19 & hour(dx$ENTREE) < 24,]
 dsr$GRP <- "SR"
@@ -56,11 +65,11 @@ Analyse CCMU
 ------------
 
 ```{r ccmu}
-tab1(dx$GRAVITE, main="2013 - Gravité (en unités CCMU)", ylab="Fréquence", xlab="CCMU")
+tab1(dx$GRAVITE, main="2013 - Gravité (en unités CCMU)", ylab="Fréquence", sub="CCMU")
 
-tab1(dsr$GRAVITE, main = "2013 - Groupe soirée (20h - minuit)")
+tab1(dsr$GRAVITE, main = "2013 - Groupe soirée (20h - minuit)", sub="CCMU")
 
-tab1(dnp$GRAVITE, main = "2013 - Groupe nuit profonde (0h - 8h)")
+tab1(dnp$GRAVITE, main = "2013 - Groupe nuit profonde (0h - 8h)", sub="CCMU")
 
 t <- table(dx2$GRP, dx2$GRAVITE)
 t
@@ -76,6 +85,11 @@ barplot(pt, beside=TRUE, ylab = "pourcentage", xlab="CCMU en soirée et nuit pro
 legend("topright", legend=c("0h-24h","24h-8h"), pch=15, col=c("grey10","grey90"))
 
 ```
+La fréquence des CCMU 1 & 2 est plus élevée avant minuit et diminue en nuit profonde. C'est l'inverse pour les CCMU 3-4-5 qui sont plus fréquentes en nuit profonde qu'en soirée. Une explication pourrrait être la suivante: dans les situations sans gravité les patients se rendent à l'hôpital à condition qu'il ne soit pas trop tard (ie avant minuit). Après minuit, il est possible qu'ils remettent au lendemain une consultation médicale non urgente. Il serait intéressant de comparer les taux d'hospitalisation pour cette catégorie de patient, avant ou après minuit.
+
+En nuit profonde, on observe plus de cas grave pour lesquels l'heure va avoir moins d'influence sur la décision de se rendre à l'hôpital ou pas.
+
+Il pourrait être intéressant également de scinder ces population en "médicales" et en "traumatiques". A gravité égale (CCMU 2) la necessité defaire un platre ou une suture contraint au passage hospitalier et ceci qu'il y ait ou non une PDS libérale dans le secteur. Pour une douleur dentaire par exemple à 3h du matin la décision d'attendre le matin est plus plausible.
 
 Analyse des CCMU1 & 2 par mois et semaine
 ------------------------------------------
@@ -113,6 +127,11 @@ legend("topleft", legend=c("CCMU 1","CCMU 2","Total RPU"), col=c("gray10","gray5
 plot(t_dsr1, type="l", ylim=c(450,3500), col="green")
 lines(t_dsr2, ylim=c(450,3500), col = "blue")
 
+# CCMU1 en soirée et par mois. On obtient un ensemble de 12 listes de codes postaux (1 par mois)
+t_dsr1_m <- split(dsr1$CODE_POSTAL, month(as.Date(dsr1$ENTREE)))
+# tri des listes par ordre de code postaux
+l <- lapply(t_dsr1_m, sort)
+
 # nuit profonde
 # --------------  
 
@@ -131,20 +150,20 @@ legend("topleft", legend=c("CCMU 1","CCMU 2","Total RPU"), col=c("gray10","gray5
 # syntaxe brewer.pal(nb de couleurs,"nom de la palette"))
 
 library(RColorBrewer)
-col=brewer.pal(3,"Set2")
-barplot(sr, beside=T, col=brewer.pal(3,"BuGn"))
-
-barplot(sr, beside=T, col=brewer.pal(3,"YlOrRd"))
-
-barplot(sr, beside=T, col=brewer.pal(3,"BuPu"))
-
-barplot(sr, beside=T, col=brewer.pal(3,"GnBu"))
-
-barplot(sr, beside=T, col=brewer.pal(3,"Greys"))
-
-barplot(sr, beside=T, col=brewer.pal(3,"Oranges"))
-
-barplot(sr, beside=T, col=brewer.pal(3,"Purples"))
+# col=brewer.pal(3,"Set2")
+# barplot(sr, beside=T, col=brewer.pal(3,"BuGn"))
+# 
+# barplot(sr, beside=T, col=brewer.pal(3,"YlOrRd"))
+# 
+# barplot(sr, beside=T, col=brewer.pal(3,"BuPu"))
+# 
+# barplot(sr, beside=T, col=brewer.pal(3,"GnBu"))
+# 
+# barplot(sr, beside=T, col=brewer.pal(3,"Greys"))
+# 
+# barplot(sr, beside=T, col=brewer.pal(3,"Oranges"))
+# 
+# barplot(sr, beside=T, col=brewer.pal(3,"Purples"))
 
 col=brewer.pal(3,"Blues")
 barplot(sr, beside=T, ylab="Freéquence", xlab="Mois", main="CCMU 2013 - Nuit profonde", col=col)
@@ -193,3 +212,158 @@ lines(t_dnp2, ylim=YL, col="blue")
 legend("topleft", legend=c("total","CCMU 1", "CCMU 2"), col=c("red","green","blue"), lty=1, bty="n")
 ```
 
+Passages et code postal
+=======================
+
+Pour les CCMU1 et 2, on veut savoir comment se fait la répartition des passages selon 3 critères:
+- la période: soirée ou nuit
+- le mois
+- le code postal (critère de regroupement)
+
+La séparation en fonction de la gravité est déjà faite:
+- CCMU1 soirée: dsr1
+- CCMU1 nuit: dnp1
+
+1. Passages par mois de l'année
+-------------------------------
+on utilise la fonction *split*. On obtient une *large list* composée de 12 éléments, correspondant à chacun des mois de l'année. On extrait le mois de janvier (b) que l'on transforme en dataframe. Avec la méthode *summary* on rétermine le nombre de CCMU1 en soirée par code postal au mois de janvier 2013.  
+
+variables:
+- mdsr1: liste des 12 mois de l'année (1 sous-liste par mois)
+- m1 à m12: mois de l'année
+
+```{r split}
+dsr11 <- dsr1[as.character(dsr1$CODE_POSTAL) > "66999" & as.character(dsr1$CODE_POSTAL) < "69000",] #élimine les RPU hors Alsace
+mdsr1 <- split(dsr11, month(dsr11$ENTREE))
+
+# janvier
+m1 <- as.data.frame(mdsr1[[1]])
+c <- summary(as.factor(m1$CODE_POSTAL))
+head(c)
+b <- tapply(as.vector(m1$GRAVITE), m1$CODE_POSTAL, length)
+b <- b[!is.na(b)]
+sum(b)
+
+# février
+m2 <- as.data.frame(mdsr1[[2]])
+# extraction des CP et transformation de factor en char
+a <- as.character(m2$CODE_POSTAL)
+# b contient le nb de CCMU1 par code postal
+b <- table(a)
+
+# nb de CCMU1 en soirée par mois:
+for(i in 1:12){print(a[[i]][1])}
+
+# la somme des lignes de chacune des listes retrouve bien le nd de lignes de mdsr1:
+b <- 0; for(i in 1:12){b <- b + a[[i]][1]}; print(b)
+
+# merging
+# on forme un dataframe (a) d'une colonne correpondant aux codes postaux théorique du haut et bas-rhin. Il y a
+# - 527 communes dans le BR
+# - 377 dans le HR
+# Attention, il y a plus de codes postaux !!!
+#a <- c(67000:67527, 68000:68377)
+a <- c(67000:68999)
+a <- as.character(a)
+a <- data.frame(a)
+# on forme un vecteur colonne des passages du mois de février groupés par codes postaux, que l'on transforme en matrice à 2 colonnes, la première colonne étant constituée par les codes postaux du mois de février et la seconde par le nombre de passages
+cp <- as.character(m2$CODE_POSTAL)
+b<-table(cp)
+d <- cbind(names(b),b)
+# finalement on merge a et d en imposant la totalité des lignes de la colonne a (all.x = TRUE). Quand il n'y a pas de correspondance dans b, la cellule prend la valeur NA.
+c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+names(c) <- c("CP","Février")
+
+# janvier
+cp <- as.character(m1$CODE_POSTAL)
+b<-table(cp)
+d <- cbind(names(b),b)
+c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+names(c) <- c("CP","Février","Janvier")
+```
+2. Synthèse des paragraphes précédents
+--------------------------------------
+```{r soir}
+
+# fichier source: dsr1
+mdsr1 <- split(dsr1, month(dsr1$ENTREE))
+# on forme un dataframe (a) d'une colonne correpondant aux codes postaux théorique du haut et bas-rhin
+a <- c(67000:68999)
+a <- as.character(a)
+a <- data.frame(a)
+
+# on crée la première colonne du dataframe
+m <- as.data.frame(mdsr1[[1]]) # mois de janvier
+cp <- as.character(m$CODE_POSTAL)
+b<-table(cp)
+d <- cbind(names(b),b)
+c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+c$b <- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer
+# on traite chaque mois
+for(i in 2:12){
+  m <- as.data.frame(mdsr1[[i]])
+  cp <- as.character(m$CODE_POSTAL)
+  b<-table(cp)
+  d <- cbind(names(b),b)
+  c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] <- as.integer(as.character( c[,i+1]))
+  }
+# on transforme les factor en character puis en numeric et partant de la les NA en 0:
+# d <- lapply(c[,2:13],as.character)
+# d <- lapply(c[,2:13],as.integer)
+names(c) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+c[is.na(c)]<-0
+ccmu1_soiree <- c
+sum(ccmu1_soiree[2:13])
+
+```
+Idem pour les CCMU2 en soirée sauf que le fichier de départ est dsr2 <- dsr[!is.na(dsr$GRAVITE) & dsr$GRAVITE==2,]
+
+mdsr2 <- split(dsr2, month(dsr2$ENTREE))
+m <- as.data.frame(mdsr2[[1]]) # mois de janvier
+
+cp <- as.character(m$CODE_POSTAL)
+b<-table(cp)
+d <- cbind(names(b),b)
+c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+c$b <- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer
+# on traite chaque mois
+for(i in 2:12){
+  m <- as.data.frame(mdsr2[[i]])
+  cp <- as.character(m$CODE_POSTAL)
+  b<-table(cp)
+  d <- cbind(names(b),b)
+  c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] <- as.integer(as.character( c[,i+1]))
+  }
+names(c) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+c[is.na(c)]<-0
+ccmu2_soiree <- c
+sum(ccmu2_soiree[2:13])
+
+# tous les CCMU en soirée
+dsrt <- dsr[!is.na(dsr$GRAVITE),]
+mdsrt <- split(dsrt, month(dsrt$ENTREE))
+m <- as.data.frame(mdsrt[[1]]) # mois de janvier
+
+cp <- as.character(m$CODE_POSTAL)
+b<-table(cp)
+d <- cbind(names(b),b)
+c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+c$b <- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer
+# on traite chaque mois
+for(i in 2:12){
+  m <- as.data.frame(mdsrt[[i]])
+  cp <- as.character(m$CODE_POSTAL)
+  b<-table(cp)
+  d <- cbind(names(b),b)
+  c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] <- as.integer(as.character( c[,i+1]))
+  }
+names(c) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+c[is.na(c)]<-0
+ccmut_soiree <- c
+sum(ccmut_soiree[2:13])
+
+Nuit profonde
+-------------

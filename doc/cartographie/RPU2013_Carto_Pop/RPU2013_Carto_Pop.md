@@ -1819,8 +1819,8 @@ col[8]<-"orange"
 
 
 ```r
-subtitle <- "Semaine 5 (27-2 février 2014)"
-tension <- c(1, 2, 3, 3, 1, 1, 1, 1, 2, 2, 2, 2)
+subtitle <- "11 février 2014 - Semaine 7 (10 février 2014)"
+tension <- c(1, 1, 3, 0, 1, 1, 1, 1, 3, 2, 2, 3)
 # subtitle <- 'Semaine 6 (3-9 février 2014)' tension <-
 # c(1,2,2,2,1,1,1,1,2,2,2,2)
 
@@ -1880,7 +1880,7 @@ save(d, file = "zp_villes.Rda")
 # production. Les axes sont utiles pour positionner des éléments comme la
 # rose des vents ou l'échelle. On peut s'aider de la fct locator(). Les
 # distances sont en mètres.
-plot(czps, col = col, axes = TRUE)
+plot(czps, col = col, axes = FALSE)
 # Dessin des villes et de leurs noms. Le cast as.numeric est indispensable
 # pour que les coordonnée soient interprétées comme des chiffres
 for (i in 1:length(villes)) {
