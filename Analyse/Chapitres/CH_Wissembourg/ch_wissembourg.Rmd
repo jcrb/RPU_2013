@@ -1,34 +1,58 @@
-CH Wissembourg
+Analyse de l'activité d'un Hôpital
 ========================================================
 
-Ligne 21 remplacer **Wis* par l'hôpital de son choix.
+Ligne 34 remplacer **Wis* par l'hôpital de son choix.
 
-```{r prologue,cache=TRUE,warning=FALSE}
+```{r prologue,cache=FALSE,warning=FALSE}
 source("../prologue.R")
-source("../../mes_fonctions.R")
+source("../../../Routines/mes_fonctions.R")
 
 date()
 pt <-nrow(d1)
 # population totale
 pt
 ```
+### Population totale `r pt`
+
 Récupération des données
 ========================
 ```{r init}
 library("epicalc")
 library("lubridate")
+library("stargazer")
+
 source("odds.R")
-HOP<-d1[d1$FINESS == "Col",]
-n <- nrow(HOP)
+
+# Pour supprimer la notation scientifique:
+options(scipen = 6, digits = 2)
+
+# Pour imposer un péparateur de milliers:
+knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=" ")
+})
+
+ch <- "Geb"
+ch.names <- "CH Guebwiller"
+
+hopital<-d1[d1$FINESS == ch,]
+n <- nrow(hopital)
 ```
+CH de `r ch.names`
+===================
+
 ### Passages en 2013: `r n`
 
 Mode de sortie
 --------------
+- 4 items: mutation, Transfert, Domicile, décès
+- **hosp** nombre total de patients hospitalisés
+- **total** hospitalisés + retour à domicile
+- le rapport des deux donne le **taux d'hospitalisation**
+
 ```{r sortie}
-a<-summary(HOP$MODE_SORTIE)
+a<-summary(hopital$MODE_SORTIE)
 a
-tab1(HOP$MODE_SORTIE)
+
 hosp <- as.numeric(a["Mutation"] + a["Transfert"])
 hosp
 total <- as.numeric(hosp + a["Domicile"])
@@ -37,33 +61,75 @@ ratio_hosp <- round(hosp * 100 / as.numeric(a["Domicile"]))
 ratio_hosp
 tx_hosp <- round(hosp * 100 / total)
 tx_hosp
+
+stargazer(table(hopital$MODE_SORTIE))
+
+tab1(hopital$MODE_SORTIE, main="Mode de sortie de l'hôpital")
+tab1(hopital$MODE_SORTIE, main="Mode de sortie de l'hôpital")
 ```
+- Nombre de patients hospitalisés (mutation + transferts): `r hosp`
+- Taux d'hospitalisation: **`r tx_hosp` %**
+
 
 Destination
 -----------
-```{r destination}
-a<-summary(HOP$DESTINATION)
-a
-tab1(HOP$DESTINATION)
+- 6 items: MCO, SSR, SLD, PSY, HAD, HMS
+- on détermine les vrais non renseignés par soustraction entre le nombre total de patients déclarés hospitalisés (**hosp**) et la somme des 6 items qui décrivent la ventilation des hospitalisés. Normalement cette différence devrait être nulle.
+- cette différence est notée **delta**. Elle permet de calculer l'exhaustivité pour l'item destination **exhaustivite.destination**
 
+```{r destination,comment=""}
+
+a<-summary(hopital$DESTINATION)
+a
+# delta = vrai non renseignés
+delta <- hosp - a["MCO"]-a["SSR"]-a["SLD"]-a["PSY"]-a["HAD"]-a["HMS"]
+# exhaustivité réelle pour la destination
+exhaustivite.destination <- round(100-(delta*100/hosp),2)
+
+tab1(hopital$DESTINATION, main="Ventilation des patients hospitalisés")
+tab1(hopital$DESTINATION, main="Ventilation des patients hospitalisés", missing=FALSE)
 ```
 
+Distribution intra-hospitalière des patients hospitalisés. La colonne *Missing* correspond aux patients non hospialisés.
+- vrai non renseignés pour la destination: `r delta`, exhaustivité: `r round(100-(delta*100/hosp),2)` %
 
 Orientation
 -----------
-```{r orientation}
-summary(HOP$ORIENTATION)
 
+- 13 items: CHIR FUGUE   HDT    HO   MED  OBST   PSA   REA   REO    SC  SCAM    SI  UHCD
+  - items hospitalisation (**orient.hosp**): CHIR, HDT, HO, MED, OBST, REA, SC, SI, UHCD 
+  - sorties atypiques (**orient.atypique**): FUGUE, PSA, SCAM
+  - réorientation immédiate (**orient.reorient **): REO
+- L'orientation est un mélange d'hospitalisés et de non hospitalisés.
+- L'exhaustivité (**orient.exhaustivite**) est calculée comme le rapport entre les orientation correspondant à une hospitalisation (MED, CHIR, SI, etc) et le nombre d'hospitalisations (**hosp**) déclarées au paragraphe destination. Comment calculer l'exhaustivité des sorties atypiques ?
+
+```{r orientation,comment=""}
+
+a <- summary(hopital$ORIENTATION)
+a
 #on supprime les NA
-a<-HOP$ORIENTATION[!is.na(HOP$ORIENTATION)]
+a<-hopital$ORIENTATION[!is.na(hopital$ORIENTATION)]
+nb_orient <- length(a)
 tab1(a,horiz=T,main="Orientation des patients",xlab="Nombre")
+
+sa <- summary(a)
+orient.hosp <- as.numeric(sa["HO"]+sa["HDT"]+sa["UHCD"]+sa["SI"]+sa["SC"]+sa["REA"]+sa["OBST"]+sa["MED"]+sa["CHIR"])
+orient.atypique <- as.numeric(sa["SCAM"]+sa["PSA"]+sa["FUGUE"])
+orient.reorient <- as.numeric(sa["REO"])
+orient.exhaustivite <- 100-round(100*(hosp - orient.hosp)/hosp,2)
 ```
+- nombre de RPU avec orientation renseigné: `r nb_orient`
+- nombre d'orientation correspondant à une hospitalisation: `r orient.hosp`
+- nombre de patients déclarés hospitalisés à la rubrique destination: `r hosp`
+- exhaustivité: **`r orient.exhaustivite` %**
+- nombre de réorientations: `r orient.reorient`
+- nombre de sorties atypiques: `r orient.atypique`
 
 Age
 ----
 
 ```{r age}
-age_local<-HOP$AGE
+age_local<-hopital$AGE
 s <- summary(age_local)
 
 c <- cut(age_local,breaks=c(-1,1,75,150),labels=c("1 an","1 à 75 ans","sup 75 ans"),ordered_result=TRUE)
@@ -74,24 +140,26 @@ c2 <- cut(age_local, breaks = c(-1,19,75,120), labels = c("Pédiatrie","Adultes"
 b <- summary(c2)
 b
 ```
-### Age moyen: `r s["Mean"]`  
+### Age moyen: `r s["Mean"]`  ans
 ### Pédiatrie: `r b["Pédiatrie"]`  (`r round(b["Pédiatrie"]*100/n)` %)
 ### Gériatrie: `r b["Gériatrie"]`  (`r round(b["Gériatrie"]*100/n)` %)
 
 ```{r age2}
 
 # region: chiffre pour toute l'Alsace
-# local: HOP
+# local: hopital
 region<-d1$AGE
 
-hist(region,freq=F)
-hist(age_local, add=T,col="blue",freq=F,main="Histogramme des ages")
+hist(region,freq=F,main="Histogramme des ages", ylab="Fréquence", xlab="Classes d'ages")
+hist(age_local, add=T,col="blue",freq=F)
 abline(v=median(region,na.rm=T),col="red")
 abline(v=median(s,na.rm=T),col="green")
-legend("topright",legend=c("médiane régionale","médiane locale"),col=c("red","green"),lty=1)
+legend("topright",legend=c("médiane régionale","médiane locale","Région"),col=c("red","green","blue"),lty=1, pch=15)
 
-# moins de 1 an / total
-local<-HOP$AGE[HOP$AGE < 1]
+# moins de 1 an / total, pt = total RPU pour la région
+
+local<-hopital$AGE[hopital$AGE < 1]
+length(local)
 length(local) * 100 /n
 region<-d1$AGE[d1$AGE < 1]
 length(region) * 100 / pt
@@ -99,7 +167,7 @@ length(region) * 100 / pt
 # on forme une matrice carrée de 2 lignes et 2 colonnes:
 # on saisi d'abord la colonne 1, puis 2
 # pour une saisie par ligne mettre byrow=TRUE
-M1 <- matrix(c(length(a),n,length(region),pt), nrow = 2,byrow=FALSE)
+M1 <- matrix(c(length(local),n,length(region),pt), nrow = 2,byrow=FALSE)
 M1
 chisq.test(M1)
 p<-M1[1,1]/n
@@ -114,18 +182,18 @@ calcRelativeRisk(M1)
 
 # 75 ans et plus
 
-a<-HOP$AGE[HOP$AGE > 74]
-length(a) * 100 /n           # % de la pop locale de 75 ans qui passa au SU
+local <- hopital$AGE[hopital$AGE > 74]
+length(local) * 100 /n           # % de la pop locale de 75 ans qui passa au SU
 region<-d1$AGE[d1$AGE > 74]
 length(region) * 100 / pt    # % de 75 ans dans la pop alsacienne qui consulte au SU
 
-hist(a,main="75 ans et plus",xlab="age",col="pink")
-summary(a)
-boxplot(a,col="pink",main="75 ans et plus",ylab="Age (années)")
+hist(local,main="75 ans et plus",xlab="age",col="pink")
+summary(local)
+boxplot(local,col="pink",main="75 ans et plus",ylab="Age (années)")
 
 # calcul manuel de l'odds-ratio
 
-M1 <- matrix(c(length(a),n-length(a),length(region),pt-length(region)), nrow = 2,byrow=FALSE)
+M1 <- matrix(c(length(local),n-length(local),length(region),pt-length(region)), nrow = 2,byrow=FALSE)
 M1
 chisq.test(M1)
 p<-M1[1,1]/n
@@ -160,7 +228,7 @@ lines(c(lower,upper),c(y,y),col="royalblue")
 sex ratio
 -----------
 ```{r sexe,fig.height=3}
-sexew <- HOP$SEXE
+sexew <- hopital$SEXE
 local <- summary(sexew)
 local
 srw <- round(local[3]/local[1],3)
@@ -191,7 +259,7 @@ Le sex-ratio est légèrement inférieur à celui de la région mais pas signfic
 Horaires
 ---------
 ```{r horaires}
-e<-hour(HOP$ENTREE)
+e<-hour(hopital$ENTREE)
 a<-cut(e,breaks=c(0,7,19,23),labels=c("nuit profonde","journée","soirée"))
 b <- summary(a)
 ```
@@ -202,7 +270,7 @@ b <- summary(a)
 
 On fait la somme du vendredi 20 heures au lundi matin 8 heures. Dimanche = 1
 ```{r weekend}
-d <-  HOP$ENTREE[wday(HOP$ENTREE)==1 | wday(HOP$ENTREE)==7 | (wday(HOP$ENTREE)==6 & hour(HOP$ENTREE)>19) | (wday(HOP$ENTREE)==2 & hour(HOP$ENTREE)<8)]
+d <-  hopital$ENTREE[wday(hopital$ENTREE)==1 | wday(hopital$ENTREE)==7 | (wday(hopital$ENTREE)==6 & hour(hopital$ENTREE)>19) | (wday(hopital$ENTREE)==2 & hour(hopital$ENTREE)<8)]
 f<-summary(as.factor(wday(d)))
 
 ```
@@ -211,7 +279,7 @@ f<-summary(as.factor(wday(d)))
 Gravité
 --------
 ```{r gravite}
-d <-  HOP$GRAVITE
+d <-  hopital$GRAVITE
 a <- summary(d)
 ```
 
@@ -222,38 +290,38 @@ a <- summary(d)
 Durée de prise en charge
 -------------------------
 ```{r presence}
-e<-ymd_hms(HOP$ENTREE)
-s<-ymd_hms(HOP$SORTIE)
+e<-ymd_hms(hopital$ENTREE)
+s<-ymd_hms(hopital$SORTIE)
 
-HOP$presence <- s - e
-HOP$presence[d1$presence < 0]<-NA
+hopital$presence <- s - e
+hopital$presence[d1$presence < 0]<-NA
 
-#  HOP$presence est de type "difftime" est peut s'exprimer en minutes ou en secondes. Si nécessaire on convertit les secondes en minutes:
-if(units(HOP$presence) == "secs")
-  HOP$presence <- HOP$presence/60
+#  hopital$presence est de type "difftime" est peut s'exprimer en minutes ou en secondes. Si nécessaire on convertit les secondes en minutes:
+if(units(hopital$presence) == "secs")
+  hopital$presence <- hopital$presence/60
 
-a <- summary(as.numeric(HOP$presence))
+a <- summary(as.numeric(hopital$presence))
 
 # on limite la durée de présence limitée à 1 jours
-troisJours <- HOP[as.numeric(HOP$presence) < 1440 * 1, "presence"]
+troisJours <- hopital[as.numeric(hopital$presence) < 1440 * 1, "presence"]
 hist(as.numeric(troisJours),breaks=40,main="Durée de présence",xlab="Temps (minutes)",ylab="Nombre",col="green")
 
 # histogramme avec toutes les données:
-hist(as.numeric(HOP$presence),breaks=40,main="Durée de présence",xlab="Temps (minutes)",ylab="Nombre",col="green")
+hist(as.numeric(hopital$presence),breaks=40,main="Durée de présence",xlab="Temps (minutes)",ylab="Nombre",col="green")
 
 
-q <- HOP$presence[as.numeric(HOP$presence) < 4*60]
-h <- HOP[HOP$MODE_SORTIE=="Mutation" | HOP$MODE_SORTIE=="Transfert","presence"]
+q <- hopital$presence[as.numeric(hopital$presence) < 4*60]
+h <- hopital[hopital$MODE_SORTIE=="Mutation" | hopital$MODE_SORTIE=="Transfert","presence"]
 sh <- summary(as.numeric(h))
 sh
-dom <- HOP[HOP$MODE_SORTIE=="Domicile","presence"]
+dom <- hopital[hopital$MODE_SORTIE=="Domicile","presence"]
 sdom <- summary(as.numeric(dom))
 ```
 ### Moyenne: `r a["Mean"]` minutes
 
 ### Médiane: `r a["Median"]` minutes
 
-### % en moins de 4 heures: `r length(q)` (`r round(length(q)*100/length(HOP$presence))` %)
+### % en moins de 4 heures: `r length(q)` (`r round(length(q)*100/length(hopital$presence))` %)
 
 ### si hospitalisé: `r sh["Mean"]` minutes
 
@@ -267,7 +335,7 @@ TOP 5 des pathologies
 
 ### Traumatiques
 ```{r trauma}
-trauma<-HOP[substr(HOP$DP,1,3) >= "S00" & substr(HOP$DP,1,4) <="T65",]
+trauma<-hopital[substr(hopital$DP,1,3) >= "S00" & substr(hopital$DP,1,4) <="T65",]
 head(trauma$DP)
 t <- summary(as.factor(trauma$DP))
 head(sort(t,decreasing=T),6)
@@ -277,3 +345,47 @@ Lésions les plus fréquentes: `r head(sort(t,decreasing=T),6)`
 
 
 ### Chirurgicales
+
+
+Exhaustivité des données (RADAR)
+================================
+Par défaut, le diagramme en radar commence à 15h et progresse dans le sens antihoraire (la position 2 correspond à 14 heures, etc.)
+```{r exhaust}
+library("plotrix", lib.loc="/usr/lib/R/site-library")
+
+rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU","Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
+
+# taux de complétude régional
+a <- is.na(d1)
+b <- round(apply(a, 2, mean) * 100, 2)
+#b <- sort(b)
+b <- cbind(b)
+colnames(b)<-"%"
+completude <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
+completude <- 100 - completude
+
+radial.plot(completude, labels = rpu.names, ,rp.type="p", radial.lim =c(0,100), poly.col = "khaki", main=paste(ch.names,"- Taux de complétude des RPU"))
+
+# taux de complétude de l'hôpital local
+a<-is.na(hopital)
+b<-round(apply(a,2,mean)*100,2)
+#b<-sort(b)
+b<-cbind(b)
+colnames(b)<-"%"
+completude_hop <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
+completude_hop <- 100 - completude_hop
+# corrections
+completude_hop[16] <- exhaustivite.destination
+completude_hop[15] <- orient.exhaustivite
+
+radial.plot(completude_hop, labels = rpu.names , radial.lim =c(0,100), add=T,rp.type="p", line.col="goldenrod4", main="Taux de complétude des RPU", lwd=2)
+
+legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n")
+
+c <- as.data.frame( completude)
+rownames(c) <- rpu.names
+c <- cbind(c, completude_hop)
+names(c) <- c("Alsace (%)", ch.names)
+c
+```
+

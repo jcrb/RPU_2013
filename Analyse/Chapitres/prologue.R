@@ -55,3 +55,4 @@ source(paste(path,"mes_fonctions.R",sep=""))
 wd<-getwd()
 
 
+

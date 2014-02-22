@@ -1,2 +1,40 @@
 % stluc.Rnw
 \index{SU St Luc}
+\index{St Luc!SU}
+
+En 2013 l'équipe médicale de la policlinique de la clinique Saint-Luc de Schirmeck à fournit les chiffres suivants:
+
+
+\begin{tabular}{|l|c|}
+\hline 
+\multicolumn{2}{|c|}{Clinique Saint Luc}\tabularnewline
+\hline 
+\hline 
+Nombre de passages & \np{8237} \tabularnewline
+\hline 
+Passages en soirée & 899 \tabularnewline
+\hline 
+Passages en nuit profonde & 398 \tabularnewline
+\hline 
+Passages le samedi entre 12 et 20 heures & 567 \tabularnewline
+\hline
+Passages dimanches et jours fériés & 1060 \tabularnewline
+\hline 
+Nombre de transferts & 260 \tabularnewline
+\hline 
+CCMU 1 & 382 \tabularnewline
+\hline 
+CCMU 2 & 6451 \tabularnewline
+\hline 
+CCMU 3 & 733 \tabularnewline
+\hline 
+CCMU 4 & 69 \tabularnewline
+\hline 
+CCMU 5 & 1 \tabularnewline
+\hline
+CCMU P & 7 \tabularnewline
+\hline 
+CCMU D & 1 \tabularnewline
+\hline 
+
+\end{tabular}

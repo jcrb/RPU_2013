@@ -242,3 +242,94 @@ sr <- function(){
   
   sex_ratio <- round(sg["M"]/sg["F"],2)
 }
+
+#===========================================================================
+# Complétude des données
+#===========================================================================
+#
+#' Calcule le taux de complétude des données contenue dans la dataframe d1
+#'@param d1 dataframe
+#'@return un vecteur de complétudes exprimé en pourcentage
+#'
+completude <- function(d1){
+  # pour dessiner un radar
+  library("plotrix")
+  
+  # nom des branches du radar:
+  rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU",
+                 "Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
+  
+  # taux de complétude régional. 
+  #----------------------------
+  #Il est calculé en comptant le nombre de NA dans la base de données, puis en appliquant la méthode MEAN() qui affiche le pourcentage de non réponses. La fonction lapply appliquée sur les colonnes (2) permet de ventiler les résultats par items.
+  a <- is.na(d1)
+  b <- round(apply(a, 2, mean) * 100, 2)
+  b <- cbind(b) # verticalise le vecteur
+  colnames(b)<-"%"
+  # completude ordonne le vecteur résultat pour qu'il soit rangé dans le même ordre que le vecteur rpu.name. Ainsi b[6] correspond à la date d'entrée.
+  completude <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
+  completude <- 100 - completude
+  
+  # **************  
+  #  corrections *  
+  # **************  
+  # on corrrige destination et orientation (voir ch_wissembourg.Rmd)
+  
+  # Mode de sortie
+  # --------------
+  a<-summary(d1$MODE_SORTIE)
+  hosp <- as.numeric(a["Mutation"] + a["Transfert"])
+  
+  a<-summary(as.factor(d1$DESTINATION))
+
+  # delta = vrai non renseignés
+  delta <- hosp - as.numeric(a["MCO"]+a["SSR"]+a["SLD"]+a["PSY"]+a["HAD"] +a["HMS"]) # -a["HMS"]
+
+  # exhaustivité réelle pour la destination
+  exhaustivite.destination <- round(100-(delta*100/hosp),2)
+  completude[16] <- exhaustivite.destination
+  
+  # Orientation
+  #------------
+  
+  #on supprime les NA
+  a<-d1$ORIENTATION[!is.na(d1$ORIENTATION)]
+  nb_orient <- length(a)
+  sa <- summary(a)
+  orient.hosp <- as.numeric(sa["HO"]+sa["HDT"]+sa["UHCD"]+sa["SI"]+sa["SC"]+sa["REA"]+sa["OBST"]+sa["MED"]+sa["CHIR"])
+  orient.exhaustivite <- 100-round(100*(hosp - orient.hosp)/hosp,2)
+  completude_hop[15] <- orient.exhaustivite
+  
+  return(completude)
+  
+}
+
+#===========================================================================
+# Radar de Complétude des données
+#===========================================================================
+#'
+#'@description Dessine le radar de complétude des données. Dessine un ou 2 radar selon la valeur de Y. Par défaut le premier
+#'radar est un polygone coloré, tandis que le second est transparent avec un périmètre coloré.
+#'@param x vecteur de complétude
+#'@param y second vecteur de complétude
+#'@param rp.type="p" pour polygone
+#'@param poly.col = "khaki" couleur du polygone
+#'@param ch.names = "CH de Colmar"
+#'@param line.col="goldenrod4" couleur du trait du second polygone
+#'@usage radar_completude(region,a, ch.names = "CH Colmar") où region = completude(d1) et a = completude(d1[d1$FINESS=="Col",])
+# dessin du premier radar correspondant à la statistique régionale
+# 
+radar_completude <- function(x, y = NULL, ch.names = "titre", rp.type="p", poly.col = "khaki",line.col="goldenrod4"){
+  # nom des branches du radar:
+  rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU",
+                 "Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
+  
+  radial.plot(x, labels = rpu.names, rp.type="p", radial.lim =c(0,100), 
+              poly.col = "khaki", main=paste(ch.names,"- Taux de complétude des RPU"))
+  if(!is.null(y)){
+    radial.plot(y, labels = rpu.names , radial.lim =c(0,100), add=T,rp.type="p", line.col="goldenrod4", 
+                main="Taux de complétude des RPU", lwd=2)
+    legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n")
+  }
+  
+}

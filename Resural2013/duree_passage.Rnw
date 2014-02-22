@@ -1,4 +1,5 @@
 % duree_passage.Rnw
+\index{Durée de passage}
 
 La durée de passage est le temps compris entre la date d'entrée et celle de sortie. Il s'agit d'une durée de transit total. Les données transmises par les RPU ne permettent pas de calculer les temps d'attente.
 
@@ -357,11 +358,13 @@ rownames(r) <- c("mn","%")
 x <-xtable(r, caption=c("Durée de présence et orientation. Temps passé en minutes (mn) aux urgences en fonction de l'orientation à l'issue de la prise en charge","Durée de présence et orientation"), label = "tab:duree_orientation")
 print.xtable(x, type="latex",)
 
-#'@details on transdorme les NA en DOM pour mesurer le temps moyen si retour à domicile. On fait l'hypothèse que NA = dom.
-d1$DESTINATION<-as.character(d1$DESTINATION)
-d1$DESTINATION[is.na(d1$DESTINATION)]<-"DOM"
+#'@details on transforme les NA en DOM pour mesurer le temps moyen si retour à domicile. On fait l'hypothèse que NA = dom.
+#d1$DESTINATION<-as.character(d1$DESTINATION)
+#d1$DESTINATION[is.na(d1$DESTINATION)]<-"DOM"
+x_dest <-as.character(d1$DESTINATION)
+x_dest[is.na(x_dest)]<-"DOM"
 
-t <- tapply(d1$presence,d1$DESTINATION,mean,na.rm=TRUE)
+t <- tapply(d1$presence, x_dest, mean,na.rm=TRUE)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
 rownames(r) <- c("mn","%")
@@ -375,7 +378,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \begin{figure}[ht!]
  \centering
   <<bp_duree_dest,echo=FALSE,fig.width=8>>=
-boxplot(d1$presence ~ d1$DESTINATION,outline=F,main="Durée de passage selon la destination",ylab="Durée de passage (mn)")
+boxplot(d1$presence ~ x_dest, outline=F,main="Durée de passage selon la destination",ylab="Durée de passage (mn)")
   @
  \caption{Durée de passage en fonction de la destination}
  \label{duree_dest}

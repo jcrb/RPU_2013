@@ -1,7 +1,7 @@
-CH Wissembourg
+Analyse de l'activité d'un Hôpital
 ========================================================
 
-Ligne 21 remplacer **Wis* par l'hôpital de son choix.
+Ligne 34 remplacer **Wis* par l'hôpital de son choix.
 
 
 ```r
@@ -9,458 +9,384 @@ source("../prologue.R")
 ```
 
 ```
-## Loading required package: questionr
-## 
-## Attaching package: 'rgrs'
-## 
-## Les objets suivants sont masqués from 'package:questionr':
-## 
-##     copie, copie.default, copie.proptab, cprop, cramer.v,
-##     format.proptab, freq, lprop, print.proptab, prop, quant.cut,
-##     renomme.variable, residus, wtd.mean, wtd.table, wtd.var
-## 
-## Rattle : une interface graphique gratuite pour l'exploration de données avec R.
-## Version 2.6.26 r77 Copyright (c) 2006-2013 Togaware Pty Ltd.
-## Entrez 'rattle()' pour secouer, faire vibrer, et faire défiler vos données.
-## Loading required package: foreign
-## Loading required package: survival
-## Loading required package: splines
-## Loading required package: MASS
-## Loading required package: nnet
-## 
-## Attaching package: 'zoo'
-## 
-## Les objets suivants sont masqués from 'package:base':
-## 
-##     as.Date, as.Date.numeric
-## 
-## Please visit openintro.org for free statistics materials
-## 
-## Attaching package: 'openintro'
-## 
-## L'objet suivant est masqué from 'package:MASS':
-## 
-##     mammals
-## 
-## L'objet suivant est masqué from 'package:datasets':
-## 
-##     cars
-```
-
-```
-## [1] "Fichier courant: rpu2013d0111.Rda"
-```
-
-```
-## Error: impossible d'ouvrir la connexion
+## [1] "Fichier courant: rpu2013d0112.Rda"
 ```
 
 ```r
-source("../../mes_fonctions.R")
-```
-
-```
-## Error: impossible d'ouvrir la connexion
-```
-
-```r
+source("../../../Routines/mes_fonctions.R")
 
 date()
 ```
 
 ```
-## [1] "Wed Jan  1 16:26:32 2014"
+## [1] "Wed Feb 19 09:34:28 2014"
 ```
 
 ```r
 pt <- nrow(d1)
-```
-
-```
-## Error: objet 'd1' introuvable
-```
-
-```r
 # population totale
 pt
 ```
 
 ```
-## function (q, df, ncp, lower.tail = TRUE, log.p = FALSE) 
-## {
-##     if (missing(ncp)) 
-##         .External(C_pt, q, df, lower.tail, log.p)
-##     else .External(C_pnt, q, df, ncp, lower.tail, log.p)
-## }
-## <bytecode: 0x594da80>
-## <environment: namespace:stats>
+## [1] 340338
 ```
+
+### Population totale 340338
 
 Récupération des données
 ========================
 
 ```r
 library("epicalc")
-library("lubridate")
-source("odds.R")
-HOP <- d1[d1$FINESS == "Col", ]
 ```
 
 ```
-## Error: objet 'd1' introuvable
+## Loading required package: foreign
+## Loading required package: survival
+## Loading required package: splines
+## Loading required package: MASS
+## Loading required package: nnet
 ```
 
 ```r
-n <- nrow(HOP)
+library("lubridate")
+library("stargazer")
 ```
 
 ```
-## Error: objet 'HOP' introuvable
+## 
+## Please cite as: 
+## 
+##  Hlavac, Marek (2013). stargazer: LaTeX code and ASCII text for well-formatted regression and summary statistics tables.
+##  R package version 4.5.3. http://CRAN.R-project.org/package=stargazer
 ```
 
-### Passages en 2013: 
+```r
 
+source("odds.R")
+
+# Pour supprimer la notation scientifique:
+options(scipen = 6, digits = 2)
+
+# Pour imposer un péparateur de milliers:
+knit_hooks$set(inline = function(x) {
+    prettyNum(x, big.mark = " ")
+})
+
+ch <- "Geb"
+ch.names <- "CH Guebwiller"
+
+hopital <- d1[d1$FINESS == ch, ]
+n <- nrow(hopital)
 ```
 
-Error in eval(expr, envir, enclos) : objet 'n' introuvable
+CH de CH Guebwiller
+===================
 
-```
-
-
+### Passages en 2013: 15 103
 
 Mode de sortie
 --------------
+- 4 items: mutation, Transfert, Domicile, décès
+- **hosp** nombre total de patients hospitalisés
+- **total** hospitalisés + retour à domicile
+- le rapport des deux donne le **taux d'hospitalisation**
+
 
 ```r
-a <- summary(HOP$MODE_SORTIE)
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+a <- summary(hopital$MODE_SORTIE)
 a
 ```
 
 ```
-## [1] "0011"
+##        NA  Mutation Transfert  Domicile     Décès      NA's 
+##         0       315       197      7748         0      6843
 ```
 
 ```r
-tab1(HOP$MODE_SORTIE)
-```
 
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
 hosp <- as.numeric(a["Mutation"] + a["Transfert"])
-```
-
-```
-## Error: argument non numérique pour un opérateur binaire
-```
-
-```r
 hosp
 ```
 
 ```
-## Error: objet 'hosp' introuvable
+## [1] 512
 ```
 
 ```r
 total <- as.numeric(hosp + a["Domicile"])
-```
-
-```
-## Error: objet 'hosp' introuvable
-```
-
-```r
 total
 ```
 
 ```
-## Error: objet 'total' introuvable
+## [1] 8260
 ```
 
 ```r
 ratio_hosp <- round(hosp * 100/as.numeric(a["Domicile"]))
-```
-
-```
-## Error: objet 'hosp' introuvable
-```
-
-```r
 ratio_hosp
 ```
 
 ```
-## Error: objet 'ratio_hosp' introuvable
+## [1] 7
 ```
 
 ```r
 tx_hosp <- round(hosp * 100/total)
-```
-
-```
-## Error: objet 'hosp' introuvable
-```
-
-```r
 tx_hosp
 ```
 
 ```
-## Error: objet 'tx_hosp' introuvable
+## [1] 6
 ```
+
+```r
+
+stargazer(table(hopital$MODE_SORTIE))
+```
+
+```
+## Error: $ operator is invalid for atomic vectors
+```
+
+```r
+
+tab1(hopital$MODE_SORTIE, main = "Mode de sortie de l'hôpital")
+```
+
+```
+## hopital$MODE_SORTIE : 
+##           Frequency   %(NA+)   %(NA-)
+## NA                0      0.0      0.0
+## Mutation        315      2.1      3.8
+## Transfert       197      1.3      2.4
+## Domicile       7748     51.3     93.8
+## Décès             0      0.0      0.0
+## NA's           6843     45.3      0.0
+##   Total       15103    100.0    100.0
+```
+
+```r
+tab1(hopital$MODE_SORTIE, main = "Mode de sortie de l'hôpital")
+```
+
+![plot of chunk sortie](figure/sortie.png) 
+
+```
+## hopital$MODE_SORTIE : 
+##           Frequency   %(NA+)   %(NA-)
+## NA                0      0.0      0.0
+## Mutation        315      2.1      3.8
+## Transfert       197      1.3      2.4
+## Domicile       7748     51.3     93.8
+## Décès             0      0.0      0.0
+## NA's           6843     45.3      0.0
+##   Total       15103    100.0    100.0
+```
+
+- Nombre de patients hospitalisés (mutation + transferts): 512
+- Taux d'hospitalisation: **6 %**
 
 
 Destination
 -----------
+- 6 items: MCO, SSR, SLD, PSY, HAD, HMS
+- on détermine les vrais non renseignés par soustraction entre le nombre total de patients déclarés hospitalisés (**hosp**) et la somme des 6 items qui décrivent la ventilation des hospitalisés. Normalement cette différence devrait être nulle.
+- cette différence est notée **delta**. Elle permet de calculer l'exhaustivité pour l'item destination **exhaustivite.destination**
+
 
 ```r
-a <- summary(HOP$DESTINATION)
-```
 
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+a <- summary(hopital$DESTINATION)
 a
 ```
 
 ```
-## [1] "0011"
+   NA   MCO   SSR   SLD   PSY   HAD   HMS  NA's 
+    0   451    50     6     5     0     5 14586 
 ```
 
 ```r
-tab1(HOP$DESTINATION)
+# delta = vrai non renseignés
+delta <- hosp - a["MCO"] - a["SSR"] - a["SLD"] - a["PSY"] - a["HAD"] - a["HMS"]
+# exhaustivité réelle pour la destination
+exhaustivite.destination <- round(100 - (delta * 100/hosp), 2)
+
+tab1(hopital$DESTINATION, main = "Ventilation des patients hospitalisés")
 ```
 
+![plot of chunk destination](figure/destination1.png) 
+
 ```
-## Error: objet 'HOP' introuvable
+hopital$DESTINATION : 
+        Frequency   %(NA+)   %(NA-)
+NA              0      0.0      0.0
+MCO           451      3.0     87.2
+SSR            50      0.3      9.7
+SLD             6      0.0      1.2
+PSY             5      0.0      1.0
+HAD             0      0.0      0.0
+HMS             5      0.0      1.0
+NA's        14586     96.6      0.0
+  Total     15103    100.0    100.0
+```
+
+```r
+tab1(hopital$DESTINATION, main = "Ventilation des patients hospitalisés", missing = FALSE)
+```
+
+![plot of chunk destination](figure/destination2.png) 
+
+```
+hopital$DESTINATION : 
+        Frequency   %(NA+)   %(NA-)
+NA              0      0.0      0.0
+MCO           451      3.0     87.2
+SSR            50      0.3      9.7
+SLD             6      0.0      1.2
+PSY             5      0.0      1.0
+HAD             0      0.0      0.0
+HMS             5      0.0      1.0
+NA's        14586     96.6      0.0
+  Total     15103    100.0    100.0
 ```
 
 
+Distribution intra-hospitalière des patients hospitalisés. La colonne *Missing* correspond aux patients non hospialisés.
+- vrai non renseignés pour la destination: -5, exhaustivité: 101 %
 
 Orientation
 -----------
 
+- 13 items: CHIR FUGUE   HDT    HO   MED  OBST   PSA   REA   REO    SC  SCAM    SI  UHCD
+  - items hospitalisation (**orient.hosp**): CHIR, HDT, HO, MED, OBST, REA, SC, SI, UHCD 
+  - sorties atypiques (**orient.atypique**): FUGUE, PSA, SCAM
+  - réorientation immédiate (**orient.reorient **): REO
+- L'orientation est un mélange d'hospitalisés et de non hospitalisés.
+- L'exhaustivité (**orient.exhaustivite**) est calculée comme le rapport entre les orientation correspondant à une hospitalisation (MED, CHIR, SI, etc) et le nombre d'hospitalisations (**hosp**) déclarées au paragraphe destination. Comment calculer l'exhaustivité des sorties atypiques ?
+
+
 ```r
-summary(HOP$ORIENTATION)
+
+a <- summary(hopital$ORIENTATION)
+a
 ```
 
 ```
-## Error: objet 'HOP' introuvable
+ CHIR FUGUE   HDT    HO   MED  OBST   PSA   REA   REO    SC  SCAM    SI 
+   59     3     1     3    29     4    40     2     1     6    33    10 
+ UHCD  NA's 
+   26 14886 
 ```
 
 ```r
-
 # on supprime les NA
-a <- HOP$ORIENTATION[!is.na(HOP$ORIENTATION)]
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+a <- hopital$ORIENTATION[!is.na(hopital$ORIENTATION)]
+nb_orient <- length(a)
 tab1(a, horiz = T, main = "Orientation des patients", xlab = "Nombre")
 ```
 
 ![plot of chunk orientation](figure/orientation.png) 
 
 ```
-## a : 
-##         Frequency Percent Cum. percent
-## 0011            1     100          100
-##   Total         1     100          100
+a : 
+        Frequency Percent Cum. percent
+CHIR           59    27.2           27
+FUGUE           3     1.4           29
+HDT             1     0.5           29
+HO              3     1.4           30
+MED            29    13.4           44
+OBST            4     1.8           46
+PSA            40    18.4           64
+REA             2     0.9           65
+REO             1     0.5           65
+SC              6     2.8           68
+SCAM           33    15.2           83
+SI             10     4.6           88
+UHCD           26    12.0          100
+  Total       217   100.0          100
 ```
 
+```r
+
+sa <- summary(a)
+orient.hosp <- as.numeric(sa["HO"] + sa["HDT"] + sa["UHCD"] + sa["SI"] + sa["SC"] + 
+    sa["REA"] + sa["OBST"] + sa["MED"] + sa["CHIR"])
+orient.atypique <- as.numeric(sa["SCAM"] + sa["PSA"] + sa["FUGUE"])
+orient.reorient <- as.numeric(sa["REO"])
+orient.exhaustivite <- 100 - round(100 * (hosp - orient.hosp)/hosp, 2)
+```
+
+- nombre de RPU avec orientation renseigné: 217
+- nombre d'orientation correspondant à une hospitalisation: 140
+- nombre de patients déclarés hospitalisés à la rubrique destination: 512
+- exhaustivité: **27 %**
+- nombre de réorientations: 1
+- nombre de sorties atypiques: 76
 
 Age
 ----
 
 
 ```r
-age_local <- HOP$AGE
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+age_local <- hopital$AGE
 s <- summary(age_local)
-```
-
-```
-## Error: objet 'age_local' introuvable
-```
-
-```r
 
 c <- cut(age_local, breaks = c(-1, 1, 75, 150), labels = c("1 an", "1 à 75 ans", 
     "sup 75 ans"), ordered_result = TRUE)
-```
-
-```
-## Error: objet 'age_local' introuvable
-```
-
-```r
 a <- summary(c)
-```
-
-```
-## Error: objet de type 'builtin' non indiçable
-```
-
-```r
 a
 ```
 
 ```
-## [1] "0011"
+##       1 an 1 à 75 ans sup 75 ans 
+##        225      13347       1531
 ```
 
 ```r
 
 c2 <- cut(age_local, breaks = c(-1, 19, 75, 120), labels = c("Pédiatrie", "Adultes", 
     "Gériatrie"))
-```
-
-```
-## Error: objet 'age_local' introuvable
-```
-
-```r
 b <- summary(c2)
-```
-
-```
-## Error: objet 'c2' introuvable
-```
-
-```r
 b
 ```
 
 ```
-## Error: objet 'b' introuvable
+## Pédiatrie   Adultes Gériatrie 
+##      4537      9035      1531
 ```
 
-### Age moyen: 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 's' introuvable
-
-```
-
-  
-### Pédiatrie: 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'b' introuvable
-
-```
-
-  (
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'b' introuvable
-
-```
-
- %)
-### Gériatrie: 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'b' introuvable
-
-```
-
-  (
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'b' introuvable
-
-```
-
- %)
+### Age moyen: 37  ans
+### Pédiatrie: 4 537  (30 %)
+### Gériatrie: 1 531  (10 %)
 
 
 ```r
 
-# region: chiffre pour toute l'Alsace local: HOP
+# region: chiffre pour toute l'Alsace local: hopital
 region <- d1$AGE
-```
 
-```
-## Error: objet 'd1' introuvable
-```
-
-```r
-
-hist(region, freq = F)
-```
-
-```
-## Error: objet 'region' introuvable
-```
-
-```r
-hist(age_local, add = T, col = "blue", freq = F, main = "Histogramme des ages")
-```
-
-```
-## Error: objet 'age_local' introuvable
-```
-
-```r
+hist(region, freq = F, main = "Histogramme des ages", ylab = "Fréquence", xlab = "Classes d'ages")
+hist(age_local, add = T, col = "blue", freq = F)
 abline(v = median(region, na.rm = T), col = "red")
-```
-
-```
-## Error: objet 'region' introuvable
-```
-
-```r
 abline(v = median(s, na.rm = T), col = "green")
+legend("topright", legend = c("médiane régionale", "médiane locale", "Région"), 
+    col = c("red", "green", "blue"), lty = 1, pch = 15)
 ```
 
-```
-## Error: objet 's' introuvable
-```
-
-```r
-legend("topright", legend = c("médiane régionale", "médiane locale"), col = c("red", 
-    "green"), lty = 1)
-```
-
-```
-## Error: plot.new has not been called yet
-```
+![plot of chunk age2](figure/age21.png) 
 
 ```r
 
-# moins de 1 an / total
-local <- HOP$AGE[HOP$AGE < 1]
+# moins de 1 an / total, pt = total RPU pour la région
+
+local <- hopital$AGE[hopital$AGE < 1]
+length(local)
 ```
 
 ```
-## Error: objet 'HOP' introuvable
+## [1] 61
 ```
 
 ```r
@@ -468,42 +394,30 @@ length(local) * 100/n
 ```
 
 ```
-## Error: objet 'n' introuvable
+## [1] 0.4
 ```
 
 ```r
 region <- d1$AGE[d1$AGE < 1]
-```
-
-```
-## Error: objet 'd1' introuvable
-```
-
-```r
 length(region) * 100/pt
 ```
 
 ```
-## Error: objet 'region' introuvable
+## [1] 2.7
 ```
 
 ```r
 
 # on forme une matrice carrée de 2 lignes et 2 colonnes: on saisi d'abord la
 # colonne 1, puis 2 pour une saisie par ligne mettre byrow=TRUE
-M1 <- matrix(c(length(a), n, length(region), pt), nrow = 2, byrow = FALSE)
-```
-
-```
-## Error: objet 'n' introuvable
-```
-
-```r
+M1 <- matrix(c(length(local), n, length(region), pt), nrow = 2, byrow = FALSE)
 M1
 ```
 
 ```
-## Error: objet 'M1' introuvable
+##       [,1]   [,2]
+## [1,]    61   9226
+## [2,] 15103 340338
 ```
 
 ```r
@@ -511,39 +425,22 @@ chisq.test(M1)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  M1
+## X-squared = 292, df = 1, p-value < 2.2e-16
 ```
 
 ```r
 p <- M1[1, 1]/n
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 q <- M1[1, 2]/pt
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 or <- p * (1 - q)/q * (1 - p)
-```
-
-```
-## Error: objet 'p' introuvable
-```
-
-```r
 p
 ```
 
 ```
-## Error: objet 'p' introuvable
+## [1] 0.004
 ```
 
 ```r
@@ -551,10 +448,7 @@ q
 ```
 
 ```
-## function (save = "default", status = 0, runLast = TRUE) 
-## .Internal(quit(save, status, runLast))
-## <bytecode: 0x4c04c90>
-## <environment: namespace:base>
+## [1] 0.027
 ```
 
 ```r
@@ -562,7 +456,7 @@ or
 ```
 
 ```
-## Error: objet 'or' introuvable
+## [1] 0.14
 ```
 
 ```r
@@ -571,7 +465,8 @@ calcOddsRatio(M1, referencerow = 2)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## [1] "categorie =  , odds ratio =  0.14899222463156"
+## [1] "categorie =  ,  95 % interval de confiance = [ 0.115768352787841 , 0.191750875486177 ]"
 ```
 
 ```r
@@ -579,88 +474,66 @@ calcRelativeRisk(M1)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## [1] "category =  , relative risk =  0.154581917136941"
+## [1] "category =  ,  95 % confidence interval = [ 0.12031527934553 , 0.198607934384686 ]"
 ```
 
 ```r
 
 # 75 ans et plus
 
-a <- HOP$AGE[HOP$AGE > 74]
+local <- hopital$AGE[hopital$AGE > 74]
+length(local) * 100/n  # % de la pop locale de 75 ans qui passa au SU
 ```
 
 ```
-## Error: objet 'HOP' introuvable
-```
-
-```r
-length(a) * 100/n  # % de la pop locale de 75 ans qui passa au SU
-```
-
-```
-## Error: objet 'n' introuvable
+## [1] 11
 ```
 
 ```r
 region <- d1$AGE[d1$AGE > 74]
-```
-
-```
-## Error: objet 'd1' introuvable
-```
-
-```r
 length(region) * 100/pt  # % de 75 ans dans la pop alsacienne qui consulte au SU
 ```
 
 ```
-## Error: objet 'region' introuvable
+## [1] 15
 ```
 
 ```r
 
-hist(a, main = "75 ans et plus", xlab = "age", col = "pink")
+hist(local, main = "75 ans et plus", xlab = "age", col = "pink")
+```
+
+![plot of chunk age2](figure/age22.png) 
+
+```r
+summary(local)
 ```
 
 ```
-## Error: 'x' must be numeric
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      75      79      83      84      88     104
 ```
 
 ```r
-summary(a)
+boxplot(local, col = "pink", main = "75 ans et plus", ylab = "Age (années)")
 ```
 
-```
-##    Length     Class      Mode 
-##         1 character character
-```
-
-```r
-boxplot(a, col = "pink", main = "75 ans et plus", ylab = "Age (années)")
-```
-
-```
-## Error: argument non numérique pour un opérateur binaire
-```
+![plot of chunk age2](figure/age23.png) 
 
 ```r
 
 # calcul manuel de l'odds-ratio
 
-M1 <- matrix(c(length(a), n - length(a), length(region), pt - length(region)), 
+M1 <- matrix(c(length(local), n - length(local), length(region), pt - length(region)), 
     nrow = 2, byrow = FALSE)
-```
-
-```
-## Error: objet 'n' introuvable
-```
-
-```r
 M1
 ```
 
 ```
-## Error: objet 'M1' introuvable
+##       [,1]   [,2]
+## [1,]  1615  52512
+## [2,] 13488 287826
 ```
 
 ```r
@@ -668,39 +541,22 @@ chisq.test(M1)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  M1
+## X-squared = 251, df = 1, p-value < 2.2e-16
 ```
 
 ```r
 p <- M1[1, 1]/n
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 q <- M1[1, 2]/pt
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 or <- (p * (1 - q))/(q * (1 - p))
-```
-
-```
-## Error: objet 'p' introuvable
-```
-
-```r
 p
 ```
 
 ```
-## Error: objet 'p' introuvable
+## [1] 0.11
 ```
 
 ```r
@@ -708,10 +564,7 @@ q
 ```
 
 ```
-## function (save = "default", status = 0, runLast = TRUE) 
-## .Internal(quit(save, status, runLast))
-## <bytecode: 0x4c04c90>
-## <environment: namespace:base>
+## [1] 0.15
 ```
 
 ```r
@@ -719,7 +572,7 @@ or
 ```
 
 ```
-## Error: objet 'or' introuvable
+## [1] 0.66
 ```
 
 ```r
@@ -730,7 +583,8 @@ calcOddsRatio(M1, referencerow = 2)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## [1] "categorie =  , odds ratio =  0.656290975213122"
+## [1] "categorie =  ,  95 % interval de confiance = [ 0.622762101756773 , 0.69162500886159 ]"
 ```
 
 ```r
@@ -738,7 +592,8 @@ calcRelativeRisk(M1)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## [1] "category =  , relative risk =  0.666546302037642"
+## [1] "category =  ,  95 % confidence interval = [ 0.633537303656711 , 0.701275158062036 ]"
 ```
 
 ```r
@@ -746,7 +601,11 @@ chisq.test(M1)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## 
+## 	Pearson's Chi-squared test with Yates' continuity correction
+## 
+## data:  M1
+## X-squared = 251, df = 1, p-value < 2.2e-16
 ```
 
 ```r
@@ -754,7 +613,17 @@ fisher.test(M1)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## 
+## 	Fisher's Exact Test for Count Data
+## 
+## data:  M1
+## p-value < 2.2e-16
+## alternative hypothesis: true odds ratio is not equal to 1
+## 95 percent confidence interval:
+##  0.62 0.69
+## sample estimates:
+## odds ratio 
+##       0.66
 ```
 
 ```r
@@ -762,181 +631,61 @@ fisher.test(M1)
 # graphe de l'OR
 
 odds <- calcOddsRatio(M1, referencerow = 2, quiet = TRUE)
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 or <- odds[1]
-```
-
-```
-## Error: objet 'odds' introuvable
-```
-
-```r
 lower <- odds[2]
-```
-
-```
-## Error: objet 'odds' introuvable
-```
-
-```r
 upper <- odds[3]
-```
-
-```
-## Error: objet 'odds' introuvable
-```
-
-```r
 y <- 0.5
 if (lower > 1) limiteInf <- 0.5 else limiteInf <- lower - 0.5
-```
-
-```
-## Error: objet 'lower' introuvable
-```
-
-```r
 plot(or, y, pch = 19, col = "darkblue", xlab = "odds-ratio", ylab = "", axes = FALSE, 
     main = "Patients de 75 ans et plus", xlim = c(limiteInf, upper + 0.5))
-```
-
-```
-## Error: objet 'or' introuvable
-```
-
-```r
 axis(1)
-```
-
-```
-## Error: plot.new has not been called yet
-```
-
-```r
 abline(v = 1, lty = "dashed")
-```
-
-```
-## Error: plot.new has not been called yet
-```
-
-```r
 lines(c(lower, upper), c(y, y), col = "royalblue")
 ```
 
-```
-## Error: objet 'lower' introuvable
-```
+![plot of chunk age2](figure/age24.png) 
 
 
 sex ratio
 -----------
 
 ```r
-sexew <- HOP$SEXE
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+sexew <- hopital$SEXE
 local <- summary(sexew)
-```
-
-```
-## Error: objet 'sexew' introuvable
-```
-
-```r
 local
 ```
 
 ```
-## function (expr, envir = new.env()) 
-## eval.parent(substitute(eval(quote(expr), envir)))
-## <bytecode: 0x2716c38>
-## <environment: namespace:base>
+##    F    I    M 
+## 7387    0 7716
 ```
 
 ```r
 srw <- round(local[3]/local[1], 3)
-```
-
-```
-## Error: objet de type 'closure' non indiçable
-```
-
-```r
 
 sexer <- d1$SEXE
-```
-
-```
-## Error: objet 'd1' introuvable
-```
-
-```r
 region <- summary(sexer)
-```
-
-```
-## Error: objet 'sexer' introuvable
-```
-
-```r
 region
 ```
 
 ```
-## Error: objet 'region' introuvable
+##      F      I      M 
+## 161941      5 178392
 ```
 
 ```r
 srr <- round(region[3]/region[1], 3)
-```
-
-```
-## Error: objet 'region' introuvable
-```
-
-```r
 
 M1 <- matrix(c(local[3], local[1], region[3], region[1]), nrow = 2)
-```
-
-```
-## Error: objet de type 'closure' non indiçable
-```
-
-```r
 colnames(M1) <- c("Local", "Alsace")
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 rownames(M1) <- c("Hommes", "Femmes")
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 M1
 ```
 
 ```
-## Error: objet 'M1' introuvable
+##        Local Alsace
+## Hommes  7716 178392
+## Femmes  7387 161941
 ```
 
 ```r
@@ -944,93 +693,24 @@ calcOddsRatio(M1, referencerow = 2)
 ```
 
 ```
-## Error: objet 'M1' introuvable
+## [1] "categorie = Hommes , odds ratio =  0.948212251093752"
+## [1] "categorie = Hommes ,  95 % interval de confiance = [ 0.917793598690976 , 0.97963907615683 ]"
 ```
 
 ```r
 or <- calcOddsRatio(M1, referencerow = 2, quiet = TRUE)
-```
-
-```
-## Error: objet 'M1' introuvable
-```
-
-```r
 
 plot(or[1], 1, pch = 19, col = "darkblue", xlab = "odds-ratio", ylab = "", axes = FALSE)
-```
-
-```
-## Error: objet 'or' introuvable
-```
-
-```r
 axis(1)
-```
-
-```
-## Error: plot.new has not been called yet
-```
-
-```r
 abline(v = 1, lty = "dashed")
-```
-
-```
-## Error: plot.new has not been called yet
-```
-
-```r
 lines(c(or[2], or[3]), c(1, 1), col = "royalblue")
 ```
 
-```
-## Error: objet 'or' introuvable
-```
+![plot of chunk sexe](figure/sexe.png) 
 
-sex-ratio local = 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'srw' introuvable
-
-```
-
-  
-sex-ratio régional = 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'srr' introuvable
-
-```
-
-  
-odds-ratio = 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'or' introuvable
-
-```
-
- [
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'or' introuvable
-
-```
-
--
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'or' introuvable
-
-```
-
-]
+sex-ratio local = 1  
+sex-ratio régional = 1.1  
+odds-ratio = 0.95 [0.92-0.98]
 
 Le sex-ratio est légèrement inférieur à celui de la région mais pas signficativement différent
 
@@ -1038,314 +718,105 @@ Horaires
 ---------
 
 ```r
-e <- hour(HOP$ENTREE)
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+e <- hour(hopital$ENTREE)
 a <- cut(e, breaks = c(0, 7, 19, 23), labels = c("nuit profonde", "journée", 
     "soirée"))
-```
-
-```
-## Error: objet 'e' introuvable
-```
-
-```r
 b <- summary(a)
 ```
 
 
-### Soirée 
+### Soirée 15 %
 
-```
-
-Error in b["soirée"] * 100 : 
-  argument non numérique pour un opérateur binaire
-
-```
-
- %
-
-### Nuit profonde 
-
-```
-
-Error in b["nuit profonde"] * 100 : 
-  argument non numérique pour un opérateur binaire
-
-```
-
- %
+### Nuit profonde 6.6 %
 
 On fait la somme du vendredi 20 heures au lundi matin 8 heures. Dimanche = 1
 
 ```r
-d <- HOP$ENTREE[wday(HOP$ENTREE) == 1 | wday(HOP$ENTREE) == 7 | (wday(HOP$ENTREE) == 
-    6 & hour(HOP$ENTREE) > 19) | (wday(HOP$ENTREE) == 2 & hour(HOP$ENTREE) < 
-    8)]
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+d <- hopital$ENTREE[wday(hopital$ENTREE) == 1 | wday(hopital$ENTREE) == 7 | 
+    (wday(hopital$ENTREE) == 6 & hour(hopital$ENTREE) > 19) | (wday(hopital$ENTREE) == 
+    2 & hour(hopital$ENTREE) < 8)]
 f <- summary(as.factor(wday(d)))
 ```
 
-```
-## Error: objet 'd' introuvable
-```
-
-### Week-end: 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'd' introuvable
-
-```
-
- dossiers (
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'd' introuvable
-
-```
-
- %)
+### Week-end: 4 963 dossiers (33 %)
 
 Gravité
 --------
 
 ```r
-d <- HOP$GRAVITE
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+d <- hopital$GRAVITE
 a <- summary(d)
 ```
 
-```
-## Error: objet 'd' introuvable
-```
 
+### CCMU 1: 881 (6 %)
 
-### CCMU 1: 0011 (
-
-```
-
-Error in a[1] * 100 : argument non numérique pour un opérateur binaire
-
-```
-
- %)
-
-### CCMU 4 & 5: 
-
-```
-
-Error in a[4] + a[5] : argument non numérique pour un opérateur binaire
-
-```
-
- (
-
-```
-
-Error in a[4] + a[5] : argument non numérique pour un opérateur binaire
-
-```
-
- %)
+### CCMU 4 & 5: 22 (0 %)
 
 Durée de prise en charge
 -------------------------
 
 ```r
-e <- ymd_hms(HOP$ENTREE)
-```
+e <- ymd_hms(hopital$ENTREE)
+s <- ymd_hms(hopital$SORTIE)
 
-```
-## Error: objet 'HOP' introuvable
-```
+hopital$presence <- s - e
+hopital$presence[d1$presence < 0] <- NA
 
-```r
-s <- ymd_hms(HOP$SORTIE)
-```
+# hopital$presence est de type 'difftime' est peut s'exprimer en minutes ou
+# en secondes. Si nécessaire on convertit les secondes en minutes:
+if (units(hopital$presence) == "secs") hopital$presence <- hopital$presence/60
 
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
-
-HOP$presence <- s - e
-```
-
-```
-## Error: objet 's' introuvable
-```
-
-```r
-HOP$presence[d1$presence < 0] <- NA
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
-
-# HOP$presence est de type 'difftime' est peut s'exprimer en minutes ou en
-# secondes. Si nécessaire on convertit les secondes en minutes:
-if (units(HOP$presence) == "secs") HOP$presence <- HOP$presence/60
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
-
-a <- summary(as.numeric(HOP$presence))
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+a <- summary(as.numeric(hopital$presence))
 
 # on limite la durée de présence limitée à 1 jours
-troisJours <- HOP[as.numeric(HOP$presence) < 1440 * 1, "presence"]
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+troisJours <- hopital[as.numeric(hopital$presence) < 1440 * 1, "presence"]
 hist(as.numeric(troisJours), breaks = 40, main = "Durée de présence", xlab = "Temps (minutes)", 
     ylab = "Nombre", col = "green")
 ```
 
-```
-## Error: objet 'troisJours' introuvable
-```
+![plot of chunk presence](figure/presence1.png) 
 
 ```r
 
 # histogramme avec toutes les données:
-hist(as.numeric(HOP$presence), breaks = 40, main = "Durée de présence", xlab = "Temps (minutes)", 
-    ylab = "Nombre", col = "green")
+hist(as.numeric(hopital$presence), breaks = 40, main = "Durée de présence", 
+    xlab = "Temps (minutes)", ylab = "Nombre", col = "green")
 ```
 
-```
-## Error: objet 'HOP' introuvable
-```
+![plot of chunk presence](figure/presence2.png) 
 
 ```r
 
 
-q <- HOP$presence[as.numeric(HOP$presence) < 4 * 60]
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
-h <- HOP[HOP$MODE_SORTIE == "Mutation" | HOP$MODE_SORTIE == "Transfert", "presence"]
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+q <- hopital$presence[as.numeric(hopital$presence) < 4 * 60]
+h <- hopital[hopital$MODE_SORTIE == "Mutation" | hopital$MODE_SORTIE == "Transfert", 
+    "presence"]
 sh <- summary(as.numeric(h))
-```
-
-```
-## Error: objet 'h' introuvable
-```
-
-```r
 sh
 ```
 
 ```
-## Error: objet 'sh' introuvable
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##       7      45      75     113     115    1550    6843
 ```
 
 ```r
-dom <- HOP[HOP$MODE_SORTIE == "Domicile", "presence"]
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+dom <- hopital[hopital$MODE_SORTIE == "Domicile", "presence"]
 sdom <- summary(as.numeric(dom))
 ```
 
-```
-## Error: objet 'dom' introuvable
-```
+### Moyenne: 76 minutes
 
-### Moyenne: NA minutes
+### Médiane: 50 minutes
 
-### Médiane: NA minutes
+### % en moins de 4 heures: 14 565 (96 %)
 
-### % en moins de 4 heures: 1 (
+### si hospitalisé: 113 minutes
 
-```
+### si retour à domicile: 75 minutes
 
-Error in eval(expr, envir, enclos) : objet 'HOP' introuvable
-
-```
-
- %)
-
-### si hospitalisé: 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'sh' introuvable
-
-```
-
- minutes
-
-### si retour à domicile: 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'sdom' introuvable
-
-```
-
- minutes
-
-### Taux hospitalisation: 
-
-```
-
-Error in eval(expr, envir, enclos) : objet 'h' introuvable
-
-```
-
- %
+### Taux hospitalisation: 49 %
 
 TOP 5 des pathologies
 ---------------------
@@ -1354,65 +825,105 @@ TOP 5 des pathologies
 ### Traumatiques
 
 ```r
-trauma <- HOP[substr(HOP$DP, 1, 3) >= "S00" & substr(HOP$DP, 1, 4) <= "T65", 
-    ]
-```
-
-```
-## Error: objet 'HOP' introuvable
-```
-
-```r
+trauma <- hopital[substr(hopital$DP, 1, 3) >= "S00" & substr(hopital$DP, 1, 
+    4) <= "T65", ]
 head(trauma$DP)
 ```
 
 ```
-## Error: objet 'trauma' introuvable
+## [1] "T230" "T510" "S019" "S019" "S208" "S009"
 ```
 
 ```r
 t <- summary(as.factor(trauma$DP))
-```
-
-```
-## Error: objet 'trauma' introuvable
-```
-
-```r
 head(sort(t, decreasing = T), 6)
 ```
 
 ```
-## Error: 'x' must be atomic
+##    S934 (Other)    S610    S019    S602    S600 
+##     540     523     374     360     337     283
 ```
 
-traumato: 
-
-```
-
-Error in nrow(trauma) : objet 'trauma' introuvable
-
-```
-
- soit 
-
-```
-
-Error in nrow(trauma) : objet 'trauma' introuvable
-
-```
-
- %  
-Lésions les plus fréquentes: 
-
-```
-
-Error in sort.int(x, na.last = na.last, decreasing = decreasing, ...) : 
-  'x' must be atomic
-
-```
-
-  
+traumato: 7 357 soit 49 %  
+Lésions les plus fréquentes: 540  
 
 
 ### Chirurgicales
+
+Exhaustivité des données (RADAR)
+------------------------
+Par défaut, le diagramme en radar commence à 15h et progresse dans le sens antihoraire (la position 2 correspond à 14 heures, etc.)
+
+```r
+library("plotrix", lib.loc = "/usr/lib/R/site-library")
+
+rpu.names <- c("Entrée", "Sexe", "Age", "Commune", "ZIP", "Provenance", "PEC Transport", 
+    "Mode Transport", "Mode entrée", "CCMU", "Motif", "DP", "Sortie", "Mode sortie", 
+    "Orientation", "Destination")
+
+# taux de complétude régional
+a <- is.na(d1)
+b <- round(apply(a, 2, mean) * 100, 2)
+# b <- sort(b)
+b <- cbind(b)
+colnames(b) <- "%"
+completude <- c(b[6], b[16], b[20], b[3], b[2], b[15], b[19], b[18], b[10], 
+    b[9], b[12], b[5], b[17], b[11], b[14], b[4])
+completude <- 100 - completude
+
+radial.plot(completude, labels = rpu.names, , rp.type = "p", radial.lim = c(0, 
+    100), poly.col = "khaki", main = paste(ch.names, "- Taux de complétude des RPU"))
+
+# taux de complétude de l'hôpital local
+a <- is.na(hopital)
+b <- round(apply(a, 2, mean) * 100, 2)
+# b<-sort(b)
+b <- cbind(b)
+colnames(b) <- "%"
+completude_hop <- c(b[6], b[16], b[20], b[3], b[2], b[15], b[19], b[18], b[10], 
+    b[9], b[12], b[5], b[17], b[11], b[14], b[4])
+completude_hop <- 100 - completude_hop
+# corrections
+completude_hop[16] <- exhaustivite.destination
+completude_hop[15] <- orient.exhaustivite
+
+radial.plot(completude_hop, labels = rpu.names, radial.lim = c(0, 100), add = T, 
+    rp.type = "p", line.col = "goldenrod4", main = "Taux de complétude des RPU", 
+    lwd = 2)
+
+legend("bottomleft", legend = c(ch.names, "Alsace"), col = c("goldenrod4", "khaki"), 
+    lty = 1, bty = "n")
+```
+
+![plot of chunk exhaust](figure/exhaust.png) 
+
+```r
+
+c <- as.data.frame(completude)
+rownames(c) <- rpu.names
+c <- cbind(c, completude_hop)
+names(c) <- c("Alsace (%)", ch.names)
+c
+```
+
+```
+##                Alsace (%) CH Guebwiller
+## Entrée                100        100.00
+## Sexe                  100        100.00
+## Age                   100        100.00
+## Commune               100        100.00
+## ZIP                   100        100.00
+## Provenance             65         15.20
+## PEC Transport          74         38.76
+## Mode Transport         77         99.09
+## Mode entrée            91         58.09
+## CCMU                   86         99.87
+## Motif                  64          0.03
+## DP                     66         99.62
+## Sortie                 91        100.00
+## Mode sortie            86         54.69
+## Orientation            20         27.34
+## Destination            21        100.98
+```
+
+

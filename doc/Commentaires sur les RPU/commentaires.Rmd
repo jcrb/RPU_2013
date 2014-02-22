@@ -1,0 +1,54 @@
+Commentaires sur les RPU 2013
+========================================================
+
+MODE D’ENTREE
+-------------
+Le RPU connait 3 modes d'entrée:
+- Mutation: le malade vient d'une autre unité médicale de la même entité juridique
+- Transfert: le malade vient d'une autre entité juridique 
+- Domicile: le malade vient de son domicile ou de son substitut, tel une structure d'hébergement médico-social. Ce mode inclut les entrées à partir de la voie publique. Le code 8 du mode d'entrée est à utiliser en cas de naissance d'un nouveau-né quelque soit la situation d’hospitalisation ou de non hospitalisation de la mère
+
+Une correction est nécessaire pour les **transferts** qui sont mal ortographiés dans certains enregistrements:
+
+d1$MODE_ENTREE <- as.character(d1$MODE_ENTREE)
+d1[d1$MODE_ENTREE == "Transfe  rt" & !is.na(d1$MODE_ENTREE), "MODE_ENTREE"] <- "Transfert"
+d1$MODE_ENTREE <- as.factor(d1$MODE_ENTREE)
+summary(d1$MODE_ENTREE)
+
+Domicile  Mutation Transfert      NA's 
+   301318      3512      3355     32153 
+   
+Provenance
+----------
+Le RPU connait deux origine du patient 
+- par *mutation ou transfert*. Le patient est adressé par un service du même établissement (*mutation*) ou d'un autre établissement (*transfert*). On distingue 4 cas:
+  - MCO: un service hospitalier
+  - SSR: soins de suite et de réadaptation
+  - SLD: soins de longue durée
+  - PSY: psychiatrie
+- en provenance directe du *domicile*
+  - soit parce que c'est le choix du patient. C'est le cas de la plupart des passages aux urgences et ce passage n'est pas du à des raisons organisationelles (**PEA**).
+  - soit parcequ'on lui a demandé de passer par les urgences avant d'être admis dans un autre service. Le passage aux urgences se fait pour des raisons organisationnelles (**PEO**).
+
+Pour 2013 les résultats sont les suivants:
+
+       3Fr   Alk   Col   Dia   Geb   Hag   Hus   Mul   Odi   Sel   Wis   Sav
+  NA      0     0     0     0     0     0     0     0     0     0     0     0
+  MCO    23     1  2394   852    20  1522  1446   905     1   656     9    14
+  SSR     0     0     0    14     7    13    13     0     0     0     1     0
+  SLD     0     0     0     7     3     4     8     0     0     0     0     0
+  PSY     0     2     0     0     0    29    14     0     0     0     0     0
+  PEA    12     0 61308    31  2256     0     0 52579 25739 28878 12453   718
+  PEO     0     0  1056 27436    10     0     0   418   204     0     0     0
+
+Hôpitaux devant modifier leur paramétrage:
+- 3Fr: item non renseigné
+- Alk: item non renseigné
+- Dia: inversion PEA-PEO
+- Geb: item partiellement renseigné
+- Hag: item non renseigné
+- Hus: item non renseigné
+- Sav: item partiellement renseigné
+
+- Les chiffres de *provenance* et *mode d'entrée* devraient être équivalents.
+- la somme PEA + PEO doit être égale à MODE_ENTREE.Domicile

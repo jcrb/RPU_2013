@@ -13,6 +13,7 @@ library("lubridate")
 
 load("../RPU2013_Carto_Pop/zone_proximite.Rda")    # czps
 load("../RPU2013_Carto_Pop/zp_villes.Rda")         # d
+source("../../../Routines/mes_fonctions.R")                                         # copyright
 
 # couleur du territoire de santé (par défaut tout est vert):
 col <- rep("green",12)
@@ -36,7 +37,7 @@ date <- format(Sys.time(), "%A %d %B %Y %H:%M:%S")
 
 subtitle <- paste0("Semaine ", s, " (", date, ")")
 
-tension <- c(1,1,1,2,1,1,1,1,2,1,1,1)
+tension <- c(1,1,1,1,1,1,3,1,2,2,1,1)
 # subtitle <- "Semaine 5 (27-2 février 2014)"
 
 col <- rep("grey",12)
@@ -75,4 +76,6 @@ legend("topleft", legend=c("Pas de tension","Surcharge","Tension avérée","Pas 
 # subtitle <- "Semaine n°__ (du __/__/____ au __/__/____)"
 
 title("Carte des tensions en Alsace", sub = subtitle)
+
+copyright(an ="2013-2014", line=-3)
 ```
