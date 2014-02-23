@@ -169,7 +169,7 @@ Cette deuxième étape viserait à identifier plus finement si une éventuelle a
 <li>Auteur: JCB</li>
 <li>Statut: doc de travail</li>
 <li>date début: 2014-02-08</li>
-<li>dernière version: sam. 15 févr. 2014 (19:46:56)</li>
+<li>dernière version: dim. 23 févr. 2014 (11:25:54)</li>
 </ul>
 
 <p>On crée deux groupes:</p>
@@ -320,14 +320,34 @@ NP 12.16 67.31 17.95 1.62 0.51 0.02 0.42
 <li>m1 à m12: mois de l&#39;année</li>
 </ul>
 
-<pre><code>Error: $ operator is invalid for atomic vectors
+<pre><code>68000 67600 68300 68200 68320 68600 
+  138    21    16    13    13    11 
 </code></pre>
 
-<pre><code>
-1 .Primitive(&quot;c&quot;)
+<pre><code>[1] 488
+</code></pre>
+
+<pre><code>[1] &quot;67600&quot;
+[1] &quot;67600&quot;
+[1] &quot;68720&quot;
+[1] &quot;68400&quot;
+[1] &quot;68300&quot;
+[1] &quot;68000&quot;
+[1] &quot;68000&quot;
+[1] &quot;68000&quot;
+[1] &quot;68000&quot;
+[1] &quot;68140&quot;
+[1] &quot;68125&quot;
+[1] &quot;67600&quot;
+</code></pre>
+
+<pre><code>Error: argument non numérique pour un opérateur binaire
 </code></pre>
 
 <h2>2. Synthèse des paragraphes précédents</h2>
+
+<pre><code>[1] 6119
+</code></pre>
 
 <p>Idem pour les CCMU2 en soirée sauf que le fichier de départ est dsr2 &lt;- dsr[!is.na(dsr$GRAVITE) &amp; dsr$GRAVITE==2,]</p>
 
@@ -337,23 +357,23 @@ m &lt;- as.data.frame(mdsr2[[1]]) # mois de janvier</p>
 <p>cp &lt;- as.character(m$CODE_POSTAL)
 b&lt;-table(cp)
 d &lt;- cbind(names(b),b)
-c &lt;- merge(a,d, all.x=TRUE,by.x=1,by.y=1)</p>
+c &lt;- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+c$b &lt;- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer</p>
 
 <h1>on traite chaque mois</h1>
 
 <p>for(i in 2:12){
-  m &lt;- as.data.frame(mdsr1[[i]])
+  m &lt;- as.data.frame(mdsr2[[i]])
   cp &lt;- as.character(m$CODE_POSTAL)
   b&lt;-table(cp)
   d &lt;- cbind(names(b),b)
   c &lt;- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] &lt;- as.integer(as.character( c[,i+1]))
   }
-d &lt;- lapply(c[,2:13],as.numeric)
-d &lt;- data.frame(d)
-d[is.na(d)]&lt;-0
-d&lt;-cbind(c$a,d)
-names(d) &lt;- c(&ldquo;CP&rdquo;,&ldquo;Janvier&rdquo;,&ldquo;Février&rdquo;,&ldquo;Mars&rdquo;,&ldquo;Avril&rdquo;,&ldquo;Mai&rdquo;,&ldquo;Juin&rdquo;,&ldquo;Juillet&rdquo;,&ldquo;Aout&rdquo;,&ldquo;Septembre&rdquo;,&ldquo;Octobre&rdquo;,&ldquo;Novembre&rdquo;,&ldquo;Décembre&rdquo;)
-ccmu2_soiree &lt;- d</p>
+names&copy; &lt;- c(&ldquo;CP&rdquo;,&ldquo;Janvier&rdquo;,&ldquo;Février&rdquo;,&ldquo;Mars&rdquo;,&ldquo;Avril&rdquo;,&ldquo;Mai&rdquo;,&ldquo;Juin&rdquo;,&ldquo;Juillet&rdquo;,&ldquo;Aout&rdquo;,&ldquo;Septembre&rdquo;,&ldquo;Octobre&rdquo;,&ldquo;Novembre&rdquo;,&ldquo;Décembre&rdquo;)
+c[is.na&copy;]&lt;-0
+ccmu2_soiree &lt;- c
+sum(ccmu2_soiree[2:13])</p>
 
 <h1>tous les CCMU en soirée</h1>
 
@@ -364,24 +384,25 @@ m &lt;- as.data.frame(mdsrt[[1]]) # mois de janvier</p>
 <p>cp &lt;- as.character(m$CODE_POSTAL)
 b&lt;-table(cp)
 d &lt;- cbind(names(b),b)
-c &lt;- merge(a,d, all.x=TRUE,by.x=1,by.y=1)</p>
+c &lt;- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+c$b &lt;- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer</p>
 
 <h1>on traite chaque mois</h1>
 
 <p>for(i in 2:12){
-  m &lt;- as.data.frame(mdsr1[[i]])
+  m &lt;- as.data.frame(mdsrt[[i]])
   cp &lt;- as.character(m$CODE_POSTAL)
   b&lt;-table(cp)
   d &lt;- cbind(names(b),b)
   c &lt;- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] &lt;- as.integer(as.character( c[,i+1]))
   }
-d &lt;- lapply(c[,2:13],as.numeric)
-d &lt;- data.frame(d)
-d[is.na(d)]&lt;-0
-d&lt;-cbind(c$a,d)
-names(d) &lt;- c(&ldquo;CP&rdquo;,&ldquo;Janvier&rdquo;,&ldquo;Février&rdquo;,&ldquo;Mars&rdquo;,&ldquo;Avril&rdquo;,&ldquo;Mai&rdquo;,&ldquo;Juin&rdquo;,&ldquo;Juillet&rdquo;,&ldquo;Aout&rdquo;,&ldquo;Septembre&rdquo;,&ldquo;Octobre&rdquo;,&ldquo;Novembre&rdquo;,&ldquo;Décembre&rdquo;)</p>
+names&copy; &lt;- c(&ldquo;CP&rdquo;,&ldquo;Janvier&rdquo;,&ldquo;Février&rdquo;,&ldquo;Mars&rdquo;,&ldquo;Avril&rdquo;,&ldquo;Mai&rdquo;,&ldquo;Juin&rdquo;,&ldquo;Juillet&rdquo;,&ldquo;Aout&rdquo;,&ldquo;Septembre&rdquo;,&ldquo;Octobre&rdquo;,&ldquo;Novembre&rdquo;,&ldquo;Décembre&rdquo;)
+c[is.na&copy;]&lt;-0
+ccmut_soiree &lt;- c
+sum(ccmut_soiree[2:13])</p>
 
-<p>ccmut_soiree &lt;- d</p>
+<h2>Nuit profonde</h2>
 
 </body>
 

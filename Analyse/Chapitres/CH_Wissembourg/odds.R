@@ -5,27 +5,31 @@
 # 
 # Bibliothèque de fonctions utiles en épidémiologie: odds-ratio, etc
 # 
-# This booklet tells you how to use the R software to carry out some simple analyses that are common in biomedical statistics. 
-# In particular, the focus is on cohort and case-control studies that aim to test whether particular factors are associated with 
-# disease, randomised trials, and meta-analysis.
+# Ce booklet vous apprend comment utiliser le logiciel R pour réaliser quelques analyses simples qui sont courantes en statistique
+# biomédicale.
+ 
+# En particulier il se focalise sur les études de cohortes et de cas-témoins, dans le but de tester si des facteurs particuliers sont
+# associés à des maladies, des essais randomisés et méta-analyses.
 # 
-# This booklet assumes that the reader has some basic knowledge of biomedical statistics, and the principal focus of the booklet 
-# is not to explain biomedical statistics analyses, but rather to explain how to carry out these analyses using R.
+# Ce booklet suppose que le lecteur à quelques connaissances de base en statistique biomédicale, car l'objectif n'est pas d'expliquer l'
+# analyse statistique biomédicale mais d'expliquer comment réaliser ces analyses avec R.
 # 
 # If you are new to biomedical statistics, and want to learn more about any of the concepts presented here, I would highly recommend 
 # the Open University book “Medical Statistics” (product code M249/01), available from from the Open University Shop.
 # 
-# There is a pdf version of this booklet available at https:
-# //media.readthedocs.org/pdf/a-little-book-of-r-for-biomedical-statistics/latest/a-little-book-of-r-for-biomedical-statistics.pdf.
+# Une version pdf de ce document est disponible à 
+# https://media.readthedocs.org/pdf/a-little-book-of-r-for-biomedical-statistics/latest/a-little-book-of-r-for-biomedical-statistics.pdf.
 # 
-# If you like this booklet, you may also like to check out my booklet on using R for time series analysis, 
-# http://a-little-book-of-r-for-time-series.readthedocs.org/ and my booklet on using R for multivariate analysis, 
+# Si vous avez aimé ce booklet, vous aimerez aussi tester mon booklet sur using R for time series analysis, 
+# http://a-little-book-of-r-for-time-series.readthedocs.org/ et mon booklet sur using R for multivariate analysis, 
 # http://little-book-of-r-for-multivariate-analysis.readthedocs.org/.
 
 # =-=-=-=-=-=-=-=--=-=-=--==-=--=-=-=-=--=-=-=-=--=-=-=-=-=--=-=-=--=-=-=-=--=-=-=-=-=--=-=-=-=--=-=-=-=-=--=-=-=-=-=-=-=--=-=
 # Calculating Relative Risks for a Cohort Study
 # =-=-=-=-=-=-=-=--=-=-=--==-=--=-=-=-=--=-=-=-=--=-=-=-=-=--=-=-=--=-=-=-=--=-=-=-=-=--=-=-=-=--=-=-=-=-=--=-=-=-=-=-=-=--=-=
 # 
+# On appelle étude de cohorte une étude (prospective) de type longitudinale qui est généralement fondée sur deux groupes de sujets (les cohortes).
+#
 # One very common type of data set in biomedical statistics is a cohort study, where you have information on people who were exposed to some treatment or environment (for example, people who took a certain drug, or people who smoke) and also on whether the same people have a particular disease or not. Your data set would look something like this:
 #   Disease 	Control
 # Exposed 	156 	9421
@@ -97,6 +101,12 @@ calcRelativeRisk <- function(mymatrix,alpha=0.05,referencerow=2)
 # Calculating Odds Ratios for a Cohort or Case-Control Study
 # =-=-=-=-=-=-=-=--=-=-=--==-=--=-=-=-=--=-=-=-=--=-=-=-=-=--=-=-=--=-=-=-=--=-=-=-=-=--=-=-=-=--=-=-=-=-=--=-=-=-=-=-=-=--=-=
 # 
+# Une étude cas-témoins (type d'étude observationnelle rétrospective) est une étude statistique utilisée en épidémiologie.
+# Les études cas-témoin sont utilisées pour mettre en évidence des facteurs qui peuvent contribuer à l'apparition d'une maladie 
+# en comparant des sujets qui ont cette maladie (les cas) avec des sujets qui n'ont pas la maladie mais qui sont similaires 
+# par ailleurs (les contrôles)1. Les études cas-témoins posent donc la question : Y a-t-il plus de gens exposés à un facteur
+#(par exemple plus de fumeurs) chez les cas que chez les témoins ?
+
 # As well as the relative risk of disease given exposure (to some treatment or environmental factor eg. smoking or some drug),
 # you can also calculate the odds ratio for association between the exposure and the disease in a cohort study. 
 # The odds ratio is also commonly calculated in a case-control study.

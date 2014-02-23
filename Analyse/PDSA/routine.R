@@ -1,4 +1,8 @@
-#'
+#' Parse un fichier source et retourne un dataframe composé:
+#' - en colonne des 12 mois de l'année
+#' - en ligne les codes postaux d'alsace
+#' Le fichier source est un dataframe formé d'observations appartenant au même groupe, par exeemple CCMU1 en soirée.
+#' Ce dataframe doit comporter une colonne ENTREE.
 #'@param source_file fichier source (ie dsr1: soirée, ccmu1 et dsr1 <- dsr[!is.na(dsr$GRAVITE) & dsr$GRAVITE==1,])
 #'@usage ccmu1_soiree <- routine(dsr1)
 #'
@@ -27,7 +31,3 @@ routine <- function(source_file){
   c[is.na(c)]<-0
   return(c)
 }
-
-
-
-sum(ccmu1_soiree[2:13])

@@ -24,7 +24,7 @@ Initialisation
 - Auteur: JCB
 - Statut: doc de travail
 - date début: 2014-02-08
-- dernière version: sam. 15 févr. 2014 (19:46:56)
+- dernière version: dim. 23 févr. 2014 (11:25:54)
 
 On crée deux groupes:
 - soirée (SR 20h - 24h) dsr 
@@ -172,17 +172,39 @@ variables:
 
 
 ```
-Error: $ operator is invalid for atomic vectors
+68000 67600 68300 68200 68320 68600 
+  138    21    16    13    13    11 
 ```
 
 ```
-                 
-1 .Primitive("c")
+[1] 488
+```
+
+```
+[1] "67600"
+[1] "67600"
+[1] "68720"
+[1] "68400"
+[1] "68300"
+[1] "68000"
+[1] "68000"
+[1] "68000"
+[1] "68000"
+[1] "68140"
+[1] "68125"
+[1] "67600"
+```
+
+```
+Error: argument non numérique pour un opérateur binaire
 ```
 
 2. Synthèse des paragraphes précédents
 --------------------------------------
 
+```
+[1] 6119
+```
 
 Idem pour les CCMU2 en soirée sauf que le fichier de départ est dsr2 <- dsr[!is.na(dsr$GRAVITE) & dsr$GRAVITE==2,]
 
@@ -193,20 +215,20 @@ cp <- as.character(m$CODE_POSTAL)
 b<-table(cp)
 d <- cbind(names(b),b)
 c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+c$b <- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer
 # on traite chaque mois
 for(i in 2:12){
-  m <- as.data.frame(mdsr1[[i]])
+  m <- as.data.frame(mdsr2[[i]])
   cp <- as.character(m$CODE_POSTAL)
   b<-table(cp)
   d <- cbind(names(b),b)
   c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] <- as.integer(as.character( c[,i+1]))
   }
-d <- lapply(c[,2:13],as.numeric)
-d <- data.frame(d)
-d[is.na(d)]<-0
-d<-cbind(c$a,d)
-names(d) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
-ccmu2_soiree <- d
+names(c) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+c[is.na(c)]<-0
+ccmu2_soiree <- c
+sum(ccmu2_soiree[2:13])
 
 # tous les CCMU en soirée
 dsrt <- dsr[!is.na(dsr$GRAVITE),]
@@ -217,18 +239,20 @@ cp <- as.character(m$CODE_POSTAL)
 b<-table(cp)
 d <- cbind(names(b),b)
 c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+c$b <- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer
 # on traite chaque mois
 for(i in 2:12){
-  m <- as.data.frame(mdsr1[[i]])
+  m <- as.data.frame(mdsrt[[i]])
   cp <- as.character(m$CODE_POSTAL)
   b<-table(cp)
   d <- cbind(names(b),b)
   c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] <- as.integer(as.character( c[,i+1]))
   }
-d <- lapply(c[,2:13],as.numeric)
-d <- data.frame(d)
-d[is.na(d)]<-0
-d<-cbind(c$a,d)
-names(d) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+names(c) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+c[is.na(c)]<-0
+ccmut_soiree <- c
+sum(ccmut_soiree[2:13])
 
-ccmut_soiree <- d
+Nuit profonde
+-------------

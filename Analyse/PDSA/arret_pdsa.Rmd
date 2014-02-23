@@ -35,10 +35,10 @@ tables crées:
 - dx: date, établissement, CCMU, code postal
 
 ```{r init}
-library("lubridate", lib.loc="/home/jcb/R/x86_64-pc-linux-gnu-library/3.0")
-library("epicalc", lib.loc="/usr/lib/R/site-library")
+library("lubridate")
+library("epicalc")
 load("~/Documents/Resural/Stat Resural/RPU_2013/rpu2013d0112.Rda")
-dx <- d1[,c("ENTREE", "FINESS","GRAVITE", "CODE_POSTAL")]
+dx <- d1[as.character(d1$CODE_POSTAL) > "66999" & as.character(d1$CODE_POSTAL) < "69000", c("ENTREE", "FINESS","GRAVITE", "CODE_POSTAL","COMMUNE")]
 # groupe soirée
 dsr <- dx[hour(dx$ENTREE) > 19 & hour(dx$ENTREE) < 24,]
 dsr$GRP <- "SR"
@@ -120,6 +120,7 @@ dsrt <- dsr[!is.na(dsr$GRAVITE),]
 t_dsr1 <- tapply(dsr1$GRAVITE, month(as.Date(dsr1$ENTREE)), length)
 t_dsr2 <- tapply(dsr2$GRAVITE, month(as.Date(dsr2$ENTREE)), length)
 t_dsrt <- tapply(dsr$GRAVITE, month(as.Date(dsr$ENTREE)), length)
+
 sr <- rbind(t_dsr1, t_dsr2, t_dsrt)
 barplot(sr, beside=T, ylab="Freéquence", xlab="Mois", main="CCMU 2013 - Soirée")
 legend("topleft", legend=c("CCMU 1","CCMU 2","Total RPU"), col=c("gray10","gray50","gray90"), pch=15, bty="n")
@@ -367,3 +368,70 @@ sum(ccmut_soiree[2:13])
 
 Nuit profonde
 -------------
+
+Utilisation de la routine
+=========================
+
+source("Analyse/PDSA/routine.R")
+
+dsr1 <- dsr[!is.na(dsr$GRAVITE) & dsr$GRAVITE==1,]
+dsr2 <- dsr[!is.na(dsr$GRAVITE) & dsr$GRAVITE==2,]
+dsrt <- dsr[!is.na(dsr$GRAVITE),]
+dnp1 <- dnp[!is.na(dnp$GRAVITE) & dnp$GRAVITE==1,]
+dnp2 <- dnp[!is.na(dnp$GRAVITE) & dnp$GRAVITE==2,]
+dnpt <- dnp[!is.na(dnp$GRAVITE),]
+
+ccmu1_soiree <- routine(dsr1)
+ccmu2_soiree <- routine(dsr2)
+passage_soiree <- routine(dsrt)
+
+ccmu1_nuit <- routine(dnp1)
+ccmu2_nuit <- routine(dnp2)
+passage_nuit <- routine(dnpt)
+
+i <- 2
+t <- cbind(ccmu1_soiree[,i],ccmu1_nuit[,i],ccmu2_soiree[,i],ccmu2_nuit[,i],passage_soiree[,i],passage_nuit[,i])
+for(i in 3:13){
+  t <- cbind(t,ccmu1_soiree[,i],ccmu1_nuit[,i],ccmu2_soiree[,i],ccmu2_nuit[,i],passage_soiree[,i],passage_nuit[,i])
+}
+t <- cbind(67000:68999, t)
+
+write(t, file-"rpu_pds.csv", sep=",", row.names = FALSE)
+
+Essai avec le nom de la commune
+===============================
+La difficulté est deconvertir les codes postaux en codes INSEE car deux communes peuvent avoir le même ZIP. Essai d'utilisation du nom de commune avec le code INSEE.
+- récuoère la liste des communes + code insee et postal à partir de wikipedia (cf blog).
+- les noms de communes sont en minuscules et caractères accentués => il faut les convertir en majuscules sans accents
+
+```{r communes}
+library("XML")
+cla <- readHTMLTable("http://fr.wikipedia.org/wiki/Liste_des_communes_du_Bas-Rhin", stringsAsFactors = FALSE)
+br <- cla[[1]]
+file <- "http://fr.wikipedia.org/wiki/Communes_du_Haut-Rhin"
+cla <- readHTMLTable(file, stringsAsFactors = FALSE)
+hr <- cla[[1]]
+al <- rbind(br[, 1:3], hr[, 1:3])
+al[,3] <- toupper(al[,3])
+al[,3] iconv(al[,3], to="ASCII//TRANSLIT") #transcodage en code ASCII qui ne connait pas les accents
+
+```
+Il faut corriger un certain nimbre d'erreur dans dx:
+- supprimer/corriger des caractères interdits
+- remplacer les espaces par des -
+- remplacer Kembs Lochlé par Kembs
+
+dx <- d1[as.character(d1$CODE_POSTAL) > "66999" & as.character(d1$CODE_POSTAL) < "69000", c("ENTREE", "FINESS","GRAVITE", "CODE_POSTAL","COMMUNE")]
+
+```{r corriger_dx}
+dx$COMMUNE <- as.character(dx$COMMUNE)
+
+dx$COMMUNE <- gsub("\xc9","E",dx$COMMUNE, fixed=FALSE)
+dx$COMMUNE <- gsub("\xd9","M",dx$COMMUNE, fixed=FALSE)
+dx$COMMUNE <- gsub("\xb2","",dx$COMMUNE, fixed=FALSE)
+
+dx$COMMUNE <- gsub(" ","-",dx$COMMUNE, fixed=TRUE)
+dx[substring(dx$COMMUNE,1,5)=="KEMBS",5] <- "KEMBS"
+```
+
+todo: merging
