@@ -1,0 +1,39 @@
+Fichier RPU quotdien
+========================================================
+
+Depuis février 2014, Alsace e-sante transmet quotidiennement un fichier contenant les RPU des 7 derniers jours (j-7 à j-1). Les données correspondant à J-7 sont considérées comme consolidées. Elles peuvent être extraites et stockées. Les données sont transmises de manière habituelle, c'est à dire un fichier .sql qu'il faut transcoder en R pour le nettoyer avant stockage.
+
+1. Le fichier des données est récupéré sur le serveur de test des HUS. Il st déposé dans le dossier de stockage (**/home/jcb/Documents/Resural/Stat Resural/Archives_Sagec/dataQ**) et dézippé.
+
+2. le nom du fichier est construit de la manière suivante:
+  - date.jour <- "2014-02-21"
+  - file <- paste0("rpu_", date.jour, "_dump.sql")
+  - *date.jour est du type AAAA-MM-JJ*
+
+2. le fichier est ensuite transféré dans la base de données **archives** dans la table **RPU__** via R
+  - il est important que le répertoire de travail temporaire soit positionné dans le dossier *dataQ*
+    - wd <- getwd()
+    - setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ")
+    - system(paste0("mysql -u root -pmarion archives < ", file))
+    - setwd(wd)
+
+3. Lecture des données dans R
+  - library("RMySQL")
+  - con<-dbConnect(MySQL(),group = "archives")
+  - rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ ",sep=""))
+  - dx<-fetch(rs,n=-1,encoding = "UTF-8")
+  - max(dx$ENTREE)
+  - min(dx$ENTREE)
+
+4. nettoyage des données
+  - suppression de la colonne 16: dx<-dx[,-16]
+  - transcodage des FINESS (vérification nombre hôpitaux)
+  - transformation en facteurs
+  - création  d'une colonne AGE (alertes age < 0 et age > 120)
+  
+5. sauvegarde des données
+  - jour à sauvegarder: jour <- as.Date(min(dx$ENTREE))
+  - dday <- dx[as.Date(dx$ENTREE) == jour,]
+  - fichier du jour: write.table(dday, paste0(date.jour,".csv"), sep=',', quote=TRUE, na="NA", row.names=FALSE,col.names=TRUE)
+  - fichier général: write.table(dday, "RPU2014.csv", sep=',', quote=TRUE, na="NA", append = TRUE, row.names=FALSE,col.names=TRUE)
+  

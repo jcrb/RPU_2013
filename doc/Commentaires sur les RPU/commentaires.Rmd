@@ -1,5 +1,15 @@
 Commentaires sur les RPU 2013
 ========================================================
+FINESS
+------
+FINESS géographique (mettre la liste des finess)
+
+COMMUNE
+-------
+- nom de la commune de résidence du patient
+- lettre majuscules sans accent
+- les nom composé sont séparés par un tiret (VIR-AU-VAL)
+- Modèle INSEE
 
 MODE D’ENTREE
 -------------
