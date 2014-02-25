@@ -36,4 +36,49 @@ Depuis février 2014, Alsace e-sante transmet quotidiennement un fichier contena
   - dday <- dx[as.Date(dx$ENTREE) == jour,]
   - fichier du jour: write.table(dday, paste0(date.jour,".csv"), sep=',', quote=TRUE, na="NA", row.names=FALSE,col.names=TRUE)
   - fichier général: write.table(dday, "RPU2014.csv", sep=',', quote=TRUE, na="NA", append = TRUE, row.names=FALSE,col.names=TRUE)
+
+6. fonctions à créer
+
+#' Méthode générale
+parse_rpu <- function(date.jour){
+  library("RMySQL")
+  file <- paste0("rpu_", date.jour, "_dump.sql")
+  wd <- getwd()
+  setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ")
+  system(paste0("mysql -u root -pmarion archives < ", file))
+  con<-dbConnect(MySQL(),group = "archives")
+  rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ ",sep=""))
+  dx<-fetch(rs,n=-1,encoding = "UTF-8")
+  dx<-dx[,-16]
+  dx$FINESS <- as.factor(finess2hop(dx$FINESS))
+  
+  dx$AGE<-floor(as.numeric(as.Date(dx$ENTREE)-as.Date(dx$NAISSANCE))/365)
+}
+
+#' Transformation du code Finess et nom court d'hôpital
+finess2hop <- function(a){
+  # a<-dx$FINESS
+  a[a=="670000397"]<-"Sel"
+  a[a=="680000684"]<-"Col"
+  a[a=="670016237"]<-"Odi"
+  a[a=="670000272"]<-"Wis"
+  a[a=="680000700"]<-"Geb"
+  a[a=="670780055"]<-"Hus"
+  a[a=="680000197"]<-"3Fr"
+  a[a=="680000627"]<-"Mul"
+  a[a=="670000157"]<-"Hag"
+  a[a=="680000320"]<-"Dia"
+  a[a=="680000395"]<-"Alk"
+  a[a=="670000165"]<-"Sav"
+  a[a=="680000494"]<-"Ros"
+  a[a=="670780162"]<-"Dts"
+  a[a=="670780212"]<-"Ane"
+  a[a=="680000601"]<-"Tan"
+  return(a)
+}
+
+# controles quotidiens
+- nlevels(dx$FINESS) si différent de 14 => problème
+- nb moyen et ecart-type de RPU par établissement et par jour
+
   
