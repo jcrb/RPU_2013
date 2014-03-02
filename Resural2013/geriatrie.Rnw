@@ -27,7 +27,7 @@ rownames(b) <- c("n","%")
 
 sex_ratio <- round(sg["M"]/sg["F"],2)
 
-xtable(b)
+xtable(b, caption=c("Sex-ratio en gériatrie","Sex-ratio en gériatrie"), label="tab:ger_sr")
 @
 
 \index{sex-ratio!en gériatrie}

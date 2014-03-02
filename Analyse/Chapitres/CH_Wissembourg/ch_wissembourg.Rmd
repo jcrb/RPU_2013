@@ -31,8 +31,8 @@ knit_hooks$set(inline = function(x) {
   prettyNum(x, big.mark=" ")
 })
 
-ch <- "Geb"
-ch.names <- "CH Guebwiller"
+ch <- "Col"
+ch.names <- "CH de Colmar"
 
 hopital<-d1[d1$FINESS == ch,]
 n <- nrow(hopital)
@@ -350,21 +350,29 @@ Lésions les plus fréquentes: `r head(sort(t,decreasing=T),6)`
 Exhaustivité des données (RADAR)
 ================================
 Par défaut, le diagramme en radar commence à 15h et progresse dans le sens antihoraire (la position 2 correspond à 14 heures, etc.)
+
+Dessin de deux graphiques radar superposés, l'un pour l'ensemble des rpu de la région, l'autre pour l'hôpital considéré.  
+On défini dans la variable *rpu.names* le nom et l'ordre des variables à afficher. Le radar commence par défaut à 15h puis progresse en sens anti-horaire. Les variables sont divisées en 3 secteurs:
+- l'entrée du patient
+- le diagnostic médical
+- la sortie  
+Le taux de complétude est calculé à partir des items non reseignés (NA) en appliquant à chaque colonne la fonction *mean* qui retourne le pourcentage de NA.
+
 ```{r exhaust}
-library("plotrix", lib.loc="/usr/lib/R/site-library")
+library("plotrix")
+library("openintro")
 
 rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU","Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
 
 # taux de complétude régional
 a <- is.na(d1)
 b <- round(apply(a, 2, mean) * 100, 2)
-#b <- sort(b)
 b <- cbind(b)
 colnames(b)<-"%"
 completude <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
 completude <- 100 - completude
 
-radial.plot(completude, labels = rpu.names, ,rp.type="p", radial.lim =c(0,100), poly.col = "khaki", main=paste(ch.names,"- Taux de complétude des RPU"))
+radial.plot(completude, labels = rpu.names, ,rp.type="p", radial.lim =c(0,100),  poly.col = fadeColor("khaki",fade = "A0"), main=paste(ch.names,"- Taux de complétude des RPU"), radial.labels=T)
 
 # taux de complétude de l'hôpital local
 a<-is.na(hopital)
@@ -387,5 +395,13 @@ rownames(c) <- rpu.names
 c <- cbind(c, completude_hop)
 names(c) <- c("Alsace (%)", ch.names)
 c
+```
+Urilsation des routines
+=======================
+```{r routines}
+source("../../../Routines/mes_fonctions.R")
+x <- completude(d1)
+y <- completude(hopital)
+radar_completude(x,y, ch.names = "CH Colmar")
 ```
 

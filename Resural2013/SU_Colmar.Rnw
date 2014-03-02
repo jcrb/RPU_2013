@@ -12,7 +12,7 @@ a <- resume_service(hop,d1=d1)
 x <- a["age_sd"]
 @
 
-% \pm dessine le symboe plus ou moins
+% \pm dessine le symbole plus ou moins
 % a["age_min"] donne une date que R n'arrive pas à utiliser. On utilise a[1,2] à la place
 
 \begin{tabular}{|l|c|}
@@ -59,3 +59,11 @@ CCMU 4 \& 5 & \np{\Sexpr{a["n_ccmu45"]}} (\Sexpr{a["p_ccmu45"]} \%) \tabularnewl
 <<graphe_p_col,echo=FALSE,fig.height=6>>=
 presence_hist(hop,d1)
 @
+
+<<compl_col>>=
+ch <- d1[d1$FINESS=="Col",]
+x <- completude(d1)
+y <- completude(ch)
+radar_completude(x,y, ch.names = "CH Colmar")
+@
+

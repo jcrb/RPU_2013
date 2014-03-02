@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Une introduction à “apply” in R</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Une introduction à “apply” in R</h1>
+
+<p>source: <a href="http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/">http://nsaunders.wordpress.com/2010/08/20/a-brief-introduction-to-apply-in-r/</a></p>
+
+<p>At any R Q&amp;A site, you’ll frequently see an exchange like this one:</p>
+
+<pre><code>Q: How can I use a loop to [...insert task here...] ?
+A: Don’t. Use one of the apply functions. 
+</code></pre>
+
+<p>So, what are these wondrous apply functions and how do they work? I think the best way to figure out anything in R is to learn by experimentation, using embarrassingly trivial data and functions.</p>
+
+<p>If you fire up your R console, type “??apply” and scroll down to the functions in the base package, you’ll see something like this:</p>
+
+<p>base::apply             Apply Functions Over Array Margins
+base::by                Apply a Function to a Data Frame Split by Factors
+base::eapply            Apply a Function Over Values in an Environment
+base::lapply            Apply a Function over a List or Vector
+base::mapply            Apply a Function to Multiple List or Vector Arguments
+base::rapply            Recursively Apply a Function to a List
+base::tapply            Apply a Function Over a Ragged Array</p>
+
+<p>Let’s examine each of those.</p>
+
+<h2>1. apply</h2>
+
+<p>Description: “Returns a vector or array or list of values obtained by applying a function to margins of an array or matrix.”</p>
+
+<p>OK – we know about vectors/arrays and functions, but what are these “margins”? Simple: either the rows (1), the columns (2) or both (1:2). By “both”, we mean “apply the function to each individual value.” An example:</p>
+
+<pre><code class="r"># create a matrix of 10 rows x 2 columns
+m &lt;- matrix(c(1:10, 11:20), nrow = 10, ncol = 2)
+# mean of the rows
+apply(m, 1, mean)
+</code></pre>
+
+<pre><code>##  [1]  6  7  8  9 10 11 12 13 14 15
+</code></pre>
+
+<pre><code class="r"># mean of the columns
+apply(m, 2, mean)
+</code></pre>
+
+<pre><code>## [1]  5.5 15.5
+</code></pre>
+
+<pre><code class="r"># divide all values by 2
+apply(m, 1:2, function(x) x/2)
+</code></pre>
+
+<pre><code>##       [,1] [,2]
+##  [1,]  0.5  5.5
+##  [2,]  1.0  6.0
+##  [3,]  1.5  6.5
+##  [4,]  2.0  7.0
+##  [5,]  2.5  7.5
+##  [6,]  3.0  8.0
+##  [7,]  3.5  8.5
+##  [8,]  4.0  9.0
+##  [9,]  4.5  9.5
+## [10,]  5.0 10.0
+</code></pre>
+
+<p>That last example was rather trivial; you could just as easily do “m[, 1:2]/2″ – but you get the idea.</p>
+
+<h2>2. by</h2>
+
+<p>Updated 27/2/14: note that the original example in this section no longer works; use colMeans now instead of mean.
+Description: “Function ‘by’ is an object-oriented wrapper for ‘tapply’ applied to data frames.”</p>
+
+<p>The by function is a little more complex than that. Read a little further and the documentation tells you that “a data frame is split by row into data frames subsetted by the values of one or more factors, and function ‘FUN’ is applied to each subset in turn.” So, we use this one where factors are involved.</p>
+
+<p>To illustrate, we can load up the classic R dataset “iris”, which contains a bunch of flower measurements:</p>
+
+<pre><code class="r">attach(iris)
+head(iris)
+</code></pre>
+
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+</code></pre>
+
+<pre><code class="r"># get the mean of the first 4 variables, by species
+by(iris[, 1:4], Species, colMeans)
+</code></pre>
+
+<pre><code>## Species: setosa
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        5.006        3.428        1.462        0.246 
+## -------------------------------------------------------- 
+## Species: versicolor
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        5.936        2.770        4.260        1.326 
+## -------------------------------------------------------- 
+## Species: virginica
+## Sepal.Length  Sepal.Width Petal.Length  Petal.Width 
+##        6.588        2.974        5.552        2.026
+</code></pre>
+
+<p>Essentially, by provides a way to split your data by factors and do calculations on each subset. It returns an object of class “by” and there are many, more complex ways to use it.</p>
+
+<h2>3. eapply</h2>
+
+<p>Description: “eapply applies FUN to the named values from an environment and returns the results as a list.”</p>
+
+<p>This one is a little trickier, since you need to know something about environments in R. An environment, as the name suggests, is a self-contained object with its own variables and functions. To continue using our very simple example:</p>
+
+<pre><code class="r"># a new environment
+e &lt;- new.env()
+# two environment variables, a and b
+e$a &lt;- 1:10
+e$b &lt;- 11:20
+# mean of the variables
+eapply(e, mean)
+</code></pre>
+
+<pre><code>## $a
+## [1] 5.5
+## 
+## $b
+## [1] 15.5
+</code></pre>
+
+<p>I don’t often create my own environments, but they’re commonly used by R packages such as Bioconductor so it’s good to know how to handle them.</p>
+
+<h2>4. lapply</h2>
+
+<p>Description: “lapply returns a list of the same length as X, each element of which is the result of applying FUN to the corresponding element of X.”</p>
+
+<p>That’s a nice, clear description which makes lapply one of the easier apply functions to understand. A simple example:</p>
+
+<pre><code class="r"># create a list with 2 elements
+l &lt;- list(a = 1:10, b = 11:20)
+# the mean of the values in each element
+lapply(l, mean)
+</code></pre>
+
+<pre><code>## $a
+## [1] 5.5
+## 
+## $b
+## [1] 15.5
+</code></pre>
+
+<pre><code class="r"># the sum of the values in each element
+lapply(l, sum)
+</code></pre>
+
+<pre><code>## $a
+## [1] 55
+## 
+## $b
+## [1] 155
+</code></pre>
+
+<p>The lapply documentation tells us to consult further documentation for sapply, vapply and replicate. Let’s do that.</p>
+
+<pre><code>4.1 sapply
+----------
+</code></pre>
+
+<p>Description: “sapply is a user-friendly version of lapply by default returning a vector or matrix if appropriate.”</p>
+
+<p>That simply means that if lapply would have returned a list with elements $a and $b, sapply will return either a vector, with elements [[&#39;a&#39;]] and [[&#39;b&#39;]], or a matrix with column names “a” and “b”. Returning to our previous simple example:</p>
+
+<pre><code class="r"># create a list with 2 elements
+l &lt;- list(a = 1:10, b = 11:20)
+# mean of values using sapply
+l.mean &lt;- sapply(l, mean)
+# what type of object was returned?
+class(l.mean)
+</code></pre>
+
+<pre><code>## [1] &quot;numeric&quot;
+</code></pre>
+
+<pre><code class="r"># it&#39;s a numeric vector, so we can get element &#39;a&#39; like this
+l.mean[[&quot;a&quot;]]
+</code></pre>
+
+<pre><code>## [1] 5.5
+</code></pre>
+
+<pre><code>4.2 vapply
+-----------
+</code></pre>
+
+<p>Description: “vapply is similar to sapply, but has a pre-specified type of return value, so it can be safer (and sometimes faster) to use.”</p>
+
+<p>A third argument is supplied to vapply, which you can think of as a kind of template for the output. The documentation uses the fivenum function as an example, so let’s go with that:</p>
+
+<pre><code class="r">l &lt;- list(a = 1:10, b = 11:20)
+# fivenum of values using vapply
+l.fivenum &lt;- vapply(l, fivenum, c(Min. = 0, `1st Qu.` = 0, Median = 0, `3rd Qu.` = 0, 
+    Max. = 0))
+class(l.fivenum)
+</code></pre>
+
+<pre><code>## [1] &quot;matrix&quot;
+</code></pre>
+
+<pre><code class="r">
+# let&#39;s see it
+l.fivenum
+</code></pre>
+
+<pre><code>##            a    b
+## Min.     1.0 11.0
+## 1st Qu.  3.0 13.0
+## Median   5.5 15.5
+## 3rd Qu.  8.0 18.0
+## Max.    10.0 20.0
+</code></pre>
+
+<p>So, vapply returned a matrix, where the column names correspond to the original list elements and the row names to the output template. Nice.</p>
+
+<pre><code>4.3 replicate
+-------------
+</code></pre>
+
+<p>Description: “replicate is a wrapper for the common use of sapply for repeated evaluation of an expression (which will usually involve random number generation).”</p>
+
+<p>The replicate function is very useful. Give it two mandatory arguments: the number of replications and the function to replicate; a third optional argument, simplify = T, tries to simplify the result to a vector or matrix. An example – let’s simulate 10 normal distributions, each with 10 observations:</p>
+
+<pre><code class="r">replicate(10, rnorm(10))
+</code></pre>
+
+<pre><code>##           [,1]    [,2]     [,3]    [,4]    [,5]    [,6]    [,7]    [,8]
+##  [1,] -1.61216  2.4135 -0.63429  1.0692 -1.0276  1.4250 -0.3813 -1.2755
+##  [2,] -0.08217  0.2226  0.70225  0.7409 -1.5667  0.2318 -1.5941 -0.4001
+##  [3,] -1.88433  2.1060 -0.62838 -1.2015  1.6868  0.5612 -0.5139 -0.2693
+##  [4,] -0.56366 -0.1698  1.40035  0.5357  0.4151  0.1034 -1.0760 -0.4197
+##  [5,]  1.06011  0.1812  0.55333  0.6288 -1.0681  1.0111  1.5814 -0.4744
+##  [6,] -0.61775  0.8535  0.21791  0.8281 -2.9412  0.6995  1.2432  0.1883
+##  [7,]  0.98996 -1.0046 -0.14792 -0.4550  0.4042 -0.4322 -0.9746 -0.2277
+##  [8,]  1.53377 -0.6002  0.60405 -0.3759 -0.1683 -1.2682  0.3630  0.1456
+##  [9,]  0.33232  0.8685  0.29591  0.6727 -2.7605 -0.4139 -0.4098  0.9131
+## [10,]  0.17398  1.4212  0.09452 -3.4987 -1.0469  0.2582  0.8206  0.4694
+##           [,9]   [,10]
+##  [1,]  1.63776 -1.8111
+##  [2,]  0.60047 -0.2523
+##  [3,] -1.00599 -0.7878
+##  [4,]  0.04986 -0.8009
+##  [5,]  0.39480 -0.5229
+##  [6,]  0.68287  1.2724
+##  [7,] -0.20719 -0.7930
+##  [8,]  0.17602 -0.3586
+##  [9,] -0.49357  0.2685
+## [10,] -1.18379  0.1372
+</code></pre>
+
+<h2>5. mapply</h2>
+
+<p>Description: “mapply is a multivariate version of sapply. mapply applies FUN to the first elements of each (…) argument, the second elements, the third elements, and so on.”</p>
+
+<p>The mapply documentation is full of quite complex examples, but here’s a simple, silly one:</p>
+
+<pre><code class="r">l1 &lt;- list(a = c(1:10), b = c(11:20))
+l2 &lt;- list(c = c(21:30), d = c(31:40))
+# sum the corresponding elements of l1 and l2
+mapply(sum, l1$a, l1$b, l2$c, l2$d)
+</code></pre>
+
+<pre><code>##  [1]  64  68  72  76  80  84  88  92  96 100
+</code></pre>
+
+<p>Here, we sum l1$a[1] + l1$b[1] + l2$c[1] + l2$d<a href="1%20+%2011%20+%2021%20+%2031">1</a> to get 64, the first element of the returned list. All the way through to l1$a[10] + l1$b[10] + l2$c[10] + l2$d<a href="10%20+%2020%20+%2030%20+%2040">10</a> = 100, the last element.</p>
+
+<h2>6. rapply</h2>
+
+<p>Description: “rapply is a recursive version of lapply.”</p>
+
+<p>I think “recursive” is a little misleading. What rapply does is apply functions to lists in different ways, depending on the arguments supplied. Best illustrated by examples:</p>
+
+<pre><code class="r"># let&#39;s start with our usual simple list example
+l &lt;- list(a = 1:10, b = 11:20)
+# log2 of each value in the list
+rapply(l, log2)
+</code></pre>
+
+<pre><code>##    a1    a2    a3    a4    a5    a6    a7    a8    a9   a10    b1    b2 
+## 0.000 1.000 1.585 2.000 2.322 2.585 2.807 3.000 3.170 3.322 3.459 3.585 
+##    b3    b4    b5    b6    b7    b8    b9   b10 
+## 3.700 3.807 3.907 4.000 4.087 4.170 4.248 4.322
+</code></pre>
+
+<pre><code class="r"># log2 of each value in each list
+rapply(l, log2, how = &quot;list&quot;)
+</code></pre>
+
+<pre><code>## $a
+##  [1] 0.000 1.000 1.585 2.000 2.322 2.585 2.807 3.000 3.170 3.322
+## 
+## $b
+##  [1] 3.459 3.585 3.700 3.807 3.907 4.000 4.087 4.170 4.248 4.322
+</code></pre>
+
+<pre><code class="r"># what if the function is the mean?
+rapply(l, mean)
+</code></pre>
+
+<pre><code>##    a    b 
+##  5.5 15.5
+</code></pre>
+
+<pre><code class="r">rapply(l, mean, how = &quot;list&quot;)
+</code></pre>
+
+<pre><code>## $a
+## [1] 5.5
+## 
+## $b
+## [1] 15.5
+</code></pre>
+
+<p>So, the output of rapply depends on both the function and the how argument. When how = “list” (or “replace”), the original list structure is preserved. Otherwise, the default is to unlist, which results in a vector.</p>
+
+<p>You can also pass a “classes=” argument to rapply. For example, in a mixed list of numeric and character variables, you could specify that the function act only on the numeric values with “classes = numeric”.</p>
+
+<h2>7. tapply</h2>
+
+<p>Description: “Apply a function to each cell of a ragged array, that is to each (non-empty) group of values given by a unique combination of the levels of certain factors.”</p>
+
+<p>Woah there. That sounds complicated. Don’t panic though, it becomes clearer when the required arguments are described. Usage is “tapply(X, INDEX, FUN = NULL, …, simplify = TRUE)”, where X is “an atomic object, typically a vector” and INDEX is “a list of factors, each of same length as X”.</p>
+
+<p>So, to go back to the famous iris data, “Species” might be a factor and “iris$Petal.Width” would give us a vector of values. We could then run something like:</p>
+
+<pre><code class="r">attach(iris)
+</code></pre>
+
+<pre><code>## Les objets suivants sont masqués from iris (position 3):
+## 
+##     Petal.Length, Petal.Width, Sepal.Length, Sepal.Width, Species
+</code></pre>
+
+<pre><code class="r"># mean petal length by species
+tapply(iris$Petal.Length, Species, mean)
+</code></pre>
+
+<pre><code>##     setosa versicolor  virginica 
+##      1.462      4.260      5.552
+</code></pre>
+
+<h2>Summary</h2>
+
+<p>I’ve used very simple examples here, with contrived data and standard functions (such as mean and sum). For me, this is the easiest way to learn what a function does: I can look at the original data, then the result and figure out what happened. However, the “apply” family is a much more powerful than these illustrations – I encourage you to play around with it.</p>
+
+<p>The things to consider when choosing an apply function are basically:</p>
+
+<pre><code>What class is my input data? – vector, matrix, data frame…
+On which subsets of that data do I want the function to act? – rows, columns, all values…
+What class will the function return? How is the original data structure transformed?
+</code></pre>
+
+<p>It’s the usual input-process-output story: what do I have, what do I want and what lies inbetween?</p>
+
+</body>
+
+</html>
+

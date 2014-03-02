@@ -1,14 +1,13 @@
 Pédiatrie
 ========================================================
 
-```{r date,echo=FALSE}
-date()
-wd<-getwd()
-wd
-```
+**Date:** `r date()`
+**Working directory:** `r getwd()`
+***
+
 Variables globales:
 -------------------
-```{r var_globales}
+```{r var_globales, echo=FALSE, warning=FALSE, message=FALSE}
 source("../prologue.R")
 an_c <- "2013"
 n_jours <- as.numeric(max(as.Date(d1$ENTREE))-min(as.Date(d1$ENTREE)))
@@ -22,3 +21,53 @@ n_p <- nrow(p)
 ```
 Les moins de 18 ans représentent $`r n_p`$ passages en `r an_c` soit $`r round(0.5 + n_p/n_jours, 0)`$ passages par jour.
 
+nombre de passages en fonction de l'age
+----------------------------------------
+```{r passages_pediatrie}
+pp <- table (as.factor(p$AGE))
+plot(pp, main = paste("Nombre de passages en fonction de l'age en",an_c), ylab = "Fréquence", xlab = "Age (années)", col="blue")
+
+```
+
+Pédiatrie et sexe
+------------------
+```{r sexe_geriatrie,results='asis'}
+sp <- table(p$SEXE)
+sp <- sp[-2]
+psp <- round(prop.table(sp)*100,2)
+b <- rbind(sp,psp)
+rownames(b) <- c("n","%")
+
+sex_ratio <- round(sp["M"]/sp["F"],2)
+
+xtable(b)
+```
+Le sex-ratio est de `r sex_ratio`
+
+Taux hospitalisation
+--------------------
+
+```{r hospit_geriatrie}
+a <- table(p$MODE_SORTIE)
+a <- c(a[2]+a[3],a[4],a[5])
+b <- round(prop.table(a)*100, 2)
+c <- rbind(a,b)
+colnames(c) <- c("Hospitalisation", "Domicile", "Décès")
+rownames(c) <- c("n","%")
+c
+```
+- Taux hospitalisation: `r c[2,1]` %.
+
+Durée de présence
+-----------------
+
+```{r pres_geriatrie}
+e <- ymd_hms(p$ENTREE)
+s<-ymd_hms(p$SORTIE)
+p$presence<-s-e
+p$presence<-(s-e)/60
+a <- summary(as.numeric(p$presence))
+```
+- Durée de présence moyenne: `r a['Mean']` mn.
+- Durée de présence médiane: `r a['Median']` mn.
+- Durée de présence la plus longue: `r a['Max.']/1440` jours.

@@ -1,7 +1,7 @@
 Gériatrie
 ========================================================
 
-**Date:** Thu Jan  9 18:45:59 2014
+**Date:** Sun Mar  2 11:19:38 2014
 
 **Working directory:** /home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Geriatrie
 ***
@@ -13,7 +13,7 @@ Variables globales:
 ## [1] "Fichier courant: rpu2013d0112.Rda"
 ```
 
-Nombre de dossiers: 330594
+Nombre de dossiers: 340338
 
 
 ```r
@@ -21,7 +21,7 @@ g <- d1[d1$AGE > 74, ]
 n_g <- nrow(g)
 ```
 
-Les 75 ans et plus représentent $51186$ passages en 2013 soit $141$ passages par jour.
+Les 75 ans et plus représentent $52512$ passages en 2013 soit $145$ passages par jour.
 
 nombre de passages en fonction sde l'age
 ----------------------------------------
@@ -51,20 +51,20 @@ xtable(b)
 ```
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Thu Jan  9 18:46:05 2014
+% Sun Mar  2 11:19:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
   \hline
  & F & M \\ 
   \hline
-n & 31105.00 & 20070.00 \\ 
-  \% & 60.78 & 39.22 \\ 
+n & 31941.00 & 20560.00 \\ 
+  \% & 60.84 & 39.16 \\ 
    \hline
 \end{tabular}
 \end{table}
 
-Le sex-ratio est de 0.65
+Le sex-ratio est de 0.64
 
 Taux hospitalisation
 --------------------
@@ -82,11 +82,11 @@ c
 
 ```
 ##   Hospitalisation Domicile Décès
-## n        25850.00 15689.00     1
-## %           62.23    37.77     0
+## n        26592.00 16271.00     1
+## %           62.04    37.96     0
 ```
 
-- Taux hospitalisation: 62.23 %.
+- Taux hospitalisation: 62.04 %.
 
 Durée de présence
 -----------------
@@ -101,5 +101,5 @@ a <- summary(as.numeric(g$presence))
 ```
 
 - Durée de présence moyenne: 219 mn.
-- Durée de présence médiane: 171 mn.
+- Durée de présence médiane: 174 mn.
 - Durée de présence la plus longue: 3.0278 jours.

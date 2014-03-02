@@ -10,4 +10,59 @@ p <-d1[d1$AGE < 18,]
 n_p <- nrow(p)
 @
 
-Les moins de 18 ans représentent $\Sexpr{n_p}$ passages en \Sexpr{ an_c} soit $\Sexpr{ round(0.5 + n_p/n_jours, 0)}$ passages par jour.
+Les moins de 18 ans représentent $\Sexpr{n_p}$ passages en \Sexpr{ as.character(an_c)} soit $\Sexpr{ round(0.5 + n_p/n_jours, 0)}$ passages par jour.
+
+% nombre de passages en fonction de l'age
+
+<<passages_pediatrie, echo=FALSE, fig.height=5>>=
+pp <- table (as.factor(p$AGE))
+plot(pp, main = paste("Nombre de passages en fonction de l'age en",an_c), ylab = "Fréquence", xlab = "Age (années)", col="blue")
+@
+
+% Pédiatrie et sexe
+
+<<sexe_pediatrie,echo=FALSE,results='asis'>>=
+sp <- table(p$SEXE)
+sp <- sp[-2]
+psp <- round(prop.table(sp)*100,2)
+b <- rbind(sp,psp)
+rownames(b) <- c("n","%")
+
+sex_ratio <- round(sp["M"]/sp["F"],2)
+
+xtable(b, caption=c("Sex-ratio en pédiatrie","Sex-ratio en pédiatrie"), label="tab:ped_sr")
+@
+
+Le sex-ratio est de $\Sexpr{sex_ratio}$ (table \ref{tab:ped_sr})
+
+% Taux hospitalisation
+
+<<hosp_pediatrie,echo=FALSE,results='asis'>>=
+a <- table(p$MODE_SORTIE)
+a <- c(a[2]+a[3],a[4],a[5])
+b <- round(prop.table(a)*100, 2)
+c <- rbind(a,b)
+colnames(c) <- c("Hospitalisation", "Domicile", "Décès")
+rownames(c) <- c("n","%")
+xtable(c, caption=c("Devenir du patient pédiatrique","Devenir du patient pédiatrique"), label="tab:ped_hosp")
+@
+
+Le taux d'hospitalisation est de : \textbf{$\Sexpr{c[2,1]}$ \%} (table \ref{tab:ped_hosp}).
+
+% Durée de présence
+
+<<<pres_pediatrique,echo=FALSE>>=
+e <- ymd_hms(p$ENTREE)
+s<-ymd_hms(p$SORTIE)
+p$presence<-s-e
+p$presence<-(s-e)/60
+a <- p$presence[p$presence > 10]
+a <- summary(as.numeric(a))
+h <- paste(as.integer(a['Mean']/60),":",a['Mean']%%60,sep="")
+@
+
+\begin{itemize}
+  \item Durée de présence moyenne: $\Sexpr{ a['Mean']}$ minutes soit \Sexpr{h} heures.
+  \item Durée de présence médiane: $\Sexpr{ a['Median']}$ minutes.
+  \item Durée de présence la plus longue: $\Sexpr{ a['Max.']/1440}$ jours.
+\end{itemize}

@@ -44,7 +44,7 @@ la transformation log produit une courbe normale où lamajorité des consultants
   \item c plus de 1000 mn
 \end{itemize}
 
-<<passage_clean,echo=FALSE>>=
+<<passage_clean,echo=FALSE,comment="">>=
 d2<-d1[!is.na(d1$presence),]
 a<-d2$presence[d2$presence < 10]
 c<-d2$presence[d2$presence > 1000]
@@ -57,10 +57,12 @@ summary3
 @
 
 Les durées de présences inférieures à 10 minutes proviennent à plus de 90\% des HUS (Erreur logicielle signalée au CRIH):
-<<passages_erronés>>= 
+<<passages_erronés, echo=FALSE, comment="">>= 
 # Origine despatients restants moins de 10 mn: ils proviennent majoritairement des HUS:
-a<-d2[d2$presence < 10,"FINESS"]
-rbind(table(a),round(prop.table(table(a))*100,2))
+a <- d2[d2$presence < 10,"FINESS"]
+r <- rbind(table(a),round(prop.table(table(a))*100,2))
+rownames(r) <- c("n","%")
+r
 # Plus de 90% proviennent des HUS
 @
 
@@ -109,36 +111,26 @@ lines(rollapply(a,7,function(x) mean(x) - sd(x)),col="red")
 <<menage,echo=FALSE>>=
 rm(d2)
 @
-\subsection{Cas particulier de Selestat}
 
-<<passage,echo=FALSE>>=
+% *********************************
+% *                               *
+% *  Histogramme des passages     *
+% *                               *
+% *********************************
 
-#' Cas prticulier de Sélestat
-#'@param e date entrée 
-#'@param s date de sortie
-#'@param limite min(date:heure)pour l'année courante. Toutes les dates inférieures à limite sont transformée en NA.
-#'@param sel$p s-e temps de présence en minutes
-#'@details on fait un test avec Sélestat
-
-sel<-d1[d1$FINESS=="Sel",c("ENTREE","SORTIE","AGE","GRAVITE","ORIENTATION","DESTINATION")]
-e_sel<-ymd_hms(sel$ENTREE)
-s_sel<-ymd_hms(sel$SORTIE)
-limite<-ymd_hms("2013-01-01 00:00:00")
-s[s < limite]<-ymd_hms("na")
-sel$p<-as.numeric(s_sel-e_sel)
-summary(sel$p)
-n_sel <- nrow(sel)
-@
+La distribution des durées de passage n'est pas normale mais présente une déviation axiale gauche importante(figure \ref{fig:hist_passages}). Cette notion est à prendre en considération lors de l'interprétation de la durée moyenne de passage.
 
 \begin{figure}[ht!]
  \centering
 <<hist_tous_passages,echo=FALSE,fig.width=8>>=
-hist(as.numeric(sel$p),xlab="temps de passage (mn)",main="Histogramme du temps de passage (tous patients)",ylab="nombre")
+  a <- (as.numeric(d1$presence))
+  a <- a[!is.na(a)]
+  a<-a[a > 10 & a < 1440]
+  hist(a, breaks=30, xlab="temps de passage (mn)",main="Histogramme du temps de passage",ylab="nombre")
 @
- \caption{Histogramme du passage à Sélestat en 2013 (\Sexpr{n_sel} patients)}
+ \caption{Histogramme des passages en 2013 (\Sexpr{length(a)} patients). Ne sont pris en compte que les RPU dont la durée de passage est renseignée et inférieure à 24 heures.}
+ \label{fig:hist_passages}
 \end{figure}
-
-% RPU_2013_analyse à partir de la ligne 382
 
 % ************************
 % *                      *  
@@ -244,22 +236,6 @@ Le temps de passage augmente avec l'age.
 <<duree_age,echo=FALSE>>=
 #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
 
-#
-# uniquement sélestat
-#
-tranche_age<-cut(sel$AGE,breaks=c(-1,15,75,max(sel$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))
-summary(tranche_age)
-tapply(sel$p,tranche_age,mean,na.rm=TRUE)
-@
-
-\begin{figure}[ht!]
- \centering
-  <<age_selestat,echo=FALSE,fig.width=8>>=
-  boxplot(sel$p~tranche_age,ylab="Temps (en mn)",main="Durée de passage en fonction de l'age", sub="Sélestat", col="yellow")
-  @
- \caption{Durée de passage en fonction de l'âge}
-\end{figure}
-
 <<age_groupe1,echo=FALSE,results='asis'>>=
 #
 #' Tout le groupe
@@ -294,7 +270,8 @@ r <- rbind(t,p)
 rownames(r) <- c("mn","%")
 xtable(r, caption=c("Durée de présence et selon le jour de la semaine. Temps passé en minutes (mn) aux urgences en fonction du jour","Durée de présence et jour de la semaine"), label = "tab:jour_semaine")
 @
-Il existe une relation entre le jour de la semaine et la durée de présence aux urgences (table \ref{tab:jour_semaine} pp.\pageref{tab:jour_semaine}).
+
+Il existe une relation entre le jour de la semaine et la durée de présence aux urgences (table \ref{tab:jour_semaine} pp.\pageref{tab:jour_semaine}). La durée de présence est plus longue en début de semaine avec un maximum pour le lundi puis diminue progressivement pour atteindre un minimum le dimanche.
 
 \begin{figure}[ht!]
  \centering
@@ -319,13 +296,6 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 #'@param a durées de présence qui sont différentes de NA
 #'@param n nombre de durées de présence qui sont différentes de NA
 #'@param p proportion de durée de passage < 4 heures
-
-h4<-240
-a<-sel$p[!is.na(sel$p)]
-n<-length(a)
-m4<-a[a<h4]
-b<-length(m4)
-p<-round(b*100/n,2)
 
 # pour tout le groupe
 h4<-240
@@ -419,7 +389,10 @@ Il existe une relation entre la gravité et la durée de présence aux urgences 
 % *                      *
 % ************************
 
-% \section{Selon la structure}
+\section{Selon la structure}
+
+Voir les tableaux de bord de caque établissement.
+
 % \subsection{CH Sélestat}
 % <<duree_structure,echo=FALSE>>=
 % summary(sel$p)

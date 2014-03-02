@@ -305,6 +305,76 @@ completude <- function(d1){
 }
 
 #===========================================================================
+# Nombre d'hospitalisation
+#===========================================================================
+#'
+#'@description calcule le nombre de patients hospitalisés à npartir de l'item MODE_SORTIE
+#'@param d1 dataframe de type RPU
+#'
+hospitalisation <- function(d1){
+  a<-summary(d1$MODE_SORTIE)
+  hosp <- as.numeric(a["Mutation"] + a["Transfert"])
+  return(hosp)
+}
+
+#===========================================================================
+# Exhaustivité DESTINATION
+#===========================================================================
+#'
+#'@description calcule le nombre réel n'item DESTINATION non renseignés
+#'@param d1 dataframe de type RPU
+#'
+exhaustivite_destination <- function(d1){
+  a<-summary(d1$DESTINATION)
+  hosp <- hospitalisation(d1)
+  # delta = vrai non renseignés
+  delta <- hosp - a["MCO"]-a["SSR"]-a["SLD"]-a["PSY"]-a["HAD"]-a["HMS"]
+  # exhaustivité réelle pour la destination
+  exhaustivite.destination <- round(100-(delta*100/hosp),2)
+  return(as.numeric(exhaustivite.destination))
+}
+
+#===========================================================================
+# Exhaustivité ORIENTATION
+#===========================================================================
+#'
+#'@description calcule le nombre réel n'item ORIENTATION non renseignés
+#'@param data.hop dataframe de type RPU
+#'
+exhaustivite_orientation <- function(data.hop){
+  a<-data.hop$ORIENTATION
+  sa <- summary(a)
+  hosp <- hospitalisation(data.hop)
+  orient.hosp <- as.numeric(sa["HO"]+sa["HDT"]+sa["UHCD"]+sa["SI"]+sa["SC"]+sa["REA"]+sa["OBST"]+sa["MED"]+sa["CHIR"])
+  orient.exhaustivite <- 100-round(100*(hosp - orient.hosp)/hosp,2)
+  return(orient.exhaustivite)
+}
+
+#===========================================================================
+# Complétude Régionale des données
+#===========================================================================
+#'
+#'@description calcule le taux de complétude d'un dataframe
+#'@param d1 dataframe
+#'@return completude vecteur contenant les completudes en %
+#'@usage completude(d1) ou completude(ch avec ch <- d1[d1$FINESS=="Col"])
+#'
+completude <- function(data.hop){
+  rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport",
+                 "Mode entrée","CCMU","Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
+  # taux de complétude régional
+  a <- is.na(data.hop)
+  b <- round(apply(a, 2, mean) * 100, 2)
+  b <- cbind(b)
+  colnames(b)<-"%"
+  completude <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
+  completude <- 100 - completude
+  # corrections
+  completude[16] <- exhaustivite_destination(data.hop)
+  completude[15] <- exhaustivite_orientation(data.hop)
+  return(completude)
+}
+#===========================================================================
 # Radar de Complétude des données
 #===========================================================================
 #'
@@ -316,20 +386,159 @@ completude <- function(d1){
 #'@param poly.col = "khaki" couleur du polygone
 #'@param ch.names = "CH de Colmar"
 #'@param line.col="goldenrod4" couleur du trait du second polygone
-#'@usage radar_completude(region,a, ch.names = "CH Colmar") où region = completude(d1) et a = completude(d1[d1$FINESS=="Col",])
+#'@usage radar_completude(region,a, ch.names = "CH Colmar") où region = completude(d1) et 
+#' a = completude(d1[d1$FINESS=="Col",])
 # dessin du premier radar correspondant à la statistique régionale
 # 
 radar_completude <- function(x, y = NULL, ch.names = "titre", rp.type="p", poly.col = "khaki",line.col="goldenrod4"){
+  library("openintro")
   # nom des branches du radar:
   rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU",
                  "Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
   
-  radial.plot(x, labels = rpu.names, rp.type="p", radial.lim =c(0,100), 
-              poly.col = "khaki", main=paste(ch.names,"- Taux de complétude des RPU"))
+  radial.plot(x, labels = rpu.names, rp.type="p", radial.lim =c(0,100), show.grid.labels=T,
+              poly.col = fadeColor("khaki",fade = "A0"), line.col="khaki", main=paste(ch.names,"- Taux de complétude des RPU"))
   if(!is.null(y)){
     radial.plot(y, labels = rpu.names , radial.lim =c(0,100), add=T,rp.type="p", line.col="goldenrod4", 
                 main="Taux de complétude des RPU", lwd=2)
     legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n")
   }
-  
 }
+
+
+#'===========================================================================
+#' passages(hop,hop_mame="CH",main="",col="")
+#'===========================================================================
+#' 
+#'passages est une fonction permettant de tracer sous forme de Radar les passages aux urgences
+#' @title La fonction « passages »
+#' @author Jc Bartier
+#' @docType package
+#' @name mes_fonctions.R
+#' @param hop (character) = Finess de l'établissement
+#' @param sens 1 = entrées, 2 = sorties, 3 = entrées et sorties
+#' @param cexlabel taille des labels radiaires (heures)
+#' @references NA
+#' @note le package est incomplet.
+#' @examples
+#' passages("Hus",sens=3)
+#' @export
+#' @author JcB
+#' @date 2013-11-22
+
+passages<-function(hop,hop_name="CH",col="blue",sens=1,main="",cexlabel=0.8)
+{
+  require("lubridate")
+  require("plotrix")
+  
+  hop<-d1[d1$FINESS==hop,]
+  if(main==""){main=hop_name}
+  if(sens==1){
+    e<-ymd_hms(hop$ENTREE)
+    col="blue"
+    t2<-as.integer(table(hour(e)))
+    t4<-prop.table(t2)
+    legende<-"Entrées"
+  }
+  else if(sens==2){
+    e<-ymd_hms(hop$SORTIE)
+    col="red"
+    t2<-as.integer(table(hour(e)))
+    t4<-prop.table(t2)
+    legende<-"Sorties"
+  }
+  else if(sens==3){
+    e<-ymd_hms(hop$ENTREE)
+    s<-ymd_hms(hop$SORTIE)
+    col<-c("red","blue")
+    te<-as.integer(table(hour(e)))
+    ts<-as.integer(table(hour(s)))
+    t4<-rbind(prop.table(te),prop.table(ts))
+    legende<-c("Entrées","Sorties")
+  }
+  
+  par(cex.axis=cexlabel)
+  clock24.plot(t4,clock.pos=0:23,rp.type="p",main=main,show.grid.labels=F,line.col=col,radial.lim=c(0,0.1),label.prop=1.1)
+  legend(0.09,-0.09,legende,col=col,lty=1,cex=0.8)
+  par(cex.axis=1)
+}
+
+#'===========================================================================
+#' resume
+#'===========================================================================
+#'@title resume
+#'@description affiche un résumé des données d'un vecteur numérique.
+#'@author JcB
+#'@param x: un vecteur de données
+#'@param echo: si FALSE (défaut) l'affichage se fait comme summary. Si TRUE, l'affichage utilise xtable
+#'@param tl titre long. Apparaitra sous le tableau si echo est TRUE
+#'@param tc titre court. Apparaitra dans la liste des tableaux
+#'@param label: label pour faire référence au tableau.
+  
+resume<-function (x,echo=FALSE,tl=NULL,tc=NULL,label=NULL)
+{
+  name=c("moyenne","écart-type","médiane","min","max","n")
+  m<-mean(x,na.remove=TRUE)
+  e<-sd(x)
+  r<-matrix(c(m,e,median(x),min(x),max(x),length(x)),1,6)
+  colnames(r)<-name
+  rownames(b)<-""
+  if(echo==TRUE){
+    require("xtable")
+    print(xtable(r,caption=c(tl,tc),label=label,type="latex",table.placement="tp",latex.environments=c("center", "footnotesize")))
+  }
+  return(r)
+}
+
+# usage
+# a<-c(1,2,3,4,5)
+# b<-resume(a)
+# > b
+#    moyenne écart-type médiane min max
+#[1,]       3   1.581139       3   1   5
+# > b[2]
+# [1] 1.581139
+# xtable(b)
+
+#===========================================================================
+# xsummary
+#===========================================================================
+#'@title xsummary
+#'@description
+#'@author JcB
+#'@description affichage de summary avec latex
+#'@param x un vecteur de données continues
+#'@param short (défaut) n'affiche que min, max, mediane, moyenne
+#'@param xtable retourne la version latex
+#'@usage voir activite_su.Rnw
+#'
+xsummary<-function(x,short=FALSE,xtable=FALSE,count=FALSE,sd=FALSE,tl="titre long",
+                   tc="titre court",lab="label"){
+  # s<-as.matrix(t(summary(x)))
+  # colnames(s)<-c("Min.","Q1","Médiane","Moyenne","Q3","Max.")
+  a<-data.frame(length(x),min(x),quantile(x,.25),mean(x),sd(x),median(x),quantile(x,.75),max(x))
+  colnames(a)<-c("n","Min","Q25","Moyenne","E-type","Médiane","Q75","Max")
+  a<-round(a,1)
+  rownames(a)<-""
+  # si on veut limiter:
+  if(short==TRUE){
+    s<-s[,c(1,3,4,6)]
+  }
+  if(xtable==TRUE){
+    require("xtable")
+    # remplacer s par t(s) pour avoir un tableau vertical
+    print(xtable(a,caption=c(tl,tc),label=lab,type="latex",table.placement="tp",
+                 latex.environments=c("center", "footnotesize")))
+  }
+  return(a)
+}
+
+#a<-1:30
+#s<-as.matrix(t(summary(a)))
+#s
+#x<-s
+#colnames(x)<-c("Min.","xx","Médiane","Moyenne","xx","Max.")
+#si on veut limiter:
+#x<-x[,c(1,3,4,6)]
+#x
+#xtable(as.matrix(t(x)),caption=c("titre long","titre court"),label="lab",type="latex",table.placement="tp",latex.environments=c("center", "footnotesize"))

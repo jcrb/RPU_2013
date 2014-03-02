@@ -1,14 +1,9 @@
 Pédiatrie
 ========================================================
 
-
-```
-## [1] "Thu Jan  9 16:47:34 2014"
-```
-
-```
-## [1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Pediatrie"
-```
+**Date:** Sun Mar  2 11:20:48 2014
+**Working directory:** /home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Pediatrie
+***
 
 Variables globales:
 -------------------
@@ -29,7 +24,7 @@ source("../prologue.R")
 ##     renomme.variable, residus, wtd.mean, wtd.table, wtd.var
 ## 
 ## Rattle : une interface graphique gratuite pour l'exploration de données avec R.
-## Version 2.6.26 r77 Copyright (c) 2006-2013 Togaware Pty Ltd.
+## Version 3.0.2 r169 Copyright (c) 2006-2013 Togaware Pty Ltd.
 ## Entrez 'rattle()' pour secouer, faire vibrer, et faire défiler vos données.
 ## Loading required package: foreign
 ## Loading required package: survival
@@ -66,7 +61,7 @@ n_jours <- as.numeric(max(as.Date(d1$ENTREE)) - min(as.Date(d1$ENTREE)))
 N <- nrow(d1)
 ```
 
-Nombre de dossiers: 330594
+Nombre de dossiers: 340338
 
 
 ```r
@@ -74,5 +69,5 @@ p <- d1[d1$AGE < 18, ]
 n_p <- nrow(p)
 ```
 
-Les moins de 18 ans représentent $79946$ passages en 2013 soit $220$ passages par jour.
+Les moins de 18 ans représentent $82650$ passages en 2013 soit $228$ passages par jour.
 

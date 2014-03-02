@@ -9,6 +9,45 @@ source("../prologue.R")
 ```
 
 ```
+## Loading required package: questionr
+## 
+## Attaching package: 'rgrs'
+## 
+## Les objets suivants sont masqués from 'package:questionr':
+## 
+##     copie, copie.default, copie.proptab, cprop, cramer.v,
+##     format.proptab, freq, lprop, print.proptab, prop, quant.cut,
+##     renomme.variable, residus, wtd.mean, wtd.table, wtd.var
+## 
+## Rattle : une interface graphique gratuite pour l'exploration de données avec R.
+## Version 3.0.2 r169 Copyright (c) 2006-2013 Togaware Pty Ltd.
+## Entrez 'rattle()' pour secouer, faire vibrer, et faire défiler vos données.
+## Loading required package: foreign
+## Loading required package: survival
+## Loading required package: splines
+## Loading required package: MASS
+## Loading required package: nnet
+## 
+## Attaching package: 'zoo'
+## 
+## Les objets suivants sont masqués from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+## 
+## Please visit openintro.org for free statistics materials
+## 
+## Attaching package: 'openintro'
+## 
+## L'objet suivant est masqué from 'package:MASS':
+## 
+##     mammals
+## 
+## L'objet suivant est masqué from 'package:datasets':
+## 
+##     cars
+```
+
+```
 ## [1] "Fichier courant: rpu2013d0112.Rda"
 ```
 
@@ -19,7 +58,7 @@ date()
 ```
 
 ```
-## [1] "Wed Feb 19 09:34:28 2014"
+## [1] "Thu Feb 27 19:42:06 2014"
 ```
 
 ```r
@@ -39,17 +78,6 @@ Récupération des données
 
 ```r
 library("epicalc")
-```
-
-```
-## Loading required package: foreign
-## Loading required package: survival
-## Loading required package: splines
-## Loading required package: MASS
-## Loading required package: nnet
-```
-
-```r
 library("lubridate")
 library("stargazer")
 ```
@@ -74,17 +102,17 @@ knit_hooks$set(inline = function(x) {
     prettyNum(x, big.mark = " ")
 })
 
-ch <- "Geb"
-ch.names <- "CH Guebwiller"
+ch <- "Col"
+ch.names <- "CH de Colmar"
 
 hopital <- d1[d1$FINESS == ch, ]
 n <- nrow(hopital)
 ```
 
-CH de CH Guebwiller
+CH de CH de Colmar
 ===================
 
-### Passages en 2013: 15 103
+### Passages en 2013: 64 758
 
 Mode de sortie
 --------------
@@ -101,7 +129,7 @@ a
 
 ```
 ##        NA  Mutation Transfert  Domicile     Décès      NA's 
-##         0       315       197      7748         0      6843
+##         0     14974      1192     47316         0      1276
 ```
 
 ```r
@@ -111,7 +139,7 @@ hosp
 ```
 
 ```
-## [1] 512
+## [1] 16166
 ```
 
 ```r
@@ -120,7 +148,7 @@ total
 ```
 
 ```
-## [1] 8260
+## [1] 63482
 ```
 
 ```r
@@ -129,7 +157,7 @@ ratio_hosp
 ```
 
 ```
-## [1] 7
+## [1] 34
 ```
 
 ```r
@@ -138,7 +166,7 @@ tx_hosp
 ```
 
 ```
-## [1] 6
+## [1] 25
 ```
 
 ```r
@@ -159,12 +187,12 @@ tab1(hopital$MODE_SORTIE, main = "Mode de sortie de l'hôpital")
 ## hopital$MODE_SORTIE : 
 ##           Frequency   %(NA+)   %(NA-)
 ## NA                0      0.0      0.0
-## Mutation        315      2.1      3.8
-## Transfert       197      1.3      2.4
-## Domicile       7748     51.3     93.8
+## Mutation      14974     23.1     23.6
+## Transfert      1192      1.8      1.9
+## Domicile      47316     73.1     74.5
 ## Décès             0      0.0      0.0
-## NA's           6843     45.3      0.0
-##   Total       15103    100.0    100.0
+## NA's           1276      2.0      0.0
+##   Total       64758    100.0    100.0
 ```
 
 ```r
@@ -177,16 +205,16 @@ tab1(hopital$MODE_SORTIE, main = "Mode de sortie de l'hôpital")
 ## hopital$MODE_SORTIE : 
 ##           Frequency   %(NA+)   %(NA-)
 ## NA                0      0.0      0.0
-## Mutation        315      2.1      3.8
-## Transfert       197      1.3      2.4
-## Domicile       7748     51.3     93.8
+## Mutation      14974     23.1     23.6
+## Transfert      1192      1.8      1.9
+## Domicile      47316     73.1     74.5
 ## Décès             0      0.0      0.0
-## NA's           6843     45.3      0.0
-##   Total       15103    100.0    100.0
+## NA's           1276      2.0      0.0
+##   Total       64758    100.0    100.0
 ```
 
-- Nombre de patients hospitalisés (mutation + transferts): 512
-- Taux d'hospitalisation: **6 %**
+- Nombre de patients hospitalisés (mutation + transferts): 16 166
+- Taux d'hospitalisation: **25 %**
 
 
 Destination
@@ -204,7 +232,7 @@ a
 
 ```
    NA   MCO   SSR   SLD   PSY   HAD   HMS  NA's 
-    0   451    50     6     5     0     5 14586 
+    0 15300     4     0   734     0     0 48720 
 ```
 
 ```r
@@ -222,14 +250,14 @@ tab1(hopital$DESTINATION, main = "Ventilation des patients hospitalisés")
 hopital$DESTINATION : 
         Frequency   %(NA+)   %(NA-)
 NA              0      0.0      0.0
-MCO           451      3.0     87.2
-SSR            50      0.3      9.7
-SLD             6      0.0      1.2
-PSY             5      0.0      1.0
+MCO         15300     23.6     95.4
+SSR             4      0.0      0.0
+SLD             0      0.0      0.0
+PSY           734      1.1      4.6
 HAD             0      0.0      0.0
-HMS             5      0.0      1.0
-NA's        14586     96.6      0.0
-  Total     15103    100.0    100.0
+HMS             0      0.0      0.0
+NA's        48720     75.2      0.0
+  Total     64758    100.0    100.0
 ```
 
 ```r
@@ -242,19 +270,19 @@ tab1(hopital$DESTINATION, main = "Ventilation des patients hospitalisés", missi
 hopital$DESTINATION : 
         Frequency   %(NA+)   %(NA-)
 NA              0      0.0      0.0
-MCO           451      3.0     87.2
-SSR            50      0.3      9.7
-SLD             6      0.0      1.2
-PSY             5      0.0      1.0
+MCO         15300     23.6     95.4
+SSR             4      0.0      0.0
+SLD             0      0.0      0.0
+PSY           734      1.1      4.6
 HAD             0      0.0      0.0
-HMS             5      0.0      1.0
-NA's        14586     96.6      0.0
-  Total     15103    100.0    100.0
+HMS             0      0.0      0.0
+NA's        48720     75.2      0.0
+  Total     64758    100.0    100.0
 ```
 
 
 Distribution intra-hospitalière des patients hospitalisés. La colonne *Missing* correspond aux patients non hospialisés.
-- vrai non renseignés pour la destination: -5, exhaustivité: 101 %
+- vrai non renseignés pour la destination: 128, exhaustivité: 99 %
 
 Orientation
 -----------
@@ -275,9 +303,9 @@ a
 
 ```
  CHIR FUGUE   HDT    HO   MED  OBST   PSA   REA   REO    SC  SCAM    SI 
-   59     3     1     3    29     4    40     2     1     6    33    10 
+ 2789   117    58     6  6576    29   964   389  1174   440   171   642 
  UHCD  NA's 
-   26 14886 
+ 4827 46576 
 ```
 
 ```r
@@ -292,20 +320,20 @@ tab1(a, horiz = T, main = "Orientation des patients", xlab = "Nombre")
 ```
 a : 
         Frequency Percent Cum. percent
-CHIR           59    27.2           27
-FUGUE           3     1.4           29
-HDT             1     0.5           29
-HO              3     1.4           30
-MED            29    13.4           44
-OBST            4     1.8           46
-PSA            40    18.4           64
-REA             2     0.9           65
-REO             1     0.5           65
-SC              6     2.8           68
-SCAM           33    15.2           83
-SI             10     4.6           88
-UHCD           26    12.0          100
-  Total       217   100.0          100
+CHIR         2789    15.3           15
+FUGUE         117     0.6           16
+HDT            58     0.3           16
+HO              6     0.0           16
+MED          6576    36.2           52
+OBST           29     0.2           53
+PSA           964     5.3           58
+REA           389     2.1           60
+REO          1174     6.5           67
+SC            440     2.4           69
+SCAM          171     0.9           70
+SI            642     3.5           74
+UHCD         4827    26.5          100
+  Total     18182   100.0          100
 ```
 
 ```r
@@ -318,12 +346,12 @@ orient.reorient <- as.numeric(sa["REO"])
 orient.exhaustivite <- 100 - round(100 * (hosp - orient.hosp)/hosp, 2)
 ```
 
-- nombre de RPU avec orientation renseigné: 217
-- nombre d'orientation correspondant à une hospitalisation: 140
-- nombre de patients déclarés hospitalisés à la rubrique destination: 512
-- exhaustivité: **27 %**
-- nombre de réorientations: 1
-- nombre de sorties atypiques: 76
+- nombre de RPU avec orientation renseigné: 18 182
+- nombre d'orientation correspondant à une hospitalisation: 15 756
+- nombre de patients déclarés hospitalisés à la rubrique destination: 16 166
+- exhaustivité: **97 %**
+- nombre de réorientations: 1 174
+- nombre de sorties atypiques: 1 252
 
 Age
 ----
@@ -341,7 +369,7 @@ a
 
 ```
 ##       1 an 1 à 75 ans sup 75 ans 
-##        225      13347       1531
+##       5596      51377       7785
 ```
 
 ```r
@@ -354,12 +382,12 @@ b
 
 ```
 ## Pédiatrie   Adultes Gériatrie 
-##      4537      9035      1531
+##     23832     33141      7785
 ```
 
-### Age moyen: 37  ans
-### Pédiatrie: 4 537  (30 %)
-### Gériatrie: 1 531  (10 %)
+### Age moyen: 36  ans
+### Pédiatrie: 23 832  (37 %)
+### Gériatrie: 7 785  (12 %)
 
 
 ```r
@@ -386,7 +414,7 @@ length(local)
 ```
 
 ```
-## [1] 61
+## [1] 3036
 ```
 
 ```r
@@ -394,7 +422,7 @@ length(local) * 100/n
 ```
 
 ```
-## [1] 0.4
+## [1] 4.7
 ```
 
 ```r
@@ -416,8 +444,8 @@ M1
 
 ```
 ##       [,1]   [,2]
-## [1,]    61   9226
-## [2,] 15103 340338
+## [1,]  3036   9226
+## [2,] 64758 340338
 ```
 
 ```r
@@ -429,7 +457,7 @@ chisq.test(M1)
 ## 	Pearson's Chi-squared test with Yates' continuity correction
 ## 
 ## data:  M1
-## X-squared = 292, df = 1, p-value < 2.2e-16
+## X-squared = 673, df = 1, p-value < 2.2e-16
 ```
 
 ```r
@@ -440,7 +468,7 @@ p
 ```
 
 ```
-## [1] 0.004
+## [1] 0.047
 ```
 
 ```r
@@ -456,7 +484,7 @@ or
 ```
 
 ```
-## [1] 0.14
+## [1] 1.6
 ```
 
 ```r
@@ -465,8 +493,8 @@ calcOddsRatio(M1, referencerow = 2)
 ```
 
 ```
-## [1] "categorie =  , odds ratio =  0.14899222463156"
-## [1] "categorie =  ,  95 % interval de confiance = [ 0.115768352787841 , 0.191750875486177 ]"
+## [1] "categorie =  , odds ratio =  1.72943933259245"
+## [1] "categorie =  ,  95 % interval de confiance = [ 1.6585388247873 , 1.80337075045644 ]"
 ```
 
 ```r
@@ -474,8 +502,8 @@ calcRelativeRisk(M1)
 ```
 
 ```
-## [1] "category =  , relative risk =  0.154581917136941"
-## [1] "category =  ,  95 % confidence interval = [ 0.12031527934553 , 0.198607934384686 ]"
+## [1] "category =  , relative risk =  1.5488343893735"
+## [1] "category =  ,  95 % confidence interval = [ 1.50057818980749 , 1.5986424312976 ]"
 ```
 
 ```r
@@ -487,7 +515,7 @@ length(local) * 100/n  # % de la pop locale de 75 ans qui passa au SU
 ```
 
 ```
-## [1] 11
+## [1] 13
 ```
 
 ```r
@@ -512,7 +540,7 @@ summary(local)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##      75      79      83      84      88     104
+##      75      79      83      84      87     112
 ```
 
 ```r
@@ -532,8 +560,8 @@ M1
 
 ```
 ##       [,1]   [,2]
-## [1,]  1615  52512
-## [2,] 13488 287826
+## [1,]  8175  52512
+## [2,] 56583 287826
 ```
 
 ```r
@@ -545,7 +573,7 @@ chisq.test(M1)
 ## 	Pearson's Chi-squared test with Yates' continuity correction
 ## 
 ## data:  M1
-## X-squared = 251, df = 1, p-value < 2.2e-16
+## X-squared = 336, df = 1, p-value < 2.2e-16
 ```
 
 ```r
@@ -556,7 +584,7 @@ p
 ```
 
 ```
-## [1] 0.11
+## [1] 0.13
 ```
 
 ```r
@@ -572,7 +600,7 @@ or
 ```
 
 ```
-## [1] 0.66
+## [1] 0.79
 ```
 
 ```r
@@ -583,8 +611,8 @@ calcOddsRatio(M1, referencerow = 2)
 ```
 
 ```
-## [1] "categorie =  , odds ratio =  0.656290975213122"
-## [1] "categorie =  ,  95 % interval de confiance = [ 0.622762101756773 , 0.69162500886159 ]"
+## [1] "categorie =  , odds ratio =  0.79190530875014"
+## [1] "categorie =  ,  95 % interval de confiance = [ 0.772364001259542 , 0.811941023926517 ]"
 ```
 
 ```r
@@ -592,8 +620,8 @@ calcRelativeRisk(M1)
 ```
 
 ```
-## [1] "category =  , relative risk =  0.666546302037642"
-## [1] "category =  ,  95 % confidence interval = [ 0.633537303656711 , 0.701275158062036 ]"
+## [1] "category =  , relative risk =  0.819937244765556"
+## [1] "category =  ,  95 % confidence interval = [ 0.802476409746222 , 0.837778004672239 ]"
 ```
 
 ```r
@@ -605,7 +633,7 @@ chisq.test(M1)
 ## 	Pearson's Chi-squared test with Yates' continuity correction
 ## 
 ## data:  M1
-## X-squared = 251, df = 1, p-value < 2.2e-16
+## X-squared = 336, df = 1, p-value < 2.2e-16
 ```
 
 ```r
@@ -620,10 +648,10 @@ fisher.test(M1)
 ## p-value < 2.2e-16
 ## alternative hypothesis: true odds ratio is not equal to 1
 ## 95 percent confidence interval:
-##  0.62 0.69
+##  0.77 0.81
 ## sample estimates:
 ## odds ratio 
-##       0.66
+##       0.79
 ```
 
 ```r
@@ -656,8 +684,8 @@ local
 ```
 
 ```
-##    F    I    M 
-## 7387    0 7716
+##     F     I     M 
+## 29732     0 35026
 ```
 
 ```r
@@ -684,8 +712,8 @@ M1
 
 ```
 ##        Local Alsace
-## Hommes  7716 178392
-## Femmes  7387 161941
+## Hommes 35026 178392
+## Femmes 29732 161941
 ```
 
 ```r
@@ -693,8 +721,8 @@ calcOddsRatio(M1, referencerow = 2)
 ```
 
 ```
-## [1] "categorie = Hommes , odds ratio =  0.948212251093752"
-## [1] "categorie = Hommes ,  95 % interval de confiance = [ 0.917793598690976 , 0.97963907615683 ]"
+## [1] "categorie = Hommes , odds ratio =  1.06941891542502"
+## [1] "categorie = Hommes ,  95 % interval de confiance = [ 1.05154362255142 , 1.08759807215026 ]"
 ```
 
 ```r
@@ -708,9 +736,9 @@ lines(c(or[2], or[3]), c(1, 1), col = "royalblue")
 
 ![plot of chunk sexe](figure/sexe.png) 
 
-sex-ratio local = 1  
+sex-ratio local = 1.2  
 sex-ratio régional = 1.1  
-odds-ratio = 0.95 [0.92-0.98]
+odds-ratio = 1.1 [1.1-1.1]
 
 Le sex-ratio est légèrement inférieur à celui de la région mais pas signficativement différent
 
@@ -725,9 +753,9 @@ b <- summary(a)
 ```
 
 
-### Soirée 15 %
+### Soirée 16 %
 
-### Nuit profonde 6.6 %
+### Nuit profonde 8.3 %
 
 On fait la somme du vendredi 20 heures au lundi matin 8 heures. Dimanche = 1
 
@@ -738,7 +766,7 @@ d <- hopital$ENTREE[wday(hopital$ENTREE) == 1 | wday(hopital$ENTREE) == 7 |
 f <- summary(as.factor(wday(d)))
 ```
 
-### Week-end: 4 963 dossiers (33 %)
+### Week-end: 20 830 dossiers (32 %)
 
 Gravité
 --------
@@ -749,9 +777,9 @@ a <- summary(d)
 ```
 
 
-### CCMU 1: 881 (6 %)
+### CCMU 1: 21 093 (33 %)
 
-### CCMU 4 & 5: 22 (0 %)
+### CCMU 4 & 5: 752 (1 %)
 
 Durée de prise en charge
 -------------------------
@@ -798,7 +826,7 @@ sh
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##       7      45      75     113     115    1550    6843
+##       1     112     217     245     346    4420    1276
 ```
 
 ```r
@@ -806,17 +834,17 @@ dom <- hopital[hopital$MODE_SORTIE == "Domicile", "presence"]
 sdom <- summary(as.numeric(dom))
 ```
 
-### Moyenne: 76 minutes
+### Moyenne: 168 minutes
 
-### Médiane: 50 minutes
+### Médiane: 119 minutes
 
-### % en moins de 4 heures: 14 565 (96 %)
+### % en moins de 4 heures: 49 904 (77 %)
 
-### si hospitalisé: 113 minutes
+### si hospitalisé: 245 minutes
 
-### si retour à domicile: 75 minutes
+### si retour à domicile: 143 minutes
 
-### Taux hospitalisation: 49 %
+### Taux hospitalisation: 27 %
 
 TOP 5 des pathologies
 ---------------------
@@ -831,7 +859,7 @@ head(trauma$DP)
 ```
 
 ```
-## [1] "T230" "T510" "S019" "S019" "S208" "S009"
+## [1] "T17.9" "S05.6" "S91.3" "T23.2" "S61.8" "T22.2"
 ```
 
 ```r
@@ -840,22 +868,32 @@ head(sort(t, decreasing = T), 6)
 ```
 
 ```
-##    S934 (Other)    S610    S019    S602    S600 
-##     540     523     374     360     337     283
+##    NA's (Other)   S93.4   S61.0  S52.50   S61.8 
+##    7425    3679    1092     834     710     593
 ```
 
-traumato: 7 357 soit 49 %  
-Lésions les plus fréquentes: 540  
+traumato: 30 528 soit 47 %  
+Lésions les plus fréquentes: 7 425  
 
 
 ### Chirurgicales
 
+
 Exhaustivité des données (RADAR)
-------------------------
+================================
 Par défaut, le diagramme en radar commence à 15h et progresse dans le sens antihoraire (la position 2 correspond à 14 heures, etc.)
 
+Dessin de deux graphiques radar superposés, l'un pour l'ensemble des rpu de la région, l'autre pour l'hôpital considéré.  
+On défini dans la variable *rpu.names* le nom et l'ordre des variables à afficher. Le radar commence par défaut à 15h puis progresse en sens anti-horaire. Les variables sont divisées en 3 secteurs:
+- l'entrée du patient
+- le diagnostic médical
+- la sortie  
+Le taux de complétude est calculé à partir des items non reseignés (NA) en appliquant à chaque colonne la fonction *mean* qui retourne le pourcentage de NA.
+
+
 ```r
-library("plotrix", lib.loc = "/usr/lib/R/site-library")
+library("plotrix")
+library("openintro")
 
 rpu.names <- c("Entrée", "Sexe", "Age", "Commune", "ZIP", "Provenance", "PEC Transport", 
     "Mode Transport", "Mode entrée", "CCMU", "Motif", "DP", "Sortie", "Mode sortie", 
@@ -864,7 +902,6 @@ rpu.names <- c("Entrée", "Sexe", "Age", "Commune", "ZIP", "Provenance", "PEC Tr
 # taux de complétude régional
 a <- is.na(d1)
 b <- round(apply(a, 2, mean) * 100, 2)
-# b <- sort(b)
 b <- cbind(b)
 colnames(b) <- "%"
 completude <- c(b[6], b[16], b[20], b[3], b[2], b[15], b[19], b[18], b[10], 
@@ -872,7 +909,19 @@ completude <- c(b[6], b[16], b[20], b[3], b[2], b[15], b[19], b[18], b[10],
 completude <- 100 - completude
 
 radial.plot(completude, labels = rpu.names, , rp.type = "p", radial.lim = c(0, 
-    100), poly.col = "khaki", main = paste(ch.names, "- Taux de complétude des RPU"))
+    100), poly.col = fadeColor("khaki", fade = "A0"), main = paste(ch.names, 
+    "- Taux de complétude des RPU"), radial.labels = T)
+```
+
+```
+## 0 100
+```
+
+```
+## 0 20 40 60 80 100
+```
+
+```r
 
 # taux de complétude de l'hôpital local
 a <- is.na(hopital)
@@ -890,6 +939,13 @@ completude_hop[15] <- orient.exhaustivite
 radial.plot(completude_hop, labels = rpu.names, radial.lim = c(0, 100), add = T, 
     rp.type = "p", line.col = "goldenrod4", main = "Taux de complétude des RPU", 
     lwd = 2)
+```
+
+```
+## 0 100
+```
+
+```r
 
 legend("bottomleft", legend = c(ch.names, "Alsace"), col = c("goldenrod4", "khaki"), 
     lty = 1, bty = "n")
@@ -907,23 +963,44 @@ c
 ```
 
 ```
-##                Alsace (%) CH Guebwiller
-## Entrée                100        100.00
-## Sexe                  100        100.00
-## Age                   100        100.00
-## Commune               100        100.00
-## ZIP                   100        100.00
-## Provenance             65         15.20
-## PEC Transport          74         38.76
-## Mode Transport         77         99.09
-## Mode entrée            91         58.09
-## CCMU                   86         99.87
-## Motif                  64          0.03
-## DP                     66         99.62
-## Sortie                 91        100.00
-## Mode sortie            86         54.69
-## Orientation            20         27.34
-## Destination            21        100.98
+##                Alsace (%) CH de Colmar
+## Entrée                100          100
+## Sexe                  100          100
+## Age                   100          100
+## Commune               100          100
+## ZIP                   100          100
+## Provenance             65          100
+## PEC Transport          74           99
+## Mode Transport         77           99
+## Mode entrée            91          100
+## CCMU                   86           99
+## Motif                  64          100
+## DP                     66           89
+## Sortie                 91           99
+## Mode sortie            86           98
+## Orientation            20           97
+## Destination            21           99
+```
+
+Urilsation des routines
+=======================
+
+```r
+source("../../../Routines/mes_fonctions.R")
+x <- completude(d1)
+y <- completude(hopital)
+radar_completude(x, y, ch.names = "CH Colmar")
+```
+
+```
+## 0 100
+```
+
+![plot of chunk routines](figure/routines.png) 
+
+```
+## 0 20 40 60 80 100 
+## 0 100
 ```
 
 

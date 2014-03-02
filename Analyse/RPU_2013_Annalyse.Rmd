@@ -36,10 +36,7 @@ Lecture du fichier des données
 On lit le fichier de travail créé:
 ```{r Lecture fichier}
 
-# load("../rpu2013.Rda")
-load("../rpu2013d0111.Rda")
-# d1<-d0109
-# rm(d0109)
+load("../rpu2013d0112.Rda")
 
 attach(d1)
 ```

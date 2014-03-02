@@ -28,16 +28,16 @@ Le nombre de retours à domicile est obtenu à partir de la rubrique MODE\_SORTI
 
 Les variation du retour journalier à domicile sont calculés de la manière suivante:
 \begin{description}
-  \item[numérateur] somme quotidienne où MODE\_SORTIE == Domicile
+  \item[numérateur] somme quotidienne où MODE\_SORTIE = Domicile
   \item[dénominateur] somme quotidienne des ENTREE (correspond à q)
 \end{description}
 
 <<retour_dom,echo=FALSE,results='asis'>>=
 q2<-tapply(d1[d1$MODE_SORTIE=="Domicile",6],yday(d1[d1$MODE_SORTIE == "Domicile", 6]),length)
 #head(q2)
-q3<-q2/q
-a<-xsummary(q3,xtable=TRUE,tl="Retours à domicile - patients n'ayant été ni hospitalisés, ni transférés dans un autre établissement. Ce taux est plus faible en début d'année, lorsque les épisodes de tension sont plus fréquents.",tc="Retour à domicile",lab="tab:rd")
-plot(q3,type="l",main="Retours à domicile")
+q3<-q2*100/q
+a<-xsummary(q3,xtable=TRUE,tl="Pourcentage de retours à domicile - patients n'ayant été ni hospitalisés, ni transférés dans un autre établissement. Ce taux est plus faible en début d'année, lorsque les épisodes de tension sont plus fréquents.",tc="Retour à domicile",lab="tab:rd")
+plot(q3,type="l", main="Retours à domicile", ylab="% de retour à domicile", xlab = "jours")
 @
 
 On refait le calcul de q en tenant compte des non réponses:
@@ -48,6 +48,8 @@ q5<-q2/q4
 #head(q5)
 a<-summary(q5,xtable=TRUE,tl="Retours à domicile sans les non réponses",tc="Passages totaux sans les non réponses",lab="tab:rdsansNA")
 plot(q3,type="l",main="Taux de retour à domicile\n(non réponses exclues)",ylab="Fréquence",xlab="Jours")
+abline(h = a["Moyenne"], lty=2, col="blue")
+legend("bottomright", legend="moyenne", col="blue", lty=2, bty="n")
 @
 
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) est une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.

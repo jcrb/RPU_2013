@@ -62,19 +62,21 @@ Le mode de sortie est affiné par la rubrique ORIENTATION avec la ventilation su
 
 On notera que le retour à domicile proprement dit ne figure pas parmi les items et cette modalité est implicite. On peut supposer que les NA's correspondent à cette modalité. Cependant une ambiguité demeure car les non réponses sont aussi représentées par ce symbole.
 
-<<orientation,echo=TRUE,warning=FALSE>>=
+<<orientation, echo=FALSE,warning=FALSE, comment="",results='asis'>>=
 # drop.levels permet d'éliminer le level 0 qui est nul
 a<-drop.levels(d1$ORIENTATION)
-summary(a)
+# summary(a)
 
 table(a,useNA="always")
 
-table(d1$DESTINATION,d1$GRAVITE)
+xtable(table(d1$DESTINATION,d1$GRAVITE), caption=c("Destination et gravité (la gravité est exprimée en unités CCMU","Destination et gravité"), label = "tab:dest_gravite")
+
+xtable(table(d1$ORIENTATION,d1$GRAVITE), caption=c("Orientation et gravité (la gravité est exprimée en unités CCMU). Certaines orientations sont curieuses: CCMU1 ou 2 et Réanimation, CCMU 5 et services de médecine ou de chirurgie.","Orientation et gravité"), label = "tab:orient_gravite")
 @
 
 \section{Destination}
 \index{destination}
-<<destination,warning=FALSE,results='asis',echo=FALSE>>=
+<<destination, warning=FALSE, results='asis', echo=FALSE>>=
 c<-drop.levels(d1$DESTINATION)
 sc<-summary(c)
 tc<-round(prop.table(table(c,dnn="%"))*100,2)
@@ -87,16 +89,25 @@ xtable(tcna,caption = "Devenir des patients à la sortie des urgences. DOM repr�
 @
 
 \section{Incohérences}
-\ref{sortie:erreurs}
-On isole le groupe "mode de sortie = domicile) et on relève les résultats de l'item "orientation":
-<<fausses_sorties>>=
-a<-d1[d1$MODE_SORTIE=="Domicile" ,]
-summary(as.factor(a$ORIENTATION))
-t<-table(as.factor(a$ORIENTATION))
-round(prop.table(t)*100,2)
-tab1(as.factor(a$ORIENTATION),sort.group="decreasing",horiz=TRUE,cex.names = 0.8,xlab="",main="Orientation des patients non hospitalisés",missing=F)
+
+\index{Incohérences}
+
+On isole le groupe "mode de sortie = domicile" et on relève les résultats de l'item "orientation" correspondant à ce groupe:
+
+<<fausses_sorties, echo=FALSE, comment="", results='asis'>>=
+or <- d1[d1$MODE_SORTIE=="Domicile", "ORIENTATION"]
+# summary(a$ORIENTATION)
+# t<-table(a$ORIENTATION)
+# round(prop.table(t)*100,2)
+
+a <- tab1(or,sort.group="decreasing",horiz=TRUE,cex.names = 0.8,xlab="",main="Orientation des patients non hospitalisés", missing=F)
+t <- a$output.table
+colnames(t)<-c("Fréquence","Pourcentage","Pourcentage cumulé")
+x <- xtable(t, caption=c("Orientation des patients non hospitalisés. Certaines orientation sont incompatibles avec un retour à domicile (Défaut de cohérence).","Orientation des patients non hospitalisés"),label="tab:orient_nh")
+print(x,format.args = list(big.mark = " ", decimal.mark = ","))
 @
-Certaines orientations sont incompatibles avec une non hospitalisation:
+
+Certaines orientations sont incompatibles avec un retour à domicile:
 \begin{itemize}
   \item HO
   \item Obstétrique
