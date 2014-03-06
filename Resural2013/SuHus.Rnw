@@ -1,6 +1,8 @@
 % SuHus.Rnw
 % Activité des SU des HUS
 
+hop <- "Hus"
+
 \index{SU des HUS}
 \index{HUS!SU}
 \index{Hôpitaux Universitaires de Strasbourg!SU}
@@ -40,3 +42,18 @@ ta<-tapply(dhus$TOTAL.passages,hus.serv,sum)
 Entre le \Sexpr{m1} et le \Sexpr{m2}, \np{\Sexpr{t}} RPU ont été transmis, alors que \np{\Sexpr{tot}} dossiers ont été déclarés au serveur régional. 
 \Sexpr{table(ta)}
 
+\section*{Durée de présence aux urgences}
+
+<<graphe_hus,echo=FALSE,fig.height=6>>=
+presence_hist(hop,d1)
+@
+
+\section*{Taux de complétude}
+\index{HUS!completude}
+
+<<compl_hus, echo=FALSE, warning=FALSE,fig.width=8>>= 
+ch <- d1[d1$FINESS==hop,]
+x <- completude(d1)
+y <- completude(ch)
+radar_completude(x,y, ch.names = "CHU Strasbourg")
+@

@@ -20,10 +20,16 @@
 \contentsline {subsubsection}{L'identifiant (ID)}{34}{section*.13}
 \contentsline {subsubsection}{L'\IeC {\'e}tablissement de sant\IeC {\'e}}{34}{section*.14}
 \contentsline {subsubsection}{Le code postal de r\IeC {\'e}sidence}{34}{section*.15}
-\contentsline {subsubsection}{le motif de recours aux urgences}{34}{section*.16}
-\contentsline {subsubsection}{Le mode de sortie}{34}{section*.17}
-\contentsline {subsubsection}{Destination}{35}{section*.18}
-\contentsline {subsubsection}{Orientation}{35}{section*.19}
+\contentsline {subsubsection}{La commune de r\IeC {\'e}sidence}{34}{section*.16}
+\contentsline {subsubsection}{la date de naissance}{34}{section*.17}
+\contentsline {subsubsection}{le mode d'entr\IeC {\'e}e}{34}{section*.18}
+\contentsline {subsubsection}{la provenance}{35}{section*.19}
+\contentsline {subsubsection}{Le mode de transport}{35}{section*.20}
+\contentsline {subsubsection}{la prise en charge durant le transport}{35}{section*.21}
+\contentsline {subsubsection}{le motif de recours aux urgences}{35}{section*.22}
+\contentsline {subsubsection}{Le mode de sortie}{35}{section*.23}
+\contentsline {subsubsection}{Destination}{36}{section*.24}
+\contentsline {subsubsection}{Orientation}{36}{section*.25}
 \contentsline {part}{II\hspace {1em}Activit\IeC {\'e} des services d'urgence d'Alsace}{37}{part.2}
 \contentsline {chapter}{\numberline {7}Activit\IeC {\'e} r\IeC {\'e}gionale totale}{39}{chapter.7}
 \contentsline {section}{\numberline {7.1}Nombre total de passages}{39}{section.7.1}
@@ -68,32 +74,33 @@
 \contentsline {chapter}{\numberline {16}G\IeC {\'e}riatrie}{135}{chapter.16}
 \contentsline {part}{IV\hspace {1em}Activit\IeC {\'e} par service d'urgence}{137}{part.4}
 \contentsline {chapter}{\numberline {17}SU Wissembourg}{139}{chapter.17}
-\contentsline {chapter}{\numberline {18}SU Haguenau}{141}{chapter.18}
-\contentsline {chapter}{\numberline {19}SU Saverne}{143}{chapter.19}
-\contentsline {chapter}{\numberline {20}SU Sainte Odile}{145}{chapter.20}
-\contentsline {chapter}{\numberline {21}SU des H\IeC {\^o}pitaux universitaires}{147}{chapter.21}
-\contentsline {section}{\numberline {21.1}Activit\IeC {\'e} globale}{147}{section.21.1}
-\contentsline {chapter}{\numberline {22}SU Sainte Anne}{149}{chapter.22}
-\contentsline {section}{\numberline {22.1}Taux moyen de passages}{150}{section.22.1}
-\contentsline {section}{\numberline {22.2}Taux d'hospitalisation}{152}{section.22.2}
-\contentsline {section}{\numberline {22.3}Total des passages}{153}{section.22.3}
-\contentsline {subsection}{\numberline {22.3.1}Passages de 1 \IeC {\`a} 75 ans}{155}{subsection.22.3.1}
-\contentsline {subsection}{\numberline {22.3.2}Passages des plus de 75 ans}{157}{subsection.22.3.2}
-\contentsline {chapter}{\numberline {23}Polyclinique Saint-Luc}{161}{chapter.23}
-\contentsline {chapter}{\numberline {24}SU S\IeC {\'e}lestat}{163}{chapter.24}
-\contentsline {chapter}{\numberline {25}SU Colmar}{165}{chapter.25}
-\contentsline {chapter}{\numberline {26}SU Guebwiller}{169}{chapter.26}
-\contentsline {chapter}{\numberline {27}SU Thann}{177}{chapter.27}
-\contentsline {chapter}{\numberline {28}SU Altkirch}{179}{chapter.28}
-\contentsline {chapter}{\numberline {29}SU Emile Muller}{181}{chapter.29}
-\contentsline {chapter}{\numberline {30}SU Diaconnat-Fonderie}{183}{chapter.30}
-\contentsline {chapter}{\numberline {31}SU Saint Louis}{185}{chapter.31}
-\contentsline {part}{V\hspace {1em}Activit\IeC {\'e} des SAMU d'Alsace}{187}{part.5}
-\contentsline {chapter}{\numberline {32}Activit\IeC {\'e} des SAMU alsacien}{189}{chapter.32}
-\contentsline {part}{VI\hspace {1em}Annexes}{195}{part.6}
-\contentsline {chapter}{\numberline {A}M\IeC {\'e}thodologie}{197}{appendix.A}
-\contentsline {chapter}{\numberline {B}Glossaire}{201}{appendix.B}
-\contentsline {chapter}{\numberline {C}RPU}{205}{appendix.C}
-\contentsline {chapter}{\numberline {D}A propos de ce document}{207}{appendix.D}
-\contentsline {chapter}{\numberline {E}Bibliographie}{209}{appendix.E}
-\contentsline {chapter}{Index}{213}{appendix*.63}
+\contentsline {chapter}{\numberline {18}SU Haguenau}{143}{chapter.18}
+\contentsline {chapter}{\numberline {19}SU Saverne}{147}{chapter.19}
+\contentsline {chapter}{\numberline {20}SU Sainte Odile}{151}{chapter.20}
+\contentsline {chapter}{\numberline {21}SU des H\IeC {\^o}pitaux universitaires}{155}{chapter.21}
+\contentsline {section}{\numberline {21.1}Activit\IeC {\'e} globale}{155}{section.21.1}
+\contentsline {chapter}{\numberline {22}SU Sainte Anne}{159}{chapter.22}
+\contentsline {section}{\numberline {22.1}Taux moyen de passages}{160}{section.22.1}
+\contentsline {section}{\numberline {22.2}Taux d'hospitalisation}{162}{section.22.2}
+\contentsline {section}{\numberline {22.3}Total des passages}{163}{section.22.3}
+\contentsline {subsection}{\numberline {22.3.1}Passages de 1 \IeC {\`a} 75 ans}{165}{subsection.22.3.1}
+\contentsline {subsection}{\numberline {22.3.2}Passages des plus de 75 ans}{167}{subsection.22.3.2}
+\contentsline {chapter}{\numberline {23}Polyclinique Saint-Luc}{171}{chapter.23}
+\contentsline {chapter}{\numberline {24}SU S\IeC {\'e}lestat}{173}{chapter.24}
+\contentsline {chapter}{\numberline {25}SU Colmar}{177}{chapter.25}
+\contentsline {chapter}{\numberline {26}SU Guebwiller}{181}{chapter.26}
+\contentsline {chapter}{\numberline {27}SU Thann}{185}{chapter.27}
+\contentsline {chapter}{\numberline {28}SU Altkirch}{187}{chapter.28}
+\contentsline {chapter}{\numberline {29}SU Emile Muller}{191}{chapter.29}
+\contentsline {chapter}{\numberline {30}SU Diaconnat-Fonderie}{195}{chapter.30}
+\contentsline {chapter}{\numberline {31}SU Saint Louis}{199}{chapter.31}
+\contentsline {chapter}{\numberline {32}Tableau de synth\IeC {\`e}se}{203}{chapter.32}
+\contentsline {part}{V\hspace {1em}Activit\IeC {\'e} des SAMU d'Alsace}{207}{part.5}
+\contentsline {chapter}{\numberline {33}Activit\IeC {\'e} des SAMU alsacien}{209}{chapter.33}
+\contentsline {part}{VI\hspace {1em}Annexes}{215}{part.6}
+\contentsline {chapter}{\numberline {A}M\IeC {\'e}thodologie}{217}{appendix.A}
+\contentsline {chapter}{\numberline {B}Glossaire}{221}{appendix.B}
+\contentsline {chapter}{\numberline {C}RPU}{225}{appendix.C}
+\contentsline {chapter}{\numberline {D}A propos de ce document}{227}{appendix.D}
+\contentsline {chapter}{\numberline {E}Bibliographie}{229}{appendix.E}
+\contentsline {chapter}{Index}{233}{appendix*.93}

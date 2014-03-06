@@ -1,0 +1,76 @@
+% SU_synthese.Rnw
+
+\index{Synthèse}
+\index{SU!synthèse}
+
+<<synthese, echo=FALSE>>=
+
+source("../Analyse/Chapitres/resume.R")
+load("~/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Synthese/Synthese.Rda")
+synt <- as.data.frame(synt)
+rownames(synt)[1] <- "RPU totaux"
+rownames(synt)[2] <- "Age moyen"
+rownames(synt)[3] <- "Ecart-type"
+rownames(synt)[4] <- "RPU Pédiatriques"
+rownames(synt)[5] <- "% Pédiatrie"
+rownames(synt)[6] <- "RPU Gériatriques"
+rownames(synt)[7] <- "% Gériatrie"
+rownames(synt)[8] <- "Présence moyenne"
+rownames(synt)[9] <- "Présence médiane"
+rownames(synt)[10] <- "RPU moins de 4 heures"
+rownames(synt)[11] <- "% moins de 4 heures"
+rownames(synt)[12] <- "Attente moy.hospitalisation"
+rownames(synt)[13] <- "Attente moy.domicile"
+rownames(synt)[14] <- "Taux hospitalisation"
+rownames(synt)[15] <- "% passages soirée"
+rownames(synt)[16] <- "% passages nuit"
+rownames(synt)[17] <- "RPU le week-end"
+rownames(synt)[18] <- "% RPU week-end"
+rownames(synt)[19] <- "Nb de CCMU 1"
+rownames(synt)[20] <- "% de CCMU 1"
+rownames(synt)[21] <- "Nb de CCMU 4 et 5"
+rownames(synt)[22] <- "% de CCMU 4 et 5"
+
+x <- xtable(synt, caption=c("Tableau comparatif des principaux indicateurs d'activité des services d'urgence d'Alsace en 2013","Tableu de synthèse des SU"), label="tab:synthèse", align=c("l",rep("r",11)))
+@
+
+Signification des intitulés des lignes:
+\begin{enumerate}
+  \item \textbf{RPU totaux}: nombre total de RPU transmis à RESURAL
+  \item \textbf{Age moyen}: age moyen en année des patients, tous ages confondus
+  \item \textbf{Ecart-type}: écart-type de l'age en années
+  \item \textbf{RPU Pédiatriques}: nombre de passages de moins de 18 ans
+  \item \textbf{\% Pédiatrie}: pourcentage de passages pédiatriques
+  \item \textbf{RPU Gériatriques}: nombre de passages de 75 ans et plus
+  \item \textbf{\% Gériatrie}: pourcentage de passages de 75 ans et plus
+  \item \textbf{Présence moyenne}: durée de présence moyenne (en minutes) au service d'urgence
+  \item \textbf{Présence médiane}: durée de présence médiane en minutes (50\% sont restés moins de cette duré et 50\% plus de cette durée)
+  \item \textbf{RPU moins de 4 heures}: nombre de patients dont a durée de présence au SU est de moins de 4 heures
+  \item \textbf{\% moins de 4 heures}: pourcentage de patients dont a durée de présence au SU est de moins de 4 heures
+  \item \textbf{Attente moy.hospitalisation}: durée de passage (en minutes) des patients qui seront hospitalisés ou transférés
+  \item \textbf{Attente moy.domicile}: durée de passage (en minutes) des patients qui quittent l'hôital à l'issue de leur passage au SU
+  \item \textbf{Taux hospitalisation}: proportion de patients hodpitalisés ou transférés par rapport au nombre total de passages
+  \item \textbf{\% passages soirée}: pourcentage de patients qui se présentent dans la tranche 20 heures - minuit
+  \item \textbf{\% passages nuit}: pourcentage de patients qui se présentent dans la tranche minuit - 8 heures (nuit profonde)
+  \item \textbf{RPU le week-end}: nombre de RPU générés du vendredi 20 heures au lundi 8 heures
+  \item \textbf{\% RPU week-end}: pourcentage de RPU générés du vendredi 20 heures au lundi 8 heures par rapport au nombre total de passages
+  \item \textbf{Nb de CCMU 1}: nombre de patients classés CCMU 1
+  \item \textbf{\% de CCMU 1}: pourcentage de patients classés CCMU 1
+  \item \textbf{Nb de CCMU 4 et 5}: nombre  de patients classés CCMU 4 ou 5 (les plus graves)
+  \item \textbf{\% de CCMU 4 et 5}: pourcentage  de patients classés CCMU 4 ou 5.
+\end{enumerate}
+
+
+\begin{landscape}
+% \begin{table}
+% \begin{center}
+  <<synthese2, echo=FALSE, results='asis'>>=
+    print(x)
+    # print(x, size="\\tiny") autres possibilités pour size: small, footnotesize, scriptsize, tiny
+  @
+% \end{center}
+% \end{table}
+\end{landscape}
+
+
+

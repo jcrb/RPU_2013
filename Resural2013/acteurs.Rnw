@@ -16,7 +16,7 @@ Deux structures ne fournissent pas encore de RPU. Il s'agit de la clinique Saint
 
 Certaines données peuvent être recoupées avec celles du serveur régional mis en place en 2006 par l'ARS: 
 
-\fbox{Voir SAU2013}
+% \fbox{Voir SAU2013}
 
 <<tab1, echo=FALSE, results='asis' >>=
 a<-table(d1$FINESS)
@@ -53,7 +53,7 @@ Les informations sont résumées dans la table \ref{tab2}, page \pageref{tab2}.
 
 On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l'exhaustivité qualitative des données. Chaque item du RPU est représenté par le rayon d'une roue, gradué de 0 à 100\%. Sur chaque rayon, les points obtenus sont reliés entre eux pour dessiner un polygone qui figue la physionomie de l'ensemble des données.
 
-<<radar,echo=FALSE>>=
+<<radar,echo=FALSE, warning=FALSE, comment="">>=
 fadeBlue<-fadeColor("blue", fade = "15")
 fadeRed<-fadeColor("red", fade = "15")
 
@@ -63,3 +63,7 @@ radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue,pol
 @
 
 Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données sont à interpréter avec prudence. Ainsi l'item 4 qui correspond au mode de sortie ne distingue pas les non réponses des vrais retours à domicile (se reporter à la discussion page \pageref{ref:sortie})
+
+Les diagrammes de complétude propres à chaque établissement figurent au chapitre correspondant au service d'urgence.
+
+Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce fernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparait dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})

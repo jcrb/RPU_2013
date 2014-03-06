@@ -49,11 +49,80 @@ Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas q
 \subsubsection{Le code postal de résidence}
 %%%%%%%%%%%%%%
 
-\index{code postal}
+\index{Code postal}
 Lorsque le lieu de résidence se situe hors des limites du territoire national, il faut indiquer par convention $99999$.
 Si le code postal précis est inconnu : le numéro du département suivi de 999
 Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}
-Si le département ou le pays de résidence est inconnu : 99999
+Si le département ou le pays de résidence est inconnu : 99999.
+Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux (Strasbourg).
+
+%%%%%%%%%%%%%%
+\subsubsection{La commune de résidence}
+%%%%%%%%%%%%%%
+
+\index{Commune de résidence}
+En l'absence de code INSEE, il convient de respecter les recommandations suivantes:
+\begin{itemize}
+  \item utiliser exclusivement des lettres majuscules
+  \item ne pas utiliser de caractères accentués
+  \item remplacer les blancs par un trait d'union (VIR-AU-VAL)
+\end{itemize}
+
+%%%%%%%%%%%%%%
+\subsubsection{la date de naissance}
+%%%%%%%%%%%%%%
+
+\index{Date de naissance}
+\index{Age}
+Elle comporte l'année, le mois et le jour de naissance, ce qui permet de calculer l'âge au moment de l'admission. Dans ce document on utilise l'âge par génération ou âge atteint dans l'année (et non pas l'age révolu). Comme toutes les dates il est préférable d'utiliser la norme ISO 8601 (AAAA-MM-JJ HH:MM:SS).
+
+%%%%%%%%%%%%%%
+\subsubsection{le mode d'entrée}
+%%%%%%%%%%%%%%
+
+\index{Mode d'entrée}
+Trois codes imposés:
+\begin{itemize}
+  \item \textbf{6} Mutation
+  \item \textbf{7} Transfert
+  \item \textbf{8} Domicile
+\end{itemize}
+
+
+%%%%%%%%%%%%%%
+\subsubsection{la provenance}
+%%%%%%%%%%%%%%
+
+\index{Provenance}
+Le RPU propose deux séries de code selon que le patient provient d'un établissement de santé ou du domicile. Si l'origine est un établissement:
+\begin{itemize}
+  \item \textbf{1}
+  \item \textbf{2}
+  \item \textbf{3}
+  \item \textbf{4}
+\end{itemize}
+Si le patient vient du domicile:
+\begin{itemize}
+  \item \textbf{7}
+  \item \textbf{8}
+\end{itemize}
+
+Les codes \textbf{Provenance} 1 à 4 sont incompatibles avec \textbf{Mode d'entrée} 8. De même les codes \textbf{Provenance} 7 et 8 sont incompatibles avec \textbf{Mode d'entrée} 6 et 7.
+
+
+%%%%%%%%%%%%%%
+\subsubsection{Le mode de transport}
+%%%%%%%%%%%%%%
+
+\index{Mode de transport}
+Ce sont des codes textuels précisant le moyen utilisé pour se rendre aux urgences.
+
+%%%%%%%%%%%%%%
+\subsubsection{la prise en charge durant le transport}
+%%%%%%%%%%%%%%
+
+\index{Prise en charge durant le transport}
+Ce sont des codes textuels précisant s'il y avait un accompgnement médical ou paramédical durant le transport.
 
 %%%%%%%%%%%%%%
 \subsubsection{le motif de recours aux urgences}
@@ -61,6 +130,7 @@ Si le département ou le pays de résidence est inconnu : 99999
 
 \index{motif de recours}
 Il faut utiliser l'un des motifs de recours préconisé par le ministère de la santé \cite{13} et codifiés par la SFMU. La dernière version est la version de juin 2013 du thésaurus de la SFMU accessible sur le site internet de cette dernière. Il comporte une liste d'environ $150$ recours avec leur équivalence CIM10.
+
 
 %%%%%%%%%%%%%%
 \subsubsection{Le mode de sortie}
@@ -93,12 +163,14 @@ En cas de sortie par mutation ou transfert, il peut s'agir:
   \item « 3 » Hospitalisation dans une unité de soins de longue durée (SLD)\index{SLD}
   \item « 4 » Hospitalisation dans une unité de psychiatrie (PSY)\index{PSY}
 \end{itemize}
+Les codes 1 à 4 sont incompatibles avec \textbf{mode de sortie} = \textbf{domicile}
 
 En cas de sortie au domicile
 \begin{itemize}
   \item « 6 » Retour au domicile dans le cadre d’une hospitalisation à domicile (HAD)\index{HAD}
   \item « 7 » Retour vers une structure d'hébergement médico-social (HMS)\index{HMS}
 \end{itemize}
+Les codes 6 et 7 sont incompatibles avec \textbf{mode de sortie} = \textbf{mutation, transfert} ou \textbf{décès}.
 
 On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne saitpas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
 
@@ -133,4 +205,4 @@ L'orientation précise le devenir ou les circonstances associées. Cette rubriqu
 
 \end{enumerate}
 
-
+Selon le cas ces codes sont incompatibles avec un \textbf{mode de sortie} à domicile ou une hospitalisation.

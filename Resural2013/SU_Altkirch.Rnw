@@ -6,6 +6,7 @@
 <<recap_alk,echo=FALSE,warning=FALSE>>=
 
 source("../Analyse/Chapitres/resume.R")
+source("../Routines/mes_fonctions.R")
 
 hop <- "Alk"
 
@@ -57,6 +58,18 @@ CCMU 4 \& 5 & \np{\Sexpr{a["n_ccmu45"]}} (\Sexpr{a["p_ccmu45"]} \%) \tabularnewl
 
 \end{tabular}
 
+\section*{Durée de présence aux urgences}
+
 <<graphe_p_alk,echo=FALSE,fig.height=6>>=
 presence_hist(hop,d1)
+@
+
+\section*{Taux de complétude}
+\index{Colmar!taux de complétude}
+
+<<compl_alk, echo=FALSE, warning=FALSE,fig.width=8>>= 
+ch <- d1[d1$FINESS==hop,]
+x <- completude(d1)
+y <- completude(ch)
+radar_completude(x,y, ch.names = "CH d'Alkirch")
 @

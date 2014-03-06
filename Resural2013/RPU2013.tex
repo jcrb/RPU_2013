@@ -171,7 +171,7 @@ Bartier \& Madame Christine Hecker}}
 %\vspace*{7.5cm}
 
 \begin{itemize}\raggedright
-  \item R version 3.0.2 (2013-09-25), \verb|i686-pc-linux-gnu|
+  \item R version 3.0.2 (2013-09-25), \verb|x86_64-pc-linux-gnu|
   \item Locale: \verb|LC_CTYPE=fr_FR.UTF-8|, \verb|LC_NUMERIC=C|, \verb|LC_TIME=fr_FR.UTF-8|, \verb|LC_COLLATE=fr_FR.UTF-8|, \verb|LC_MONETARY=fr_FR.UTF-8|, \verb|LC_MESSAGES=fr_FR.UTF-8|, \verb|LC_PAPER=fr_FR.UTF-8|, \verb|LC_NAME=C|, \verb|LC_ADDRESS=C|, \verb|LC_TELEPHONE=C|, \verb|LC_MEASUREMENT=fr_FR.UTF-8|, \verb|LC_IDENTIFICATION=C|
   \item Base packages: base, datasets, graphics, grDevices,
     methods, stats, utils
@@ -544,10 +544,10 @@ Deux structures ne fournissent pas encore de RPU. Il s'agit de la clinique Saint
 
 Certaines données peuvent être recoupées avec celles du serveur régional mis en place en 2006 par l'ARS: 
 
-\fbox{Voir SAU2013}
+% \fbox{Voir SAU2013}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:37:25 2014
+% Thu Mar  6 23:41:38 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -583,7 +583,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:37:27 2014
+% Thu Mar  6 23:41:39 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -628,28 +628,28 @@ On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-##            id   CODE_POSTAL       COMMUNE   DESTINATION            DP 
-##           0.0           0.0           0.0          78.7          33.8 
-##        ENTREE       EXTRACT        FINESS       GRAVITE   MODE_ENTREE 
-##           0.0           0.0           0.0          14.4           9.4 
-##   MODE_SORTIE         MOTIF     NAISSANCE   ORIENTATION    PROVENANCE 
-##          14.0          35.8           0.0          80.0          35.0 
-##          SEXE        SORTIE     TRANSPORT TRANSPORT_PEC           AGE 
-##           0.0           8.9          23.3          25.5           0.0 
-##       secteur 
-##           0.0
-## 0 1
+           id   CODE_POSTAL       COMMUNE   DESTINATION            DP 
+          0.0           0.0           0.0          78.7          33.8 
+       ENTREE       EXTRACT        FINESS       GRAVITE   MODE_ENTREE 
+          0.0           0.0           0.0          14.4           9.4 
+  MODE_SORTIE         MOTIF     NAISSANCE   ORIENTATION    PROVENANCE 
+         14.0          35.8           0.0          80.0          35.0 
+         SEXE        SORTIE     TRANSPORT TRANSPORT_PEC           AGE 
+          0.0           8.9          23.3          25.5           0.0 
+      secteur 
+          0.0 
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/radar} 
-\begin{kframe}\begin{verbatim}
-## 0 0.2 0.4 0.6 0.8 1
-\end{verbatim}
-\end{kframe}
+
 \end{knitrout}
 
 
 Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données sont à interpréter avec prudence. Ainsi l'item 4 qui correspond au mode de sortie ne distingue pas les non réponses des vrais retours à domicile (se reporter à la discussion page \pageref{ref:sortie})
+
+Les diagrammes de complétude propres à chaque établissement figurent au chapitre correspondant au service d'urgence.
+
+Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce fernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparait dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})
 
 
 \newpage
@@ -760,11 +760,80 @@ Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas q
 \subsubsection{Le code postal de résidence}
 %%%%%%%%%%%%%%
 
-\index{code postal}
+\index{Code postal}
 Lorsque le lieu de résidence se situe hors des limites du territoire national, il faut indiquer par convention $99999$.
 Si le code postal précis est inconnu : le numéro du département suivi de 999
 Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}
-Si le département ou le pays de résidence est inconnu : 99999
+Si le département ou le pays de résidence est inconnu : 99999.
+Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux (Strasbourg).
+
+%%%%%%%%%%%%%%
+\subsubsection{La commune de résidence}
+%%%%%%%%%%%%%%
+
+\index{Commune de résidence}
+En l'absence de code INSEE, il convient de respecter les recommandations suivantes:
+\begin{itemize}
+  \item utiliser exclusivement des lettres majuscules
+  \item ne pas utiliser de caractères accentués
+  \item remplacer les blancs par un trait d'union (VIR-AU-VAL)
+\end{itemize}
+
+%%%%%%%%%%%%%%
+\subsubsection{la date de naissance}
+%%%%%%%%%%%%%%
+
+\index{Date de naissance}
+\index{Age}
+Elle comporte l'année, le mois et le jour de naissance, ce qui permet de calculer l'âge au moment de l'admission. Dans ce document on utilise l'âge par génération ou âge atteint dans l'année (et non pas l'age révolu). Comme toutes les dates il est préférable d'utiliser la norme ISO 8601 (AAAA-MM-JJ HH:MM:SS).
+
+%%%%%%%%%%%%%%
+\subsubsection{le mode d'entrée}
+%%%%%%%%%%%%%%
+
+\index{Mode d'entrée}
+Trois codes imposés:
+\begin{itemize}
+  \item \textbf{6} Mutation
+  \item \textbf{7} Transfert
+  \item \textbf{8} Domicile
+\end{itemize}
+
+
+%%%%%%%%%%%%%%
+\subsubsection{la provenance}
+%%%%%%%%%%%%%%
+
+\index{Provenance}
+Le RPU propose deux séries de code selon que le patient provient d'un établissement de santé ou du domicile. Si l'origine est un établissement:
+\begin{itemize}
+  \item \textbf{1}
+  \item \textbf{2}
+  \item \textbf{3}
+  \item \textbf{4}
+\end{itemize}
+Si le patient vient du domicile:
+\begin{itemize}
+  \item \textbf{7}
+  \item \textbf{8}
+\end{itemize}
+
+Les codes \textbf{Provenance} 1 à 4 sont incompatibles avec \textbf{Mode d'entrée} 8. De même les codes \textbf{Provenance} 7 et 8 sont incompatibles avec \textbf{Mode d'entrée} 6 et 7.
+
+
+%%%%%%%%%%%%%%
+\subsubsection{Le mode de transport}
+%%%%%%%%%%%%%%
+
+\index{Mode de transport}
+Ce sont des codes textuels précisant le moyen utilisé pour se rendre aux urgences.
+
+%%%%%%%%%%%%%%
+\subsubsection{la prise en charge durant le transport}
+%%%%%%%%%%%%%%
+
+\index{Prise en charge durant le transport}
+Ce sont des codes textuels précisant s'il y avait un accompgnement médical ou paramédical durant le transport.
 
 %%%%%%%%%%%%%%
 \subsubsection{le motif de recours aux urgences}
@@ -772,6 +841,7 @@ Si le département ou le pays de résidence est inconnu : 99999
 
 \index{motif de recours}
 Il faut utiliser l'un des motifs de recours préconisé par le ministère de la santé \cite{13} et codifiés par la SFMU. La dernière version est la version de juin 2013 du thésaurus de la SFMU accessible sur le site internet de cette dernière. Il comporte une liste d'environ $150$ recours avec leur équivalence CIM10.
+
 
 %%%%%%%%%%%%%%
 \subsubsection{Le mode de sortie}
@@ -804,12 +874,14 @@ En cas de sortie par mutation ou transfert, il peut s'agir:
   \item « 3 » Hospitalisation dans une unité de soins de longue durée (SLD)\index{SLD}
   \item « 4 » Hospitalisation dans une unité de psychiatrie (PSY)\index{PSY}
 \end{itemize}
+Les codes 1 à 4 sont incompatibles avec \textbf{mode de sortie} = \textbf{domicile}
 
 En cas de sortie au domicile
 \begin{itemize}
   \item « 6 » Retour au domicile dans le cadre d’une hospitalisation à domicile (HAD)\index{HAD}
   \item « 7 » Retour vers une structure d'hébergement médico-social (HMS)\index{HMS}
 \end{itemize}
+Les codes 6 et 7 sont incompatibles avec \textbf{mode de sortie} = \textbf{mutation, transfert} ou \textbf{décès}.
 
 On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne saitpas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
 
@@ -844,7 +916,7 @@ L'orientation précise le devenir ou les circonstances associées. Cette rubriqu
 
 \end{enumerate}
 
-
+Selon le cas ces codes sont incompatibles avec un \textbf{mode de sortie} à domicile ou une hospitalisation.
 
 
 
@@ -916,7 +988,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 \subsection*{En valeur absolue}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:37:40 2014
+% Thu Mar  6 23:41:44 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -954,13 +1026,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 
 \subsection*{Taux de recours aux urgences}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] 441062
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+
 
 Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comprte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à 441 062.
 
@@ -970,20 +1036,11 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 %------------------------------
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{m} \hlkwb{<-} \hlkwd{month}\hlstd{(d1}\hlopt{$}\hlstd{ENTREE,} \hlkwc{label} \hlstd{=} \hlnum{TRUE}\hlstd{)}
-\hlkwd{table}\hlstd{(m)}
-\end{alltt}
 \begin{verbatim}
-## m
-##   Jan   Feb   Mar   Apr   May   Jun   Jul   Aug   Sep   Oct   Nov   Dec 
-## 25609 25004 26937 28428 27899 30038 30103 29693 29190 29858 27657 29922
+m
+  Jan   Feb   Mar   Apr   May   Jun   Jul   Aug   Sep   Oct   Nov   Dec 
+25609 25004 26937 28428 27899 30038 30103 29693 29190 29858 27657 29922 
 \end{verbatim}
-\begin{alltt}
-\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(m),} \hlkwc{ylab} \hlstd{=} \hlstr{"nombre"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"mois"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"2013 - Nombre de RPU par mois"}\hlstd{,}
-    \hlkwc{names.arg} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Jan"}\hlstd{,} \hlstr{"Fev"}\hlstd{,} \hlstr{"Mar"}\hlstd{,} \hlstr{"Avr"}\hlstd{,} \hlstr{"Mai"}\hlstd{,} \hlstr{"Jui"}\hlstd{,} \hlstr{"Jul"}\hlstd{,} \hlstr{"Aou"}\hlstd{,} \hlstr{"Sep"}\hlstd{,}
-        \hlstr{"Oct"}\hlstd{,} \hlstr{"Nov"}\hlstd{,} \hlstr{"Dec"}\hlstd{),} \hlkwc{las} \hlstd{=} \hlnum{2}\hlstd{)}
-\end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/parmois} 
 
@@ -993,7 +1050,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 \subsection*{Activité par semaine}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:37:47 2014
+% Thu Mar  6 23:41:46 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1059,7 +1116,7 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 \label{act_sem}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:37:48 2014
+% Thu Mar  6 23:41:46 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
@@ -1080,18 +1137,11 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 \subsection*{Activité par jour de la semaine}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{m} \hlkwb{<-} \hlkwd{wday}\hlstd{(d1}\hlopt{$}\hlstd{ENTREE,} \hlkwc{label} \hlstd{= T)}
-\hlkwd{table}\hlstd{(m)}
-\end{alltt}
 \begin{verbatim}
-## m
-##   Sun   Mon  Tues   Wed Thurs   Fri   Sat 
-## 49530 52265 48026 45838 47628 47252 49799
+m
+  Sun   Mon  Tues   Wed Thurs   Fri   Sat 
+49530 52265 48026 45838 47628 47252 49799 
 \end{verbatim}
-\begin{alltt}
-\hlkwd{barplot}\hlstd{(}\hlkwd{table}\hlstd{(m),} \hlkwc{names.arg} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Dim"}\hlstd{,} \hlstr{"Lun"}\hlstd{,} \hlstr{"Mar"}\hlstd{,} \hlstr{"Mer"}\hlstd{,} \hlstr{"Jeu"}\hlstd{,} \hlstr{"Ven"}\hlstd{,} \hlstr{"Sam"}\hlstd{))}
-\end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/activite_semaine} 
 
@@ -1120,7 +1170,7 @@ Ce phénomène cyclique se répète tous les jours selon un profil immuable. La 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:37:56 2014
+% Thu Mar  6 23:41:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -1156,18 +1206,9 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 \begin{figure}
 \begin{center}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## 3238 22533
-## 5000 10000 15000 20000 25000
-## 3238 22533
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/test25} 
-\begin{kframe}\begin{verbatim}
-## 5000 10000 15000 20000 25000
-\end{verbatim}
-\end{kframe}
+
 \end{knitrout}
 
 \end{center}
@@ -1179,16 +1220,9 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 \begin{figure}
 \begin{center}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## 0 0.1
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/test2} 
-\begin{kframe}\begin{verbatim}
-## 0 0.02 0.04 0.06 0.08 0.1
-\end{verbatim}
-\end{kframe}
+
 \end{knitrout}
 
 \end{center}
@@ -1200,26 +1234,9 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 \begin{figure}
 \begin{center}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/test26} 
-\begin{kframe}\begin{verbatim}
-## 0 0.02 0.04 0.06 0.08 0.1
-\end{verbatim}
-\end{kframe}
+
 \end{knitrout}
 
 \end{center}
@@ -1230,26 +1247,9 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 \begin{figure}
 \begin{center}
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-## 0 0.02 0.04 0.06 0.08 0.1
-## 0 0.1
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/test27} 
-\begin{kframe}\begin{verbatim}
-## 0 0.02 0.04 0.06 0.08 0.1
-\end{verbatim}
-\end{kframe}
+
 \end{knitrout}
 
 \end{center}
@@ -1264,7 +1264,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % tranche-age.Rnw
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:05 2014
+% Thu Mar  6 23:41:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1300,7 +1300,7 @@ Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{rec
 
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:05 2014
+% Thu Mar  6 23:41:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -1371,7 +1371,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:06 2014
+% Thu Mar  6 23:41:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1401,7 +1401,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:06 2014
+% Thu Mar  6 23:41:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1590,7 +1590,7 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:20 2014
+% Thu Mar  6 23:41:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1605,7 +1605,7 @@ N & 44074.00 & 249610.00 & 39653.00 \\
 \label{tab:freq_periode}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:20 2014
+% Thu Mar  6 23:41:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1663,7 +1663,7 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 \end{figure}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:24 2014
+% Thu Mar  6 23:41:59 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1731,7 +1731,7 @@ Le temps de passage augmente avec l'age.
 \section{Selon le jour de la semaine}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:27 2014
+% Thu Mar  6 23:42:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1784,7 +1784,7 @@ Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de qu
 
 \section{Selon l'orientation}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:28 2014
+% Thu Mar  6 23:42:01 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrr}
@@ -1799,7 +1799,7 @@ mn & 239.33 & 230.40 & 229.06 & 224.77 & 262.76 & 234.94 & 170.33 & 210.98 & 86.
 \label{tab:duree_orientation}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:29 2014
+% Thu Mar  6 23:42:01 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1842,7 +1842,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \section{Selon la gravité}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:30 2014
+% Thu Mar  6 23:42:01 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2357,7 +2357,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:36 2014
+% Thu Mar  6 23:42:04 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2375,7 +2375,7 @@ J450 & 132 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:36 2014
+% Thu Mar  6 23:42:04 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2403,7 +2403,7 @@ On note \np{1 388} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:37 2014
+% Thu Mar  6 23:42:04 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2826,7 +2826,7 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:44 2014
+% Thu Mar  6 23:42:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
@@ -2851,7 +2851,7 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:45 2014
+% Thu Mar  6 23:42:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -2902,7 +2902,7 @@ a
   SCAM     SI   UHCD   <NA> 
    512   1402  32452 272103 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:45 2014
+% Thu Mar  6 23:42:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2922,7 +2922,7 @@ NA &   0 &   0 &   0 &   0 &   0 &   0 &   0 \\
 \label{tab:dest_gravite}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:45 2014
+% Thu Mar  6 23:42:07 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2953,7 +2953,7 @@ CHIR & 181 & 3331 & 3662 & 363 &  11 &   1 & 140 \\
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:45 2014
+% Thu Mar  6 23:42:07 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2972,7 +2972,7 @@ HAD & 0.01 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:45 2014
+% Thu Mar  6 23:42:07 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3003,7 +3003,7 @@ On isole le groupe "mode de sortie = domicile" et on relève les résultats de l
 
 \includegraphics[width=\maxwidth]{figure/fausses_sorties} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:46 2014
+% Thu Mar  6 23:42:07 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3070,7 +3070,7 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:49 2014
+% Thu Mar  6 23:42:08 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3103,7 +3103,7 @@ Les variation du retour journalier à domicile sont calculés de la manière sui
 \end{description}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:53 2014
+% Thu Mar  6 23:42:09 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3130,7 +3130,7 @@ On refait le calcul de q en tenant compte des non réponses:
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) est une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:38:57 2014
+% Thu Mar  6 23:42:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3189,7 +3189,7 @@ Les moins de 18 ans représentent $82 650$ passages en 2 013 soit $228$ passages
 % Pédiatrie et sexe
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:39:03 2014
+% Thu Mar  6 23:42:12 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3211,7 +3211,7 @@ Le sex-ratio est de $1.2$ (table \ref{tab:ped_sr})
 % Taux hospitalisation
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:39:03 2014
+% Thu Mar  6 23:42:13 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3264,7 +3264,7 @@ Les 75 ans et plus représentent $52 512$ passages en 2 013 soit $145$ passages 
 % Gériatrie et sexe
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:39:04 2014
+% Thu Mar  6 23:42:13 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3288,7 +3288,7 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:39:04 2014
+% Thu Mar  6 23:42:13 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3326,6 +3326,7 @@ Note: on ne retient que les durées de présence supérieures à 30 minutes.
 % *                      *
 % ************************
 \part{Activité par service d'urgence}
+\label{partie4}
 
 \newpage
 
@@ -3383,9 +3384,21 @@ CCMU 4 \& 5 & \np{174} (1.4 \%) \tabularnewline
 
 \end{tabular}
 
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_wis} 
+
+\end{knitrout}
+
+
+\section*{Taux de complétude}
+\index{CH Wissembourg}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_wis} 
 
 \end{knitrout}
 
@@ -3415,7 +3428,7 @@ Date de début & 2 013-01-01 00:10:00 \tabularnewline
 \hline 
 Date de fin & 2 013-12-31 23:45:00 \tabularnewline
 \hline 
-Age moyen & 48 ans $\pm NA$ \tabularnewline
+Age moyen & 48 ans $\pm 26$ \tabularnewline
 \hline 
 RPU pédiatriques & \np{5 277} (15 \%) \tabularnewline
 \hline 
@@ -3445,9 +3458,21 @@ CCMU 4 \& 5 & \np{558} (1.6 \%) \tabularnewline
 
 \end{tabular}
 
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_hag} 
+
+\end{knitrout}
+
+
+\section*{Taux de complétude}
+\index{Diaconat-Fonderie!taux de complétude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_hag} 
 
 \end{knitrout}
 
@@ -3507,12 +3532,23 @@ CCMU 4 \& 5 & \np{72} (0.58 \%) \tabularnewline
 
 \end{tabular}
 
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_sav} 
 
 \end{knitrout}
 
+
+\section*{Taux de complétude}
+\index{CH Saverne}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_sav} 
+
+\end{knitrout}
 
 
 
@@ -3540,7 +3576,7 @@ Date de début & 2 013-01-01 00:09:00 \tabularnewline
 \hline 
 Date de fin & 2 013-12-31 23:48:00 \tabularnewline
 \hline 
-Age moyen & 34 ans $\pm NA$ \tabularnewline
+Age moyen & 34 ans $\pm 22$ \tabularnewline
 \hline 
 RPU pédiatriques & \np{7 488} (29 \%) \tabularnewline
 \hline 
@@ -3570,9 +3606,21 @@ CCMU 4 \& 5 & \np{7} (0.027 \%) \tabularnewline
 
 \end{tabular}
 
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_odi} 
+
+\end{knitrout}
+
+
+\section*{Taux de complétude}
+\index{Sainte Odile!completude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_odi} 
 
 \end{knitrout}
 
@@ -3582,6 +3630,8 @@ CCMU 4 \& 5 & \np{7} (0.027 \%) \tabularnewline
 
 % SuHus.Rnw
 % Activité des SU des HUS
+
+hop <- "Hus"
 
 \index{SU des HUS}
 \index{HUS!SU}
@@ -3610,8 +3660,26 @@ Auxquels il faut rajouter les services assurant un accueil des urgences 24h/24h 
 
 
 
-Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont été transmis, alors que \np{91 652} dossiers ont été déclarés au serveur régional. 
+Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont été transmis, alors que \np{121 190} dossiers ont été déclarés au serveur régional. 
 1
+
+\section*{Durée de présence aux urgences}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/graphe_hus} 
+
+\end{knitrout}
+
+
+\section*{Taux de complétude}
+\index{HUS!completude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_hus} 
+
+\end{knitrout}
 
 
 
@@ -3637,7 +3705,7 @@ Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont é
 \hlstd{hospitalise}
 \end{alltt}
 \begin{verbatim}
-## [1] 2103
+## [1] 2515
 \end{verbatim}
 \begin{alltt}
 \hlstd{tx_hospit} \hlkwb{<-} \hlkwd{round}\hlstd{(}\hlkwd{as.numeric}\hlstd{(hospitalise} \hlopt{*} \hlnum{100}\hlopt{/}\hlstd{s[}\hlnum{4}\hlstd{]),} \hlnum{2}\hlstd{)}
@@ -3688,18 +3756,18 @@ Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont é
 \end{knitrout}
 
 
-Le SU Sainte Anne a reçu en 2013 un total de \np{12 139} consultants, soit en moyenne 1 317 par jour.
+Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 1 574 par jour.
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:39:16 2014
+% Thu Mar  6 23:42:21 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
   \hline
  & inf1an & entre1\_75ans & sup75ans & total & hospitalises & UHCD & tranferts \\ 
   \hline
-n & 211.00 & 10611.00 & 1317.00 & 12139.00 & 4.00 & 1925.00 & 174.00 \\ 
-  \% & 1.74 & 87.41 & 10.85 & 100.00 & 0.03 & 15.86 & 1.43 \\ 
+n & 282.00 & 12805.00 & 1574.00 & 14661.00 & 4.00 & 2261.00 & 250.00 \\ 
+  \% & 1.92 & 87.34 & 10.74 & 100.00 & 0.03 & 15.42 & 1.71 \\ 
    \hline
 \end{tabular}
 \end{table}
@@ -3742,9 +3810,9 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## [1] 12139
+## [1] 14661
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##      22      34      40      40      45      69
+##      22      34      40      40      46      69
 ## [1] 8
 \end{verbatim}
 \end{kframe}
@@ -3760,10 +3828,10 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## [1] 10611
+## [1] 12805
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##      18      30      34      35      40      63
-## [1] 7.4
+## [1] 7.5
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages1} 
@@ -3779,7 +3847,7 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## [1] 1317
+## [1] 1574
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##     0.0     3.0     4.0     4.3     6.0    12.0
 ## [1] 2.3
@@ -3896,6 +3964,18 @@ CCMU 4 \& 5 & \np{550} (1.9 \%) \tabularnewline
 \end{knitrout}
 
 
+\section*{Durée de présence aux urgences}
+
+\section*{Taux de complétude}
+\index{CH Sélestat!completude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_sel} 
+
+\end{knitrout}
+
+
 \chapter{SU Colmar}
 
 % SU_Colmar.Rnw
@@ -3907,6 +3987,8 @@ CCMU 4 \& 5 & \np{550} (1.9 \%) \tabularnewline
 
 % \pm dessine le symbole plus ou moins
 % a["age_min"] donne une date que R n'arrive pas à utiliser. On utilise a[1,2] à la place
+
+\section*{Résumé de l'activité}
 
 \begin{tabular}{|l|c|}
 \hline 
@@ -3946,9 +4028,10 @@ CCMU 1 & \np{21 093} (33 \%) \tabularnewline
 \hline
 CCMU 4 \& 5 & \np{752} (1.2 \%) \tabularnewline
 \hline
-
 \end{tabular}
 
+
+\section*{Durée de présence aux urgences}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_p_col} 
@@ -3956,24 +4039,14 @@ CCMU 4 \& 5 & \np{752} (1.2 \%) \tabularnewline
 \end{knitrout}
 
 
+
+\section*{Taux de complétude}
+\index{Colmar!taux de complétude}
+
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlstd{ch} \hlkwb{<-} \hlstd{d1[d1}\hlopt{$}\hlstd{FINESS} \hlopt{==} \hlstr{"Col"}\hlstd{, ]}
-\hlstd{x} \hlkwb{<-} \hlkwd{completude}\hlstd{(d1)}
-\hlstd{y} \hlkwb{<-} \hlkwd{completude}\hlstd{(ch)}
-\hlkwd{radar_completude}\hlstd{(x, y,} \hlkwc{ch.names} \hlstd{=} \hlstr{"CH Colmar"}\hlstd{)}
-\end{alltt}
-\begin{verbatim}
-## 0 100
-\end{verbatim}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/compl_col} 
-\begin{kframe}\begin{verbatim}
-## 0 20 40 60 80 100 
-## 0 100
-\end{verbatim}
-\end{kframe}
+
 \end{knitrout}
 
 
@@ -3984,6 +4057,8 @@ CCMU 4 \& 5 & \np{752} (1.2 \%) \tabularnewline
 
 \index{SU Guebwiller}
 \index{Guebwiller!SU}
+
+hop <- "Geb"
 
 \section*{Résumé des données}
 
@@ -4041,6 +4116,10 @@ CCMU 4 \& 5 & \np{22} (0.15 \%) \tabularnewline
 
 \end{tabular}
 
+% %=================================
+\section*{Durée de présence aux urgences}
+% %=================================
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_p_gueb} 
@@ -4048,202 +4127,102 @@ CCMU 4 \& 5 & \np{22} (0.15 \%) \tabularnewline
 \end{knitrout}
 
 
+% %=================================
+% 
+% \section*{Complétude des données}
+% 
+% %=================================
+% 
+% <<compl_gueb>>=
+% 
+% # pour dessiner un radar
+% library("plotrix")
+% 
+% # nom des branches du radar:
+% rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU","Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
+% 
+% # taux de complétude régional. 
+% #----------------------------
+% #Il est calculé en comptant le nombre de NA dans la base de données, puis en appliquant la méthode MEAN() qui affiche le pourcentage de non réponses. La fonction lapply appliquée sur les colonnes (2) permet de ventiler les résultats par items.
+% a <- is.na(d1)
+% b <- round(apply(a, 2, mean) * 100, 2)
+% #rm(a)
+% b <- cbind(b) # verticalise le vecteur
+% colnames(b)<-"%"
+% # completude ordonne le vecteur résultat pour qu'il soit rangé dans le même ordre que le vecteur rpu.name. Ainsi b[6] correspond à la date d'entrée.
+% completude <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
+% completude <- 100 - completude
+% completude
+% # dessin du premier radar correspondant à la statistique régionale
+% radial.plot(completude, labels = rpu.names, ,rp.type="p", radial.lim =c(0,100), poly.col = "khaki", main=paste(ch.names,"- Taux de complétude des RPU"))
+% 
+% # taux de complétude de l'hôpital local
+% #--------------------------------------
+% a<-is.na(hopital)
+% head(a)
+% b<-round(apply(a,2,mean)*100,2)
+% b
+% b<-cbind(b)
+% colnames(b)<-"%"
+% completude_hop <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
+% completude_hop <- 100 - completude_hop
+% completude_hop
+% 
+% # **************  
+% #  corrections *  
+% # **************  
+% # on corrrige destination et orientation (voir ch_wissembourg.Rmd)
+% 
+% # Mode de sortie
+% # --------------
+% a<-summary(hopital$MODE_SORTIE)
+% hosp <- as.numeric(a["Mutation"] + a["Transfert"])
+% hosp
+% 
+% a<-summary(as.factor(hopital$DESTINATION))
+% a
+% # delta = vrai non renseignés
+% delta <- hosp - as.numeric(a["MCO"]+a["SSR"]+a["SLD"]+a["PSY"]+a["HAD"] +a["HMS"]) # -a["HMS"]
+% delta
+% # exhaustivité réelle pour la destination
+% exhaustivite.destination <- round(100-(delta*100/hosp),2)
+% completude_hop[16] <- exhaustivite.destination
+% 
+% # Orientation
+% #------------
+% 
+% #on supprime les NA
+% a<-hopital$ORIENTATION[!is.na(hopital$ORIENTATION)]
+% nb_orient <- length(a)
+% sa <- summary(a)
+% orient.hosp <- as.numeric(sa["HO"]+sa["HDT"]+sa["UHCD"]+sa["SI"]+sa["SC"]+sa["REA"]+sa["OBST"]+sa["MED"]+sa["CHIR"])
+% orient.exhaustivite <- 100-round(100*(hosp - orient.hosp)/hosp,2)
+% completude_hop[15] <- orient.exhaustivite
+% 
+% completude_hop
+% 
+% radial.plot(completude_hop, labels = rpu.names , radial.lim =c(0,100), add=T,rp.type="p", line.col="goldenrod4", main="Taux de complétude des RPU", lwd=2)
+% 
+% legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n")
+% 
+% # affichage du tableau correspondant:
+% c <- as.data.frame( completude)
+% rownames(c) <- rpu.names
+% c <- cbind(c, completude_hop)
+% names(c) <- c("Alsace (%)", ch.names)
+% c
+% @
+
+%=================================
+\section*{Taux de complétude}
 %=================================
 
-\section*{Complétude des données}
-
-%=================================
+\index{Guebwiller!taux de complétude}
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcom{# pour dessiner un radar}
-\hlkwd{library}\hlstd{(}\hlstr{"plotrix"}\hlstd{)}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_geb2} 
 
-\hlcom{# nom des branches du radar:}
-\hlstd{rpu.names} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Entrée"}\hlstd{,} \hlstr{"Sexe"}\hlstd{,} \hlstr{"Age"}\hlstd{,} \hlstr{"Commune"}\hlstd{,} \hlstr{"ZIP"}\hlstd{,} \hlstr{"Provenance"}\hlstd{,} \hlstr{"PEC Transport"}\hlstd{,}
-    \hlstr{"Mode Transport"}\hlstd{,} \hlstr{"Mode entrée"}\hlstd{,} \hlstr{"CCMU"}\hlstd{,} \hlstr{"Motif"}\hlstd{,} \hlstr{"DP"}\hlstd{,} \hlstr{"Sortie"}\hlstd{,} \hlstr{"Mode sortie"}\hlstd{,}
-    \hlstr{"Orientation"}\hlstd{,} \hlstr{"Destination"}\hlstd{)}
-
-\hlcom{# taux de complétude régional.  ---------------------------- Il est calculé}
-\hlcom{# en comptant le nombre de NA dans la base de données, puis en appliquant la}
-\hlcom{# méthode MEAN() qui affiche le pourcentage de non réponses. La fonction}
-\hlcom{# lapply appliquée sur les colonnes (2) permet de ventiler les résultats par}
-\hlcom{# items.}
-\hlstd{a} \hlkwb{<-} \hlkwd{is.na}\hlstd{(d1)}
-\hlstd{b} \hlkwb{<-} \hlkwd{round}\hlstd{(}\hlkwd{apply}\hlstd{(a,} \hlnum{2}\hlstd{, mean)} \hlopt{*} \hlnum{100}\hlstd{,} \hlnum{2}\hlstd{)}
-\hlcom{# rm(a)}
-\hlstd{b} \hlkwb{<-} \hlkwd{cbind}\hlstd{(b)}  \hlcom{# verticalise le vecteur}
-\hlkwd{colnames}\hlstd{(b)} \hlkwb{<-} \hlstr{"%"}
-\hlcom{# completude ordonne le vecteur résultat pour qu'il soit rangé dans le même}
-\hlcom{# ordre que le vecteur rpu.name. Ainsi b[6] correspond à la date d'entrée.}
-\hlstd{completude} \hlkwb{<-} \hlkwd{c}\hlstd{(b[}\hlnum{6}\hlstd{], b[}\hlnum{16}\hlstd{], b[}\hlnum{20}\hlstd{], b[}\hlnum{3}\hlstd{], b[}\hlnum{2}\hlstd{], b[}\hlnum{15}\hlstd{], b[}\hlnum{19}\hlstd{], b[}\hlnum{18}\hlstd{], b[}\hlnum{10}\hlstd{],}
-    \hlstd{b[}\hlnum{9}\hlstd{], b[}\hlnum{12}\hlstd{], b[}\hlnum{5}\hlstd{], b[}\hlnum{17}\hlstd{], b[}\hlnum{11}\hlstd{], b[}\hlnum{14}\hlstd{], b[}\hlnum{4}\hlstd{])}
-\hlstd{completude} \hlkwb{<-} \hlnum{100} \hlopt{-} \hlstd{completude}
-\hlstd{completude}
-\end{alltt}
-\begin{verbatim}
-##  [1] 100 100 100 100 100  65  74  77  91  86  64  66  91  86  20  21
-\end{verbatim}
-\begin{alltt}
-\hlcom{# dessin du premier radar correspondant à la statistique régionale}
-\hlkwd{radial.plot}\hlstd{(completude,} \hlkwc{labels} \hlstd{= rpu.names, ,} \hlkwc{rp.type} \hlstd{=} \hlstr{"p"}\hlstd{,} \hlkwc{radial.lim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}
-    \hlnum{100}\hlstd{),} \hlkwc{poly.col} \hlstd{=} \hlstr{"khaki"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlkwd{paste}\hlstd{(ch.names,} \hlstr{"- Taux de complétude des RPU"}\hlstd{))}
-\end{alltt}
-\begin{verbatim}
-## 0 100
-## 0 20 40 60 80 100
-\end{verbatim}
-\begin{alltt}
-\hlcom{# taux de complétude de l'hôpital local}
-\hlcom{# --------------------------------------}
-\hlstd{a} \hlkwb{<-} \hlkwd{is.na}\hlstd{(hopital)}
-\hlkwd{head}\hlstd{(a)}
-\end{alltt}
-\begin{verbatim}
-##        id CODE_POSTAL COMMUNE DESTINATION    DP ENTREE EXTRACT FINESS
-## 429 FALSE       FALSE   FALSE        TRUE FALSE  FALSE   FALSE  FALSE
-## 430 FALSE       FALSE   FALSE        TRUE FALSE  FALSE   FALSE  FALSE
-## 431 FALSE       FALSE   FALSE        TRUE FALSE  FALSE   FALSE  FALSE
-## 432 FALSE       FALSE   FALSE        TRUE FALSE  FALSE   FALSE  FALSE
-## 433 FALSE       FALSE   FALSE        TRUE FALSE  FALSE   FALSE  FALSE
-## 434 FALSE       FALSE   FALSE        TRUE FALSE  FALSE   FALSE  FALSE
-##     GRAVITE MODE_ENTREE MODE_SORTIE MOTIF NAISSANCE ORIENTATION PROVENANCE
-## 429   FALSE        TRUE        TRUE  TRUE     FALSE        TRUE       TRUE
-## 430   FALSE        TRUE        TRUE  TRUE     FALSE        TRUE       TRUE
-## 431   FALSE        TRUE        TRUE  TRUE     FALSE        TRUE       TRUE
-## 432   FALSE        TRUE        TRUE  TRUE     FALSE        TRUE       TRUE
-## 433   FALSE        TRUE        TRUE  TRUE     FALSE        TRUE       TRUE
-## 434   FALSE        TRUE        TRUE  TRUE     FALSE        TRUE       TRUE
-##      SEXE SORTIE TRANSPORT TRANSPORT_PEC   AGE secteur presence
-## 429 FALSE  FALSE     FALSE          TRUE FALSE   FALSE    FALSE
-## 430 FALSE  FALSE     FALSE          TRUE FALSE   FALSE    FALSE
-## 431 FALSE  FALSE     FALSE          TRUE FALSE   FALSE    FALSE
-## 432 FALSE  FALSE     FALSE          TRUE FALSE   FALSE    FALSE
-## 433 FALSE  FALSE     FALSE          TRUE FALSE   FALSE    FALSE
-## 434 FALSE  FALSE     FALSE          TRUE FALSE   FALSE    FALSE
-\end{verbatim}
-\begin{alltt}
-\hlstd{b} \hlkwb{<-} \hlkwd{round}\hlstd{(}\hlkwd{apply}\hlstd{(a,} \hlnum{2}\hlstd{, mean)} \hlopt{*} \hlnum{100}\hlstd{,} \hlnum{2}\hlstd{)}
-\hlstd{b}
-\end{alltt}
-\begin{verbatim}
-##            id   CODE_POSTAL       COMMUNE   DESTINATION            DP 
-##          0.00          0.00          0.00         96.58          0.38 
-##        ENTREE       EXTRACT        FINESS       GRAVITE   MODE_ENTREE 
-##          0.00          0.00          0.00          0.13         41.91 
-##   MODE_SORTIE         MOTIF     NAISSANCE   ORIENTATION    PROVENANCE 
-##         45.31         99.97          0.00         98.56         84.80 
-##          SEXE        SORTIE     TRANSPORT TRANSPORT_PEC           AGE 
-##          0.00          0.00          0.91         61.24          0.00 
-##       secteur      presence 
-##          0.00          0.00
-\end{verbatim}
-\begin{alltt}
-\hlstd{b} \hlkwb{<-} \hlkwd{cbind}\hlstd{(b)}
-\hlkwd{colnames}\hlstd{(b)} \hlkwb{<-} \hlstr{"%"}
-\hlstd{completude_hop} \hlkwb{<-} \hlkwd{c}\hlstd{(b[}\hlnum{6}\hlstd{], b[}\hlnum{16}\hlstd{], b[}\hlnum{20}\hlstd{], b[}\hlnum{3}\hlstd{], b[}\hlnum{2}\hlstd{], b[}\hlnum{15}\hlstd{], b[}\hlnum{19}\hlstd{], b[}\hlnum{18}\hlstd{], b[}\hlnum{10}\hlstd{],}
-    \hlstd{b[}\hlnum{9}\hlstd{], b[}\hlnum{12}\hlstd{], b[}\hlnum{5}\hlstd{], b[}\hlnum{17}\hlstd{], b[}\hlnum{11}\hlstd{], b[}\hlnum{14}\hlstd{], b[}\hlnum{4}\hlstd{])}
-\hlstd{completude_hop} \hlkwb{<-} \hlnum{100} \hlopt{-} \hlstd{completude_hop}
-\hlstd{completude_hop}
-\end{alltt}
-\begin{verbatim}
-##  [1] 100.00 100.00 100.00 100.00 100.00  15.20  38.76  99.09  58.09  99.87
-## [11]   0.03  99.62 100.00  54.69   1.44   3.42
-\end{verbatim}
-\begin{alltt}
-\hlcom{# ************** corrections * ************** on corrrige destination et}
-\hlcom{# orientation (voir ch_wissembourg.Rmd)}
-
-\hlcom{# Mode de sortie --------------}
-\hlstd{a} \hlkwb{<-} \hlkwd{summary}\hlstd{(hopital}\hlopt{$}\hlstd{MODE_SORTIE)}
-\hlstd{hosp} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(a[}\hlstr{"Mutation"}\hlstd{]} \hlopt{+} \hlstd{a[}\hlstr{"Transfert"}\hlstd{])}
-\hlstd{hosp}
-\end{alltt}
-\begin{verbatim}
-## [1] 512
-\end{verbatim}
-\begin{alltt}
-\hlstd{a} \hlkwb{<-} \hlkwd{summary}\hlstd{(}\hlkwd{as.factor}\hlstd{(hopital}\hlopt{$}\hlstd{DESTINATION))}
-\hlstd{a}
-\end{alltt}
-\begin{verbatim}
-##    NA   MCO   SSR   SLD   PSY   HAD   HMS  NA's 
-##     0   451    50     6     5     0     5 14586
-\end{verbatim}
-\begin{alltt}
-\hlcom{# delta = vrai non renseignés}
-\hlstd{delta} \hlkwb{<-} \hlstd{hosp} \hlopt{-} \hlkwd{as.numeric}\hlstd{(a[}\hlstr{"MCO"}\hlstd{]} \hlopt{+} \hlstd{a[}\hlstr{"SSR"}\hlstd{]} \hlopt{+} \hlstd{a[}\hlstr{"SLD"}\hlstd{]} \hlopt{+} \hlstd{a[}\hlstr{"PSY"}\hlstd{]} \hlopt{+} \hlstd{a[}\hlstr{"HAD"}\hlstd{]} \hlopt{+}
-    \hlstd{a[}\hlstr{"HMS"}\hlstd{])}  \hlcom{# -a['HMS']}
-\hlstd{delta}
-\end{alltt}
-\begin{verbatim}
-## [1] -5
-\end{verbatim}
-\begin{alltt}
-\hlcom{# exhaustivité réelle pour la destination}
-\hlstd{exhaustivite.destination} \hlkwb{<-} \hlkwd{round}\hlstd{(}\hlnum{100} \hlopt{-} \hlstd{(delta} \hlopt{*} \hlnum{100}\hlopt{/}\hlstd{hosp),} \hlnum{2}\hlstd{)}
-\hlstd{completude_hop[}\hlnum{16}\hlstd{]} \hlkwb{<-} \hlstd{exhaustivite.destination}
-
-\hlcom{# Orientation ------------}
-
-\hlcom{# on supprime les NA}
-\hlstd{a} \hlkwb{<-} \hlstd{hopital}\hlopt{$}\hlstd{ORIENTATION[}\hlopt{!}\hlkwd{is.na}\hlstd{(hopital}\hlopt{$}\hlstd{ORIENTATION)]}
-\hlstd{nb_orient} \hlkwb{<-} \hlkwd{length}\hlstd{(a)}
-\hlstd{sa} \hlkwb{<-} \hlkwd{summary}\hlstd{(a)}
-\hlstd{orient.hosp} \hlkwb{<-} \hlkwd{as.numeric}\hlstd{(sa[}\hlstr{"HO"}\hlstd{]} \hlopt{+} \hlstd{sa[}\hlstr{"HDT"}\hlstd{]} \hlopt{+} \hlstd{sa[}\hlstr{"UHCD"}\hlstd{]} \hlopt{+} \hlstd{sa[}\hlstr{"SI"}\hlstd{]} \hlopt{+} \hlstd{sa[}\hlstr{"SC"}\hlstd{]} \hlopt{+}
-    \hlstd{sa[}\hlstr{"REA"}\hlstd{]} \hlopt{+} \hlstd{sa[}\hlstr{"OBST"}\hlstd{]} \hlopt{+} \hlstd{sa[}\hlstr{"MED"}\hlstd{]} \hlopt{+} \hlstd{sa[}\hlstr{"CHIR"}\hlstd{])}
-\hlstd{orient.exhaustivite} \hlkwb{<-} \hlnum{100} \hlopt{-} \hlkwd{round}\hlstd{(}\hlnum{100} \hlopt{*} \hlstd{(hosp} \hlopt{-} \hlstd{orient.hosp)}\hlopt{/}\hlstd{hosp,} \hlnum{2}\hlstd{)}
-\hlstd{completude_hop[}\hlnum{15}\hlstd{]} \hlkwb{<-} \hlstd{orient.exhaustivite}
-
-\hlstd{completude_hop}
-\end{alltt}
-\begin{verbatim}
-##  [1] 100.00 100.00 100.00 100.00 100.00  15.20  38.76  99.09  58.09  99.87
-## [11]   0.03  99.62 100.00  54.69  27.34 100.98
-\end{verbatim}
-\begin{alltt}
-\hlkwd{radial.plot}\hlstd{(completude_hop,} \hlkwc{labels} \hlstd{= rpu.names,} \hlkwc{radial.lim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,} \hlnum{100}\hlstd{),} \hlkwc{add} \hlstd{= T,}
-    \hlkwc{rp.type} \hlstd{=} \hlstr{"p"}\hlstd{,} \hlkwc{line.col} \hlstd{=} \hlstr{"goldenrod4"}\hlstd{,} \hlkwc{main} \hlstd{=} \hlstr{"Taux de complétude des RPU"}\hlstd{,}
-    \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)}
-\end{alltt}
-\begin{verbatim}
-## 0 100
-\end{verbatim}
-\begin{alltt}
-\hlkwd{legend}\hlstd{(}\hlstr{"bottomleft"}\hlstd{,} \hlkwc{legend} \hlstd{=} \hlkwd{c}\hlstd{(ch.names,} \hlstr{"Alsace"}\hlstd{),} \hlkwc{col} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"goldenrod4"}\hlstd{,} \hlstr{"khaki"}\hlstd{),}
-    \hlkwc{lty} \hlstd{=} \hlnum{1}\hlstd{,} \hlkwc{bty} \hlstd{=} \hlstr{"n"}\hlstd{)}
-\end{alltt}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/compl_gueb} 
-\begin{kframe}\begin{alltt}
-\hlcom{# affichage du tableau correspondant:}
-\hlstd{c} \hlkwb{<-} \hlkwd{as.data.frame}\hlstd{(completude)}
-\hlkwd{rownames}\hlstd{(c)} \hlkwb{<-} \hlstd{rpu.names}
-\hlstd{c} \hlkwb{<-} \hlkwd{cbind}\hlstd{(c, completude_hop)}
-\hlkwd{names}\hlstd{(c)} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlstr{"Alsace (%)"}\hlstd{, ch.names)}
-\hlstd{c}
-\end{alltt}
-\begin{verbatim}
-##                Alsace (%) CH Guebwiller
-## Entrée                100        100.00
-## Sexe                  100        100.00
-## Age                   100        100.00
-## Commune               100        100.00
-## ZIP                   100        100.00
-## Provenance             65         15.20
-## PEC Transport          74         38.76
-## Mode Transport         77         99.09
-## Mode entrée            91         58.09
-## CCMU                   86         99.87
-## Motif                  64          0.03
-## DP                     66         99.62
-## Sortie                 91        100.00
-## Mode sortie            86         54.69
-## Orientation            20         27.34
-## Destination            21        100.98
-\end{verbatim}
-\end{kframe}
 \end{knitrout}
 
 
@@ -4303,9 +4282,21 @@ CCMU 4 \& 5 & \np{0} (0 \%) \tabularnewline
 
 \end{tabular}
 
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_p_alk} 
+
+\end{knitrout}
+
+
+\section*{Taux de complétude}
+\index{Colmar!taux de complétude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_alk} 
 
 \end{knitrout}
 
@@ -4367,9 +4358,23 @@ CCMU 4 \& 5 & \np{1 551} (2.8 \%) \tabularnewline
 
 \end{tabular}
 
+
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_p_mul} 
+
+\end{knitrout}
+
+
+
+\section*{Taux de complétude}
+\index{CH Mulhouse!taux de complétude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_mul} 
 
 \end{knitrout}
 
@@ -4399,7 +4404,7 @@ Date de début & 2 013-01-01 00:57:00 \tabularnewline
 \hline 
 Date de fin & 2 013-12-31 23:19:00 \tabularnewline
 \hline 
-Age moyen & 42 ans $\pm NA$ \tabularnewline
+Age moyen & 42 ans $\pm 25$ \tabularnewline
 \hline 
 RPU pédiatriques & \np{6 304} (21 \%) \tabularnewline
 \hline 
@@ -4429,9 +4434,22 @@ CCMU 4 \& 5 & \np{17} (0.058 \%) \tabularnewline
 
 \end{tabular}
 
+
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_fonderie} 
+
+\end{knitrout}
+
+
+\section*{Taux de complétude}
+\index{Diaconat-Fonderie!taux de complétude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_dia} 
 
 \end{knitrout}
 
@@ -4461,7 +4479,7 @@ Date de début & 2 013-01-01 00:45:00 \tabularnewline
 \hline 
 Date de fin & 2 013-12-31 23:46:00 \tabularnewline
 \hline 
-Age moyen & 39 ans $\pm NA$ \tabularnewline
+Age moyen & 39 ans $\pm 24$ \tabularnewline
 \hline 
 RPU pédiatriques & \np{3 857} (25 \%) \tabularnewline
 \hline 
@@ -4491,11 +4509,108 @@ CCMU 4 \& 5 & \np{18} (0.12 \%) \tabularnewline
 
 \end{tabular}
 
+\section*{Durée de présence aux urgences}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/graphe_3fr} 
 
 \end{knitrout}
+
+
+\section*{Taux de complétude}
+\index{3 Frontières!taux de complétude}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/compl_3fr} 
+
+\end{knitrout}
+
+
+
+\chapter{Tableau de synthèse}
+
+% SU_synthese.Rnw
+
+\index{Synthèse}
+\index{SU!synthèse}
+
+
+
+
+Signification des intitulés des lignes:
+\begin{enumerate}
+  \item \textbf{RPU totaux}: nombre total de RPU transmis à RESURAL
+  \item \textbf{Age moyen}: age moyen en année des patients, tous ages confondus
+  \item \textbf{Ecart-type}: écart-type de l'age en années
+  \item \textbf{RPU Pédiatriques}: nombre de passages de moins de 18 ans
+  \item \textbf{\% Pédiatrie}: pourcentage de passages pédiatriques
+  \item \textbf{RPU Gériatriques}: nombre de passages de 75 ans et plus
+  \item \textbf{\% Gériatrie}: pourcentage de passages de 75 ans et plus
+  \item \textbf{Présence moyenne}: durée de présence moyenne (en minutes) au service d'urgence
+  \item \textbf{Présence médiane}: durée de présence médiane en minutes (50\% sont restés moins de cette duré et 50\% plus de cette durée)
+  \item \textbf{RPU moins de 4 heures}: nombre de patients dont a durée de présence au SU est de moins de 4 heures
+  \item \textbf{\% moins de 4 heures}: pourcentage de patients dont a durée de présence au SU est de moins de 4 heures
+  \item \textbf{Attente moy.hospitalisation}: durée de passage (en minutes) des patients qui seront hospitalisés ou transférés
+  \item \textbf{Attente moy.domicile}: durée de passage (en minutes) des patients qui quittent l'hôital à l'issue de leur passage au SU
+  \item \textbf{Taux hospitalisation}: proportion de patients hodpitalisés ou transférés par rapport au nombre total de passages
+  \item \textbf{\% passages soirée}: pourcentage de patients qui se présentent dans la tranche 20 heures - minuit
+  \item \textbf{\% passages nuit}: pourcentage de patients qui se présentent dans la tranche minuit - 8 heures (nuit profonde)
+  \item \textbf{RPU le week-end}: nombre de RPU générés du vendredi 20 heures au lundi 8 heures
+  \item \textbf{\% RPU week-end}: pourcentage de RPU générés du vendredi 20 heures au lundi 8 heures par rapport au nombre total de passages
+  \item \textbf{Nb de CCMU 1}: nombre de patients classés CCMU 1
+  \item \textbf{\% de CCMU 1}: pourcentage de patients classés CCMU 1
+  \item \textbf{Nb de CCMU 4 et 5}: nombre  de patients classés CCMU 4 ou 5 (les plus graves)
+  \item \textbf{\% de CCMU 4 et 5}: pourcentage  de patients classés CCMU 4 ou 5.
+\end{enumerate}
+
+
+\begin{landscape}
+% \begin{table}
+% \begin{center}
+% latex table generated in R 3.0.2 by xtable 1.7-1 package
+% Thu Mar  6 23:42:35 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrrrrrrrrr}
+  \hline
+ & Wis & Hag & Sav & Hus & Odi & Sel & Col & Geb & Mul & Dia & 3Fr \\ 
+  \hline
+RPU totaux & 12646 & 34414 & 12424 & 37018 & 25963 & 29534 & 64758 & 15103 & 56195 & 29469 & 15688 \\ 
+  Age moyen & 42.7 & 48.2 & 35.6 & 57.7 & 34.3 & 38.0 & 35.6 & 37.2 & 35.1 & 41.6 & 38.8 \\ 
+  Ecart-type & 26.98 & 25.81 & 28.29 & 22.72 & 21.75 & 26.51 & 27.65 & 24.49 & 27.95 & 24.70 & 24.37 \\ 
+  RPU Pédiatriques &  3202 &  5277 &  4603 &  1138 &  7488 &  9171 & 23832 &  4537 & 20181 &  6304 &  3857 \\ 
+  \% Pédiatrie & 25.32 & 15.33 & 37.05 &  3.07 & 28.84 & 31.05 & 36.80 & 30.04 & 35.91 & 21.39 & 24.59 \\ 
+  RPU Gériatriques &  2190 &  7332 &  1691 & 10910 &  1332 &  3865 &  7785 &  1531 &  6905 &  3762 &  1606 \\ 
+  \% Gériatrie & 17.32 & 21.31 & 13.61 & 29.47 &  5.13 & 13.09 & 12.02 & 10.14 & 12.29 & 12.77 & 10.24 \\ 
+  Présence moyenne & 133.0 & 352.0 & 151.0 &  61.8 &  94.4 & 159.0 & 168.0 &  76.4 & 179.0 & 160.0 & 136.0 \\ 
+  Présence médiane &  93 & 235 & 112 &   1 &  75 & 135 & 119 &  50 & 144 & 135 & 107 \\ 
+  RPU moins de 4 heures & 11089 & 19998 & 10511 & 35417 & 25247 & 24143 & 49904 & 14565 & 44441 & 24438 & 14049 \\ 
+  \% moins de 4 heures & 88 & 58 & 85 & 96 & 97 & 82 & 77 & 96 & 79 & 83 & 90 \\ 
+  Attente moy.hospitalisation & 217.00 & 397.00 & 225.00 &   4.52 & 104.00 & 213.00 & 245.00 & 113.00 & 246.00 & 221.00 & 126.00 \\ 
+  Attente moy.domicile &  105.0 &  339.0 &  123.0 & 1200.0 &   94.0 &  144.0 &  143.0 &   75.1 &  165.0 &  152.0 &  131.0 \\ 
+  Taux hospitalisation & 24.35 & 43.56 & 30.86 & 97.86 &  6.15 & 21.18 & 26.93 & 48.70 & 38.12 & 17.81 &  9.01 \\ 
+  \% passages soirée & 14.61 & 18.67 & 13.90 & 24.83 & 17.80 & 16.45 & 15.75 & 14.51 & 18.20 & 15.97 & 16.55 \\ 
+  \% passages nuit &  7.43 & 11.94 &  7.03 &  9.81 &  5.62 &  8.90 &  8.32 &  6.63 & 10.23 &  8.17 & 10.45 \\ 
+  RPU le week-end &  4368 & 12281 &  3834 & 11769 &  9192 & 10309 & 20830 &  4963 & 19298 &  9613 &  5549 \\ 
+  \% RPU week-end & 34.54 & 35.69 & 30.86 & 31.79 & 35.40 & 34.91 & 32.17 & 32.86 & 34.34 & 32.62 & 35.37 \\ 
+  Nb de CCMU 1 &   828 &  2885 &   338 &  1750 &  1105 &  2717 & 21093 &   881 &  5388 &    50 &  1431 \\ 
+  \% de CCMU 1 &  6.55 &  8.38 &  2.72 &  4.73 &  4.26 &  9.20 & 32.57 &  5.83 &  9.59 &  0.17 &  9.12 \\ 
+  Nb de CCMU 4 et 5 &  174 &  558 &   72 &  708 &    7 &  550 &  752 &   22 & 1551 &   17 &   18 \\ 
+  \% de CCMU 4 et 5 & 1.376 & 1.621 & 0.580 & 1.913 & 0.027 & 1.862 & 1.161 & 0.146 & 2.760 & 0.058 & 0.115 \\ 
+   \hline
+\end{tabular}
+\caption[Tableu de synthèse des SU]{Tableau comparatif des principaux indicateurs d'activité des services d'urgence d'Alsace en 2013} 
+\label{tab:synthèse}
+\end{table}
+
+
+% \end{center}
+% \end{table}
+\end{landscape}
+
+
 
 
 
@@ -4535,7 +4650,7 @@ Le interventions SMUR sont égales à la somme des interventions primaires et se
 
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:39:45 2014
+% Thu Mar  6 23:42:35 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -4604,7 +4719,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.0.2 by xtable 1.7-1 package
-% Sun Mar  2 18:39:46 2014
+% Thu Mar  6 23:42:35 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}

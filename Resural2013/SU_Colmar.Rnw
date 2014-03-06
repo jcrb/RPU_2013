@@ -15,6 +15,8 @@ x <- a["age_sd"]
 % \pm dessine le symbole plus ou moins
 % a["age_min"] donne une date que R n'arrive pas à utiliser. On utilise a[1,2] à la place
 
+\section*{Résumé de l'activité}
+
 \begin{tabular}{|l|c|}
 \hline 
 \multicolumn{2}{|c|}{Centre Hospitalier de Colmar}\tabularnewline
@@ -53,14 +55,19 @@ CCMU 1 & \np{\Sexpr{a["n_ccmu1"]}} (\Sexpr{a["p_ccmu1"]} \%) \tabularnewline
 \hline
 CCMU 4 \& 5 & \np{\Sexpr{a["n_ccmu45"]}} (\Sexpr{a["p_ccmu45"]} \%) \tabularnewline
 \hline
-
 \end{tabular}
 
+
+\section*{Durée de présence aux urgences}
 <<graphe_p_col,echo=FALSE,fig.height=6>>=
 presence_hist(hop,d1)
 @
 
-<<compl_col>>=
+
+\section*{Taux de complétude}
+\index{Colmar!taux de complétude}
+
+<<compl_col, echo=FALSE, warning=FALSE,fig.width=8>>= 
 ch <- d1[d1$FINESS=="Col",]
 x <- completude(d1)
 y <- completude(ch)

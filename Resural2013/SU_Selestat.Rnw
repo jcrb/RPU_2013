@@ -59,3 +59,15 @@ CCMU 4 \& 5 & \np{\Sexpr{a["n_ccmu45"]}} (\Sexpr{a["p_ccmu45"]} \%) \tabularnewl
 <<graphe_p_sel,echo=FALSE,fig.height=6>>=
 presence_hist(hop,d1)
 @
+
+\section*{Durée de présence aux urgences}
+
+\section*{Taux de complétude}
+\index{CH Sélestat!completude}
+
+<<compl_sel, echo=FALSE, warning=FALSE,fig.width=8>>= 
+ch <- d1[d1$FINESS==hop,]
+x <- completude(d1)
+y <- completude(ch)
+radar_completude(x,y, ch.names = "CH Sélestat")
+@

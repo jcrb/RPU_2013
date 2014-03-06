@@ -84,12 +84,12 @@ barplot(p,horiz=T,las=2,xlim=c(0,20),xlab="pourcentage du total",main="SU 2013: 
 
 \subsection*{Taux de recours aux urgences}
 <<tru,echo=FALSE>>=
-tru2011_lorraine<-0.2345
+tru2011_lorraine <- 0.2345
 tru_estime<-pop.als.2010.totale*tru2011_lorraine
 # tru2013_alsace<-round(length(e)*100/pop.als.2010.totale,2)
 tru2013_alsace<-round(nrow(d1)*100/pop.als.2010.totale,2)
 
-print(tru_estime)
+# print(tru_estime)
 @
 Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comprte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à \Sexpr{tru_estime}.
 
@@ -97,15 +97,15 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_a
 
 \subsection*{Activité par mois}
 %------------------------------
-<<parmois>>=
-m<-month(d1$ENTREE,label=TRUE)
+<<parmois, echo=FALSE, comment="", fig.height=8>>=
+m <- month(d1$ENTREE,label=TRUE)
 table(m)
 barplot(table(m),ylab="nombre",xlab="mois",main="2013 - Nombre de RPU par mois",names.arg=c("Jan","Fev","Mar","Avr","Mai","Jui","Jul","Aou","Sep","Oct","Nov","Dec"),las=2)
 @
 
 \subsection*{Activité par semaine}
 
-<<label=act_sem,echo=FALSE,results='asis'>>=
+<<label=act_sem, echo=FALSE,results='asis', fig.height=8>>=
 m<-week(d1$ENTREE)
 
 xtable(table(m),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
@@ -116,10 +116,10 @@ barplot(table(m))
 @
 
 \subsection*{Activité par jour de la semaine}
-<<activite_semaine>>=
+<<activite_semaine, echo=FALSE, comment="", fig.height=8>>=
 m<-wday(d1$ENTREE,label=T)
 table(m)
-barplot(table(m),names.arg=c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam"))
+barplot(table(m),names.arg=c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam"), main="Activité selon le jour de la semaine")
 @
 
 \subsection*{Activité horaire}

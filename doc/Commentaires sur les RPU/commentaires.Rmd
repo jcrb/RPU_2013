@@ -62,3 +62,12 @@ Hôpitaux devant modifier leur paramétrage:
 
 - Les chiffres de *provenance* et *mode d'entrée* devraient être équivalents.
 - la somme PEA + PEO doit être égale à MODE_ENTREE.Domicile
+
+CCMU
+----
+
+- CCMU 1: consultation simple sans acte biologique ou radiologique (ex. angine)
+- CCMU 2: nécessité d'un acte bio ou radio et/ou d'un petit geste (suture), pas d'hospitalisation
+- CCMU 3: hospitalisation nécessaire dans un service conventionnel
+- CCMU 4: SI, SC
+- CCMU 5: REA
