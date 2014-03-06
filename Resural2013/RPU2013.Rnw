@@ -326,6 +326,7 @@ N <- nrow(d1)
 % *                      *
 % ************************
 \part{Activité par service d'urgence}
+\label{partie4}
 
 \newpage
 
@@ -380,6 +381,10 @@ N <- nrow(d1)
 
 \chapter{SU Saint Louis}
 <<child='SU_3Frontiere.Rnw'>>=
+@
+
+\chapter{Tableau de synthèse}
+<<child='SU_synthese.Rnw'>>=
 @
 
 % ************************

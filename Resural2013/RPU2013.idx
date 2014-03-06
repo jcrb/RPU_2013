@@ -22,20 +22,27 @@
 \indexentry{RPU|hyperpage}{33}
 \indexentry{R\IeC {\'e}sum\IeC {\'e} du passage aux urgences|hyperpage}{33}
 \indexentry{FINESS|hyperpage}{34}
-\indexentry{code postal|hyperpage}{34}
-\indexentry{motif de recours|hyperpage}{34}
-\indexentry{mode de sortie|hyperpage}{34}
-\indexentry{retour \IeC {\`a} domicile|hyperpage}{34}
-\indexentry{mutation|hyperpage}{34}
-\indexentry{transfert|hyperpage}{34}
-\indexentry{d\IeC {\'e}c\IeC {\`e}s|hyperpage}{34}
-\indexentry{MCO|hyperpage}{35}
-\indexentry{SSR|hyperpage}{35}
-\indexentry{SLD|hyperpage}{35}
-\indexentry{PSY|hyperpage}{35}
-\indexentry{HAD|hyperpage}{35}
-\indexentry{HMS|hyperpage}{35}
-\indexentry{orientation|hyperpage}{35}
+\indexentry{Code postal|hyperpage}{34}
+\indexentry{Commune de r\IeC {\'e}sidence|hyperpage}{34}
+\indexentry{Date de naissance|hyperpage}{34}
+\indexentry{Age|hyperpage}{34}
+\indexentry{Mode d'entr\IeC {\'e}e|hyperpage}{34}
+\indexentry{Provenance|hyperpage}{35}
+\indexentry{Mode de transport|hyperpage}{35}
+\indexentry{Prise en charge durant le transport|hyperpage}{35}
+\indexentry{motif de recours|hyperpage}{35}
+\indexentry{mode de sortie|hyperpage}{35}
+\indexentry{retour \IeC {\`a} domicile|hyperpage}{35}
+\indexentry{mutation|hyperpage}{35}
+\indexentry{transfert|hyperpage}{35}
+\indexentry{d\IeC {\'e}c\IeC {\`e}s|hyperpage}{35}
+\indexentry{MCO|hyperpage}{36}
+\indexentry{SSR|hyperpage}{36}
+\indexentry{SLD|hyperpage}{36}
+\indexentry{PSY|hyperpage}{36}
+\indexentry{HAD|hyperpage}{36}
+\indexentry{HMS|hyperpage}{36}
+\indexentry{orientation|hyperpage}{36}
 \indexentry{taux de recours aux urgences|hyperpage}{43}
 \indexentry{TRU|hyperpage}{43}
 \indexentry{motif de consultation|hyperpage}{57}
@@ -75,59 +82,73 @@
 \indexentry{sex-ratio!en g\IeC {\'e}riatrie|hyperpage}{135}
 \indexentry{SU Wissembourg|hyperpage}{139}
 \indexentry{CH de Wissembourg!SU|hyperpage}{139}
-\indexentry{SU Hagenau|hyperpage}{141}
-\indexentry{CH de Haguenau!SU|hyperpage}{141}
-\indexentry{SU Saverne|hyperpage}{143}
-\indexentry{CH de Saverne!SU|hyperpage}{143}
-\indexentry{SU SuSteOdile|hyperpage}{145}
-\indexentry{Ste Odile!SU|hyperpage}{145}
-\indexentry{SU des HUS|hyperpage}{147}
-\indexentry{HUS!SU|hyperpage}{147}
-\indexentry{H\IeC {\^o}pitaux Universitaires de Strasbourg!SU|hyperpage}{147}
-\indexentry{SU Sainte Anne|hyperpage}{149}
-\indexentry{Sainte Anne!SU |hyperpage}{149}
-\indexentry{SU St Luc|hyperpage}{161}
-\indexentry{St Luc!SU|hyperpage}{161}
-\indexentry{SU S\IeC {\'e}lestat|hyperpage}{163}
-\indexentry{S\IeC {\'e}lestat!SU|hyperpage}{163}
-\indexentry{SU Colmar|hyperpage}{165}
-\indexentry{Colmar!SU|hyperpage}{165}
-\indexentry{SU Guebwiller|hyperpage}{169}
-\indexentry{Guebwiller!SU|hyperpage}{169}
-\indexentry{SU Altkirch|hyperpage}{179}
-\indexentry{Altkirch!SU|hyperpage}{179}
-\indexentry{SU Emile Muller|hyperpage}{181}
-\indexentry{Emile Muller!SU|hyperpage}{181}
-\indexentry{SU CH Mulhouse|hyperpage}{181}
-\indexentry{CH Mulhouse!SU|hyperpage}{181}
-\indexentry{SU Diaconnat-Fonderie|hyperpage}{183}
-\indexentry{Diaconnat-Fonderie!SU|hyperpage}{183}
-\indexentry{SU des trois fronti\IeC {\`e}res|hyperpage}{185}
-\indexentry{Clinique des trois fronti\IeC {\`e}res!SU|hyperpage}{185}
-\indexentry{SAMU d'Alsace!activit\IeC {\'e}|hyperpage}{189}
-\indexentry{SAMU!taux de  recours|hyperpage}{194}
-\indexentry{Taux de passage aux urgences|hyperpage}{197}
-\indexentry{Taux de recours aux urgences|hyperpage}{197}
-\indexentry{Taux d'intervention r\IeC {\'e}gional|hyperpage}{197}
-\indexentry{Taux de recours r\IeC {\'e}gional|hyperpage}{197}
-\indexentry{sex ratio|hyperpage}{198}
-\indexentry{rapport de masculinit\IeC {\'e}|hyperpage}{198}
-\indexentry{semaine (d\IeC {\'e}finition de la)|hyperpage}{198}
-\indexentry{week-end (d\IeC {\'e}finition)|hyperpage}{198}
-\indexentry{moyenne mobile|hyperpage}{198}
-\indexentry{passages p\IeC {\'e}diatriques|hyperpage}{198}
-\indexentry{passages g\IeC {\'e}riatriques|hyperpage}{199}
-\indexentry{Journ\IeC {\'e}e|hyperpage}{199}
-\indexentry{Soir\IeC {\'e}e|hyperpage}{199}
-\indexentry{Nuit profonde|hyperpage}{199}
-\indexentry{AIT|hyperpage}{201}
-\indexentry{ANTARES|hyperpage}{201}
-\indexentry{AR|hyperpage}{201}
-\indexentry{ARS|hyperpage}{201}
-\indexentry{Accident Vasculaire C\IeC {\'e}r\IeC {\'e}bral|hyperpage}{201}
-\indexentry{Population|hyperpage}{201}
-\indexentry{Population@Population!compt\IeC {\'e}e \IeC {\`a} part|hyperpage}{201}
-\indexentry{Population@Population!totale|hyperpage}{202}
-\indexentry{Population@Population!municipale|hyperpage}{202}
-\indexentry{Unit\IeC {\'e} urbaine|hyperpage}{202}
-\indexentry{R (CRAN R)|hyperpage}{207}
+\indexentry{CH Wissembourg|hyperpage}{140}
+\indexentry{SU Hagenau|hyperpage}{143}
+\indexentry{CH de Haguenau!SU|hyperpage}{143}
+\indexentry{Diaconat-Fonderie!taux de compl\IeC {\'e}tude|hyperpage}{144}
+\indexentry{SU Saverne|hyperpage}{147}
+\indexentry{CH de Saverne!SU|hyperpage}{147}
+\indexentry{CH Saverne|hyperpage}{148}
+\indexentry{SU SuSteOdile|hyperpage}{151}
+\indexentry{Ste Odile!SU|hyperpage}{151}
+\indexentry{Sainte Odile!completude|hyperpage}{152}
+\indexentry{SU des HUS|hyperpage}{155}
+\indexentry{HUS!SU|hyperpage}{155}
+\indexentry{H\IeC {\^o}pitaux Universitaires de Strasbourg!SU|hyperpage}{155}
+\indexentry{HUS!completude|hyperpage}{156}
+\indexentry{SU Sainte Anne|hyperpage}{159}
+\indexentry{Sainte Anne!SU |hyperpage}{159}
+\indexentry{SU St Luc|hyperpage}{171}
+\indexentry{St Luc!SU|hyperpage}{171}
+\indexentry{SU S\IeC {\'e}lestat|hyperpage}{173}
+\indexentry{S\IeC {\'e}lestat!SU|hyperpage}{173}
+\indexentry{CH S\IeC {\'e}lestat!completude|hyperpage}{174}
+\indexentry{SU Colmar|hyperpage}{177}
+\indexentry{Colmar!SU|hyperpage}{177}
+\indexentry{Colmar!taux de compl\IeC {\'e}tude|hyperpage}{178}
+\indexentry{SU Guebwiller|hyperpage}{181}
+\indexentry{Guebwiller!SU|hyperpage}{181}
+\indexentry{Guebwiller!taux de compl\IeC {\'e}tude|hyperpage}{182}
+\indexentry{SU Altkirch|hyperpage}{187}
+\indexentry{Altkirch!SU|hyperpage}{187}
+\indexentry{Colmar!taux de compl\IeC {\'e}tude|hyperpage}{188}
+\indexentry{SU Emile Muller|hyperpage}{191}
+\indexentry{Emile Muller!SU|hyperpage}{191}
+\indexentry{SU CH Mulhouse|hyperpage}{191}
+\indexentry{CH Mulhouse!SU|hyperpage}{191}
+\indexentry{CH Mulhouse!taux de compl\IeC {\'e}tude|hyperpage}{192}
+\indexentry{SU Diaconnat-Fonderie|hyperpage}{195}
+\indexentry{Diaconnat-Fonderie!SU|hyperpage}{195}
+\indexentry{Diaconat-Fonderie!taux de compl\IeC {\'e}tude|hyperpage}{196}
+\indexentry{SU des trois fronti\IeC {\`e}res|hyperpage}{199}
+\indexentry{Clinique des trois fronti\IeC {\`e}res!SU|hyperpage}{199}
+\indexentry{3 Fronti\IeC {\`e}res!taux de compl\IeC {\'e}tude|hyperpage}{200}
+\indexentry{Synth\IeC {\`e}se|hyperpage}{203}
+\indexentry{SU!synth\IeC {\`e}se|hyperpage}{203}
+\indexentry{SAMU d'Alsace!activit\IeC {\'e}|hyperpage}{209}
+\indexentry{SAMU!taux de  recours|hyperpage}{214}
+\indexentry{Taux de passage aux urgences|hyperpage}{217}
+\indexentry{Taux de recours aux urgences|hyperpage}{217}
+\indexentry{Taux d'intervention r\IeC {\'e}gional|hyperpage}{217}
+\indexentry{Taux de recours r\IeC {\'e}gional|hyperpage}{217}
+\indexentry{sex ratio|hyperpage}{218}
+\indexentry{rapport de masculinit\IeC {\'e}|hyperpage}{218}
+\indexentry{semaine (d\IeC {\'e}finition de la)|hyperpage}{218}
+\indexentry{week-end (d\IeC {\'e}finition)|hyperpage}{218}
+\indexentry{moyenne mobile|hyperpage}{218}
+\indexentry{passages p\IeC {\'e}diatriques|hyperpage}{218}
+\indexentry{passages g\IeC {\'e}riatriques|hyperpage}{219}
+\indexentry{Journ\IeC {\'e}e|hyperpage}{219}
+\indexentry{Soir\IeC {\'e}e|hyperpage}{219}
+\indexentry{Nuit profonde|hyperpage}{219}
+\indexentry{AIT|hyperpage}{221}
+\indexentry{ANTARES|hyperpage}{221}
+\indexentry{AR|hyperpage}{221}
+\indexentry{ARS|hyperpage}{221}
+\indexentry{Accident Vasculaire C\IeC {\'e}r\IeC {\'e}bral|hyperpage}{221}
+\indexentry{Population|hyperpage}{221}
+\indexentry{Population@Population!compt\IeC {\'e}e \IeC {\`a} part|hyperpage}{221}
+\indexentry{Population@Population!totale|hyperpage}{222}
+\indexentry{Population@Population!municipale|hyperpage}{222}
+\indexentry{Unit\IeC {\'e} urbaine|hyperpage}{222}
+\indexentry{R (CRAN R)|hyperpage}{227}

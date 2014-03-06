@@ -22,10 +22,11 @@
 }
 
 
-
-
-
-
+#==============================================
+#                                             #
+#       resume_service                        #
+#                                             #
+#==============================================
 #' @title resume_service
 #' @author JcB
 #' @details 17/12/2013
@@ -34,6 +35,17 @@
 #' @param date année de l'analyse
 #' @param d1 source des données
 #' @param print imprime les résultats (FALSE par défaut)
+#' 
+#' @details min_date date de début
+#' @details max_date date de fin
+#' @details pt population totale
+#' 
+#' @details n_ccmu1 nombre de CCMU1
+#' @details p_ccmu1 pourcentage de CCMU1
+#' @details n_ccmu45 nombre de CCMU 4 et 5
+#' @details p_ccmu45 pourcentage de CCMU 4 et 5
+#' 
+#' @return dataframe
 #' 
 resume_service <- function(hop, date = "2013", d1 = d1, print=FALSE){
   
@@ -64,7 +76,7 @@ resume_service <- function(hop, date = "2013", d1 = d1, print=FALSE){
   # age moyen
   age_moyen <- s_age["Mean"]
   # ecart-type
-  age_sd <- round(sd(HOP$AGE),2)
+  age_sd <- round(sd(HOP$AGE, na.rm=TRUE),2)
 
   # nb de rpu pédiatriques
   ped <- s_c2["Pédiatrie"]
@@ -189,9 +201,10 @@ rep <- data.frame(n,as.character(min_date),max_date,age_moyen,age_sd,ped,p_ped,g
                   p_dom_mean,tx_hosp,p_soir,p_nuitp,n_we,p_we,n_ccmu1,p_ccmu1,n_ccmu45,p_ccmu45)
 colnames(rep) <- c("n","min_date","max_date","age_moyen","age_sd","ped","p_ped","ger","p_ger","p_mean","p_median","p_4h","pp_4h",
                    "p_hosp_mean","p_dom_mean","tx_hosp","p_soir","p_nuitp","n_we","p_we","n_ccmu1","p_ccmu1","n_ccmu45","p_ccmu45")
-rownames(rep) <- ""
+rownames(rep) <- hop
 return(rep)
 }
+
 
 presence_hist <- function(hop, data = d1){
   # vecteur des présence

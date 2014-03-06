@@ -1,8 +1,14 @@
 \begin{theindex}
 
-  \item Accident Vasculaire C\IeC {\'e}r\IeC {\'e}bral, \hyperpage{201}
+  \item 3 Fronti\IeC {\`e}res
+    \subitem taux de compl\IeC {\'e}tude, \hyperpage{200}
+
+  \indexspace
+
+  \item Accident Vasculaire C\IeC {\'e}r\IeC {\'e}bral, \hyperpage{221}
   \item Activit\IeC {\'e} r\IeC {\'e}gionale, \hyperpage{123}
-  \item AIT, \hyperpage{91}, \hyperpage{201}
+  \item Age, \hyperpage{34}
+  \item AIT, \hyperpage{91}, \hyperpage{221}
     \subitem th\IeC {\'e}saurus, \hyperpage{91}
   \item Alsace
     \subitem d\IeC {\'e}mographie, \hyperpage{17}
@@ -11,11 +17,11 @@
     \subitem territoires de proximit\IeC {\'e}, \hyperpage{16}
   \item Alsace e-sant\IeC {\'e}, \hyperpage{31}
   \item Altkirch
-    \subitem SU, \hyperpage{179}
-  \item ANTARES, \hyperpage{201}
-  \item AR, \hyperpage{201}
+    \subitem SU, \hyperpage{187}
+  \item ANTARES, \hyperpage{221}
+  \item AR, \hyperpage{221}
   \item ARS, \hyperpage{15}, \hyperpage{29}, \hyperpage{31}, 
-		\hyperpage{201}
+		\hyperpage{221}
   \item Asthme, \hyperpage{94}
   \item AVC, \hyperpage{82}
     \subitem age, \hyperpage{86, 87}
@@ -30,33 +36,45 @@
 
   \item marqueurs, \hyperpage{104}
   \item CH de Haguenau
-    \subitem SU, \hyperpage{141}
-  \item CH de Saverne
     \subitem SU, \hyperpage{143}
+  \item CH de Saverne
+    \subitem SU, \hyperpage{147}
   \item CH de Wissembourg
     \subitem SU, \hyperpage{139}
   \item CH Mulhouse
-    \subitem SU, \hyperpage{181}
+    \subitem SU, \hyperpage{191}
+    \subitem taux de compl\IeC {\'e}tude, \hyperpage{192}
+  \item CH S\IeC {\'e}lestat
+    \subitem completude, \hyperpage{174}
+  \item CH Saverne, \hyperpage{148}
+  \item CH Wissembourg, \hyperpage{140}
   \item CIRE-INVS, \hyperpage{31}
   \item Clinique des trois fronti\IeC {\`e}res
-    \subitem SU, \hyperpage{185}
+    \subitem SU, \hyperpage{199}
   \item CMUNE, \hyperpage{31}
-  \item code postal, \hyperpage{34}
+  \item Code postal, \hyperpage{34}
   \item Colmar
-    \subitem SU, \hyperpage{165}
+    \subitem SU, \hyperpage{177}
+    \subitem taux de compl\IeC {\'e}tude, \hyperpage{178}, 
+		\hyperpage{188}
+  \item Commune de r\IeC {\'e}sidence, \hyperpage{34}
 
   \indexspace
 
-  \item d\IeC {\'e}c\IeC {\`e}s, \hyperpage{34}
+  \item d\IeC {\'e}c\IeC {\`e}s, \hyperpage{35}
+  \item Date de naissance, \hyperpage{34}
   \item destination, \hyperpage{117}
+  \item Diaconat-Fonderie
+    \subitem taux de compl\IeC {\'e}tude, \hyperpage{144}, 
+		\hyperpage{196}
   \item Diaconnat-Fonderie
-    \subitem SU, \hyperpage{183}
+    \subitem SU, \hyperpage{195}
   \item Dur\IeC {\'e}e de passage, \hyperpage{65}
 
   \indexspace
 
   \item Emile Muller
-    \subitem SU, \hyperpage{181}
+    \subitem SU, \hyperpage{191}
   \item exhaustivit\IeC {\'e}
     \subitem CIM10, \hyperpage{79}
   \item mode de sortie, \hyperpage{129}
@@ -72,16 +90,18 @@
   \item G\IeC {\'e}riatrie, \hyperpage{135}
   \item Gastroent\IeC {\'e}rites, \hyperpage{107}
   \item Guebwiller
-    \subitem SU, \hyperpage{169}
+    \subitem SU, \hyperpage{181}
+    \subitem taux de compl\IeC {\'e}tude, \hyperpage{182}
 
   \indexspace
 
   \item H\IeC {\^o}pitaux Universitaires de Strasbourg
-    \subitem SU, \hyperpage{147}
-  \item HAD, \hyperpage{35}
-  \item HMS, \hyperpage{35}
+    \subitem SU, \hyperpage{155}
+  \item HAD, \hyperpage{36}
+  \item HMS, \hyperpage{36}
   \item HUS
-    \subitem SU, \hyperpage{147}
+    \subitem completude, \hyperpage{156}
+    \subitem SU, \hyperpage{155}
 
   \indexspace
 
@@ -90,29 +110,29 @@
 
   \indexspace
 
-  \item Journ\IeC {\'e}e, \hyperpage{199}
+  \item Journ\IeC {\'e}e, \hyperpage{219}
 
   \indexspace
 
   \item malaise, \hyperpage{101}
-  \item MCO, \hyperpage{35}
-  \item Mode d'entr\IeC {\'e}e, \hyperpage{61}
+  \item MCO, \hyperpage{36}
+  \item Mode d'entr\IeC {\'e}e, \hyperpage{34}, \hyperpage{61}
   \item Mode de sortie, \hyperpage{115}
-  \item mode de sortie, \hyperpage{34}
-  \item Mode de transport, \hyperpage{62}
+  \item mode de sortie, \hyperpage{35}
+  \item Mode de transport, \hyperpage{35}, \hyperpage{62}
   \item motif de consultation, \hyperpage{57}
-  \item motif de recours, \hyperpage{34}, \hyperpage{79}
-  \item moyenne mobile, \hyperpage{198}
-  \item mutation, \hyperpage{34}
+  \item motif de recours, \hyperpage{35}, \hyperpage{79}
+  \item moyenne mobile, \hyperpage{218}
+  \item mutation, \hyperpage{35}
 
   \indexspace
 
-  \item Nuit profonde, \hyperpage{199}
+  \item Nuit profonde, \hyperpage{219}
 
   \indexspace
 
   \item Observatoire des urgences en Alsace, \hyperpage{31}
-  \item orientation, \hyperpage{35}, \hyperpage{116}, \hyperpage{121}
+  \item orientation, \hyperpage{36}, \hyperpage{116}, \hyperpage{121}
   \item Origine g\IeC {\'e}ographique, \hyperpage{64}
   \item ORUDAL, \hyperpage{31}
   \item ORUPACA, \hyperpage{31}
@@ -121,86 +141,93 @@
 
   \item P\IeC {\'e}diatrie, \hyperpage{133}
   \item journaliers, \hyperpage{123}
-  \item passages g\IeC {\'e}riatriques, \hyperpage{199}
-  \item passages p\IeC {\'e}diatriques, \hyperpage{198}
+  \item passages g\IeC {\'e}riatriques, \hyperpage{219}
+  \item passages p\IeC {\'e}diatriques, \hyperpage{218}
   \item pneumonies, \hyperpage{92}
-  \item Population, \hyperpage{201}
+  \item Population, \hyperpage{221}
   \item Population
-    \subitem compt\IeC {\'e}e \IeC {\`a} part, \hyperpage{201}
-    \subitem municipale, \hyperpage{18}, \hyperpage{202}
-    \subitem totale, \hyperpage{202}
-  \item PSY, \hyperpage{35}
+    \subitem compt\IeC {\'e}e \IeC {\`a} part, \hyperpage{221}
+    \subitem municipale, \hyperpage{18}, \hyperpage{222}
+    \subitem totale, \hyperpage{222}
+  \item Prise en charge durant le transport, \hyperpage{35}
+  \item Provenance, \hyperpage{35}
+  \item PSY, \hyperpage{36}
 
   \indexspace
 
-  \item R (CRAN R), \hyperpage{207}
+  \item R (CRAN R), \hyperpage{227}
   \item R\IeC {\'e}sum\IeC {\'e} du passage aux urgences, 
 		\hyperpage{33}
-  \item rapport de masculinit\IeC {\'e}, \hyperpage{198}
+  \item rapport de masculinit\IeC {\'e}, \hyperpage{218}
   \item RESURAL, \hyperpage{29}, \hyperpage{31}
     \subitem historique, \hyperpage{13}
   \item Retour \IeC {\`a} domicile, \hyperpage{125}
-  \item retour \IeC {\`a} domicile, \hyperpage{34}
+  \item retour \IeC {\`a} domicile, \hyperpage{35}
   \item RPU, \hyperpage{33}
 
   \indexspace
 
   \item S\IeC {\'e}lestat
-    \subitem SU, \hyperpage{163}
+    \subitem SU, \hyperpage{173}
   \item Sainte Anne
-    \subitem SU , \hyperpage{149}
+    \subitem SU , \hyperpage{159}
+  \item Sainte Odile
+    \subitem completude, \hyperpage{152}
   \item SAMU
-    \subitem taux de  recours, \hyperpage{194}
+    \subitem taux de  recours, \hyperpage{214}
   \item SAMU d'Alsace
-    \subitem activit\IeC {\'e}, \hyperpage{189}
+    \subitem activit\IeC {\'e}, \hyperpage{209}
   \item Secteurs sanitaires, \hyperpage{15}
-  \item semaine (d\IeC {\'e}finition de la), \hyperpage{198}
+  \item semaine (d\IeC {\'e}finition de la), \hyperpage{218}
   \item Services d'urgence
     \subitem en Alsace, \hyperpage{19}
-  \item sex ratio, \hyperpage{198}
+  \item sex ratio, \hyperpage{218}
   \item sex-ratio
     \subitem en g\IeC {\'e}riatrie, \hyperpage{135}
-  \item SLD, \hyperpage{35}
-  \item Soir\IeC {\'e}e, \hyperpage{199}
-  \item SSR, \hyperpage{35}
+  \item SLD, \hyperpage{36}
+  \item Soir\IeC {\'e}e, \hyperpage{219}
+  \item SSR, \hyperpage{36}
   \item St Luc
-    \subitem SU, \hyperpage{161}
+    \subitem SU, \hyperpage{171}
   \item Ste Odile
-    \subitem SU, \hyperpage{145}
-  \item SU Altkirch, \hyperpage{179}
-  \item SU CH Mulhouse, \hyperpage{181}
-  \item SU Colmar, \hyperpage{165}
-  \item SU des HUS, \hyperpage{147}
-  \item SU des trois fronti\IeC {\`e}res, \hyperpage{185}
-  \item SU Diaconnat-Fonderie, \hyperpage{183}
-  \item SU Emile Muller, \hyperpage{181}
-  \item SU Guebwiller, \hyperpage{169}
-  \item SU Hagenau, \hyperpage{141}
-  \item SU S\IeC {\'e}lestat, \hyperpage{163}
-  \item SU Sainte Anne, \hyperpage{149}
-  \item SU Saverne, \hyperpage{143}
-  \item SU St Luc, \hyperpage{161}
-  \item SU SuSteOdile, \hyperpage{145}
+    \subitem SU, \hyperpage{151}
+  \item SU
+    \subitem synth\IeC {\`e}se, \hyperpage{203}
+  \item SU Altkirch, \hyperpage{187}
+  \item SU CH Mulhouse, \hyperpage{191}
+  \item SU Colmar, \hyperpage{177}
+  \item SU des HUS, \hyperpage{155}
+  \item SU des trois fronti\IeC {\`e}res, \hyperpage{199}
+  \item SU Diaconnat-Fonderie, \hyperpage{195}
+  \item SU Emile Muller, \hyperpage{191}
+  \item SU Guebwiller, \hyperpage{181}
+  \item SU Hagenau, \hyperpage{143}
+  \item SU S\IeC {\'e}lestat, \hyperpage{173}
+  \item SU Sainte Anne, \hyperpage{159}
+  \item SU Saverne, \hyperpage{147}
+  \item SU St Luc, \hyperpage{171}
+  \item SU SuSteOdile, \hyperpage{151}
   \item SU Wissembourg, \hyperpage{139}
   \item syndrome grippal, \hyperpage{94}
+  \item Synth\IeC {\`e}se, \hyperpage{203}
 
   \indexspace
 
-  \item Taux d'intervention r\IeC {\'e}gional, \hyperpage{197}
-  \item Taux de passage aux urgences, \hyperpage{197}
-  \item Taux de recours aux urgences, \hyperpage{197}
+  \item Taux d'intervention r\IeC {\'e}gional, \hyperpage{217}
+  \item Taux de passage aux urgences, \hyperpage{217}
+  \item Taux de recours aux urgences, \hyperpage{217}
   \item taux de recours aux urgences, \hyperpage{43}
-  \item Taux de recours r\IeC {\'e}gional, \hyperpage{197}
+  \item Taux de recours r\IeC {\'e}gional, \hyperpage{217}
   \item Territoires de proximit\IeC {\'e}, \hyperpage{16}
-  \item transfert, \hyperpage{34}
+  \item transfert, \hyperpage{35}
   \item TRU, \hyperpage{43}
 
   \indexspace
 
-  \item Unit\IeC {\'e} urbaine, \hyperpage{202}
+  \item Unit\IeC {\'e} urbaine, \hyperpage{222}
 
   \indexspace
 
-  \item week-end (d\IeC {\'e}finition), \hyperpage{198}
+  \item week-end (d\IeC {\'e}finition), \hyperpage{218}
 
 \end{theindex}
