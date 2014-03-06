@@ -1,0 +1,25 @@
+Synthèse
+========================================================
+
+Comparaison de l'activité des SU
+
+Calcule un tableau de synthèse des principaux indicateurs pour chacun des SU. Les lignes correspondant aux dates de début et de fin sont supprimées pour gagner de la place. Le tableau est sauvegardé sous le nom de **synt** pour être exploité:
+- les noms de lignes dont modifiables avec *rownames(synt)[2] <- "Age moyen"* par exemple
+- l'impression peut se faire avec *xtable*
+
+```{r synthese,message=FALSE,warning=FALSE,cache=TRUE}
+getwd()
+source("../resume.R")
+source("../prologue.R")
+su <- c("Wis","Hag","Sav","Hus","Odi","Sel","Col","Geb","Mul","Dia","3Fr")
+a <- resume_service(su[1],d1=d1)
+for(i in su[2:12]){
+  a <- rbind(a, resume_service(i, d1=d1))
+}
+a <- t(a)
+head(a)
+synt <- a[-2:-3,]
+save(synt, file="Synthese.Rda")
+```
+
+
