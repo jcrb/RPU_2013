@@ -139,7 +139,7 @@ La prévention et la prise en charge des accidents vasculaires cérébraux  Anne
 juin 2009
 
 Annexe : Liste exhaustive des codes CIM10 d’AVC
-
+{\footnotesize
 \begin{longtable}{|l|l|}
  \hline
  Code & libellé\\
@@ -194,8 +194,9 @@ Annexe : Liste exhaustive des codes CIM10 d’AVC
  G468 & Autres syndromes vasculaires cérébraux au cours de maladies cérébrovasculaires (I60I67) (1) \\
   \hline
 \end{longtable}
+} % end small
 
-<<df_avc,echo=TRUE>>=
+<<df_avc,echo=FALSE>>=
 # Création d'un dataframe DP
 dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT")]
 # correction d'erreurs:
@@ -229,12 +230,14 @@ tab1(h,missing=FALSE,main="Heures d'admission des AVC")
 \subsection*{Selon le jour de la semaine}
 \index{AVC!age}
 
-<<avc_jour_semaine,echo=FALSE>>=
+<<avc_jour_semaine,echo=FALSE,comment="">>=
 library("gdata")
 w<-wday(AVC$ENTREE,label=TRUE)
 levels(w)<-c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
 table(w)
 round( prop.table(table(w))*100,2)
+
+
 
 # plot(w,main="AVC selon le jour de la semaine")
 # abline(h=nrow(AVC)/7,col="red")
@@ -271,6 +274,7 @@ barplot(t,col=c("yellow","white","red"),main="Répartion des AVC selon l'age et 
 
 Recommandations pour la sélection des données PMSI MCO concernant l’AVC (Juin 2009)
 
+{\small
 \begin{longtable}{|l|l|}
  \hline
  Code & libellé\\
@@ -283,6 +287,7 @@ G458  & Autres accidents ischémiques cérébraux transitoires et syndromes appa
 G459  & Accident ischémique cérébral transitoire, sans précision \\  
   \hline
 \end{longtable}
+} % end small
 
 Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour tout diagnostic d'AIT.
 \index{AIT!thésaurus}
@@ -431,13 +436,13 @@ Inclus:
   \item J21.9 Bronchiolite aiguë, sans précision
 \end{itemize}
 
-<<bron>>=
+<<bron, echo=FALSE>>=
 bron<-dpr[substr(dpr$DP,1,3)=="J21" ,]
 m<-month(bron$ENTREE,label=T)
 barplot(table(m),main="Bronchiolites - 2013",xlab="Mois")
 s<-week(bron$ENTREE)
 barplot(table(s),main="Bronchiolites - 2013",xlab="Semaines")
-summary(bron)
+# summary(bron)
 @
 
 Surreprésentation de Mul  
@@ -451,7 +456,7 @@ taux hospitalisation: 50\%
 
 CIM10 = T58
 
-<<co>>=
+<<co, echo=FALSE>>=
 co<-dpr[substr(dpr$DP,1,3)=="T58" ,]
 m<-month(co$ENTREE,label=T)
 table(m)
@@ -516,7 +521,7 @@ CIM10 A09 : Diarrhée et gastro-entérite d'origine présumée infectieuse
 Inclus: Catarrhe intestinale (Colite,Entérite, Gastro-entérite,SAI hémorragique,septique), Diarrhée (SAI,dysentérique,épidémique), Maladie diarrhéique infectieuse SAI.
 Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies dues à des bactéries, des protozoaires, des virus et d'autres agents infectieux précisés (A00-A08)  
 
-<<ge>>=
+<<ge, echo=FALSE>>=
 ge<-dpr[substr(dpr$DP,1,3)=="A09" ,]
 summary(ge)
 table(ge$FINESS,ge$DP)
@@ -536,7 +541,7 @@ Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
 calculs à la manière de l'INVS
 
 nombre de diagnostics de GE / nb total de diagnostics par semaine:
-<<invs>>=
+<<invs, echo=FALSE>>=
 mge<-month(ge$ENTREE,label=T)
 mtot<-month(dpr$ENTREE,label=T)
 summary(mtot)
@@ -551,7 +556,7 @@ dpt: tous les cas de traumato (S00 à T98)
 
 dpnp:tous les cas de médecine  
 
-<<trauma>>=
+<<trauma, echo=FALSE>>=
 dpt<-dpr[substr(dpr$DP,1,3)>="S00" & substr(dpr$DP,1,3)<"T99", ]  
 dpnt<-dpr[substr(dpr$DP,1,3) < "S00" | substr(dpr$DP,1,3)>"T98", ]  
 mnt<-month(dpnt$ENTREE,label=T)  

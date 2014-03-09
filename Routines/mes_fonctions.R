@@ -541,4 +541,21 @@ xsummary<-function(x,short=FALSE,xtable=FALSE,count=FALSE,sd=FALSE,tl="titre lon
 #si on veut limiter:
 #x<-x[,c(1,3,4,6)]
 #x
-#xtable(as.matrix(t(x)),caption=c("titre long","titre court"),label="lab",type="latex",table.placement="tp",latex.environments=c("center", "footnotesize"))
+#xtable(as.matrix(t(x)),caption=c("titre long","titre court"),
+#label="lab",type="latex",table.placement="tp",latex.environments=c("center", "footnotesize"))
+
+#===========================================================================
+# xprop.table
+#===========================================================================
+#'@param t un vecteur ligne (table, tapply)
+#'@usage tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))
+#'@usage t <- table(tranche_age)
+#'@usage x <- xprop.table(t)
+#'@usage xtable(x, caption=c("long","short"), label="lab")
+#'
+xprop.table <- function(t, rnames=""){
+  pt <- round(prop.table(t)*100,2)
+  b <- rbind(t,pt)
+  rownames(b) <-c("n","%")
+  return(b)
+}

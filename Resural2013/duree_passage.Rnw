@@ -232,17 +232,29 @@ Durée moyenne de présence pour le groupe b (10-1000 mn) (fig. \ref{b_periode} 
 
 \section{Selon l'âge}
 
-Le temps de passage augmente avec l'age.
-<<duree_age,echo=FALSE>>=
-#'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
+On peut répartir les ages des patients en trois catégories (tableau \ref{tab:tranches_age} page \pageref{tab:tranches_age}). Le temps de passage augmente avec l'age (table \ref{tab:age_dp} et figure \ref{fig:bp_age} page \pageref{fig:bp_age}).
+
+% <<duree_age,echo=FALSE>>=
+% #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
+
+<<age, echo=FALSE, comment=FALSE, results='asis'>>=
+tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))
+# s <- table(tranche_age)
+# s
+x <- xprop.table(table(tranche_age))
+xtable(x, caption=c("Répartition des RPU par tranches d'age ","Répartition des RPU par tranches d'age"), label="tab:tranches_age")
+@
+
 
 <<age_groupe1,echo=FALSE,results='asis'>>=
 #
 #' Tout le groupe
 #
 tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))
-summary(tranche_age)
-tapply(d1$presence,tranche_age,mean,na.rm=TRUE)
+t <- tapply(d1$presence,tranche_age,mean,na.rm=TRUE)
+t <- t(t)
+rownames(t)<-"mn"
+xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'age","Durée de passage et age"), label="tab:age_dp")
 @
 
 \begin{figure}[ht!]
@@ -252,6 +264,7 @@ tapply(d1$presence,tranche_age,mean,na.rm=TRUE)
   boxplot(d1$presence~tranche_age,ylab="Temps (en mn)",main="Durée de passage en fonction de l'age",col="yellow",outline=F)
   @
  \caption{Durée de passage en fonction de l'âge}
+ \label{fig:bp_age}
 \end{figure}
 
 % *************************
@@ -322,10 +335,11 @@ Pour l'ensemble des patients d'Alsace, \Sexpr{p2}\% quittent les urgences en moi
 # durée d'attente moyenne selon l'orientation
 
 t <- round(tapply(d1$presence,d1$ORIENTATION,mean,na.rm=TRUE),2)
+t <- sort(t)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
 rownames(r) <- c("mn","%")
-x <-xtable(r, caption=c("Durée de présence et orientation. Temps passé en minutes (mn) aux urgences en fonction de l'orientation à l'issue de la prise en charge","Durée de présence et orientation"), label = "tab:duree_orientation")
+x <-xtable(t(r), caption=c("Durée de présence et orientation. Temps passé en minutes (mn) aux urgences en fonction de l'orientation à l'issue de la prise en charge","Durée de présence et orientation"), label = "tab:duree_orientation")
 print.xtable(x, type="latex",)
 
 #'@details on transforme les NA en DOM pour mesurer le temps moyen si retour à domicile. On fait l'hypothèse que NA = dom.
@@ -421,3 +435,6 @@ Voir les tableaux de bord de caque établissement.
 % t<-table(periode,wday(e,label=TRUE))
 % t
 % @
+
+% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Sun Mar  9 17:20:02 2014

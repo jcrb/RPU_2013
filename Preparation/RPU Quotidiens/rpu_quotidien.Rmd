@@ -37,9 +37,25 @@ Depuis février 2014, Alsace e-sante transmet quotidiennement un fichier contena
   - fichier du jour: write.table(dday, paste0(date.jour,".csv"), sep=',', quote=TRUE, na="NA", row.names=FALSE,col.names=TRUE)
   - fichier général: write.table(dday, "RPU2014.csv", sep=',', quote=TRUE, na="NA", append = TRUE, row.names=FALSE,col.names=TRUE)
 
-6. fonctions à créer
+6. fonctions helpers
+
+source("quot_utils.R") ou source("Preparation/RPU Quotidiens/quot_utils.R") en mode console.
+
+- **rpu_jour**: fonction principale. En entrée on donne la date ISO souhaitée et en sortie retourne un dataframe avec les données correspondantes. Le WD doit pointer sur le dossier contenant le fichier .sql correspondant. Ce fichier doit être dézippé.
+- **finess2hop**: transforme le code FINESS en nom court d'hopital
+- **parse_rpu**: 
+
+séquence:
+
+- date.jour <- "2014_02"
+- parse_rpu(date.jour)
+- dx$FINESS <- as.factor(finess2hop(dx$FINESS))
+- summary(dx$FINESS) fait un décompte des RPU par établissement sur la période => permet de vérifier si anomalies quantitatives. Suppose de disposer d'un historique moyenne, écart-type par type de jour.
+- dx <- rpu2factor(dx)
 
 #' Méthode générale
+#' Préalable: disposer d'une base de donnée MySql avec une table appelée "archives". Cette base doit être référencée dans le fichier .my.conf
+#'@ data date.jour nom du fichier. Pour une utilisation courante il s'agit de la date du jour au format ISO
 parse_rpu <- function(date.jour){
   library("RMySQL")
   file <- paste0("rpu_", date.jour, "_dump.sql")
@@ -53,6 +69,9 @@ parse_rpu <- function(date.jour){
   dx$FINESS <- as.factor(finess2hop(dx$FINESS))
   
   dx$AGE<-floor(as.numeric(as.Date(dx$ENTREE)-as.Date(dx$NAISSANCE))/365)
+  
+  dx$EXTRACT <- as.Date(dx$EXTRACT)
+  setwd(wd)
 }
 
 #' Transformation du code Finess et nom court d'hôpital

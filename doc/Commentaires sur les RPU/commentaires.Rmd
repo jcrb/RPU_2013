@@ -1,5 +1,9 @@
 Commentaires sur les RPU 2013
 ========================================================
+Général
+-------
+Encoder les fichiers en UTF8 (\e9 au lieu de é haguenau)
+
 FINESS
 ------
 FINESS géographique (mettre la liste des finess)

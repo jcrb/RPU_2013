@@ -380,3 +380,31 @@ Export Word
 
 p <- "pandoc Analyse/PDSA/arret_pdsa.md -o Analyse/PDSA/arret_pdsa.docx"
 system(p)
+
+Création des fichiers pour février 2012
+========================================
+
+Début des envois quotidiens de fichier le 20/02/2014. Le premier fichier comporte les enregistrements créés entre le 1 et le 21 février. Après cette date, les sauvegardes se font par jour.
+
+```{}
+setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ")
+dx <- parse_rpu("2014_02")
+dx$FINESS <- as.factor(finess2hop(dx$FINESS))
+dx <- rpu2factor(dx)
+analyse_rpu_jour(dx)
+d02 <- dx[dx$ENTREE < "2014-02-22",]
+analyse_rpu_jour(d02)
+```
+[1] 22636
+[1] "2014-02-01"
+[1] "2014-02-21"
+[1] 14
+ 3Fr  Alk  Col  Dia  Dts  Geb  Hag  Hus  Mul  Odi  Ros  Sav  Sel  Wis 
+ 909  801 3914 1671  102  927 2057 2404 3599 1581  335 1850 1731  755
+
+```{}
+# d02<- gsub("\\e9", "é", d02, fixed=TRUE) # caractère anormal généré par certains SU (Haguenau)
+setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ/archivesCsv")
+write.table(d02, "2014-02.csv", sep=',', quote=TRUE, na="NA", row.names=FALSE,col.names=TRUE)
+```
+Les données du 1 au 21 février 2014 inclus sont sauvegardés dans le dossier **Stat Resural/Archives_Sagec/dataQ/archivesCsv** sous le nom de **2014-02.csv**. A partir du 22/2 les données sont sauvegardées quotidiennement.

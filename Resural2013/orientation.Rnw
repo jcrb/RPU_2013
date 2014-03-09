@@ -2,4 +2,4 @@
 
 \index{orientation}
 
-Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regrouppant des hospitalisations comme des sorties "anormales" de la filère de soins (fugues, sotie contre avis, etc.).
+Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroupant des hospitalisations comme des sorties "anormales" de la filière de soins (fugues, sortie contre avis, etc.).

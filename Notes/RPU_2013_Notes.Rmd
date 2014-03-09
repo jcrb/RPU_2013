@@ -66,6 +66,28 @@ as.data.frame.matrix(ma_table)
 Losqu'un tableau n'a qu'une seule colonne, R l'intitule *c* (count) par défaut. Pour changer l'intitulé ajouter *dnn = "%"*:  
 tcna<-round(prop.table(table(c,dnn="%"))*100,3)
 
+#### Renomer les lignes et/ou les colonnes
+- rownames(a) <- c("un", "deux")
+- colnames(a) <- c("un", "deux")
+
+#### tapply et xtable
+On divise la colonne AGE en 3 groupes puis on calcule l'effectif de chaque groupe avec tapply. Pour obtenir un affichage latex avec xtable, il faut transformer le vecteur en dataframe. On obtient un affichage en colonne. Pour obtenir l'affichage en ligne, utiliser la transposée t(t).  
+
+tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))  
+t <- tapply(d1$presence,tranche_age,mean,na.rm=TRUE)  
+t  
+xtable(as.data.frame(t))  
+xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'age","Durée de passage et age"), label="tab:age_dp") 
+
+#### xprop.table(x) [mes_fonctions.R]  
+Affiche un vecteur de FACTOR sur deux lignes: n et %  
+
+xprop.table(table(tranche_age))  
+a
+  15 ans et moins 16 à 74 ans 75 ans et plus  
+n        74739.00   215694.00       49895.00  
+%           21.96       63.38          14.66  
+
 #### sélectionner des variables avec TRUE et FALSE
 - v<-c("ajax","troie","voiture")
 - x<-nchar(v)<6
@@ -113,6 +135,8 @@ table \ref{tab1}, page \pageref{tab1}.
 
 #### Pour présenter en latex un tableau type *summary*:
 stargazer(as.data.frame(a2[1:length(a)]),summary=TRUE,digit.separator=" ",digits=2,median=TRUE,iqr=TRUE)
+
+stargazer(as.data.frame(data$total),summary=TRUE,digit.separator=" ",digits=2, median=TRUE, iqr=TRUE, title ="Totalité des passages: résumé des principales caractéristiques")
 
 #### Séparateur de milliers:
 \np{x} génère une erreur si x est en notation scientifique
