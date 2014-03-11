@@ -58,7 +58,7 @@ date()
 ```
 
 ```
-## [1] "Thu Feb 27 19:42:06 2014"
+## [1] "Mon Mar 10 22:05:38 2014"
 ```
 
 ```r
@@ -86,8 +86,8 @@ library("stargazer")
 ## 
 ## Please cite as: 
 ## 
-##  Hlavac, Marek (2013). stargazer: LaTeX code and ASCII text for well-formatted regression and summary statistics tables.
-##  R package version 4.5.3. http://CRAN.R-project.org/package=stargazer
+##  Hlavac, Marek (2014). stargazer: LaTeX code and ASCII text for well-formatted regression and summary statistics tables.
+##  R package version 5.0. http://CRAN.R-project.org/package=stargazer
 ```
 
 ```r
@@ -911,17 +911,6 @@ completude <- 100 - completude
 radial.plot(completude, labels = rpu.names, , rp.type = "p", radial.lim = c(0, 
     100), poly.col = fadeColor("khaki", fade = "A0"), main = paste(ch.names, 
     "- Taux de complétude des RPU"), radial.labels = T)
-```
-
-```
-## 0 100
-```
-
-```
-## 0 20 40 60 80 100
-```
-
-```r
 
 # taux de complétude de l'hôpital local
 a <- is.na(hopital)
@@ -939,13 +928,6 @@ completude_hop[15] <- orient.exhaustivite
 radial.plot(completude_hop, labels = rpu.names, radial.lim = c(0, 100), add = T, 
     rp.type = "p", line.col = "goldenrod4", main = "Taux de complétude des RPU", 
     lwd = 2)
-```
-
-```
-## 0 100
-```
-
-```r
 
 legend("bottomleft", legend = c(ch.names, "Alsace"), col = c("goldenrod4", "khaki"), 
     lty = 1, bty = "n")
@@ -992,15 +974,6 @@ y <- completude(hopital)
 radar_completude(x, y, ch.names = "CH Colmar")
 ```
 
-```
-## 0 100
-```
-
 ![plot of chunk routines](figure/routines.png) 
-
-```
-## 0 20 40 60 80 100 
-## 0 100
-```
 
 
