@@ -1,0 +1,115 @@
+ZP Sélestat
+========================================================
+
+2014-03-11: demande Sélestat
+
+Créer une carte du secteur de proximité de Sélestat.
+
+souces nécessaires
+------------------
+
+librairies:
+```{r init}
+library("maptools")
+getwd()
+source("../../../../Routines/mes_fonctions.R")
+```
+fichiers source:
+- Fichier **als** pour les shapes de base (carto_alsace.rda)
+- **pop67**: fichier INSEE de 2010 (doc/Demographie)
+- **pop68**: fichier INSEE de 2010 (doc/Demographie)
+- **zpo**: fichier des zones de proximité (zp.csv)
+```{r file}
+setwd("~/Documents/Resural/Stat Resural/RPU_2013")
+zpo<-read.csv("doc/cartographie/data/zp.csv",header=TRUE, sep=",")
+load("doc/Demographie/pop67.rda")
+load("doc/Demographie/pop68.rda")
+load("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/carto_alsace.rda")
+```
+
+
+
+On forme un fichier commun avec
+- 
+- va: ville d'Alsace (doc/cartographie/RPU2013_Carto_Pop)
+de façon a avoir dans une même base les zones de proximité (va) et les populations correspondantes:
+- base1: merging de *va* et de *pop67*
+- base2: merging de *va* et de *pop68*
+base1 et base2 sont fusionné en un seul fichier *base*, puis supprimés.
+
+
+```{r}
+
+names(zpo)
+print("Nb de communes par territoire de santé")
+a<-zpo$LIBELLE.DES.TERRITOIRES.DE.SANTE
+summary(a)
+print("Nb de communes par territoire de proximité")
+a<-zpo$LIBELLE.DES.ZONES.DE.PROXIMITE
+summary(a)
+```
+
+```{r}
+setwd("~/Documents/Resural/Stat Resural/RPU_2013")
+
+base1<-merge(zpo,pop67,by.x="CODE.COMMUNE",by.y="insee")
+base2<-merge(zpo,pop68,by.x="CODE.COMMUNE",by.y="insee")
+base<-rbind(base1,base2)
+rm(base1,base2)
+names(base)
+```
+
+
+Zone de proximité de Sélestat:
+
+```{r zp6_selestat}
+zip6<-base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE==6]
+b<-paste(zip6,sep=",")
+zp6<-als[als@data$INSEE_COM %in% b,]
+plot(zp6)
+title( main="Zone de proximité de Sélestat")
+copyright(2014)
+
+contour6<-unionSpatialPolygons(zp6,IDs=zp6@data$CODE_DEPT)
+plot(contour6)
+
+zp6$STATUT<-gsub("\xe9","e",zp6$STATUT,fixed=F)
+a<-zp6@data
+sp<-a[a$STATUT == "Sous-prefecture",]
+x<-sp$X_CHF_LIEU * 100
+y<-sp$Y_CHF_LIEU * 100
+nom<-sp$NOM_COMM
+points(x,y,pch=19,col=1)
+text(x,y,labels=nom,cex=0.8,pos=1)
+plot(contour6,add=T)
+title( main="Zone de proximité de Sélestat")
+copyright(2014)
+```
+Dataframe des communes de la zone de proximité de sélestat
+```{r liste_communes}
+a <- zp6@data
+head(a)
+```
+```{r carte_noms_communes}
+plot(zp6)
+title( main="Zone de proximité de Sélestat")
+copyright(2014)
+points(a$X_CHF_LIEU * 100, a$Y_CHF_LIEU * 100,pch=19,col="blue")
+text(a$X_CHF_LIEU * 100, a$Y_CHF_LIEU * 100,labels=a$NOM_COMM,cex=0.6,pos=1)
+```
+
+Pour que la carte soit plus lisible, on remplace le nom de la commune par son code, positionné au centre de la commune.
+```{r carte_code_communes}
+plot(zp6)
+title( main="Zone de proximité de Sélestat")
+copyright(2014)
+text(a$X_CENTROID * 100, a$Y_CENTROID * 100,labels=a$CODE_COMM,cex=0.6)
+
+code <- a[, c("INSEE_COM","CODE_COMM", "NOM_COMM")]
+rownames(code) <- NULL
+code
+write.table(code, file="liste_communes_zp6.csv")
+```
+
+
+

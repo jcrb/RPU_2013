@@ -402,6 +402,7 @@ Les zones de proximités officielles sont dans le fichier zp.csv
 ```{r zpo}
 # zpo<-read.csv("zp.csv",header=TRUE, sep=",")
 zpo<-read.csv("../../cartographie/data/zp.csv",header=TRUE, sep=",")
+# si rpu_2013: zpo<-read.csv("doc/cartographie/data/zp.csv",header=TRUE, sep=",")
 names(zpo)
 print("Nb de communes par territoire de santé")
 a<-zpo$LIBELLE.DES.TERRITOIRES.DE.SANTE
