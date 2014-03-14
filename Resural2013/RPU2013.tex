@@ -171,7 +171,7 @@ Bartier \& Madame Christine Hecker}}
 %\vspace*{7.5cm}
 
 \begin{itemize}\raggedright
-  \item R version 3.0.3 (2014-03-06), \verb|x86_64-pc-linux-gnu|
+  \item R version 3.0.3 (2014-03-06), \verb|i686-pc-linux-gnu|
   \item Locale: \verb|LC_CTYPE=fr_FR.UTF-8|, \verb|LC_NUMERIC=C|, \verb|LC_TIME=fr_FR.UTF-8|, \verb|LC_COLLATE=fr_FR.UTF-8|, \verb|LC_MONETARY=fr_FR.UTF-8|, \verb|LC_MESSAGES=fr_FR.UTF-8|, \verb|LC_PAPER=fr_FR.UTF-8|, \verb|LC_NAME=C|, \verb|LC_ADDRESS=C|, \verb|LC_TELEPHONE=C|, \verb|LC_MEASUREMENT=fr_FR.UTF-8|, \verb|LC_IDENTIFICATION=C|
   \item Base packages: base, datasets, graphics, grDevices,
     methods, stats, utils
@@ -201,7 +201,14 @@ Copyright \copyright{} 2013-2014 RESURAL et les contributeurs.
 \listoftables
 \listoffigures
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'gdata'}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'rattle'}}\end{kframe}
+\end{knitrout}
 
 
 % ************************
@@ -214,11 +221,11 @@ Copyright \copyright{} 2013-2014 RESURAL et les contributeurs.
 
 % preface.Rnw
 
-Ce document analyse les Résumé de Passages aux Urgences (RPU) transmis en 2 013 au réseau des urgences en Alsace. C'est le premier du genre et comme tel il forcément bien imparfait, à la fois qualitativement et quantitativement.
+Ce document analyse les Résumés de Passages aux Urgences (RPU) transmis en 2 013 au réseau des urgences en Alsace. C'est le premier du genre et comme tel il est forcément bien imparfait, à la fois qualitativement et quantitativement.
 
-Ce travail puise sa source das les travaux des observatoires des urgences qui nous ont précédés dans cette démarche et qui sont nos modèles: ORUMIP, ORUPACA, ORULIM et ORULOR.
+Ce travail puise sa source dans les travaux des observatoires des urgences qui nous ont précédés dans cette démarche et qui sont nos modèles: ORUMIP, ORUPACA, ORULIM et ORULOR.
 
-Il est le reflet du travail accompli par les professionnels de santé au profit des habitants de l'Alsace et d'ailleurs. Que soient remerciés les équipes de hôpitaux et cliniques de Wissembourg, Haguenau, Saverne, Strasbourg, Sélestat, Colmar, Guebwiller, Thann, Altkirch et Saint-Louis qui ont recueillis les informations nécessaires et leur transmission. Ces remerciements englobent également Alasace e-santé qui assure le stockage et la diffusion des RPU vers Resural et l'InVS, ainsi qu'aux autres membres de l'Observatoire des urgences en Alsace (ORUDAL), l'ARS Alsace, la CIRE Lorraine-Alsace et le collège de médecine d'urgence du Nord-Est (CMUNE).
+Il est le reflet du travail accompli par les professionnels de santé au profit des habitants de l'Alsace et d'ailleurs. Que soient remerciés les équipes de hôpitaux et cliniques de Wissembourg, Haguenau, Saverne, Strasbourg, Sélestat, Colmar, Guebwiller, Thann, Altkirch et Saint-Louis qui ont recueillis les informations nécessaires et leur transmission. Ces remerciements englobent également Alsace e-santé qui assure le stockage et la diffusion des RPU vers Resural et l'InVS, ainsi qu'aux autres membres de l'Observatoire des urgences en Alsace (ORUDAL), l'ARS Alsace, la CIRE Lorraine-Alsace et le collège de médecine d'urgence du Nord-Est (CMUNE).
 
 
 % ************************
@@ -538,7 +545,7 @@ Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU
 
 
 
-On dédinit l'exhaustivité quantitative comme le nombre de RPU transmis par rapport au nombre de passages réels.
+On définit l'exhaustivité quantitative comme le nombre de RPU transmis par rapport au nombre de passages réels.
 Les données proviennent des RPU produits par les hôpitaux d'Alsace ayant l'autorisation de faire fonctionner un service d'urgence (SU). La liste des structures hospitalières ayant fournit des informations alimentant le présent rapport est fournie par la table \ref{tab1}, page \pageref{tab1}.
 
 Tous ces hôpitaux fournissent des données depuis le premier janvier 2013 sauf le CH Saverne qui a commencé en Juillet 2013.
@@ -550,7 +557,11 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 % \fbox{Voir SAU2013}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:22:49 2014
+=======
+% Fri Mar 14 13:55:15 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -586,7 +597,11 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:22:50 2014
+=======
+% Fri Mar 14 13:55:17 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -652,7 +667,7 @@ Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données
 
 Les diagrammes de complétude propres à chaque établissement figurent au chapitre correspondant au service d'urgence.
 
-Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce fernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparait dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})
+Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce dernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparait dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})
 
 
 \newpage
@@ -665,7 +680,7 @@ Le réseau des urgences en Alsace (RESURAL) est une association à but non lucra
 
 Elle est domiciliée aux Hôpitaux Universitaires de Strasbourg.
 
-Elle est dirigée par un conseil d'administration et représentée par son preésident, le Docteur Bruno Goulesque.
+Elle est dirigée par un conseil d'administration et représentée par son président, le Docteur Bruno Goulesque.
 
 Son fonctionnement est assuré par une équipe de coordination, composée d'un médecin coordinateur à mi-temps et d'une assistante à mi-temps. Cette équipe est opérationnelle depuis le 1er février 2013.
 
@@ -706,7 +721,7 @@ Il est composé des organismes suivants:
 \section*{FEDORU}
   \index{FEDORU}
   
-La fédération des observatoires des urgences et structures apparentés a été crée en octobre 2013 à l'initiative de quelques organisme régionaux dont Résural sur une proposition de l'ORUPACA \index{ORUPACA}
+La fédération des observatoires des urgences et structures apparentés a été crée en octobre 2013 à l'initiative de quelques organismes régionaux dont Résural sur une proposition de l'ORUPACA \index{ORUPACA}
 
 
 \newpage
@@ -750,14 +765,15 @@ Chaque passage aux urgences donne lieu à la création d'un RPU qui collecte les
 \subsubsection{L'identifiant (ID)}
 %%%%%%%%%%%%%%
 
-Ils'agit d'un code unique caractérisant le RPU. Il ne fait pas partie de la définition de l'INVS.Il a été rajouté par SAGEC à l'origine du serveur régional pour retrouver l'enregistrement en cas de problème et faciliter laliaison avec d'autres rubriques comme les diagnostiques associés.
+Il s'agit d'un code unique caractérisant le RPU. Il ne fait pas partie de la définition de l'INVS. 
+Il a été rajouté par SAGEC à l'origine du serveur régional pour retrouver l'enregistrement en cas de problème et faciliter la liaison avec d'autres rubriques comme les diagnostics associés.
 
 %%%%%%%%%%%%%%
 \subsubsection{L'établissement de santé}
 %%%%%%%%%%%%%%
 
 \index{FINESS}
-Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas quel FINESS utiliser et on trouve des FINESS juridiques et géographiques. Nous recommandons d'utiliser le FINESS géographique qi permet d'identifier la structure d'origine quand il s'agit d'établissements multisites.
+Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas quel FINESS utiliser et on trouve des FINESS juridiques et géographiques. Nous recommandons d'utiliser le FINESS géographique qui permet d'identifier la structure d'origine quand il s'agit d'établissements multisites.
 
 %%%%%%%%%%%%%%
 \subsubsection{Le code postal de résidence}
@@ -765,8 +781,8 @@ Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas q
 
 \index{Code postal}
 Lorsque le lieu de résidence se situe hors des limites du territoire national, il faut indiquer par convention $99999$.
-Si le code postal précis est inconnu : le numéro du département suivi de 999
-Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}
+Si le code postal précis est inconnu : le numéro du département suivi de 999.
+Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}.
 Si le département ou le pays de résidence est inconnu : 99999.
 Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux (Strasbourg).
 
@@ -788,7 +804,7 @@ En l'absence de code INSEE, il convient de respecter les recommandations suivant
 
 \index{Date de naissance}
 \index{Age}
-Elle comporte l'année, le mois et le jour de naissance, ce qui permet de calculer l'âge au moment de l'admission. Dans ce document on utilise l'âge par génération ou âge atteint dans l'année (et non pas l'age révolu). Comme toutes les dates il est préférable d'utiliser la norme ISO 8601 (AAAA-MM-JJ HH:MM:SS).
+Elle comporte l'année, le mois et le jour de naissance, ce qui permet de calculer l'âge au moment de l'admission. Dans ce document on utilise l'âge par génération ou âge atteint dans l'année (et non pas l'âge révolu). Comme toutes les dates il est préférable d'utiliser la norme ISO 8601 (AAAA-MM-JJ HH:MM:SS).
 
 %%%%%%%%%%%%%%
 \subsubsection{le mode d'entrée}
@@ -836,7 +852,7 @@ Ce sont des codes textuels précisant le moyen utilisé pour se rendre aux urgen
 %%%%%%%%%%%%%%
 
 \index{Prise en charge durant le transport}
-Ce sont des codes textuels précisant s'il y avait un accompgnement médical ou paramédical durant le transport.
+Ce sont des codes textuels précisant s'il y avait un accompagnement médical ou paramédical durant le transport.
 
 %%%%%%%%%%%%%%
 \subsubsection{le motif de recours aux urgences}
@@ -853,11 +869,11 @@ Il faut utiliser l'un des motifs de recours préconisé par le ministère de la 
 \index{mode de sortie}
 \index{retour à domicile}
 \label{ref:sortie}
-Les patients quittent les urgences soit parcequ'ils ne nécessitent pas d'hospitalisation (c'est un \emph{retour à domicile}), soit parcequ'ils sont hospitalisé dans la structure hospitalière (c'est une \emph{mutation}\index{mutation}) ou dans un autre établissement (on parle alors de \emph{transfert}\index{transfert}). Enfin il peut s'agir d'un \emph{décès}\index{décès} dans le service d'urgence.
+Les patients quittent les urgences soit parce qu'ils ne nécessitent pas d'hospitalisation (c'est un \emph{retour à domicile}), soit parce qu'ils sont hospitalisés dans la structure hospitalière (c'est une \emph{mutation}\index{mutation}) ou dans un autre établissement (on parle alors de \emph{transfert}\index{transfert}). Enfin il peut s'agir d'un \emph{décès}\index{décès} dans le service d'urgence.
 
 \begin{itemize}
   \item « 6 » Mutation : le malade est hospitalisé vers une autre unité médicale de la même
-entité juridique \footnote{Dans les établissements privés visés aux alinéas d et e de l'article L162-22-6 du code de la sécurité sociale (CSS), si le patient provient d’un autre établissement de la même entité juridique, le mode desortie à utiliser est le 7}
+entité juridique \footnote{Dans les établissements privés visés aux alinéas d et e de l'article L162-22-6 du code de la sécurité sociale (CSS), si le patient provient d’un autre établissement de la même entité juridique, le mode de sortie à utiliser est le 7}
   \item « 7 » Transfert : le malade est hospitalisé dans une autre entité juridique
   \item « 8 » Domicile : le malade retourne au domicile ou son substitut, tel une
 structure d'hébergement médico-social.
@@ -886,14 +902,14 @@ En cas de sortie au domicile
 \end{itemize}
 Les codes 6 et 7 sont incompatibles avec \textbf{mode de sortie} = \textbf{mutation, transfert} ou \textbf{décès}.
 
-On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne saitpas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
+On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne sait pas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
 
 %%%%%%%%%%%%%%
 \subsubsection{Orientation}
 %%%%%%%%%%%%%%
 
 \index{orientation}
-L'orientation précise le devenir ou les circonstances associées. Cette rubrique est complémentaire du \emph{mode de sortie}. Malheureusement, elle souffre de la mêmelimitation:le retour à domicile simple est implicite.
+L'orientation précise le devenir ou les circonstances associées. Cette rubrique est complémentaire du \emph{mode de sortie}. Malheureusement, elle souffre de la même limitation:le retour à domicile simple est implicite.
 
 \begin{enumerate}
   \item En cas de sortie par mutation ou transfert
@@ -934,7 +950,7 @@ Selon le cas ces codes sont incompatibles avec un \textbf{mode de sortie} à dom
 \chapter{Activité régionale totale}
 \section{Nombre total de passages}
 
-% activite_regionale.Rnw
+% activite_regionale.Rnw ou Activité régionale totale
 
 %on fabrique un objet **a** qui fait la somme par date des passages aux urgences:
 
@@ -971,7 +987,7 @@ Passages par secteur sanitaire:
 \end{tabular}
 \end{table}
 
-Les données du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi q'une part importante des RPU des urgences adulte des HUS.
+Les données du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi qu'une part importante des RPU des urgences adulte des HUS.
 
 
 %affichage du graphique
@@ -991,7 +1007,11 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 \subsection*{En valeur absolue}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:22:53 2014
+=======
+% Fri Mar 14 13:55:30 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -1031,7 +1051,8 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 \subsection*{Taux de recours aux urgences}
 
 
-Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comprte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à 441 062.
+
+Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comporte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à 441 062.
 
 Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 
@@ -1053,7 +1074,11 @@ m
 \subsection*{Activité par semaine}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:22:55 2014
+=======
+% Fri Mar 14 13:55:34 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1119,7 +1144,11 @@ m
 \label{act_sem}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:22:55 2014
+=======
+% Fri Mar 14 13:55:35 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
@@ -1168,12 +1197,16 @@ m
 
 L'activité horaire des services d'urgence en Alsace est totalement superposable à celui de l'ensemble des SU (figure \ref{passage:als} page \pageref{passage:als}). L'activité diminue fortement en nuit profonde à partir de une heure du matin pour redémarrer vers 9 heures et s'intensifier progressivement en matinée. Après un premier pic en fin de matinée, la croissance reprend pour culminer vers 19 heures, puis décroître lentement jusqu'en fin de soirée.
 
-Ce phénomène cyclique se répète tous les jours selon un profil immuable. La projection de ces données sur un graphique en radar représentant les 24 tranches horaires (figure \ref{radar:als} page \pageref{radar:als}) montre qu'il existe trois pics d'égale amplitude à 11, 15 et 19 heures. Ce point mérite d'être analysé car s'il se confirme, cela pourrait indiquer que le pointage de 11 heures permet d'avoir une prévision sur l'intensité de la fréquentation avant la garde du soir. On peut en rapprocher le fait que la médiane des passages se situe vers 14h, c'est à dire qu'au ointage de 15 heures on peut évaluer la quantité totale de patients qui vont se présenter dans les heures qui viennent.
+Ce phénomène cyclique se répète tous les jours selon un profil immuable. La projection de ces données sur un graphique en radar représentant les 24 tranches horaires (figure \ref{radar:als} page \pageref{radar:als}) montre qu'il existe trois pics d'égale amplitude à 11, 15 et 19 heures. Ce point mérite d'être analysé car s'il se confirme, cela pourrait indiquer que le pointage de 11 heures permet d'avoir une prévision sur l'intensité de la fréquentation avant la garde du soir. On peut en rapprocher le fait que la médiane des passages se situe vers 14h, c'est à dire qu'au pointage de 15 heures on peut évaluer la quantité totale de patients qui vont se présenter dans les heures qui viennent.
 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:22:56 2014
+=======
+% Fri Mar 14 13:55:40 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -1267,7 +1300,11 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % tranche-age.Rnw
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:00 2014
+=======
+% Fri Mar 14 13:55:47 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1299,11 +1336,15 @@ Moins de 1 an & 9216 \\
 
 Le motif de consultation est l'un des items les plus mal renseigné. Cela est du en partie à l'absence de règles formelles concernant la saisie de cet élément. Une recommandation du ministère de la santé (juin 2013 \cite{12,13}) demande que le thésaurus 2013 de la SFMU \cite{9} soit utilisé.
 
-Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{recours} liste environ \emph{150} motifs de recours aux urgences avec leur correspondance CIM10, répartis en 17 groupes. Aucune méthode n'est parfaite mais cette page constitue une bonne base d'harmonisation des données.
+Le thésaurus est présenté sous la forme d'un fichier Excel. L'onglet \emph{recours} liste environ \emph{150} motifs de recours aux urgences avec leur correspondance CIM10, répartis en 17 groupes. Aucune méthode n'est parfaite mais cette page constitue une base acceptable d'harmonisation des données.
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:00 2014
+=======
+% Fri Mar 14 13:55:47 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -1324,18 +1365,18 @@ Le thésaurus est présenté sous la formed'un fichier Excel. L'onglet \emph{rec
 
 
 \index{exhaustivité@motif}
-Le motif de consultation nest pas renseigné dans 55 \% des cas (table \ref{lab:motif}).
+Le motif de consultation n'est pas renseigné dans 55 \% des cas (table \ref{lab:motif}).
 
 Seuls six établissements ont un taux d'exhaustivité supérieur à 80\% pour cette rubrique.
 
-Cependant seuls quelques établissements saisissent cette information sous forme normalisée qui permet de l'exploiter. Dans les autres cas il s'agit de codes propre à l'établissement ou de texte libre inexploitable.
+Cependant seuls quelques établissements saisissent cette information sous forme normalisée qui permet de l'exploiter. Dans les autres cas il s'agit de codes propres à l'établissement ou de texte libre inexploitable.
 
 Données non renseignées:
 \begin{itemize}
   \item Guebwiller
   \item HUS
   \item Ste Anne
-  \item Tann
+  \item Thann
 \end{itemize}
 
 Données renseignées mais inexploitables:
@@ -1352,7 +1393,7 @@ Données renseignées, exploitables mais à mettre en conformité avec le thésa
   \item Altkirch (exhaustivité)
   \item Saverne
   \item Ste Odile
-  \item Diaconnat Fonderie
+  \item Diaconat Fonderie
   \item Trois Frontières
 \end{itemize}
 
@@ -1374,7 +1415,11 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:00 2014
+=======
+% Fri Mar 14 13:55:48 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1404,7 +1449,11 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:00 2014
+=======
+% Fri Mar 14 13:55:49 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1421,13 +1470,13 @@ AMBU & 44 176,00 & 13,00 & 16,90 \\
     Total & 340 338,00 & 100,00 & 100,00 \\ 
    \hline
 \end{tabular}
-\caption[Moyens de transport]{Moyens de transport utilisés pour se rendre à l'hôpital. Les deux colonnes de droite mesurent la fréquence du moyen utilise (en pourcentage) selon que l'on prenne en compte ou non les valeurs manquantes. } 
+\caption[Moyens de transport]{Moyens de transport utilisés pour se rendre à l'hôpital. Les deux colonnes de droite mesurent la fréquence du moyen utilisé (en pourcentage) selon que l'on prenne en compte ou non les valeurs manquantes. } 
 \label{transport}
 \end{table}
 
 
 
-Dans 23 \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpial n'est pas précisé.
+Dans 23 \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpital n'est pas précisé.
 
 %==============================
 \section*{Origine géographique}
@@ -1593,7 +1642,11 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:05 2014
+=======
+% Fri Mar 14 13:56:01 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1608,7 +1661,11 @@ N & 44074.00 & 249610.00 & 39653.00 \\
 \label{tab:freq_periode}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:05 2014
+=======
+% Fri Mar 14 13:56:01 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1666,7 +1723,11 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 \end{figure}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:06 2014
+=======
+% Fri Mar 14 13:56:04 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1705,13 +1766,17 @@ Durée moyenne de présence pour le groupe b (10-1000 mn) (fig. \ref{b_periode} 
 
 \section{Selon l'âge}
 
-On peut répartir les ages des patients en trois catégories (tableau \ref{tab:tranches_age} page \pageref{tab:tranches_age}). Le temps de passage augmente avec l'age (table \ref{tab:age_dp} et figure \ref{fig:bp_age} page \pageref{fig:bp_age}).
+On peut répartir les âges des patients en trois catégories (tableau \ref{tab:tranches_age} page \pageref{tab:tranches_age}). Le temps de passage augmente avec l'âge (table \ref{tab:age_dp} et figure \ref{fig:bp_age} page \pageref{fig:bp_age}).
 
 % <<duree_age,echo=FALSE>>=
 % #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:06 2014
+=======
+% Fri Mar 14 13:56:05 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1730,7 +1795,11 @@ n & 74739.00 & 215694.00 & 49895.00 \\
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:06 2014
+=======
+% Fri Mar 14 13:56:06 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1742,7 +1811,7 @@ n & 74739.00 & 215694.00 & 49895.00 \\
   75 ans et plus & 220.43 \\ 
    \hline
 \end{tabular}
-\caption[Durée de passage et age]{Durée de passage (mn) en fonction de l'age} 
+\caption[Durée de passage et age]{Durée de passage (mn) en fonction de l'âge} 
 \label{tab:age_dp}
 \end{table}
 
@@ -1769,7 +1838,11 @@ n & 74739.00 & 215694.00 & 49895.00 \\
 \section{Selon le jour de la semaine}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:07 2014
+=======
+% Fri Mar 14 13:56:07 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1822,7 +1895,11 @@ Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de qu
 
 \section{Selon l'orientation}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:07 2014
+=======
+% Fri Mar 14 13:56:09 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -1848,7 +1925,11 @@ REO & 86.22 & 3.23 \\
 \label{tab:duree_orientation}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:08 2014
+=======
+% Fri Mar 14 13:56:10 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1891,7 +1972,11 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \section{Selon la gravité}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:08 2014
+=======
+% Fri Mar 14 13:56:10 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1930,7 +2015,7 @@ Il existe une relation entre la gravité et la durée de présence aux urgences 
 
 \section{Selon la structure}
 
-Voir les tableaux de bord de caque établissement.
+Voir les tableaux de bord de chaque établissement.
 
 % \subsection{CH Sélestat}
 % <<duree_structure,echo=FALSE>>=
@@ -1984,7 +2069,7 @@ La comparaison entre le nombre de RPU reçus et le nombre de diagnostics renseig
 
 \section{Cim10}
 
-Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10. Le tableau qui suit indique pour chaque chapitre, le nombre total de cas rapportés, le pourcentage par rapport à l'ensemble, et le pourcentage de cas déduction faite de la traumatologie. En effet celleci représente environ la moitié des cas et il parait intéressant de séparer les pathologies traumatiques des non traumatiques.
+Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10. Le tableau qui suit indique pour chaque chapitre, le nombre total de cas rapportés, le pourcentage par rapport à l'ensemble, et le pourcentage de cas déduction faite de la traumatologie. En effet celle-ci représente environ la moitié des cas et il parait intéressant de séparer les pathologies traumatiques des non traumatiques.
 
 
 
@@ -2089,7 +2174,7 @@ XXII&U00–U99&Codes d'utilisation particulière & 0&0&0\\
 \index{AVC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Les AVC sont définis par la nomenclature I60 à I64, G45 Accidents ischémiques cérébraux transitoires (sauf G45.4 amnésie transitoire) et syndromes apparentés et G46 Syndromes vasculaires cérébraux au cours de maladies cérébrovasculaires
+Les AVC sont définis par la nomenclature I60 à I64, G45 accidents ischémiques cérébraux transitoires (sauf G45.4 amnésie transitoire) et syndromes apparentés et G46 syndromes vasculaires cérébraux au cours de maladies cérébrovasculaires
 
 La prévention et la prise en charge des accidents vasculaires cérébraux  Annexes 
 juin 2009
@@ -2207,7 +2292,9 @@ Horaire des AVC, à comparer avec:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: there is no package called 'gdata'}}\begin{verbatim}
 w
 Dim Lun Mar Mer Jeu Ven Sam 
 321 465 454 398 396 407 347 
@@ -2215,14 +2302,18 @@ w
 Dim Lun Mar Mer Jeu Ven Sam 
  12  17  16  14  14  15  12 
 \end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/avc_jour_semaine} 
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: l'argument "{}X"{} est manquant, avec aucune valeur par défaut}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur : objet 'w2' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: plot.new has not been called yet}}\end{kframe}
 \end{knitrout}
 
 Proportion théorique = 14.28\% par jour de la semaine.
 
-\subsection*{AVC et age}
+\subsection*{AVC et âge}
 \index{AVC!age}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -2256,7 +2347,7 @@ Le rapport de 2009 donne age moyen = 70.5 et age médian = 75 ans.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Accidents ischiémiques transitoires (AIT)}
+\section{Accidents ischémiques transitoires (AIT)}
 \index{AIT}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -2307,6 +2398,8 @@ Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour to
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'epitools'}}
+
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning: impossible d'ouvrir le fichier '../mes\_fonctions.R' : Aucun fichier ou dossier de ce type}}
 
 {\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}\begin{verbatim}
@@ -2318,15 +2411,20 @@ Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour to
 \end{knitrout}
 
 
-Les pneumopaties bactériennes sans précision sont cotées J15.9 Dans la CIM10.
+Les pneumopathies bactériennes sans précision sont cotées J15.9 Dans la CIM10.
 840 diagnostics de ce type ont été portés au SAU en 2 013.
 
-Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age moyen est de 71 ans et la moitié de ces patients ont 77 ans et plus.
+Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'age moyen est de 71 ans et la moitié de ces patients ont 77 ans et plus.
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/pneumo} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}colorbrewer.palette"{}}}
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning: there is no package called 'epitools'}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: Il manque le package 'epitools'}}\end{kframe}
 \end{knitrout}
 
 
@@ -2364,7 +2462,7 @@ En fonction de l'orientation:
 \end{knitrout}
 
 
-Deux patients porteurs de problèmes respiratoires sont orienté en chirurgie : erreur ou manque de place en médecine ?
+Deux patients porteurs de problèmes respiratoires sont orientés en chirurgie : erreur ou manque de place en médecine ?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Syndrome grippal}
@@ -2393,7 +2491,11 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:10 2014
+=======
+% Fri Mar 14 13:56:17 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2411,7 +2513,11 @@ J450 & 132 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:10 2014
+=======
+% Fri Mar 14 13:56:17 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2439,7 +2545,11 @@ On note \np{1 388} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:10 2014
+=======
+% Fri Mar 14 13:56:17 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2527,9 +2637,9 @@ La population des patients consultant pour une crise d'astme est jeune (voir tab
 
 Les crises sont de gravité moyenne avec une prédominance de CCMU 2 et 3 (voir table \ref{tab:ccmu_asthme} page \pageref{tab:ccmu_asthme}).
 Cependant le taux d'hospitalisation est important: 38 \%.
-\np{88} patients ont été orientés vers un service "chaud" (Réanimation, sins intensifs ou continus) soit 19 \% des patients hospitalisés pour asthme.
+\np{88} patients ont été orientés vers un service "chaud" (Réanimation, soins intensifs ou continus) soit 19 \% des patients hospitalisés pour asthme.
 
-Le bulletin épidémiologique (Le point épidémiologique du 24 octobre 2013 - Surveillance épidémiologique de la Cire Lorraine-Alsace) clôt la surveillance de l’asthme. Pour l’association SOS Médecins de Strasbourg, l’activité liée à l’asthme a été particulièrement marqué de mi-avril (semaine 16) à fin mai(semaine 22) puis en semaine 40. Concernant l’association de Mulhouse, seule une forte augmentation en semaine 39 a été observée depuis début avril.
+Le bulletin épidémiologique (Le point épidémiologique du 24 octobre 2013 - Surveillance épidémiologique de la Cire Lorraine-Alsace) clôt la surveillance de l’asthme. Pour l’association SOS Médecins de Strasbourg, l’activité liée à l’asthme a été particulièrement marquée de mi-avril (semaine 16) à fin mai(semaine 22) puis en semaine 40. Concernant l’association de Mulhouse, seule une forte augmentation en semaine 39 a été observée depuis début avril.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bronchiolite}
@@ -2555,8 +2665,8 @@ Inclus:
 \end{knitrout}
 
 
-Surreprésentation de Mul  
-taux hospitalisation: 50\%
+Surreprésentation de Mulhouse. 
+Taux hospitalisation: 50\%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2619,7 +2729,7 @@ Données hospitalières : nombre quotidien de passages dans des services d'urgen
 
 \includegraphics[width=\maxwidth]{figure/canicule2} 
 \begin{kframe}\begin{verbatim}
-## canicule$DP : 
+## canicule$DP :  
 ##         Frequency Percent Cum. percent
 ## T670           57    73.1           73
 ## T671            8    10.3           83
@@ -2698,12 +2808,6 @@ Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies du
 \end{knitrout}
 
 
-
-NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On utilise lines avec les valeurs suivantes:
-- x = abcisse des colonnes. Elles sont contenues dans l'objet barplot. On peut les recueillir eplicitement par la fonction *str* (str(x)).
-- y = ordonnées des barres, récupérées avec la fonction *table* qui agglomère les données par mois
-Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
-
 calculs à la manière de l'INVS
 
 nombre de diagnostics de GE / nb total de diagnostics par semaine:
@@ -2767,19 +2871,27 @@ Le RPU connaît trois mode de sortie des urgences:
  \caption{Modes de sortie}
 \end{figure}
 
+<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
 % Wed Mar 12 09:23:12 2014
+=======
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}drop.levels"{}}}\end{kframe}% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Fri Mar 14 13:56:23 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
   \hline
  & n & \% \\ 
   \hline
-Décès & 2 & 0.00 \\ 
-  Domicile & 220090 & 64.67 \\ 
-  Mutation & 67665 & 19.88 \\ 
-  $<$NA$>$ & 47704 & 14.02 \\ 
-  Transfert & 4877 & 1.43 \\ 
+0 & 2 & 33.33 \\ 
+  122 & 1 & 16.67 \\ 
+  18 & 1 & 16.67 \\ 
+  468 & 1 & 16.67 \\ 
+  780 & 1 & 16.67 \\ 
    \hline
 \end{tabular}
 \caption[Mode de sortie des urgences]{Mode de sortie des urgences. <NA> est le nombre de non réponses à cet item} 
@@ -2792,6 +2904,7 @@ Décès & 2 & 0.00 \\
 
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
+<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
 % Wed Mar 12 09:23:13 2014
 \begin{table}[ht]
@@ -2817,7 +2930,16 @@ Les données par établissement sont résumées dans le tableau \ref{tab.sortie_
 \caption[Mode de sortie selon l'établissement]{Mode de sortie des urgences selon l'établissement (en pourcentage). <NA> est le nombre de non réponses à cet item} 
 \label{tab.sortie_etab}
 \end{table}
+=======
+\begin{kframe}
 
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: all arguments must have the same length}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: indice hors limites}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}align"{} must have length equal to 3 ( ncol(x) + 1 )}}\end{kframe}
 
 
 
@@ -2838,13 +2960,18 @@ Le mode de sortie est affiné par la rubrique ORIENTATION avec la ventilation su
 
 On notera que le retour à domicile proprement dit ne figure pas parmi les items et cette modalité est implicite. On peut supposer que les NA's correspondent à cette modalité. Cependant une ambiguité demeure car les non réponses sont aussi représentées par ce symbole.
 
-a
-  CHIR  FUGUE    HDT     HO    MED   OBST    PSA    REA    REO     SC 
-  7872    256    126     31  18522     98   3067   1035   1436   1426 
-  SCAM     SI   UHCD   <NA> 
-   512   1402  32452 272103 
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: impossible de trouver la fonction "{}drop.levels"{}}}\end{kframe}a
+1.37 1.38  1.4 1.44 1.58 1.59 1.86 2.07 2.17  2.2 2.65 3.01 <NA> 
+   1    1    1    1    1    1    1    1    1    1    1    1    0 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:13 2014
+=======
+% Fri Mar 14 13:56:23 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2860,11 +2987,15 @@ NA &   0 &   0 &   0 &   0 &   0 &   0 &   0 \\
   HMS &   3 &  15 &   2 &   0 &   0 &   0 &   0 \\ 
    \hline
 \end{tabular}
-\caption[Destination et gravité]{Destination et gravité (la gravité est exprimée en unités CCMU} 
+\caption[Destination et gravité]{Destination et gravité (la gravité est exprimée en unités CCMU)} 
 \label{tab:dest_gravite}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:13 2014
+=======
+% Fri Mar 14 13:56:23 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2894,40 +3025,47 @@ CHIR & 181 & 3331 & 3662 & 363 &  11 &   1 & 140 \\
 
 \section{Destination}
 \index{destination}
+<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
 % Wed Mar 12 09:23:13 2014
+=======
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}drop.levels"{}}}\end{kframe}% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Fri Mar 14 13:56:23 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
   \hline
  & \% \\ 
   \hline
-HAD & 0.01 \\ 
-  HMS & 0.03 \\ 
-  MCO & 98.18 \\ 
-  PSY & 1.61 \\ 
-  SLD & 0.02 \\ 
-  SSR & 0.14 \\ 
+1 & 40.00 \\ 
+  2 & 10.00 \\ 
+  16.67 & 40.00 \\ 
+  33.33 & 10.00 \\ 
    \hline
 \end{tabular}
 \caption{Destination des patients non rentrés à domicile après leur passage aux urgences} 
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:13 2014
+=======
+% Fri Mar 14 13:56:23 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
   \hline
  & \% \\ 
   \hline
-DOM & 78.73 \\ 
-  HAD & 0.00 \\ 
-  HMS & 0.01 \\ 
-  MCO & 20.88 \\ 
-  PSY & 0.34 \\ 
-  SLD & 0.01 \\ 
-  SSR & 0.03 \\ 
+1 & 40.00 \\ 
+  16.67 & 40.00 \\ 
+  2 & 10.00 \\ 
+  33.33 & 10.00 \\ 
    \hline
 \end{tabular}
 \caption{Devenir des patients à la sortie des urgences. DOM représentent ceux qui sont repartis vers leur domicile ou ce qui en tient lieu (sous l'hypothèse que toutes les non réponses correspondent à un retour à domicile).} 
@@ -2945,7 +3083,11 @@ On isole le groupe "mode de sortie = domicile" et on relève les résultats de l
 
 \includegraphics[width=\maxwidth]{figure/fausses_sorties} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:13 2014
+=======
+% Fri Mar 14 13:56:24 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2969,7 +3111,7 @@ NA's & 262 056,00 & 97,90 & 0,00 \\
     Total & 267 794,00 & 100,00 & 100,00 \\ 
    \hline
 \end{tabular}
-\caption[Orientation des patients non hospitalisés]{Orientation des patients non hospitalisés. Certaines orientation sont incompatibles avec un retour à domicile (Défaut de cohérence).} 
+\caption[Orientation des patients non hospitalisés]{Orientation des patients non hospitalisés. Certaines orientations sont incompatibles avec un retour à domicile (Défaut de cohérence).} 
 \label{tab:orient_nh}
 \end{table}
 
@@ -3012,7 +3154,11 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:14 2014
+=======
+% Fri Mar 14 13:56:26 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3038,14 +3184,18 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 Le nombre de retours à domicile est obtenu à partir de la rubrique MODE\_SORTIE. Il s'agit en fait des patients qui n'ont pas été hospitalisés. Sont également comptabilisé dans cette rubrique les sorties atypiques.
 
-Les variation du retour journalier à domicile sont calculés de la manière suivante:
+Les variations du retour journalier à domicile sont calculées de la manière suivante:
 \begin{description}
   \item[numérateur] somme quotidienne où MODE\_SORTIE = Domicile
   \item[dénominateur] somme quotidienne des ENTREE (correspond à q)
 \end{description}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:15 2014
+=======
+% Fri Mar 14 13:56:29 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3069,10 +3219,14 @@ On refait le calcul de q en tenant compte des non réponses:
 
 
 
-Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) est une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
+Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:15 2014
+=======
+% Fri Mar 14 13:56:32 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3131,7 +3285,11 @@ Les moins de 18 ans représentent $82 650$ passages en 2 013 soit $228$ passages
 % Pédiatrie et sexe
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:17 2014
+=======
+% Fri Mar 14 13:56:36 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3153,7 +3311,11 @@ Le sex-ratio est de $1.2$ (table \ref{tab:ped_sr})
 % Taux hospitalisation
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:17 2014
+=======
+% Fri Mar 14 13:56:36 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3206,7 +3368,11 @@ Les 75 ans et plus représentent $52 512$ passages en 2 013 soit $145$ passages 
 % Gériatrie et sexe
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:17 2014
+=======
+% Fri Mar 14 13:56:38 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3230,7 +3396,11 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:17 2014
+=======
+% Fri Mar 14 13:56:38 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3602,7 +3772,7 @@ Auxquels il faut rajouter les services assurant un accueil des urgences 24h/24h 
 
 
 
-Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont été transmis, alors que \np{121 190} dossiers ont été déclarés au serveur régional. 
+Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont été transmis, alors que \np{91 652} dossiers ont été déclarés au serveur régional. 
 1
 
 \section*{Durée de présence aux urgences}
@@ -3631,11 +3801,15 @@ Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont é
 \index{SU Sainte Anne}
 \index{Sainte Anne!SU }
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}
 
-Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 40 par jour.
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
 
+<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
 % Wed Mar 12 09:23:25 2014
 \begin{table}[ht]
@@ -3649,36 +3823,84 @@ n & 282.00 & 12805.00 & 1574.00 & 14661.00 & 4.00 & 2261.00 & 250.00 \\
    \hline
 \end{tabular}
 \end{table}
+=======
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: '/' not defined for "{}POSIXt"{} objects}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: invalid 'row.names' length}}
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: 'sum' not defined for "{}POSIXt"{} objects}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hospitalise' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hosp' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hosp' introuvable}}\end{kframe}
+\end{knitrout}
+
+
+Le SU Sainte Anne a reçu en 2013 un total de \np{1 388} consultants, soit en moyenne 4 par jour.
+
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: input string 5177 is invalid in this locale}}\end{kframe}
 
 
 \section{Taux moyen de passages}
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages1} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages2} 
 
-\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages3} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
+\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages} 
+\begin{kframe}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}x"{} : attempt to define invalid zoo object}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur : objet 'ma' introuvable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur dans ts\$total : objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 \end{knitrout}
 
 
 \section{Taux d'hospitalisation}
 
-Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mutations, transferts et UHCD.} est de 17\% par jour.
+Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mutations, transferts et UHCD.} est de 38\% par jour.
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/hospit_stAnne} 
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
+\includegraphics[width=\maxwidth]{figure/hospit_stAnne} 
+\begin{kframe}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}x"{} : attempt to define invalid zoo object}}\end{kframe}
 \end{knitrout}
 
 
 \section{Total des passages}
 
+\begin{kframe}
 
+
+<<<<<<< HEAD
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: mer., mars 12, 2014 - 09:23:25
 \begin{table}[!htbp] \centering 
@@ -3692,16 +3914,23 @@ data\$total & 365 & 40.00 & 8.00 & 22 & 34 & 40 & 46 & 69 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
+=======
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 
-\includegraphics[width=\maxwidth]{figure/stAnne_tot_passages1} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
 
-\includegraphics[width=\maxwidth]{figure/stAnne_tot_passages2} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}\end{kframe}
 
 
 \subsection{Passages de 1 à 75 ans}
 
+\begin{kframe}
 
+
+<<<<<<< HEAD
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: mer., mars 12, 2014 - 09:23:25
 \begin{table}[!htbp] \centering 
@@ -3715,17 +3944,23 @@ data\$entre1\_75ans & 365 & 35.00 & 7.50 & 18 & 30 & 34 & 40 & 63 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
+=======
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 
-\includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages1} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
 
-\includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages2} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}\end{kframe}
 
 
 
 \subsection{Passages des plus de 75 ans}
 
+\begin{kframe}
 
+<<<<<<< HEAD
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: mer., mars 12, 2014 - 09:23:25
 \begin{table}[!htbp] \centering 
@@ -3739,14 +3974,19 @@ data\$sup75ans & 365 & 4.30 & 2.30 & 0 & 3 & 4 & 6 & 12 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
+=======
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 
-\includegraphics[width=\maxwidth]{figure/stAnne_sup75_passages1} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
 
-\includegraphics[width=\maxwidth]{figure/stAnne_sup75_passages2} 
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}\end{kframe}
 
 
-
-
+<<<<<<< HEAD
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
 % Date and time: mer., mars 12, 2014 - 09:23:25
 \begin{table}[!htbp] \centering 
@@ -3767,7 +4007,12 @@ tx\_hosp & 365 & 0.17 & 0.06 & 0.00 & 0.12 & 0.18 & 0.22 & 0.34 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
+=======
+\begin{kframe}
 
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 
 
 
@@ -4291,12 +4536,12 @@ CCMU 4 \& 5 & \np{1 551} (2.8 \%) \tabularnewline
 
 
 
-\chapter{SU Diaconnat-Fonderie}
+\chapter{SU Diaconat-Fonderie}
 
 % SU_Fonderie.Rnw
 
-\index{SU Diaconnat-Fonderie}
-\index{Diaconnat-Fonderie!SU}
+\index{SU Diaconat-Fonderie}
+\index{Diaconat-Fonderie!SU}
 
 
 
@@ -4306,7 +4551,7 @@ CCMU 4 \& 5 & \np{1 551} (2.8 \%) \tabularnewline
 
 \begin{tabular}{|l|c|}
 \hline 
-\multicolumn{2}{|c|}{Clinique Diaconnat-Fonderie (Mulhouse)}\tabularnewline
+\multicolumn{2}{|c|}{Clinique Diaconat-Fonderie (Mulhouse)}\tabularnewline
 \hline 
 \hline 
 RPU déclarés & \np{29 469} \tabularnewline
@@ -4452,28 +4697,28 @@ CCMU 4 \& 5 & \np{18} (0.12 \%) \tabularnewline
 
 Signification des intitulés des lignes:
 \begin{enumerate}
-  \item \textbf{RPU totaux}: nombre total de RPU transmis à RESURAL
-  \item \textbf{Age moyen}: age moyen en année des patients, tous ages confondus
-  \item \textbf{Ecart-type}: écart-type de l'age en années
-  \item \textbf{RPU Pédiatriques}: nombre de passages de moins de 18 ans
-  \item \textbf{\% Pédiatrie}: pourcentage de passages pédiatriques
-  \item \textbf{RPU Gériatriques}: nombre de passages de 75 ans et plus
-  \item \textbf{\% Gériatrie}: pourcentage de passages de 75 ans et plus
-  \item \textbf{Présence moyenne}: durée de présence moyenne (en minutes) au service d'urgence
-  \item \textbf{Présence médiane}: durée de présence médiane en minutes (50\% sont restés moins de cette duré et 50\% plus de cette durée)
-  \item \textbf{RPU moins de 4 heures}: nombre de patients dont a durée de présence au SU est de moins de 4 heures
-  \item \textbf{\% moins de 4 heures}: pourcentage de patients dont a durée de présence au SU est de moins de 4 heures
-  \item \textbf{Attente moy.hospitalisation}: durée de passage (en minutes) des patients qui seront hospitalisés ou transférés
-  \item \textbf{Attente moy.domicile}: durée de passage (en minutes) des patients qui quittent l'hôital à l'issue de leur passage au SU
-  \item \textbf{Taux hospitalisation}: proportion de patients hodpitalisés ou transférés par rapport au nombre total de passages
-  \item \textbf{\% passages soirée}: pourcentage de patients qui se présentent dans la tranche 20 heures - minuit
-  \item \textbf{\% passages nuit}: pourcentage de patients qui se présentent dans la tranche minuit - 8 heures (nuit profonde)
-  \item \textbf{RPU le week-end}: nombre de RPU générés du vendredi 20 heures au lundi 8 heures
-  \item \textbf{\% RPU week-end}: pourcentage de RPU générés du vendredi 20 heures au lundi 8 heures par rapport au nombre total de passages
-  \item \textbf{Nb de CCMU 1}: nombre de patients classés CCMU 1
-  \item \textbf{\% de CCMU 1}: pourcentage de patients classés CCMU 1
-  \item \textbf{Nb de CCMU 4 et 5}: nombre  de patients classés CCMU 4 ou 5 (les plus graves)
-  \item \textbf{\% de CCMU 4 et 5}: pourcentage  de patients classés CCMU 4 ou 5.
+  \item \textbf{RPU totaux:} nombre total de RPU transmis à RESURAL
+  \item \textbf{Age moyen:} âge moyen en année des patients, tous âges confondus
+  \item \textbf{Ecart-type:} écart-type de l'âge en années
+  \item \textbf{RPU Pédiatriques:} nombre de passages de moins de 18 ans
+  \item \textbf{\% Pédiatrie:} pourcentage de passages pédiatriques
+  \item \textbf{RPU Gériatriques:} nombre de passages de 75 ans et plus
+  \item \textbf{\% Gériatrie:} pourcentage de passages de 75 ans et plus
+  \item \textbf{Présence moyenne:} durée de présence moyenne (en minutes) au service d'urgence
+  \item \textbf{Présence médiane:} durée de présence médiane en minutes (50\% sont restés moins de cette durée et 50\% plus de cette durée)
+  \item \textbf{RPU moins de 4 heures:} nombre de patients dont la durée de présence au SU est de moins de 4 heures
+  \item \textbf{\% moins de 4 heures:} pourcentage de patients dont la durée de présence au SU est de moins de 4 heures
+  \item \textbf{Attente moy.hospitalisation:} durée de passage (en minutes) des patients qui seront hospitalisés ou transférés
+  \item \textbf{Attente moy.domicile:} durée de passage (en minutes) des patients qui quittent l'hôpital à l'issue de leur passage au SU
+  \item \textbf{Taux hospitalisation:} proportion de patients hospitalisés ou transférés par rapport au nombre total de passages
+  \item \textbf{\% passages soirée:} pourcentage de patients qui se présentent dans la tranche 20 heures - minuit
+  \item \textbf{\% passages nuit:} pourcentage de patients qui se présentent dans la tranche minuit - 8 heures (nuit profonde)
+  \item \textbf{RPU le week-end:} nombre de RPU générés du vendredi 20 heures au lundi 8 heures
+  \item \textbf{\% RPU week-end:} pourcentage de RPU générés du vendredi 20 heures au lundi 8 heures par rapport au nombre total de passages
+  \item \textbf{Nb de CCMU 1:} nombre de patients classés CCMU 1
+  \item \textbf{\% de CCMU 1:} pourcentage de patients classés CCMU 1
+  \item \textbf{Nb de CCMU 4 et 5:} nombre  de patients classés CCMU 4 ou 5 (les plus graves)
+  \item \textbf{\% de CCMU 4 et 5:} pourcentage  de patients classés CCMU 4 ou 5.
 \end{enumerate}
 
 
@@ -4481,7 +4726,11 @@ Signification des intitulés des lignes:
 % \begin{table}
 % \begin{center}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:36 2014
+=======
+% Fri Mar 14 13:57:29 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrrrrrrrr}
@@ -4548,20 +4797,24 @@ Les données proviennent du serveur régional SAGEC. Les informations sont trans
   \item nombre d'affaires régulées
   \item nombre d'interventions primaires
   \item nombre d'interventions secondaires
-  \item nombre de transport de néonatalogie
-  \item nombre de transfert infirmier inter hospitaliers
+  \item nombre de transports de néonatalogie
+  \item nombre de transferts infirmier inter hospitaliers
   \item nombre de transports par ambulances privées demandés par le SAMU
-  \item nombre de transport par VSAV demandés par le SAMU
+  \item nombre de transports par VSAV demandés par le SAMU
   \item nombre de conseils médicaux
   \item nombre de visites de médecins déclenchées par le Centre 15
 \end{itemize}
-La base de données est renseignées depuis le mois de juillet 2005. En 2012, une difficulté au niveau de l'hôpital de Mulhouse a entraîné un arrêt complet des transmissions pendant 6 mois en en 2013, une erreur logicielle à provoqué la transmissions de données erronées en provenance du SAMU 67 du 24 avril au 1er novembre 2013. Les données 2013 sont globalement sous estimées.
+La base de données est renseignées depuis le mois de juillet 2005. En 2012, une difficulté au niveau de l'hôpital de Mulhouse a entraîné un arrêt complet des transmissions pendant 6 mois et en 2013, une erreur logicielle à provoqué la transmissions de données erronées en provenance du SAMU 67 du 24 avril au 1er novembre 2013. Les données 2013 sont globalement sous estimées.
 
 Le interventions SMUR sont égales à la somme des interventions primaires et secondaires.
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:36 2014
+=======
+% Fri Mar 14 13:57:30 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -4630,7 +4883,11 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
+<<<<<<< HEAD
 % Wed Mar 12 09:23:36 2014
+=======
+% Fri Mar 14 13:57:31 2014
+>>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -4641,7 +4898,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
   68 & 18.25 & 18.68 & 19.32 & 20.58 & 20.00 & 16.31 & 12.18 & 25.72 \\ 
    \hline
 \end{tabular}
-\caption[Taux de recours des SAMU]{Taux de recours des SAMU 67 et 68. Si le taux de recours du SAMU 68 est plus faible que celui du SAMU 67, il connait une forte progression (les années 20122 et 2012 sont incomplètes pourle 68).} 
+\caption[Taux de recours des SAMU]{Taux de recours des SAMU 67 et 68. Si le taux de recours du SAMU 68 est plus faible que celui du SAMU 67, il connait une forte progression (les années 2011 et 2012 sont incomplètes pourle 68).} 
 \label{fig.rec}
 \end{table}
 
@@ -4735,11 +4992,11 @@ Le nombre de jour dans un mois est variable d'un mois à l'autre. Il en va de m�
 
 \section*{Passages pédiatriques}
 \index{passages pédiatriques}
-Passages ayant donné lieu à la création d'un RPU et dont l'age est compris entre 0 et 18 ans inclus.
+Passages ayant donné lieu à la création d'un RPU et dont l'âge est compris entre 0 et 18 ans inclus.
 
 \section*{Passages gériatriques}
 \index{passages gériatriques}
-Passages ayant donné lieu à la création d'un RPU et dont l'age est supérieur ou égal à 75 ans.
+Passages ayant donné lieu à la création d'un RPU et dont l'âge est supérieur ou égal à 75 ans.
 
 \section*{Journée}
 \index{Journée}
