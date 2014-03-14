@@ -39,7 +39,7 @@ La comparaison entre le nombre de RPU reçus et le nombre de diagnostics renseig
 
 \section{Cim10}
 
-Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10. Le tableau qui suit indique pour chaque chapitre, le nombre total de cas rapportés, le pourcentage par rapport à l'ensemble, et le pourcentage de cas déduction faite de la traumatologie. En effet celleci représente environ la moitié des cas et il parait intéressant de séparer les pathologies traumatiques des non traumatiques.
+Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10. Le tableau qui suit indique pour chaque chapitre, le nombre total de cas rapportés, le pourcentage par rapport à l'ensemble, et le pourcentage de cas déduction faite de la traumatologie. En effet celle-ci représente environ la moitié des cas et il parait intéressant de séparer les pathologies traumatiques des non traumatiques.
 
 << table_cim10,echo=FALSE>>=
 
@@ -133,7 +133,7 @@ tab1(a,horiz=T,sort.group="decreasing",main="Classes dignostiques de la CIM10")
 \index{AVC}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Les AVC sont définis par la nomenclature I60 à I64, G45 Accidents ischémiques cérébraux transitoires (sauf G45.4 amnésie transitoire) et syndromes apparentés et G46 Syndromes vasculaires cérébraux au cours de maladies cérébrovasculaires
+Les AVC sont définis par la nomenclature I60 à I64, G45 accidents ischémiques cérébraux transitoires (sauf G45.4 amnésie transitoire) et syndromes apparentés et G46 syndromes vasculaires cérébraux au cours de maladies cérébrovasculaires
 
 La prévention et la prise en charge des accidents vasculaires cérébraux  Annexes 
 juin 2009
@@ -223,7 +223,7 @@ Horaire des AVC, à comparer avec:
 <<heure_avc,echo=FALSE>>=
 
 h<-hour(AVC$ENTREE)
-hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée")
+hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée", ylab="Fréquence")
 tab1(h,missing=FALSE,main="Heures d'admission des AVC")
 @
 
@@ -248,7 +248,7 @@ abline(h=nrow(AVC)/7,col="red")
 @
 Proportion théorique = 14.28\% par jour de la semaine.
 
-\subsection*{AVC et age}
+\subsection*{AVC et âge}
 \index{AVC!age}
 <<avs_age,echo=FALSE>>=
 summary(AVC$AGE)
@@ -268,7 +268,7 @@ barplot(t,col=c("yellow","white","red"),main="Répartion des AVC selon l'age et 
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Accidents ischiémiques transitoires (AIT)}
+\section{Accidents ischémiques transitoires (AIT)}
 \index{AIT}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -313,10 +313,10 @@ print("Pneumonies et AGE")
 p
 @
 
-Les pneumopaties bactériennes sans précision sont cotées J15.9 Dans la CIM10.
+Les pneumopathies bactériennes sans précision sont cotées J15.9 Dans la CIM10.
 \Sexpr{nrow(pneumo)} diagnostics de ce type ont été portés au SAU en \Sexpr{annee}.
 
-Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus.
+Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'age moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus.
 
 <<pneumo,echo=FALSE,message=FALSE>>=
 
@@ -341,7 +341,7 @@ En fonction de l'orientation:
 summary(pneumo$ORIENTATION)
 @
 
-Deux patients porteurs de problèmes respiratoires sont orienté en chirurgie : erreur ou manque de place en médecine ?
+Deux patients porteurs de problèmes respiratoires sont orientés en chirurgie : erreur ou manque de place en médecine ?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Syndrome grippal}
@@ -417,9 +417,9 @@ atypique<-orient["FUGUE"]+orient["PSA"]+orient["SCAM"]+orient["REO"]
 
 Les crises sont de gravité moyenne avec une prédominance de CCMU 2 et 3 (voir table \ref{tab:ccmu_asthme} page \pageref{tab:ccmu_asthme}).
 Cependant le taux d'hospitalisation est important: \Sexpr{tx_hospit} \%.
-\np{\Sexpr{svce_chauds}} patients ont été orientés vers un service "chaud" (Réanimation, sins intensifs ou continus) soit \Sexpr{round(svce_chauds*100/(svce_chauds+svce_conv+svce_porte),2)} \% des patients hospitalisés pour asthme.
+\np{\Sexpr{svce_chauds}} patients ont été orientés vers un service "chaud" (Réanimation, soins intensifs ou continus) soit \Sexpr{round(svce_chauds*100/(svce_chauds+svce_conv+svce_porte),2)} \% des patients hospitalisés pour asthme.
 
-Le bulletin épidémiologique (Le point épidémiologique du 24 octobre 2013 - Surveillance épidémiologique de la Cire Lorraine-Alsace) clôt la surveillance de l’asthme. Pour l’association SOS Médecins de Strasbourg, l’activité liée à l’asthme a été particulièrement marqué de mi-avril (semaine 16) à fin mai(semaine 22) puis en semaine 40. Concernant l’association de Mulhouse, seule une forte augmentation en semaine 39 a été observée depuis début avril.
+Le bulletin épidémiologique (Le point épidémiologique du 24 octobre 2013 - Surveillance épidémiologique de la Cire Lorraine-Alsace) clôt la surveillance de l’asthme. Pour l’association SOS Médecins de Strasbourg, l’activité liée à l’asthme a été particulièrement marquée de mi-avril (semaine 16) à fin mai(semaine 22) puis en semaine 40. Concernant l’association de Mulhouse, seule une forte augmentation en semaine 39 a été observée depuis début avril.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Bronchiolite}
@@ -445,8 +445,8 @@ barplot(table(s),main="Bronchiolites - 2013",xlab="Semaines")
 # summary(bron)
 @
 
-Surreprésentation de Mul  
-taux hospitalisation: 50\%
+Surreprésentation de Mulhouse. 
+Taux hospitalisation: 50\%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -528,15 +528,9 @@ table(ge$FINESS,ge$DP)
 hist(ge$AGE,main="Gasto-entérites - 2013",xlab="Age (années)", ylab="nombre",col="gray90")
 boxplot(ge$AGE,col="yellow",main="Gastro-entérite",ylab="age (années)")
 m<-month(ge$ENTREE,label=T)
-x<-barplot(table(m),main="Gestro-entérites - 2013",xlab="Mois")
+x<-barplot(table(m),main="Gastro-entérites - 2013",xlab="Mois")
 lines(x=x,y=table(m),col="red")
 @
-
-
-NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On utilise lines avec les valeurs suivantes:
-- x = abcisse des colonnes. Elles sont contenues dans l'objet barplot. On peut les recueillir eplicitement par la fonction *str* (str(x)).
-- y = ordonnées des barres, récupérées avec la fonction *table* qui agglomère les données par mois
-Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
 
 calculs à la manière de l'INVS
 

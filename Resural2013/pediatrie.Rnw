@@ -16,7 +16,7 @@ Les moins de 18 ans représentent $\Sexpr{n_p}$ passages en \Sexpr{ as.character
 
 <<passages_pediatrie, echo=FALSE, fig.height=5>>=
 pp <- table (as.factor(p$AGE))
-plot(pp, main = paste("Nombre de passages en fonction de l'age en",an_c), ylab = "Fréquence", xlab = "Age (années)", col="blue")
+plot(pp, main = paste("Nombre de passages en fonction de l'âge en",an_c), ylab = "Fréquence", xlab = "Age (années)", col="blue")
 @
 
 % Pédiatrie et sexe

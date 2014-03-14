@@ -6,7 +6,7 @@
 <<synthese, echo=FALSE>>=
 
 source("../Analyse/Chapitres/resume.R")
-load("~/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Synthese/Synthese.Rda")
+load("../Analyse/Chapitres/Synthese/Synthese.Rda")
 synt <- as.data.frame(synt)
 rownames(synt)[1] <- "RPU totaux"
 rownames(synt)[2] <- "Age moyen"
@@ -36,28 +36,28 @@ x <- xtable(synt, caption=c("Tableau comparatif des principaux indicateurs d'act
 
 Signification des intitulés des lignes:
 \begin{enumerate}
-  \item \textbf{RPU totaux}: nombre total de RPU transmis à RESURAL
-  \item \textbf{Age moyen}: age moyen en année des patients, tous ages confondus
-  \item \textbf{Ecart-type}: écart-type de l'age en années
-  \item \textbf{RPU Pédiatriques}: nombre de passages de moins de 18 ans
-  \item \textbf{\% Pédiatrie}: pourcentage de passages pédiatriques
-  \item \textbf{RPU Gériatriques}: nombre de passages de 75 ans et plus
-  \item \textbf{\% Gériatrie}: pourcentage de passages de 75 ans et plus
-  \item \textbf{Présence moyenne}: durée de présence moyenne (en minutes) au service d'urgence
-  \item \textbf{Présence médiane}: durée de présence médiane en minutes (50\% sont restés moins de cette duré et 50\% plus de cette durée)
-  \item \textbf{RPU moins de 4 heures}: nombre de patients dont a durée de présence au SU est de moins de 4 heures
-  \item \textbf{\% moins de 4 heures}: pourcentage de patients dont a durée de présence au SU est de moins de 4 heures
-  \item \textbf{Attente moy.hospitalisation}: durée de passage (en minutes) des patients qui seront hospitalisés ou transférés
-  \item \textbf{Attente moy.domicile}: durée de passage (en minutes) des patients qui quittent l'hôital à l'issue de leur passage au SU
-  \item \textbf{Taux hospitalisation}: proportion de patients hodpitalisés ou transférés par rapport au nombre total de passages
-  \item \textbf{\% passages soirée}: pourcentage de patients qui se présentent dans la tranche 20 heures - minuit
-  \item \textbf{\% passages nuit}: pourcentage de patients qui se présentent dans la tranche minuit - 8 heures (nuit profonde)
-  \item \textbf{RPU le week-end}: nombre de RPU générés du vendredi 20 heures au lundi 8 heures
-  \item \textbf{\% RPU week-end}: pourcentage de RPU générés du vendredi 20 heures au lundi 8 heures par rapport au nombre total de passages
-  \item \textbf{Nb de CCMU 1}: nombre de patients classés CCMU 1
-  \item \textbf{\% de CCMU 1}: pourcentage de patients classés CCMU 1
-  \item \textbf{Nb de CCMU 4 et 5}: nombre  de patients classés CCMU 4 ou 5 (les plus graves)
-  \item \textbf{\% de CCMU 4 et 5}: pourcentage  de patients classés CCMU 4 ou 5.
+  \item \textbf{RPU totaux:} nombre total de RPU transmis à RESURAL
+  \item \textbf{Age moyen:} âge moyen en année des patients, tous âges confondus
+  \item \textbf{Ecart-type:} écart-type de l'âge en années
+  \item \textbf{RPU Pédiatriques:} nombre de passages de moins de 18 ans
+  \item \textbf{\% Pédiatrie:} pourcentage de passages pédiatriques
+  \item \textbf{RPU Gériatriques:} nombre de passages de 75 ans et plus
+  \item \textbf{\% Gériatrie:} pourcentage de passages de 75 ans et plus
+  \item \textbf{Présence moyenne:} durée de présence moyenne (en minutes) au service d'urgence
+  \item \textbf{Présence médiane:} durée de présence médiane en minutes (50\% sont restés moins de cette durée et 50\% plus de cette durée)
+  \item \textbf{RPU moins de 4 heures:} nombre de patients dont la durée de présence au SU est de moins de 4 heures
+  \item \textbf{\% moins de 4 heures:} pourcentage de patients dont la durée de présence au SU est de moins de 4 heures
+  \item \textbf{Attente moy.hospitalisation:} durée de passage (en minutes) des patients qui seront hospitalisés ou transférés
+  \item \textbf{Attente moy.domicile:} durée de passage (en minutes) des patients qui quittent l'hôpital à l'issue de leur passage au SU
+  \item \textbf{Taux hospitalisation:} proportion de patients hospitalisés ou transférés par rapport au nombre total de passages
+  \item \textbf{\% passages soirée:} pourcentage de patients qui se présentent dans la tranche 20 heures - minuit
+  \item \textbf{\% passages nuit:} pourcentage de patients qui se présentent dans la tranche minuit - 8 heures (nuit profonde)
+  \item \textbf{RPU le week-end:} nombre de RPU générés du vendredi 20 heures au lundi 8 heures
+  \item \textbf{\% RPU week-end:} pourcentage de RPU générés du vendredi 20 heures au lundi 8 heures par rapport au nombre total de passages
+  \item \textbf{Nb de CCMU 1:} nombre de patients classés CCMU 1
+  \item \textbf{\% de CCMU 1:} pourcentage de patients classés CCMU 1
+  \item \textbf{Nb de CCMU 4 et 5:} nombre  de patients classés CCMU 4 ou 5 (les plus graves)
+  \item \textbf{\% de CCMU 4 et 5:} pourcentage  de patients classés CCMU 4 ou 5.
 \end{enumerate}
 
 

@@ -1,7 +1,7 @@
 % SU_Fonderie.Rnw
 
-\index{SU Diaconnat-Fonderie}
-\index{Diaconnat-Fonderie!SU}
+\index{SU Diaconat-Fonderie}
+\index{Diaconat-Fonderie!SU}
 
 <<recap_dia,echo=FALSE,warning=FALSE>>=
 
@@ -18,7 +18,7 @@ x <- a["age_sd"]
 
 \begin{tabular}{|l|c|}
 \hline 
-\multicolumn{2}{|c|}{Clinique Diaconnat-Fonderie (Mulhouse)}\tabularnewline
+\multicolumn{2}{|c|}{Clinique Diaconat-Fonderie (Mulhouse)}\tabularnewline
 \hline 
 \hline 
 RPU déclarés & \np{\Sexpr{a["n"]}} \tabularnewline
@@ -71,5 +71,5 @@ presence_hist(hop,d1)
 ch <- d1[d1$FINESS==hop,]
 x <- completude(d1)
 y <- completude(ch)
-radar_completude(x,y, ch.names = "Diaconnat-Fonderie")
+radar_completude(x,y, ch.names = "Diaconat-Fonderie")
 @

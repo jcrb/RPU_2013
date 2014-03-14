@@ -7,7 +7,7 @@
 <<origine,echo=FALSE>>=
 hop<-c("Clinique des 3 frontières","CH Altkirch","CH Colmar","Diaconat Fonderie","CH Guebwiller","CH Haguenau","Hôpitaux Universitaires de Strasbourg","CH Mulhouse","Clinique Ste Odile","CH Sélestat","CH Wissembourg","CH Saverne")
 @
-On dédinit l'exhaustivité quantitative comme le nombre de RPU transmis par rapport au nombre de passages réels.
+On définit l'exhaustivité quantitative comme le nombre de RPU transmis par rapport au nombre de passages réels.
 Les données proviennent des RPU produits par les hôpitaux d'Alsace ayant l'autorisation de faire fonctionner un service d'urgence (SU). La liste des structures hospitalières ayant fournit des informations alimentant le présent rapport est fournie par la table \ref{tab1}, page \pageref{tab1}.
 
 Tous ces hôpitaux fournissent des données depuis le premier janvier 2013 sauf le CH Saverne qui a commencé en Juillet 2013.
@@ -66,4 +66,4 @@ Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données
 
 Les diagrammes de complétude propres à chaque établissement figurent au chapitre correspondant au service d'urgence.
 
-Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce fernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparait dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})
+Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce dernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparait dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})

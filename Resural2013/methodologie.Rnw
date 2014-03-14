@@ -58,11 +58,11 @@ Le nombre de jour dans un mois est variable d'un mois à l'autre. Il en va de m�
 
 \section*{Passages pédiatriques}
 \index{passages pédiatriques}
-Passages ayant donné lieu à la création d'un RPU et dont l'age est compris entre 0 et 18 ans inclus.
+Passages ayant donné lieu à la création d'un RPU et dont l'âge est compris entre 0 et 18 ans inclus.
 
 \section*{Passages gériatriques}
 \index{passages gériatriques}
-Passages ayant donné lieu à la création d'un RPU et dont l'age est supérieur ou égal à 75 ans.
+Passages ayant donné lieu à la création d'un RPU et dont l'âge est supérieur ou égal à 75 ans.
 
 \section*{Journée}
 \index{Journée}

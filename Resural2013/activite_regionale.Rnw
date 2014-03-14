@@ -1,4 +1,4 @@
-% activite_regionale.Rnw
+% activite_regionale.Rnw ou Activité régionale totale
 
 %on fabrique un objet **a** qui fait la somme par date des passages aux urgences:
 <<activite,echo=FALSE>>=
@@ -40,7 +40,7 @@ t<-tapply(d1$ENTREE,d1$secteur,length)
 \end{tabular}
 \end{table}
 
-Les données du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi q'une part importante des RPU des urgences adulte des HUS.
+Les données du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi qu'une part importante des RPU des urgences adulte des HUS.
 
 
 %affichage du graphique
@@ -83,6 +83,7 @@ barplot(p,horiz=T,las=2,xlim=c(0,20),xlab="pourcentage du total",main="SU 2013: 
 @
 
 \subsection*{Taux de recours aux urgences}
+
 <<tru,echo=FALSE>>=
 tru2011_lorraine <- 0.2345
 tru_estime<-pop.als.2010.totale*tru2011_lorraine
@@ -91,7 +92,7 @@ tru2013_alsace<-round(nrow(d1)*100/pop.als.2010.totale,2)
 
 # print(tru_estime)
 @
-Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comprte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à \Sexpr{tru_estime}.
+Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comporte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à \Sexpr{tru_estime}.
 
 Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_alsace}\%.
 

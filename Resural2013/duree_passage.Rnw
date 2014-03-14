@@ -232,7 +232,7 @@ Durée moyenne de présence pour le groupe b (10-1000 mn) (fig. \ref{b_periode} 
 
 \section{Selon l'âge}
 
-On peut répartir les ages des patients en trois catégories (tableau \ref{tab:tranches_age} page \pageref{tab:tranches_age}). Le temps de passage augmente avec l'age (table \ref{tab:age_dp} et figure \ref{fig:bp_age} page \pageref{fig:bp_age}).
+On peut répartir les âges des patients en trois catégories (tableau \ref{tab:tranches_age} page \pageref{tab:tranches_age}). Le temps de passage augmente avec l'âge (table \ref{tab:age_dp} et figure \ref{fig:bp_age} page \pageref{fig:bp_age}).
 
 % <<duree_age,echo=FALSE>>=
 % #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
@@ -254,7 +254,7 @@ tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans 
 t <- tapply(d1$presence,tranche_age,mean,na.rm=TRUE)
 t <- t(t)
 rownames(t)<-"mn"
-xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'age","Durée de passage et age"), label="tab:age_dp")
+xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'âge","Durée de passage et age"), label="tab:age_dp")
 @
 
 \begin{figure}[ht!]
@@ -405,7 +405,7 @@ Il existe une relation entre la gravité et la durée de présence aux urgences 
 
 \section{Selon la structure}
 
-Voir les tableaux de bord de caque établissement.
+Voir les tableaux de bord de chaque établissement.
 
 % \subsection{CH Sélestat}
 % <<duree_structure,echo=FALSE>>=

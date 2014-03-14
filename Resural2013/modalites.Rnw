@@ -36,11 +36,11 @@ a$first.line<-"Mode de transport"
 t <- a$output.table
 colnames(t)<-c("Fréquence","Pourcentage","Pourcentage cumulé")
 missing <- a$output.table[7, 2]
-x <- xtable(t, caption=c("Moyens de transport utilisés pour se rendre à l'hôpital. Les deux colonnes de droite mesurent la fréquence du moyen utilise (en pourcentage) selon que l'on prenne en compte ou non les valeurs manquantes. ","Moyens de transport"),label="transport")
+x <- xtable(t, caption=c("Moyens de transport utilisés pour se rendre à l'hôpital. Les deux colonnes de droite mesurent la fréquence du moyen utilisé (en pourcentage) selon que l'on prenne en compte ou non les valeurs manquantes. ","Moyens de transport"),label="transport")
 print(x,format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
-Dans \Sexpr{missing} \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpial n'est pas précisé.
+Dans \Sexpr{missing} \% des cas, le moyen de transport utilisé par le patient pour rejoindre l'hôpital n'est pas précisé.
 
 %==============================
 \section*{Origine géographique}
