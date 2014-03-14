@@ -41,14 +41,14 @@ Les données proviennent du serveur régional SAGEC. Les informations sont trans
   \item nombre d'affaires régulées
   \item nombre d'interventions primaires
   \item nombre d'interventions secondaires
-  \item nombre de transport de néonatalogie
-  \item nombre de transfert infirmier inter hospitaliers
+  \item nombre de transports de néonatalogie
+  \item nombre de transferts infirmier inter hospitaliers
   \item nombre de transports par ambulances privées demandés par le SAMU
-  \item nombre de transport par VSAV demandés par le SAMU
+  \item nombre de transports par VSAV demandés par le SAMU
   \item nombre de conseils médicaux
   \item nombre de visites de médecins déclenchées par le Centre 15
 \end{itemize}
-La base de données est renseignées depuis le mois de juillet 2005. En 2012, une difficulté au niveau de l'hôpital de Mulhouse a entraîné un arrêt complet des transmissions pendant 6 mois en en 2013, une erreur logicielle à provoqué la transmissions de données erronées en provenance du SAMU 67 du 24 avril au 1er novembre 2013. Les données 2013 sont globalement sous estimées.
+La base de données est renseignées depuis le mois de juillet 2005. En 2012, une difficulté au niveau de l'hôpital de Mulhouse a entraîné un arrêt complet des transmissions pendant 6 mois et en 2013, une erreur logicielle à provoqué la transmissions de données erronées en provenance du SAMU 67 du 24 avril au 1er novembre 2013. Les données 2013 sont globalement sous estimées.
 
 Le interventions SMUR sont égales à la somme des interventions primaires et secondaires.
 
@@ -166,5 +166,5 @@ rec67 <- round(taf67*100/pop67,2)
 rec68 <- round(taf68*100/pop68,2)
 t <- rbind(rec67,rec68)
 rownames(t) <- c("67","68")
-xtable(t, caption=c("Taux de recours des SAMU 67 et 68. Si le taux de recours du SAMU 68 est plus faible que celui du SAMU 67, il connait une forte progression (les années 20122 et 2012 sont incomplètes pourle 68).","Taux de recours des SAMU"), label="fig.rec")
+xtable(t, caption=c("Taux de recours des SAMU 67 et 68. Si le taux de recours du SAMU 68 est plus faible que celui du SAMU 67, il connait une forte progression (les années 2011 et 2012 sont incomplètes pourle 68).","Taux de recours des SAMU"), label="fig.rec")
 @

@@ -36,14 +36,15 @@ Chaque passage aux urgences donne lieu à la création d'un RPU qui collecte les
 \subsubsection{L'identifiant (ID)}
 %%%%%%%%%%%%%%
 
-Ils'agit d'un code unique caractérisant le RPU. Il ne fait pas partie de la définition de l'INVS.Il a été rajouté par SAGEC à l'origine du serveur régional pour retrouver l'enregistrement en cas de problème et faciliter laliaison avec d'autres rubriques comme les diagnostiques associés.
+Il s'agit d'un code unique caractérisant le RPU. Il ne fait pas partie de la définition de l'INVS. 
+Il a été rajouté par SAGEC à l'origine du serveur régional pour retrouver l'enregistrement en cas de problème et faciliter la liaison avec d'autres rubriques comme les diagnostics associés.
 
 %%%%%%%%%%%%%%
 \subsubsection{L'établissement de santé}
 %%%%%%%%%%%%%%
 
 \index{FINESS}
-Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas quel FINESS utiliser et on trouve des FINESS juridiques et géographiques. Nous recommandons d'utiliser le FINESS géographique qi permet d'identifier la structure d'origine quand il s'agit d'établissements multisites.
+Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas quel FINESS utiliser et on trouve des FINESS juridiques et géographiques. Nous recommandons d'utiliser le FINESS géographique qui permet d'identifier la structure d'origine quand il s'agit d'établissements multisites.
 
 %%%%%%%%%%%%%%
 \subsubsection{Le code postal de résidence}
@@ -51,8 +52,8 @@ Il est identifié par son numéro FINESS. Le schéma de l'INVS ne précise pas q
 
 \index{Code postal}
 Lorsque le lieu de résidence se situe hors des limites du territoire national, il faut indiquer par convention $99999$.
-Si le code postal précis est inconnu : le numéro du département suivi de 999
-Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}
+Si le code postal précis est inconnu : le numéro du département suivi de 999.
+Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}.
 Si le département ou le pays de résidence est inconnu : 99999.
 Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux (Strasbourg).
 
@@ -74,7 +75,7 @@ En l'absence de code INSEE, il convient de respecter les recommandations suivant
 
 \index{Date de naissance}
 \index{Age}
-Elle comporte l'année, le mois et le jour de naissance, ce qui permet de calculer l'âge au moment de l'admission. Dans ce document on utilise l'âge par génération ou âge atteint dans l'année (et non pas l'age révolu). Comme toutes les dates il est préférable d'utiliser la norme ISO 8601 (AAAA-MM-JJ HH:MM:SS).
+Elle comporte l'année, le mois et le jour de naissance, ce qui permet de calculer l'âge au moment de l'admission. Dans ce document on utilise l'âge par génération ou âge atteint dans l'année (et non pas l'âge révolu). Comme toutes les dates il est préférable d'utiliser la norme ISO 8601 (AAAA-MM-JJ HH:MM:SS).
 
 %%%%%%%%%%%%%%
 \subsubsection{le mode d'entrée}
@@ -122,7 +123,7 @@ Ce sont des codes textuels précisant le moyen utilisé pour se rendre aux urgen
 %%%%%%%%%%%%%%
 
 \index{Prise en charge durant le transport}
-Ce sont des codes textuels précisant s'il y avait un accompgnement médical ou paramédical durant le transport.
+Ce sont des codes textuels précisant s'il y avait un accompagnement médical ou paramédical durant le transport.
 
 %%%%%%%%%%%%%%
 \subsubsection{le motif de recours aux urgences}
@@ -139,11 +140,11 @@ Il faut utiliser l'un des motifs de recours préconisé par le ministère de la 
 \index{mode de sortie}
 \index{retour à domicile}
 \label{ref:sortie}
-Les patients quittent les urgences soit parcequ'ils ne nécessitent pas d'hospitalisation (c'est un \emph{retour à domicile}), soit parcequ'ils sont hospitalisé dans la structure hospitalière (c'est une \emph{mutation}\index{mutation}) ou dans un autre établissement (on parle alors de \emph{transfert}\index{transfert}). Enfin il peut s'agir d'un \emph{décès}\index{décès} dans le service d'urgence.
+Les patients quittent les urgences soit parce qu'ils ne nécessitent pas d'hospitalisation (c'est un \emph{retour à domicile}), soit parce qu'ils sont hospitalisés dans la structure hospitalière (c'est une \emph{mutation}\index{mutation}) ou dans un autre établissement (on parle alors de \emph{transfert}\index{transfert}). Enfin il peut s'agir d'un \emph{décès}\index{décès} dans le service d'urgence.
 
 \begin{itemize}
   \item « 6 » Mutation : le malade est hospitalisé vers une autre unité médicale de la même
-entité juridique \footnote{Dans les établissements privés visés aux alinéas d et e de l'article L162-22-6 du code de la sécurité sociale (CSS), si le patient provient d’un autre établissement de la même entité juridique, le mode desortie à utiliser est le 7}
+entité juridique \footnote{Dans les établissements privés visés aux alinéas d et e de l'article L162-22-6 du code de la sécurité sociale (CSS), si le patient provient d’un autre établissement de la même entité juridique, le mode de sortie à utiliser est le 7}
   \item « 7 » Transfert : le malade est hospitalisé dans une autre entité juridique
   \item « 8 » Domicile : le malade retourne au domicile ou son substitut, tel une
 structure d'hébergement médico-social.
@@ -172,14 +173,14 @@ En cas de sortie au domicile
 \end{itemize}
 Les codes 6 et 7 sont incompatibles avec \textbf{mode de sortie} = \textbf{mutation, transfert} ou \textbf{décès}.
 
-On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne saitpas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
+On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne sait pas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
 
 %%%%%%%%%%%%%%
 \subsubsection{Orientation}
 %%%%%%%%%%%%%%
 
 \index{orientation}
-L'orientation précise le devenir ou les circonstances associées. Cette rubrique est complémentaire du \emph{mode de sortie}. Malheureusement, elle souffre de la mêmelimitation:le retour à domicile simple est implicite.
+L'orientation précise le devenir ou les circonstances associées. Cette rubrique est complémentaire du \emph{mode de sortie}. Malheureusement, elle souffre de la même limitation:le retour à domicile simple est implicite.
 
 \begin{enumerate}
   \item En cas de sortie par mutation ou transfert
