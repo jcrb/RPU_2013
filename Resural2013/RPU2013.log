@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.23)  9 MAR 2014 23:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2013.11.23)  12 MAR 2014 09:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1056,6 +1056,9 @@ Chapitre 1.
 
 ]
 Chapitre 2.
+(/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
+File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
+)
 
 Package xcolor Warning: Incompatible color definition on input line 266.
 
@@ -1139,7 +1142,7 @@ File: figure/carte_sau_2.pdf Graphic file (type pdf)
 Package pdftex.def Info: figure/carte_sau_2.pdf used on input line 491.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
-Overfull \hbox (76.26799pt too wide) in paragraph at lines 503--524
+Overfull \hbox (105.71043pt too wide) in paragraph at lines 503--524
  [] 
  []
 
@@ -1239,10 +1242,7 @@ Package Fancyhdr Warning: \headheight is too small (15.39603pt):
 
 ]
 Chapitre 6.
-[33] [34] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-32.def
-File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-)
-[35] [36] [37
+[33] [34] [35] [36] [37
 
 ] [38]
 Chapitre 7.
@@ -3468,7 +3468,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 4869.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 4869.
 
 Package rerunfilecheck Info: File `RPU2013.out' has not changed.
-(rerunfilecheck)             Checksum: 3BB1C48DF895BD481DAD302CA5D22F39;6013.
+(rerunfilecheck)             Checksum: 2A4CA499ACF126C67293412193107BF3;6016.
 
 
 LaTeX Warning: There were undefined references.
@@ -3481,7 +3481,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 4869.
 Here is how much of TeX's memory you used:
  19752 strings out of 495002
  331464 string characters out of 6180261
- 433122 words of memory out of 5000000
+ 433108 words of memory out of 5000000
  21838 multiletter control sequences out of 15000+600000
  77121 words of font info for 68 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -3506,7 +3506,7 @@ pe1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr
 c/lm/lmri12.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/
 texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/
 lmtt12.pfb>
-Output written on RPU2013.pdf (234 pages, 1164703 bytes).
+Output written on RPU2013.pdf (234 pages, 1164835 bytes).
 PDF statistics:
  3052 PDF objects out of 3580 (max. 8388607)
  2554 compressed objects within 26 object streams

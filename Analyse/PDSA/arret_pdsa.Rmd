@@ -398,7 +398,7 @@ t <- cbind(67000:68999, t)
 
 write(t, file-"rpu_pds.csv", sep=",", row.names = FALSE)
 
-Essai avec le nom de la commune
+Essai 1 avec le nom de la commune
 ===============================
 La difficulté est deconvertir les codes postaux en codes INSEE car deux communes peuvent avoir le même ZIP. Essai d'utilisation du nom de commune avec le code INSEE.
 - récuoère la liste des communes + code insee et postal à partir de wikipedia (cf blog).
@@ -433,5 +433,89 @@ dx$COMMUNE <- gsub("\xb2","",dx$COMMUNE, fixed=FALSE)
 dx$COMMUNE <- gsub(" ","-",dx$COMMUNE, fixed=TRUE)
 dx[substring(dx$COMMUNE,1,5)=="KEMBS",5] <- "KEMBS"
 ```
+
+Essai 2 avec la commune (marche)
+================================
+
+dx <- d1[as.character(d1$CODE_POSTAL) > "66999" & as.character(d1$CODE_POSTAL) < "69000", c("ENTREE", "FINESS","GRAVITE", "CODE_POSTAL","COMMUNE")]
+
+dsr <- dx[hour(dx$ENTREE) > 19 & hour(dx$ENTREE) < 24,]
+
+dsr1 <- dsr[!is.na(dsr$GRAVITE) & dsr$GRAVITE==1,]
+
+
+c_dsr1_m <- split(dsr1$COMMUNE, month(as.Date(dsr1$ENTREE)))
+
+c_dsr1_m est une large list de 12 éléments, chaque élément correspondant à 1 mois de l'année. Pour une liste donnée, chaque élément correspond à un nom de commune. Par exemple pour le mois de janvier:
+
+head(c_dsr1_m[[1]])
+
+Pour faciliter le traitement, on transforme la liste en dataframe:
+
+m1 <- as.data.frame(c_dsr1_m[[1]])
+c<-summary(as.factor(m1[,1]))
+sum(c) #nb de passages
+
+c est un vecteur de communes avec pour chaque commune la somme des passages CCMU1 en soirée pour le mois de janvier.
+
+On forme un vecteur de référence constitué par l'ensemble des communes d'Alsace dont l'orthographe apparait une fois dans le dataframe dx:
+
+com <- sort(unique(dx$COMMUNE))
+length(com)
+
+La liste est supérieure au nombre de communes d'Alsace traduisant le défaut d'harmosisation des nims de communes. Par exemple Strasbourg:
+STRABOURG                   STRASBOURG                  STRASBOURG CEDEX            STRASBOURG CEDEX 1         
+STRASBOURG CEDEX 2          STRASBOURG CEDEX 9          STRASOURG
+
+on transforme com en dataframe:
+
+ a <- as.data.frame(com)
+ 
+ c_dsr1_m <- split(dsr1$COMMUNE, month(as.Date(dsr1$ENTREE)))
+ m1 <- as.data.frame(c_dsr1_m[[1]])
+ 
+ b<-table(as.character(m1[,1]))
+ d <- cbind(names(b),b)
+ c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+ c$b <- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer
+ 
+ # on traite chaque mois
+for(i in 2:12){
+  m <- as.data.frame(c_dsr1_m[[i]])
+  b<-table(as.character(m[,1]))
+  d <- cbind(names(b),b)
+  c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+  c[,i+1] <- as.integer(as.character( c[,i+1]))
+  }
+  names(c) <- c("CP","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+  c[is.na(c)]<-0
+  ccmu1_soiree <- c
+sum(ccmu1_soiree[2:13]) # on trouve le même chiffre que dsr1
+
+# utilisation de la routine
+
+colcom <- col_unique()
+
+ccmu1_soiree <- routine2(dsr1, colcom)
+ccmu2_soiree <- routine2(dsr2, colcom)
+passage_soiree <- routine2(dsrt, colcom)
+
+ccmu1_nuit <- routine2(dnp1, colcom)
+ccmu2_nuit <- routine2(dnp2, colcom)
+passage_nuit <- routine2(dnpt, colcom)
+
+i <- 2
+t <- cbind(ccmu1_soiree[,i],ccmu1_nuit[,i],ccmu2_soiree[,i],ccmu2_nuit[,i],passage_soiree[,i],passage_nuit[,i])
+for(i in 3:13){
+  t <- cbind(t,ccmu1_soiree[,i],ccmu1_nuit[,i],ccmu2_soiree[,i],ccmu2_nuit[,i],passage_soiree[,i],passage_nuit[,i])
+}
+x <- as.character(colcom)
+t <- cbind(x, t)
+
+wd <- getwd()
+setwd("~/Documents/Resural/Stat Resural/RPU_2013/Analyse/PDSA")
+write(t, file = "rpu_pds_communes.csv", sep=",")
+setwd(wd)
+
 
 todo: merging

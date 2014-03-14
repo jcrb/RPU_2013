@@ -31,3 +31,57 @@ routine <- function(source_file){
   c[is.na(c)]<-0
   return(c)
 }
+
+# extrait toute les communes du fichier source pour produire une liste des communes présentes
+col_commune <- function(source_file){
+  com <- sort(unique(source_file$COMMUNE))
+  a <- as.data.frame(com)
+  return(a)
+}
+
+# colonne unique pour les 6 fichiers
+col_unique <- function(){
+  a <- col_commune(dsr1)
+  a <- rbind(a, col_commune(dsr2))
+  a <- rbind(a, col_commune(dsrt))
+  a <- rbind(a, col_commune(dnp1))
+  a <- rbind(a, col_commune(dnp2))
+  a <- rbind(a, col_commune(dnpt))
+  b <- unique(a[,1])
+  return(b)
+}
+
+# idem mais en utilisant le nom de la commune plutot que le CP
+
+routine2 <- function(source_file, colcom=NULL){
+  # le fichier source est divisé en mois
+  c_dsr <- split(source_file$COMMUNE, month(as.Date(source_file$ENTREE)))
+  
+  # on forme un dataframe (a) d'une colonne correpondant aux communes présentes dans le fichier
+  if(is.null(colcom)){
+    com <- sort(unique(source_file$COMMUNE))
+    a <- as.data.frame(com)
+  }
+  else{
+    a <- colcom
+  }
+  
+  # on crée la première colonne du dataframe
+  m1 <- as.data.frame(c_dsr[[1]])
+  b<-table(as.character(m1[,1]))
+  d <- cbind(names(b),b)
+  c <- merge(a,d, all.x=TRUE,by.x=1,by.y=1)
+  c$b <- as.integer(as.character(c$b)) # transforme la colonne b (janvier) en integer
+  
+  # on traite chaque mois
+  for(i in 2:12){
+    m <- as.data.frame(c_dsr[[i]])
+    b<-table(as.character(m[,1]))
+    d <- cbind(names(b),b)
+    c <- merge(c,d, all.x=TRUE,by.x=1,by.y=1)
+    c[,i+1] <- as.integer(as.character( c[,i+1]))
+  }
+  names(c) <- c("COMMUNE","Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Aout","Septembre","Octobre","Novembre","Décembre")
+  c[is.na(c)]<-0
+  return(c)
+}

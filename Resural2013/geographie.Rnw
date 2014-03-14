@@ -1,6 +1,6 @@
-% geographie.Rnw
+﻿% geographie.Rnw
 
-L'Alsace est la plus petite région de France (n42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chef-lieu sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
+L’Alsace est la plus petite région de France (n° 42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chefs-lieux sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
 
 La région est divisée en quatre secteurs sanitaires et douze territoires de proximité.
 
@@ -8,7 +8,7 @@ La région est divisée en quatre secteurs sanitaires et douze territoires de pr
 \index{Alsace!secteurs sanitaires}
 \index{Secteurs sanitaires}
 
-L'alsace est divisée en quatre secteurs sanitaires
+L'Alsace est divisée en quatre secteurs sanitaires
 \begin{enumerate}
   \item secteur 1: Haguenau, Wissembourg et Saverne
   \item secteur 2: Strasbourg
@@ -77,7 +77,7 @@ Les populations légales millésimées 2010 entrent en vigueur le 1er janvier 20
 
 \subsubsection{Le concept de population municipale}
 
-Ce document utilise la \emph{Population municipale} \ref{Population_municipale} \index{Population@Population!municipale}  qui est la nouvelle dénomination de la population sans double comptes et qui correspond à la notion de \emph{population} utilisée usuellement en statistique.
+Ce document utilise la \emph{Population municipale} \ref{Population_municipale} \index{Population@Population!municipale}  qui est la nouvelle dénomination de la population sans double compte et qui correspond à la notion de \emph{population} utilisée usuellement en statistique.
 Le chiffre est donc inférieur de celui de la \emph{Population totale} qui est égale à la somme de la population municipale et de la population comptée à part d'une commune.
 Les chiffres de l'INSEE sont les suivants \footnote{http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/france-regions.asp?annee=2010}:
 
@@ -106,7 +106,7 @@ au 1er janvier 2012) }
 \end{center}
 \end{table}
 
-\subsection{Classes d'age}
+\subsection{Classes d'âge}
 Depuis la mise en place des serveurs régionaux, on a pris l'habitude de diviser la population en trois catégories selon l'age:
 \begin{enumerate}
   \item Les moins de un an
@@ -169,9 +169,9 @@ ppop75<-as.numeric(round(pop75*100/pop_als_2010_municipale,2))
 
 L'autorisation de pratiquer la médecine d'urgence est délivrée par l'ARS en cohérence avec le schéma régional de l'organisation des soins (SROS) dont les dispositions pour la période 2012-2016 ont été précisées par l'arrêté du 30 janvier 2012 \cite{14} et du 23 mai 2013 \cite{15}.
 
-Rélementairement, le CSP reconnait deux types de structures pouvant être autorisées à prendre en charge directement des patients pouvant relever d'une situation d'urgence
+Réglementairement, le CSP reconnaît deux types de structures pouvant être autorisées à prendre en charge directement des patients pouvant relever d'une situation d'urgence
 \begin{enumerate}
-  \item les structures d'urgence (SU). Le CSP reconnait quatre types d'autorisations qui peuvent être dissociées:
+  \item les structures d'urgence (SU). Le CSP reconnaît quatre types d'autorisations qui peuvent être dissociées:
     \begin{itemize}
       \item SAMU
       \item SMUR
@@ -179,37 +179,37 @@ Rélementairement, le CSP reconnait deux types de structures pouvant être autor
       \item SU pédiatrique
     \end{itemize}
 
-  \item les plateaux techniques spécialisés d'accès direct (PTSAD: article R 6123-32-6 CSP) qui sont de quatres types en Alsace:
+  \item les plateaux techniques spécialisés d'accès direct (PTSAD: article R 6123-32-6 CSP) qui sont de quatre types en Alsace:
     \begin{itemize}
       \item Urgences main
       \item Urgences cardiologiques
-      \item Urgences neuro vasculaires
-      \item Poly-traumatisés
+      \item Urgences neuro-vasculaires
+      \item Polytraumatisés
     \end{itemize}
 \end{enumerate}
 
-On peut trouver des PTSAD avec une autorisation SU mais qui ne concerne que la spécialité du plateau technique, des PTSAD non labellisé SU, des SU non labellisés pédiatriques mais ayant une activité pédiatrique exclusive.
+On peut trouver des PTSAD avec une autorisation SU mais qui ne concerne que la spécialité du plateau technique, des PTSAD non labellisés SU, des SU non labellisés pédiatriques mais ayant une activité pédiatrique exclusive.
 
 A la date du 23 mai 2013, l'Alsace compte 18 établissements ou structures autorisés pour l'activité de soins de médecine d'urgence (article R6123-1 du CSP) dont deux ayant une activité de PTDAD exclusive \cite{15}, 1 établissement labellisé SU pédiatrique.
 
-En pratique, à la question qui prend en charge 24h sur 24 des problèmes aigus de santé et/ou de permanence des soins, on se ramène a une listede 14 établissements pratiquant la médecine d'urgence au sens où on l'entend communément. Trois établissements ont une activité multisite. Au final cela représente 18 sites Les trois villes les plus importantes de la région concentrent la totalité des PTSAD.
+En pratique, à la question de savoir qui prend en charge 24h sur 24 des problèmes aigus de santé et/ou de permanence des soins, on se ramène a une liste de 14 établissements pratiquant la médecine d'urgence au sens où on l'entend communément. Trois établissements ont une activité multisite. Au final cela représente 18 sites. Les trois villes les plus importantes de la région concentrent la totalité des PTSAD.
 
-Celle-ci se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Le SROS 2 avait introduit une distinction entre les services accueillant les urgences en fonction de leurs capacités et plateau technique. On distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser,même si elle n'a plus cours officiellement. 
+Celle-ci se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Le SROS 2 avait introduit une distinction entre les services accueillant les urgences en fonction de leurs capacités et plateau technique. On distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser, même si elle n'a plus cours officiellement. 
 
-La clinique du Diaconat de Strasbourg (groupe des "Cliniques de Strasbourg"),bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lequelles elle dispose d'une labellisation FESUM \footnote{Federation Européenne des Services d'Urgence de la Main}. Il en est de même pour la clinique Diaconat-Roosevelt de Mulhouse (groupe "Fondation de la maison du Diaconat" )
+La clinique du Diaconat de Strasbourg (groupe des "Cliniques de Strasbourg"),bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lesquelles elle dispose d'une labellisation FESUM \footnote{Fédération Européenne des Services d'Urgence de la Main}. Il en est de même pour la clinique Diaconat-Roosevelt de Mulhouse (groupe "Fondation de la maison du Diaconat" )
 
 Le réseau prend également en compte la clinique Saint-Luc de Schirmeck (groupe hospitalier Saint Vincent) qui fait fonctionner une policlinique recevant plus de \np{8000} passages par an. Officiellement, cet établissement de santé ne dispose pas d' autorisation de type SU bien qu'elle en effectue la mission et est le seul établissement de proximité de la zone Molsheim-Schirmeck.
 
-Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'est pas inclu dans les implantations de services d'urgence.
+Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'est pas inclut dans les implantations de services d'urgence.
 
-Sont officiellement labellisés 18 sites (en y incluant SOS main Diaconnat mais pas la clinique St Luc). Ces données sont résumées dans le tableau \ref{tab:sualsace} page \pageref{tab:sualsace}
+Sont officiellement labellisés 18 sites (en y incluant SOS main Diaconat mais pas la clinique St Luc). Ces données sont résumées dans le tableau \ref{tab:sualsace} page \pageref{tab:sualsace}
 
 \begin{landscape}
 \begin{table}
 \begin{center}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 \hline 
-Territoire & ZProximité & Etablissement & FINESS J & Site & FINESS G & SU & SU Ped & SMUR & SAMU\tabularnewline
+Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU Ped & SMUR & SAMU\tabularnewline
 \hline 
 \hline 
  \multirow{3}{*}{1} & Wissembourg & CH Wissembourg &  & id &  & oui &  & oui & \tabularnewline
@@ -230,7 +230,7 @@ Territoire & ZProximité & Etablissement & FINESS J & Site & FINESS G & SU & SU 
 \cline{3-10} 
  &  & Ste Odile &  & id &  & oui &  &  & \tabularnewline
 \cline{3-10} 
- &  & Diaconnat &  & id &  & oui%
+ &  & Diaconat &  & id &  & oui%
 \footnote{SOS Mains%
 } &  &  & \tabularnewline
 \cline{2-10} 
@@ -250,7 +250,7 @@ Territoire & ZProximité & Etablissement & FINESS J & Site & FINESS G & SU & SU 
 \footnote{antenne SMUR%
 } & \tabularnewline
 \cline{3-10} 
- &  & Diaconnat-F &  & id &  & oui &  &  & \tabularnewline
+ &  & Diaconat-F &  & id &  & oui &  &  & \tabularnewline
 \cline{2-10} 
  & Thann & CH Thann &  & id &  & oui &  &  & \tabularnewline
 \cline{2-10} 
@@ -272,11 +272,11 @@ load("../Data/als_ts.Rda")
 plot(ctss)
 title(main="Service d'urgences d'Alsace")
 # surimpression des SAU
-hopitaux<-"../Data/Hopitaux2lambert/hopitaux_alsace.csv"
+hopitaux <-"../Data/Hopitaux2lambert/hopitaux_alsace.csv"
 h<-read.csv(hopitaux,header=TRUE,sep=",")
 for(i in 1:nrow(h)){points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");text(h$lam_lon[i],h$lam_lat[i],labels=h$hopital[i],cex=0.8,pos=h$pos[i])}
 @
- \caption[Services d'urgenced'Alsace]{L'Alsace compte 14 services d'urgence labellisés sur 15 sites.}
+ \caption[Services d'urgence d'Alsace]{L'Alsace compte 14 services d'urgence labellisés sur 15 sites.}
  \label{fig:su_alsace}
 \end{figure}
 
@@ -286,15 +286,15 @@ for(i in 1:nrow(h)){points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");text(h$la
 \begin{center}
 \begin{tabular}{|c|c|c|c|l|}
   \hline
-& Finess utilisé & Finess géographique & Finess Juridique & Structure \\
+& FINESS utilisé & FINESS géographique & FINESS Juridique & Structure \\
   \hline
   \hline
 1 & 670780055 &   & 670780055 & HUS \\
 2 & 670780543 & 670000272 & 670780543 & CH Wissembourg \\
-3 & 670000397 & 670000397  & 670780691 & CH Selestat \\
+3 & 670000397 & 670000397  & 670780691 & CH Sélestat \\
 4 & 670780337 & 670000157 & 670780337 & CH Haguenau \\
 5 &   & 670000165 & 670780345 & CH Saverne \\
-6 & 670016237  & 670016237  & 670016211 & Clinique ste Odile \\
+6 & 670016237  & 670016237  & 670016211 & Clinique Ste Odile \\
 7 &   & 670780212 & 670014604 & Clinique Ste Anne \\
 8 & 680000973 & 680000684 & 680000973 & CH Colmar \\
 9 & 680000197  & 680000197  & 680000049 & Clinique des trois frontières \\

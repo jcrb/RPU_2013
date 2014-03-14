@@ -48,7 +48,7 @@ source("quot_utils.R") ou source("Preparation/RPU Quotidiens/quot_utils.R") en m
 séquence:
 
 - date.jour <- "2014_02"
-- parse_rpu(date.jour)
+- dx <- parse_rpu(date.jour)
 - dx$FINESS <- as.factor(finess2hop(dx$FINESS))
 - summary(dx$FINESS) fait un décompte des RPU par établissement sur la période => permet de vérifier si anomalies quantitatives. Suppose de disposer d'un historique moyenne, écart-type par type de jour.
 - dx <- rpu2factor(dx)

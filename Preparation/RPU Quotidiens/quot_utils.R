@@ -85,6 +85,10 @@ parse_rpu <- function(date.jour){
   file <- paste0("rpu_", date.jour, "_dump.sql")
   wd <- getwd()
   setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ")
+  if(!file.exists(file)){
+    x <- paste("Le fichier",file,"n'existe pas dans le répertoire",getwd(), sep=" ")
+    stop(x)
+  }
   system(paste0("mysql -u root -pmarion archives < ", file))
   con<-dbConnect(MySQL(),group = "archives")
   rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ ",sep=""))
@@ -142,10 +146,10 @@ rpu2factor <- function(dx){
 #' dx est le dataframe correspondant au fichier transmis.
 #' 
 analyse_rpu_jour <- function(dx){
-  print(nrow(dx))
-  print(min(as.Date(dx$ENTREE)))
-  print(max(as.Date(dx$ENTREE)))
-  print(nlevels(dx$FINESS))
+  print(paste("Nombre de RPU: ",nrow(dx)))
+  print(paste("Date de début: ",min(as.Date(dx$ENTREE))))
+  print(paste("Date de fin: ",max(as.Date(dx$ENTREE))))
+  print(paste("Nombre d'établissements: ", nlevels(dx$FINESS)))
   print(summary(dx$FINESS))
 }
 
@@ -170,7 +174,7 @@ jour_consolide <- function(dx){
   # fichier du jour: 
   file <- paste0(jour,".csv")
   write.table(dday, file, sep=',', quote=TRUE, na="NA", row.names=FALSE,col.names=TRUE, qmethod = "double")
-  print(paste("fichier créé:", file))
+  print(paste("fichier créé:", file, getwd()))
   # fichier général: write.table(dday, "RPU2014.csv", sep=',', quote=TRUE, na="NA", append = TRUE, row.names=FALSE,col.names=TRUE)
   setwd(wd)
   return(dday)
@@ -189,15 +193,17 @@ jour_consolide <- function(dx){
 lire_archive <- function(jour){
   file <- paste0(jour, ".csv")
   wd <- getwd()
-  setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ/archivesCsv")
-  a <- read.table(file, header=TRUE, sep=",")
+  path = "~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ/archivesCsv"
+  a <- read.table(paste(path,file,sep="/"), header=TRUE, sep=",")
+  a <- normalise(a)
   setwd(wd)
   return(a)
 }
 
-sauvegarde de l'archive au format Rda'
-dx <- lire_archive("rpu2014")
-save(dx, file="rpu2014d02.Rda")
+#sauvegarde de l'archive au format Rda'
+#dx <- lire_archive("rpu2014")
+#save(dx, file="rpu2014d02.Rda")
+
 #=======================================
 #
 # assemble
@@ -209,11 +215,32 @@ save(dx, file="rpu2014d02.Rda")
 #' 
 assemble <- function(){
   path <- "/home/jcb/Documents/Resural/Stat Resural/Archives_Sagec/dataQ/archivesCsv"
-  out.file<-""
+  out.file<-NULL
   file.names <- dir(path, pattern =".csv")
   for(i in 1:length(file.names)){
        file <- read.table(paste(path, file.names[i], sep="/"),header=TRUE, sep=",", stringsAsFactors=FALSE)
        out.file <- rbind(out.file, file)
    }
   write.table(out.file, file = paste(path,"rpu2014.csv",sep="/"),sep=",", row.names = FALSE, qmethod = "double")
+}
+
+#=======================================
+#
+# normalise
+#
+#=======================================
+#'
+#' Normalise les item du RPU
+#' 
+normalise <- function(dx){
+  dx$DP <- as.character(dx$DP)
+  dx$ENTREE <- as.character(dx$ENTREE)
+  dx$EXTRACT <- as.character(dx$EXTRACT)
+  dx$MOTIF <- as.character(dx$MOTIF)
+  dx$NAISSANCE <- as.character(dx$NAISSANCE)
+  dx$SORTIE <- as.character(dx$SORTIE)
+  dx$AGE <- as.numeric(dx$AGE)
+  dx$id <- as.character(dx$id)
+  dx$CODE_POSTAL <- as.factor(dx$CODE_POSTAL)
+  return(dx)
 }

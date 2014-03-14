@@ -381,7 +381,7 @@ Export Word
 p <- "pandoc Analyse/PDSA/arret_pdsa.md -o Analyse/PDSA/arret_pdsa.docx"
 system(p)
 
-Création des fichiers pour février 2012
+Création des fichiers pour février 2014
 ========================================
 
 Début des envois quotidiens de fichier le 20/02/2014. Le premier fichier comporte les enregistrements créés entre le 1 et le 21 février. Après cette date, les sauvegardes se font par jour.
