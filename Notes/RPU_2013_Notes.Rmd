@@ -206,6 +206,12 @@ print.xtable {x} permet d'utiliser d'autres arguments notamment longtable.
 
 La figure~\ref{toucan} (pp.\pageref{toucan}) montre une photographie de toucan. Le tilde (\~) dans l'exemple ci-dessus est un symbole spécial en Latex. Il représente un espace insécable. Il est utile ici parce qu'il garde « figure » et le numéro quel qu'il soit auquel \\ref se rapporte comme un tout, et ne les coupera pas sur une ligne ou une page lors de la production du document.
 
+#### tracer une ligne joignant les sommets des barres du barplot
+
+NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On utilise lines avec les valeurs suivantes:
+- x = abcisse des colonnes. Elles sont contenues dans l'objet barplot. On peut les recueillir eplicitement par la fonction *str* (str(x)).
+- y = ordonnées des barres, récupérées avec la fonction *table* qui agglomère les données par mois
+Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
 
 #### notes sur les spatialPolygons
 > str(poly)
