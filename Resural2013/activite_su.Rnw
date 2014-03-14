@@ -26,7 +26,7 @@ copyright()
 
 Le nombre de retours à domicile est obtenu à partir de la rubrique MODE\_SORTIE. Il s'agit en fait des patients qui n'ont pas été hospitalisés. Sont également comptabilisé dans cette rubrique les sorties atypiques.
 
-Les variation du retour journalier à domicile sont calculés de la manière suivante:
+Les variations du retour journalier à domicile sont calculées de la manière suivante:
 \begin{description}
   \item[numérateur] somme quotidienne où MODE\_SORTIE = Domicile
   \item[dénominateur] somme quotidienne des ENTREE (correspond à q)
@@ -52,7 +52,7 @@ abline(h = a["Moyenne"], lty=2, col="blue")
 legend("bottomright", legend="moyenne", col="blue", lty=2, bty="n")
 @
 
-Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) est une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
+Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 <<hospit,echo=FALSE,results='asis'>>=
 q7<-1-q2/q4

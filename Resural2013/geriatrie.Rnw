@@ -13,7 +13,7 @@ Les 75 ans et plus représentent $\Sexpr{n_g}$ passages en \Sexpr{ an_c} soit $\
 
 <<passages_geriatrie,echo=FALSE,fig.height=5>>=
 pg <- table (as.factor(g$AGE))
-plot(pg, main = paste("Nombre de passages en fonction de l'age en",an_c), ylab = "Fréquence", xlab = "Age (années)", col="blue")
+plot(pg, main = paste("Nombre de passages en fonction de l'âge en",an_c), ylab = "Fréquence", xlab = "Age (années)", col="blue")
 @
 
 % Gériatrie et sexe
