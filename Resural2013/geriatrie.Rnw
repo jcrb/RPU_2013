@@ -1,6 +1,7 @@
 % geriatrie.Rnw
 
 \index{Gériatrie}
+\label{chap_geriatrie}
 
 <<ger_init,echo=FALSE>>=
 g <-d1[d1$AGE > 74,]
@@ -68,4 +69,25 @@ h <- paste(as.integer(a['Mean']/60),":",a['Mean']%%60,sep="")
 \end{itemize}
 
 Note: on ne retient que les durées de présence supérieures à 30 minutes.
+
+\subsubsection*{Entrée - sorties gériatriques}
+
+<<es_geriatriques, echo=FALSE, fig.height=5>>=
+e<-ymd_hms(d1$ENTREE[d1$AGE > 74])
+h<-hour(e)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages gériatriques (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+
+s<-ymd_hms(d1$SORTIE[d1$AGE > 74])
+h<-hour(s)
+sh <- table(as.factor(h))
+lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+
+legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+@
+
 

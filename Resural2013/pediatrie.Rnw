@@ -1,5 +1,6 @@
 % pediatrie.Rnw
 \index{Pédiatrie}
+\label{chap_pediatrie}
 
 <<ped_init,echo=FALSE>>=
 an_c <- "2013"
@@ -66,3 +67,24 @@ h <- paste(as.integer(a['Mean']/60),":",a['Mean']%%60,sep="")
   \item Durée de présence médiane: $\Sexpr{ a['Median']}$ minutes.
   \item Durée de présence la plus longue: $\Sexpr{ a['Max.']/1440}$ jours.
 \end{itemize}
+
+\subsubsection*{Entrée - sorties pediatriques}
+
+<<es_pediatriques, echo=FALSE, fig.height=5>>=
+e<-ymd_hms(d1$ENTREE[d1$AGE < 18])
+h<-hour(e)
+sh <- table(as.factor(h))
+psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages pédiatriques (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+
+s<-ymd_hms(d1$SORTIE[d1$AGE < 18])
+h<-hour(s)
+sh <- table(as.factor(h))
+lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+prsh <- prop.table(sh)*100
+for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+
+legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+@
+

@@ -6,7 +6,7 @@ date()
 ```
 
 ```
-## [1] "Thu Jan  9 18:19:00 2014"
+## [1] "Mon Mar 17 18:49:16 2014"
 ```
 
 Variables globales:
@@ -29,7 +29,7 @@ source("../prologue.R")
 ##     renomme.variable, residus, wtd.mean, wtd.table, wtd.var
 ## 
 ## Rattle : une interface graphique gratuite pour l'exploration de données avec R.
-## Version 2.6.26 r77 Copyright (c) 2006-2013 Togaware Pty Ltd.
+## Version 3.0.2 r169 Copyright (c) 2006-2013 Togaware Pty Ltd.
 ## Entrez 'rattle()' pour secouer, faire vibrer, et faire défiler vos données.
 ## Loading required package: foreign
 ## Loading required package: survival
@@ -74,7 +74,7 @@ N
 ```
 
 ```
-## [1] 330594
+## [1] 340338
 ```
 
 Librairies nécessaires:
@@ -104,9 +104,9 @@ sh
 ```
 ## 
 ##     0     1     2     3     4     5     6     7     8     9    10    11 
-##  6832  5509  4412  3781  3309  3149  3477  5911 13268 19066 21900 20872 
+##  7001  5650  4529  3898  3394  3238  3584  6105 13676 19662 22533 21483 
 ##    12    13    14    15    16    17    18    19    20    21    22    23 
-## 17877 18791 21530 20719 20293 21134 21157 19668 19317 16185 13265  9172
+## 18378 19427 22159 21289 20911 21802 21830 20314 19822 16640 13596  9417
 ```
 
 ```r
@@ -134,9 +134,9 @@ sh
 ```
 ## 
 ##     0     1     2     3     4     5     6     7     8     9    10    11 
-##  9912  7517  5783  4417  3269  2664  2216  6033  5737  9571 13941 16639 
+## 10341  7877  5994  4504  3339  2754  2269  6081  5853  9785 14313 17087 
 ##    12    13    14    15    16    17    18    19    20    21    22    23 
-## 17067 15116 16750 21811 19197 19456 19823 18317 17423 16288 16461 15060
+## 17524 15545 17281 22452 19853 20181 20473 18974 18006 16947 17000 15564
 ```
 
 ```r
@@ -202,11 +202,11 @@ n <- s_diurne + s_nocturne
 sortie_diurne <- round(s_diurne * 100/n, 2)
 ```
 
-admission diurne: 71.47 %
+admission diurne: 71.54 %
 
-**Recours nocturne: 28.53 %**
+**Recours nocturne: 28.46 %**
 
-sortie diurne: 64.37 %
+sortie diurne: 64.3 %
 
 ratio entrée/sortie diurne: 1.22
 
@@ -406,9 +406,9 @@ legend("topleft", legend = c("entrées", "sorties"), col = c("red", "blue"),
 
 ![plot of chunk sem_we](figure/sem_we2.png) 
 
-- entrées en semaine 36277
-- entrées le weekend: 14919
-- pourcentage des entrées en semaine: 70.86 %
+- entrées en semaine 37207
+- entrées le weekend: 15315
+- pourcentage des entrées en semaine: 70.84 %
 - **Part d'activité de week-end: 
 
 ```
@@ -421,9 +421,9 @@ Error in base::parse(text = code, srcfile = NULL) :
 ```
 
 ***
-- sorties en semaine 37650
-- sorties le weekend: 20656
-- pourcentage de sorties en semaine: 64.57
+- sorties en semaine 38550
+- sorties le weekend: 21117
+- pourcentage de sorties en semaine: 64.61
 
 Entrées sorties des hospitalisés
 --------------------------------
@@ -594,7 +594,7 @@ summary(as.numeric(d1$presence))
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##    -247      54     110     163     204    9870   30126
+##    -247      55     110     163     204    9870   30341
 ```
 
 ```r
@@ -609,7 +609,7 @@ sdp
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##       0      54     110     163     204    5710   30132
+##       0      55     110     163     204    5710   30347
 ```
 
 ```r
@@ -634,7 +634,7 @@ length(a)
 ```
 
 ```
-## [1] 23384
+## [1] 23397
 ```
 
 ```r
@@ -642,7 +642,7 @@ length(b)
 ```
 
 ```
-## [1] 274356
+## [1] 283871
 ```
 
 ```r
@@ -650,7 +650,7 @@ length(c)
 ```
 
 ```
-## [1] 2722
+## [1] 2723
 ```
 
 ```r
@@ -660,7 +660,7 @@ summary(b)
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##      10      65     119     164     211    1000
+##      10      65     120     164     211    1000
 ```
 
 ```r
@@ -680,8 +680,8 @@ rbind(table(a), round(prop.table(table(a)) * 100, 2))
 
 ```
 ##         3Fr   Alk    Col    Dia    Geb    Hag      Hus    Mul    Odi   Sel
-## [1,] 179.00 64.00 283.00 246.00 108.00 165.00 21430.00 442.00 108.00 29.00
-## [2,]   0.77  0.27   1.21   1.05   0.46   0.71    91.64   1.89   0.46  0.12
+## [1,] 179.00 64.00 283.00 246.00 108.00 165.00 21430.00 442.00 108.00 42.00
+## [2,]   0.77  0.27   1.21   1.05   0.46   0.71    91.59   1.89   0.46  0.18
 ##         Wis    Sav
 ## [1,] 151.00 179.00
 ## [2,]   0.65   0.77
@@ -785,7 +785,7 @@ round(prop.table(bp) * 100, 2)
 
 ```
 ##    NP    JO    SR  NA's 
-## 12.95 73.30 11.68  2.07
+## 12.95 73.34 11.65  2.06
 ```
 
 ```r
@@ -810,9 +810,9 @@ t
 ```
 ## h
 ##     0     1     2     3     4     5     6     7     8     9    10    11 
-##  6391  4513  3389  2546  1777  1489  1380  5033  4233  7200 10347 12183 
+##  6695  4757  3508  2597  1812  1538  1410  5068  4316  7386 10685 12576 
 ##    12    13    14    15    16    17    18    19    20    21    22    23 
-## 12673 10738 11166 14279 13982 14359 14743 13492 12880 11355 10907  9653
+## 13076 11103 11582 14792 14508 14930 15264 14011 13365 11866 11298 10004
 ```
 
 ```r
@@ -838,9 +838,9 @@ t
 ```
 ## h
 ##     0     1     2     3     4     5     6     7     8     9    10    11 
-##  6391  4513  3389  2546  1777  1489  1380  5033  4233  7200 10347 12183 
+##  6695  4757  3508  2597  1812  1538  1410  5068  4316  7386 10685 12576 
 ##    12    13    14    15    16    17    18    19    20    21    22    23 
-## 12673 10738 11166 14279 13982 14359 14743 13492 12880 11355 10907  9653
+## 13076 11103 11582 14792 14508 14930 15264 14011 13365 11866 11298 10004
 ```
 
 ```r

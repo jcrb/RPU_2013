@@ -45,110 +45,117 @@
 \indexentry{orientation|hyperpage}{36}
 \indexentry{taux de recours aux urgences|hyperpage}{43}
 \indexentry{TRU|hyperpage}{43}
-\indexentry{motif de consultation|hyperpage}{57}
-\indexentry{exhaustivit\IeC {\'e}@motif|hyperpage}{59}
-\indexentry{Mode d'entr\IeC {\'e}e|hyperpage}{61}
-\indexentry{Mode de transport|hyperpage}{62}
-\indexentry{Origine g\IeC {\'e}ographique|hyperpage}{64}
-\indexentry{Dur\IeC {\'e}e de passage|hyperpage}{65}
-\indexentry{motif de recours|hyperpage}{79}
-\indexentry{exhaustivit\IeC {\'e}!CIM10|hyperpage}{79}
-\indexentry{AVC|hyperpage}{82}
-\indexentry{AVC!heure|hyperpage}{83}
-\indexentry{AVC!age|hyperpage}{86}
-\indexentry{AVC!age|hyperpage}{86}
-\indexentry{AVC!sexe|hyperpage}{86}
-\indexentry{AIT|hyperpage}{90}
-\indexentry{AIT!th\IeC {\'e}saurus|hyperpage}{90}
-\indexentry{pneumonies|hyperpage}{91}
-\indexentry{syndrome grippal|hyperpage}{92}
-\indexentry{Asthme|hyperpage}{93}
-\indexentry{Bronchiolite|hyperpage}{97}
-\indexentry{Intoxication au CO|hyperpage}{98}
-\indexentry{malaise|hyperpage}{99}
-\indexentry{Canicule@marqueurs|hyperpage}{102}
-\indexentry{Gastroent\IeC {\'e}rites|hyperpage}{105}
-\indexentry{Mode de sortie|hyperpage}{113}
-\indexentry{orientation|hyperpage}{114}
-\indexentry{destination|hyperpage}{114}
-\indexentry{Incoh\IeC {\'e}rences|hyperpage}{115}
-\indexentry{orientation|hyperpage}{119}
-\indexentry{Activit\IeC {\'e} r\IeC {\'e}gionale|hyperpage}{121}
-\indexentry{Passages@journaliers|hyperpage}{121}
-\indexentry{Retour \IeC {\`a} domicile|hyperpage}{123}
-\indexentry{exhaustivit\IeC {\'e}@mode de sortie|hyperpage}{127}
-\indexentry{P\IeC {\'e}diatrie|hyperpage}{131}
-\indexentry{G\IeC {\'e}riatrie|hyperpage}{133}
-\indexentry{sex-ratio!en g\IeC {\'e}riatrie|hyperpage}{133}
-\indexentry{SU Wissembourg|hyperpage}{137}
-\indexentry{CH de Wissembourg!SU|hyperpage}{137}
-\indexentry{CH Wissembourg|hyperpage}{138}
-\indexentry{SU Hagenau|hyperpage}{141}
-\indexentry{CH de Haguenau!SU|hyperpage}{141}
-\indexentry{Diaconat-Fonderie!taux de compl\IeC {\'e}tude|hyperpage}{142}
-\indexentry{SU Saverne|hyperpage}{145}
-\indexentry{CH de Saverne!SU|hyperpage}{145}
-\indexentry{CH Saverne|hyperpage}{146}
-\indexentry{SU SuSteOdile|hyperpage}{149}
-\indexentry{Ste Odile!SU|hyperpage}{149}
-\indexentry{Sainte Odile!completude|hyperpage}{150}
-\indexentry{SU des HUS|hyperpage}{153}
-\indexentry{HUS!SU|hyperpage}{153}
-\indexentry{H\IeC {\^o}pitaux Universitaires de Strasbourg!SU|hyperpage}{153}
-\indexentry{HUS!completude|hyperpage}{154}
-\indexentry{SU Sainte Anne|hyperpage}{157}
-\indexentry{Sainte Anne!SU |hyperpage}{157}
-\indexentry{SU St Luc|hyperpage}{161}
-\indexentry{St Luc!SU|hyperpage}{161}
-\indexentry{SU S\IeC {\'e}lestat|hyperpage}{163}
-\indexentry{S\IeC {\'e}lestat!SU|hyperpage}{163}
-\indexentry{CH S\IeC {\'e}lestat!completude|hyperpage}{164}
-\indexentry{SU Colmar|hyperpage}{167}
-\indexentry{Colmar!SU|hyperpage}{167}
-\indexentry{Colmar!taux de compl\IeC {\'e}tude|hyperpage}{168}
-\indexentry{SU Guebwiller|hyperpage}{171}
-\indexentry{Guebwiller!SU|hyperpage}{171}
-\indexentry{Guebwiller!taux de compl\IeC {\'e}tude|hyperpage}{172}
-\indexentry{SU Altkirch|hyperpage}{177}
-\indexentry{Altkirch!SU|hyperpage}{177}
+\indexentry{passages!typologie|hyperpage}{47}
+\indexentry{admission diurne|hyperpage}{48}
+\indexentry{Recours nocturne|hyperpage}{48}
+\indexentry{sortie diurne|hyperpage}{48}
+\indexentry{Entr\IeC {\'e}e-sorties du weekend|hyperpage}{49}
+\indexentry{Entr\IeC {\'e}es sorties des hospitalis\IeC {\'e}s|hyperpage}{51}
+\indexentry{Entr\IeC {\'e}es sorties des retours \IeC {\`a} domicile|hyperpage}{52}
+\indexentry{motif de consultation|hyperpage}{61}
+\indexentry{exhaustivit\IeC {\'e}@motif|hyperpage}{63}
+\indexentry{Mode d'entr\IeC {\'e}e|hyperpage}{65}
+\indexentry{Mode de transport|hyperpage}{66}
+\indexentry{Origine g\IeC {\'e}ographique|hyperpage}{68}
+\indexentry{Dur\IeC {\'e}e de passage|hyperpage}{69}
+\indexentry{motif de recours|hyperpage}{83}
+\indexentry{exhaustivit\IeC {\'e}!CIM10|hyperpage}{83}
+\indexentry{AVC|hyperpage}{86}
+\indexentry{AVC!heure|hyperpage}{87}
+\indexentry{AVC!age|hyperpage}{90}
+\indexentry{AVC!age|hyperpage}{91}
+\indexentry{AVC!sexe|hyperpage}{91}
+\indexentry{AIT|hyperpage}{95}
+\indexentry{AIT!th\IeC {\'e}saurus|hyperpage}{95}
+\indexentry{pneumonies|hyperpage}{96}
+\indexentry{syndrome grippal|hyperpage}{98}
+\indexentry{Asthme|hyperpage}{98}
+\indexentry{Bronchiolite|hyperpage}{102}
+\indexentry{Intoxication au CO|hyperpage}{103}
+\indexentry{malaise|hyperpage}{104}
+\indexentry{Canicule@marqueurs|hyperpage}{107}
+\indexentry{Gastroent\IeC {\'e}rites|hyperpage}{110}
+\indexentry{Mode de sortie|hyperpage}{117}
+\indexentry{orientation|hyperpage}{118}
+\indexentry{destination|hyperpage}{119}
+\indexentry{Incoh\IeC {\'e}rences|hyperpage}{119}
+\indexentry{orientation|hyperpage}{123}
+\indexentry{Activit\IeC {\'e} r\IeC {\'e}gionale|hyperpage}{125}
+\indexentry{Passages@journaliers|hyperpage}{125}
+\indexentry{Retour \IeC {\`a} domicile|hyperpage}{127}
+\indexentry{exhaustivit\IeC {\'e}@mode de sortie|hyperpage}{131}
+\indexentry{P\IeC {\'e}diatrie|hyperpage}{135}
+\indexentry{G\IeC {\'e}riatrie|hyperpage}{137}
+\indexentry{sex-ratio!en g\IeC {\'e}riatrie|hyperpage}{137}
+\indexentry{SU Wissembourg|hyperpage}{141}
+\indexentry{CH de Wissembourg!SU|hyperpage}{141}
+\indexentry{CH Wissembourg|hyperpage}{142}
+\indexentry{SU Hagenau|hyperpage}{145}
+\indexentry{CH de Haguenau!SU|hyperpage}{145}
+\indexentry{Diaconat-Fonderie!taux de compl\IeC {\'e}tude|hyperpage}{146}
+\indexentry{SU Saverne|hyperpage}{149}
+\indexentry{CH de Saverne!SU|hyperpage}{149}
+\indexentry{CH Saverne|hyperpage}{150}
+\indexentry{SU SuSteOdile|hyperpage}{153}
+\indexentry{Ste Odile!SU|hyperpage}{153}
+\indexentry{Sainte Odile!completude|hyperpage}{154}
+\indexentry{SU des HUS|hyperpage}{157}
+\indexentry{HUS!SU|hyperpage}{157}
+\indexentry{H\IeC {\^o}pitaux Universitaires de Strasbourg!SU|hyperpage}{157}
+\indexentry{HUS!completude|hyperpage}{158}
+\indexentry{SU Sainte Anne|hyperpage}{161}
+\indexentry{Sainte Anne!SU |hyperpage}{161}
+\indexentry{SU St Luc|hyperpage}{171}
+\indexentry{St Luc!SU|hyperpage}{171}
+\indexentry{SU S\IeC {\'e}lestat|hyperpage}{173}
+\indexentry{S\IeC {\'e}lestat!SU|hyperpage}{173}
+\indexentry{CH S\IeC {\'e}lestat!completude|hyperpage}{174}
+\indexentry{SU Colmar|hyperpage}{177}
+\indexentry{Colmar!SU|hyperpage}{177}
 \indexentry{Colmar!taux de compl\IeC {\'e}tude|hyperpage}{178}
-\indexentry{SU Emile Muller|hyperpage}{181}
-\indexentry{Emile Muller!SU|hyperpage}{181}
-\indexentry{SU CH Mulhouse|hyperpage}{181}
-\indexentry{CH Mulhouse!SU|hyperpage}{181}
-\indexentry{CH Mulhouse!taux de compl\IeC {\'e}tude|hyperpage}{182}
-\indexentry{SU Diaconat-Fonderie|hyperpage}{185}
-\indexentry{Diaconat-Fonderie!SU|hyperpage}{185}
-\indexentry{Diaconat-Fonderie!taux de compl\IeC {\'e}tude|hyperpage}{186}
-\indexentry{SU des trois fronti\IeC {\`e}res|hyperpage}{189}
-\indexentry{Clinique des trois fronti\IeC {\`e}res!SU|hyperpage}{189}
-\indexentry{3 Fronti\IeC {\`e}res!taux de compl\IeC {\'e}tude|hyperpage}{190}
-\indexentry{Synth\IeC {\`e}se|hyperpage}{193}
-\indexentry{SU!synth\IeC {\`e}se|hyperpage}{193}
-\indexentry{SAMU d'Alsace!activit\IeC {\'e}|hyperpage}{199}
-\indexentry{SAMU!taux de  recours|hyperpage}{204}
-\indexentry{Taux de passage aux urgences|hyperpage}{207}
-\indexentry{Taux de recours aux urgences|hyperpage}{207}
-\indexentry{Taux d'intervention r\IeC {\'e}gional|hyperpage}{207}
-\indexentry{Taux de recours r\IeC {\'e}gional|hyperpage}{207}
-\indexentry{sex ratio|hyperpage}{208}
-\indexentry{rapport de masculinit\IeC {\'e}|hyperpage}{208}
-\indexentry{semaine (d\IeC {\'e}finition de la)|hyperpage}{208}
-\indexentry{week-end (d\IeC {\'e}finition)|hyperpage}{208}
-\indexentry{moyenne mobile|hyperpage}{208}
-\indexentry{passages p\IeC {\'e}diatriques|hyperpage}{208}
-\indexentry{passages g\IeC {\'e}riatriques|hyperpage}{209}
-\indexentry{Journ\IeC {\'e}e|hyperpage}{209}
-\indexentry{Soir\IeC {\'e}e|hyperpage}{209}
-\indexentry{Nuit profonde|hyperpage}{209}
-\indexentry{AIT|hyperpage}{211}
-\indexentry{ANTARES|hyperpage}{211}
-\indexentry{AR|hyperpage}{211}
-\indexentry{ARS|hyperpage}{211}
-\indexentry{Accident Vasculaire C\IeC {\'e}r\IeC {\'e}bral|hyperpage}{211}
-\indexentry{Population|hyperpage}{211}
-\indexentry{Population@Population!compt\IeC {\'e}e \IeC {\`a} part|hyperpage}{211}
-\indexentry{Population@Population!totale|hyperpage}{212}
-\indexentry{Population@Population!municipale|hyperpage}{212}
-\indexentry{Unit\IeC {\'e} urbaine|hyperpage}{212}
-\indexentry{R (CRAN R)|hyperpage}{217}
+\indexentry{SU Guebwiller|hyperpage}{181}
+\indexentry{Guebwiller!SU|hyperpage}{181}
+\indexentry{Guebwiller!taux de compl\IeC {\'e}tude|hyperpage}{182}
+\indexentry{SU Altkirch|hyperpage}{187}
+\indexentry{Altkirch!SU|hyperpage}{187}
+\indexentry{Colmar!taux de compl\IeC {\'e}tude|hyperpage}{188}
+\indexentry{SU Emile Muller|hyperpage}{191}
+\indexentry{Emile Muller!SU|hyperpage}{191}
+\indexentry{SU CH Mulhouse|hyperpage}{191}
+\indexentry{CH Mulhouse!SU|hyperpage}{191}
+\indexentry{CH Mulhouse!taux de compl\IeC {\'e}tude|hyperpage}{192}
+\indexentry{SU Diaconat-Fonderie|hyperpage}{195}
+\indexentry{Diaconat-Fonderie!SU|hyperpage}{195}
+\indexentry{Diaconat-Fonderie!taux de compl\IeC {\'e}tude|hyperpage}{196}
+\indexentry{SU des trois fronti\IeC {\`e}res|hyperpage}{199}
+\indexentry{Clinique des trois fronti\IeC {\`e}res!SU|hyperpage}{199}
+\indexentry{3 Fronti\IeC {\`e}res!taux de compl\IeC {\'e}tude|hyperpage}{200}
+\indexentry{Synth\IeC {\`e}se|hyperpage}{203}
+\indexentry{SU!synth\IeC {\`e}se|hyperpage}{203}
+\indexentry{SAMU d'Alsace!activit\IeC {\'e}|hyperpage}{209}
+\indexentry{SAMU!taux de  recours|hyperpage}{214}
+\indexentry{Taux de passage aux urgences|hyperpage}{217}
+\indexentry{Taux de recours aux urgences|hyperpage}{217}
+\indexentry{Taux d'intervention r\IeC {\'e}gional|hyperpage}{217}
+\indexentry{Taux de recours r\IeC {\'e}gional|hyperpage}{217}
+\indexentry{sex ratio|hyperpage}{218}
+\indexentry{rapport de masculinit\IeC {\'e}|hyperpage}{218}
+\indexentry{semaine (d\IeC {\'e}finition de la)|hyperpage}{218}
+\indexentry{week-end (d\IeC {\'e}finition)|hyperpage}{218}
+\indexentry{moyenne mobile|hyperpage}{218}
+\indexentry{passages p\IeC {\'e}diatriques|hyperpage}{218}
+\indexentry{passages g\IeC {\'e}riatriques|hyperpage}{219}
+\indexentry{Journ\IeC {\'e}e|hyperpage}{219}
+\indexentry{Soir\IeC {\'e}e|hyperpage}{219}
+\indexentry{Nuit profonde|hyperpage}{219}
+\indexentry{AIT|hyperpage}{221}
+\indexentry{ANTARES|hyperpage}{221}
+\indexentry{AR|hyperpage}{221}
+\indexentry{ARS|hyperpage}{221}
+\indexentry{Accident Vasculaire C\IeC {\'e}r\IeC {\'e}bral|hyperpage}{221}
+\indexentry{Population|hyperpage}{221}
+\indexentry{Population@Population!compt\IeC {\'e}e \IeC {\`a} part|hyperpage}{221}
+\indexentry{Population@Population!totale|hyperpage}{222}
+\indexentry{Population@Population!municipale|hyperpage}{222}
+\indexentry{Unit\IeC {\'e} urbaine|hyperpage}{222}
+\indexentry{R (CRAN R)|hyperpage}{227}

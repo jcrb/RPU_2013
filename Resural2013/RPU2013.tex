@@ -171,7 +171,7 @@ Bartier \& Madame Christine Hecker}}
 %\vspace*{7.5cm}
 
 \begin{itemize}\raggedright
-  \item R version 3.0.3 (2014-03-06), \verb|i686-pc-linux-gnu|
+  \item R version 3.0.3 (2014-03-06), \verb|x86_64-pc-linux-gnu|
   \item Locale: \verb|LC_CTYPE=fr_FR.UTF-8|, \verb|LC_NUMERIC=C|, \verb|LC_TIME=fr_FR.UTF-8|, \verb|LC_COLLATE=fr_FR.UTF-8|, \verb|LC_MONETARY=fr_FR.UTF-8|, \verb|LC_MESSAGES=fr_FR.UTF-8|, \verb|LC_PAPER=fr_FR.UTF-8|, \verb|LC_NAME=C|, \verb|LC_ADDRESS=C|, \verb|LC_TELEPHONE=C|, \verb|LC_MEASUREMENT=fr_FR.UTF-8|, \verb|LC_IDENTIFICATION=C|
   \item Base packages: base, datasets, graphics, grDevices,
     methods, stats, utils
@@ -201,14 +201,7 @@ Copyright \copyright{} 2013-2014 RESURAL et les contributeurs.
 \listoftables
 \listoffigures
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'gdata'}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'rattle'}}\end{kframe}
-\end{knitrout}
 
 
 % ************************
@@ -557,11 +550,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 % \fbox{Voir SAU2013}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:22:49 2014
-=======
-% Fri Mar 14 13:55:15 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:38 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -597,11 +586,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:22:50 2014
-=======
-% Fri Mar 14 13:55:17 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:39 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -1006,12 +991,9 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 
 \subsection*{En valeur absolue}
+
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:22:53 2014
-=======
-% Fri Mar 14 13:55:30 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:43 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -1041,6 +1023,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 
 
 \subsection*{En pourcentage}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/en_pourcentage} 
@@ -1074,11 +1057,7 @@ m
 \subsection*{Activité par semaine}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:22:55 2014
-=======
-% Fri Mar 14 13:55:34 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:44 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1144,11 +1123,7 @@ m
 \label{act_sem}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:22:55 2014
-=======
-% Fri Mar 14 13:55:35 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:44 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
@@ -1188,7 +1163,100 @@ m
 \end{knitrout}
 
 
-  
+\subsection{Typologie des passages} \footnote{attente.Rmd}
+
+\index{passages!typologie}
+
+\subsubsection*{Tous les passages}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/sau_arrive_depart} 
+
+\end{knitrout}
+
+
+\subsubsection*{Passages Diurnes - Nocturnes}
+
+- diurne: 8h - 19h59
+- nocturne: 20h - 7h59
+
+
+
+
+\index{admission diurne}
+\index{Recours nocturne}
+\index{sortie diurne}
+
+\begin{boxedminipage}{10cm}
+\begin{itemize}
+  \item admission diurne: 72 \%
+  \item Recours nocturne: 28 \%
+  \item sortie diurne:    64 \%
+  \item ratio entrée/sortie diurne: 1.2
+  \item ratio entrée/sortie nocturne: 0.88
+\end{itemize}
+\end{boxedminipage}
+
+\subsubsection*{Entrée - sorties adultes}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/es_adultes} 
+
+\end{knitrout}
+
+
+Pour la pédiatrie (pp.\pageref{chap_pediatrie}) et la gériatrie (pp.\pageref{chap_geriatrie}), on se reportera aux chapitres correspondants.
+
+\subsubsection*{Semaine - Week-end}
+\index{Entrée-sorties du weekend}
+
+- semaine: du lundi 8h au vendredi 19h59
+
+- week-end: du vendredi 20h au lundi 7h59
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/es_we1} 
+
+\includegraphics[width=\maxwidth]{figure/es_we2} 
+
+\end{knitrout}
+
+
+\begin{boxedminipage}{10cm}
+\begin{itemize}
+  \item entrées en semaine 135 310
+  \item entrées le weekend: 69 896
+  \item pourcentage des entrées en semaine: 66 \%
+  \item \textbf{Part d'activité de week-end: 34 \%}
+  \item sorties en semaine 140 242
+  \item sorties le weekend: 85 132
+  \item pourcentage de sorties en semaine: 62
+\end{itemize}
+\end{boxedminipage}
+
+\subsubsection*{Entrées sorties des hospitalisés}
+\index{Entrées sorties des hospitalisés}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/es_hospitalise} 
+
+\end{knitrout}
+
+
+\subsubsection*{Entrées sorties des retours à domicile}
+\index{Entrées sorties des retours à domicile}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/es_dom} 
+
+\end{knitrout}
+
+
 
 
 \section{Passages aux urgences}
@@ -1202,11 +1270,7 @@ Ce phénomène cyclique se répète tous les jours selon un profil immuable. La 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:22:56 2014
-=======
-% Fri Mar 14 13:55:40 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -1300,11 +1364,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % tranche-age.Rnw
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:00 2014
-=======
-% Fri Mar 14 13:55:47 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1340,11 +1400,7 @@ Le thésaurus est présenté sous la forme d'un fichier Excel. L'onglet \emph{re
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:00 2014
-=======
-% Fri Mar 14 13:55:47 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -1415,11 +1471,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:00 2014
-=======
-% Fri Mar 14 13:55:48 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1449,11 +1501,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:00 2014
-=======
-% Fri Mar 14 13:55:49 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1642,11 +1690,7 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:05 2014
-=======
-% Fri Mar 14 13:56:01 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1661,11 +1705,7 @@ N & 44074.00 & 249610.00 & 39653.00 \\
 \label{tab:freq_periode}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:05 2014
-=======
-% Fri Mar 14 13:56:01 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1723,11 +1763,7 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 \end{figure}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:06 2014
-=======
-% Fri Mar 14 13:56:04 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1772,11 +1808,7 @@ On peut répartir les âges des patients en trois catégories (tableau \ref{tab:
 % #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:06 2014
-=======
-% Fri Mar 14 13:56:05 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:59 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1795,11 +1827,7 @@ n & 74739.00 & 215694.00 & 49895.00 \\
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:06 2014
-=======
-% Fri Mar 14 13:56:06 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:59 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1838,11 +1866,7 @@ n & 74739.00 & 215694.00 & 49895.00 \\
 \section{Selon le jour de la semaine}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:07 2014
-=======
-% Fri Mar 14 13:56:07 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:31:59 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1895,11 +1919,7 @@ Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de qu
 
 \section{Selon l'orientation}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:07 2014
-=======
-% Fri Mar 14 13:56:09 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -1925,11 +1945,7 @@ REO & 86.22 & 3.23 \\
 \label{tab:duree_orientation}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:08 2014
-=======
-% Fri Mar 14 13:56:10 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1972,11 +1988,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \section{Selon la gravité}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:08 2014
-=======
-% Fri Mar 14 13:56:10 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2292,9 +2304,7 @@ Horaire des AVC, à comparer avec:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: there is no package called 'gdata'}}\begin{verbatim}
+\begin{verbatim}
 w
 Dim Lun Mar Mer Jeu Ven Sam 
 321 465 454 398 396 407 347 
@@ -2302,13 +2312,9 @@ w
 Dim Lun Mar Mer Jeu Ven Sam 
  12  17  16  14  14  15  12 
 \end{verbatim}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/avc_jour_semaine} 
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: l'argument "{}X"{} est manquant, avec aucune valeur par défaut}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur : objet 'w2' introuvable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: plot.new has not been called yet}}\end{kframe}
 \end{knitrout}
 
 Proportion théorique = 14.28\% par jour de la semaine.
@@ -2398,8 +2404,6 @@ Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour to
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: there is no package called 'epitools'}}
-
 {\ttfamily\noindent\color{warningcolor}{\#\# Warning: impossible d'ouvrir le fichier '../mes\_fonctions.R' : Aucun fichier ou dossier de ce type}}
 
 {\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}\begin{verbatim}
@@ -2417,14 +2421,9 @@ Les pneumopathies bactériennes sans précision sont cotées J15.9 Dans la CIM10
 Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'age moyen est de 71 ans et la moitié de ces patients ont 77 ans et plus.
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/pneumo} 
 
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}colorbrewer.palette"{}}}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning: there is no package called 'epitools'}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: Il manque le package 'epitools'}}\end{kframe}
 \end{knitrout}
 
 
@@ -2491,11 +2490,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:10 2014
-=======
-% Fri Mar 14 13:56:17 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:03 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2513,11 +2508,7 @@ J450 & 132 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:10 2014
-=======
-% Fri Mar 14 13:56:17 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:03 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2545,11 +2536,7 @@ On note \np{1 388} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:10 2014
-=======
-% Fri Mar 14 13:56:17 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:03 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2729,7 +2716,7 @@ Données hospitalières : nombre quotidien de passages dans des services d'urgen
 
 \includegraphics[width=\maxwidth]{figure/canicule2} 
 \begin{kframe}\begin{verbatim}
-## canicule$DP :  
+## canicule$DP : 
 ##         Frequency Percent Cum. percent
 ## T670           57    73.1           73
 ## T671            8    10.3           83
@@ -2871,27 +2858,19 @@ Le RPU connaît trois mode de sortie des urgences:
  \caption{Modes de sortie}
 \end{figure}
 
-<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Wed Mar 12 09:23:12 2014
-=======
-\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}drop.levels"{}}}\end{kframe}% latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Fri Mar 14 13:56:23 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
   \hline
  & n & \% \\ 
   \hline
-0 & 2 & 33.33 \\ 
-  122 & 1 & 16.67 \\ 
-  18 & 1 & 16.67 \\ 
-  468 & 1 & 16.67 \\ 
-  780 & 1 & 16.67 \\ 
+Décès & 2 & 0.00 \\ 
+  Domicile & 220090 & 64.67 \\ 
+  Mutation & 67665 & 19.88 \\ 
+  $<$NA$>$ & 47704 & 14.02 \\ 
+  Transfert & 4877 & 1.43 \\ 
    \hline
 \end{tabular}
 \caption[Mode de sortie des urgences]{Mode de sortie des urgences. <NA> est le nombre de non réponses à cet item} 
@@ -2904,9 +2883,8 @@ Le RPU connaît trois mode de sortie des urgences:
 
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
-<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Wed Mar 12 09:23:13 2014
+% Mon Mar 17 20:32:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -2930,16 +2908,7 @@ Les données par établissement sont résumées dans le tableau \ref{tab.sortie_
 \caption[Mode de sortie selon l'établissement]{Mode de sortie des urgences selon l'établissement (en pourcentage). <NA> est le nombre de non réponses à cet item} 
 \label{tab.sortie_etab}
 \end{table}
-=======
-\begin{kframe}
 
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: all arguments must have the same length}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: indice hors limites}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}align"{} must have length equal to 3 ( ncol(x) + 1 )}}\end{kframe}
 
 
 
@@ -2960,18 +2929,13 @@ Le mode de sortie est affiné par la rubrique ORIENTATION avec la ventilation su
 
 On notera que le retour à domicile proprement dit ne figure pas parmi les items et cette modalité est implicite. On peut supposer que les NA's correspondent à cette modalité. Cependant une ambiguité demeure car les non réponses sont aussi représentées par ce symbole.
 
-\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: impossible de trouver la fonction "{}drop.levels"{}}}\end{kframe}a
-1.37 1.38  1.4 1.44 1.58 1.59 1.86 2.07 2.17  2.2 2.65 3.01 <NA> 
-   1    1    1    1    1    1    1    1    1    1    1    1    0 
+a
+  CHIR  FUGUE    HDT     HO    MED   OBST    PSA    REA    REO     SC 
+  7872    256    126     31  18522     98   3067   1035   1436   1426 
+  SCAM     SI   UHCD   <NA> 
+   512   1402  32452 272103 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:13 2014
-=======
-% Fri Mar 14 13:56:23 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2991,11 +2955,7 @@ NA &   0 &   0 &   0 &   0 &   0 &   0 &   0 \\
 \label{tab:dest_gravite}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:13 2014
-=======
-% Fri Mar 14 13:56:23 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3025,47 +2985,40 @@ CHIR & 181 & 3331 & 3662 & 363 &  11 &   1 & 140 \\
 
 \section{Destination}
 \index{destination}
-<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Wed Mar 12 09:23:13 2014
-=======
-\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible de trouver la fonction "{}drop.levels"{}}}\end{kframe}% latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Fri Mar 14 13:56:23 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
   \hline
  & \% \\ 
   \hline
-1 & 40.00 \\ 
-  2 & 10.00 \\ 
-  16.67 & 40.00 \\ 
-  33.33 & 10.00 \\ 
+HAD & 0.01 \\ 
+  HMS & 0.03 \\ 
+  MCO & 98.18 \\ 
+  PSY & 1.61 \\ 
+  SLD & 0.02 \\ 
+  SSR & 0.14 \\ 
    \hline
 \end{tabular}
 \caption{Destination des patients non rentrés à domicile après leur passage aux urgences} 
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:13 2014
-=======
-% Fri Mar 14 13:56:23 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
   \hline
  & \% \\ 
   \hline
-1 & 40.00 \\ 
-  16.67 & 40.00 \\ 
-  2 & 10.00 \\ 
-  33.33 & 10.00 \\ 
+DOM & 78.73 \\ 
+  HAD & 0.00 \\ 
+  HMS & 0.01 \\ 
+  MCO & 20.88 \\ 
+  PSY & 0.34 \\ 
+  SLD & 0.01 \\ 
+  SSR & 0.03 \\ 
    \hline
 \end{tabular}
 \caption{Devenir des patients à la sortie des urgences. DOM représentent ceux qui sont repartis vers leur domicile ou ce qui en tient lieu (sous l'hypothèse que toutes les non réponses correspondent à un retour à domicile).} 
@@ -3083,11 +3036,7 @@ On isole le groupe "mode de sortie = domicile" et on relève les résultats de l
 
 \includegraphics[width=\maxwidth]{figure/fausses_sorties} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:13 2014
-=======
-% Fri Mar 14 13:56:24 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3154,11 +3103,7 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:14 2014
-=======
-% Fri Mar 14 13:56:26 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3191,11 +3136,7 @@ Les variations du retour journalier à domicile sont calculées de la manière s
 \end{description}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:15 2014
-=======
-% Fri Mar 14 13:56:29 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:07 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3222,11 +3163,7 @@ On refait le calcul de q en tenant compte des non réponses:
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:15 2014
-=======
-% Fri Mar 14 13:56:32 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:08 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3267,6 +3204,7 @@ Le taux de réponse pour cet item est de
 
 % pediatrie.Rnw
 \index{Pédiatrie}
+\label{chap_pediatrie}
 
 
 
@@ -3285,11 +3223,7 @@ Les moins de 18 ans représentent $82 650$ passages en 2 013 soit $228$ passages
 % Pédiatrie et sexe
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:17 2014
-=======
-% Fri Mar 14 13:56:36 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:09 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3311,11 +3245,7 @@ Le sex-ratio est de $1.2$ (table \ref{tab:ped_sr})
 % Taux hospitalisation
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:17 2014
-=======
-% Fri Mar 14 13:56:36 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:09 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3345,11 +3275,22 @@ Le taux d'hospitalisation est de : \textbf{$10$ \%} (table \ref{tab:ped_hosp}).
   \item Durée de présence la plus longue: $4.3$ jours.
 \end{itemize}
 
+\subsubsection*{Entrée - sorties gériatriques}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/es_pediatriques} 
+
+\end{knitrout}
+
+
+
 \chapter{Gériatrie}
 
 % geriatrie.Rnw
 
 \index{Gériatrie}
+\label{chap_geriatrie}
 
 
 
@@ -3368,11 +3309,7 @@ Les 75 ans et plus représentent $52 512$ passages en 2 013 soit $145$ passages 
 % Gériatrie et sexe
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:17 2014
-=======
-% Fri Mar 14 13:56:38 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3396,11 +3333,7 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:17 2014
-=======
-% Fri Mar 14 13:56:38 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3429,6 +3362,16 @@ Le taux d'hospitalisation est de $62$ \%.
 \end{itemize}
 
 Note: on ne retient que les durées de présence supérieures à 30 minutes.
+
+\subsubsection*{Entrée - sorties gériatriques}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/es_geriatriques} 
+
+\end{knitrout}
+
+
 
 
 
@@ -3772,7 +3715,7 @@ Auxquels il faut rajouter les services assurant un accueil des urgences 24h/24h 
 
 
 
-Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont été transmis, alors que \np{91 652} dossiers ont été déclarés au serveur régional. 
+Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont été transmis, alors que \np{121 190} dossiers ont été déclarés au serveur régional. 
 1
 
 \section*{Durée de présence aux urgences}
@@ -3801,17 +3744,13 @@ Entre le 2 013-01-01 00:11:00 et le 2 013-12-31 23:13:00, \np{37 018} RPU ont é
 \index{SU Sainte Anne}
 \index{Sainte Anne!SU }
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: impossible d'ouvrir la connexion}}
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
+Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 40 par jour.
 
-<<<<<<< HEAD
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Wed Mar 12 09:23:25 2014
+% Mon Mar 17 20:32:17 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3823,86 +3762,38 @@ n & 282.00 & 12805.00 & 1574.00 & 14661.00 & 4.00 & 2261.00 & 250.00 \\
    \hline
 \end{tabular}
 \end{table}
-=======
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: '/' not defined for "{}POSIXt"{} objects}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: invalid 'row.names' length}}
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: 'sum' not defined for "{}POSIXt"{} objects}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hospitalise' introuvable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hosp' introuvable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet 'hosp' introuvable}}\end{kframe}
-\end{knitrout}
-
-
-Le SU Sainte Anne a reçu en 2013 un total de \np{1 388} consultants, soit en moyenne 4 par jour.
-
-\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: input string 5177 is invalid in this locale}}\end{kframe}
 
 
 \section{Taux moyen de passages}
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages1} 
 
+\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages2} 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
-\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages} 
-\begin{kframe}
+\includegraphics[width=\maxwidth]{figure/stAnne_tx_moyen_passages3} 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}x"{} : attempt to define invalid zoo object}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur : objet 'ma' introuvable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: erreur d'évaluation de l'argument 'x' lors de la sélection d'une méthode pour la fonction 'plot' : Erreur dans ts\$total : objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 \end{knitrout}
 
 
 \section{Taux d'hospitalisation}
 
-Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mutations, transferts et UHCD.} est de 38\% par jour.
+Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mutations, transferts et UHCD.} est de 17\% par jour.
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/hospit_stAnne} 
-\begin{kframe}
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: "{}x"{} : attempt to define invalid zoo object}}\end{kframe}
 \end{knitrout}
 
 
 \section{Total des passages}
 
-\begin{kframe}
 
-
-<<<<<<< HEAD
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., mars 12, 2014 - 09:23:25
+% Date and time: lun., mars 17, 2014 - 20:32:17
 \begin{table}[!htbp] \centering 
   \caption{Totalité des passages: résumé des principales caractéristiques} 
   \label{} 
@@ -3914,25 +3805,18 @@ data\$total & 365 & 40.00 & 8.00 & 22 & 34 & 40 & 46 & 69 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
-=======
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+\includegraphics[width=\maxwidth]{figure/stAnne_tot_passages1} 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+\includegraphics[width=\maxwidth]{figure/stAnne_tot_passages2} 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}\end{kframe}
 
 
 \subsection{Passages de 1 à 75 ans}
 
-\begin{kframe}
 
-
-<<<<<<< HEAD
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., mars 12, 2014 - 09:23:25
+% Date and time: lun., mars 17, 2014 - 20:32:17
 \begin{table}[!htbp] \centering 
   \caption{Se 1 à 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -3944,25 +3828,19 @@ data\$entre1\_75ans & 365 & 35.00 & 7.50 & 18 & 30 & 34 & 40 & 63 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
-=======
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+\includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages1} 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+\includegraphics[width=\maxwidth]{figure/stAnne_1_75_passages2} 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}\end{kframe}
 
 
 
 \subsection{Passages des plus de 75 ans}
 
-\begin{kframe}
 
-<<<<<<< HEAD
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., mars 12, 2014 - 09:23:25
+% Date and time: lun., mars 17, 2014 - 20:32:18
 \begin{table}[!htbp] \centering 
   \caption{Plus de 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -3974,21 +3852,16 @@ data\$sup75ans & 365 & 4.30 & 2.30 & 0 & 3 & 4 & 6 & 12 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
-=======
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
+\includegraphics[width=\maxwidth]{figure/stAnne_sup75_passages1} 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{Error: objet de type 'closure' non indiçable}}\end{kframe}
+\includegraphics[width=\maxwidth]{figure/stAnne_sup75_passages2} 
 
 
-<<<<<<< HEAD
+
+
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., mars 12, 2014 - 09:23:25
+% Date and time: lun., mars 17, 2014 - 20:32:18
 \begin{table}[!htbp] \centering 
   \caption{Clinique Ste Anne: résumé des données} 
   \label{} 
@@ -4007,12 +3880,7 @@ tx\_hosp & 365 & 0.17 & 0.06 & 0.00 & 0.12 & 0.18 & 0.22 & 0.34 \\
 \hline \\[-1.8ex] 
 \end{tabular} 
 \end{table} 
-=======
-\begin{kframe}
 
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: objet de type 'closure' non indiçable}}\end{kframe}
 
 
 
@@ -4726,11 +4594,7 @@ Signification des intitulés des lignes:
 % \begin{table}
 % \begin{center}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:36 2014
-=======
-% Fri Mar 14 13:57:29 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:28 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrrrrrrrr}
@@ -4810,11 +4674,7 @@ Le interventions SMUR sont égales à la somme des interventions primaires et se
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:36 2014
-=======
-% Fri Mar 14 13:57:30 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:29 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -4883,11 +4743,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-<<<<<<< HEAD
-% Wed Mar 12 09:23:36 2014
-=======
-% Fri Mar 14 13:57:31 2014
->>>>>>> c54c5c2092fb1533271e395c561ab3d562e88125
+% Mon Mar 17 20:32:29 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}

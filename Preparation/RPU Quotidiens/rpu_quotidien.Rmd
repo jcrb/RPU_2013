@@ -100,4 +100,26 @@ finess2hop <- function(a){
 - nlevels(dx$FINESS) si différent de 14 => problème
 - nb moyen et ecart-type de RPU par établissement et par jour
 
-  
+```{r}
+date1 <- "2014-03-01"
+date2 <- "2014-03-05"
+p <- seq(as.Date(date1), as.Date(date2), 1)
+for(i in 1:length(p)){
+  x <- parse_rpu(p[i])
+  table(x$FINESS, as.Date(x$ENTREE))
+}
+```
+Commentaires:
+-------------
+```{r}
+r <- table(as.Date(a$ENTREE), a$FINESS)
+r <- r[,-13] # supprime la colonne 13 qui est totalement vide ?
+r
+```
+
+- altkirch: toujours des trous inexpliqués: 1/1, 5/1, 11 et 12/1, 16/1, 18/1, 2/3
+- mulhouse: 15/1, 7/2, 5-6-7/3 zéro rpu
+- ste odile: 16 au 31/1 pas de rpu
+- sélestat: 22 et 23/2 pas de RPU
+- diaconat strasbourg: 1-2-3-4/3 puis plus rien
+- roosvelt: depuis le 5/2 OK
