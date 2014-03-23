@@ -1,0 +1,39 @@
+*Lundi 10/3/2014 -- 16:33:40
+*Résultat de la transformation de type Grille entre :
+*SYSTEME :        RGF93
+*COORDONNÉES :   Géographiques
+*ELLIPSOÏDE :     GRS 1980
+*MERIDIEN :      Greenwich
+*UNITÉ :          Degrés décimaux
+
+*SYSTEME :        RGF93
+*COORDONNÉES :   Planes
+*ELLIPSOÏDE :     GRS 1980
+*PROJECTION:    LAMBERT-93
+
+*SYSTEME ALTIMETRIQUE :       IGN69
+
+
+
+*          Nom              E              N             Alt     Conv(Degrés Minutes Secondes)  Alt Lin(mm/km)		préc. plani		préc alti
+             SteAnne    1052730.208    6845664.803      0.000      -3.282728     -273.6 		 aucune information 		 de 1 à 5cm
+                 HTP    1046920.941    6842902.748      0.000      -3.245595     -287.6 		 aucune information 		 de 1 à 5cm
+                 NHC    1049535.382    6841068.541      0.000      -3.262450     -299.1 		 aucune information 		 de 1 à 5cm
+            SteOdile    1050838.318    6840008.934      0.000      -3.270829     -305.5 		 aucune information 		 de 1 à 5cm
+            Diaconat    1024390.647    6747690.459      0.000      -3.083417     -717.6 		 aucune information 		 de 1 à 5cm
+             EMuller    1025449.812    6745010.097      0.000      -3.090590     -726.8 		 aucune information 		 de 1 à 5cm
+                 3Fr    1041906.351    6730091.780      0.000      -3.180843     -776.4 		 aucune information 		 de 5 à 10cm
+          Guebwiller    1014805.840    6764800.373      0.000      -3.033235     -653.9 		 aucune information 		 de 1 à 5cm
+               Thann    1006392.396    6753821.525      0.000      -2.581867     -692.9 		 aucune information 		 de 1 à 5cm
+            Altkirch    1019311.931    6733478.215      0.000      -3.051071     -762.5 		 aucune information 		 de 1 à 5cm
+              Colmar    1022855.267    6783818.002      0.000      -3.084987     -578.2 		 aucune information 		 de 1 à 5cm
+            Selestat    1028912.137    6804884.625      0.000      -3.130346     -483.5 		 aucune information 		 de 1 à 5cm
+               StLuc    1012003.369    6828636.172      0.000      -3.035384     -356.6 		 aucune information 		 de 1 à 5cm
+            Haguenau    1050806.723    6865868.720      0.000      -3.280254     -149.9 		 aucune information 		 de 1 à 5cm
+         Wissembourg    1060357.108    6893687.634      0.000      -3.344325       32.5 		 aucune information 		 de 1 à 5cm
+             Saverne    1019654.098    6858345.856      0.000      -3.092168     -185.8 		 aucune information 		 de 1 à 5cm
+  Diaconnat_Roosvelt    1024391.063    6747690.126      0.000      -3.083419     -717.6 		 aucune information 		 de 1 à 5cm
+Diaconnat_Strasbourg    1049701.577    6841230.096      0.000      -3.263071     -298.2 		 aucune information 		 de 1 à 5cm
+                CCOM    1048454.774    6836747.993      0.000      -3.253715     -323.2 		 aucune information 		 de 1 à 5cm
+        Cl.Orangerie    1051167.558    6842661.091      0.000      -3.272559     -290.5 		 aucune information 		 de 1 à 5cm
+* Fin Lundi 10/3/2014 -- 16:33:40

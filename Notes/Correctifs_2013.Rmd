@@ -28,4 +28,76 @@ d1 <- d2
 rm(d2)
 ```
 
+Altkirch
+--------
+
+En 2013, les RPU d'Altkirch ont connus une interruption entre le 
+
+- le dossier des données: Stat Resural/Archives_Sagec/RPU2013_Altkirch/
+- fichier: rpu_680000395_1tri2013_dump.sql
+- on utilise la procédure décrite dans RPU_2013/Preparation/RPU_Quotidiens/rpu_quotodien.Rmd, pour lire les données
+- en partant de RPU_2013:
+
+> wd
+[1] "/home/jcb/Documents/Resural/Stat Resural/RPU_2013"
+wd <- getwd()
+> setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/RPU2013_Altkirch")
+> file <- "rpu_680000395_1tri2013_dump.sql"
+> system(paste0("mysql -u root -pmarion archives < ", file))
+> setwd(wd)
+> library("RMySQL")
+Le chargement a nécessité le package : DBI
+> con<-dbConnect(MySQL(),group = "archives")
+> rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ ",sep=""))
+> dx<-fetch(rs,n=-1,encoding = "UTF-8")
+> max(dx$ENTREE)
+[1] "2013-03-31 22:42:00"
+> min(dx$ENTREE)
+[1] "2013-01-01 00:07:00"
+
+Le dataframe **dx** comporte 3735 RPU allant du 1er janvier au 31 mars 2013 inclu.
+
+retrait <- d1[d1$FINESS=='Alt' & d1$ENTREE >= "2013-01-01" & d1$ENTREE < "2013-04-01",]
+> nrow(retrait)
+[1] 0
+
+Le fichier principal pour 2013, **d1**, n'a aucun enregistrement correspondant au patch, on peut donc lui ajouter le dataframe dx. Cependant dx est formée de données brutes qu'il faut nettyer (supprimer la colonne raw, ajouter une colonne age, etc.)
+
+```{}
+dx <- dx[,-16]
+a<-dx$FINESS
+a[a=="680000395"]<-"Alk"
+dx$FINESS <- a
+d06 <- dx
+d06$CODE_POSTAL<-as.factor(d06$CODE_POSTAL)
+d06$COMMUNE<-as.factor(d06$COMMUNE)
+d06$SEXE<-as.factor(d06$SEXE)
+d06$TRANSPORT<-as.factor(d06$TRANSPORT)
+d06$TRANSPORT_PEC<-as.factor(d06$TRANSPORT_PEC)
+d06$GRAVITE<-as.factor(d06$GRAVITE)
+d06$ORIENTATION<-as.factor(d06$ORIENTATION)
+d06$MODE_ENTREE<-factor(d06$MODE_ENTREE,levels=c(0,6,7,8),labels=c('NA','Mutation','Transfe  rt','Domicile'))
+d06$PROVENANCE<-factor(d06$PROVENANCE,levels=c(0,1,2,3,4,5,8),labels=c('NA','MCO','SSR','SLD','PSY','PEA','PEO'))
+d06$MODE_SORTIE<-factor(d06$MODE_SORTIE,levels=c(0,6,7,8,4),labels=c('NA','Mutation','Transfert','Domicile','Décès'))
+d06$DESTINATION<-factor(d06$DESTINATION,levels=c(0,1,2,3,4,6,7),labels=c('NA','MCO','SSR','SLD','PSY','HAD','HMS'))
+d06$AGE<-floor(as.numeric(as.Date(d06$ENTREE)-as.Date(d06$NAISSANCE))/365)
+d06$AGE[d06$AGE 120]<-NA
+d06$AGE[d06$AGE < 0]<-NA
+d2 <- rbind(d1, d06)
+save(d1, file="rpu2013d0112_2.Rda")
+d1 <- d2
+save(d1, file="rpu2013d0112.Rda")
+dx <- d06
+save(dx, file="rpu2013_Alkd0103.Rda")
+```
+
+Au final:
+- les 3 premiers mois de 2013 pour Altkirch sont sauvegardé dans **rpu2013_Alkd0103.Rda**  
+- les fichier principal 2013 sans les données d'Alkirch: **rpu2013d0112_2.Rda**  
+- le fichier principal définitif pour 2013 est **rpu2013d0112.Rda**
+
+
+
+
+
 

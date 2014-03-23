@@ -1,0 +1,54 @@
+Discussions
+========================================================
+
+```{r general, echo=FALSE}
+load("~/Documents/Resural/Stat Resural/RPU_2013/rpu2013d0112.Rda")
+# render_listings()
+```
+
+
+Diaconat-Fonderie
+-----------------
+```{r init, echo=FALSE}
+fond <- d1[d1$FINESS=="Dia",]
+```
+
+
+#### le taux de remonté GEMSA et CCMU ne peut être à 100%, en effet dans notre pratique les patients qui, lassés d’attendre repartent sans voir le médecin sont conservés dans Atalante mais aucune codification GEMSA et CCMU ne leur est, fort logiquement attribuée.
+
+Oui et non. Si on examine le croisement des variables ORIENTATION et CCMU on obtient:
+
+```{r Q1, echo=FALSE, comment=""}
+table(fond$ORIENTATION, fond$GRAVITE, useNA="always")
+```
+On voit qu'a la rubrique "Parti Sans Attendre" (PSA), 232 patients ont été coté et 742 ne l'on pas été (pour cela on peut présumer qu'ils sont CCMU 1).
+La gravité en terme de CCMU se mesure dès l'admission et avant tout soins ou examen. Dans beaucoup d'endroit c'est l'IAO qui fixe la gravité. Pour une histoire qui a défrayé la chronique il y a quelques semaines, une patient décédée en salle d'attente était classée CCMU1-2, ce qui était exact.
+Dans la même veine, vous noterez que certains patients réorientés (REO) sont coté en CCMU, d'autres non, ce qui pose un (potentiellement) un problème médico-légal.
+
+#### le résultat relatif à l’item orientation me semble erroné, un contrôle aléatoire montre que son taux de remonté est identique aux autres items.
+
+Nous avons échangé à ce sujet il y a quelques  jours. Je reprends mon argumentation: les rubriques MODE_SORTIE et ORIENTATION sont liées, la seconde précisant la première.
+
+La rubrique MODE_SORTIE devrait être systématiquement remplie, tout patient qui n'a pas été hospitalisé (mutation + transfert) a quitté l’hôpital (domicile ou ce qui en tient lieu + décès):
+
+```{r Q2, echo=FALSE,comment=""}
+summary(fond$MODE_SORTIE)
+```
+
+L’exhaustivité sur cette rubrique est bonne: 92,8569%
+
+La rubrique ORIENTATION donne une information plus précise sur le devenir exact de ces patients (notamment pour las sorties atypiques). Si on croise les rubriques MODE_SORTIE et Orientation on obtient ceci:
+
+```{r Q3, echo=FALSE, comment=""}
+table(fond$ORIENTATION, fond$MODE_SORTIE, useNA="always")
+```
+Dans la colonne mutation (hospitalisation dans le même établissement que le SU) 30 patients sont allés en chirurgie, 4 en médecine et on se sait pas où sont allés 2904 patients. Le total de cette colonne est d'ailleurs supérieur au chiffre des mutations indiqué à MODE_SORTIE, même si tient compte des 11 PSA mais qui ont été hospitalisés quand même (défaut de détrompage du logiciel). Idem pur les REOrientation.
+
+C'est cette non complétude qui explique le défaut d'exhaustivité.
+
+#### La CCMU doit être faite par un médecin
+
+Pour ce qui concerne la CCMU: il s'agit d'une classification assez ancienne, en tout cas antérieure à l'émergence des IAO. C'est donc historiquement une classification élaborée par des médecins pour être utilisée par un trieur qui était dans le contexte de l'époque, un médecin. D'où la notion implicite que le tri était médical, notion renforcée par le contexte de la médecine militaire ou de catastrophe. Sur le plan juridique on peut opposer le diagnostic médical et le diagnostic infirmier mais les arguments avancés relèvent souvent d'avantage d'une défense corporatiste que de l'intérêt du patient.
+En pratique, l'IAO trie et oriente en fonction de l'urgence de la situation: on est bien dans l'esprit de la CCMU. Pour éviter tous ces difficultés, il est proposé soit d'utiliser une approche simplifiée strictement identique (1 = consultation simple, 2 = examens complémentaires ou gestes réalisables en ambulatoire - radio, biologie, sutures - 3 = hospitalisation en services conventionnels MCO, 4 = prise en charge urgente relevant de SI ou SC, 5 = très urgent relevant de la réa). On retrouve ce principe dans la classification CIMU (http://www.triage-urgence.com).
+
+

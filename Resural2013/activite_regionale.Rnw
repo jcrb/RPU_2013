@@ -19,8 +19,8 @@ a<-a[-211]
 % Min. 1 st Qu.  Median    Mean 3rd Qu.    Max. 
 %   642.0   848.0   895.5   883.2   957.0  1050.0 
 
-L'ensemble des SU ont déclaré \np{\Sexpr{length(e)}} passages au \Sexpr{format(max(e),format="%d %B %Y")}, 
-soit une moyenne de \np{\Sexpr{a1[4]}} passages par jour (extrèmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
+En \ancourante les SU produisant des RPU ont déclaré \np{\Sexpr{length(e)}} passages au \Sexpr{as.character(format(max(e),format="%d %B %Y"))}, 
+soit une moyenne de \np{\Sexpr{a1[4]}} passages par jour (extrêmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
 
 Passages par secteur sanitaire:
 <<passages_secteur,echo=FALSE>>=

@@ -1,0 +1,55 @@
+Evènements remarquables 2014
+========================================================
+
+- tensions hospitalières
+- pic de pollution: semaine 11 (10-16 mars, circulation alternée Paris le 17/3)
+
+Principales fêtes de 2014
+-------------------------
+
+```{r fetes}
+
+library("timeDate")
+library("lubridate")
+
+year <- 2014
+
+a<-NewYearsDay()
+print(paste("Nouvel an:", wday(a, label=T), a))
+
+a <- Easter(year)
+b <- EasterMonday(year)
+c <- EasterSunday(year)
+d <- GoodFriday(year)
+print(paste("Vendredi Saint:", d))
+print(paste("dimanche de Pâques:", c))
+print(paste("lundi de Pâques:", b))
+
+a <- FRAllSaints(year)
+print(paste("Tousaint:", wday(a, label=T), a))
+
+a <- FRArmisticeDay(year)
+print(paste("Armistice 1918:", wday(a, label=T), a))
+
+a <- FRAscension(year)
+print(paste("Ascencion:", wday(a, label=T), a))
+
+a <- FRAssumptionVirginMary(year)
+print(paste("Assomption:", wday(a, label=T), a))
+
+a <- FRBastilleDay(year)
+print(paste("14 juillet:", wday(a, label=T), a))
+
+a <- FRAscension(year)
+print(paste("Ascencion:", wday(a, label=T), a))
+
+a <- LaborDay(year)
+print(paste("Fête du travail:", wday(a, label=T), a))
+
+a <- Pentecost(year)
+print(paste("Pentecote:", wday(a, label=T), a))
+
+a <- PentecostMonday(year)
+print(paste("Lundi de pentecote:", wday(a, label=T), a))
+```
+

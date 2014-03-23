@@ -1,4 +1,4 @@
-﻿% geographie.Rnw
+% geographie.Rnw
 
 L’Alsace est la plus petite région de France (n° 42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chefs-lieux sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
 
@@ -8,7 +8,7 @@ La région est divisée en quatre secteurs sanitaires et douze territoires de pr
 \index{Alsace!secteurs sanitaires}
 \index{Secteurs sanitaires}
 
-L'Alsace est divisée en quatre secteurs sanitaires
+L’Alsace est divisée en quatre secteurs sanitaires
 \begin{enumerate}
   \item secteur 1: Haguenau, Wissembourg et Saverne
   \item secteur 2: Strasbourg
@@ -64,7 +64,7 @@ Chaque territoire dispose d'un établissement de santé de référence.
  \centering
  \includegraphics[height=15cm,keepaspectratio=true]{../doc/cartographie/RPU2013_Carto_Pop/figure/zone_proximite.png}
  % image.: 0x0 pixel, 0dpi, nanxnan cm, bb=
- \caption{L'Alsace compte 12 territoires de proximité}
+ \caption{L’Alsace compte 12 territoires de proximité}
  \label{fig:zp}
 \end{figure}
 
@@ -159,7 +159,7 @@ ppop75<-as.numeric(round(pop75*100/pop_als_2010_municipale,2))
  \centering
  \includegraphics[height=15cm,keepaspectratio=true]{../doc/cartographie/RPU2013_Carto_Pop/figure/75ans.png}
  % image.: 0x0 pixel, 0dpi, nanxnan cm, bb=
- \caption[Répartition des 75 ans et plus]{Les personnes de 75 ans et plus en Alsace en fonction du territoire de proximté (en pourcentage du nombre total de 75 ans et plus).}
+ \caption[Répartition des 75 ans et plus]{Les personnes de 75 ans et plus en Alsace en fonction du territoire de proximité (en pourcentage du nombre total de 75 ans et plus).}
  \label{fig:75ans}
 \end{figure}
 
@@ -276,7 +276,7 @@ hopitaux <-"../Data/Hopitaux2lambert/hopitaux_alsace.csv"
 h<-read.csv(hopitaux,header=TRUE,sep=",")
 for(i in 1:nrow(h)){points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");text(h$lam_lon[i],h$lam_lat[i],labels=h$hopital[i],cex=0.8,pos=h$pos[i])}
 @
- \caption[Services d'urgence d'Alsace]{L'Alsace compte 14 services d'urgence labellisés sur 15 sites.}
+ \caption[Services d'urgence d'Alsace]{L’Alsace compte 14 services d'urgence labellisés sur 15 sites.}
  \label{fig:su_alsace}
 \end{figure}
 

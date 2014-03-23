@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Discussions</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Discussions</h1>
+
+<h2>Diaconat-Fonderie</h2>
+
+<h4>le taux de remonté GEMSA et CCMU ne peut être à 100%, en effet dans notre pratique les patients qui, lassés d’attendre repartent sans voir le médecin sont conservés dans Atalante mais aucune codification GEMSA et CCMU ne leur est, fort logiquement attribuée.</h4>
+
+<p>Oui et non. Si on examine le croisement des variables ORIENTATION et CCMU on obtient:</p>
+
+<pre><code>
+            1     2     3     4     5     D     P  &lt;NA&gt;
+  CHIR      0    69    30     0     0     0     0     2
+  FUGUE     1     6     0     0     0     0     0     5
+  HDT       0     0     0     0     0     0     0     0
+  HO        0     0     0     0     0     0     0     0
+  MED       0    12     6     0     0     0     0     1
+  OBST      0     0     0     0     0     0     0     0
+  PSA       1   215    16     0     0     0     0   742
+  REA       0     0     5     1     0     0     0     0
+  REO      19    45     8     0     0     0     0    81
+  SC        0     1     0     0     0     0     0     0
+  SCAM      1    10     6     0     0     0     0     1
+  SI        0     2     0     0     0     0     0     0
+  UHCD      0    10     1     0     0     0     0     1
+  &lt;NA&gt;     28 22065  5670    14     2     1     0   391
+</code></pre>
+
+<p>On voit qu&#39;a la rubrique &ldquo;Parti Sans Attendre&rdquo; (PSA), 232 patients ont été coté et 742 ne l&#39;on pas été (pour cela on peut présumer qu&#39;ils sont CCMU 1).
+La gravité en terme de CCMU se mesure dès l&#39;admission et avant tout soins ou examen. Dans beaucoup d&#39;endroit c&#39;est l&#39;IAO qui fixe la gravité. Pour une histoire qui a défrayé la chronique il y a quelques semaines, une patient décédée en salle d&#39;attente était classée CCMU1-2, ce qui était exact.
+Dans la même veine, vous noterez que certains patients réorientés (REO) sont coté en CCMU, d&#39;autres non, ce qui pose un (potentiellement) un problème médico-légal.</p>
+
+<h4>le résultat relatif à l’item orientation me semble erroné, un contrôle aléatoire montre que son taux de remonté est identique aux autres items.</h4>
+
+<p>Nous avons échangé à ce sujet il y a quelques  jours. Je reprends mon argumentation: les rubriques MODE_SORTIE et ORIENTATION sont liées, la seconde précisant la première.</p>
+
+<p>La rubrique MODE_SORTIE devrait être systématiquement remplie, tout patient qui n&#39;a pas été hospitalisé (mutation + transfert) a quitté l’hôpital (domicile ou ce qui en tient lieu + décès):</p>
+
+<pre><code>       NA  Mutation Transfert  Domicile     Décès      NA&#39;s 
+        0      2960       182     24222         0      2105 
+</code></pre>
+
+<p>L’exhaustivité sur cette rubrique est bonne: 92,8569%</p>
+
+<p>La rubrique ORIENTATION donne une information plus précise sur le devenir exact de ces patients (notamment pour las sorties atypiques). Si on croise les rubriques MODE_SORTIE et Orientation on obtient ceci:</p>
+
+<pre><code>
+           NA Mutation Transfert Domicile Décès  &lt;NA&gt;
+  CHIR      0       30        21       30     0    20
+  FUGUE     0        0         0       12     0     0
+  HDT       0        0         0        0     0     0
+  HO        0        0         0        0     0     0
+  MED       0        4         4        7     0     4
+  OBST      0        0         0        0     0     0
+  PSA       0       11         0      925     0    38
+  REA       0        0         2        3     0     1
+  REO       0       11         2      131     0     9
+  SC        0        0         1        0     0     0
+  SCAM      0        0         0       18     0     0
+  SI        0        0         0        1     0     1
+  UHCD      0        0         5        4     0     3
+  &lt;NA&gt;      0     2904       147    23091     0  2029
+</code></pre>
+
+<p>Dans la colonne mutation (hospitalisation dans le même établissement que le SU) 30 patients sont allés en chirurgie, 4 en médecine et on se sait pas où sont allés 2904 patients. Le total de cette colonne est d&#39;ailleurs supérieur au chiffre des mutations indiqué à MODE_SORTIE, même si tient compte des 11 PSA mais qui ont été hospitalisés quand même (défaut de détrompage du logiciel). Idem pur les REOrientation.</p>
+
+<p>C&#39;est cette non complétude qui explique le défaut d&#39;exhaustivité.</p>
+
+</body>
+
+</html>
+

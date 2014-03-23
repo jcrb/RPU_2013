@@ -56,6 +56,7 @@
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{boxedminipage}
+\usepackage{xspace} % pour respecter l'espace après une macro: \newcommand{\ancourante}{2013\xspace}
 
 \usepackage{makeidx}
 \makeindex
@@ -92,7 +93,7 @@ pop.als.2010.municipale<-1095905 + 749782
 % Commandes
 \providecommand{\tabularnewline}{\\} % compatibilité avec Lyx
 %\newcommand{\cette_annee}{\ensuremath{\mathbb{2013\xspace}}}
-
+\newcommand{\ancourante}{2013\xspace}
 
 
 %====================================== DEBUT =========================================
@@ -169,7 +170,10 @@ options(scipen = 6, digits = 2)
 
 # Pour imposer un péparateur de milliers:
 knit_hooks$set(inline = function(x) {
-  prettyNum(x, big.mark=" ")
+  if(!is.character(x))
+    prettyNum(x, big.mark=" ")
+  else
+    return(x)
 })
 
 #========================================================================

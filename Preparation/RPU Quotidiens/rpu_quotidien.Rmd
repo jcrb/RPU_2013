@@ -12,18 +12,22 @@ Depuis février 2014, Alsace e-sante transmet quotidiennement un fichier contena
 
 2. le fichier est ensuite transféré dans la base de données **archives** dans la table **RPU__** via R
   - il est important que le répertoire de travail temporaire soit positionné dans le dossier *dataQ*
-    - wd <- getwd()
-    - setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ")
-    - system(paste0("mysql -u root -pmarion archives < ", file))
-    - setwd(wd)
+```{}
+    wd <- getwd()
+    setwd("~/Documents/Resural/Stat Resural/Archives_Sagec/dataQ")
+    system(paste0("mysql -u root -pmarion archives < ", file))
+    setwd(wd)
+```
 
 3. Lecture des données dans R
-  - library("RMySQL")
-  - con<-dbConnect(MySQL(),group = "archives")
-  - rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ ",sep=""))
-  - dx<-fetch(rs,n=-1,encoding = "UTF-8")
-  - max(dx$ENTREE)
-  - min(dx$ENTREE)
+```{}
+  library("RMySQL")
+  con<-dbConnect(MySQL(),group = "archives")
+  rs<-dbSendQuery(con,paste("SELECT * FROM RPU__ ",sep=""))
+  dx<-fetch(rs,n=-1,encoding = "UTF-8")
+  max(dx$ENTREE)
+  min(dx$ENTREE)
+```
 
 4. nettoyage des données
   - suppression de la colonne 16: dx<-dx[,-16]

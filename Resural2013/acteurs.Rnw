@@ -66,4 +66,4 @@ Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données
 
 Les diagrammes de complétude propres à chaque établissement figurent au chapitre correspondant au service d'urgence.
 
-Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce dernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparait dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})
+Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce dernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparaît dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})

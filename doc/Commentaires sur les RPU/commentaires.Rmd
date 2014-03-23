@@ -15,6 +15,14 @@ COMMUNE
 - les nom composé sont séparés par un tiret (VIR-AU-VAL)
 - Modèle INSEE
 
+Date-Heure
+----------
+
+- format ISO
+- heure d'entrée et de sortie sont obligatoire sinon rejet
+- heure de sortie ne peut pas être inférieure à l'heue d'entrée
+- heure de sortie correspond à la sortie physique du patient
+
 MODE D’ENTREE
 -------------
 Le RPU connait 3 modes d'entrée:
