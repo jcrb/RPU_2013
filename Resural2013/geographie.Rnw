@@ -1,6 +1,6 @@
 % geographie.Rnw
 
-L’Alsace est la plus petite région de France (n° 42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chefs-lieux sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de l'hospitalisation \index{ARS} (ARS).
+L’Alsace est la plus petite région de France (n° 42) avec la Corse. Elle est formée de deux départements, le bas-Rhin (67) et le haut-Rhin (68), dont les chefs-lieux sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de santé \index{ARS} (ARS).
 
 La région est divisée en quatre secteurs sanitaires et douze territoires de proximité.
 
@@ -73,7 +73,7 @@ Chaque territoire dispose d'un établissement de santé de référence.
 \index{Alsace!démographie}
 
 En France, les populations légales sont calculées par l'INSEE sur la base de définitions réglementaires à partir de recensement de la population. 
-Les populations légales millésimées 2010 entrent en vigueur le 1er janvier 2013.  
+Les populations légales millésimées 2010 entrent en vigueur le 1\ier{} janvier 2013.  
 
 \subsubsection{Le concept de population municipale}
 
@@ -101,7 +101,7 @@ Haut-Rhin & 749 782\tabularnewline
 \end{tabular}
 \caption[Populations légales 2010]{Populations légales 2010 des régions de France métropolitaine, Population
 municipale (Source : Recensement de la population 2010 - Limites territoriales
-au 1er janvier 2012) }
+au 1\ier{} janvier 2012) }
 \label{pop2010}
 \end{center}
 \end{table}
@@ -114,7 +114,7 @@ Depuis la mise en place des serveurs régionaux, on a pris l'habitude de diviser
   \item les plus de 75 ans
 \end{enumerate}
 
-Les calculs sont effectués à partir du fichier \texttt{BTT\_TD\_POP1B\_2010} de l'INSEE qui recense l'ensemble de la population par commune et par tranches de un an. La version utilisée est celle du 1er janvier 2010 (tab.\ref{pop}). Le secteur de proximité de Strasbourg qui est aussi le plus peuplé, compte le plus grand nombre de personnes de 75 ans et plus (figure \ref{fig:75ans} page \pageref{fig:75ans})
+Les calculs sont effectués à partir du fichier \texttt{BTT\_TD\_POP1B\_2010} de l'INSEE qui recense l'ensemble de la population par commune et par tranches de un an. La version utilisée est celle du 1\ier{} janvier 2010 (tab.\ref{pop}). Le secteur de proximité de Strasbourg qui est aussi le plus peuplé, compte le plus grand nombre de personnes de 75 ans et plus (figure \ref{fig:75ans} page \pageref{fig:75ans})
 
 <<test,echo=FALSE>>=
 pop0<-21655
@@ -163,7 +163,10 @@ ppop75<-as.numeric(round(pop75*100/pop_als_2010_municipale,2))
  \label{fig:75ans}
 \end{figure}
 
+
 \section{Les services d'accueil des urgences (SAU)}
+%==================================================
+
 \index{Services d'urgence!en Alsace}
 \index{Alsace!services d'urgence}
 
@@ -194,9 +197,9 @@ A la date du 23 mai 2013, l'Alsace compte 18 établissements ou structures autor
 
 En pratique, à la question de savoir qui prend en charge 24h sur 24 des problèmes aigus de santé et/ou de permanence des soins, on se ramène a une liste de 14 établissements pratiquant la médecine d'urgence au sens où on l'entend communément. Trois établissements ont une activité multisite. Au final cela représente 18 sites. Les trois villes les plus importantes de la région concentrent la totalité des PTSAD.
 
-Celle-ci se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Le SROS 2 avait introduit une distinction entre les services accueillant les urgences en fonction de leurs capacités et plateau technique. On distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser, même si elle n'a plus cours officiellement. 
+Celle-ci se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Le SROS 2 avait introduit une distinction entre les services accueillant les urgences en fonction de leurs capacités et plateaux techniques. On distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser, même si elle n'a plus cours officiellement. 
 
-La clinique du Diaconat de Strasbourg (groupe des "Cliniques de Strasbourg"),bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lesquelles elle dispose d'une labellisation FESUM \footnote{Fédération Européenne des Services d'Urgence de la Main}. Il en est de même pour la clinique Diaconat-Roosevelt de Mulhouse (groupe "Fondation de la maison du Diaconat" )
+La clinique du Diaconat de Strasbourg (groupe des "Cliniques de Strasbourg"), bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lesquelles elle dispose d'une labellisation FESUM \footnote{Fédération Européenne des Services d'Urgence de la Main}. Il en est de même pour la clinique Diaconat-Roosevelt de Mulhouse (groupe "Fondation de la maison du Diaconat" )
 
 Le réseau prend également en compte la clinique Saint-Luc de Schirmeck (groupe hospitalier Saint Vincent) qui fait fonctionner une policlinique recevant plus de \np{8000} passages par an. Officiellement, cet établissement de santé ne dispose pas d' autorisation de type SU bien qu'elle en effectue la mission et est le seul établissement de proximité de la zone Molsheim-Schirmeck.
 

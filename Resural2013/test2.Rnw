@@ -9,7 +9,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 <<fig24,echo=FALSE,comment="",results='asis'>>=
 e<-ymd_hms(d1$ENTREE)
 h<-hour(e)
-a<-xsummary(h,xtable=T,tl="Résumé des horaires de passage aux urgences",tc="horaires de passage",lab="tab:24")
+a<-xsummary(h,xtable=T,tl="Résumé des horaires de passage aux urgences",tc="Horaires de passage",lab="tab:24")
 @
 
 % \input{../blah.gen}

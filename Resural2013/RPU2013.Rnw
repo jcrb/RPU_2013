@@ -180,6 +180,7 @@ knit_hooks$set(inline = function(x) {
 
 mois_courant <- 12
 annee_courante <- 2013
+anc <- as.character(annee_courante) # utiliser cette formulation pour éviter la césure
 
 path <- "../"
 
@@ -199,7 +200,7 @@ d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
 d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 
 # names(d1)
-anc <- annee_courante
+
 n_jours <- as.numeric(max(as.Date(d1$ENTREE))-min(as.Date(d1$ENTREE)))
 N <- nrow(d1)
 @

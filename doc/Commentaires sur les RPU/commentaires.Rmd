@@ -83,3 +83,24 @@ CCMU
 - CCMU 3: hospitalisation nécessaire dans un service conventionnel
 - CCMU 4: SI, SC
 - CCMU 5: REA
+
+Lire un fichier depuis google drive
+-----------------------------------
+
+1. créer un fichier dans drive (calc)
+2. le rendre exportable: fichier/publier sur le web/démarrer la publication, remplacer page Web par CSV
+3. copier l'adresse du lien
+```{}
+require(RCurl)
+file <- "https://docs.google.com/spreadsheet/pub?key=0Aieb-IfcCNcXdFh2bklWeHhKUTVwZUFMSlBJQkpPcWc&output=csv"
+f <- read.table(textConnection(getURL(file)), header=T, sep=",")
+```
+
+
+Test Jahia (9/12/2013)
+-----------------------
+
+- Création dossier ORUDAL dans téléchargement
+- 3 fichiers y sont placées: test2.html, data2.csv et dygraphs.js
+- création d'un lien dans Orudal vers test2.html
+- fonctionne sans pb

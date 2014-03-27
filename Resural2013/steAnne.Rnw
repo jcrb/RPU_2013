@@ -96,7 +96,7 @@ hist(data$total,main="SAU Sainte-Anne",xlab="Passages",ylab="Fréquence",col="gr
 t<-sum(data$entre1_75ans)
 # t
 # summary(data$entre1_75ans)
-stargazer(as.data.frame(data$entre1_75ans),summary=TRUE,digit.separator=" ",digits=2,median=TRUE,iqr=TRUE, title ="Se 1 à 75 ans: résumé des principales caractéristiques")
+stargazer(as.data.frame(data$entre1_75ans),summary=TRUE,digit.separator=" ",digits=2,median=TRUE,iqr=TRUE, title ="De 1 à 75 ans: résumé des principales caractéristiques")
 
 boxplot(data$entre1_75ans,ylab="nombre",main="SU Ste Anne 2013 - 1 à de 75ans",col="yellow")
 hist(data$entre1_75ans,main="SAU Sainte-Anne",xlab="Passages entre 1 et 75 ans",ylab="Fréquence",col="green")
