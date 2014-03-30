@@ -1,8 +1,334 @@
 % tranche-age.Rnw
 
+\subsection*{Pyramide des âges en Alsace}
+%-------------------------------------------
+\index{Pyramide des âges!Alsace}
+\index{Age}
+\index{Tranches d'age}
+
+% ce paragraphe utilise intensivement le dessin des pyramides: utiliser la syntaxe pp <- pyramid.plot() qui provoque le dessin de la pyramide tandis que les valeurs de retours sont stockées dans pp et n'apparaissent pas à l'impression.
+
+<<pyramide_age, echo=FALSE, results='asis'>>=
+
+# Onrécupère le fichier de l'insee qui donne les chiffres régionaux par tranches de 5 ans:
+file<-"~/Documents/Resural/Stat Resural/population_alsace/pop_legale_2010/rp2010_POP1B_n1_REG-42.csv"
+doc<-read.table(file,header=TRUE,sep=",", skip = 9)
+n <- sum(doc$Hommes,doc$Femmes) # pop totale
+# on supprime la dernière ligne qui correspond au total
+doc <- doc[-nrow(doc),]
+xtable(doc, caption=c("Population d'Alsace en 2010 (source INSEE)","Population d'Alsace en 2010"), label="tab:pop_insee")
+@
+
+La répartition de la population alsacienne par tranche d'âge est fournie par l'INSEE (table \ref{tab:pop_insee} page \pageref{tab:pop_insee}). La somme des valeurs donne un chiffre de \Sexpr{n} personnes dans la région Alsace en 2010.
+
+\begin{figure}
+\begin{center}
+<<pyramide_graphe, echo=FALSE, comment="", message=FALSE>>=
+# couleur du fond
+par(bg="#eedd55")
+# graduations echelle des x: de 0 à 70000 par pas de 10000
+rl <- seq(0,70000,10000)
+# labels centraux
+agelabels<-c("0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90-94","95-99","100+")
+# gap = écartement entre les colonnes en unité prop au graphique
+pp <- pyramid.plot(lx=doc$Hommes, rx=doc$Femmes, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=6000, main="Pyramide des ages en Alsace (INSEE 2010)", unit="nombre", labelcex=0.8, laxlab=rl, raxlab=rl)
+par( bg= "white")
+@
+\end{center}
+\caption{Pyramides des âges en Alsace (source INSEE)}
+\label{fig:pyr_age_insee}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+<<pyramide_graphe2, echo=FALSE, comment="", message=FALSE>>=
+# en pourcentage
+n <- sum(doc$Hommes,doc$Femmes) # pop totale
+rl <- seq(0,6,1)
+r <- doc$Hommes * 100 / n
+l <- doc$Femmes * 100 / n
+pyr.regionale <- pyramid.plot(lx=r, rx=l, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages en Alsace (INSEE 2010)", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl)
+# pyr.regionale
+@
+\end{center}
+\caption{Pyramides des âges en Alsace (source INSEE)}
+\label{fig:pyr_age_inseep100}
+\end{figure}
+
+
+
+\subsection*{Analyse de la variable AGE}
+%------------------------------------------
+
+Les RPU utilisent la date de naissance. L'âge est calculé en soustrayant l’année de naissance de l'année courante (âge atteint dans l'année).
+
+% la doc de ce chapitre est dans tranche_age.Rmd
+
+<<age_general, echo=FALSE>>=
+s_age <- summary(d1$AGE)
+sex_age <- tapply(d1$AGE, d1$SEXE, mean, na.rm=TRUE)
+@
+
+
+Les âges répertoriés vont de moins de 1 an à \Sexpr{s_age["Max."]} ans. L'âge moyen est de \Sexpr{s_age["Mean"]} ans (médiane \Sexpr{s_age["Median"]} ans). L'âge moyen des hommes est de \Sexpr{round(sex_age[3], 2)} ans et celui des femmes de \Sexpr{round(sex_age[1], 2)} ans.
+
+Il existe plusieurs façons de former de tranches d'âges.
+
+% ### Age 1
+%----------
+
 <<tranche,echo=FALSE,results='asis'>>=
 age<-cut(d1$AGE,breaks=c(-1,0.99,14,74,84,110),labels=c("Moins de 1 an","De 1 à 15 ans","De 15 à 75 ans","de 75 à 85 ans","Plus de 85 ans"))
 a<-tapply(d1$AGE,age,length)
 xtable(as.data.frame(a),caption=c("Répartition des RPU par tranches d'age","Répartition des RPU par tranches d'age"),label="tab:tranche")
-barplot(a,main="Répartition des RPU par tranches d'age",ylab="Nombre")
 @
+
+\begin{figure}
+\begin{center}
+<<tranches_age1, echo=FALSE, fig = TRUE, fig.height=5>>=
+  barplot(a,main="Répartition des RPU par tranches d'age",ylab="Nombre", las=2)
+@
+\end{center}
+\caption{Répartition des RPU par tanches d'âge}
+\label{fig:tranches_age1}
+\end{figure}
+
+% ### Age 2
+%----------
+
+<<tranche_age2, echo=FALSE, comment="">>=
+age2 <- cut(d1$AGE,breaks=c(-1, 17, 74, 110),labels=c("Pédiatrie","Adulte < 75 ans","Gériatrie"))
+t1 <- table(age2)
+
+t2 <- round(prop.table(table(age2))*100,2)
+a <- rbind(t1,t2)
+rownames(a) <- c("n", "%")
+a
+@
+
+\begin{itemize}
+  \item Pédiatrie:  \Sexpr{round(t2[1],0)} \%
+  \item Gériatrie:  \Sexpr{round(t2[3],0)} \%
+\end{itemize}
+Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2}
+
+\begin{figure}
+\begin{center}
+<<tranches_age21, echo=FALSE, fig = TRUE, fig.height=5>>=
+  mp <- barplot(prop.table(t1)*100, ylab="Pourcentage de la population", main="Répartition des consultants en 2013", col="lavender")
+  mtext(side=1, at=mp, line=-2, text=paste(round(prop.table(t1)*100,0), "%",sep=""), col="blue")
+@
+\end{center}
+\caption{Répartition des RPU par tanches d'âge}
+\label{fig:tranches_age2}
+\end{figure}
+
+% ### Age3
+%---------
+
+<<tranche_age3, echo=FALSE>>=
+
+# construction du vecteur x des labels ("0-4","5-9", ...)
+# inc = incrément
+# intervalle = no de l'intervalle (le premier vaut 1)
+# i = borne inférieure de l'intervalle
+# j = borne sup de l'intervalle
+# x = vecteur des labels
+inc <- 5
+intervalle <- 1
+lim_sup <- 100
+i <- 0
+j <- i + inc - 1
+x <- 1
+while(j < lim_sup){
+  x[intervalle] <- paste(i, "-", j, sep="")
+  i <- j + 1
+  j <- i + inc - 1
+  intervalle <- intervalle + 1
+}
+x[intervalle] <- "100+"
+ # x
+ # construction du vecteur age3
+brek <- c( seq(from = 0, to = lim_sup, by = 5),120)
+age3 <- cut(d1$AGE, breaks =  brek, include.lowest=F, right=F, labels = x)
+t_age3 <- table(age3)
+@
+
+% # Affichage
+\begin{figure}
+\begin{center}
+  <<affiche_age3, echo=FALSE, fig.height=5>>=
+  barplot(t_age3, las = 2)
+  barplot(round(prop.table(t_age3)*100,2), ylab = "% de la population", las = 2, xlab="", main="Pourcentage de consultants par tranche d'age")
+  @
+\end{center}
+\caption{Répartition des RPU par tanches d'âge}
+\label{fig:tranches_age3}
+\end{figure}
+
+
+\subsection*{Pyramide des âges des consultants}
+%--------------------------------------------------------
+\index{âge!et sexe}
+
+<<age_sexe, echo=FALSE, results='asis'>>=
+ts <- table(age3, d1$SEXE)
+ts <- cbind(ts[,3], ts[,1])
+colnames(ts)<- c("H","F")
+xtable(ts, caption=c("Distribution des RPU par âges et sexe. Le découpage des âges en tranche de 5 ans correspond au découpage de l'INSEE","Répartition par âges et sexe"), label="tab:age_sexe")
+@
+
+% pyramide des ages
+
+\begin{figure}
+\begin{center}
+  <<pyr_consult, echo=FALSE, fig.height=5>>=
+  # graduations echelle des x: de 0 à 70000 par pas de 10000
+rl <- seq(0,17000,1000)
+# labels centraux
+agelabels<-c("0-4","5-9","10-14","15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89","90-94","95-99","100+")
+# gap = écartement entre les colonnes en unité prop au graphique
+pp <- pyramid.plot(lx= ts[,1], rx= ts[,2], labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1500, main="Pyramide des ages des passages aux urgences", unit="nombre", labelcex=0.8, laxlab=rl, raxlab=rl)
+  @
+\end{center}
+\caption{Pyramide des âges des consultants}
+\label{fig:pyr_consult}
+\end{figure}
+
+% en pourcentages
+
+<<table_pyr_p100, echo=FALSE, results='asis'>>=
+  xtable(round(prop.table(ts) * 100, 2), caption=c("Répartition en pourcentages des classes d'âge en fonction du sexe des consultants","Sexe et age en pourcentages"), label="tab:pyr_p100")
+@
+
+
+\begin{figure}
+\begin{center}
+  <<pyr_consult_p100, echo=FALSE, fig.height=5>>=
+  rl <- seq(0, 6, 1)
+  l <- ts[,1] * 100 / sum(ts)
+  r <- ts[,2] * 100 / sum(ts)
+  pyr.urg <- pyramid.plot(lx= l, rx= r, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages des passages aux urgences (en %)", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl)
+# pyr.urg
+  @
+\end{center}
+\caption{Pyramide des âges des consultants (exprimés en pourcentages)}
+\label{fig:tranches_age31}
+\end{figure}
+
+
+\subsection*{Comparaison des pyramides des âges consultants-population générale}
+--------------------------------------------------------------------------------
+
+\begin{figure}
+\begin{center}
+<<comp_pyramides, echo=FALSE, fig.height=8>>=
+
+#On peut superposer les deux pyramides
+# --------------------------------------
+# pyr.regionale en premier puis pyr.urg
+
+myred <- adjustcolor("red", alpha.f = 0.3)
+myblue <- adjustcolor("blue", alpha.f = 0.3)
+
+n <- sum(doc$Hommes,doc$Femmes) # pop totale
+rl <- seq(0,6,1)
+r <- doc$Hommes * 100 / n
+l <- doc$Femmes * 100 / n
+pyr.regionale <- pyramid.plot(lx=r, rx=l, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages en Alsace (INSEE 2010)", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl, lxcol= myblue, rxcol= myblue)
+# pyr.regionale
+
+rl <- seq(0, 6, 1)
+l <- ts[,1] * 100 / sum(ts)
+r <- ts[,2] * 100 / sum(ts)
+pyr.urg <- pyramid.plot(lx= l, rx= r, labels=agelabels, top.labels=c("Hommes","Age","Femmes"), gap=1, main="Pyramide des ages des passages aux urgences", unit="%", labelcex=0.8, laxlab=rl, raxlab=rl, ,lxcol=myred, rxcol=myred, add=TRUE)
+# pyr.urg 
+
+legend("topleft", legend=c("Région","Urgences"), col=c(myblue,myred), pch=15)
+@
+\end{center}
+\caption{Pyramide des âges des consultants aux urgences comparés à la population générale. Les âges extrêmes fréquentent davantage les SU}
+\label{fig:pyr_rpu_popgen}
+\end{figure}
+
+La pyramide des âges des personnes consultant aux urgences n'est pas superposable à celle de la population générale (figure \ref{fig:pyr_rpu_popgen} page \pageref{fig:pyr_rpu_popgen}). 
+
+
+\subsection*{Taux de recours aux urgences par âge et par sexe}
+%--------------------------------------------------------
+
+Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.
+
+\begin{figure}
+\begin{center}
+  <<alsace_recours, echo=FALSE, fig.height=5>>=
+  load("../doc/Demographie/pop_alsace_2010.Rda")
+pop_als <- tapply(as.numeric(alsace$NB), alsace$C_AGED10, sum)
+rm(alsace)
+
+pop_urg <- d1$AGE
+pop_urg[pop_urg > 100] <- 100
+pop_urg <- table(as.factor(pop_urg))
+
+tx <-round(pop_urg*100/pop_als, 2)
+tx_moyen <- sum(pop_urg)/sum(pop_als)
+plot(tx, ylab="Taux de recours aux urgences (%)", xlab="Age (années", main=paste0("Recours aux urgences en Alsace en ",anc), col="blue")
+abline(h=tx_moyen*100, col="red", lty=2)
+legend(0,100,legend="Taux moyen", col="red", lty=2, bty="n")
+  @
+\end{center}
+\caption{Taux de recours aux urgences selon la classe d'age. Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
+\label{fig:recours_su}
+\end{figure}
+
+Le taux moyen de recours aux urgences en \Sexpr{anc} est de \Sexpr{tx_moyen*100} \%. Ce taux reste assez stable jusque vers 70 ans puis croît de façon exponentielle avec l'âge (figure \ref{fig:recours_su} page \pageref{fig:recours_su}). Pour la tranche d'âge de 90 ans, on note une sur-représentation de ces patients, le nombre de consultants dépassant la population de cette classe d'âge.
+
+\subsection*{Les Centenaires}
+%--------------------------------
+\index{Centenaires (les)}
+\label{centenaires}
+
+<<centenaire, echo=FALSE>>=
+centenaire <- d1$AGE[d1$AGE > 99]
+n_centenaire <- length(centenaire)
+centenaire <- d1[d1$AGE > 99, c("AGE","SEXE")]
+@
+
+Entrent dans cette catégorie les patients de 100 ans et plus. En \Sexpr{anc}, \textbf{\Sexpr{n_centenaire} centenaires} ont été pris en charge par les services d'urgence (\Sexpr{round(n_centenaire*100/N,2)}  \% des RPU).  
+Le recensement 2010 fait état de \textbf{358} centenaires en Alsace. Le taux de recours aux urgences pour cette population particulière s'élève à  \Sexpr{round(n_centenaire * 100 / 358, 2)} \%.
+
+
+\subsection*{Evolution du sex-ratio en fonction de l'age}
+%-----------------------------------------------------------
+\index{sex ratio}
+
+<<sr2, echo=FALSE, results='asis'>>=
+a <- table(d1$SEXE)
+sex_ratio <-  a["M"]/a["F"]
+
+a <- table(d1$SEXE, as.factor(d1$AGE))
+sr <- a[3,]/a[1,]
+@
+
+<<sr3, echo=TRUE, results='asis'>>=
+d1$age3 <- cut(d1$AGE, breaks =  brek, include.lowest=F, right=F, labels = x)
+a_table <- table(d1$SEXE, d1$age3)
+# on utilise la transposée de a_table pour que le tableau soit vertical (sinon trop large)
+ xtable(t(a_table), caption=c("Répartition des consultants aux urgences par tranche de cinq ans en fonction du sexe (I = sexe indéterminé)",""), label="tab:sr2")
+@
+
+
+Le rapport de masculinité ou sex ratio est de \Sexpr{round(sex_ratio, 2)} pour l'ensemble des RPU. Ce chiffre reste stable jusque vers l'age de 77 ans puis s'inverse, reflet d'une espérance de vie plus élevée pour les femmes (figure \ref{fig:sex-ratio} page \pageref{fig:sex-ratio}).
+
+\begin{figure}
+\begin{center}
+  <<sr_graphe, echo=FALSE, fig.height=5>>=
+  plot(sr[0:103], type = "l", xlab = "Age (années)", ylab = "Sex ratio", las = 2, col="green", lwd=2)
+  abline(h = 1, col="red")
+  abline(v = 77, col="blue")
+  @
+\end{center}
+\caption{Evolution du sex ratio en fonction de l'âge)}
+\label{fig:sex-ratio}
+\end{figure}
+

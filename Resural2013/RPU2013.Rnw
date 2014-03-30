@@ -263,6 +263,7 @@ N <- nrow(d1)
 
 \newpage
 \chapter{Activité régionale totale}
+
 \section{Nombre total de passages}
 <<child='activite_regionale.Rnw'>>=
 @
@@ -271,7 +272,7 @@ N <- nrow(d1)
 <<child='test2.Rnw'>>=
 @
 
-\subsection{Passages par tranches d'âge}
+\section{Passages en fonction de l'âge}
 <<child='tranche_age.Rnw'>>=
 @
 

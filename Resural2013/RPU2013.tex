@@ -551,7 +551,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 % \fbox{Voir SAU2013}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:28 2014
+% Sun Mar 30 19:41:36 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -587,7 +587,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:29 2014
+% Sun Mar 30 19:41:37 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -707,7 +707,7 @@ Il est composé des organismes suivants:
 \section*{FEDORU}
   \index{FEDORU}
   
-La fédération des observatoires des urgences et structures apparentés a été crée en octobre 2013 à l'initiative de quelques organismes régionaux dont Résural sur une proposition de l'ORUPACA \index{ORUPACA}
+La fédération des observatoires des urgences et structures apparentées a été créée en octobre 2013 à l'initiative de quelques organismes régionaux dont RESURAL sur une proposition de l'ORUPACA \index{ORUPACA}
 
 
 \newpage
@@ -934,6 +934,7 @@ Selon le cas ces codes sont incompatibles avec un \textbf{mode de sortie} à dom
 
 \newpage
 \chapter{Activité régionale totale}
+
 \section{Nombre total de passages}
 
 % activite_regionale.Rnw ou Activité régionale totale
@@ -975,26 +976,42 @@ Passages par secteur sanitaire:
 
 Les données du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi qu'une part importante des RPU des urgences adulte des HUS.
 
-
 %affichage du graphique
+%\begin{figure}
+\begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/activite_plot} 
 
 \end{knitrout}
 
+\caption{Passages en SU en 2013.}
+\label{fig:activite_plot}
+\end{center}
+
+%\end{figure}
+
 % Variante avec *xts*
+
+%\begin{figure}
+\begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/activite_plot2} 
 
 \end{knitrout}
 
+\caption{Passages en SU en2013.}
+\label{fig:activite_plot2}
+\end{center}
+%\end{figure}
 
+%------------------------------
 \subsection*{En valeur absolue}
+%------------------------------
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:33 2014
+% Sun Mar 30 19:41:41 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -1019,20 +1036,44 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 \label{fig:passage_su}
 \end{table}
 
-\includegraphics[width=\maxwidth]{figure/val_abs} 
 
 
-
-\subsection*{En pourcentage}
-
+%\begin{figure}
+\begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/en_pourcentage} 
+\includegraphics[width=\maxwidth]{figure/bplot_val_abs} 
 
 \end{knitrout}
 
+\caption{SU d'Alsace: nombre de passages en 2013.}
+\label{fig:bplot_val_abs}
+\end{center}
+%\end{figure}
 
+%------------------------------
+\subsection*{En pourcentage}
+%------------------------------
+
+
+
+
+%\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/bp_en_pourcentage} 
+
+\end{knitrout}
+
+% \caption{main1.} # cette ligne fait bugger, pourquoi ?
+\label{fig:bp_en_pourcentage}
+\end{center}
+%\end{figure}
+
+%-----------------------------------------
 \subsection*{Taux de recours aux urgences}
+%-----------------------------------------
 
 
 
@@ -1040,8 +1081,10 @@ Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \inde
 
 Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 
+%------------------------------
 \subsection*{Activité par mois}
 %------------------------------
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
@@ -1050,15 +1093,31 @@ m
 26858 26115 28312 28428 27899 30038 30103 29693 29190 29858 27657 29922 
 \end{verbatim}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/parmois} 
-
 \end{knitrout}
 
 
-\subsection*{Activité par semaine}
+%\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/bp_parmois} 
 
-% latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:34 2014
+\end{knitrout}
+
+\caption{2013 - Nombre de RPU par mois.}
+\label{fig:bp_parmois}
+\end{center}
+%\end{figure}
+
+%---------------------------------
+\subsection*{Activité par semaine}
+%---------------------------------
+
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: l'argument 2 correspond à plusieurs arguments formels}}\end{kframe}% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Sun Mar 30 19:41:42 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1124,7 +1183,7 @@ m
 \label{act_sem}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:34 2014
+% Sun Mar 30 19:41:43 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
@@ -1138,126 +1197,252 @@ m
 \label{act_sem2}
 \end{table}
 
-\includegraphics[width=\maxwidth]{figure/act_sem} 
 
 
-
-\subsection*{Activité par jour de la semaine}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-m
-  Sun   Mon  Tues   Wed Thurs   Fri   Sat 
-50120 52804 48522 46335 48142 47782 50368 
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/activite_semaine} 
-
-\end{knitrout}
-
-
-\subsection*{Activité horaire}
+%\begin{figure}
+\begin{center}
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/activite_heure} 
+\includegraphics[width=\maxwidth]{figure/bp_act_sem} 
 
 \end{knitrout}
 
+\caption{Activité hebdomadaire en 2013.}
+\label{fig:act_sem}
+\end{center}
+%\end{figure}
 
-\subsection{Typologie des passages} \footnote{attente.Rmd}
-
-\index{passages!typologie}
-
-\subsubsection*{Tous les passages}
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/sau_arrive_depart} 
-
-\end{knitrout}
-
-
-\subsubsection*{Passages Diurnes - Nocturnes}
-
-- diurne: 8h - 19h59
-- nocturne: 20h - 7h59
-
-
-
-
-\index{admission diurne}
-\index{Recours nocturne}
-\index{sortie diurne}
-
-\begin{boxedminipage}{10cm}
-\begin{itemize}
-  \item admission diurne: 72 \%
-  \item Recours nocturne: 28 \%
-  \item sortie diurne:    64 \%
-  \item ratio entrée/sortie diurne: 1.2
-  \item ratio entrée/sortie nocturne: 0.87
-\end{itemize}
-\end{boxedminipage}
-
-\subsubsection*{Entrée - sorties adultes}
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/es_adultes} 
-
-\end{knitrout}
-
-
-Pour la pédiatrie (pp.\pageref{chap_pediatrie}) et la gériatrie (pp.\pageref{chap_geriatrie}), on se reportera aux chapitres correspondants.
-
-\subsubsection*{Semaine - Week-end}
-\index{Entrée-sorties du weekend}
-
-- semaine: du lundi 8h au vendredi 19h59
-
-- week-end: du vendredi 20h au lundi 7h59
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/es_we1} 
-
-\includegraphics[width=\maxwidth]{figure/es_we2} 
-
-\end{knitrout}
-
-
-\begin{boxedminipage}{10cm}
-\begin{itemize}
-  \item entrées en semaine 136 833
-  \item entrées le weekend: 70 734
-  \item pourcentage des entrées en semaine: 66 \%
-  \item \textbf{Part d'activité de week-end: 34 \%}
-  \item sorties en semaine 141 749
-  \item sorties le weekend: 85 986
-  \item pourcentage de sorties en semaine: 62
-\end{itemize}
-\end{boxedminipage}
-
-\subsubsection*{Entrées sorties des hospitalisés}
-\index{Entrées sorties des hospitalisés}
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/es_hospitalise} 
-
-\end{knitrout}
-
-
-\subsubsection*{Entrées sorties des retours à domicile}
-\index{Entrées sorties des retours à domicile}
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/es_dom} 
-
-\end{knitrout}
-
-
+% %--------------------------------------------
+% \subsection*{Activité par jour de la semaine}
+% %--------------------------------------------
+% 
+% <<activite_semaine, echo=FALSE, comment="", fig.height=8>>=
+% m<-wday(d1$ENTREE,label=T)
+% table(m)
+% barplot(table(m),names.arg=c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam"), main="Activité selon le jour de la semaine")
+% @
+% 
+% %------------------------------
+% \subsection*{Activité horaire}
+% %------------------------------
+% 
+% <<activite_heure,echo=FALSE>>=
+% h<-hour(d1$ENTREE)
+% t<-table(h)
+% barplot(table(h),xlab="Heures de la journée",ylab="nombre",main="Répartition des RPU sur le nycthémère")
+% @
+% 
+% %----------------------------------
+% \subsection{Typologie des passages} \footnote{attente.Rmd}
+% %----------------------------------
+% 
+% \index{passages!typologie}
+% 
+% %---------------------------------
+% \subsubsection*{Tous les passages}
+% %---------------------------------
+% 
+% <<sau_arrive_depart, echo=FALSE, fig.height=6>>=
+% # Entées et sorties
+% 
+% s<-ymd_hms(d1$SORTIE)
+% e<-ymd_hms(d1$ENTREE)
+% 
+% h<-hour(e)
+% sh <- table(as.factor(h))
+% psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% h<-hour(s)
+% sh <- table(as.factor(h))
+% lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+% @
+% 
+% %---------------------------------------------
+% \subsubsection*{Passages Diurnes - Nocturnes}
+% %---------------------------------------------
+% 
+% - diurne: 8h - 19h59
+% - nocturne: 20h - 7h59
+% 
+% <<diurne_nocturne, echo=FALSE, fig.height=6>>=
+% h<-hour(e)
+% t <- table(h) # t[1] correspond à t0
+% e_nocturne <- sum(t[1:8]) + sum(t[21:24])
+% e_diurne <- sum(t[9:20])
+% n <- e_diurne + e_nocturne
+% admission_diurne <- round(e_diurne * 100 / n, 2)
+% 
+% h<-hour(s)
+% t <- table(h) # t[1] correspond à t0
+% s_nocturne <- sum(t[1:8]) + sum(t[21:24])
+% s_diurne <- sum(t[9:20])
+% n <- s_diurne + s_nocturne
+% sortie_diurne <- round(s_diurne * 100 / n, 2)
+% @
+% 
+% \index{admission diurne}
+% \index{Recours nocturne}
+% \index{sortie diurne}
+% 
+% \begin{boxedminipage}{10cm}
+% \begin{itemize}
+%   \item admission diurne: admission_diurne \%
+%   \item Recours nocturne: 100-admission_diurne \%
+%   \item sortie diurne:    sortie_diurne \%
+%   \item ratio entrée/sortie diurne: round(e_diurne/s_diurne, 2)
+%   \item ratio entrée/sortie nocturne: round(e_nocturne/s_nocturne, 2)
+% \end{itemize}
+% \end{boxedminipage}
+% 
+% %-----------------------------------------
+% \subsubsection*{Entrée - sorties adultes}
+% %-----------------------------------------
+% 
+% <<es_adultes, echo=FALSE, fig.height=6>>=
+% e<-ymd_hms(d1$ENTREE[d1$AGE >= 18 & d1$AGE < 75])
+% h<-hour(e)
+% sh <- table(as.factor(h))
+% psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages adultes (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% s<-ymd_hms(d1$SORTIE[d1$AGE >= 18 & d1$AGE < 75])
+% h<-hour(s)
+% sh <- table(as.factor(h))
+% lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+% @
+% 
+% Pour la pédiatrie (pp.\pageref{chap_pediatrie}) et la gériatrie (pp.\pageref{chap_geriatrie}), on se reportera aux chapitres correspondants.
+% 
+% %----------------------------------
+% \subsubsection*{Semaine - Week-end}
+% %----------------------------------
+% 
+% \index{Entrée-sorties du weekend}
+% 
+% - semaine: du lundi 8h au vendredi 19h59
+% 
+% - week-end: du vendredi 20h au lundi 7h59
+% 
+% <<es_we, echo=FALSE, fig.height=6>>=
+% 
+% # admissions 
+% semaine <- e[wday(e) %in% c(3:5) | (wday(e)==2 & hour(e)>7) | (wday(e)==6 & hour(e)<20) ]
+% weekend <- e[wday(e) %in% c(7,1) | (wday(e)==6 & hour(e)>19) | (wday(e)==2 & hour(e)<8) ]
+% n_se <- length(semaine)
+% n_we <- length(weekend)
+% 
+% # sorties 
+% s_semaine <- s[wday(s) %in% c(3:5) | (wday(s)==2 & hour(s)>7) | (wday(s)==6 & hour(s)<20) ]
+% s_weekend <- s[wday(s) %in% c(7,1) | (wday(s)==6 & hour(s)>19) | (wday(s)==2 & hour(s)<8) ]
+% n_sse <- length(s_semaine)
+% n_swe <- length(s_weekend)
+% 
+% # graphe entrées semaine/we
+% 
+% h<-hour(semaine)
+% sh <- table(as.factor(h))
+% psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages en semaine (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% h<-hour(weekend)
+% sh <- table(as.factor(h))
+% lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+% 
+% # graphue des sorties semaine/we
+% 
+% h<-hour(s_semaine)
+% sh <- table(as.factor(h))
+% psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages le week-end (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% h<-hour(s_weekend)
+% sh <- table(as.factor(h))
+% lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+% @
+% 
+% \begin{boxedminipage}{10cm}
+% \begin{itemize}
+%   \item entrées en semaine  n_se
+%   \item entrées le weekend:  n_we
+%   \item pourcentage des entrées en semaine:  round(n_se*100/(n_se+n_we),2) \%
+%   \item \textbf{Part d'activité de week-end:   round(n_we*100/(n_se+n_we),2) \%}
+%   \item sorties en semaine  n_sse
+%   \item sorties le weekend:  n_swe
+%   \item pourcentage de sorties en semaine:  round(n_sse*100/(n_sse+n_swe),2)
+% \end{itemize}
+% \end{boxedminipage}
+% 
+% %------------------------------------------------
+% \subsubsection*{Entrées sorties des hospitalisés}
+% %------------------------------------------------
+% 
+% \index{Entrées sorties des hospitalisés}
+% 
+% <<es_hospitalise, echo=FALSE, fig.height=6>>=
+% e_hosp <- d1$ENTREE[d1$MODE_SORTIE %in% c("Mutation","Transfert")]
+% s_hosp <- d1$SORTIE[d1$MODE_SORTIE %in% c("Mutation","Transfert")]
+% 
+% h<-hour(e_hosp)
+% sh <- table(as.factor(h))
+% psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages des patients hospitalisés (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% h<-hour(s_hosp)
+% sh <- table(as.factor(h))
+% lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+% @
+% 
+% %------------------------------------------------------
+% \subsubsection*{Entrées sorties des retours à domicile}
+% %------------------------------------------------------
+% 
+% \index{Entrées sorties des retours à domicile}
+% 
+% <<es_dom, echo=FALSE, fig.height=6>>=
+% e_dom <- d1$ENTREE[d1$MODE_SORTIE %in% c("Domicile")]
+% s_dom <- d1$SORTIE[d1$MODE_SORTIE %in% c("Domicile")]
+% 
+% h<-hour(e_dom)
+% sh <- table(as.factor(h))
+% psh <- plot(prop.table(sh)*100, type="l", col="red", xlim=c(0,24), ylab="Pourcentage", xlab="Heure d'entrée", main="Répartition des passages des retours à domicile (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% h<-hour(s_dom)
+% sh <- table(as.factor(h))
+% lines(prop.table(sh)*100, type="l", col="blue", xlim=c(0,24), , ylim=c(0,10))
+% prsh <- prop.table(sh)*100
+% for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
+% 
+% legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
+% @
+% 
 
 
 \section{Passages aux urgences}
@@ -1271,7 +1456,7 @@ Ce phénomène cyclique se répète tous les jours selon un profil immuable. La 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:39 2014
+% Sun Mar 30 19:41:43 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -1360,12 +1545,105 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 
 
 
-\subsection{Passages par tranches d'âge}
+\section{Passages en fonction de l'âge}
 
 % tranche-age.Rnw
 
+\subsection*{Pyramide des âges en Alsace}
+%-------------------------------------------
+\index{Pyramide des âges!Alsace}
+\index{Age}
+\index{Tranches d'age}
+
+% ce paragraphe utilise intensivement le dessin des pyramides: utiliser la syntaxe pp <- pyramid.plot() qui provoque le dessin de la pyramide tandis que les valeurs de retours sont stockées dans pp et n'apparaissent pas à l'impression.
+
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:42 2014
+% Sun Mar 30 19:41:46 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlrrr}
+  \hline
+ & X & Hommes & Femmes & Ensemble \\ 
+  \hline
+1 & Moins de 5 ans & 55914 & 53240 & 109154 \\ 
+  2 & 5 à 9 ans & 56840 & 54235 & 111075 \\ 
+  3 & 10 à 14 ans & 56710 & 54357 & 111067 \\ 
+  4 & 15 à 19 ans & 58843 & 56599 & 115441 \\ 
+  5 & 20 à 24 ans & 58106 & 59818 & 117924 \\ 
+  6 & 25 à 29 ans & 57879 & 59193 & 117072 \\ 
+  7 & 30 à 34 ans & 57264 & 57915 & 115179 \\ 
+  8 & 35 à 39 ans & 65126 & 65588 & 130714 \\ 
+  9 & 40 à 44 ans & 68519 & 67953 & 136472 \\ 
+  10 & 45 à 49 ans & 67881 & 68439 & 136319 \\ 
+  11 & 50 à 54 ans & 64389 & 65566 & 129956 \\ 
+  12 & 55 à 59 ans & 61926 & 62187 & 124114 \\ 
+  13 & 60 à 64 ans & 50598 & 50280 & 100878 \\ 
+  14 & 65 à 69 ans & 36682 & 38515 & 75197 \\ 
+  15 & 70 à 74 ans & 31586 & 37465 & 69051 \\ 
+  16 & 75 à 79 ans & 25776 & 36071 & 61847 \\ 
+  17 & 80 à 84 ans & 16584 & 29995 & 46579 \\ 
+  18 & 85 à 89 ans & 8009 & 19326 & 27336 \\ 
+  19 & 90 à 94 ans & 1815 & 5825 & 7640 \\ 
+  20 & 95 à 99 ans & 430 & 1883 & 2313 \\ 
+  21 & 100 ans ou plus &  42 & 316 & 358 \\ 
+   \hline
+\end{tabular}
+\caption[Population d'Alsace en 2010]{Population d'Alsace en 2010 (source INSEE)} 
+\label{tab:pop_insee}
+\end{table}
+
+
+
+La répartition de la population alsacienne par tranche d'âge est fournie par l'INSEE (table \ref{tab:pop_insee} page \pageref{tab:pop_insee}). La somme des valeurs donne un chiffre de 3 691 372 personnes dans la région Alsace en 2010.
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/pyramide_graphe} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Pyramides des âges en Alsace (source INSEE)}
+\label{fig:pyr_age_insee}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/pyramide_graphe2} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Pyramides des âges en Alsace (source INSEE)}
+\label{fig:pyr_age_inseep100}
+\end{figure}
+
+
+
+\subsection*{Analyse de la variable AGE}
+%------------------------------------------
+
+Les RPU utilisent la date de naissance. L'âge est calculé en soustrayant l’année de naissance de l'année courante (âge atteint dans l'année).
+
+% la doc de ce chapitre est dans tranche_age.Rmd
+
+
+
+
+
+Les âges répertoriés vont de moins de 1 an à 113 ans. L'âge moyen est de 40 ans (médiane 38 ans). L'âge moyen des hommes est de 38 ans et celui des femmes de 43 ans.
+
+Il existe plusieurs façons de former de tranches d'âges.
+
+% ### Age 1
+%----------
+
+% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Sun Mar 30 19:41:47 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1383,8 +1661,306 @@ Moins de 1 an & 9233 \\
 \label{tab:tranche}
 \end{table}
 
-\includegraphics[width=\maxwidth]{figure/tranche} 
 
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/tranches_age1} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Répartition des RPU par tanches d'âge}
+\label{fig:tranches_age1}
+\end{figure}
+
+% ### Age 2
+%----------
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+  Pédiatrie Adulte < 75 ans Gériatrie
+n     83445          207547     53038
+%        24              60        15
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{itemize}
+  \item Pédiatrie:  24 \%
+  \item Gériatrie:  15 \%
+\end{itemize}
+Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2}
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/tranches_age21} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Répartition des RPU par tanches d'âge}
+\label{fig:tranches_age2}
+\end{figure}
+
+% ### Age3
+%---------
+
+
+
+
+% # Affichage
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/affiche_age31} 
+
+\includegraphics[width=\maxwidth]{figure/affiche_age32} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Répartition des RPU par tanches d'âge}
+\label{fig:tranches_age3}
+\end{figure}
+
+
+\subsection*{Pyramide des âges des consultants}
+%--------------------------------------------------------
+\index{âge!et sexe}
+
+% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Sun Mar 30 19:41:47 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & H & F \\ 
+  \hline
+0-4 & 19105 & 14812 \\ 
+  5-9 & 10077 & 7930 \\ 
+  10-14 & 10666 & 8915 \\ 
+  15-19 & 10959 & 9868 \\ 
+  20-24 & 12667 & 11359 \\ 
+  25-29 & 12383 & 10263 \\ 
+  30-34 & 11813 & 9259 \\ 
+  35-39 & 10443 & 8109 \\ 
+  40-44 & 11170 & 8731 \\ 
+  45-49 & 10172 & 8291 \\ 
+  50-54 & 9371 & 8093 \\ 
+  55-59 & 8772 & 7669 \\ 
+  60-64 & 8609 & 6973 \\ 
+  65-69 & 6811 & 5498 \\ 
+  70-74 & 6438 & 5762 \\ 
+  75-79 & 6937 & 7489 \\ 
+  80-84 & 7034 & 9561 \\ 
+  85-89 & 4562 & 9127 \\ 
+  90-94 & 1942 & 5118 \\ 
+  95-99 & 235 & 833 \\ 
+  100+ &  83 & 149 \\ 
+   \hline
+\end{tabular}
+\caption[Répartition par âges et sexe]{Distribution des RPU par âges et sexe. Le découpage des âges en tranche de 5 ans correspond au découpage de l'INSEE} 
+\label{tab:age_sexe}
+\end{table}
+
+
+
+% pyramide des ages
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/pyr_consult} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Pyramide des âges des consultants}
+\label{fig:pyr_consult}
+\end{figure}
+
+% en pourcentages
+
+% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Sun Mar 30 19:41:47 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & H & F \\ 
+  \hline
+0-4 & 5.55 & 4.31 \\ 
+  5-9 & 2.93 & 2.30 \\ 
+  10-14 & 3.10 & 2.59 \\ 
+  15-19 & 3.19 & 2.87 \\ 
+  20-24 & 3.68 & 3.30 \\ 
+  25-29 & 3.60 & 2.98 \\ 
+  30-34 & 3.43 & 2.69 \\ 
+  35-39 & 3.04 & 2.36 \\ 
+  40-44 & 3.25 & 2.54 \\ 
+  45-49 & 2.96 & 2.41 \\ 
+  50-54 & 2.72 & 2.35 \\ 
+  55-59 & 2.55 & 2.23 \\ 
+  60-64 & 2.50 & 2.03 \\ 
+  65-69 & 1.98 & 1.60 \\ 
+  70-74 & 1.87 & 1.67 \\ 
+  75-79 & 2.02 & 2.18 \\ 
+  80-84 & 2.04 & 2.78 \\ 
+  85-89 & 1.33 & 2.65 \\ 
+  90-94 & 0.56 & 1.49 \\ 
+  95-99 & 0.07 & 0.24 \\ 
+  100+ & 0.02 & 0.04 \\ 
+   \hline
+\end{tabular}
+\caption[Sexe et age en pourcentages]{Répartition en pourcentages des classes d'âge en fonction du sexe des consultants} 
+\label{tab:pyr_p100}
+\end{table}
+
+
+
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/pyr_consult_p100} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Pyramide des âges des consultants (exprimés en pourcentages)}
+\label{fig:tranches_age31}
+\end{figure}
+
+
+\subsection*{Comparaison des pyramides des âges consultants-population générale}
+--------------------------------------------------------------------------------
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/comp_pyramides} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Pyramide des âges des consultants aux urgences comparés à la population générale. Les âges extrêmes fréquentent davantage les SU}
+\label{fig:pyr_rpu_popgen}
+\end{figure}
+
+La pyramide des âges des personnes consultant aux urgences n'est pas superposable à celle de la population générale (figure \ref{fig:pyr_rpu_popgen} page \pageref{fig:pyr_rpu_popgen}). 
+
+
+\subsection*{Taux de recours aux urgences par âge et par sexe}
+%--------------------------------------------------------
+
+Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/alsace_recours} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Taux de recours aux urgences selon la classe d'age. Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
+\label{fig:recours_su}
+\end{figure}
+
+Le taux moyen de recours aux urgences en 2013 est de 19 \%. Ce taux reste assez stable jusque vers 70 ans puis croît de façon exponentielle avec l'âge (figure \ref{fig:recours_su} page \pageref{fig:recours_su}). Pour la tranche d'âge de 90 ans, on note une sur-représentation de ces patients, le nombre de consultants dépassant la population de cette classe d'âge.
+
+\subsection*{Les Centenaires}
+%--------------------------------
+\index{Centenaires (les)}
+\label{centenaires}
+
+
+
+
+Entrent dans cette catégorie les patients de 100 ans et plus. En 2013, \textbf{242 centenaires} ont été pris en charge par les services d'urgence (0.07  \% des RPU).  
+Le recensement 2010 fait état de \textbf{358} centenaires en Alsace. Le taux de recours aux urgences pour cette population particulière s'élève à  68 \%.
+
+
+\subsection*{Evolution du sex-ratio en fonction de l'age}
+%-----------------------------------------------------------
+\index{sex ratio}
+
+
+
+
+\begin{kframe}
+\begin{alltt}
+\hlstd{d1}\hlopt{$}\hlstd{age3} \hlkwb{<-} \hlkwd{cut}\hlstd{(d1}\hlopt{$}\hlstd{AGE,} \hlkwc{breaks} \hlstd{= brek,} \hlkwc{include.lowest} \hlstd{= F,} \hlkwc{right} \hlstd{= F,} \hlkwc{labels} \hlstd{= x)}
+\hlstd{a_table} \hlkwb{<-} \hlkwd{table}\hlstd{(d1}\hlopt{$}\hlstd{SEXE, d1}\hlopt{$}\hlstd{age3)}
+\hlcom{# on utilise la transposée de a_table pour que le tableau soit vertical}
+\hlcom{# (sinon trop large)}
+\hlkwd{xtable}\hlstd{(}\hlkwd{t}\hlstd{(a_table),} \hlkwc{caption} \hlstd{=} \hlkwd{c}\hlstd{(}\hlstr{"Répartition des consultants aux urgences par tranche de cinq ans en fonction du sexe (I = sexe indéterminé)"}\hlstd{,}
+    \hlstr{""}\hlstd{),} \hlkwc{label} \hlstd{=} \hlstr{"tab:sr2"}\hlstd{)}
+\end{alltt}
+\end{kframe}% latex table generated in R 3.0.3 by xtable 1.7-3 package
+% Sun Mar 30 19:41:49 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & F & I & M \\ 
+  \hline
+0-4 & 14812 &   1 & 19105 \\ 
+  5-9 & 7930 &   1 & 10077 \\ 
+  10-14 & 8915 &   0 & 10666 \\ 
+  15-19 & 9868 &   2 & 10959 \\ 
+  20-24 & 11359 &   0 & 12667 \\ 
+  25-29 & 10263 &   0 & 12383 \\ 
+  30-34 & 9259 &   0 & 11813 \\ 
+  35-39 & 8109 &   0 & 10443 \\ 
+  40-44 & 8731 &   0 & 11170 \\ 
+  45-49 & 8291 &   0 & 10172 \\ 
+  50-54 & 8093 &   0 & 9371 \\ 
+  55-59 & 7669 &   0 & 8772 \\ 
+  60-64 & 6973 &   0 & 8609 \\ 
+  65-69 & 5498 &   0 & 6811 \\ 
+  70-74 & 5762 &   0 & 6438 \\ 
+  75-79 & 7489 &   0 & 6937 \\ 
+  80-84 & 9561 &   1 & 7034 \\ 
+  85-89 & 9127 &   0 & 4562 \\ 
+  90-94 & 5118 &   0 & 1942 \\ 
+  95-99 & 833 &   0 & 235 \\ 
+  100+ & 149 &   0 &  83 \\ 
+   \hline
+\end{tabular}
+\caption[]{Répartition des consultants aux urgences par tranche de cinq ans en fonction du sexe (I = sexe indéterminé)} 
+\label{tab:sr2}
+\end{table}
+
+
+
+
+Le rapport de masculinité ou sex ratio est de 1.1 pour l'ensemble des RPU. Ce chiffre reste stable jusque vers l'age de 77 ans puis s'inverse, reflet d'une espérance de vie plus élevée pour les femmes (figure \ref{fig:sex-ratio} page \pageref{fig:sex-ratio}).
+
+\begin{figure}
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/sr_graphe} 
+
+\end{knitrout}
+
+\end{center}
+\caption{Evolution du sex ratio en fonction de l'âge)}
+\label{fig:sex-ratio}
+\end{figure}
 
 
 
@@ -1401,7 +1977,7 @@ Le thésaurus est présenté sous la forme d'un fichier Excel. L'onglet \emph{re
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:42 2014
+% Sun Mar 30 19:41:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -1472,7 +2048,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:43 2014
+% Sun Mar 30 19:41:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1502,7 +2078,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:43 2014
+% Sun Mar 30 19:41:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1691,7 +2267,7 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:48 2014
+% Sun Mar 30 19:41:54 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1706,7 +2282,7 @@ N & 44638.00 & 252428.00 & 39943.00 \\
 \label{tab:freq_periode}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:48 2014
+% Sun Mar 30 19:41:54 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1764,7 +2340,7 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 \end{figure}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:48 2014
+% Sun Mar 30 19:41:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1809,7 +2385,7 @@ On peut répartir les âges des patients en trois catégories (tableau \ref{tab:
 % #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:49 2014
+% Sun Mar 30 19:41:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1828,7 +2404,7 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:49 2014
+% Sun Mar 30 19:41:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1867,7 +2443,7 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 \section{Selon le jour de la semaine}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:49 2014
+% Sun Mar 30 19:41:56 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1920,7 +2496,7 @@ Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de qu
 
 \section{Selon l'orientation}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:50 2014
+% Sun Mar 30 19:41:56 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -1946,7 +2522,7 @@ REO & 86.25 & 3.24 \\
 \label{tab:duree_orientation}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:50 2014
+% Sun Mar 30 19:41:56 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -1989,7 +2565,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \section{Selon la gravité}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:50 2014
+% Sun Mar 30 19:41:57 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2491,7 +3067,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:53 2014
+% Sun Mar 30 19:41:59 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2509,7 +3085,7 @@ J450 & 133 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:53 2014
+% Sun Mar 30 19:41:59 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2537,7 +3113,7 @@ On note \np{1 398} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:53 2014
+% Sun Mar 30 19:41:59 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2860,7 +3436,7 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:55 2014
+% Sun Mar 30 19:42:01 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
@@ -2885,7 +3461,7 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:55 2014
+% Sun Mar 30 19:42:01 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -2936,7 +3512,7 @@ a
   SCAM     SI   UHCD   <NA> 
    522   1402  32452 275755 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:55 2014
+% Sun Mar 30 19:42:01 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2956,7 +3532,7 @@ NA &   0 &   0 &   0 &   0 &   0 &   0 &   0 \\
 \label{tab:dest_gravite}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:55 2014
+% Sun Mar 30 19:42:02 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2987,7 +3563,7 @@ CHIR & 181 & 3331 & 3662 & 363 &  11 &   1 & 140 \\
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:55 2014
+% Sun Mar 30 19:42:02 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3006,7 +3582,7 @@ HAD & 0.01 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:55 2014
+% Sun Mar 30 19:42:02 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3037,7 +3613,7 @@ On isole le groupe "mode de sortie = domicile" et on relève les résultats de l
 
 \includegraphics[width=\maxwidth]{figure/fausses_sorties} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:55 2014
+% Sun Mar 30 19:42:02 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3104,7 +3680,7 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:56 2014
+% Sun Mar 30 19:42:03 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3137,7 +3713,7 @@ Les variations du retour journalier à domicile sont calculées de la manière s
 \end{description}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:57 2014
+% Sun Mar 30 19:42:04 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3164,7 +3740,7 @@ On refait le calcul de q en tenant compte des non réponses:
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:58 2014
+% Sun Mar 30 19:42:04 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3224,7 +3800,7 @@ Les moins de 18 ans représentent $83 455$ passages en 2013 soit $230$ passages 
 % Pédiatrie et sexe
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:59 2014
+% Sun Mar 30 19:42:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3246,7 +3822,7 @@ Le sex-ratio est de $1.2$ (table \ref{tab:ped_sr})
 % Taux hospitalisation
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:03:59 2014
+% Sun Mar 30 19:42:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3310,7 +3886,7 @@ Les 75 ans et plus représentent $53 081$ passages en 2013 soit $146$ passages p
 % Gériatrie et sexe
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:04:00 2014
+% Sun Mar 30 19:42:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3334,7 +3910,7 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:04:00 2014
+% Sun Mar 30 19:42:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3751,7 +4327,7 @@ Entre le 2013-01-01 00:11:00 et le 2013-12-31 23:13:00, \np{37 018} RPU ont ét�
 Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 40 par jour.
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:04:07 2014
+% Sun Mar 30 19:42:14 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3794,7 +4370,7 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: jeu., mars 27, 2014 - 17:04:08
+% Date and time: dim., mars 30, 2014 - 19:42:14
 \begin{table}[!htbp] \centering 
   \caption{Totalité des passages: résumé des principales caractéristiques} 
   \label{} 
@@ -3817,7 +4393,7 @@ data\$total & 365 & 40.00 & 8.00 & 22 & 34 & 40 & 46 & 69 \\
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: jeu., mars 27, 2014 - 17:04:08
+% Date and time: dim., mars 30, 2014 - 19:42:15
 \begin{table}[!htbp] \centering 
   \caption{De 1 à 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -3841,7 +4417,7 @@ data\$entre1\_75ans & 365 & 35.00 & 7.50 & 18 & 30 & 34 & 40 & 63 \\
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: jeu., mars 27, 2014 - 17:04:08
+% Date and time: dim., mars 30, 2014 - 19:42:15
 \begin{table}[!htbp] \centering 
   \caption{Plus de 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -3862,7 +4438,7 @@ data\$sup75ans & 365 & 4.30 & 2.30 & 0 & 3 & 4 & 6 & 12 \\
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: jeu., mars 27, 2014 - 17:04:08
+% Date and time: dim., mars 30, 2014 - 19:42:15
 \begin{table}[!htbp] \centering 
   \caption{Clinique Ste Anne: résumé des données} 
   \label{} 
@@ -4595,7 +5171,7 @@ Signification des intitulés des lignes:
 % \begin{table}
 % \begin{center}
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:04:18 2014
+% Sun Mar 30 19:42:26 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrrrrrrrr}
@@ -4675,7 +5251,7 @@ Le interventions SMUR sont égales à la somme des interventions primaires et se
 
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:04:18 2014
+% Sun Mar 30 19:42:26 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -4744,7 +5320,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.0.3 by xtable 1.7-3 package
-% Thu Mar 27 17:04:19 2014
+% Sun Mar 30 19:42:26 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
