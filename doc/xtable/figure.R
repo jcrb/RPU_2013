@@ -1,12 +1,17 @@
 \begin{figure}
+
 \begin{center}
+
 <<alsace_recours, echo=FALSE, fig.height=5>>=
   main <- paste0("Titre_principal", anc)
 @
+
+\captionof{figure}{\Sexpr{main}.}\label{fig:}%
 \end{center}
-\caption{\Sexpr{main}.}
-\label{fig:}
+
 \end{figure}
+
+
 
 Si on ne veut pas faire flotter
 

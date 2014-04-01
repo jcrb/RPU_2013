@@ -57,6 +57,7 @@
 \usepackage{tabularx}
 \usepackage{boxedminipage}
 \usepackage{xspace} % pour respecter l'espace après une macro: \newcommand{\ancourante}{2013\xspace}
+\usepackage{caption}
 
 \usepackage{makeidx}
 \makeindex

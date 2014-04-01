@@ -15,18 +15,19 @@ a<-xsummary(h,xtable=T,tl="Résumé des horaires de passage aux urgences",tc="Ho
 % \input{../blah.gen}
 %---------------------------------------------------------------------- HISTOGRAMME
 
-\begin{figure}
+%\begin{figure}
 \begin{center}
 <<test23, echo=FALSE,fig = TRUE,fig.height=5>>=
 hist(h,breaks=23,xlab="Heures",ylab="Nombre de passages",main="Alsace - Horaire de fréquentation du SU",col="pink")
 @
-\end{center}
-\caption{Horaires d'arrivée aux urgences en Alsace 2013}
+\captionof{figure}{Horaires d'arrivée aux urgences en Alsace 2013}
 \label{passage:als}
-\end{figure}
+\end{center}
+
+%\end{figure}
 %---------------------------------------------------------------------------- RADAR 1
 
-\begin{figure}
+%\begin{figure}
 \begin{center}
 <<test25, echo=FALSE,fig = TRUE,fig.height=10,warning=FALSE>>=
 t<-table(h)
@@ -36,24 +37,26 @@ c<-clock24.plot(als_entree,clock.pos=0:23,lwd=3,show.grid.labels=F,line.col="gre
 c<-clock24.plot(als_entree,clock.pos=0:23,rp.type="p",main="Alsace",xlab="Heures d'arrivée aux urgences",show.grid.labels=F,line.col="green",lwd=3)
 par(mfrow = c(1, 1))
 @
-\end{center}
-\caption{Horaires d'arrivée aux urgences en Alsace 2013}
+\captionof{figure}{Horaires d'arrivée aux urgences en Alsace 2013}
 \label{radar:als}
-\end{figure}
+\end{center}
+
+%\end{figure}
 
 %---------------------------------------------------------Radar HUS
-\begin{figure}
+%\begin{figure}
 \begin{center}
   <<test2, echo=FALSE,fig = TRUE,fig.height=5,warning=FALSE>>=
     passages("Hus","HUS",sens=3)
     @
-\end{center}
-\caption{HUS: répartition des arrivées et départs aux urgences}
+\captionof{figure}{HUS: répartition des arrivées et départs aux urgences}
 \label{passage:hus}
-\end{figure}
+\end{center}
+
+%\end{figure}
 
 %---------------------------------------------------------Radar Colmar
-\begin{figure}
+%\begin{figure}
 \begin{center}
   <<test26, echo=FALSE,fig = TRUE,fig.height=10,warning=FALSE>>=
     par(mfrow = c(3, 2))
@@ -65,12 +68,13 @@ par(mfrow = c(1, 1))
     passages("Dia","Diaconnat-Fonderie",sens=3)
     par(mfrow = c(1, 1))
     @
-\end{center}
-\caption{Secteurs 3 et 4: répartition des arrivées et départs aux urgences}
+\captionof{figure}{Secteurs 3 et 4: répartition des arrivées et départs aux urgences}
 \label{passage:col}
-\end{figure}
+\end{center}
 
-\begin{figure}
+%\end{figure}
+
+%\begin{figure}
 \begin{center}
   <<test27, echo=FALSE,fig = TRUE,fig.height=10,warning=FALSE>>=
     par(mfrow = c(3, 2))
@@ -82,8 +86,9 @@ par(mfrow = c(1, 1))
     passages("Odi","Ste Odile",sens=3)
     par(mfrow = c(1, 1))
     @
-\end{center}
-\caption{Secteurs 1 et 2: répartition des arrivées et départs aux urgences}
+\captionof{figure}{Secteurs 1 et 2: répartition des arrivées et départs aux urgences}
 \label{passage:secteur12}
-\end{figure}
+\end{center}
+
+%\end{figure}
 
