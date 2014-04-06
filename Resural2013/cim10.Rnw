@@ -32,12 +32,12 @@ Les motifs de recours aux urgences sont exprimés en fonction de la classificati
 \index{motif de recours}
 \footnote{Classification Internationale des Maladies, 10ème révision (La CIM10 comporte environ 36000 maladies).}.
 \url{http://apps.who.int/classifications/icd10/browse/2008/fr}
-Le fichier comporte \np{\Sexpr{ndpr}} diagnostics principaux différents.
+Le fichier comporte \np{\Sexpr{ndpr}} diagnostics principaux différents, 
 répartis en \Sexpr{length(unique(dpr))} classes de diagnostics.
 La comparaison entre le nombre de RPU reçus et le nombre de diagnostics renseignés permet d'établir l'exhaustivité des CIM10 à \Sexpr{ex}\% \index{exhaustivité!CIM10}
 
 
-\section{Cim10}
+\section{CIM10}
 
 Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10. Le tableau qui suit indique pour chaque chapitre, le nombre total de cas rapportés, le pourcentage par rapport à l'ensemble, et le pourcentage de cas déduction faite de la traumatologie. En effet celle-ci représente environ la moitié des cas et il parait intéressant de séparer les pathologies traumatiques des non traumatiques.
 
@@ -86,7 +86,7 @@ V&F00–F99&Troubles mentaux et du comportement&\Sexpr{psy}&\Sexpr{round(psy*100
 
 VI&G00–G99&Maladies du système nerveux&\Sexpr{neuro}&\Sexpr{round(neuro*100/total,digits=2)}&\Sexpr{round(neuro*100/(total-traumato),digits=2)}\\
 
-VII & H00–H59 & Maladies de l'oeil et de ses annexes & \Sexpr{oeil} & \Sexpr{round(oeil*100/total,digits=2)}&\Sexpr{round(oeil*100/(total-traumato),digits=2)}\\
+VII & H00–H59 & Maladies de l’œil et de ses annexes & \Sexpr{oeil} & \Sexpr{round(oeil*100/total,digits=2)}&\Sexpr{round(oeil*100/(total-traumato),digits=2)}\\
 
 VIII&H60–H95&Maladies de l'oreille et de l'apophyse mastoïde&\Sexpr{orl}&\Sexpr{round(orl*100/total,digits=2)}&\Sexpr{round(orl*100/(total-traumato),digits=2)}\\
 
@@ -96,11 +96,11 @@ X&J00–J99&Maladies de l'appareil respiratoire&\Sexpr{respi}&\Sexpr{round(respi
 
 XI&K00–K93&Maladies de l'appareil digestif&\Sexpr{digestif}&\Sexpr{round(digestif*100/total,digits=2)}&\Sexpr{round(digestif*100/(total-traumato),digits=2)}\\
 
-XII&L00–L99&Maladies de la peau et du tissu cellulaire souscutané&\Sexpr{peau}&\Sexpr{round(peau*100/total,digits=2)}&\Sexpr{round(peau*100/(total-traumato),digits=2)}\\
+XII&L00–L99&Maladies de la peau et du tissu cellulaire sous cutané&\Sexpr{peau}&\Sexpr{round(peau*100/total,digits=2)}&\Sexpr{round(peau*100/(total-traumato),digits=2)}\\
 
 XIII&M00–M99&Maladies du système ostéoarticulaire, des muscles et du tissu conjonctif&\Sexpr{os}&\Sexpr{round(os*100/total,digits=2)}&\Sexpr{round(os*100/(total-traumato),digits=2)}\\
 
-XIV&N00–N99&Maladies de l'appareil génitourinaire&\Sexpr{genital}&\Sexpr{round(genital*100/total,digits=2)}&\Sexpr{round(genital*100/(total-traumato),digits=2)}\\
+XIV&N00–N99&Maladies de l'appareil génito-urinaire&\Sexpr{genital}&\Sexpr{round(genital*100/total,digits=2)}&\Sexpr{round(genital*100/(total-traumato),digits=2)}\\
 
 XV&O00–O99&Grossesse, accouchement et puerpéralité&\Sexpr{obst}&\Sexpr{round(obst*100/total,digits=2)}&\Sexpr{round(obst*100/(total-traumato),digits=2)}\\
 
@@ -151,17 +151,17 @@ Annexe : Liste exhaustive des codes CIM10 d’AVC
  G454 & Amnésie globale transitoire : NON RETENU \\
  G458 & Autres accidents ischémiques cérébraux transitoires et syndromes apparentés \\
  G459 & Accident ischémique cérébral transitoire, sans précision \\
- I600 & Hémorragie sousarachnoïdienne de labifurcation et du siphon carotidien \\
+ I600 & Hémorragie sousarachnoïdienne de la bifurcation et du siphon carotidien \\
  I601 & Hémorragie sousarachnoïdienne de l'artère cérébrale moyenne \\
  I602 & Hémorragie sousarachnoïdienne de l'artère communicante antérieure \\
- I603 & Hémorragie sousarachnoïdienne del'artère communicante postérieure \\
+ I603 & Hémorragie sousarachnoïdienne de l’artère communicante postérieure \\
  I604 & Hémorragie sousarachnoïdienne de l'artère basilaire \\
  I605 & Hémorragie sousarachnoïdienne de l'artère vertébrale \\
  I606 & Hémorragie sousarachnoïdienne d'autres artères intracrâniennes \\
  I607 & Hémorragie sousarachnoïdienne d'une artère intracrânienne, sans précision \\
- I608 & Autres hémorragies sousarachnoïdiennes \\
+ I608 & Autres hémorragies sous arachnoïdiennes \\
  I609 & Hémorragie sousarachnoïdienne, sans précision \\
- I610 & Hémorragie intracérébrale hémisphérique, souscorticale \\
+ I610 & Hémorragie intracérébrale hémisphérique, sous corticale \\
  I611 & Hémorragie intracérébrale hémisphérique, corticale \\
  I612 & Hémorragie intracérébrale hémisphérique, non précisée \\
  I613 & Hémorragie intracérébrale du tronc cérébral \\
@@ -178,7 +178,7 @@ Annexe : Liste exhaustive des codes CIM10 d’AVC
  I632 & Infarctus cérébral dû à une occlusion ou sténose des artères précérébrales,de mécanisme non précisé \\
  I633 & Infarctus cérébral dû à une thrombose des artères cérébrales \\
  I634 & Infarctus cérébral dû à une embolie des artères cérébrales \\
- I635 & Infarctus cérébral dû à une occlusion ou sténose des artères cérébrales, demécanisme non précisé \\
+ I635 & Infarctus cérébral dû à une occlusion ou sténose des artères cérébrales, de mécanisme non précisé \\
  I636 & Infarctus cérébral dû à une thrombose veineuse cérébrale, non pyogène \\
  I638 & Autres infarctus cérébraux \\
  I639 & Infarctus cérébral, sans précision \\
@@ -217,15 +217,18 @@ AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,
 Horaire des AVC, à comparer avec:
 \begin{itemize}
   \item les crises d'épilepsie
-  \item la pression athmosphérique
+  \item la pression atmosphérique
 \end{itemize}
 
 <<heure_avc,echo=FALSE>>=
-
 h<-hour(AVC$ENTREE)
-hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée", ylab="Fréquence")
+hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée", ylab="Fréquence", col="azure")
+@
+
+<<heure_avc2,echo=FALSE, comment="">>=
 tab1(h,missing=FALSE,main="Heures d'admission des AVC")
 @
+
 
 \subsection*{Selon le jour de la semaine}
 \index{AVC!age}
@@ -253,18 +256,18 @@ Proportion théorique = 14.28\% par jour de la semaine.
 <<avs_age,echo=FALSE>>=
 summary(AVC$AGE)
 @
-Le rapport de 2009 donne age moyen = 70.5 et age médian = 75 ans.
+Le rapport de 2009 donne âge moyen = 70.5 et âge médian = 75 ans.
 
 \subsection*{AVC et sexe}
 \index{AVC!sexe}
 <<avc_sexe,echo=FALSE>>=
 summary(AVC$SEXE)
-hist(AVC$AGE,main="Répartition des AVC",col="pink",xlab="Age en années")
+hist(AVC$AGE,main="Répartition des AVC",col="pink",xlab="Âge en années")
 t<-table(AVC$AGE)
-barplot(t,main="AVC - Répartition des ages")
+barplot(t,main="AVC - Répartition des âges")
 t<-table(AVC$SEXE,AVC$AGE)
-barplot(t,col=c("red","white","darkblue"),main="Répartion des AVC selon l'age et le sexe",legend=TRUE)
-barplot(t,col=c("yellow","white","red"),main="Répartion des AVC selon l'age et le sexe",legend=TRUE,beside=TRUE)
+barplot(t,col=c("red","white","darkblue"),main="Répartion des AVC selon l'âge et le sexe",legend=TRUE)
+barplot(t,col=c("yellow","white","red"),main="Répartion des AVC selon l'âge et le sexe",legend=TRUE,beside=TRUE)
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -292,9 +295,9 @@ G459  & Accident ischémique cérébral transitoire, sans précision \\
 Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour tout diagnostic d'AIT.
 \index{AIT!thésaurus}
 
-<<ait,echo=FALSE>>=
+<<ait,echo=FALSE, comment="">>=
 ait<-dpr$DP[substr(dpr$DP,1,3)=="G45" & substr(dpr$DP,1,4)!="G454"]
-tab1(ait,missing=FALSE)
+tab1(ait,missing=FALSE, main="Distribution des AIT", ylab="Fréquence")
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,18 +308,18 @@ tab1(ait,missing=FALSE)
 <<pneumo_intro,echo=FALSE,message=FALSE>>=
 
 library("epitools")
-source("../mes_fonctions.R")
+source("../Routines/mes_fonctions.R")
 
 pneumo<-dpr[substr(dpr$DP,1,4)=="J159" ,]
 p<-summary(pneumo$AGE)
-print("Pneumonies et AGE")
+print("Pneumonies et ÂGE")
 p
 @
 
 Les pneumopathies bactériennes sans précision sont cotées J15.9 Dans la CIM10.
 \Sexpr{nrow(pneumo)} diagnostics de ce type ont été portés au SAU en \Sexpr{annee}.
 
-Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'age moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus.
+Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âge moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus.
 
 <<pneumo,echo=FALSE,message=FALSE>>=
 
@@ -393,10 +396,26 @@ xtable(x$output.table,caption=c("Fréquence des crises d'asthme par semaine en 2
 @
 
 
-La population des patients consultant pour une crise d'astme est jeune (voir table \ref{tab:age_asthme} page \pageref{tab:age_asthme}).
+La population des patients consultant pour une crise d’asthme est jeune (voir table \ref{tab:age_asthme} page \pageref{tab:age_asthme}).
+
+\begin{center}
+<<asthme_age, echo=FALSE, fig.height=5>>=
+main="Histogramme des classes d'âge pour l'asthme"
+hist(asthme$AGE, breaks=20, xlab="Âge", ylab="Nombre", main=main, col="darkolivegreen1")
+@
+\captionof{figure}{\Sexpr{main}.}\label{fig:asthme_age}%
+\end{center}
+
+\begin{center}
+<<asthme_ccmu, echo=FALSE, fig.height=5>>=
+main="Gravité des crises d'asthme"
+barplot(summary(asthme$GRAVITE),xlab="Gravité (CCMU)", ylab="Nombre", main=main)
+@
+\captionof{figure}{\Sexpr{main}.}\label{fig:asthme_ccmu}%
+\end{center}
 
 <<asthme3,echo=FALSE,results='asis'>>=
-xtable(resume(asthme$AGE),caption=c("Age de la population consultant pour crise d'asthme","Asthme et age"),label="tab:age_asthme")
+xtable(resume(asthme$AGE),caption=c("Âge de la population consultant pour crise d'asthme","Asthme et âge"),label="tab:age_asthme")
 
 x<-t(resume(asthme$GRAVITE))
 rownames(x)<-""
@@ -445,7 +464,7 @@ barplot(table(s),main="Bronchiolites - 2013",xlab="Semaines")
 # summary(bron)
 @
 
-Surreprésentation de Mulhouse. 
+Sur représentation de Mulhouse. 
 Taux hospitalisation: 50\%
 
 
@@ -491,10 +510,10 @@ hist(malaise$date,breaks=18,freq=TRUE,col="slategray1",main="Malaises (INVS)")
 \index{Canicule@marqueurs}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Données hospitalières : nombre quotidien de passages dans des services d'urgence hospitaliers pour un diagnostic de malaise (codes Cim10 R42, R53 et R55), d'hyperthermie et autres effets directs de la chaleur (codes Cim10 T67 et X30), de déshydratation (code Cim10 E86) et d'hyponatrémie (code Cim10 E871)
+Données hospitalières : nombre quotidien de passages dans des services d'urgence hospitaliers pour un diagnostic de malaise (codes CIM10 R42, R53 et R55), d'hyperthermie et autres effets directs de la chaleur (codes CIM10 T67 et X30), de déshydratation (code CIM10 E86) et d'hyponatrémie (code CIM10 E871)
 
 - X30  Exposition à une chaleur naturelle excessive
-- E86  Déplétion du volume du plasma ou du liquide extracellulaire, Déshydratation sauf choc hypovolémique
+- E86  Déplétion du volume du plasma ou du liquide extra cellulaire, Déshydratation sauf choc hypovolémique
 
 <<canicule,echo=FALSE>>=
 canicule<-dpr[substr(dpr$DP,1,3)=="T67", c("DP","ENTREE")]
@@ -525,8 +544,8 @@ Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies du
 ge<-dpr[substr(dpr$DP,1,3)=="A09" ,]
 summary(ge)
 table(ge$FINESS,ge$DP)
-hist(ge$AGE,main="Gasto-entérites - 2013",xlab="Age (années)", ylab="nombre",col="gray90")
-boxplot(ge$AGE,col="yellow",main="Gastro-entérite",ylab="age (années)")
+hist(ge$AGE,main="Gasto-entérites - 2013",xlab="Âge (années)", ylab="nombre",col="gray90")
+boxplot(ge$AGE,col="yellow",main="Gastro-entérite",ylab="âge (années)")
 m<-month(ge$ENTREE,label=T)
 x<-barplot(table(m),main="Gastro-entérites - 2013",xlab="Mois")
 lines(x=x,y=table(m),col="red")

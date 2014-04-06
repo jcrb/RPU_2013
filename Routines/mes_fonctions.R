@@ -37,32 +37,7 @@ load_libraries<-function(){
   library("maptools")
 }
 
-#===========================================================================
-# resume
-#===========================================================================
-#'@title resume
-#'@description affiche un résummée de données continues
-#'@param x vecteur de données
-#'@return une matrice contenant moyenne, médiane, écart_type, min, max,n
-#'
-resume<-function (x)
-{
-  r<-NULL
-  classe<-class(x)
-  if(classe=="numeric"){
-    name=c("moyenne","écart-type","médiane","min","max","n")
-    m<-mean(x,na.remove=TRUE)
-    e<-sd(x)
-    r<-matrix(c(m,e,median(x),min(x),max(x),length(x)),1,6)
-    colnames(r)<-name
-    rownames(r)<-""
-  }
-  else if(classe=="factor"){
-    r<-as.matrix(summary(x))
-    #rownames(r)<-""
-  }
-  return(r)
-}
+
 
 #===========================================================================
 # copyrigth
@@ -463,10 +438,38 @@ passages<-function(hop,hop_name="CH",col="blue",sens=1,main="",cexlabel=0.8)
   par(cex.axis=1)
 }
 
-#'===========================================================================
-#' resume
-#'===========================================================================
+#===========================================================================
+# resume
+#===========================================================================
 #'@title resume
+#'@description affiche un résummée de données continues
+#'@param x vecteur de données
+#'@return une matrice contenant moyenne, médiane, écart_type, min, max,n
+#'
+resume<-function (x)
+{
+  r<-NULL
+  classe<-class(x)
+  if(classe=="numeric"){
+    name=c("moyenne","écart-type","médiane","min","max","n")
+    m<-mean(x,na.remove=TRUE)
+    e<-sd(x)
+    r<-matrix(c(m,e,median(x),min(x),max(x),length(x)),1,6)
+    colnames(r)<-name
+    print(dimnames(r))
+    rownames(r)<-""
+  }
+  else if(classe=="factor"){
+    r<-as.matrix(summary(x))
+    #rownames(r)<-""
+  }
+  return(r)
+}
+
+#'===========================================================================
+#' resume2
+#'===========================================================================
+#'@title resume2
 #'@description affiche un résumé des données d'un vecteur numérique.
 #'@author JcB
 #'@param x: un vecteur de données
@@ -475,14 +478,14 @@ passages<-function(hop,hop_name="CH",col="blue",sens=1,main="",cexlabel=0.8)
 #'@param tc titre court. Apparaitra dans la liste des tableaux
 #'@param label: label pour faire référence au tableau.
   
-resume<-function (x,echo=FALSE,tl=NULL,tc=NULL,label=NULL)
+resume2<-function (x, echo=FALSE, tl=NULL, tc=NULL, label=NULL)
 {
   name=c("moyenne","écart-type","médiane","min","max","n")
   m<-mean(x,na.remove=TRUE)
   e<-sd(x)
   r<-matrix(c(m,e,median(x),min(x),max(x),length(x)),1,6)
   colnames(r)<-name
-  rownames(b)<-""
+  rownames(r)<-""
   if(echo==TRUE){
     require("xtable")
     print(xtable(r,caption=c(tl,tc),label=label,type="latex",table.placement="tp",latex.environments=c("center", "footnotesize")))
@@ -492,7 +495,7 @@ resume<-function (x,echo=FALSE,tl=NULL,tc=NULL,label=NULL)
 
 # usage
 # a<-c(1,2,3,4,5)
-# b<-resume(a)
+# b<-resume2(a)
 # > b
 #    moyenne écart-type médiane min max
 #[1,]       3   1.581139       3   1   5

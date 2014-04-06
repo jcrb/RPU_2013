@@ -227,19 +227,26 @@ J46   Etat de mal asthmatique
 
 ```{r asthme,echo=FALSE}
 asthme<-dpr[substr(dpr$DP,1,3)=="J45" | substr(dpr$DP,1,3)=="J46",]
+nrow(asthme)
 summary(as.factor(asthme$DP))
 tab1(as.factor(asthme$DP),main="Distribution des diagnostics d'asthme")
 s<-week(asthme$ENTREE)
 barplot(table(s),main="Crises d'asthme - 2013",xlab="Semaines")
 tab1(table(s))
 summary(asthme)
+
+summary(asthme$GRAVITE)
+barplot(summary(asthme$GRAVITE),xlab="Gravité (CCMU)", ylab="Nombre", main="Gravité des crises d'asthme")
+
+hist(asthme$AGE, breaks=20, xlab="Âge", ylab="Nombre", main="Histogramme des classes d'âge pour l'asthme")
+
 ```
-Gravité des crises: prédominance CCMU  2  et 3 et qulques 4 ou 5 
-hospit = mutation+tranfert = 323+13=336
-taux hospit supérieur à 30% (336/1001)  
-taux hospit en services chaud (SI+SC+Rea): 52/1001= 5.2% et 52/323= 16% des hospit  
-age: moyenne 24 ans(médiane 14 ans)  
-sex ratio: 0.98
+Gravité des crises: prédominance CCMU  2  et 3 et qulques 4 ou 5   
+hospit = mutation+tranfert = 323+13=336  
+taux hospit supérieur à 30% (336/1001)   
+taux hospit en services chaud (SI+SC+Rea): 52/1001= 5.2% et 52/323= 16% des hospit   
+age: moyenne 24 ans(médiane 14 ans)   
+sex ratio: 0.98  
 
 Crise asthme hospitalisée et lieu d'hospitalisation:
 ```{r asthme2}
