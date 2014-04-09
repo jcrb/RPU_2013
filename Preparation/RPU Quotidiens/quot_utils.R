@@ -1,5 +1,7 @@
 # Ensemble de fonctions pour intégrer automatiquement les RPU
 
+#  source("Preparation/RPU Quotidiens/quot_utils.R")
+
 # Liste des fonctions
 #' - rpu_jour
 #' - finess2hop

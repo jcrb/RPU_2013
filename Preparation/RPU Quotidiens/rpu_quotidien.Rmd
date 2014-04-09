@@ -127,3 +127,28 @@ r
 - sélestat: 22 et 23/2 pas de RPU
 - diaconat strasbourg: 1-2-3-4/3 puis plus rien
 - roosvelt: depuis le 5/2 OK
+
+Transformer unr liste de **.sql** en **.csv**
+==============================================
+
+On veut tansformer une liste fichier .sql stocké dans Archives_Sagec stockés dans dataQ en fichier .csv qui seront enregistrés dans dataQ/archivesCsv. Les fichier .sql sont désignés par leur date de production (un fichier contient 7 jours glissants. Seul le 7ème est considéré comme consolidé et est enregistré dans .csv).
+
+```{}
+date1 <- "2014-03-18"
+date2 <- "2014-04-06"
+p <- seq(as.Date(date1), as.Date(date2), 1)
+for(i in 1:length(p)){
++     dx <- rpu_jour(p[i])
++ }
+```
+Pour assembler tous les fichiers .csv de archivesCsv:
+
+assemble()
+
+Transformer le fichier obtenu en dataframe:
+
+dx <- lire_archive("rpu2014")
+min(as.Date(dx$ENTREE))
+max(as.Date(dx$ENTREE))
+save(dx, file="rpu2014d03.Rda")
+

@@ -21,10 +21,32 @@ fichiers source:
 - **zpo**: fichier des zones de proximité (zp.csv)
 ```{r file}
 setwd("~/Documents/Resural/Stat Resural/RPU_2013")
+source("Routines/mes_fonctions.R")
 zpo<-read.csv("doc/cartographie/data/zp.csv",header=TRUE, sep=",")
 load("doc/Demographie/pop67.rda")
 load("doc/Demographie/pop68.rda")
 load("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/carto_alsace.rda")
+```
+Commentaires
+-------------
+- **zpo** est un dataframe de 6 variables et 904 lignes:
+```{}
+[1] "CODE.DEP"                         **"CODE.COMMUNE"**                     "LIBELLE.DES.COMMUNES"            
+[4] "LIBELLE.DES.TERRITOIRES.DE.SANTE" "CODE.ZONES.DE.PROXIMITE"          "LIBELLE.DES.ZONES.DE.PROXIMITE"  
+```
+- **pop67** est le dataframe résultant de *pop67.rda*. Comporte 11 variables
+```{}
+ [1] "Code.région"               "Nom.de.la.région"          "Code.département"          "Code.arrondissement"      
+ [5] "Code.canton"               "Code.commune"              "Nom.de.la.commune"         "Population.municipale"    
+ [9] "Population.comptée.à.part" "Population.totale"         **"insee"**  
+ 
+ insee et CODE.COMMUNE sont identiques (dode insee de la commune) ce qui permet de merger sur cette colonne.
+```
+- **pop68** idem pour le 68
+- **als** est un SpatialPolygonsDataFrame résultant de *carto_alsace.rda*. La partie dataframe comporte les noms suivants:
+```{}
+[1] "ID_GEOFLA"  "CODE_COMM"  "INSEE_COM"  "NOM_COMM"   "STATUT"     "X_CHF_LIEU" "Y_CHF_LIEU" "X_CENTROID" "Y_CENTROID" "Z_MOYEN"   
+[11] "SUPERFICIE" "POPULATION" "CODE_CANT"  "CODE_ARR"   "CODE_DEPT"  "NOM_DEPT"   "CODE_REG"   "NOM_REGION"
 ```
 
 
@@ -58,9 +80,23 @@ base<-rbind(base1,base2)
 rm(base1,base2)
 names(base)
 ```
+**base** est un datadrame de 16 variables:
+```{}
+[1] "CODE.COMMUNE"                     "CODE.DEP"                         "LIBELLE.DES.COMMUNES"            
+[4] "LIBELLE.DES.TERRITOIRES.DE.SANTE" **"CODE.ZONES.DE.PROXIMITE"**      **"LIBELLE.DES.ZONES.DE.PROXIMITE"**  
+[7] "Code.région"                      "Nom.de.la.région"                 "Code.département"                
+[10] "Code.arrondissement"              "Code.canton"                      "Code.commune"                    
+[13] "Nom.de.la.commune"                "Population.municipale"            "Population.comptée.à.part"       
+[16] "Population.totale" 
+```
+A partir de là on peut déterminer la population d'une zone de proximité.
+
 
 
 Zone de proximité de Sélestat:
+- **zip6** vecteur d'entiers contenant les codes INSEE des communes du secteur de Sélestat
+- **zp6** est un SpatialPolygonsDataFrame contenant les communes du secteur de Sélestat
+- **a** est le dataframe extrait de zp6
 
 ```{r zp6_selestat}
 zip6<-base$CODE.COMMUNE[base$CODE.ZONES.DE.PROXIMITE==6]
@@ -105,10 +141,16 @@ title( main="Zone de proximité de Sélestat")
 copyright(2014)
 text(a$X_CENTROID * 100, a$Y_CENTROID * 100,labels=a$CODE_COMM,cex=0.6)
 
-code <- a[, c("INSEE_COM","CODE_COMM", "NOM_COMM")]
+code <- a[, c("INSEE_COM","CODE_COMM", "NOM_COMM","POPULATION","SUPERFICIE")]
 rownames(code) <- NULL
 code
-write.table(code, file="liste_communes_zp6.csv")
+write.table(code, file="doc/cartographie/RPU2013_Carto_Pop/ZP6_Selestat/liste_communes_zp6.csv")
+
+# population du territoire:
+sum(code$POPULATION)
+
+# superficie du territoire:
+sum(code$SUPERFICIE)
 ```
 
 
