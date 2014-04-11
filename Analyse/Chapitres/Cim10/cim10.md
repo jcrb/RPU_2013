@@ -7,16 +7,32 @@ source("../prologue.R")
 ```
 
 ```
-## [1] "Fichier courant: rpu2013d0110.Rda"
+## [1] "Fichier courant: rpu2013d0112.Rda"
 ```
 
 ```r
-source("../../mes_fonctions.R")
+source("../../../Routines/mes_fonctions.R")
+library("lubridate")
+library("epicalc")
+library("epitools")
+```
+
+```
+## 
+## Attaching package: 'epitools'
+## 
+## L'objet suivant est masqué from 'package:survival':
+## 
+##     ratetable
+```
+
+```r
+
 nrow(d1)
 ```
 
 ```
-## [1] 276452
+## [1] 344073
 ```
 
 
@@ -36,7 +52,7 @@ ndp
 ```
 
 ```
-## [1] 276452
+## [1] 344073
 ```
 
 ```r
@@ -46,7 +62,7 @@ ndpr
 ```
 
 ```
-## [1] 183565
+## [1] 228524
 ```
 
 ```r
@@ -85,7 +101,7 @@ summary(as.factor(a))
 
 ```
 ##      1      3      4      5      6      7     11     12     15     16 
-##      9  17297 146862  19111    235     46      1      1      2      1
+##      9  21634 182834  23622    302    118      1      1      2      1
 ```
 
 ```r
@@ -94,7 +110,7 @@ summary(as.factor(a))
 dpr <- d1[!is.na(d1$DP), c("DP", "CODE_POSTAL", "ENTREE", "FINESS", "GRAVITE", 
     "ORIENTATION", "MODE_SORTIE", "AGE", "SEXE", "TRANSPORT", "DESTINATION")]
 
-library("epitools")
+
 annee <- 2013
 ```
 
@@ -119,13 +135,13 @@ p
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##     2.0    63.5    79.0    72.2    86.0    98.0
+##     2.0    63.0    79.0    72.1    86.0    98.0
 ```
 
 Les pneumopaties bactériennes sans précision sont cotées J15.9 Dans la CIM10.
-467 diagnostics de ce type ont été portés au SAU en 2013.
+599 diagnostics de ce type ont été portés au SAU en 2013.
 
-Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age moyen est de 72.2 ans et la moitié de ces patients ont 79 ans et plus.
+Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age moyen est de 72.1 ans et la moitié de ces patients ont 79 ans et plus.
 
 
 
@@ -147,7 +163,7 @@ summary(as.factor(pneumo$GRAVITE))
 
 ```
 ##    1    2    3    4    5    D    P NA's 
-##   13  217  204   25    1    0    0    7
+##   13  268  276   29    2    0    0   11
 ```
 
 En fonction du mode de sortie;
@@ -158,7 +174,7 @@ summary(as.factor(pneumo$MODE_SORTIE))
 
 ```
 ##        NA  Mutation Transfert  Domicile     Décès      NA's 
-##         0       349         0        74         0        44
+##         0       459         0        93         0        47
 ```
 
 
@@ -170,7 +186,7 @@ summary(as.factor(pneumo$DESTINATION))
 
 ```
 ##   NA  MCO  SSR  SLD  PSY  HAD  HMS NA's 
-##    0  350    1    0    0    0    0  116
+##    0  460    1    0    0    0    0  138
 ```
 
 
@@ -183,13 +199,13 @@ a
 
 ```
 ##  CHIR FUGUE   HDT    HO   MED  OBST   PSA   REA   REO    SC  SCAM    SI 
-##     8     0     0     0   115     0     0     2     0     0     0     1 
+##    11     0     0     0   170     0     0     2     0     0     0     1 
 ##  UHCD  NA's 
-##   177   164
+##   208   207
 ```
 
 
-8 patients porteurs de problèmes respiratoires sont orienté en chirurgie : erreur ou manque de place en médecine ?
+11 patients porteurs de problèmes respiratoires sont orienté en chirurgie : erreur ou manque de place en médecine ?
 
 
 ```r
@@ -206,26 +222,77 @@ AVC <- dpr[substr(dpr$DP, 1, 3) >= "I60" & substr(dpr$DP, 1, 3) < "I65" | substr
     1, 3) == "G46" | substr(dpr$DP, 1, 3) == "G45", ]
 
 h <- hour(AVC$ENTREE)
-```
-
-```
-## Error: impossible de trouver la fonction "hour"
-```
-
-```r
 hist(h, breaks = 24, xlab = "Heure de la journée", main = "Répartition des AVC dans la journée")
 ```
 
+![plot of chunk avc](figure/avc1.png) 
+
+```r
+tab1(h, missing = FALSE, main = "Heures d'admission des AVC", col = "yellow")
 ```
-## Error: objet 'h' introuvable
+
+![plot of chunk avc](figure/avc2.png) 
+
+```
+## h : 
+##         Frequency Percent Cum. percent
+## 0              45     1.6          1.6
+## 1              38     1.4          3.0
+## 2              35     1.2          4.2
+## 3              29     1.0          5.2
+## 4              17     0.6          5.9
+## 5              26     0.9          6.8
+## 6              25     0.9          7.7
+## 7              49     1.8          9.4
+## 8             100     3.6         13.0
+## 9             173     6.2         19.2
+## 10            238     8.5         27.7
+## 11            246     8.8         36.5
+## 12            200     7.1         43.6
+## 13            175     6.2         49.9
+## 14            201     7.2         57.0
+## 15            172     6.1         63.2
+## 16            181     6.5         69.6
+## 17            197     7.0         76.7
+## 18            171     6.1         82.8
+## 19            129     4.6         87.4
+## 20            150     5.4         92.8
+## 21             80     2.9         95.6
+## 22             68     2.4         98.0
+## 23             55     2.0        100.0
+##   Total      2800   100.0        100.0
 ```
 
 ```r
-tab1(h, missing = FALSE, main = "Heures d'admission des AVC", col = "paleyellow")
+
+nAvc <- nrow(AVC)
+sAvc_age <- summary(AVC$AGE)
+srAVC <- sr(AVC)
+summary(AVC$TRANSPORT)
 ```
 
 ```
-## Error: impossible de trouver la fonction "tab1"
+##  AMBU    FO  HELI PERSO  SMUR  VSAB  NA's 
+##  1116     3    24   616    66   493   482
+```
+
+```r
+tab1(AVC$TRANSPORT)
+```
+
+![plot of chunk avc](figure/avc3.png) 
+
+```
+## AVC$TRANSPORT : 
+##         Frequency   %(NA+)   %(NA-)
+## AMBU         1116     39.9     48.1
+## FO              3      0.1      0.1
+## HELI           24      0.9      1.0
+## PERSO         616     22.0     26.6
+## SMUR           66      2.4      2.8
+## VSAB          493     17.6     21.3
+## NA's          482     17.2      0.0
+##   Total      2800    100.0    100.0
 ```
 
 
@@ -242,7 +309,7 @@ trauma_age
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##     0.0    13.0    28.0    33.6    50.0   112.0
+##     0.0    13.0    28.0    33.9    51.0   112.0
 ```
 
 ```r
@@ -252,8 +319,8 @@ trauma_sexe
 
 ```
 ##     F     I     M 
-## 29151     2 38691
+## 36609     3 48089
 ```
 
-Total traumato 67844  
-Pourcentage 36.96
+Total traumato 84701  
+Pourcentage 37.06

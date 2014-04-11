@@ -3,7 +3,11 @@ CIM 10
 
 ```{r prologue,cache=TRUE}
 source("../prologue.R")
-source("../Routines/mes_fonctions.R")
+source("../../../Routines/mes_fonctions.R")
+library("lubridate")
+library("epicalc")
+library("epitools")
+
 nrow(d1)
 ```
 
@@ -52,7 +56,7 @@ summary(as.factor(a))
 # Création d'un dataframe DP
 dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT","DESTINATION")]
 
-library("epitools")
+
 annee<-2013
 ```
 
@@ -111,7 +115,13 @@ AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,
 
 h<-hour(AVC$ENTREE)
 hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée")
-tab1(h,missing=FALSE,main="Heures d'admission des AVC",col="paleyellow")
+tab1(h,missing=FALSE,main="Heures d'admission des AVC",col="yellow")
+
+nAvc <- nrow(AVC)
+sAvc_age <- summary(AVC$AGE)
+srAVC <- sr(AVC)
+summary(AVC$TRANSPORT)
+tab1(AVC$TRANSPORT)
 ```
 
 Traumatologie

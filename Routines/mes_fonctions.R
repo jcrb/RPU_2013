@@ -208,14 +208,15 @@ mysql2resural<-function(an,mois)
 # Sex Ratio
 #===========================================================================
 #'@title sr
-sr <- function(){
+sr <- function(g){
   sg <- table(g$SEXE)
   sg <- sg[-2] # retire les sexes indéterminés
   psg <- round(prop.table(sg)*100,2)
   b <- rbind(sg,psg)
   rownames(b) <- c("n","%")
   
-  sex_ratio <- round(sg["M"]/sg["F"],2)
+  sex_ratio <- sg["M"]/sg["F"]
+  return(sex_ratio)
 }
 
 #===========================================================================
