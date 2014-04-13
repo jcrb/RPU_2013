@@ -211,6 +211,7 @@ dpr$DP<-gsub("+","",as.character(dpr$DP),fixed=TRUE)
 AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45" ,]
 @
 
+
 \subsection*{Horaire des AVC}
 \index{AVC!heure}
 

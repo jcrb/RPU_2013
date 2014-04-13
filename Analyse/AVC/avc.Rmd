@@ -1,0 +1,101 @@
+CIM 10 - Etude des AVC
+========================================================
+
+```{}
+source("../Chapitres/prologue.R")
+load("../../rpu2013d0112.Rda")
+nrow(d1)
+
+# Création d'un dataframe DP
+dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT","DESTINATION")]
+
+AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45" ,]
+getwd()
+save(AVC, file="avc.Rda")
+```
+
+AVC
+---
+
+On travaille uniquement sur le fichier AVC
+
+```{r avc, echo=FALSE, comment=""}
+
+source("../../Routines/mes_fonctions.R")
+
+library("lubridate")
+library("epicalc")
+library("epitools")
+
+load("avc.Rda")
+
+h<-hour(AVC$ENTREE)
+s<-summary(as.factor(h))
+
+# arrivées en journées
+jour <- sum(s[9:20])
+pjour <- round(jour*100/sum(s),2)
+
+hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée")
+tab1(h,missing=FALSE,main="Heures d'admission des AVC",col="yellow")
+
+nAvc <- nrow(AVC)
+sAvc_age <- summary(AVC$AGE)
+srAVC <- sr(AVC)
+
+Mode.transport <- AVC$TRANSPORT
+summary(Mode.transport)
+tab1(Mode.transport, main="Mode de transport des AVC vers les urgences", ylab="Fréquence")
+
+boxplot(AVC$AGE~ factor(AVC$SEXE), ylab="Age (années)", main="Comparaison des âges entre les Femmes (F) et les Hommes (H)", col="yellow")
+
+
+s_sortie <- summary(AVC$MODE_SORTIE)
+s_sortie
+hosp <- sum(s_sortie["Mutation"], s_sortie["Transfert"])
+tx_hosp_brut <- hosp/nAvc
+tx_hosp_cor <- hosp/(nAvc-s_sortie["NA's"])
+
+tapply(AVC$AGE, AVC$MODE_SORTIE, mean, na.rm=TRUE )
+boxplot(AVC$AGE ~ AVC$MODE_SORTIE)
+aov <- aov(AVC$AGE ~ AVC$MODE_SORTIE)
+aov
+summary(aov)
+
+# qui transfère ?
+print("AVC par étalissement")
+summary(AVC$FINESS)
+print("Devenir des AVC par établissement")
+trans <- table(AVC$FINESS, AVC$MODE_SORTIE)
+trans
+# taux de transfert par établissement
+print("taux de transfert par établissement (en %)")
+round(trans[,3]*100/(trans[,2]+trans[,3]), 2)
+print("Saverne ne cote pas la CIM 10")
+print("Sélestat ne transfère pas ?")
+
+hist(AVC$AGE,main="Répartition des AVC",col="pink",xlab="Âge en années")
+
+t<-table(factor(AVC$SEXE),AVC$AGE)
+barplot(t,col=c("red","darkblue"),main="Répartion des AVC selon l'âge et le sexe",legend=TRUE, xlab="Âge (années)", ylab="Fréquence")
+```
+
+- Nombre d'AVC ayant fait l'objet d'un RPU en 2013: `r nAvc`
+- sex-ratio `r srAVC`
+- age moyen: `r sAvc_age["Mean"]` ans, médiane `r sAvc_age["Median"]` ans, écart inter-quartile `r sAvc_age["1st Qu."]`-`r sAvc_age["3rd Qu."]` ans.
+- L'age moyen des femmes (`r w$estimate[1]` ans) est plus élevé que celui des hommes (`r w$estimate[2]` ans) (p = `r w$p.value`).
+- taux hospitalisation brut (NA inclus): `r tx_hosp_brut`
+- taux hospitalisation corrigé (NA exclus): `r tx_hosp_cor`
+- % d'arrivée en journée (8h-20h) `r pjour` %
+
+Différence AGE selon le SEXE
+----------------------------
+
+```{r age_sexe}
+w <- t.test(AVC$AGE~ factor(AVC$SEXE), alternative="two.sided")
+w
+```
+- age moyen des femmes `r w$estimate[1]`
+- age moyen des hommes `r w$estimate[2]`
+- t = `r w$statistic` (p < `r w$p.value`)
+

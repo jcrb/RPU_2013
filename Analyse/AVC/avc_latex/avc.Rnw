@@ -1,0 +1,18 @@
+\documentclass{article}
+
+\documentclass[12pt,english,french,twoside]{book}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage[utf8]{inputenc}
+\usepackage[utf8x]{inputenc} 
+
+\begin{document}
+
+\title{Prise en charge des Acidents Vasculaires Cérébraux en Alsace \\Analyse des RPU 2013}
+\author{RESURAL\thanks{Réseau des urgences en Alsace - Equipe de coordination Dr J.C.
+Bartier \& Madame Christine Hecker}}
+\date{\today}
+\maketitle
+
+\end{document}
