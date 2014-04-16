@@ -19,21 +19,6 @@ AVC
 
 On travaille uniquement sur le fichier AVC
 
-
-```
-Loading required package: foreign
-Loading required package: survival
-Loading required package: splines
-Loading required package: MASS
-Loading required package: nnet
-
-Attaching package: 'epitools'
-
-L'objet suivant est masqué from 'package:survival':
-
-    ratetable
-```
-
 ![plot of chunk avc](figure/avc1.png) ![plot of chunk avc](figure/avc2.png) 
 
 ```
@@ -232,3 +217,94 @@ w
 - age moyen des hommes 68.5491
 - t = 8.991 (p < 4.4089 &times; 10<sup>-19</sup>)
 
+Par mois
+--------
+
+```r
+m <- month(AVC$ENTREE, label = TRUE)
+summary(m)
+```
+
+```
+## Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
+## 235 191 229 270 251 258 250 254 209 201 216 236
+```
+
+```r
+barplot(summary(m), main = "Répartition mensuelle des AVC en Alsace", xlab = "Année 2013", 
+    ylab = "Fréquence")
+abline(h = mean(summary(m)), col = "red")
+```
+
+![plot of chunk avc_mois](figure/avc_mois.png) 
+
+```r
+mean(summary(m))
+```
+
+```
+## [1] 233.3
+```
+
+
+Selon le jour de la semaine
+---------------------------
+
+
+```r
+library("gdata")
+```
+
+```
+## gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+## 
+## gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+## 
+## Attaching package: 'gdata'
+## 
+## L'objet suivant est masqué from 'package:stats':
+## 
+##     nobs
+## 
+## L'objet suivant est masqué from 'package:utils':
+## 
+##     object.size
+```
+
+```r
+w <- wday(AVC$ENTREE, label = TRUE)
+levels(w) <- c("Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam")
+table(w)
+```
+
+```
+## w
+## Dim Lun Mar Mer Jeu Ven Sam 
+## 323 467 457 399 396 408 350
+```
+
+```r
+round(prop.table(table(w)) * 100, 2)
+```
+
+```
+## w
+##   Dim   Lun   Mar   Mer   Jeu   Ven   Sam 
+## 11.54 16.68 16.32 14.25 14.14 14.57 12.50
+```
+
+```r
+
+
+
+# plot(w,main='AVC selon le jour de la semaine')
+# abline(h=nrow(AVC)/7,col='red') on rordonne pour que la semaine commence
+# le lundi
+w2 <- reorder(w, new.order = c("Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"))
+plot(w2, main = "AVC selon le jour de la semaine")
+abline(h = nrow(AVC)/7, col = "red")
+```
+
+![plot of chunk wwek](figure/wwek.png) 
+
+Proportion théorique = 14.28\% par jour de la semaine.

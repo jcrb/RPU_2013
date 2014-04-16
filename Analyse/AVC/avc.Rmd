@@ -19,7 +19,7 @@ AVC
 
 On travaille uniquement sur le fichier AVC
 
-```{r avc, echo=FALSE, comment=""}
+```{r avc, echo=FALSE, comment="",message=FALSE}
 
 source("../../Routines/mes_fonctions.R")
 
@@ -99,3 +99,33 @@ w
 - age moyen des hommes `r w$estimate[2]`
 - t = `r w$statistic` (p < `r w$p.value`)
 
+Par mois
+--------
+```{r avc_mois}
+m<-month(AVC$ENTREE, label=TRUE)
+summary(m)
+barplot(summary(m), main="Répartition mensuelle des AVC en Alsace",xlab="Année 2013", ylab="Fréquence")
+abline(h=mean(summary(m)), col="red")
+mean(summary(m))
+```
+
+Selon le jour de la semaine
+---------------------------
+
+```{r wwek}
+library("gdata")
+w<-wday(AVC$ENTREE,label=TRUE)
+levels(w)<-c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
+table(w)
+round( prop.table(table(w))*100,2)
+
+
+
+# plot(w,main="AVC selon le jour de la semaine")
+# abline(h=nrow(AVC)/7,col="red")
+# on rordonne pour que la semaine commence le lundi
+w2<-reorder(w,new.order=c("Lun","Mar","Mer","Jeu","Ven","Sam","Dim"))
+plot(w2,main="AVC selon le jour de la semaine")
+abline(h=nrow(AVC)/7,col="red")
+```
+Proportion théorique = 14.28\% par jour de la semaine.
