@@ -129,3 +129,11 @@ plot(w2,main="AVC selon le jour de la semaine")
 abline(h=nrow(AVC)/7,col="red")
 ```
 Proportion théorique = 14.28\% par jour de la semaine.
+
+Selon le type
+-------------
+```{r type}
+x <- tab1(AVC$DP, horiz=TRUE)
+x
+```
+
