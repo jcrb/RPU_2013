@@ -8,8 +8,19 @@ nrow(d1)
 
 # Création d'un dataframe DP
 dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT","DESTINATION")]
+# suppression du point et autres symboles
+dpr$DP<-gsub("\xe9","é",dpr$DP)
+dpr$DP<-gsub(".","",dpr$DP,fixed=TRUE)
+dpr$DP<-gsub("+","",dpr$DP,fixed=TRUE)
 
+# ATTENTION: sélectionne AVC constitués et AIT
 AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45" ,]
+AVC$etiologie <- NA
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("I60","I61","I62")] <-"HEMO"
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("I63","I64")] <-"ISCH"
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("I64")] <-"NPRE"
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("G45","G46")] <-"AIT"
+AVC$etiologie <- as.factor(AVC$etiologie)
 getwd()
 save(AVC, file="avc.Rda")
 ```
@@ -133,7 +144,17 @@ Proportion théorique = 14.28\% par jour de la semaine.
 Selon le type
 -------------
 ```{r type}
-x <- tab1(AVC$DP, horiz=TRUE)
+AVC$DP <- substr(AVC$DP,1,3)
+x <- tab1(AVC$DP, horiz=TRUE, main="AVC selon la classification CIM10", xlab="Fréquence")
 x
+
+table(AVC$FINESS, AVC$DP)
+
+tab1(AVC$etiologie)
+
+t <- table(AVC$SEXE,AVC$etiologie)
+round(prop.table(t,1),2)
+
+
 ```
 

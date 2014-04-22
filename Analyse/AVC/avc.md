@@ -8,8 +8,19 @@ nrow(d1)
 
 # Création d'un dataframe DP
 dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT","DESTINATION")]
+# suppression du point et autres symboles
+dpr$DP<-gsub("\xe9","é",dpr$DP)
+dpr$DP<-gsub(".","",dpr$DP,fixed=TRUE)
+dpr$DP<-gsub("+","",dpr$DP,fixed=TRUE)
 
+# ATTENTION: sélectionne AVC constitués et AIT
 AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45" ,]
+AVC$etiologie <- NA
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("I60","I61","I62")] <-"HEMO"
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("I63","I64")] <-"ISCH"
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("I64")] <-"NPRE"
+AVC$etiologie[substr(AVC$DP,1,3) %in% c("G45","G46")] <-"AIT"
+AVC$etiologie <- as.factor(AVC$etiologie)
 getwd()
 save(AVC, file="avc.Rda")
 ```
@@ -313,10 +324,12 @@ Selon le type
 -------------
 
 ```r
-x <- tab1(AVC$DP, horiz = TRUE)
+AVC$DP <- substr(AVC$DP, 1, 3)
+x <- tab1(AVC$DP, horiz = TRUE, main = "AVC selon la classification CIM10", 
+    xlab = "Fréquence")
 ```
 
-![plot of chunk type](figure/type.png) 
+![plot of chunk type](figure/type1.png) 
 
 ```r
 x
@@ -325,77 +338,71 @@ x
 ```
 ## AVC$DP : 
 ##         Frequency Percent Cum. percent
-## G450            2     0.1          0.1
-## G45.0           2     0.1          0.1
-## G451            5     0.2          0.3
-## G45.1           2     0.1          0.4
-## G452           17     0.6          1.0
-## G45.2           3     0.1          1.1
-## G453            5     0.2          1.3
-## G45.3           2     0.1          1.4
-## G454           25     0.9          2.2
-## G45.4          16     0.6          2.8
-## G458           50     1.8          4.6
-## G45.8           2     0.1          4.7
-## G459          275     9.8         14.5
-## G45.9         342    12.2         26.7
-## G460            5     0.2         26.9
-## G46.0           1     0.0         26.9
-## G462            1     0.0         27.0
-## G463            1     0.0         27.0
-## G464            4     0.1         27.1
-## G46.4           9     0.3         27.5
-## G467            2     0.1         27.5
-## G46.7          14     0.5         28.0
-## G468            3     0.1         28.1
-## I600            1     0.0         28.2
-## I60.0           1     0.0         28.2
-## I601            4     0.1         28.4
-## I60.1           1     0.0         28.4
-## I602            2     0.1         28.5
-## I60.2           1     0.0         28.5
-## I606            1     0.0         28.5
-## I607            1     0.0         28.6
-## I60.7           1     0.0         28.6
-## I608            9     0.3         28.9
-## I60.8          27     1.0         29.9
-## I609            8     0.3         30.2
-## I60.9          13     0.5         30.6
-## I610           10     0.4         31.0
-## I61.0          70     2.5         33.5
-## I611           15     0.5         34.0
-## I61.1          12     0.4         34.5
-## I612           18     0.6         35.1
-## I61.2           3     0.1         35.2
-## I613            2     0.1         35.3
-## I614            9     0.3         35.6
-## I61.4           1     0.0         35.6
-## I615            4     0.1         35.8
-## I61.5           2     0.1         35.9
-## I616           21     0.8         36.6
-## I61.6           1     0.0         36.6
-## I618           16     0.6         37.2
-## I619           19     0.7         37.9
-## I61.9           3     0.1         38.0
-## I620           17     0.6         38.6
-## I62.0           2     0.1         38.7
-## I621            2     0.1         38.8
-## I629           31     1.1         39.9
-## I62.9          47     1.7         41.5
-## I630           13     0.5         42.0
-## I631            1     0.0         42.0
-## I632            4     0.1         42.2
-## I633           26     0.9         43.1
-## I63.3           1     0.0         43.1
-## I634           14     0.5         43.6
-## I635           19     0.7         44.3
-## I63.5           2     0.1         44.4
-## I636            1     0.0         44.4
-## I638           66     2.4         46.8
-## I639          293    10.5         57.2
-## I63.9         344    12.3         69.5
+## G45           748    26.7         26.7
+## G46            40     1.4         28.1
+## I60            70     2.5         30.6
+## I61           206     7.4         38.0
+## I62            99     3.5         41.5
+## I63           784    28.0         69.5
 ## I64           853    30.5        100.0
 ##   Total      2800   100.0        100.0
+```
+
+```r
+
+table(AVC$FINESS, AVC$DP)
+```
+
+```
+##      
+##       G45 G46 I60 I61 I62 I63 I64
+##   3Fr  19   1   0   3   0  42   3
+##   Alk  11   0   0   3   0  17   1
+##   Col 226   8  22  17  34 100 270
+##   Dia   0   0   0   0   0   0   0
+##   Geb   8   1   1   0   0  13   2
+##   Hag 112   0   3  41   9  88 290
+##   Hus 103  13  16  30  35 169  66
+##   Mul 143  16  22  75  15 247 141
+##   Odi   0   0   0   0   0   1   0
+##   Sel  94   1   2  33   5  63  68
+##   Wis  32   0   4   4   1  44  12
+##   Sav   0   0   0   0   0   0   0
+```
+
+```r
+
+tab1(AVC$etiologie)
+```
+
+![plot of chunk type](figure/type2.png) 
+
+```
+## AVC$etiologie : 
+##         Frequency Percent Cum. percent
+## AIT           788    28.1         28.1
+## HEMO          375    13.4         41.5
+## ISCH          784    28.0         69.5
+## NPRE          853    30.5        100.0
+##   Total      2800   100.0        100.0
+```
+
+```r
+
+t <- table(AVC$SEXE, AVC$etiologie)
+round(prop.table(t, 1), 2)
+```
+
+```
+##    
+##      AIT HEMO ISCH NPRE
+##   F 0.27 0.13 0.28 0.32
+##   I                    
+##   M 0.29 0.14 0.28 0.28
+```
+
+```r
+
 ```
 
 
