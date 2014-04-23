@@ -372,7 +372,7 @@ table(AVC$FINESS, AVC$DP)
 
 ```r
 
-tab1(AVC$etiologie)
+tab1(AVC$etiologie, main = "Etiologies regroupées", ylab = "Fréquence")
 ```
 
 ![plot of chunk type](figure/type2.png) 
@@ -389,20 +389,28 @@ tab1(AVC$etiologie)
 
 ```r
 
-t <- table(AVC$SEXE, AVC$etiologie)
-round(prop.table(t, 1), 2)
+# étiologie selon le sexe en pourcentage
+t <- table(factor(AVC$SEXE), AVC$etiologie)
+round(prop.table(t, 1) * 100, 2)
 ```
 
 ```
 ##    
-##      AIT HEMO ISCH NPRE
-##   F 0.27 0.13 0.28 0.32
-##   I                    
-##   M 0.29 0.14 0.28 0.28
+##       AIT  HEMO  ISCH  NPRE
+##   F 27.17 12.87 27.71 32.25
+##   M 29.23 13.97 28.32 28.47
 ```
 
 ```r
+chisq.test(t)
+```
 
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  t
+## X-squared = 5.043, df = 3, p-value = 0.1686
 ```
 
 

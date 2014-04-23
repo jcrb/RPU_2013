@@ -150,11 +150,12 @@ x
 
 table(AVC$FINESS, AVC$DP)
 
-tab1(AVC$etiologie)
+tab1(AVC$etiologie, main="Etiologies regroupées", ylab="Fréquence")
 
-t <- table(AVC$SEXE,AVC$etiologie)
-round(prop.table(t,1),2)
-
+# étiologie selon le sexe en pourcentage
+t <- table(factor(AVC$SEXE),AVC$etiologie)
+round(prop.table(t,1)*100,2)
+chisq.test(t)
 
 ```
 
