@@ -563,3 +563,16 @@ xprop.table <- function(t, rnames=""){
   rownames(b) <-c("n","%")
   return(b)
 }
+
+#===========================================================================
+# meanna
+#===========================================================================
+#'@ Evalue le pourcentage de non réponse (NA) dans un vecteur
+#'@param x un vecteur de données
+#'@param nombre de chiffre après la virgul (défaut = 2)
+#'@return le % de NA
+#'@usage sort(tapply(d1$SORTIE, d1$FINESS, meanna)) retourne le % de NA de chaque hopital pour l'item SORTIE
+meanna <- function(x, digits=2){
+  a<-round(mean(is.na(x))*100, digits);
+  return(a)
+}

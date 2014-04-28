@@ -1,3 +1,147 @@
+Commentaires sur les RPU 2013
+========================================================
+Général
+-------
+Encoder les fichiers en UTF8 (\e9 au lieu de é haguenau)
+
+RPU Administratif (Core)
+-------------------------
+- Il doit être transmis tous les jours avant 4 heures du matin
+- Le fichier doit comporter un nombre d'enregistrements égal au nombre de passages (inscriptions) au service des urgences(SU)
+- Il comprend l'ensemble des données recueillies au moment de l'enregistrement administratif du patient:
+  1. n° de dossier
+  2. Date et heure d'enregistrement
+  3. Le n° FINESS (géographique) de l'établissement
+  4. La commune de résidence
+  5. Le code postal
+  6. Date de naissance
+  7. Mode d'entrée
+  8. Provenance
+  9. Mode de transport
+  10. Prise en charge durant le transport
+
+RPU Médical (Supplementary)
+---------------------------
+- RPU administratif +
+  1. Diagnostic principal (DP)
+  2. Diagnostics associés
+  3. Motif de recours
+  4. Gravité
+  5. Actes réalisés
+  6. Date et heure de sortie
+  7. Mode de sortie
+  8. Destination
+  9. Orientation
+- Cette partie du dossier est transmise au plus pars dans les 6 jours.
+
+
+No de dossier
+-------------
+- attribué par l'expéditeur
+- doit être unique
+- permet de lier le RPU aux diagnostics associés et aux gestes
+
+FINESS
+------
+FINESS géographique (mettre la liste des finess)
+
+COMMUNE
+-------
+- nom de la commune de résidence du patient
+- lettre majuscules sans accent
+- les nom composé sont séparés par un tiret (WIR-AU-VAL)
+- Modèle INSEE
+
+Date-Heure
+----------
+
+- format ISO
+- heure d'entrée et de sortie sont obligatoire sinon rejet
+- heure de sortie ne peut pas être inférieure à l'heue d'entrée
+- heure de sortie correspond à la sortie physique du patient
+
+MODE D’ENTREE
+-------------
+Le RPU connait 3 modes d'entrée:
+- Mutation: le malade vient d'une autre unité médicale de la même entité juridique
+- Transfert: le malade vient d'une autre entité juridique 
+- Domicile: le malade vient de son domicile ou de son substitut, tel une structure d'hébergement médico-social. Ce mode inclut les entrées à partir de la voie publique. Le code 8 du mode d'entrée est à utiliser en cas de naissance d'un nouveau-né quelque soit la situation d’hospitalisation ou de non hospitalisation de la mère
+
+Une correction est nécessaire pour les **transferts** qui sont mal ortographiés dans certains enregistrements:
+
+d1$MODE_ENTREE <- as.character(d1$MODE_ENTREE)
+d1[d1$MODE_ENTREE == "Transfe  rt" & !is.na(d1$MODE_ENTREE), "MODE_ENTREE"] <- "Transfert"
+d1$MODE_ENTREE <- as.factor(d1$MODE_ENTREE)
+summary(d1$MODE_ENTREE)
+
+Domicile  Mutation Transfert      NA's 
+   301318      3512      3355     32153 
+   
+Provenance
+----------
+Le RPU connait deux origine du patient 
+- par *mutation ou transfert*. Le patient est adressé par un service du même établissement (*mutation*) ou d'un autre établissement (*transfert*). On distingue 4 cas:
+  - MCO: un service hospitalier
+  - SSR: soins de suite et de réadaptation
+  - SLD: soins de longue durée
+  - PSY: psychiatrie
+- en provenance directe du *domicile*
+  - soit parce que c'est le choix du patient. C'est le cas de la plupart des passages aux urgences et ce passage n'est pas du à des raisons organisationelles (**PEA**).
+  - soit parcequ'on lui a demandé de passer par les urgences avant d'être admis dans un autre service. Le passage aux urgences se fait pour des raisons organisationnelles (**PEO**).
+
+Pour 2013 les résultats sont les suivants:
+
+       3Fr   Alk   Col   Dia   Geb   Hag   Hus   Mul   Odi   Sel   Wis   Sav
+  NA      0     0     0     0     0     0     0     0     0     0     0     0
+  MCO    23     1  2394   852    20  1522  1446   905     1   656     9    14
+  SSR     0     0     0    14     7    13    13     0     0     0     1     0
+  SLD     0     0     0     7     3     4     8     0     0     0     0     0
+  PSY     0     2     0     0     0    29    14     0     0     0     0     0
+  PEA    12     0 61308    31  2256     0     0 52579 25739 28878 12453   718
+  PEO     0     0  1056 27436    10     0     0   418   204     0     0     0
+
+Hôpitaux devant modifier leur paramétrage:
+- 3Fr: item non renseigné
+- Alk: item non renseigné
+- Dia: inversion PEA-PEO
+- Geb: item partiellement renseigné
+- Hag: item non renseigné
+- Hus: item non renseigné
+- Sav: item partiellement renseigné
+
+- Les chiffres de *provenance* et *mode d'entrée* devraient être équivalents.
+- la somme PEA + PEO doit être égale à MODE_ENTREE.Domicile
+
+CCMU
+----
+
+- CCMU 1: consultation simple sans acte biologique ou radiologique (ex. angine)
+- CCMU 2: nécessité d'un acte bio ou radio et/ou d'un petit geste (suture), pas d'hospitalisation
+- CCMU 3: hospitalisation nécessaire dans un service conventionnel
+- CCMU 4: SI, SC
+- CCMU 5: REA
+
+Lire un fichier depuis google drive
+-----------------------------------
+
+1. créer un fichier dans drive (calc)
+2. le rendre exportable: fichier/publier sur le web/démarrer la publication, remplacer page Web par CSV
+3. copier l'adresse du lien
+```{}
+require(RCurl)
+file <- "https://docs.google.com/spreadsheet/pub?key=0Aieb-IfcCNcXdFh2bklWeHhKUTVwZUFMSlBJQkpPcWc&output=csv"
+f <- read.table(textConnection(getURL(file)), header=T, sep=",")
+```
+
+
+Test Jahia (9/12/2013)
+-----------------------
+
+- Création dossier ORUDAL dans téléchargement
+- 3 fichiers y sont placées: test2.html, data2.csv et dygraphs.js
+- création d'un lien dans Orudal vers test2.html
+- fonctionne sans pb
+
 RPU
 ===========
 
@@ -143,3 +287,4 @@ Les hôpitaux sont dotés d'un système d'information (SI) et les SU sont inform
 Alsace e-santé met en place les connecteurs permettant le transfert des fichiers depuis l'établissement jusqu'à la plateforme esanté.
 AeS met en place un accès aux données du RPU pour permettre à RESURAL d'y accéder
 Resural exploite les données au profit des ES, de Résural et de l'OUDAL.
+

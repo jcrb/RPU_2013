@@ -184,7 +184,7 @@ hljs.initHighlightingOnLoad();
 <pre><code class="r">date()
 </code></pre>
 
-<pre><code>## [1] &quot;Fri Jan  3 18:05:35 2014&quot;
+<pre><code>## [1] &quot;Mon Apr 28 15:21:40 2014&quot;
 </code></pre>
 
 <pre><code class="r">wd &lt;- getwd()
@@ -210,7 +210,7 @@ wd
 ##     renomme.variable, residus, wtd.mean, wtd.table, wtd.var
 ## 
 ## Rattle : une interface graphique gratuite pour l&#39;exploration de données avec R.
-## Version 2.6.26 r77 Copyright (c) 2006-2013 Togaware Pty Ltd.
+## Version 3.0.2 r169 Copyright (c) 2006-2013 Togaware Pty Ltd.
 ## Entrez &#39;rattle()&#39; pour secouer, faire vibrer, et faire défiler vos données.
 ## Loading required package: foreign
 ## Loading required package: survival
@@ -237,13 +237,13 @@ wd
 ##     cars
 </code></pre>
 
-<pre><code>## [1] &quot;Fichier courant: rpu2013d0111.Rda&quot;
+<pre><code>## [1] &quot;Fichier courant: rpu2013d0112.Rda&quot;
 </code></pre>
 
 <pre><code class="r">nrow(d1)
 </code></pre>
 
-<pre><code>## [1] 301767
+<pre><code>## [1] 344073
 </code></pre>
 
 <h2>Données générales</h2>
@@ -253,7 +253,7 @@ a &lt;- x[substr(x, 1, 2) == &quot;57&quot;]
 length(a)
 </code></pre>
 
-<pre><code>## [1] 2827
+<pre><code>## [1] 3354
 </code></pre>
 
 <h2>Origine géographique des patients</h2>
@@ -269,30 +269,33 @@ rownames(c) &lt;- c(&quot;n&quot;, &quot;%&quot;)
 c
 </code></pre>
 
-<pre><code>##   96 48 23 09 32 98 19 47 36 46 58 12 05 53 65 16 43 87 15 24 61 81    18
-## n  1  4  5  8  8  8  9  9 10 10 10 11 12 12 12 13 13 14 15 15 15 15 18.00
-## %  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0.01
-##      85    17    20    82    86    07    40    04    26    03    22    37
-## n 18.00 19.00 20.00 20.00 21.00 22.00 22.00 25.00 25.00 27.00 27.00 27.00
+<pre><code>##   96 48 23 98 09 19 32 46 58 36 47 12 43 65 53 16 24 61    05    15    20
+## n  1  4  5  8  9  9 10 10 10 11 11 12 14 14 15 16 16 17 18.00 19.00 22.00
+## %  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0.01  0.01  0.01
+##      81    85    18    82    87    86    04    07    17    40    22    03
+## n 22.00 22.00 23.00 23.00 24.00 25.00 26.00 26.00 27.00 27.00 28.00 31.00
 ## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01
-##      11    41    64    14    28    50    72    89    56    45    30    39
-## n 28.00 29.00 30.00 31.00 32.00 32.00 32.00 32.00 33.00 34.00 35.00 35.00
+##      41    37    26    50    11    28    56    89    64    72    14    45
+## n 32.00 33.00 34.00 35.00 36.00 37.00 37.00 37.00 38.00 38.00 39.00 39.00
 ## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01
-##      49    52    79    10    08    27    84    73    00    42    80    55
-## n 37.00 37.00 39.00 40.00 43.00 43.00 43.00 44.00 45.00 45.00 45.00 50.00
-## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.02
-##      35    66    02    44    31    83    97    60    01    71    33    51
-## n 51.00 54.00 56.00 56.00 59.00 60.00 60.00 64.00 66.00 66.00 67.00 71.00
+##      79    49    52    10    80    00    08    30    39    42    27    73
+## n 40.00 44.00 44.00 46.00 48.00 49.00 49.00 49.00 49.00 50.00 51.00 51.00
+## %  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01  0.01
+##      84    35    02    66    55    97    31    60    44    83    71    33
+## n 53.00 55.00 62.00 63.00 64.00 67.00 68.00 68.00 70.00 73.00 74.00 81.00
 ## %  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02  0.02
-##      74    21    29    34    38    62    63     06     91     95     13
-## n 78.00 79.00 79.00 79.00 86.00 89.00 90.00 102.00 104.00 104.00 115.00
-## %  0.03  0.03  0.03  0.03  0.03  0.03  0.03   0.03   0.03   0.03   0.04
-##       94     93     78     76     70     92     69     77     59     75
-## n 118.00 127.00 130.00 143.00 153.00 154.00 174.00 183.00 256.00 282.00
-## %   0.04   0.04   0.04   0.05   0.05   0.05   0.06   0.06   0.08   0.09
-##      25    54     88     90      99      57        67        68
-## n 300.0 305.0 491.00 560.00 1653.00 2827.00 124304.00 166458.00
-## %   0.1   0.1   0.16   0.19    0.55    0.94     41.19     55.16
+##      01    51    29    74    21    63    34     62     91     06     38
+## n 82.00 85.00 87.00 88.00 91.00 98.00 99.00 108.00 119.00 120.00 121.00
+## %  0.02  0.02  0.03  0.03  0.03  0.03  0.03   0.03   0.03   0.03   0.04
+##       95     94     93     13     78     76     70     92     69     77
+## n 125.00 137.00 146.00 147.00 157.00 167.00 170.00 187.00 201.00 207.00
+## %   0.04   0.04   0.04   0.04   0.05   0.05   0.05   0.05   0.06   0.06
+##       59    75    54    25     88    90      99      57        67
+## n 289.00 336.0 345.0 353.0 560.00 688.0 1888.00 3354.00 144478.00
+## %   0.08   0.1   0.1   0.1   0.16   0.2    0.55    0.97     41.99
+##          68
+## n 186682.00
+## %     54.26
 </code></pre>
 
 <pre><code class="r">
@@ -300,11 +303,11 @@ org_als &lt;- as.numeric(ap[&quot;67&quot;] + ap[&quot;68&quot;])
 org_lim &lt;- as.numeric(ap[&quot;57&quot;] + ap[&quot;54&quot;] + ap[&quot;88&quot;] + ap[&quot;90&quot;])
 </code></pre>
 
-<h4>Patient domiciliés en Alsace: 96.35 %</h4>
+<h4>Patient domiciliés en Alsace: 96.25 %</h4>
 
-<h4>Patient domicilés dans les départements voisins: 1.39 %</h4>
+<h4>Patient domicilés dans les départements voisins: 1.43 %</h4>
 
-<p>La majorité des passages aux urgences sont le fait de résidents alsaciens. La fréquentation hors région ne représente que 3.65 % des passages. La Moselle (57) est le département extra régional le plus représenté. Cette situation s&#39;explique par les liens forts qui unissent l&#39;Alsace-Moselle au travers du Concordat.</p>
+<p>La majorité des passages aux urgences sont le fait de résidents alsaciens. La fréquentation hors région ne représente que 3.75 % des passages. La Moselle (57) est le département extra régional le plus représenté. Cette situation s&#39;explique par les liens forts qui unissent l&#39;Alsace-Moselle au travers du Concordat.</p>
 
 <h2>Passages en provenance des départements limitrophes</h2>
 
@@ -316,7 +319,7 @@ summary(b)
 </code></pre>
 
 <pre><code>##   54   57   88   90 
-##  305 2827  491  560
+##  345 3354  560  688
 </code></pre>
 
 <h3>TODO</h3>

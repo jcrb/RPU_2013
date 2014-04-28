@@ -10,6 +10,28 @@ library("epitools")
 
 nrow(d1)
 ```
+Utilisation de __tab1__ à la place de _summary_
+------------------------------------------------
+```{}
+<<echo=FALSE, comment="", results='asis'>>=
+x<-tab1(pneumo$ORIENTATION, main="Orientation des pneumopathies", graph=FALSE)
+dimnames(x$output.table)[[2]]<-c("Fréquence","Pourcentage","% hors NA's")
+xtable(x$output.table,caption=c(paste("Orientation des patients admis pour pneumonie aux urgences en région Alsace en", anc),"Pneumonies et service d'hospitalisation"),label="tab:pneumo_orient")
+@
+
+Remplacer FALSE par TRUE pour afficher le graphe
+```
+
+Utilisation de __resume2__ à la place de _summary_
+----------------------------------------------------
+```{}
+pneumo<-dpr[substr(dpr$DP,1,4)=="J159" ,]
+p<-resume2(pneumo$AGE)
+row.names(r)<-"âge"
+xtable(p, caption=c("Pneumonies et âge","Pneumonies et âge"),label="tab:pneumo_age")
+```
+
+
 
 Analyse
 ----------

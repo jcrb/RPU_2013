@@ -1,0 +1,321 @@
+RPU Presentation
+========================================================
+author: Dr JC Bartier
+date: 3/12/2013
+transition: rotate
+
+Introduction
+========================================================
+
+Un **RPU** est composé de **18 items** qui peuvent être
+divisés en deux groupes.
+
+- groupe principal ou __RPU administratif__ (**core**)
+
+  éléments de base qui peuvent **toujours** être relevés de manière exhausive dès l'admission du patient et transmis au fil de l'eau au concentrateur régional.
+
+  C'est le minimun qui doit pouvoir être transmis au moins une fois par 24 heures.
+
+- groupe complémentaire ou __RPU médical__ (**supplementary**)
+
+RPU Administratif (Core)
+========================================================
+
+- Il doit être transmis tous les jours avant 4 heures du matin
+- Le fichier doit comporter un nombre d'enregistrements égal au nombre de passages (inscriptions) au service des urgences(SU)
+- Il comprend l'ensemble des données recueillies au moment de l'enregistrement administratif du patient:
+
+RPU Administratif (Core)
+========================================================
+
+  1. n° de dossier
+  2. Date et heure d'enregistrement
+  3. Le n° FINESS (géographique) de l'établissement
+  4. La commune de résidence
+  5. Le code postal  
+  6. Date de naissance
+  7. Mode d'entrée
+  8. Provenance
+  9. Mode de transport
+  10. Prise en charge durant le transport
+  11. Sexe
+
+RPU Médical (Supplementary)
+===========================
+
+- RPU administratif +
+  1. Diagnostic principal (DP)
+  2. Diagnostics associés
+  3. Motif de recours
+  4. Gravité
+  5. Actes réalisés
+  6. Date et heure de sortie
+  7. Mode de sortie
+  8. Destination
+  9. Orientation
+- Cette partie du dossier est transmise au plus tard dans les 6 jours.
+
+No de dossier
+=============
+- attribué par l'expéditeur
+- doit être unique
+- permet de lier le RPU aux diagnostics associés et aux gestes
+
+FINESS
+======
+- FINESS __géographique__ (mettre la liste des finess)
+- critère de rejet (FEDORU)
+- Exhaustivité de 100% pour tous les sites
+
+COMMUNE
+=======
+- nom de la commune de résidence du patient
+- lettre majuscules sans accent
+- les noms composés sont séparés par un tiret (WIR-AU-VAL)
+- Strasbourg: 5 othographes différentes 
+- Il est recommandé d'utiliser la **nomenclature des villes de l'INSEE**. (http://www.insee.fr/fr/methodes/nomenclatures/cog/)
+- Pour le **schéma ATIH** le nom de la commune est remplacé par son code INSEE.
+
+```
+3Fr  Alk  Col  Dia  Geb  Hag  
+0.00 0.00 0.00 0.00 0.00 0.00 
+Hus  Mul  Odi  Sel  Wis  Sav 
+0.00 0.01 0.00 0.00 0.00 0.00
+```
+
+
+Code postal
+========================================================
+
+- Code à 5 chiffre valable uniquement pour les personnes résidentes sur le territoire français. 
+- La norme RPU définit un code de résidence pour les non résidents. Ce code (**99 999**)n'est en général pas respecté et nécessite un détrompage reposant sur le pays de résidence (pas demandé dans le RPU). 
+- Pour des régions frontalières comme l'Alsace il pourrait être intéressant de distinguer les résidents Suisses et Allemands des autres non résidents.
+- Pour la partie des RPU à transmettre à l'**ATIH** ce code doit être remplacé par un **code de résidence** calqué sur le modèle du **PMSI**.
+
+Date-Heure
+==========
+
+- format ISO [AAAA-MM-HH hh:mn:ss]
+- heure d'entrée et de sortie sont obligatoire sinon rejet
+- heure de sortie ne peut pas être inférieure à l'heure d'entrée
+
+Règles de rejet des durées de passage (non consensuelles)
+- nulle ou négatives
+- inférieures à 10 mn
+- supérieures à 72 heures
+
+Date-heure d'entrée
+===================
+- Exhaustivité de 100% pour tous les sites
+
+Date-heure de sortie
+====================
+<!--
+  round(mean(is.na(d1$SORTIE))*100,2)
+[1] 8.82
+sort(tapply(d1$SORTIE, d1$FINESS, meanna))
+barplot(sort(x), ylab="% de non réponse", main="Item Date-heure de Sortie")
+-->
+- indispensable pour calculer la __durée de passage__
+- heure de sortie correspond à la sortie physique du patient
+- exhaustivité moyenne: <b>\Sexpr{100-8.82} %</b>
+
+```
+3Fr   Alk   Dia   Geb   Odi   Wis   
+0.00  0.00  0.00  0.00  0.00  0.00 
+
+Col   Sel   Sav   Hag   Mul   Hus 
+0.69  2.96  9.50 14.94 17.14 35.29 
+```
+L'**hospitalisation en UHCD** est une sortie du point de vue du RPU mais une simple translation pour le service (porosité accueil/UHCD).
+
+Sexe
+========================================================
+
+- Le RPU attend **H**omme ou **F**emme ou __I__ndéterminé (pas masculin / féminin /)
+- Exhaustivité de 100% pour tous les sites
+
+Date de naissance
+========================================================
+
+- Pour le **schéma ATIH** la date de naissance est remplacée par l'**âge** calendaire à la date d'entrée du patient.
+- Exhaustivité de 100%
+
+```
+3Fr  Alk  Col  Dia  Geb  Hag  
+0.03 0.00 0.00 0.01 0.00 0.00 
+
+Hus  Mul  Odi  Sel  Wis  Sav 
+0.00 0.00 0.01 0.00 0.00 0.00 
+```
+
+
+
+MODE D’ENTREE
+=============
+Le RPU connait 3 modes d'entrée:
+- __Mutation__: le malade vient d'une autre unité médicale de la même entité juridique
+- __Transfert__: le malade vient d'une autre entité juridique 
+- __Domicile__: le malade vient de son domicile ou de son substitut, comme une structure d'hébergement __médico-sociale__. Ce mode inclut les entrées à partir de la __voie publique__. Le code 8 du mode d'entrée est à utiliser en cas de naissance d'un nouveau-né quelque soit la situation d’hospitalisation ou de non hospitalisation de la mère
+
+Provenance
+===========
+Le RPU connait deux origine du patient 
+- par *mutation ou transfert*. Le patient est adressé par un service du même établissement (__mutation__) ou d'un autre établissement (__transfert__). 
+On distingue 4 cas:
+  - MCO: un service hospitalier
+  - SSR: soins de suite et de réadaptation
+  - SLD: soins de longue durée
+  - PSY: psychiatrie
+
+===
+- en provenance directe du *domicile*
+  - soit parce que c'est le choix du patient. C'est le cas de la plupart des passages aux urgences et ce passage n'est pas du à des raisons organisationelles (**PEA**).
+  - soit parcequ'on lui a demandé de passer par les urgences avant d'être admis dans un autre service. Le passage aux urgences se fait pour des raisons organisationnelles (**PEO**).
+
+
+Provenance en pratique
+=======================
+<!--
+  x <- xtable(table(d1$FINESS, factor(d1$PROVENANCE)), align=c("l","r","r","r","r","r","r"))
+  print.xtable(x, type="html")
+-->
+
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> MCO </TH> <TH> SSR </TH> <TH> SLD </TH> <TH> PSY </TH> <TH> PEA </TH> <TH> PEO </TH>  </TR>
+  <TR> <TD align="right"> 3Fr </TD> <TD align="right">  23 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">  12 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> Alk </TD> <TD align="right">   2 </TD> <TD align="right">   2 </TD> <TD align="right">   0 </TD> <TD align="right">   2 </TD> <TD align="right">   1 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> Col </TD> <TD align="right"> 2394 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 61308 </TD> <TD align="right"> 1056 </TD> </TR>
+  <TR> <TD align="right"> Dia </TD> <TD align="right"> 852 </TD> <TD align="right">  14 </TD> <TD align="right">   7 </TD> <TD align="right">   0 </TD> <TD align="right">  31 </TD> <TD align="right"> 27436 </TD> </TR>
+  <TR> <TD align="right"> Geb </TD> <TD align="right">  20 </TD> <TD align="right">   7 </TD> <TD align="right">   3 </TD> <TD align="right">   0 </TD> <TD align="right"> 2256 </TD> <TD align="right">  10 </TD> </TR>
+  <TR> <TD align="right"> Hag </TD> <TD align="right"> 1522 </TD> <TD align="right">  13 </TD> <TD align="right">   4 </TD> <TD align="right">  29 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> Hus </TD> <TD align="right"> 1446 </TD> <TD align="right">  13 </TD> <TD align="right">   8 </TD> <TD align="right">  14 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> Mul </TD> <TD align="right"> 905 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 52579 </TD> <TD align="right"> 418 </TD> </TR>
+  <TR> <TD align="right"> Odi </TD> <TD align="right">   1 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 25739 </TD> <TD align="right"> 204 </TD> </TR>
+  <TR> <TD align="right"> Sel </TD> <TD align="right"> 656 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 28878 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> Wis </TD> <TD align="right">   9 </TD> <TD align="right">   1 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 12453 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> Sav </TD> <TD align="right">  14 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 718 </TD> <TD align="right">   0 </TD> </TR>
+   </TABLE>
+
+
+
+CCMU
+========================================================
+
+la CCMU 
+doit être déterminée **dès l'admission** et non  la sortie du patient, ou être modifiée parceque l'état du patient évolue pendant le séjour aux urgences (étude INVS).
+
+- CCMU 1: consultation simple sans acte biologique ou radiologique (ex. angine)
+- CCMU 2: nécessité d'un acte bio ou radio et/ou d'un petit geste (suture), pas d'hospitalisation
+- CCMU 3: hospitalisation nécessaire dans un service conventionnel
+- CCMU 4: SI, SC
+- CCMU 5: REA
+
+CCMU (2)
+=======
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Mon Apr 28 18:50:16 2014 -->
+<TABLE border=1>
+<CAPTION ALIGN="bottom"> CCMU et devenir (DCD et hospitalisé en UHTCD)</CAPTION>
+<TR> <TH>  </TH> <TH> 1 </TH> <TH> 2 </TH> <TH> 3 </TH> <TH> 4 </TH> <TH> 5 </TH> <TH> D </TH> <TH> P </TH>  </TR>
+  <TR> <TD align="left"> CHIR </TD> <TD align="left"> 181 </TD> <TD align="left"> 3331 </TD> <TD align="left"> 3662 </TD> <TD align="left"> 363 </TD> <TD align="left">  11 </TD> <TD align="left">   1 </TD> <TD align="left"> 140 </TD> </TR>
+  <TR> <TD align="left"> FUGUE </TD> <TD align="left">  67 </TD> <TD align="left"> 141 </TD> <TD align="left">  22 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   9 </TD> </TR>
+  <TR> <TD align="left"> HDT </TD> <TD align="left">   4 </TD> <TD align="left">  30 </TD> <TD align="left">  24 </TD> <TD align="left">   1 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">  48 </TD> </TR>
+  <TR> <TD align="left"> HO </TD> <TD align="left">   0 </TD> <TD align="left">  16 </TD> <TD align="left">   5 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">  10 </TD> </TR>
+  <TR> <TD align="left"> MED </TD> <TD align="left"> 827 </TD> <TD align="left"> 5966 </TD> <TD align="left"> 9670 </TD> <TD align="left"> 704 </TD> <TD align="left">  39 </TD> <TD align="left">   1 </TD> <TD align="left"> 274 </TD> </TR>
+  <TR> <TD align="left"> OBST </TD> <TD align="left">   3 </TD> <TD align="left">  53 </TD> <TD align="left">  35 </TD> <TD align="left">   3 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> </TR>
+  <TR> <TD align="left"> PSA </TD> <TD align="left"> 1109 </TD> <TD align="left"> 558 </TD> <TD align="left">  32 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   8 </TD> </TR>
+  <TR> <TD align="left"> REA </TD> <TD align="left">   1 </TD> <TD align="left">  99 </TD> <TD align="left"> 246 </TD> <TD align="left"> 266 </TD> <TD align="left"> 408 </TD> <TD align="left">   0 </TD> <TD align="left">   3 </TD> </TR>
+  <TR> <TD align="left"> REO </TD> <TD align="left"> 955 </TD> <TD align="left"> 349 </TD> <TD align="left">  52 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   1 </TD> </TR>
+  <TR> <TD align="left"> SC </TD> <TD align="left">  80 </TD> <TD align="left"> 419 </TD> <TD align="left"> 749 </TD> <TD align="left"> 138 </TD> <TD align="left">  24 </TD> <TD align="left">   0 </TD> <TD align="left">   9 </TD> </TR>
+  <TR> <TD align="left"> SCAM </TD> <TD align="left">  77 </TD> <TD align="left"> 324 </TD> <TD align="left">  81 </TD> <TD align="left">   3 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   2 </TD> </TR>
+  <TR> <TD align="left"> SI </TD> <TD align="left">  19 </TD> <TD align="left"> 319 </TD> <TD align="left"> 757 </TD> <TD align="left"> 255 </TD> <TD align="left">  29 </TD> <TD align="left">   0 </TD> <TD align="left">   2 </TD> </TR>
+  <TR> <TD align="left"> UHCD </TD> <TD align="left"> 1258 </TD> <TD align="left"> 12752 </TD> <TD align="left"> 9190 </TD> <TD align="left"> 1157 </TD> <TD align="left"> 191 </TD> <TD align="left">   7 </TD> <TD align="left">  48 </TD> </TR>
+   </TABLE>
+
+Motif de recours
+========================================================
+<!--
+sort(100-tapply(d1$MOTIF, d1$FINESS, meanna))
+round(mean(!is.na(d1$MOTIF))*100,2)
+[1] 36.29
+-->
+
+- La règle est d'utiliser le **thésaurus SFMU** version 2013, basé sur la classification internationale des maladies (CIM 10), seul reconnu par l'InVS et imposé parle ministère de la santé. 
+
+- **La liste compte encore une quinzaine d'items inexacts ou imprécis.**
+- exhaustivité moyenne $\textbf{63.71}$ %
+
+```
+Hus    Geb    3Fr    Hag    Alk    Sav   
+0.00   0.03   7.22  13.10  23.50  42.02  
+
+Mul    Odi    Dia    Sel    Wis    Col 
+83.00  94.92  95.50  98.20  99.69 100.00 
+```
+Motif(2)
+========
+<!--
+
+-->
+__3Fr__ "H669" "K591" "Z027" "B309" "J00"  "S000"
+
+__Alk__ "R600"  "R104"  "R104"  "T140"  "R53+1" "R074"     
+
+__Col__ "une crise d'asthme", "un malaise avec PC", "Autre""un traumatisme oculaire: explosion d'un", "plaie pied gauche par p\xe9tard ; une plaie" "une br\xfblre"                              
+
+__Dia__ "R060" "L039" "R060" "J029" NA     "Z480"
+
+__Geb__ NA NA NA NA NA NA
+
+__Hag__ NA, "Douleurs abdominales, autres et non pr\xe9cis\xe9es", "Plaie ouverte d'autres parties de la jambe", "\xc9pilepsie, sans pr\xe9cision", NA, NA     
+
+===
+
+__Hus__ NA NA NA NA NA NA
+
+__Mul__ "S37.0" "R05"   "R10.4" "R41.0" "R10.4" "J45.9"
+
+__Odi__ "T009" "Z609" "R21"  "L988" "T119" "R103"
+
+__Sel__ "GASTRO04"   "DIVERS23"   "TRAUMATO10" "TRAUMATO02" "OPHTALMO04" "TRAUMATO09"
+
+__Wis__ "T009" "T119" "T009" "S008" "R11"  "R11" 
+
+__Sav__ "Z480" "F329" "F419" "R456" "I472" "R074"
+
+Diagnostic principal
+========================================================
+<!--
+sort(100-tapply(d1$DP, d1$FINESS, meanna))
+round(mean(!is.na(d1$DP))*100,2)
+[1] 66.42
+-->
+
+- Il se code avec la **CIM10** telle qu'elle est définie par l'OMS dans sa version officielle. 
+- Ce code CIM10 habituellement utilisé dans les hôpitaux est celui du **PMSI**. Ce code comporte une racine commune avec le code CIM10 officiel. 
+- exhaustivité moyenne $\textbf{66.42}$ %
+
+```
+Dia   Sav   Odi   Hus   Alk   Mul  
+0.00  0.01 27.05 35.61 80.90 80.91 
+
+ Hag   3Fr   Col   Wis   Sel   Geb 
+81.55 87.81 88.53 90.17 96.29 99.62 
+```
+
+Les données
+===========
+type: section
+
+Elles doivent présenter 4 caractéristiques:
+- conformité (règles d'acceptation et de rejet)
+  - structurelle (schéma XML)
+  - contenu conforme (ex.code CIM10 conforme)
+- exhaustivité (données et passages)
+- qualité (défaut technique  ou problème de codage)
+- cohérence (bornes et définitions)
+
+Quel doit être le devenir des RPU non conformes ?
+- rejet total
+- acceptation partielle

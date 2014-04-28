@@ -173,7 +173,7 @@ En cas de sortie au domicile
 \end{itemize}
 Les codes 6 et 7 sont incompatibles avec \textbf{mode de sortie} = \textbf{mutation, transfert} ou \textbf{décès}.
 
-On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne sait pas s'il s'agit d'une non réponse ou d'un retour simple à domicile.
+On notera que dans cette formulation, le retour à domicile "normal" est implicite et celà génère une ambiguité car si la rubrique est laissée libre, on ne sait pas s'il s'agit d'une non-réponse ou d'un retour simple à domicile.
 
 %%%%%%%%%%%%%%
 \subsubsection{Orientation}

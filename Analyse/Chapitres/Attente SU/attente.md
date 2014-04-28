@@ -621,7 +621,7 @@ hist(log10(as.numeric(d1$presence)), ylab = "nombre", xlab = "Logarithme de la d
 
 ```r
 
-# la transformation log produit une courbe normale où lamajorité des
+# la transformation log produit une courbe normale où la majorité des
 # consultants ont une durée de présence comprise entre 10 et 1000 minutes
 # (environ 17 heures). On nettoie les données en supprimant les
 # enregistrements où presence = NA, puis on forme 3 sous-groupes: - a moins

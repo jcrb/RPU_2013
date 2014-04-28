@@ -301,7 +301,7 @@ sdp <- summary(d1$presence)
 sdp
 hist(log10(as.numeric(d1$presence)),ylab="nombre", xlab="Logarithme de la durée de présence en mn", main="Durée de présence au SU en 2013")
 
-# la transformation log produit une courbe normale où lamajorité des consultants ont une durée de présence comprise entre 10 et 1000 minutes (environ 17 heures). On nettoie les données en supprimant les enregistrements où presence = NA, puis on forme 3 sous-groupes:
+# la transformation log produit une courbe normale où la majorité des consultants ont une durée de présence comprise entre 10 et 1000 minutes (environ 17 heures). On nettoie les données en supprimant les enregistrements où presence = NA, puis on forme 3 sous-groupes:
 # - a moins de 10 mn
 # - b de 10 à 1000 mn
 # - c plus de 1000 mn

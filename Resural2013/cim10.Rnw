@@ -198,7 +198,7 @@ Annexe : Liste exhaustive des codes CIM10 d’AVC
 
 <<df_avc,echo=FALSE>>=
 # Création d'un dataframe DP
-dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT")]
+dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT","DESTINATION")]
 # correction d'erreurs:
 dpr$DP[37807]<-"N10"
 dpr$DP[47689]<-"R06.0"
@@ -254,15 +254,17 @@ Proportion théorique = 14.28\% par jour de la semaine.
 
 \subsection*{AVC et âge}
 \index{AVC!age}
-<<avs_age,echo=FALSE>>=
-summary(AVC$AGE)
+<<avs_age,echo=FALSE, comment="">>=
+# summary(AVC$AGE)
+resume2(AVC$AGE)
 @
 Le rapport de 2009 donne âge moyen = 70.5 et âge médian = 75 ans.
 
 \subsection*{AVC et sexe}
 \index{AVC!sexe}
-<<avc_sexe,echo=FALSE>>=
-summary(AVC$SEXE)
+
+<<avc_sexe,echo=FALSE, comment="">>=
+summary(factor(AVC$SEXE))
 hist(AVC$AGE,main="Répartition des AVC",col="pink",xlab="Âge en années")
 t<-table(AVC$AGE)
 barplot(t,main="AVC - Répartition des âges")
@@ -306,21 +308,21 @@ tab1(ait,missing=FALSE, main="Distribution des AIT", ylab="Fréquence")
 \index{pneumonies}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<pneumo_intro,echo=FALSE,message=FALSE>>=
+<<pneumo_intro,echo=FALSE,message=FALSE, results='asis'>>=
 
 library("epitools")
 source("../Routines/mes_fonctions.R")
 
 pneumo<-dpr[substr(dpr$DP,1,4)=="J159" ,]
-p<-summary(pneumo$AGE)
-print("Pneumonies et ÂGE")
-p
+p<-resume2(pneumo$AGE)
+row.names(r)<-"âge"
+xtable(p, caption=c("Pneumonies et âge","Pneumonies et âge"),label="tab:pneumo_age")
 @
 
 Les pneumopathies bactériennes sans précision sont cotées J15.9 Dans la CIM10.
-\Sexpr{nrow(pneumo)} diagnostics de ce type ont été portés au SAU en \Sexpr{annee}.
+\Sexpr{nrow(pneumo)} diagnostics de ce type ont été portés au SAU en \Sexpr{anc}.
 
-Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âge moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus.
+Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âge moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus (table \ref{tab:pneumo_age} pp.\pageref{tab:pneumo_age}).
 
 <<pneumo,echo=FALSE,message=FALSE>>=
 
@@ -331,21 +333,32 @@ a<-epigraphe(pneumo$ENTREE,min.date="2013-01-01", strata = pneumo$SEXE,col=seq3.
 @
 
 En fonction de la gravité (CCMU):
-<<echo=FALSE>>=
-summary(as.factor(pneumo$GRAVITE))
+<<echo=FALSE, comment="", results='asis'>>=
+
+# Francisation de tab1 et utilisation avec xtable. La première ligne dessine le graphe sans afficher la tableau. Ce dernier est francisé puis affiché via xtable
+
+x<-tab1(pneumo$GRAVITE, main="Gravité des pneumopathies")
+dimnames(x$output.table)[[2]]<-c("Fréquence","Pourcentage","% hors NA's")
+xtable(x$output.table,caption=c("Gravité des pneumonies chez les patients ayant consulté un  SU, en région Alsace en 2013","Gravité des pneumonies"),label="tab:pneumonies")
 @
 
-En fonction de la destination:
-<<echo=FALSE>>=
-summary(as.factor(pneumo$DESTINATION))
+En fonction de la destination: table \ref{tab:pneumo_dest}
+
+<<echo=FALSE, results='asis'>>=
+x<-tab1(pneumo$DESTINATION, main="Gravité des pneumopathies", graph=FALSE)
+dimnames(x$output.table)[[2]]<-c("Fréquence","Pourcentage","% hors NA's")
+xtable(x$output.table,caption=c(paste("Destination des patients admis pour pneumonie aux urgences en région Alsace en", anc),"Pneumonies et service d'hospitalisation"),label="tab:pneumo_dest")
 @
 
-En fonction de l'orientation:
-<<echo=FALSE>>=
-summary(pneumo$ORIENTATION)
+En fonction de l'orientation: table \ref{tab:pneumo_orient}
+
+<<echo=FALSE, comment="", results='asis'>>=
+x<-tab1(pneumo$ORIENTATION, main="Orientation des pneumopathies", graph=FALSE)
+dimnames(x$output.table)[[2]]<-c("Fréquence","Pourcentage","% hors NA's")
+xtable(x$output.table,caption=c(paste("Orientation des patients admis pour pneumonie aux urgences en région Alsace en", anc),"Pneumonies et service d'hospitalisation"),label="tab:pneumo_orient")
 @
 
-Deux patients porteurs de problèmes respiratoires sont orientés en chirurgie : erreur ou manque de place en médecine ?
+Des patients porteurs de problèmes respiratoires sont orientés en chirurgie : erreur ou manque de place en médecine ?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Syndrome grippal}
@@ -376,7 +389,9 @@ Classification selon la CIM10:
 <<asthme,echo=FALSE,results='asis'>>=
 asthme<-dpr[substr(dpr$DP,1,3)=="J45" | substr(dpr$DP,1,3)=="J46",]
 n<-nrow(asthme)
-xtable(table(as.factor(asthme$DP)))
+x <- table(as.factor(asthme$DP))
+# colnames(x) <- "nombre"
+xtable(x,caption=c("Diagnostics d'asthme",""))
 
 # Francisation de tab1 et utilisation avec xtable. La première ligne dessine le graphe sans afficher la tableau. Ce dernier est francisé puis affiché via xtable
 
@@ -428,11 +443,12 @@ dom<-ms[4]
 tx_hospit<-round(hospit/(hospit+dom)*100,2)
 
 orient<-summary(asthme$ORIENTATION)
-svce_chauds<-orient["REA"]+orient["SI"]+orient["SC"]
-svce_conv<-orient["MED"]+orient["CHIR"]+orient["OBST"]
-svce_porte<-orient["UHCD"]
-svce_psy<-orient["HO"]+orient["HDT"]
-atypique<-orient["FUGUE"]+orient["PSA"]+orient["SCAM"]+orient["REO"]
+
+svce_chauds <-orient["REA"]+orient["SI"]+orient["SC"]
+svce_conv <-orient["MED"]+orient["CHIR"]+orient["OBST"]
+svce_porte <-orient["UHCD"]
+svce_psy <-orient["HO"]+orient["HDT"]
+atypique <- orient["FUGUE"]+orient["PSA"]+orient["SCAM"]+orient["REO"]
 @
 
 Les crises sont de gravité moyenne avec une prédominance de CCMU 2 et 3 (voir table \ref{tab:ccmu_asthme} page \pageref{tab:ccmu_asthme}).

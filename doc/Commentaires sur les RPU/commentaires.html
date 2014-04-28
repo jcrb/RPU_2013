@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Commentaires sur les RPU 2013</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<h1>Commentaires sur les RPU 2013</h1>
+
+<h2>Général</h2>
+
+<p>Encoder les fichiers en UTF8 (\e9 au lieu de é haguenau)</p>
+
+<h2>RPU Administratif (Core)</h2>
+
+<ul>
+<li>Il doit être transmis tous les jours avant 4 heures du matin</li>
+<li>Le fichier doit comporter un nombre d&#39;enregistrements égal au nombre de passages (inscriptions) au service des urgences(SU)</li>
+<li>Il comprend l&#39;ensemble des données recueillies au moment de l&#39;enregistrement administratif du patient:
+
+<ol>
+<li>n° de dossier</li>
+<li>Date et heure d&#39;enregistrement</li>
+<li>Le n° FINESS (géographique) de l&#39;établissement</li>
+<li>La commune de résidence</li>
+<li>Le code postal
+*. Date de naissance</li>
+<li>Mode d&#39;entrée</li>
+<li>Provenance</li>
+</ol></li>
+</ul>
+
+<h2>RPU Médical (Supplementary)</h2>
+
+<ul>
+<li>RPU administratif +</li>
+<li>DP</li>
+</ul>
+
+<h2>No de dossier</h2>
+
+<ul>
+<li>attribué par l&#39;expéditeur</li>
+<li>doit être unique</li>
+<li>permet de lier le RPU aux diagnostics associés et aux gestes</li>
+</ul>
+
+<h2>FINESS</h2>
+
+<p>FINESS géographique (mettre la liste des finess)</p>
+
+<h2>COMMUNE</h2>
+
+<ul>
+<li>nom de la commune de résidence du patient</li>
+<li>lettre majuscules sans accent</li>
+<li>les nom composé sont séparés par un tiret (VIR-AU-VAL)</li>
+<li>Modèle INSEE</li>
+</ul>
+
+<h2>Date-Heure</h2>
+
+<ul>
+<li>format ISO</li>
+<li>heure d&#39;entrée et de sortie sont obligatoire sinon rejet</li>
+<li>heure de sortie ne peut pas être inférieure à l&#39;heue d&#39;entrée</li>
+<li>heure de sortie correspond à la sortie physique du patient</li>
+</ul>
+
+<h2>MODE D’ENTREE</h2>
+
+<p>Le RPU connait 3 modes d&#39;entrée:</p>
+
+<ul>
+<li>Mutation: le malade vient d&#39;une autre unité médicale de la même entité juridique</li>
+<li>Transfert: le malade vient d&#39;une autre entité juridique </li>
+<li>Domicile: le malade vient de son domicile ou de son substitut, tel une structure d&#39;hébergement médico-social. Ce mode inclut les entrées à partir de la voie publique. Le code 8 du mode d&#39;entrée est à utiliser en cas de naissance d&#39;un nouveau-né quelque soit la situation d’hospitalisation ou de non hospitalisation de la mère</li>
+</ul>
+
+<p>Une correction est nécessaire pour les <strong>transferts</strong> qui sont mal ortographiés dans certains enregistrements:</p>
+
+<p>d1$MODE_ENTREE &lt;- as.character(d1$MODE_ENTREE)
+d1[d1$MODE_ENTREE == &ldquo;Transfe  rt&rdquo; &amp; !is.na(d1$MODE_ENTREE), &ldquo;MODE_ENTREE&rdquo;] &lt;- &ldquo;Transfert&rdquo;
+d1$MODE_ENTREE &lt;- as.factor(d1$MODE_ENTREE)
+summary(d1$MODE_ENTREE)</p>
+
+<p>Domicile  Mutation Transfert      NA&#39;s 
+   301318      3512      3355     32153 </p>
+
+<h2>Provenance</h2>
+
+<p>Le RPU connait deux origine du patient </p>
+
+<ul>
+<li>par <em>mutation ou transfert</em>. Le patient est adressé par un service du même établissement (<em>mutation</em>) ou d&#39;un autre établissement (<em>transfert</em>). On distingue 4 cas:
+
+<ul>
+<li>MCO: un service hospitalier</li>
+<li>SSR: soins de suite et de réadaptation</li>
+<li>SLD: soins de longue durée</li>
+<li>PSY: psychiatrie</li>
+</ul></li>
+<li>en provenance directe du <em>domicile</em>
+
+<ul>
+<li>soit parce que c&#39;est le choix du patient. C&#39;est le cas de la plupart des passages aux urgences et ce passage n&#39;est pas du à des raisons organisationelles (<strong>PEA</strong>).</li>
+<li>soit parcequ&#39;on lui a demandé de passer par les urgences avant d&#39;être admis dans un autre service. Le passage aux urgences se fait pour des raisons organisationnelles (<strong>PEO</strong>).</li>
+</ul></li>
+</ul>
+
+<p>Pour 2013 les résultats sont les suivants:</p>
+
+<pre><code>   3Fr   Alk   Col   Dia   Geb   Hag   Hus   Mul   Odi   Sel   Wis   Sav
+</code></pre>
+
+<p>NA      0     0     0     0     0     0     0     0     0     0     0     0
+  MCO    23     1  2394   852    20  1522  1446   905     1   656     9    14
+  SSR     0     0     0    14     7    13    13     0     0     0     1     0
+  SLD     0     0     0     7     3     4     8     0     0     0     0     0
+  PSY     0     2     0     0     0    29    14     0     0     0     0     0
+  PEA    12     0 61308    31  2256     0     0 52579 25739 28878 12453   718
+  PEO     0     0  1056 27436    10     0     0   418   204     0     0     0</p>
+
+<p>Hôpitaux devant modifier leur paramétrage:</p>
+
+<ul>
+<li>3Fr: item non renseigné</li>
+<li>Alk: item non renseigné</li>
+<li>Dia: inversion PEA-PEO</li>
+<li>Geb: item partiellement renseigné</li>
+<li>Hag: item non renseigné</li>
+<li>Hus: item non renseigné</li>
+<li><p>Sav: item partiellement renseigné</p></li>
+<li><p>Les chiffres de <em>provenance</em> et <em>mode d&#39;entrée</em> devraient être équivalents.</p></li>
+<li><p>la somme PEA + PEO doit être égale à MODE_ENTREE.Domicile</p></li>
+</ul>
+
+<h2>CCMU</h2>
+
+<ul>
+<li>CCMU 1: consultation simple sans acte biologique ou radiologique (ex. angine)</li>
+<li>CCMU 2: nécessité d&#39;un acte bio ou radio et/ou d&#39;un petit geste (suture), pas d&#39;hospitalisation</li>
+<li>CCMU 3: hospitalisation nécessaire dans un service conventionnel</li>
+<li>CCMU 4: SI, SC</li>
+<li>CCMU 5: REA</li>
+</ul>
+
+<h2>Lire un fichier depuis google drive</h2>
+
+<ol>
+<li>créer un fichier dans drive (calc)</li>
+<li>le rendre exportable: fichier/publier sur le web/démarrer la publication, remplacer page Web par CSV</li>
+<li>copier l&#39;adresse du lien
+<code>{}
+require(RCurl)
+file &lt;- &quot;https://docs.google.com/spreadsheet/pub?key=0Aieb-IfcCNcXdFh2bklWeHhKUTVwZUFMSlBJQkpPcWc&amp;output=csv&quot;
+f &lt;- read.table(textConnection(getURL(file)), header=T, sep=&quot;,&quot;)
+</code></li>
+</ol>
+
+<h2>Test Jahia (9/12/2013)</h2>
+
+<ul>
+<li>Création dossier ORUDAL dans téléchargement</li>
+<li>3 fichiers y sont placées: test2.html, data2.csv et dygraphs.js</li>
+<li>création d&#39;un lien dans Orudal vers test2.html</li>
+<li>fonctionne sans pb</li>
+</ul>
+
+</body>
+
+</html>
+

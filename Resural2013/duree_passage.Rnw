@@ -119,7 +119,7 @@ rm(d2)
 % *                               *
 % *********************************
 
-La distribution des durées de passage n'est pas normale mais présente une déviation axiale gauche importante(figure \ref{fig:hist_passages}). Cette notion est à prendre en considération lors de l'interprétation de la durée moyenne de passage.
+La distribution des durées de passage n'est pas normale mais présente une déviation axiale gauche importante (figure \ref{fig:hist_passages}). Cette notion est à prendre en considération lors de l'interprétation de la durée moyenne de passage.
 
 %\begin{figure}[ht!]
  \begin{center}
