@@ -57,6 +57,7 @@ CCMU 4 \& 5 & \np{\Sexpr{a["n_ccmu45"]}} (\Sexpr{a["p_ccmu45"]} \%) \tabularnewl
 \hline
 \end{tabular}
 
+Note: pour les RPU pédiatriques, les chiffres prennent en compte les urgences pédiatriques des deux sites du CHM (Hôpital Pasteur et hôpital du Parc)
 
 \section*{Durée de présence aux urgences}
 <<graphe_p_col,echo=FALSE,fig.height=6>>=

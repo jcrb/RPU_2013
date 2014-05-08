@@ -52,3 +52,27 @@ Pour ce qui concerne la CCMU: il s'agit d'une classification assez ancienne, en 
 En pratique, l'IAO trie et oriente en fonction de l'urgence de la situation: on est bien dans l'esprit de la CCMU. Pour éviter tous ces difficultés, il est proposé soit d'utiliser une approche simplifiée strictement identique (1 = consultation simple, 2 = examens complémentaires ou gestes réalisables en ambulatoire - radio, biologie, sutures - 3 = hospitalisation en services conventionnels MCO, 4 = prise en charge urgente relevant de SI ou SC, 5 = très urgent relevant de la réa). On retrouve ce principe dans la classification CIMU (http://www.triage-urgence.com).
 
 
+Commentaires CH Colmar
+========================================================
+
+Analyse de la rubrique __MOTIF__
+--------------------------------
+
+Les intitulés sont fournis par le logiciel CristalNet de Grenoble.
+
+```{r}
+col <- d1$MOTIF[d1$FINESS=="Col"]
+head(col, 50)
+col <- gsub("\xe9", "é", col)
+col <- gsub("\xfb", "û", col)
+col <- gsub("\xe8", "è", col)
+col <- gsub("\xe2", "â", col)
+col <- gsub("\xe0", "à", col)
+head(col, 50)
+nchar(col[5])
+```
+- L'encodage ne prend pas en compte les caractères accentuée. Le RPU transmis devriat être au format UTF-8
+- Après nettoyage on obtient une liste relativement normalisée où les champs sont tronqués à 40 caractères
+- il semblerait que l'on puisse combiner plusieurs champs de nature différente sur la même ligne (ex. ligne 4, on a à la fois un motif et une circonstance)
+- ce qui attendu pour cette rubrique est un transcodage CIM10 complet ou simplifié (thésaurus SFMU).
+

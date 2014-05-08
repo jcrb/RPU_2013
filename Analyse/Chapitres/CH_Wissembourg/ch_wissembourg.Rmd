@@ -31,8 +31,8 @@ knit_hooks$set(inline = function(x) {
   prettyNum(x, big.mark=" ")
 })
 
-ch <- "Col"
-ch.names <- "CH de Colmar"
+ch <- "Wis"
+ch.names <- "CH de Wissembourg"
 
 hopital<-d1[d1$FINESS == ch,]
 n <- nrow(hopital)
@@ -365,16 +365,19 @@ library("openintro")
 rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU","Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
 
 # taux de complétude régional
-a <- is.na(d1)
-b <- round(apply(a, 2, mean) * 100, 2)
-b <- cbind(b)
-colnames(b)<-"%"
+# ---------------------------
+a <- is.na(d1) # matrice équivalente à d1 formée uniquement de TRUE et FALSE
+b <- round(apply(a, 2, mean) * 100, 2) # pour chaque coonne de la matrice a on calcule le taux de NA's
+b <- cbind(b) # le vecter ligne est transformé en colonne
+colnames(b)<-"% de NA's" # l'intitulé de la coonne
+# on réarrange b pour que l'ordre des items soit cohérent avec rpu.names. Le tout est sauvegardé sous le nom de complétude
 completude <- c(b[6],b[16],b[20],b[3],b[2],b[15],b[19],b[18],b[10],b[9],b[12],b[5],b[17],b[11],b[14],b[4])
 completude <- 100 - completude
 
-radial.plot(completude, labels = rpu.names, ,rp.type="p", radial.lim =c(0,100),  poly.col = fadeColor("khaki",fade = "A0"), main=paste(ch.names,"- Taux de complétude des RPU"), radial.labels=T)
+radial.plot(completude, labels = rpu.names, ,rp.type="p", radial.lim =c(0,100),  poly.col = fadeColor("khaki",fade = "A0"), main=paste(ch.names,"- Taux de complétude des RPU"), radial.labels=c("0","20%","40%","60%","80%",""), boxed.radial=FALSE, line.col="khaki", label.prop=0)
 
 # taux de complétude de l'hôpital local
+# -------------------------------------
 a<-is.na(hopital)
 b<-round(apply(a,2,mean)*100,2)
 #b<-sort(b)
@@ -388,7 +391,7 @@ completude_hop[15] <- orient.exhaustivite
 
 radial.plot(completude_hop, labels = rpu.names , radial.lim =c(0,100), add=T,rp.type="p", line.col="goldenrod4", main="Taux de complétude des RPU", lwd=2)
 
-legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n")
+legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n", pch=15)
 
 c <- as.data.frame( completude)
 rownames(c) <- rpu.names
@@ -396,12 +399,36 @@ c <- cbind(c, completude_hop)
 names(c) <- c("Alsace (%)", ch.names)
 c
 ```
-Urilsation des routines
+Utilsation des routines
 =======================
 ```{r routines}
 source("../../../Routines/mes_fonctions.R")
+
+ch <- "Wis"
+ch.names <- "CH de Wissembourg"
+hopital<-d1[d1$FINESS == ch,]
+
 x <- completude(d1)
 y <- completude(hopital)
-radar_completude(x,y, ch.names = "CH Colmar")
+radar_completude(x,y, ch.names)
+```
+
+Application: création de radars de complétude pour tous les hôpitaux:
+---------------------------------------------------------------------
+
+```{r completude.hop.als}
+#par(mar=c(2,6,4,2), oma=c(1,4,1,1))
+x <- completude(d1)
+for(i in 1:length(hop.short)){
+  ch.names <- hop.long[i]
+  ch <- hop.short[i]
+  hopital <- d1[d1$FINESS == ch,]
+  y <- completude(hopital)
+  radar_completude(x,y, ch.names)
+}
+
+radar_completude(x, ch.names="Région Alsace 2013")
+
+par(mar=c(5, 4, 4, 2) + 0.1, oma=c(0,0,0,0))
 ```
 

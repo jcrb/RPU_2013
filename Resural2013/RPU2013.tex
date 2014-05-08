@@ -178,7 +178,7 @@ Bartier \& Madame Christine Hecker}}
   \item Base packages: base, datasets, graphics, grDevices,
     methods, stats, utils
   \item Other packages: knitr~1.5
-  \item Loaded via a namespace (and not attached): evaluate~0.5.3,
+  \item Loaded via a namespace (and not attached): evaluate~0.5.5,
     formatR~0.10, stringr~0.6.2, tools~3.1.0
 \end{itemize}
 
@@ -552,7 +552,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 % \fbox{Voir SAU2013}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:29 2014
+% Thu May  8 23:38:54 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -588,7 +588,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:30 2014
+% Thu May  8 23:38:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -771,7 +771,7 @@ Lorsque le lieu de résidence se situe hors des limites du territoire national, 
 Si le code postal précis est inconnu : le numéro du département suivi de 999.
 Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}.
 Si le département ou le pays de résidence est inconnu : 99999.
-Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux (Strasbourg).
+Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux(Strasbourg).
 
 %%%%%%%%%%%%%%
 \subsubsection{La commune de résidence}
@@ -813,15 +813,19 @@ Trois codes imposés:
 \index{Provenance}
 Le RPU propose deux séries de code selon que le patient provient d'un établissement de santé ou du domicile. Si l'origine est un établissement:
 \begin{itemize}
-  \item \textbf{1}
-  \item \textbf{2}
-  \item \textbf{3}
-  \item \textbf{4}
+  \item \textbf{1} En provenance d'une unité de soins de courte durée (MCO) 
+  \item \textbf{2} En provenance d'une unité de soins de suite ou de réadaptation
+  \item \textbf{3} En provenance d'une unité de soins de longue durée
+  \item \textbf{4} En provenance d'une unité de psychiatrie
 \end{itemize}
 Si le patient vient du domicile:
 \begin{itemize}
-  \item \textbf{7}
-  \item \textbf{8}
+  \item \textbf{7} Prise en charge aux urgences autres que pour des raisons organisationnelles
+  \item \textbf{8} Prise en charge aux urgences pour des raisons organisationnelles \footnote{Ce code ne fait pas partie des codes du PMSI. Il a été créé spécifiquement pour le RPU.}
+    \begin{itemize}
+      \item patient re-convoqué par le même service d’urgence pour des soins à distance de la prise en charge initiale (surveillance de plâtre, réfection de pansements, rappel de vaccination)
+      \item patient déjà attendu avant sa prise en charge aux urgences dans un autre service et transitant aux urgences pour faciliter l’enregistrement administratif ou la réalisation des premiers examens complémentaires à la prise en charge qui va suivre.
+    \end{itemize}
 \end{itemize}
 
 Les codes \textbf{Provenance} 1 à 4 sont incompatibles avec \textbf{Mode d'entrée} 8. De même les codes \textbf{Provenance} 7 et 8 sont incompatibles avec \textbf{Mode d'entrée} 6 et 7.
@@ -1017,7 +1021,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 %------------------------------
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:34 2014
+% Thu May  8 23:39:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{llr}
@@ -1094,8 +1098,8 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-m
-  Jan   Feb   Mar   Apr   May   Jun   Jul   Aug   Sep   Oct   Nov   Dec 
+RPU.mois
+  Jan   Fev   Mar   Avr   Mai   Jun   Jui   Aou   Sep   Oct   Nov   Dec 
 26858 26115 28312 28428 27899 30038 30103 29693 29190 29858 27657 29922 
 \end{verbatim}
 \end{kframe}
@@ -1120,12 +1124,12 @@ m
 %---------------------------------
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:35 2014
+% Thu May  8 23:39:01 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
   \hline
- & V1 & V2 & V3 & V4 \\ 
+ & 1 & 2 & 3 & 4 \\ 
   \hline
 1 & 4752.00 & 5170.00 & 6242.00 & 6885.00 \\ 
   2 & 6823.00 & 6645.00 & 6530.00 & 6451.00 \\ 
@@ -1143,86 +1147,7 @@ m
    \hline
 \end{tabular}
 \caption[Activité par semaine]{Activité des SU par semaine en 2013} 
-\end{table}
-% latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:35 2014
-\begin{table}[ht]
-\centering
-\begin{tabular}{rr}
-  \hline
- & m \\ 
-  \hline
-1 & 4752 \\ 
-  2 & 5170 \\ 
-  3 & 6242 \\ 
-  4 & 6885 \\ 
-  5 & 6823 \\ 
-  6 & 6645 \\ 
-  7 & 6530 \\ 
-  8 & 6451 \\ 
-  9 & 6305 \\ 
-  10 & 6712 \\ 
-  11 & 6478 \\ 
-  12 & 6060 \\ 
-  13 & 6232 \\ 
-  14 & 6698 \\ 
-  15 & 6632 \\ 
-  16 & 6667 \\ 
-  17 & 6538 \\ 
-  18 & 6462 \\ 
-  19 & 6628 \\ 
-  20 & 6720 \\ 
-  21 & 6314 \\ 
-  22 & 5615 \\ 
-  23 & 7116 \\ 
-  24 & 7213 \\ 
-  25 & 7193 \\ 
-  26 & 6569 \\ 
-  27 & 6566 \\ 
-  28 & 7083 \\ 
-  29 & 6391 \\ 
-  30 & 7069 \\ 
-  31 & 6995 \\ 
-  32 & 6726 \\ 
-  33 & 6861 \\ 
-  34 & 6502 \\ 
-  35 & 6568 \\ 
-  36 & 6768 \\ 
-  37 & 6474 \\ 
-  38 & 6891 \\ 
-  39 & 7152 \\ 
-  40 & 6727 \\ 
-  41 & 6760 \\ 
-  42 & 6763 \\ 
-  43 & 6757 \\ 
-  44 & 6500 \\ 
-  45 & 6427 \\ 
-  46 & 6489 \\ 
-  47 & 6620 \\ 
-  48 & 6390 \\ 
-  49 & 6705 \\ 
-  50 & 6411 \\ 
-  51 & 6619 \\ 
-  52 & 7260 \\ 
-  53 & 1949 \\ 
-   \hline
-\end{tabular}
-\caption[Activité par semaine]{Activité des SU par semaine en 2013} 
 \label{act_sem}
-\end{table}
-% latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:36 2014
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr}
-  \hline
- & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 & 41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 & 50 & 51 & 52 & 53 \\ 
-  \hline
-1 & 4752 & 5170 & 6242 & 6885 & 6823 & 6645 & 6530 & 6451 & 6305 & 6712 & 6478 & 6060 & 6232 & 6698 & 6632 & 6667 & 6538 & 6462 & 6628 & 6720 & 6314 & 5615 & 7116 & 7213 & 7193 & 6569 & 6566 & 7083 & 6391 & 7069 & 6995 & 6726 & 6861 & 6502 & 6568 & 6768 & 6474 & 6891 & 7152 & 6727 & 6760 & 6763 & 6757 & 6500 & 6427 & 6489 & 6620 & 6390 & 6705 & 6411 & 6619 & 7260 & 1949 \\ 
-   \hline
-\end{tabular}
-\caption[Activité par semaine]{Activité des SU par semaine en 2013} 
-\label{act_sem2}
 \end{table}
 
 
@@ -1247,8 +1172,8 @@ m
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-m
-  Sun   Mon  Tues   Wed Thurs   Fri   Sat 
+RPU.jour.semaine
+  Dim   Lun   Mar   Mer   Jeu   Ven   Sam 
 50120 52804 48522 46335 48142 47782 50368 
 \end{verbatim}
 \end{kframe}
@@ -1454,7 +1379,7 @@ Ce phénomène cyclique se répète tous les jours selon un profil immuable. La 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:40 2014
+% Thu May  8 23:39:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -1561,7 +1486,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % ce paragraphe utilise intensivement le dessin des pyramides: utiliser la syntaxe pp <- pyramid.plot() qui provoque le dessin de la pyramide tandis que les valeurs de retours sont stockées dans pp et n'apparaissent pas à l'impression.
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:43 2014
+% Thu May  8 23:39:08 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -1648,7 +1573,7 @@ Il existe plusieurs façons de former de tranches d'âges.
 %----------
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:43 2014
+% Thu May  8 23:39:08 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1685,22 +1610,30 @@ Moins de 1 an & 9233 \\
 % ### Age 2
 %----------
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-  Pédiatrie Adulte < 75 ans Gériatrie
-n     83445          207547     53038
-%        24              60        15
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+% latex table generated in R 3.1.0 by xtable 1.7-1 package
+% Thu May  8 23:39:09 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & Pédiatrie & Adulte $<$ 75 ans & Gériatrie \\ 
+  \hline
+n & 83445.00 & 207547.00 & 53038.00 \\ 
+  \% & 24.26 & 60.33 & 15.42 \\ 
+   \hline
+\end{tabular}
+\caption{Répartition en trois classe d'âge telles qu'elles sont définies par le serveur régional de veille et d'alerte} 
+\label{tranche_age2}
+\end{table}
+
 
 
 \begin{itemize}
   \item Pédiatrie:  24 \%
   \item Gériatrie:  15 \%
 \end{itemize}
-Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2}
+
+Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \ref{tranche_age2} page \pageref{tranche_age2}
 
 %\begin{figure}
 \begin{center}
@@ -1744,7 +1677,7 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2}
 \index{âge!et sexe}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:43 2014
+% Thu May  8 23:39:09 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -1798,7 +1731,7 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2}
 % en pourcentages
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:43 2014
+% Thu May  8 23:39:09 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -1910,7 +1843,7 @@ Le recensement 2010 fait état de \textbf{358} centenaires en Alsace. Le taux de
 
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:44 2014
+% Thu May  8 23:39:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1978,7 +1911,7 @@ Le thésaurus est présenté sous la forme d'un fichier Excel. L'onglet \emph{re
 
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:45 2014
+% Thu May  8 23:39:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -2049,7 +1982,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:45 2014
+% Thu May  8 23:39:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2079,7 +2012,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:45 2014
+% Thu May  8 23:39:10 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2269,7 +2202,7 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:49 2014
+% Thu May  8 23:39:15 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2284,7 +2217,7 @@ N & 44638.00 & 252428.00 & 39943.00 \\
 \label{tab:freq_periode}
 \end{table}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:49 2014
+% Thu May  8 23:39:15 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2342,7 +2275,7 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 \end{center}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:50 2014
+% Thu May  8 23:39:15 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2387,7 +2320,7 @@ On peut répartir les âges des patients en trois catégories (tableau \ref{tab:
 % #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:50 2014
+% Thu May  8 23:39:16 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2406,7 +2339,7 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:50 2014
+% Thu May  8 23:39:16 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2445,7 +2378,7 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 \section{Selon le jour de la semaine}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:51 2014
+% Thu May  8 23:39:16 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2499,7 +2432,7 @@ Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de qu
 
 \section{Selon l'orientation}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:51 2014
+% Thu May  8 23:39:17 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -2525,7 +2458,7 @@ REO & 86.25 & 3.24 \\
 \label{tab:duree_orientation}
 \end{table}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:51 2014
+% Thu May  8 23:39:17 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2568,7 +2501,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \section{Selon la gravité}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:51 2014
+% Thu May  8 23:39:17 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2726,36 +2659,36 @@ XXII&U00–U99&Codes d'utilisation particulière & 0&0&0\\
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/class_cim10} 
 \begin{kframe}\begin{verbatim}
-## a :  
-##         Frequency Percent Cum. percent
-## S           77664    34.0           34
-## R           35297    15.4           49
-## J           15661     6.9           56
-## M           13972     6.1           62
-## K           12249     5.4           68
-## T            9286     4.1           72
-## I            9036     4.0           76
-## F            8138     3.6           79
-## H            8025     3.5           83
-## N            7885     3.5           86
-## Z            6683     2.9           89
-## A            4708     2.1           91
-## L            4651     2.0           93
-## G            4439     1.9           95
-## B            2227     1.0           96
-## W            1923     0.8           97
-## E            1657     0.7           98
-## D            1430     0.6           98
-## Y             948     0.4           99
-## X             711     0.3           99
-## V             624     0.3           99
-## C             522     0.2          100
-## O             282     0.1          100
-## P             257     0.1          100
-## r             130     0.1          100
-## Q              93     0.0          100
-## k              26     0.0          100
-##   Total    228524   100.0          100
+classes.cim10 :  
+        Fréquence Pourcentage Pourcentage cumul.
+S           77664        34.0                 34
+R           35297        15.4                 49
+J           15661         6.9                 56
+M           13972         6.1                 62
+K           12249         5.4                 68
+T            9286         4.1                 72
+I            9036         4.0                 76
+F            8138         3.6                 79
+H            8025         3.5                 83
+N            7885         3.5                 86
+Z            6683         2.9                 89
+A            4708         2.1                 91
+L            4651         2.0                 93
+G            4439         1.9                 95
+B            2227         1.0                 96
+W            1923         0.8                 97
+E            1657         0.7                 98
+D            1430         0.6                 98
+Y             948         0.4                 99
+X             711         0.3                 99
+V             624         0.3                 99
+C             522         0.2                100
+O             282         0.1                100
+P             257         0.1                100
+r             130         0.1                100
+Q              93         0.0                100
+k              26         0.0                100
+  Total    228524       100.0                100
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2853,33 +2786,33 @@ Horaire des AVC, à comparer avec:
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/heure_avc2} 
 \begin{kframe}\begin{verbatim}
-h :  
-        Frequency Percent Cum. percent
-0              45     1.6          1.6
-1              38     1.4          3.0
-2              35     1.2          4.2
-3              29     1.0          5.2
-4              17     0.6          5.9
-5              26     0.9          6.8
-6              25     0.9          7.7
-7              49     1.8          9.4
-8             100     3.6         13.0
-9             173     6.2         19.2
-10            238     8.5         27.7
-11            246     8.8         36.5
-12            200     7.1         43.6
-13            175     6.2         49.9
-14            201     7.2         57.0
-15            172     6.1         63.2
-16            181     6.5         69.6
-17            197     7.0         76.7
-18            171     6.1         82.8
-19            129     4.6         87.4
-20            150     5.4         92.8
-21             80     2.9         95.6
-22             68     2.4         98.0
-23             55     2.0        100.0
-  Total      2800   100.0        100.0
+heure.AVC :  
+        Fréquence Pourcentage Pourcentage cumul.
+0              45         1.6                1.6
+1              38         1.4                3.0
+2              35         1.2                4.2
+3              29         1.0                5.2
+4              17         0.6                5.9
+5              26         0.9                6.8
+6              25         0.9                7.7
+7              49         1.8                9.4
+8             100         3.6               13.0
+9             173         6.2               19.2
+10            238         8.5               27.7
+11            246         8.8               36.5
+12            200         7.1               43.6
+13            175         6.2               49.9
+14            201         7.2               57.0
+15            172         6.1               63.2
+16            181         6.5               69.6
+17            197         7.0               76.7
+18            171         6.1               82.8
+19            129         4.6               87.4
+20            150         5.4               92.8
+21             80         2.9               95.6
+22             68         2.4               98.0
+23             55         2.0              100.0
+  Total      2800       100.0              100.0
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2892,10 +2825,10 @@ h :
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-w
+Nombre d'AVC selon le jour de la semaine
 Dim Lun Mar Mer Jeu Ven Sam 
 323 467 457 399 396 408 350 
-w
+Pourcentage d'AVC selon le jour de la semaine
 Dim Lun Mar Mer Jeu Ven Sam 
  12  17  16  14  14  15  12 
 \end{verbatim}
@@ -2969,15 +2902,15 @@ Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour to
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/ait} 
 \begin{kframe}\begin{verbatim}
-ait :  
-        Frequency Percent Cum. percent
-G450            4     0.6          0.6
-G451            7     1.0          1.6
-G452           20     2.8          4.4
-G453            7     1.0          5.4
-G458           52     7.4         12.7
-G459          617    87.3        100.0
-  Total       707   100.0        100.0
+AIT :  
+        Fréquence Pourcentage Pourcentage cumul.
+G450            4         0.6                0.6
+G451            7         1.0                1.6
+G452           20         2.8                4.4
+G453            7         1.0                5.4
+G458           52         7.4               12.7
+G459          617        87.3              100.0
+  Total       707       100.0              100.0
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -2988,18 +2921,15 @@ G459          617    87.3        100.0
 \index{pneumonies}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{kframe}
-
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error: la longueur de 'dimnames' [1] n'est pas égale à l'étendue du tableau}}\end{kframe}% latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:53 2014
+% latex table generated in R 3.1.0 by xtable 1.7-1 package
+% Thu May  8 23:39:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
   \hline
  & moyenne & écart-type & médiane & min & max & n \\ 
   \hline
-1 & 70.87 & 19.41 & 77.00 & 0.00 & 98.00 & 841.00 \\ 
+âge & 70.87 & 19.41 & 77.00 & 0.00 & 98.00 & 841.00 \\ 
    \hline
 \end{tabular}
 \caption[Pneumonies et âge]{Pneumonies et âge} 
@@ -3011,7 +2941,7 @@ G459          617    87.3        100.0
 Les pneumopathies bactériennes sans précision sont cotées J15.9 Dans la CIM10.
 841 diagnostics de ce type ont été portés au SAU en 2013.
 
-Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âge moyen est de 0 ans et la moitié de ces patients ont 77 ans et plus (table \ref{tab:pneumo_age} pp.\pageref{tab:pneumo_age}).
+Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âge moyen est de 71 ans et la moitié de ces patients ont 77 ans et plus (table \ref{tab:pneumo_age} pp.\pageref{tab:pneumo_age}).
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
@@ -3024,7 +2954,7 @@ En fonction de la gravité (CCMU):
 
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-39} 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:53 2014
+% Thu May  8 23:39:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3051,7 +2981,7 @@ En fonction de la gravité (CCMU):
 En fonction de la destination: table \ref{tab:pneumo_dest}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:53 2014
+% Thu May  8 23:39:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3078,7 +3008,7 @@ NA & 0.00 & 0.00 & 0.00 \\
 En fonction de l'orientation: table \ref{tab:pneumo_orient}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:53 2014
+% Thu May  8 23:39:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3137,7 +3067,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:54 2014
+% Thu May  8 23:39:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3156,7 +3086,7 @@ J450 & 133 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:54 2014
+% Thu May  8 23:39:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3184,7 +3114,7 @@ On note \np{1 398} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:54 2014
+% Thu May  8 23:39:19 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3284,7 +3214,7 @@ NULL
 [6] "n"         
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:54 2014
+% Thu May  8 23:39:20 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -3298,7 +3228,7 @@ NULL
 \label{tab:age_asthme}
 \end{table}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:54 2014
+% Thu May  8 23:39:20 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3358,9 +3288,8 @@ CIM10 = T58
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## m
-## Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
-##   5  13  11   0   6   9   0   1   1   1  15   4
+Jan Fev Mar Avr Mai Jun Jui Aou Sep Oct Nov Dec 
+  5  13  11   0   6   9   0   1   1   1  15   4 
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/co} 
@@ -3374,6 +3303,16 @@ CIM10 = T58
 \index{malaise}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Cette rubrique associe les codes suivants:
+
+\begin{itemize}
+  \item \textbf{R55}: syncope, lipothymie, malaise vagal
+  \item \textbf{R53}: altération de l'état général, fatigue, épuisement
+  \item \textbf{R42}: étourdissement, vertiges
+\end{itemize}
+
+\subsection*{Malaise de type vagal (R55)}
+
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/malaises} 
@@ -3381,13 +3320,13 @@ CIM10 = T58
 \end{knitrout}
 
 
-malaise selon INVS (canicule):
+\subsection*{malaise selon INVS (canicule)}
+
+Regroupe tous les intitulés: R55, R53 et R42.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/malaises_invs1} 
-
-\includegraphics[width=\maxwidth]{figure/malaises_invs2} 
+\includegraphics[width=\maxwidth]{figure/malaises_invs} 
 
 \end{knitrout}
 
@@ -3408,16 +3347,16 @@ Données hospitalières : nombre quotidien de passages dans des services d'urgen
 
 \includegraphics[width=\maxwidth]{figure/canicule2} 
 \begin{kframe}\begin{verbatim}
-## canicule$DP : 
-##         Frequency Percent Cum. percent
-## T670           57    73.1           73
-## T671            8    10.3           83
-## T672            3     3.8           87
-## T676            2     2.6           90
-## T677            6     7.7           97
-## T678            1     1.3           99
-## T679            1     1.3          100
-##   Total        78   100.0          100
+canicule : 
+        Fréquence Pourcentage Pourcentage cumul.
+T670           57        73.1                 73
+T671            8        10.3                 83
+T672            3         3.8                 87
+T676            2         2.6                 90
+T677            6         7.7                 97
+T678            1         1.3                 99
+T679            1         1.3                100
+  Total        78       100.0                100
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/canicule3} 
@@ -3430,38 +3369,96 @@ Données hospitalières : nombre quotidien de passages dans des services d'urgen
 \index{Gastroentérites}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-CIM10 A09 : Diarrhée et gastro-entérite d'origine présumée infectieuse
+CIM10 \textbf{A09} : Diarrhée et gastro-entérite d'origine présumée infectieuse. Les RPU retournent 3 codes: A09, A090 et A099 correspondant à la classification CIM10-PMSI:
+\begin{itemize}
+  \item \textbf{A090} Gastroentérites et colites d’origine infectieuse, autres et non précisées
+  \item \textbf{A099} Gastroentérites et colites d’origine non précisée
+\end{itemize}
 
 Inclus: Catarrhe intestinale (Colite,Entérite, Gastro-entérite,SAI hémorragique,septique), Diarrhée (SAI,dysentérique,épidémique), Maladie diarrhéique infectieuse SAI.
-Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies dues à des bactéries, des protozoaires, des virus et d'autres agents infectieux précisés (A00-A08)  
+Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies dues à des bactéries, des protozoaires, des virus et d'autres agents infectieux précisés (A00-A08) 
+
+
+
+
+\subsection*{Une pathologie de l'enfant et de l'adulte jeune}
+
+
+
+\begin{itemize}
+  \item age moyen 18 ans.
+  \item age médian 5 ans.
+  \item 75\% des paients ont moins de 27 ans.
+\end{itemize}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/ge_hist} 
+
+}
+
+
+
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/ge_age_box} 
+
+}
+
+
+
+\end{knitrout}
+
+
+\subsection*{Epidémiologie des gastro-entérites}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/ge_epidemio} 
+
+\end{knitrout}
+
+
+% calculs à la manière de l'INVS
+\subsection*{nombre de diagnostics de GE par rapport au nombre total de RPU par semaine}
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-##       DP             CODE_POSTAL      ENTREE              FINESS    
-##  Length:2681        68200  : 329   Length:2681        Mul    :1411  
-##  Class :character   68100  : 304   Class :character   Col    : 363  
-##  Mode  :character   68300  : 157   Mode  :character   3Fr    : 228  
-##                     68000  : 142                      Wis    : 170  
-##                     68500  :  81                      Geb    : 150  
-##                     67160  :  70                      Sel    : 123  
-##                     (Other):1598                      (Other): 236  
-##     GRAVITE      ORIENTATION      MODE_SORTIE        AGE      SEXE    
-##  2      :1797   MED    : 248   NA       :   0   Min.   :  0   F:1346  
-##  1      : 589   UHCD   : 129   Mutation : 439   1st Qu.:  1   I:   0  
-##  3      : 261   SC     :  31   Transfert:   3   Median :  5   M:1335  
-##  4      :  14   CHIR   :   4   Domicile :1989   Mean   : 18           
-##  5      :   0   HO     :   1   Décès    :   0   3rd Qu.: 27           
-##  (Other):   0   (Other):   5   NA's     : 250   Max.   :100           
-##  NA's   :  20   NA's   :2263                                          
-##  TRANSPORT     DESTINATION  
-##  AMBU : 245   MCO    : 439  
-##  FO   :   0   HMS    :   1  
-##  HELI :   0   NA     :   0  
-##  PERSO:2129   SSR    :   0  
-##  SMUR :  10   SLD    :   0  
-##  VSAB :  63   (Other):   0  
-##  NA's : 234   NA's   :2241
+                     Jan     Fev     Mar     Avr      Mai      Jun
+RPU totaux       18392.0 18052.0 19523.0 20302.0 19207.00 20772.00
+Gastro-entérites   306.0   240.0   264.0   282.0   181.00   168.00
+Rapport              1.7     1.3     1.4     1.4     0.94     0.81
+                      Jui     Aou      Sep      Oct      Nov     Dec
+RPU totaux       20387.00 19275.0 18272.00 18519.00 17387.00 18436.0
+Gastro-entérites   173.00   219.0   174.00   165.00   149.00   360.0
+Rapport              0.85     1.1     0.95     0.89     0.86     1.9
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/invs_barplot} 
+
+}
+
+
+
+\end{knitrout}
+
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
 ##      
 ##        A09 A090 A099
 ##   3Fr    0   50  178
@@ -3478,47 +3475,42 @@ Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies du
 ##   Sav    0    0    0
 \end{verbatim}
 \end{kframe}
-\includegraphics[width=\maxwidth]{figure/ge1} 
-
-\includegraphics[width=\maxwidth]{figure/ge2} 
-
-\includegraphics[width=\maxwidth]{figure/ge3} 
-
 \end{knitrout}
 
 
-calculs à la manière de l'INVS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Traumatologie}
+\index{Traumatologie}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-nombre de diagnostics de GE / nb total de diagnostics par semaine:
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-##   Jan   Feb   Mar   Apr   May   Jun   Jul   Aug   Sep   Oct   Nov   Dec 
-## 18392 18052 19523 20302 19207 20772 20387 19275 18272 18519 17387 18436
-## Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
-## 306 240 264 282 181 168 173 219 174 165 149 360
-##  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec 
-## 1.66 1.33 1.35 1.39 0.94 0.81 0.85 1.14 0.95 0.89 0.86 1.95
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/invs} 
-
-\end{knitrout}
-
-
-
-dpt: tous les cas de traumato (S00 à T98)
-
-dpnp:tous les cas de médecine  
+% dpt: tous les cas de traumato (S00 à T98)
+% dpnt:tous les cas de médecine  
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
-## 2.6 2.0 2.2 2.2 1.6 1.4 1.4 1.9 1.6 1.4 1.4 3.0
+                      Jan      Fev      Mar      Avr      Mai      Jun
+RPU médicaux     11670.00 11891.00 12170.00 12812.00 11411.00 12152.00
+Traumatologie     6722.00  6161.00  7353.00  7490.00  7796.00  8620.00
+Ratio med/trauma     1.74     1.93     1.66     1.71     1.46     1.41
+Trauma ratio         0.63     0.66     0.62     0.63     0.59     0.59
+                     Jui      Aou     Sep      Oct      Nov      Dec
+RPU médicaux     12326.0 11792.00 11006.0 11478.00 10901.00 11965.00
+Traumatologie     8061.0  7483.00  7266.0  7041.00  6486.00  6471.00
+Ratio med/trauma     1.5     1.58     1.5     1.63     1.68     1.85
+Trauma ratio         0.6     0.61     0.6     0.62     0.63     0.65
+Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 
+2.6 2.0 2.2 2.2 1.6 1.4 1.4 1.9 1.6 1.4 1.4 3.0 
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
+
+
+\begin{itemize}
+  \item Nombre de cas de traumatologie: 86 950
+  \item Nombre de cas médicaux: 141 574
+  \item Trauma ratio moyen: 0.38
+\end{itemize}
 
 
  
@@ -3551,7 +3543,7 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:56 2014
+% Thu May  8 23:39:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
@@ -3576,7 +3568,7 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:56 2014
+% Thu May  8 23:39:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -3627,7 +3619,7 @@ a
   SCAM     SI   UHCD   <NA> 
    522   1402  32452 275755 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:56 2014
+% Thu May  8 23:39:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3647,7 +3639,7 @@ NA &   0 &   0 &   0 &   0 &   0 &   0 &   0 \\
 \label{tab:dest_gravite}
 \end{table}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:56 2014
+% Thu May  8 23:39:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3678,7 +3670,7 @@ CHIR & 181 & 3331 & 3662 & 363 &  11 &   1 & 140 \\
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:56 2014
+% Thu May  8 23:39:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3697,7 +3689,7 @@ HAD & 0.01 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:56 2014
+% Thu May  8 23:39:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3728,7 +3720,7 @@ On isole le groupe "mode de sortie = domicile" et on relève les résultats de l
 
 \includegraphics[width=\maxwidth]{figure/fausses_sorties} 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:56 2014
+% Thu May  8 23:39:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3795,7 +3787,7 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:57 2014
+% Thu May  8 23:39:23 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3828,7 +3820,7 @@ Les variations du retour journalier à domicile sont calculées de la manière s
 \end{description}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:58 2014
+% Thu May  8 23:39:24 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3855,7 +3847,7 @@ On refait le calcul de q en tenant compte des non réponses:
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:23:59 2014
+% Thu May  8 23:39:25 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3915,7 +3907,7 @@ Les moins de 18 ans représentent $83 455$ passages en 2013 soit $230$ passages 
 % Pédiatrie et sexe
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:01 2014
+% Thu May  8 23:39:26 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3937,7 +3929,7 @@ Le sex-ratio est de $1.2$ (table \ref{tab:ped_sr})
 % Taux hospitalisation
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:01 2014
+% Thu May  8 23:39:27 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -4001,7 +3993,7 @@ Les 75 ans et plus représentent $53 081$ passages en 2013 soit $146$ passages p
 % Gériatrie et sexe
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:01 2014
+% Thu May  8 23:39:27 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -4025,7 +4017,7 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:01 2014
+% Thu May  8 23:39:27 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -4442,7 +4434,7 @@ Entre le 2013-01-01 00:11:00 et le 2013-12-31 23:13:00, \np{37 018} RPU ont ét�
 Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 40 par jour.
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:09 2014
+% Thu May  8 23:39:35 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -4485,7 +4477,7 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: lun., avril 28, 2014 - 15:24:09
+% Date and time: jeu., mai 08, 2014 - 23:39:35
 \begin{table}[!htbp] \centering 
   \caption{Totalité des passages: résumé des principales caractéristiques} 
   \label{} 
@@ -4508,7 +4500,7 @@ data\$total & 365 & 40.00 & 8.00 & 22 & 34 & 40 & 46 & 69 \\
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: lun., avril 28, 2014 - 15:24:09
+% Date and time: jeu., mai 08, 2014 - 23:39:35
 \begin{table}[!htbp] \centering 
   \caption{De 1 à 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -4532,7 +4524,7 @@ data\$entre1\_75ans & 365 & 35.00 & 7.50 & 18 & 30 & 34 & 40 & 63 \\
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: lun., avril 28, 2014 - 15:24:09
+% Date and time: jeu., mai 08, 2014 - 23:39:35
 \begin{table}[!htbp] \centering 
   \caption{Plus de 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -4553,7 +4545,7 @@ data\$sup75ans & 365 & 4.30 & 2.30 & 0 & 3 & 4 & 6 & 12 \\
 
 
 % Table created by stargazer v.5.0 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: lun., avril 28, 2014 - 15:24:09
+% Date and time: jeu., mai 08, 2014 - 23:39:35
 \begin{table}[!htbp] \centering 
   \caption{Clinique Ste Anne: résumé des données} 
   \label{} 
@@ -4746,6 +4738,7 @@ CCMU 4 \& 5 & \np{752} (1.2 \%) \tabularnewline
 \hline
 \end{tabular}
 
+Note: pour les RPU pédiatriques, les chiffres prennent en compte les urgences pédiatriques des deux sites du CHM (Hôpital Pasteur et hôpital du Parc)
 
 \section*{Durée de présence aux urgences}
 \begin{knitrout}
@@ -4773,8 +4766,6 @@ CCMU 4 \& 5 & \np{752} (1.2 \%) \tabularnewline
 
 \index{SU Guebwiller}
 \index{Guebwiller!SU}
-
-hop <- "Geb"
 
 \section*{Résumé des données}
 
@@ -5074,6 +5065,8 @@ CCMU 4 \& 5 & \np{1 551} (2.8 \%) \tabularnewline
 
 \end{tabular}
 
+Note: pour les RPU pédiatriques, les chiffres prennent en compte les urgences pédiatriques des deux sites du CHM (Hôpital Emile Muller et Hasenrain)
+
 
 \section*{Durée de présence aux urgences}
 
@@ -5286,7 +5279,7 @@ Signification des intitulés des lignes:
 % \begin{table}
 % \begin{center}
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:20 2014
+% Thu May  8 23:39:45 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrrrrrrrr}
@@ -5366,7 +5359,7 @@ Le interventions SMUR sont égales à la somme des interventions primaires et se
 
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:20 2014
+% Thu May  8 23:39:46 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -5435,7 +5428,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.1.0 by xtable 1.7-1 package
-% Mon Apr 28 15:24:20 2014
+% Thu May  8 23:39:46 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}

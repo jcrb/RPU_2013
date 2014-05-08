@@ -17,6 +17,16 @@ pop15_75<-1368317
 pop75_85<-108426
 pop85<-37647
 
+hop.short <- c("Wis","Hag","Sav","Hus","Odi","Sel","Col","Geb","Mul","3Fr","Alk")
+
+hop.long <- c("CH Wissembourg","CH Haguenau","CH Saverne","HUS","CL Ste Odile","CH Séletat","CH Colmar","CH Guebwiller",
+              "CH Mulhouse", "CL 3 Frontières","CH Alkirch")
+
+rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport",
+               "Mode Transport","Mode entrée","CCMU","Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
+week.short <- c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
+mois.short <- c("Jan","Fev","Mar","Avr","Mai","Jun","Jui","Aou","Sep","Oct","Nov","Dec")
+
 #===========================================================================
 # load_libraries
 #===========================================================================
@@ -360,24 +370,29 @@ completude <- function(data.hop){
 #'@param y second vecteur de complétude
 #'@param rp.type="p" pour polygone
 #'@param poly.col = "khaki" couleur du polygone
-#'@param ch.names = "CH de Colmar"
+#'@param ch.names = nom du centre hospitalier
 #'@param line.col="goldenrod4" couleur du trait du second polygone
 #'@usage radar_completude(region,a, ch.names = "CH Colmar") où region = completude(d1) et 
 #' a = completude(d1[d1$FINESS=="Col",])
 # dessin du premier radar correspondant à la statistique régionale
+#'@usage radar_completude(x, ch.names=ch.names) où x = completude(d1[d1$FINESS=="Col",]) et
+#'ch.names = ch.names. Dessine uniquement le centre hospitalier sous forme d'un radar plein.
 # 
 radar_completude <- function(x, y = NULL, ch.names = "titre", rp.type="p", poly.col = "khaki",line.col="goldenrod4"){
   library("openintro")
   # nom des branches du radar:
-  rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode entrée","CCMU",
+  rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode\nentrée","CCMU",
                  "Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
   
-  radial.plot(x, labels = rpu.names, rp.type="p", radial.lim =c(0,100), show.grid.labels=T,
-              poly.col = fadeColor("khaki",fade = "A0"), line.col="khaki", main=paste(ch.names,"- Taux de complétude des RPU"))
+  radial.plot(x, labels = rpu.names, rp.type="p", radial.lim =c(0,100), show.grid.labels = 2,
+              poly.col = fadeColor("khaki",fade = "A0"), line.col="khaki", main=paste(ch.names,"- Taux de complétude des RPU"),
+              boxed.radial=FALSE, radial.labels=c("0","20%","40%","60%","80%",""), cex.lab=0.1, point.symbols=1, point.col=1,
+              label.prop=1.15, mar=c(2,3,4,2))
   if(!is.null(y)){
     radial.plot(y, labels = rpu.names , radial.lim =c(0,100), add=T,rp.type="p", line.col="goldenrod4", 
-                main="Taux de complétude des RPU", lwd=2)
-    legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n")
+                main="Taux de complétude des RPU", lwd=2, point.symbols=1, point.col=1, poly.col=NULL)
+    # legend("bottomleft", legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="n")
+    legend(-125,-90, legend=c(ch.names,"Alsace"), col=c("goldenrod4","khaki"), lty=1, bty="", pch=15, cex=0.8)
   }
 }
 

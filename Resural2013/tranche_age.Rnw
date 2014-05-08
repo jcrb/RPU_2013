@@ -99,21 +99,22 @@ xtable(as.data.frame(a),caption=c("Répartition des RPU par tranches d'age","Ré
 % ### Age 2
 %----------
 
-<<tranche_age2, echo=FALSE, comment="">>=
+<<tranche_age2, echo=FALSE, comment="", results='asis'>>=
 age2 <- cut(d1$AGE,breaks=c(-1, 17, 74, 110),labels=c("Pédiatrie","Adulte < 75 ans","Gériatrie"))
 t1 <- table(age2)
 
 t2 <- round(prop.table(table(age2))*100,2)
 a <- rbind(t1,t2)
 rownames(a) <- c("n", "%")
-a
+xtable(a, caption="Répartition en trois classe d'âge telles qu'elles sont définies par le serveur régional de veille et d'alerte", label="tranche_age2")
 @
 
 \begin{itemize}
   \item Pédiatrie:  \Sexpr{round(t2[1],0)} \%
   \item Gériatrie:  \Sexpr{round(t2[3],0)} \%
 \end{itemize}
-Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2}
+
+Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \ref{tranche_age2} page \pageref{tranche_age2}
 
 %\begin{figure}
 \begin{center}
@@ -266,8 +267,8 @@ Le taux de recours est le rapport du nombre de consultants dans une classe d'âg
 
 %\begin{figure}
 \begin{center}
-  <<alsace_recours, echo=FALSE, fig.height=5>>=
-  load("../doc/Demographie/pop_alsace_2010.Rda")
+<<alsace_recours, echo=FALSE, fig.height=5>>=
+load("../doc/Demographie/pop_alsace_2010.Rda")
 pop_als <- tapply(as.numeric(alsace$NB), alsace$C_AGED10, sum)
 rm(alsace)
 

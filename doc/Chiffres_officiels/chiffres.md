@@ -28,10 +28,28 @@ names(x)
 a <- rbind(x$chiffres.officiels, x$chiffre.RESURAL)
 a[is.na(a)] <- 100
 rownames(a) <- c("Etablissement", "RESURAL")
+
+or <- par()$mar
+print(or)
+```
+
+```
+## [1] 5.1 4.1 4.1 2.1
+```
+
+```r
+par(mar = c(9, 4, 2, 0))
 barplot(a, beside = TRUE, col = c("darkblue", "red"), legend = rownames(a), 
-    names.arg = x$établissement, las = 2)
+    names.arg = x$établissement, las = 2, main = "2013 - Comparaison Passages au SU et RPU déclarés")
 ```
 
 ![plot of chunk compare](figure/compare.png) 
+
+```r
+par(mar = c(5.1, 4.1, 4.1, 2.1))
+```
+
+
+![wzq](../Analyse/Chapitres/CH_Wissembourg/figure/completude_hop_als1.png)
 
 

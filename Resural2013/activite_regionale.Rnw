@@ -149,15 +149,16 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_a
 %------------------------------
 
 <<parmois, echo=FALSE, comment="", fig.height=8>>=
-m <- month(d1$ENTREE,label=TRUE)
-table(m)
+RPU.mois <- month(d1$ENTREE,label=TRUE)
+levels(RPU.mois) <- mois.short # remplace les termes anglais
+table(RPU.mois)
 @
 
 %\begin{figure}
 \begin{center}
 <<bp_parmois, echo=FALSE, fig.height=5>>=
   main <- paste0(anc, " - Nombre de RPU par mois")
-  barplot(table(m),ylab="nombre",xlab="mois",main=main,names.arg=c("Jan","Fev","Mar","Avr","Mai","Jui","Jul","Aou","Sep","Oct","Nov","Dec"),las=2)
+  barplot(table(RPU.mois),ylab="nombre",xlab="mois",main=main, names.arg = mois.short, las=2)
 @
 \captionof{figure}{\Sexpr{main}.}
 \label{fig:bp_parmois}
@@ -174,13 +175,14 @@ m<-week(d1$ENTREE)
 a <- table(m)
 a <- a[-53] # supprime la dernière semaine
 b <- matrix(as.numeric(a), ncol=4, nrow=13, byrow=TRUE)
-c <- xtable(as.data.frame(b),caption=c("Activité des SU par semaine en 2013","Activité par semaine"))
-print.xtable(c) # b, include.colnames=FALSE
+colnames(b)<-c("1","2","3","4")
+c <- xtable(as.data.frame(b),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
+print.xtable(c) 
 
 
-xtable(table(m),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
-
-xtable(t(table(m)),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem2",table.placement = "ht",caption.placement = "top")
+# xtable(table(m),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
+# 
+# xtable(t(table(m)),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem2",table.placement = "ht",caption.placement = "top")
 @
 
 %\begin{figure}
@@ -199,14 +201,15 @@ xtable(t(table(m)),caption=c("Activité des SU par semaine en 2013","Activité p
 %--------------------------------------------
 
 <<activite_semaine, echo=FALSE, comment="", fig.height=8>>=
-m<-wday(d1$ENTREE,label=T)
-table(m)
+RPU.jour.semaine <- wday(d1$ENTREE,label=T)
+levels(RPU.jour.semaine) <- week.short
+table(RPU.jour.semaine)
 @
 
 \begin{center}
 <<bp_activite_semaine, echo=FALSE, fig.height=5>>=
   main <- paste0("Activité selon le jour de la semaine en ", anc)
-barplot(table(m),names.arg=c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam"), main=main)
+barplot(table(RPU.jour.semaine),names.arg = week.short, main=main)
 @
 \captionof{figure}{\Sexpr{main}.}
 \label{fig:activite_semaine}

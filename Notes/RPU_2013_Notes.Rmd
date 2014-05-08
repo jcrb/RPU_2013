@@ -79,6 +79,17 @@ t
 xtable(as.data.frame(t))  
 xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'age","Durée de passage et age"), label="tab:age_dp") 
 
+Note that latex.environments = "" avoids the default option of tables being centered, which in this example would lead
+to the caption not being directly under the table. 
+Most importantly, table.placement = NULL is required to ensure that the default table placement options [ht] being inserted after
+\begin{margintable}.
+This is necessary because the margintable environment does not allow placement options like [ht]
+.
+> library(xtable)
+> x <- matrix(rnorm(6), ncol = 2)
+> x.small <- xtable(x, label ='tabsmall', caption ='A margin table')
+> print(x.small,floating.environment='margintable',latex.environments = "", table.placement = NULL)
+
 #### xprop.table(x) [mes_fonctions.R]  
 Affiche un vecteur de FACTOR sur deux lignes: n et %  
 
@@ -212,6 +223,15 @@ NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On 
 - x = abcisse des colonnes. Elles sont contenues dans l'objet barplot. On peut les recueillir eplicitement par la fonction *str* (str(x)).
 - y = ordonnées des barres, récupérées avec la fonction *table* qui agglomère les données par mois
 Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
+
+#### Renomer des levels prédéfini
+Notamment pour franciser certains tableau:
+```
+RPU.jour.semaine <- wday(d1$ENTREE,label=T)
+levels(RPU.jour.semaine) <- week.short
+table(RPU.jour.semaine)
+```
+wday retourne le nom du jour en anglais. _week.short_ contient la même liste en français
 
 #### notes sur les spatialPolygons
 > str(poly)

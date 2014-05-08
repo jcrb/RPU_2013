@@ -1,10 +1,21 @@
-RPU Presentation
+Réunion ARS Qualité des RPU
 ========================================================
 author: Dr JC Bartier
 date: 3/12/2013
 transition: rotate
 
+
 Introduction
+============
+type: section
+
+- Au delà de l'aspect réglementaire, c'est dire ce que lon fait (et faire ce que l'on dit)
+
+- Démarche d'amélioration de la qualité et de la sécurité des soins
+
+- Complémentarité RPU et ROR (et DPC)
+
+Généralités
 ========================================================
 
 Un **RPU** est composé de **18 items** qui peuvent être
@@ -12,9 +23,9 @@ divisés en deux groupes.
 
 - groupe principal ou __RPU administratif__ (**core**)
 
-  éléments de base qui peuvent **toujours** être relevés de manière exhausive dès l'admission du patient et transmis au fil de l'eau au concentrateur régional.
+  éléments de base qui peuvent **toujours** être relevés de manière exhaustive dès l'admission du patient et transmis au fil de l'eau au concentrateur régional.
 
-  C'est le minimun qui doit pouvoir être transmis au moins une fois par 24 heures.
+  C'est le minimum qui doit pouvoir être transmis au moins une fois par 24 heures.
 
 - groupe complémentaire ou __RPU médical__ (**supplementary**)
 
@@ -22,6 +33,7 @@ RPU Administratif (Core)
 ========================================================
 
 - Il doit être transmis tous les jours avant 4 heures du matin
+- Codage __UTF-8__
 - Le fichier doit comporter un nombre d'enregistrements égal au nombre de passages (inscriptions) au service des urgences(SU)
 - Il comprend l'ensemble des données recueillies au moment de l'enregistrement administratif du patient:
 
@@ -55,6 +67,42 @@ RPU Médical (Supplementary)
   9. Orientation
 - Cette partie du dossier est transmise au plus tard dans les 6 jours.
 
+-----------------------------------------------------------------------------------------
+
+Résultats
+=========
+type: section
+
+% les figures doivent être dans le dossier figure
+
+
+Comparaison RPU réalisés / RPU déclarés
+=======================================
+
+![wzq](figure/compare.png)
+
+Complétude régionale
+====================
+![wzq](figure/completude_hop_als12.png)
+
+-----------------------------------------------------------------------------------------
+
+Les items du RPU dans le détail
+===============================
+type: section
+
+*le diable est dans les détails*
+
+ La réussite d'une production repose sur l'attention prêtée aux détails.
+ David O. Selznick (Autant en emporte le vent)
+ 
+Suivi des RPU
+=============
+- alarmes
+- maintenance
+- tests unitaires
+- signaler toute intervention sur le processus de saisie ou de transmission (mises à jour)
+
 No de dossier
 =============
 - attribué par l'expéditeur
@@ -72,7 +120,7 @@ COMMUNE
 - nom de la commune de résidence du patient
 - lettre majuscules sans accent
 - les noms composés sont séparés par un tiret (WIR-AU-VAL)
-- Strasbourg: 5 othographes différentes 
+- Strasbourg: 5 orthographes différentes 
 - Il est recommandé d'utiliser la **nomenclature des villes de l'INSEE**. (http://www.insee.fr/fr/methodes/nomenclatures/cog/)
 - Pour le **schéma ATIH** le nom de la commune est remplacé par son code INSEE.
 
@@ -90,6 +138,8 @@ Code postal
 - Code à 5 chiffre valable uniquement pour les personnes résidentes sur le territoire français. 
 - La norme RPU définit un code de résidence pour les non résidents. Ce code (**99 999**)n'est en général pas respecté et nécessite un détrompage reposant sur le pays de résidence (pas demandé dans le RPU). 
 - Pour des régions frontalières comme l'Alsace il pourrait être intéressant de distinguer les résidents Suisses et Allemands des autres non résidents.
+    - Allemagne: **99109**
+    - Suisse: **99140**
 - Pour la partie des RPU à transmettre à l'**ATIH** ce code doit être remplacé par un **code de résidence** calqué sur le modèle du **PMSI**.
 
 Date-Heure
@@ -172,6 +222,10 @@ On distingue 4 cas:
 - en provenance directe du *domicile*
   - soit parce que c'est le choix du patient. C'est le cas de la plupart des passages aux urgences et ce passage n'est pas du à des raisons organisationelles (**PEA**).
   - soit parcequ'on lui a demandé de passer par les urgences avant d'être admis dans un autre service. Le passage aux urgences se fait pour des raisons organisationnelles (**PEO**).
+  
+  Les codes Provenance 1 à 4 sont incompatibles avec Mode d’entrée 8. De
+même les codes Provenance 7 et 8 sont incompatibles avec Mode d’entrée 6
+et 7.
 
 
 Provenance en pratique
@@ -203,7 +257,7 @@ CCMU
 ========================================================
 
 la CCMU 
-doit être déterminée **dès l'admission** et non  la sortie du patient, ou être modifiée parceque l'état du patient évolue pendant le séjour aux urgences (étude INVS).
+doit être déterminée **dès l'admission** et non  la sortie du patient, ou être modifiée parce que l'état du patient évolue pendant le séjour aux urgences (étude INVS).
 
 - CCMU 1: consultation simple sans acte biologique ou radiologique (ex. angine)
 - CCMU 2: nécessité d'un acte bio ou radio et/ou d'un petit geste (suture), pas d'hospitalisation
@@ -317,5 +371,10 @@ Elles doivent présenter 4 caractéristiques:
 - cohérence (bornes et définitions)
 
 Quel doit être le devenir des RPU non conformes ?
+=================================================
 - rejet total
 - acceptation partielle
+- auto complétion (avec heure médiane)
+- stockage et information du producteur
+- auto-correction (CIM10)
+- analyse dur RPU incomplets

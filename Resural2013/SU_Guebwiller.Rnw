@@ -3,8 +3,6 @@
 \index{SU Guebwiller}
 \index{Guebwiller!SU}
 
-hop <- "Geb"
-
 \section*{Résumé des données}
 
 <<recap_gueb,echo=FALSE,warning=FALSE>>=
@@ -13,6 +11,7 @@ source("../Analyse/Chapitres/resume.R")
 source("../Routines/mes_fonctions.R")
 
 #hop <- "Geb"
+hop <- "Geb"
 ch.names <- "CH Guebwiller"
 ch <- "Geb"
 hopital <- d1[d1$FINESS == ch,]

@@ -55,7 +55,7 @@ Lorsque le lieu de résidence se situe hors des limites du territoire national, 
 Si le code postal précis est inconnu : le numéro du département suivi de 999.
 Pour les malades résidant hors de France : 99 suivi du code INSEE du pays \footnote{http://www.insee.fr/fr/methodes/nomenclatures/cog/pays.asp}.
 Si le département ou le pays de résidence est inconnu : 99999.
-Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux (Strasbourg).
+Deux communes peuvent avoir le même code postal (Vendenheim et Eckwersheim) et une commune importante peut avoir plusieurs codes postaux(Strasbourg).
 
 %%%%%%%%%%%%%%
 \subsubsection{La commune de résidence}
@@ -97,15 +97,19 @@ Trois codes imposés:
 \index{Provenance}
 Le RPU propose deux séries de code selon que le patient provient d'un établissement de santé ou du domicile. Si l'origine est un établissement:
 \begin{itemize}
-  \item \textbf{1}
-  \item \textbf{2}
-  \item \textbf{3}
-  \item \textbf{4}
+  \item \textbf{1} En provenance d'une unité de soins de courte durée (MCO) 
+  \item \textbf{2} En provenance d'une unité de soins de suite ou de réadaptation
+  \item \textbf{3} En provenance d'une unité de soins de longue durée
+  \item \textbf{4} En provenance d'une unité de psychiatrie
 \end{itemize}
 Si le patient vient du domicile:
 \begin{itemize}
-  \item \textbf{7}
-  \item \textbf{8}
+  \item \textbf{7} Prise en charge aux urgences autres que pour des raisons organisationnelles
+  \item \textbf{8} Prise en charge aux urgences pour des raisons organisationnelles \footnote{Ce code ne fait pas partie des codes du PMSI. Il a été créé spécifiquement pour le RPU.}
+    \begin{itemize}
+      \item patient re-convoqué par le même service d’urgence pour des soins à distance de la prise en charge initiale (surveillance de plâtre, réfection de pansements, rappel de vaccination)
+      \item patient déjà attendu avant sa prise en charge aux urgences dans un autre service et transitant aux urgences pour faciliter l’enregistrement administratif ou la réalisation des premiers examens complémentaires à la prise en charge qui va suivre.
+    \end{itemize}
 \end{itemize}
 
 Les codes \textbf{Provenance} 1 à 4 sont incompatibles avec \textbf{Mode d'entrée} 8. De même les codes \textbf{Provenance} 7 et 8 sont incompatibles avec \textbf{Mode d'entrée} 6 et 7.

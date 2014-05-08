@@ -123,9 +123,11 @@ XXII&U00–U99&Codes d'utilisation particulière & \Sexpr{codeU}&\Sexpr{round(co
 
 
 
-<<class_cim10,echo=FALSE>>=
-a<-substr(dpr,1,1)
-tab1(a,horiz=T,sort.group="decreasing",main="Classes dignostiques de la CIM10")
+<<class_cim10,echo=FALSE, comment="">>=
+classes.cim10 <- substr(dpr,1,1)
+a <- tab1(classes.cim10, horiz=T,sort.group="decreasing", main="Classes dignostiques de la CIM10", xlab="Fréquence")
+colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+print(a)
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -222,12 +224,14 @@ Horaire des AVC, à comparer avec:
 \end{itemize}
 
 <<heure_avc,echo=FALSE>>=
-h<-hour(AVC$ENTREE)
-hist(h,breaks=24,xlab="Heure de la journée",main="Répartition des AVC dans la journée", ylab="Fréquence", col="azure")
+heure.AVC <- hour(AVC$ENTREE)
+hist(heure.AVC, breaks=24, xlab="Heure de la journée", main="Répartition des AVC dans la journée", ylab="Fréquence", col="cornflowerblue", border="white")
 @
 
 <<heure_avc2,echo=FALSE, comment="">>=
-tab1(h,missing=FALSE,main="Heures d'admission des AVC")
+a <- tab1(heure.AVC, missing=FALSE,main="Heures d'admission des AVC", ylab="Fréquence")
+colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+print(a)
 @
 
 
@@ -238,8 +242,11 @@ tab1(h,missing=FALSE,main="Heures d'admission des AVC")
 library("gdata")
 w<-wday(AVC$ENTREE,label=TRUE)
 levels(w)<-c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
-table(w)
-round( prop.table(table(w))*100,2)
+
+table(w, dnn = "Nombre d'AVC selon le jour de la semaine")
+
+
+round( prop.table(table(w, dnn = "Pourcentage d'AVC selon le jour de la semaine"))*100,2)
 
 
 
@@ -299,8 +306,10 @@ Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour to
 \index{AIT!thésaurus}
 
 <<ait,echo=FALSE, comment="">>=
-ait<-dpr$DP[substr(dpr$DP,1,3)=="G45" & substr(dpr$DP,1,4)!="G454"]
-tab1(ait,missing=FALSE, main="Distribution des AIT", ylab="Fréquence")
+AIT <- dpr$DP[substr(dpr$DP,1,3)=="G45" & substr(dpr$DP,1,4)!="G454"]
+a <- tab1(AIT,missing=FALSE, main="Distribution des AIT", ylab="Fréquence")
+colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+print(a)
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -315,14 +324,14 @@ source("../Routines/mes_fonctions.R")
 
 pneumo<-dpr[substr(dpr$DP,1,4)=="J159" ,]
 p<-resume2(pneumo$AGE)
-row.names(r)<-"âge"
+row.names(p)<-"âge"
 xtable(p, caption=c("Pneumonies et âge","Pneumonies et âge"),label="tab:pneumo_age")
 @
 
 Les pneumopathies bactériennes sans précision sont cotées J15.9 Dans la CIM10.
 \Sexpr{nrow(pneumo)} diagnostics de ce type ont été portés au SAU en \Sexpr{anc}.
 
-Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âge moyen est de \Sexpr{p[4]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus (table \ref{tab:pneumo_age} pp.\pageref{tab:pneumo_age}).
+Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âge moyen est de \Sexpr{p[1]} ans et la moitié de ces patients ont \Sexpr{p[3]} ans et plus (table \ref{tab:pneumo_age} pp.\pageref{tab:pneumo_age}).
 
 <<pneumo,echo=FALSE,message=FALSE>>=
 
@@ -492,11 +501,13 @@ Taux hospitalisation: 50\%
 
 CIM10 = T58
 
-<<co, echo=FALSE>>=
+<<co, echo=FALSE, comment="">>=
 co<-dpr[substr(dpr$DP,1,3)=="T58" ,]
 m<-month(co$ENTREE,label=T)
-table(m)
-barplot(table(m),main="Intoxication au CO - 2013",xlab="Mois")
+t <- table(m)
+names(t) <- mois.short
+print(t)
+barplot(table(m),main="Intoxication au CO - 2013",xlab="Mois", ylab="fréquence")
 @
 
 
@@ -505,21 +516,38 @@ barplot(table(m),main="Intoxication au CO - 2013",xlab="Mois")
 \index{malaise}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Cette rubrique associe les codes suivants:
+
+\begin{itemize}
+  \item \textbf{R55}: syncope, lipothymie, malaise vagal
+  \item \textbf{R53}: altération de l'état général, fatigue, épuisement
+  \item \textbf{R42}: étourdissement, vertiges
+\end{itemize}
+
+\subsection*{Malaise de type vagal (R55)}
+
 <<malaises,echo=FALSE>>=
 malaise<-d1[substr(d1$DP,1,3)=="R55", c("DP","ENTREE")]
 malaise<-malaise[complete.cases(malaise),]
 malaise$date<-as.Date(malaise$ENTREE)
-hist(malaise$date,breaks=18,freq=TRUE,col="slategray1")
+malaise.mois <- tapply(malaise$date, month(malaise$date), length)
+barplot(malaise.mois, col="slategray1", main="Malaises de type vagal en 2013", names.arg=mois.short, ylab="fréquence")
 @
 
-malaise selon INVS (canicule):
+\subsection*{malaise selon INVS (canicule)}
+
+Regroupe tous les intitulés: R55, R53 et R42.
 
 <<malaises_invs,echo=FALSE>>=
-malaise<-d1[substr(d1$DP,1,3)=="R55"|substr(d1$DP,1,3)=="R53"|substr(d1$DP,1,3)=="R42", c("DP","ENTREE")]
-malaise<-malaise[complete.cases(malaise),]
-malaise$date<-as.Date(malaise$ENTREE)
-hist(malaise$date,breaks=18,freq=TRUE,col="slategray1",main="Malaises (INVS)")
- plot(as.factor(malaise$date),col="slategray1",las = 1,main="Malaises (INVS)")
+malaise <- d1[substr(d1$DP,1,3)=="R55"|substr(d1$DP,1,3)=="R53"|substr(d1$DP,1,3)=="R42", c("DP","ENTREE")]
+malaise <- malaise[complete.cases(malaise),]
+malaise$date <- as.Date(malaise$ENTREE)
+
+malaise.mois <- tapply(malaise$date, month(malaise$date), length)
+barplot(malaise.mois, col="slategray1", main="Malaises (INVS) en 2013", names.arg=mois.short, ylab="fréquence")
+
+# hist(malaise$date,breaks=18,freq=TRUE,col="slategray1",main="Malaises (INVS)", xlab="")
+# plot(as.factor(malaise$date),col="slategray1",las = 1,main="Malaises (INVS)")
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -532,13 +560,17 @@ Données hospitalières : nombre quotidien de passages dans des services d'urgen
 - X30  Exposition à une chaleur naturelle excessive
 - E86  Déplétion du volume du plasma ou du liquide extra cellulaire, Déshydratation sauf choc hypovolémique
 
-<<canicule,echo=FALSE>>=
+<<canicule,echo=FALSE, comment="">>=
 canicule<-dpr[substr(dpr$DP,1,3)=="T67", c("DP","ENTREE")]
 canicule<-canicule[complete.cases(canicule),]
 canicule$date<-as.Date(canicule$ENTREE)
 hist(canicule$date,breaks=18,freq=TRUE,col="slategray1",main="Pathologies liées à la chaleur",ylab="Nombre",xlab="",sub="Code CIM10 T67.0 à T67.9")
 canicule$DP<-gsub(".","",canicule$DP,fixed=TRUE)
-tab1(canicule$DP,xlab="Fréquence",main="Pathologies liées à la chaleur")
+
+canicule <- canicule$DP
+a <- tab1(canicule,xlab="Fréquence",main="Pathologies liées à la chaleur")
+colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+print(a)
 
 
 canicule<-dpr[substr(dpr$DP,1,3)=="T67"|substr(dpr$DP,1,3)=="X30"|substr(dpr$DP,1,3)=="E86"|substr(dpr$DP,1,3)=="E871", c("DP","ENTREE")]
@@ -552,46 +584,108 @@ hist(canicule$date,breaks=18,freq=TRUE,col="slategray1",main="Pathologies liées
 \index{Gastroentérites}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-CIM10 A09 : Diarrhée et gastro-entérite d'origine présumée infectieuse
+CIM10 \textbf{A09} : Diarrhée et gastro-entérite d'origine présumée infectieuse. Les RPU retournent 3 codes: A09, A090 et A099 correspondant à la classification CIM10-PMSI:
+\begin{itemize}
+  \item \textbf{A090} Gastroentérites et colites d’origine infectieuse, autres et non précisées
+  \item \textbf{A099} Gastroentérites et colites d’origine non précisée
+\end{itemize}
 
 Inclus: Catarrhe intestinale (Colite,Entérite, Gastro-entérite,SAI hémorragique,septique), Diarrhée (SAI,dysentérique,épidémique), Maladie diarrhéique infectieuse SAI.
-Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies dues à des bactéries, des protozoaires, des virus et d'autres agents infectieux précisés (A00-A08)  
+Sont exclues: diarrhée non infectieuse (K52.9), néonatale (P78.3), maladies dues à des bactéries, des protozoaires, des virus et d'autres agents infectieux précisés (A00-A08) 
 
-<<ge, echo=FALSE>>=
+<<ge_init, echo=FALSE>>=
 ge<-dpr[substr(dpr$DP,1,3)=="A09" ,]
-summary(ge)
-table(ge$FINESS,ge$DP)
+# summary(ge)
+@
+
+\subsection*{Une pathologie de l'enfant et de l'adulte jeune}
+
+<<ge_age, echo=FALSE>>=
+s.ge <- summary(ge$AGE)
+@
+\begin{itemize}
+  \item age moyen \Sexpr{s.ge["Mean"]} ans.
+  \item age médian \Sexpr{s.ge["Median"]} ans.
+  \item 75\% des paients ont moins de \Sexpr{s.ge["3rd Qu."]} ans.
+\end{itemize}
+
+<<ge.hist, echo=FALSE, fig.align='center', fig.height=8>>=
 hist(ge$AGE,main="Gasto-entérites - 2013",xlab="Âge (années)", ylab="nombre",col="gray90")
+@
+
+<<ge.age.box, echo=FALSE, fig.align='center', fig.height=6>>=
 boxplot(ge$AGE,col="yellow",main="Gastro-entérite",ylab="âge (années)")
+@
+
+\subsection*{Epidémiologie des gastro-entérites}
+
+<<ge.epidemio, echo=FALSE>>=
 m<-month(ge$ENTREE,label=T)
-x<-barplot(table(m),main="Gastro-entérites - 2013",xlab="Mois")
+x<-barplot(table(m),main="Gastro-entérites - 2013",xlab="Mois", names.arg=mois.short)
 lines(x=x,y=table(m),col="red")
 @
 
-calculs à la manière de l'INVS
+% calculs à la manière de l'INVS
+\subsection*{nombre de diagnostics de GE par rapport au nombre total de RPU par semaine}
 
-nombre de diagnostics de GE / nb total de diagnostics par semaine:
-<<invs, echo=FALSE>>=
-mge<-month(ge$ENTREE,label=T)
-mtot<-month(dpr$ENTREE,label=T)
-summary(mtot)
-summary(mge)
-a<-round(summary(mge)*100/summary(mtot),2)
+<<invs, echo=FALSE, comment="">>=
+mge <- month(ge$ENTREE,label=T)
+mtot <- month(dpr$ENTREE,label=T)
+s.mtot <- summary(mtot)
+s.mge <- summary(mge)
+rapport <- round(summary(mge)*100/summary(mtot),2)
+a <- rbind(s.mtot, s.mge, rapport)
+colnames(a) <- mois.short
+rownames(a) <- c("RPU totaux", "Gastro-entérites", "Rapport")
 a
-barplot(a)
+@
+
+<<invs.barplot, echo=FALSE, fig.align='center', fig.height= 8>>=
+b <- rbind(s.mtot, s.mge)
+colnames(b) <- mois.short
+rownames(b) <- c("RPU totaux", "Gastro-entérites")
+barplot(b, beside=TRUE)
 @
 
 
-dpt: tous les cas de traumato (S00 à T98)
+<<ge.finess, echo=FALSE>>=
+table(ge$FINESS,ge$DP)
+@
 
-dpnp:tous les cas de médecine  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Traumatologie}
+\index{Traumatologie}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<trauma, echo=FALSE>>=
-dpt<-dpr[substr(dpr$DP,1,3)>="S00" & substr(dpr$DP,1,3)<"T99", ]  
-dpnt<-dpr[substr(dpr$DP,1,3) < "S00" | substr(dpr$DP,1,3)>"T98", ]  
-mnt<-month(dpnt$ENTREE,label=T)  
-a<-round(summary(mge)*100/summary(mnt),2)  
+% dpt: tous les cas de traumato (S00 à T98)
+% dpnt:tous les cas de médecine  
+
+<<trauma, echo=FALSE, comment="">>=
+dpt <- dpr[substr(dpr$DP,1,3)>="S00" & substr(dpr$DP,1,3)<"T99", ]  
+dpnt <- dpr[substr(dpr$DP,1,3) < "S00" | substr(dpr$DP,1,3)>"T98", ]  
+n.dpt <- nrow(dpt)
+n.dpnt <- nrow(dpnt)
+trauma.ratio <- round(n.dpt/(n.dpt+n.dpnt), 2)
+
+dpnt.mois <- summary(month(dpnt$ENTREE,label=T)) #nb de cas médicaux par mois
+dpt.mois <- summary(month(dpt$ENTREE,label=T)) #nb de cas de traumato par mois
+ratio.med.trauma <- round(dpnt.mois/dpt.mois, 2)
+trauma.ratio.mois <- round(dpnt.mois/(dpnt.mois + dpt.mois), 2)
+
+a <- rbind(dpnt.mois, dpt.mois, ratio.med.trauma, trauma.ratio.mois)
+colnames(a) <- mois.short
+rownames(a) <- c("RPU médicaux", "Traumatologie", "Ratio med/trauma", "Trauma ratio")
+a
+
+a<-round(summary(mge)*100/dpnt.mois,2)  
 a 
 @
+
+\begin{itemize}
+  \item Nombre de cas de traumatologie: \Sexpr{n.dpt}
+  \item Nombre de cas médicaux: \Sexpr{n.dpnt}
+  \item Trauma ratio moyen: \Sexpr{trauma.ratio}
+\end{itemize}
+
 
  
