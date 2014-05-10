@@ -39,8 +39,10 @@ print(or)
 
 ```r
 par(mar = c(9, 4, 2, 0))
-barplot(a, beside = TRUE, col = c("darkblue", "red"), legend = rownames(a), 
-    names.arg = x$établissement, las = 2, main = "2013 - Comparaison Passages au SU et RPU déclarés")
+barplot(a, beside = TRUE, col = c("darkblue", "red"), names.arg = x$établissement, 
+    las = 2, main = "2013 - Comparaison Passages au SU et RPU déclarés")
+legend(1, 115000, legend = rownames(a), col = c("darkblue", "red"), pch = 15, 
+    pt.cex = 2)
 ```
 
 ![plot of chunk compare](figure/compare.png) 

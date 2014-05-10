@@ -32,7 +32,7 @@ knit_hooks$set(inline = function(x) {
 })
 
 ch <- "Wis"
-ch.names <- "CH de Wissembourg"
+ch.names <- "CH Wissembourg"
 
 hopital<-d1[d1$FINESS == ch,]
 n <- nrow(hopital)

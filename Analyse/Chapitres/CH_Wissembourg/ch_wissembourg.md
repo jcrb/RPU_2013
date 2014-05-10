@@ -58,7 +58,7 @@ date()
 ```
 
 ```
-## [1] "Sat May  3 19:39:01 2014"
+## [1] "Fri May  9 11:48:37 2014"
 ```
 
 ```r
@@ -103,13 +103,13 @@ knit_hooks$set(inline = function(x) {
 })
 
 ch <- "Wis"
-ch.names <- "CH de Wissembourg"
+ch.names <- "CH Wissembourg"
 
 hopital <- d1[d1$FINESS == ch, ]
 n <- nrow(hopital)
 ```
 
-CH de CH de Wissembourg
+CH de CH Wissembourg
 ===================
 
 ### Passages en 2013: 12 646
@@ -949,23 +949,23 @@ c
 ```
 
 ```
-##                Alsace (%) CH de Wissembourg
-## Entrée                100             100.0
-## Sexe                  100             100.0
-## Age                   100             100.0
-## Commune               100             100.0
-## ZIP                   100             100.0
-## Provenance             64              98.5
-## PEC Transport          74              99.5
-## Mode Transport         77              99.2
-## Mode entrée            90              99.5
-## CCMU                   86              99.9
-## Motif                  64              99.7
-## DP                     66              90.2
-## Sortie                 91             100.0
-## Mode sortie            86              99.4
-## Orientation            20               7.8
-## Destination            21             100.0
+##                Alsace (%) CH Wissembourg
+## Entrée                100          100.0
+## Sexe                  100          100.0
+## Age                   100          100.0
+## Commune               100          100.0
+## ZIP                   100          100.0
+## Provenance             64           98.5
+## PEC Transport          74           99.5
+## Mode Transport         77           99.2
+## Mode entrée            90           99.5
+## CCMU                   86           99.9
+## Motif                  64           99.7
+## DP                     66           90.2
+## Sortie                 91          100.0
+## Mode sortie            86           99.4
+## Orientation            20            7.8
+## Destination            21          100.0
 ```
 
 Utilsation des routines
@@ -1002,14 +1002,14 @@ for (i in 1:length(hop.short)) {
 }
 ```
 
-![plot of chunk completude.hop.als](figure/completude_hop_als1.png) ![plot of chunk completude.hop.als](figure/completude_hop_als2.png) ![plot of chunk completude.hop.als](figure/completude_hop_als3.png) ![plot of chunk completude.hop.als](figure/completude_hop_als4.png) ![plot of chunk completude.hop.als](figure/completude_hop_als5.png) ![plot of chunk completude.hop.als](figure/completude_hop_als6.png) ![plot of chunk completude.hop.als](figure/completude_hop_als7.png) ![plot of chunk completude.hop.als](figure/completude_hop_als8.png) ![plot of chunk completude.hop.als](figure/completude_hop_als9.png) ![plot of chunk completude.hop.als](figure/completude_hop_als10.png) ![plot of chunk completude.hop.als](figure/completude_hop_als11.png) 
+![plot of chunk completude.hop.als](figure/completude_hop_als1.png) ![plot of chunk completude.hop.als](figure/completude_hop_als2.png) ![plot of chunk completude.hop.als](figure/completude_hop_als3.png) ![plot of chunk completude.hop.als](figure/completude_hop_als4.png) ![plot of chunk completude.hop.als](figure/completude_hop_als5.png) ![plot of chunk completude.hop.als](figure/completude_hop_als6.png) ![plot of chunk completude.hop.als](figure/completude_hop_als7.png) ![plot of chunk completude.hop.als](figure/completude_hop_als8.png) ![plot of chunk completude.hop.als](figure/completude_hop_als9.png) ![plot of chunk completude.hop.als](figure/completude_hop_als10.png) ![plot of chunk completude.hop.als](figure/completude_hop_als11.png) ![plot of chunk completude.hop.als](figure/completude_hop_als12.png) 
 
 ```r
 
 radar_completude(x, ch.names = "Région Alsace 2013")
 ```
 
-![plot of chunk completude.hop.als](figure/completude_hop_als12.png) 
+![plot of chunk completude.hop.als](figure/completude_hop_als13.png) 
 
 ```r
 

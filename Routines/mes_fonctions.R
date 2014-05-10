@@ -17,15 +17,19 @@ pop15_75<-1368317
 pop75_85<-108426
 pop85<-37647
 
-hop.short <- c("Wis","Hag","Sav","Hus","Odi","Sel","Col","Geb","Mul","3Fr","Alk")
+hop.short <- c("Wis","Hag","Sav","Hus","Odi","Sel","Col","Geb","Mul","3Fr","Alk","Dia")
 
 hop.long <- c("CH Wissembourg","CH Haguenau","CH Saverne","HUS","CL Ste Odile","CH Séletat","CH Colmar","CH Guebwiller",
-              "CH Mulhouse", "CL 3 Frontières","CH Alkirch")
+              "CH Mulhouse", "CL 3 Frontières","CH Alkirch","Diaconat-Fonderie")
 
 rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport",
                "Mode Transport","Mode entrée","CCMU","Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
+
 week.short <- c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
+week.long <- c("Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi")
+
 mois.short <- c("Jan","Fev","Mar","Avr","Mai","Jun","Jui","Aou","Sep","Oct","Nov","Dec")
+mois.long <- c("Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Decembre")
 
 #===========================================================================
 # load_libraries
@@ -587,7 +591,24 @@ xprop.table <- function(t, rnames=""){
 #'@param nombre de chiffre après la virgul (défaut = 2)
 #'@return le % de NA
 #'@usage sort(tapply(d1$SORTIE, d1$FINESS, meanna)) retourne le % de NA de chaque hopital pour l'item SORTIE
+#'@usage exaustivité: 100 - sort(tapply(d1$MODE_ENTREE, d1$FINESS, meanna))
+#'@usage Pour imprimer le résultat en HTML ou LATEX
+#'@usage t <- data.frame(t(100-sort(tapply(d1$PROVENANCE, d1$FINESS, meanna))), check.names = FALSE, row.names="")
+#'@usage puis print.xtable(xtable(t), type = "html")
+#'
 meanna <- function(x, digits=2){
   a<-round(mean(is.na(x))*100, digits);
   return(a)
+}
+
+#===========================================================================
+# exhaustivite
+#===========================================================================
+#'@ calcule le taux de réponse (exhaustivité) pour un item
+#'@param x un vecteur de valeur
+#'@return le % d'item différents de NA
+#'@usage exhaustivite(d1$MODE_ENTREE) = 0.9043401 en 2013
+#'
+exhaustivite <- function(x){
+  return(mean(!is.na(x)))
 }

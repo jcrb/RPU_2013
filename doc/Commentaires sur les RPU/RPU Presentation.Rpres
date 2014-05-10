@@ -3,20 +3,29 @@ Réunion ARS Qualité des RPU
 author: Dr JC Bartier
 date: 3/12/2013
 transition: rotate
+width: 1440
+height: 900
 
 
 Introduction
 ============
 type: section
 
-- Au delà de l'aspect réglementaire, c'est dire ce que lon fait (et faire ce que l'on dit)
+Introduction
+============
+incremental: true
 
 - Démarche d'amélioration de la qualité et de la sécurité des soins
 
+- Au delà de l'aspect réglementaire, c'est dire ce que lon fait (et faire ce que l'on dit)
+
 - Complémentarité RPU et ROR (et DPC)
+
+- Globalement plutôt satisfaisant
 
 Généralités
 ========================================================
+incremental: true
 
 Un **RPU** est composé de **18 items** qui peuvent être
 divisés en deux groupes.
@@ -76,14 +85,24 @@ type: section
 % les figures doivent être dans le dossier figure
 
 
-Comparaison RPU réalisés / RPU déclarés
-=======================================
+Exhaustivité quantitative
+=========================
 
 ![wzq](figure/compare.png)
 
-Complétude régionale
-====================
-![wzq](figure/completude_hop_als12.png)
+***
+
+- Comparaison RPU réalisés / RPU déclarés au serveur régional.
+- Haguenau: pas de chiffres officiels
+- HUS: chiffres issus du serveur régional
+
+Exhaustivité qualitative
+========================
+![wzq](figure/completude_hop_Alsace.png)
+
+***
+
+- Taux de Complétude régionale
 
 -----------------------------------------------------------------------------------------
 
@@ -98,20 +117,27 @@ type: section
  
 Suivi des RPU
 =============
-- alarmes
+incremental: true
+
+- alertes
+  - non transmission des fichiers
+  - non réceptions des fichiers
+  
 - maintenance
-- tests unitaires
-- signaler toute intervention sur le processus de saisie ou de transmission (mises à jour)
+  - tests unitaires
+  - signaler toute intervention sur le processus de saisie ou de transmission (mises à jour)
 
 No de dossier
 =============
 - attribué par l'expéditeur
 - doit être unique
-- permet de lier le RPU aux diagnostics associés et aux gestes
+- permet de lier le RPU 
+  - aux diagnostics associés et 
+  - aux gestes
 
 FINESS
 ======
-- FINESS __géographique__ (mettre la liste des finess)
+- FINESS __géographique__
 - critère de rejet (FEDORU)
 - Exhaustivité de 100% pour tous les sites
 
@@ -120,17 +146,13 @@ COMMUNE
 - nom de la commune de résidence du patient
 - lettre majuscules sans accent
 - les noms composés sont séparés par un tiret (WIR-AU-VAL)
-- Strasbourg: 5 orthographes différentes 
+- ex: Strasbourg: 5 orthographes différentes 
 - Il est recommandé d'utiliser la **nomenclature des villes de l'INSEE**. (http://www.insee.fr/fr/methodes/nomenclatures/cog/)
 - Pour le **schéma ATIH** le nom de la commune est remplacé par son code INSEE.
+- Item manquant:
 
-```
-3Fr  Alk  Col  Dia  Geb  Hag  
-0.00 0.00 0.00 0.00 0.00 0.00 
-Hus  Mul  Odi  Sel  Wis  Sav 
-0.00 0.01 0.00 0.00 0.00 0.00
-```
-
+- Exhaustivité de 100% pour tous les sites0 0.01 0.00 0.00 0.00 0.00
+- __Exhaustivité qualitative__ à améliorer
 
 Code postal
 ========================================================
@@ -141,6 +163,11 @@ Code postal
     - Allemagne: **99109**
     - Suisse: **99140**
 - Pour la partie des RPU à transmettre à l'**ATIH** ce code doit être remplacé par un **code de résidence** calqué sur le modèle du **PMSI**.
+
+```
+- Exhaustivité quantitative 100%
+- Exhaustivité qualitative ?
+```
 
 Date-Heure
 ==========
@@ -170,19 +197,19 @@ barplot(sort(x), ylab="% de non réponse", main="Item Date-heure de Sortie")
 - heure de sortie correspond à la sortie physique du patient
 - exhaustivité moyenne: <b>\Sexpr{100-8.82} %</b>
 
-```
-3Fr   Alk   Dia   Geb   Odi   Wis   
-0.00  0.00  0.00  0.00  0.00  0.00 
-
-Col   Sel   Sav   Hag   Mul   Hus 
-0.69  2.96  9.50 14.94 17.14 35.29 
-```
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Sat May 10 14:07:14 2014 -->
+<TABLE border=1>
+<TR>  <TH> 3Fr </TH> <TH> Alk </TH> <TH> Dia </TH> <TH> Geb </TH> <TH> Odi </TH> <TH> Wis </TH> <TH> Col </TH> <TH> Sel </TH> <TH> Sav </TH> <TH> Hag </TH> <TH> Mul </TH> <TH> Hus </TH>  </TR>
+  <TR>  <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 99.31 </TD> <TD align="right"> 97.04 </TD> <TD align="right"> 90.50 </TD> <TD align="right"> 85.06 </TD> <TD align="right"> 82.86 </TD> <TD align="right"><font color="red"> 64.71 </TD> </TR>
+   </TABLE>
+   
 L'**hospitalisation en UHCD** est une sortie du point de vue du RPU mais une simple translation pour le service (porosité accueil/UHCD).
 
 Sexe
 ========================================================
 
-- Le RPU attend **H**omme ou **F**emme ou __I__ndéterminé (pas masculin / féminin /)
+- Le RPU attend **M**asculin ou **F**éminin ou __I__ndéterminé (pas homme / femme)
 - Exhaustivité de 100% pour tous les sites
 
 Date de naissance
@@ -191,15 +218,17 @@ Date de naissance
 - Pour le **schéma ATIH** la date de naissance est remplacée par l'**âge** calendaire à la date d'entrée du patient.
 - Exhaustivité de 100%
 
-```
-3Fr  Alk  Col  Dia  Geb  Hag  
-0.03 0.00 0.00 0.01 0.00 0.00 
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Sat May 10 13:15:11 2014 -->
+<TABLE border=1>
+<TR><TH> 3Fr </TH> <TH> Alk </TH> <TH> Col </TH> <TH> Dia </TH> <TH> Geb </TH> <TH> Hag </TH> <TH> Hus </TH> <TH> Mul </TH> <TH> Odi </TH> <TH> Sel </TH> <TH> Wis </TH> <TH> Sav </TH>  </TR>
+  <TR>  </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> </TR>
+</TABLE>
 
-Hus  Mul  Odi  Sel  Wis  Sav 
-0.00 0.00 0.01 0.00 0.00 0.00 
-```
-
-
+<!--
+t <- data.frame(t(100-sort(tapply(d1$NAISSANCE, d1$FINESS, meanna))), check.names = FALSE, row.names="")
+print.xtable(xtable(t), type = "html")
+-->
 
 MODE D’ENTREE
 =============
@@ -207,6 +236,21 @@ Le RPU connait 3 modes d'entrée:
 - __Mutation__: le malade vient d'une autre unité médicale de la même entité juridique
 - __Transfert__: le malade vient d'une autre entité juridique 
 - __Domicile__: le malade vient de son domicile ou de son substitut, comme une structure d'hébergement __médico-sociale__. Ce mode inclut les entrées à partir de la __voie publique__. Le code 8 du mode d'entrée est à utiliser en cas de naissance d'un nouveau-né quelque soit la situation d’hospitalisation ou de non hospitalisation de la mère
+
+- exhaustivité globale: __90.43 %__
+
+
+<TABLE border=1>
+<TR> <TH> Col </TH> <TH> Hus </TH> <TH> Sel </TH> <TH> Sav </TH> <TH> Odi </TH> <TH> Wis </TH> <TH> Dia </TH> <TH> Mul </TH> <TH> Alk </TH> <TH> 3Fr </TH> <TH> Geb </TH> <TH> Hag </TH>  </TR>
+
+<TR> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 99.93 </TD> <TD align="right"> 99.53 </TD> <TD align="right"> 96.19 </TD> <TD align="right"> 95.92 </TD> <TD align="right"> 85.19 </TD> <TD align="right"> 83.71 </TD> <TD align="right"><font color="red"> 58.09 </TD> <TD align="right"><font color="red"> 45.01 </TD> </TR>
+   </TABLE>
+
+<!-- 
+100-sort(tapply(d1$MODE_ENTREE, d1$FINESS, meanna))
+print.xtable(xtable(data.frame(t(t))), type="html")
+-->
+
 
 Provenance
 ===========
@@ -222,11 +266,43 @@ On distingue 4 cas:
 - en provenance directe du *domicile*
   - soit parce que c'est le choix du patient. C'est le cas de la plupart des passages aux urgences et ce passage n'est pas du à des raisons organisationelles (**PEA**).
   - soit parcequ'on lui a demandé de passer par les urgences avant d'être admis dans un autre service. Le passage aux urgences se fait pour des raisons organisationnelles (**PEO**).
-  
-  Les codes Provenance 1 à 4 sont incompatibles avec Mode d’entrée 8. De
-même les codes Provenance 7 et 8 sont incompatibles avec Mode d’entrée 6
+- Les codes __Provenance 1 à 4__ sont incompatibles avec __Mode d’entrée 8__. De
+même les codes __Provenance 7 et 8__ sont incompatibles avec __Mode d’entrée 6__
 et 7.
+- exhaustivité __64 %__
 
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Sat May 10 11:57:37 2014 -->
+<TABLE border=1>
+<TR>  <TH> Col </TH> <TH> Sel </TH> <TH> Odi </TH> <TH> Wis </TH> <TH> Dia </TH> <TH> Mul </TH> <TH> Geb </TH> <TH> Sav </TH> <TH> Hag </TH> <TH> Hus </TH> <TH> 3Fr </TH> <TH> Alk </TH>  </TR>
+  <TR> <TD align="right"> 100.00 </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 99.93 </TD> <TD align="right"> 98.55 </TD> <TD align="right"> 96.17 </TD> <TD align="right"> 95.92 </TD> <TD align="right"><font color="red"> 15.20 </TD> <TD align="right"><font color="red"> 5.89 </TD> <TD align="right"><font color="red"> 4.56 </TD> <TD align="right"><font color="red"> 4.00 </TD> <TD align="right"><font color="red"> 0.22 </TD> <TD align="right"><font color="red"> 0.06 </TD> </TR>
+</TABLE>
+
+<!-- 
+Pour afficher en HLML une table d'une ligne
+t <- data.frame(t(100-sort(tapply(d1$PROVENANCE, d1$FINESS, meanna))), check.names = FALSE, row.names="")
+print.xtable(xtable(t), type = "html")
+-->
+
+Provenance et Orientation
+=========================
+
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Fri May  9 14:36:50 2014 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Mutation </TH> <TH> Transfert </TH> <TH> Domicile </TH>  </TR>
+  <TR> <TD align="right"> NA </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> MCO </TD> <TD align="right"> 3148 </TD> <TD align="right"> 3199 </TD> <TD align="right"><font color="red"><b> 1497</b></font> </TD> </TR>
+  <TR> <TD align="right"> SSR </TD> <TD align="right">  20 </TD> <TD align="right">  30 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> SLD </TD> <TD align="right">   8 </TD> <TD align="right">  14 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> PSY </TD> <TD align="right">  14 </TD> <TD align="right">  31 </TD> <TD align="right">   0 </TD> </TR>
+  <TR> <TD align="right"> PEA </TD> <TD align="right"> 323 </TD> <TD align="right">  78 </TD> <TD align="right"> 183 574 </TD> </TR>
+  <TR> <TD align="right"> PEO </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 29 114 </TD> </TR>
+   </TABLE>
+
+***
+
+- pas de détrompage. On ne peut venir simultanément de son domicile et d'un service.
 
 Provenance en pratique
 =======================
@@ -236,7 +312,7 @@ Provenance en pratique
 -->
 
 <TABLE border=1>
-<TR> <TH>  </TH> <TH> MCO </TH> <TH> SSR </TH> <TH> SLD </TH> <TH> PSY </TH> <TH> PEA </TH> <TH> PEO </TH>  </TR>
+<TR> <TH>  </TH> <TH> MCO </TH> <TH> SSR </TH> <TH> SLD </TH> <TH> PSY </TH> <TH><font color="red"> PEA </TH> <TH><font color="red"> PEO </TH>  </TR>
   <TR> <TD align="right"> 3Fr </TD> <TD align="right">  23 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">  12 </TD> <TD align="right">   0 </TD> </TR>
   <TR> <TD align="right"> Alk </TD> <TD align="right">   2 </TD> <TD align="right">   2 </TD> <TD align="right">   0 </TD> <TD align="right">   2 </TD> <TD align="right">   1 </TD> <TD align="right">   0 </TD> </TR>
   <TR> <TD align="right"> Col </TD> <TD align="right"> 2394 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 61308 </TD> <TD align="right"> 1056 </TD> </TR>
@@ -251,9 +327,14 @@ Provenance en pratique
   <TR> <TD align="right"> Sav </TD> <TD align="right">  14 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right">   0 </TD> <TD align="right"> 718 </TD> <TD align="right">   0 </TD> </TR>
    </TABLE>
 
+***
+
+Confusion entre
+- raisons organisationnelles (PEO)
+- raisons non organisationnelles (PEA)
 
 
-CCMU
+CCMU (Gravité)
 ========================================================
 
 la CCMU 
@@ -265,12 +346,23 @@ doit être déterminée **dès l'admission** et non  la sortie du patient, ou ê
 - CCMU 4: SI, SC
 - CCMU 5: REA
 
+- Exhaustivité: __85,75 %__
+
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Sat May 10 12:34:25 2014 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Wis </TH> <TH> Geb </TH> <TH> Odi </TH> <TH> Col </TH> <TH> Sel </TH> <TH> Alk </TH> <TH> 3Fr </TH> <TH> Dia </TH> <TH> Hag </TH> <TH> Mul </TH> <TH> Sav </TH> <TH> Hus </TH>  </TR>
+  <TR> <TD align="right">  </TD> <TD align="right"> 99.89 </TD> <TD align="right"> 99.87 </TD> <TD align="right"> 99.60 </TD> <TD align="right"> 99.48 </TD> <TD align="right"> 97.68 </TD> <TD align="right"> 97.26 </TD> <TD align="right"> 96.46 </TD> <TD align="right"> 95.85 </TD> <TD align="right"><font color="red"> 78.32 </TD> <TD align="right"><font color="red"> 77.82 </TD> <TD align="right"><font color="red"> 57.78 </TD> <TD align="right"><font color="red"> 44.35 </TD> </TR>
+   </TABLE>
+
 CCMU (2)
 =======
+left: 60%
+
 <!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
 <!-- Mon Apr 28 18:50:16 2014 -->
 <TABLE border=1>
-<CAPTION ALIGN="bottom"> CCMU et devenir (DCD et hospitalisé en UHTCD)</CAPTION>
+<CAPTION ALIGN="bottom"> CCMU et devenir </CAPTION>
 <TR> <TH>  </TH> <TH> 1 </TH> <TH> 2 </TH> <TH> 3 </TH> <TH> 4 </TH> <TH> 5 </TH> <TH> D </TH> <TH> P </TH>  </TR>
   <TR> <TD align="left"> CHIR </TD> <TD align="left"> 181 </TD> <TD align="left"> 3331 </TD> <TD align="left"> 3662 </TD> <TD align="left"> 363 </TD> <TD align="left">  11 </TD> <TD align="left">   1 </TD> <TD align="left"> 140 </TD> </TR>
   <TR> <TD align="left"> FUGUE </TD> <TD align="left">  67 </TD> <TD align="left"> 141 </TD> <TD align="left">  22 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   9 </TD> </TR>
@@ -285,7 +377,15 @@ CCMU (2)
   <TR> <TD align="left"> SCAM </TD> <TD align="left">  77 </TD> <TD align="left"> 324 </TD> <TD align="left">  81 </TD> <TD align="left">   3 </TD> <TD align="left">   0 </TD> <TD align="left">   0 </TD> <TD align="left">   2 </TD> </TR>
   <TR> <TD align="left"> SI </TD> <TD align="left">  19 </TD> <TD align="left"> 319 </TD> <TD align="left"> 757 </TD> <TD align="left"> 255 </TD> <TD align="left">  29 </TD> <TD align="left">   0 </TD> <TD align="left">   2 </TD> </TR>
   <TR> <TD align="left"> UHCD </TD> <TD align="left"> 1258 </TD> <TD align="left"> 12752 </TD> <TD align="left"> 9190 </TD> <TD align="left"> 1157 </TD> <TD align="left"> 191 </TD> <TD align="left">   7 </TD> <TD align="left">  48 </TD> </TR>
-   </TABLE>
+</TABLE>
+
+***
+
+Absence de détrompage:
+- DCD (__P__) et UHTCD, MED, CHIR
+- CCMU 5 et MED, CHIR, UHCD
+- CCMU 1, 2 et REA, SI, SC
+
 
 Motif de recours
 ========================================================
@@ -298,17 +398,25 @@ round(mean(!is.na(d1$MOTIF))*100,2)
 - La règle est d'utiliser le **thésaurus SFMU** version 2013, basé sur la classification internationale des maladies (CIM 10), seul reconnu par l'InVS et imposé parle ministère de la santé. 
 
 - **La liste compte encore une quinzaine d'items inexacts ou imprécis.**
-- exhaustivité moyenne $\textbf{63.71}$ %
+- exhaustivité quantitative __63.71 %__
 
-```
-Hus    Geb    3Fr    Hag    Alk    Sav   
-0.00   0.03   7.22  13.10  23.50  42.02  
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Sat May 10 12:56:25 2014 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Col </TH> <TH> Wis </TH> <TH> Sel </TH> <TH> Dia </TH> <TH> Odi </TH> <TH> Mul </TH> <TH> Sav </TH> <TH> Alk </TH> <TH> Hag </TH> <TH> 3Fr </TH> <TH> Geb </TH> <TH> Hus </TH>  </TR>
+<TR> <TD align="right">  </TD> <TD align="right"> 100.00 </TD> <TD align="right"> 99.69 </TD> <TD align="right"> 98.20 </TD> <TD align="right"> 95.50 </TD> <TD align="right"> 94.92 </TD> <TD align="right"> 83.00 </TD> <TD align="right"><font color="red"> 42.02 </TD> <TD align="right"><font color="red"> 23.50 </TD> <TD align="right"><font color="red"> 13.10 </TD> <TD align="right"><font color="red"> 7.22 </TD> <TD align="right"><font color="red"> 0.03 </TD> <TD align="right"><font color="red"> 0.00 </TD> </TR>
+</TABLE>
 
-Mul    Odi    Dia    Sel    Wis    Col 
-83.00  94.92  95.50  98.20  99.69 100.00 
-```
-Motif(2)
-========
+- exhaustivité qualitative: __?__
+   
+<!-- 
+Pour afficher en HLML une table d'une ligne
+t <- data.frame(t(100-sort(tapply(d1$MOTIF, d1$FINESS, meanna))), check.names = FALSE, row.names="")
+print.xtable(xtable(t), type = "html")
+-->
+
+Motif(exemple 1)
+================
 <!--
 
 -->
@@ -324,7 +432,8 @@ __Geb__ NA NA NA NA NA NA
 
 __Hag__ NA, "Douleurs abdominales, autres et non pr\xe9cis\xe9es", "Plaie ouverte d'autres parties de la jambe", "\xc9pilepsie, sans pr\xe9cision", NA, NA     
 
-===
+Motif(exemple 2)
+================
 
 __Hus__ NA NA NA NA NA NA
 
@@ -348,15 +457,19 @@ round(mean(!is.na(d1$DP))*100,2)
 
 - Il se code avec la **CIM10** telle qu'elle est définie par l'OMS dans sa version officielle. 
 - Ce code CIM10 habituellement utilisé dans les hôpitaux est celui du **PMSI**. Ce code comporte une racine commune avec le code CIM10 officiel. 
-- exhaustivité moyenne $\textbf{66.42}$ %
+- exhaustivité moyenne __66.42 %__
 
-```
-Dia   Sav   Odi   Hus   Alk   Mul  
-0.00  0.01 27.05 35.61 80.90 80.91 
-
- Hag   3Fr   Col   Wis   Sel   Geb 
-81.55 87.81 88.53 90.17 96.29 99.62 
-```
+<!-- html table generated in R 3.1.0 by xtable 1.7-1 package -->
+<!-- Sat May 10 12:55:00 2014 -->
+<TABLE border=1>
+<TR> <TH>  </TH> <TH> Geb </TH> <TH> Sel </TH> <TH> Wis </TH> <TH> Col </TH> <TH> 3Fr </TH> <TH> Hag </TH> <TH> Mul </TH> <TH> Alk </TH> <TH> Hus </TH> <TH> Odi </TH> <TH> Sav </TH> <TH> Dia </TH>  </TR>
+  <TR> <TD align="right">  </TD> <TD align="right"> 99.62 </TD> <TD align="right"> 96.29 </TD> <TD align="right"> 90.17 </TD> <TD align="right"> 88.53 </TD> <TD align="right"> 87.81 </TD> <TD align="right"> 81.55 </TD> <TD align="right"> 80.91 </TD> <TD align="right"> 80.90 </TD> <TD align="right"><font color="red"> 35.61 </TD> <TD align="right"><font color="red"> 27.05 </TD> <TD align="right"><font color="red"> 0.01 </TD> <TD align="right"><font color="red"> 0.00 </TD> </TR>
+</TABLE>
+   
+<!--
+t <- data.frame(t(100-sort(tapply(d1$DP, d1$FINESS, meanna))), check.names = FALSE, row.names="")
+print.xtable(xtable(t), type = "html")
+-->
 
 Les données
 ===========
@@ -378,3 +491,61 @@ Quel doit être le devenir des RPU non conformes ?
 - stockage et information du producteur
 - auto-correction (CIM10)
 - analyse dur RPU incomplets
+
+Bas - Rhin
+===========
+type:section
+
+Complétude régionale (CH Wissembourg)
+====================
+![wzq](figure/completude_wis.png)
+
+Complétude régionale (CH Haguenau)
+====================
+![wzq](figure/completude_hag.png)
+
+Complétude régionale (CH Saverne)
+====================
+![wzq](figure/completude_sav.png)
+
+Complétude régionale (HUS)
+====================
+![wzq](figure/completude_hus.png)
+
+Complétude régionale (Clinique Ste Odile)
+====================
+![wzq](figure/completude_odi.png)
+
+Complétude régionale (Clinique Ste Anne)
+====================
+
+Complétude régionale (CH Sélestat)
+====================
+![wzq](figure/completude_sel.png)
+
+Haut-Rhin
+=========
+type:section
+
+Complétude régionale (CH Colmar)
+====================
+![wzq](figure/completude_col.png)
+
+Complétude régionale (CH Guebwiller)
+====================
+![wzq](figure/completude_geb.png)
+
+Complétude régionale (CH Mulhouse)
+====================
+![wzq](figure/completude_mul.png)
+
+Complétude régionale (Diaconat-Fonderie)
+====================
+![wzq](figure/completude_dia.png)
+
+Complétude régionale (CH Alkirch)
+====================
+![wzq](figure/completude_alk.png)
+
+Complétude régionale (CH Thann)
+====================
