@@ -22,6 +22,29 @@ incremental: true
 - Complémentarité RPU et ROR (et DPC)
 
 - Globalement plutôt satisfaisant
+  - 12 structures hospitalières sur 14 remontent des RPU (85%)
+  - __344 073 RPU__ transmis en 2013
+
+Structures hospitalières
+========================
+
+- CH Wissembourg
+- CH Haguenau
+- CH Saverne
+- CHU Strasbourg
+- GHSV (Ste Anne)
+- Clinque de Strasbourg (Ste Odile)
+- CH Sélestat
+
+***
+
+- CH Colmar
+- CH Guebwiller
+- CH Mulhouse
+- Diaconat Mulhouse
+- CH Thann
+- CH Alkirch
+- CH St Louis
 
 Généralités
 ========================================================
@@ -549,3 +572,7 @@ Complétude régionale (CH Alkirch)
 
 Complétude régionale (CH Thann)
 ====================
+
+Merci pour votre attention
+============
+type: section
