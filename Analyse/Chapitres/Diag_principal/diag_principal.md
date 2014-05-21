@@ -1088,3 +1088,254 @@ cw[nchar(cw) > 5]
 
 Le code M62890 (PMSI ?) correspond à la rhabdomyolyse, en CIM10 M62.8 (présent 5 fois sous ceete forme et 7 fois au total: "M62890" "M62800" "M6286"  "M62890" "M62890" "M62890" "M6285")
 
+DP renseignés versus RPU totaux
+=================================
+
+Cette méthodologie a été présentée lors de la réunion FEDORU de mois de mai 2014 par l'INVS et en particulier par la CIRE Aquitaine. Elle consiste à comparer le nombre de RPU où le DP est renseigné par rapport au nombre total de RPU rapportés pour une journée, et de suivre l'évolution dans le temps.
+
+Une autre approche est d'observer la variabilité de codage des RPU. On compte le nombre de codes différents (unique) utiisés pour une journée sur une période donnée. On peut calculer le boxplot sur la période et comparer des établissements. En moyenne, combien de codes différents sont utilisés par Wissembourg, Saverne...
+
+
+```r
+# Nombre de RPU par jour:
+a <- tapply(as.Date(d1$ENTREE), as.Date(d1$ENTREE), length)
+# Nombre de RPU renseignés
+b <- tapply(!is.na(d1$DP), as.Date(d1$ENTREE), sum)
+# rapport
+c <- round(b * 100/a, 2)
+plot(c, type = "l", ylab = "% de DP renseignés", main = "Pourcentage de DP renseignés par rapport au nombre total de RPU", 
+    xlab = "2013")
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-41.png) 
+
+```r
+
+# Application à Wissembourg
+wis <- d1[d1$FINESS == "Wis", c("ENTREE", "DP")]
+a <- tapply(as.Date(wis$ENTREE), as.Date(wis$ENTREE), length)
+summary(a)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    16.0    29.0    34.0    34.7    40.0    56.0
+```
+
+```r
+
+b <- tapply(!is.na(wis$DP), as.Date(wis$ENTREE), sum)
+summary(b)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    15.0    26.0    31.0    31.3    36.0    54.0
+```
+
+```r
+
+c <- round(b * 100/a, 2)
+summary(c)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    48.0    86.0    93.1    90.4    97.6   100.0
+```
+
+```r
+
+plot(a, type = "l", ylab = "Nombre de RPU", xlab = "2013")
+lines(b, col = "red")
+legend("bottomleft", legend = c("RPU totaux", "RPU avec DP"), col = c("black", 
+    "red"), lty = 1)
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-42.png) 
+
+```r
+
+plot(c, type = "l", ylab = "% de DP renseignés", main = "Poucentage de DP renseignés par rapport au nombre total de RPU", 
+    xlab = "2013")
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-43.png) 
+
+```r
+summary(c)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    48.0    86.0    93.1    90.4    97.6   100.0
+```
+
+```r
+
+# nombre de code CIM10 différents
+a <- unique(wis$DP)
+length(a)
+```
+
+```
+## [1] 1507
+```
+
+```r
+# nombre de fois ou un code donné est utilisé:
+b <- tapply(wis$DP, wis$DP, length)
+b[b == max(b)]
+```
+
+```
+## S934 
+##  313
+```
+
+```r
+# nombre code CIM10 différents par jour: Crée une liste de codes utilisés
+# chaque jour
+wis.unique.dp <- tapply(wis$DP, as.Date(wis$ENTREE), unique)
+nb.dp.uniques.jour <- lapply(wis.unique.dp, length)
+plot(as.numeric(nb.dp.uniques.jour), type = "l")
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-44.png) 
+
+```r
+summary(as.numeric(nb.dp.uniques.jour))
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##      15      25      29      29      34      44
+```
+
+```r
+sd(nb.dp.uniques.jour)
+```
+
+```
+## Error: is.atomic(x) n'est pas TRUE
+```
+
+```r
+
+# Application à Mulhouse
+
+mul <- d1[d1$FINESS == "Mul", c("ENTREE", "DP")]
+a <- tapply(as.Date(mul$ENTREE), as.Date(mul$ENTREE), length)
+summary(a)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       7     152     166     162     179     229
+```
+
+```r
+b <- tapply(!is.na(mul$DP), as.Date(mul$ENTREE), sum)
+summary(b)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       7     124     134     131     143     182
+```
+
+```r
+c <- round(b * 100/a, 2)
+summary(c)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    66.5    77.8    81.7    81.4    85.2   100.0
+```
+
+```r
+plot(a, type = "l", ylab = "Nombre de RPU", xlab = "2013")
+lines(b, col = "red")
+legend("bottomleft", legend = c("RPU Créés", "RPU avec DP"), col = c("black", 
+    "red"), lty = 1)
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-45.png) 
+
+```r
+b <- tapply(mul$DP, mul$DP, length)
+b[b == max(b)]
+```
+
+```
+##  J00 
+## 1475
+```
+
+```r
+
+mul.unique.dp <- tapply(mul$DP, as.Date(mul$ENTREE), unique)
+nb.dp.uniques.jour <- lapply(mul.unique.dp, length)
+plot(as.numeric(nb.dp.uniques.jour), type = "l")
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-46.png) 
+
+```r
+summary(as.numeric(nb.dp.uniques.jour))
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##     6.0    84.0    90.0    87.6    95.0   111.0
+```
+
+```r
+sd(as.numeric(nb.dp.uniques.jour))
+```
+
+```
+## [1] 13.9
+```
+
+```r
+
+# avec xts
+
+x <- t(as.data.frame(t(nb.dp.uniques.jour)))
+xx <- cbind(row.names(x), x[, 1])
+colnames(xx) <- c("date", "n")
+xx <- as.data.frame(xx)
+
+a <- as.Date(as.character(xx$date))
+b <- as.numeric(xx$n)
+
+xx <- data.frame(b, a)
+
+ts <- xts(xx, order.by = xx$a)
+ts <- ts[-1, ]
+plot(ts$b)
+lines(rollmean(as.numeric(ts$b), 7), col = "red", type = "l")
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-47.png) 
+
+```r
+
+# alternative
+
+z <- zoo(xx$b, xx$a)
+plot(z, main = "Mulhouse - variation du codage CIM 10", xlab = "2013", ylab = "nombre de codes utilisés")
+lines(rollmean(z, 7), col = "red", lwd = 2)
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-48.png) 
+
+```r
+
+boxplot(as.numeric(z))
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-49.png) 
+
