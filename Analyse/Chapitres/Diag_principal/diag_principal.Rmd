@@ -501,3 +501,25 @@ lines(rollmean(z, 7), col="red", lwd=2)
 
 boxplot(as.numeric(z))
 ```
+
+Nombre de codes CIM10 utilisés par les SU
+----------------------------------------- 
+
+On compte le nombre de codes uniques en fonction di FINESS, en urilisant la méthode _tapply_ (code). Puis on fait le total par établissement avec _lapply_ ce qui donne une liste de 12 éléments (code.par.hop).
+
+```{r code_unique}
+code <- tapply(d1$DP, d1$FINESS, unique)
+code.par.hop <- lapply(code, length)
+# print.xtable(xtable(as.data.frame(code.par.hop)), type="html")
+kable(as.data.frame(code.par.hop), format="markdown")
+```
+Sur 14 SU, 12 envoient des RPU et 10 renseignent le code DP (71%). Calcul du taux de complétude par établissement. NB il faudrait retirer mes RPU où il n'est pas possible de mettre un DP (parti sans attendre...)
+
+```{r ex}
+a <- tapply(d1$DP, d1$FINESS, function(x){!is.na(x)})
+b <- lapply(a, function(x){round(mean(x)*100, 2)})
+print("Taux de complétude des DP (en %)")
+kable(as.data.frame(b), format="markdown")
+```
+
+

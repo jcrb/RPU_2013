@@ -1245,6 +1245,9 @@ summary(b)
 ```
 
 ```r
+
+# % de code renseignés. NB il faudrait retirer les RPU avec sortie atypique
+# dont le DP ne peut être rensigné.
 c <- round(b * 100/a, 2)
 summary(c)
 ```
@@ -1255,13 +1258,25 @@ summary(c)
 ```
 
 ```r
+z <- zoo(c, unique(as.Date(d1$ENTREE)))
+plot(z, type = "l", ylim = c(0, 100), main = "CHM - % de DP renseignés", xlab = "2013", 
+    ylab = "% de RPU où le DP est renseigné")
+lines(rollmean(z, 7), col = "red", type = "l", lwd = 2)
+legend("bottomleft", legend = "moyenne lissée", col = "red", lty = 1, cex = 0.8, 
+    bty = "n")
+```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-45.png) 
+
+```r
+
 plot(a, type = "l", ylab = "Nombre de RPU", xlab = "2013")
 lines(b, col = "red")
 legend("bottomleft", legend = c("RPU Créés", "RPU avec DP"), col = c("black", 
     "red"), lty = 1)
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-45.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-46.png) 
 
 ```r
 b <- tapply(mul$DP, mul$DP, length)
@@ -1280,7 +1295,7 @@ nb.dp.uniques.jour <- lapply(mul.unique.dp, length)
 plot(as.numeric(nb.dp.uniques.jour), type = "l")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-46.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-47.png) 
 
 ```r
 summary(as.numeric(nb.dp.uniques.jour))
@@ -1319,7 +1334,7 @@ plot(ts$b)
 lines(rollmean(as.numeric(ts$b), 7), col = "red", type = "l")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-47.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-48.png) 
 
 ```r
 
@@ -1330,12 +1345,61 @@ plot(z, main = "Mulhouse - variation du codage CIM 10", xlab = "2013", ylab = "n
 lines(rollmean(z, 7), col = "red", lwd = 2)
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-48.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-49.png) 
 
 ```r
 
 boxplot(as.numeric(z))
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-49.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-410.png) 
+
+
+Nombre de codes CIM10 utilisés par les SU
+----------------------------------------- 
+
+On compte le nombre de codes uniques en fonction di FINESS, en urilisant la méthode _tapply_ (code). Puis on fait le total par établissement avec _lapply_ ce qui donne une liste de 12 éléments (code.par.hop).
+
+
+```r
+code <- tapply(d1$DP, d1$FINESS, unique)
+code.par.hop <- lapply(code, length)
+# print.xtable(xtable(as.data.frame(code.par.hop)), type='html')
+kable(as.data.frame(code.par.hop), format = "markdown")
+```
+
+```
+## |  X3Fr|  Alk|   Col|  Dia|   Geb|   Hag|   Hus|  Mul|  Odi|   Sel|   Wis|  Sav|
+## |-----:|----:|-----:|----:|-----:|-----:|-----:|----:|----:|-----:|-----:|----:|
+## |  1254|  860|  2429|    2|  1074|  1669|  1736|  918|  841|  2098|  1507|    2|
+```
+
+Sur 14 SU, 12 envoient des RPU et 10 renseignent le code DP (71%). Calcul du taux de complétude par établissement. NB il faudrait retirer mes RPU où il n'est pas possible de mettre un DP (parti sans attendre...)
+
+
+```r
+a <- tapply(d1$DP, d1$FINESS, function(x) {
+    !is.na(x)
+})
+b <- lapply(a, function(x) {
+    round(mean(x) * 100, 2)
+})
+print("Taux de complétude des DP (en %)")
+```
+
+```
+## [1] "Taux de complétude des DP (en %)"
+```
+
+```r
+kable(as.data.frame(b), format = "markdown")
+```
+
+```
+## |   X3Fr|   Alk|    Col|  Dia|    Geb|    Hag|    Hus|    Mul|    Odi|    Sel|    Wis|   Sav|
+## |------:|-----:|------:|----:|------:|------:|------:|------:|------:|------:|------:|-----:|
+## |  87.81|  80.9|  88.53|    0|  99.62|  81.55|  35.61|  80.91|  27.05|  96.29|  90.17|  0.01|
+```
+
+
 
