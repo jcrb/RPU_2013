@@ -194,6 +194,13 @@ mysql2resural<-function(an,mois)
   a[a=="670000157"]<-"Hag"
   a[a=="680000320"]<-"Dia"
   a[a=="680000395"]<-"Alk"
+  a[a=="670000165"]<-"Sav"
+  a[a=="680000494"]<-"Ros"
+  a[a=="670780162"]<-"Dts"
+  a[a=="670780212"]<-"Ane"
+  a[a=="680000601"]<-"Tan"
+  a[a=="680020096"]<-"3Fr" # ajouté le 30 mai 2014
+  # manque Schirmeck ?
   unique(a)
   d06$FINESS<-as.factor(a)
   rm(a)
