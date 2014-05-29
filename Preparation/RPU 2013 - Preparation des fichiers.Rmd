@@ -168,6 +168,7 @@ a[a=="680000494"]<-"Ros"
 a[a=="670780162"]<-"Dts"
 a[a=="670780212"]<-"Ane"
 a[a=="680000601"]<-"Tan"
+a[a=="680020096"]<-"3Fr" # ajouté le 30 mai 2014
 unique(a)
 dx$FINESS<-as.factor(a)
 rm(a)
