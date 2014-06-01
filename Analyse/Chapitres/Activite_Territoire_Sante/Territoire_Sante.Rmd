@@ -34,7 +34,7 @@ Age moyen
 tapply(d1$AGE,d1$secteur,mean, na.rm=TRUE)
 tapply(d1$AGE,d1$secteur,sd, na.rm=TRUE)
 tapply(d1$AGE,d1$secteur,median, na.rm=TRUE)
-boxplot(d1$AGE ~ d1$secteur)
+boxplot(d1$AGE ~ d1$secteur, ylab="Age", xlab="Territoitre de santé", main="Age des consultants selon le territoire de santé")
 age <- d1$AGE
 territoire <- d1$secteur
 mod <- aov(age ~ territoire)
