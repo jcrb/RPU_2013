@@ -293,5 +293,40 @@ Outils de présentation
 Sont également utilisables pour le site internet de Resural:
 - Interactive presentation with slidify and googleVis: comment faire un diaporama en R en incorporant des graphiques interactifs présentés via googlevis et les incorporer dans son site http://feedproxy.google.com/~r/RBloggers/~3/4w4oN8fMOa4/?utm_source=feedburner&utm_medium=email
 
+Analyse de la variance (one-way)
+================================
+
+Comparaisons de plusieurs moyennes. Le principe est de comparer une variable _qualitative_ par une variable _quantitatives_ possédant _plusieurs_ niveaux. Par exemple on veut comparer l'age moyen des patients consultants aux urgences (_variable qualitative_) selon le territoire de santé (_variable quantitative à 4 niveaux_).
+
+```
+tapply(d1$AGE,d1$secteur,mean, na.rm=TRUE)
+tapply(d1$AGE,d1$secteur,sd, na.rm=TRUE)
+tapply(d1$AGE,d1$secteur,median, na.rm=TRUE)
+boxplot(d1$AGE ~ d1$secteur, ylab="Age", xlab="Territoitre de santé", main="Age des consultants selon le territoire de santé")
+age <- d1$AGE
+territoire <- d1$secteur
+mod <- aov(age ~ territoire)
+mod
+summary(mod)
+plotmeans(age ~ territoire, ylab="Age moyen",  p=0.9999999, xlab="Territoire de santé", main = "Age moyen selon le territoire de santé\n(avec intervalle de confiance à 99%)")
+TukeyHSD(mod)
+par(las=2)
+par(mar=c(5,8,4,2))
+plot(TukeyHSD(mod))
+
+tuk <- glht(mod, linfct=mcp(territoire="Tukey"))
+par(las=1)
+plot(cld(tuk, levels=0.05), col="lightgray")
+
+```
+L'intervalle de confiance a été augmenté à  p=0.9999999 pour qu'il soit visible. A p = 0.95 on ne les voit âs car inférieurs à 1 et des messages d'avertissement sont générés. La méthode __plotCI__ fait la même chose (voir notamment le premier exemple de cette méthode).
+```
+Explications:
+- les 3 premières lignes explorent le pb: on calcule la moyenne, l'écart-type et le boxplot pour chaque secteur (territoire de santé)
+- les 3 lignes suivantes constituent l'Anova proprement dite: anova <- aov(var.quantitative ~ var.qualitative)
+- la ligne _plotmeans() trace un graphique avec les moyennes des groupes et l'écart-type. La taille des groupes étant très imprtante, les SD sont très petits.
+- TukeyHSD calcule les différence par groupe pris 2 à 2 et dessine le graphe associé.
+
+ref: R in action pp 225-230
 
 

@@ -1,0 +1,85 @@
+Analyse des données Par Territoire de santé (ex.secteur sanitaires)
+===================================================================
+
+Variables globales:
+-------------------
+```{r var_globales}
+source("../prologue.R")
+library("gplots")
+library("multcomp")
+```
+
+entrées par Territoire de santé
+-------------------------------
+On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
+```{r secteur_rpu,echo=FALSE}
+d1$secteur[d1$FINESS %in% c("Wis","Hag","Sav")]<-1
+d1$secteur[d1$FINESS %in% c("Hus","Odi")]<-2
+d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
+d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
+d1$secteur <- as.factor(d1$secteur)
+
+```
+Nombre de RPU par secteur de santé
+```{r rpu_par_secteur}
+tapply(d1$ENTREE,d1$secteur,length)
+```
+Remarques:
+- en 2013: secteur 2, manque St Anne, pediatrie HTP, une partie des RPU HUS adultes. Secteur 4, manque CH Thann.
+- en 2014: en cours d'année apparaissent St Anne, pédiatrie HUS (avril 2014), Diaconat Roosvelt (), Diaconat Strasbourg (). La clinique des 3 frontières deveint propriété du CH de Mulhouse et change de Finess (Mai 2014). CH Thann en attente absobtion par Mulhouse (2015) ne fornit pas de RPU.
+
+Age moyen
+----------
+```{r age, warning=TRUE}
+tapply(d1$AGE,d1$secteur,mean, na.rm=TRUE)
+tapply(d1$AGE,d1$secteur,sd, na.rm=TRUE)
+tapply(d1$AGE,d1$secteur,median, na.rm=TRUE)
+boxplot(d1$AGE ~ d1$secteur)
+age <- d1$AGE
+territoire <- d1$secteur
+mod <- aov(age ~ territoire)
+mod
+summary(mod)
+plotmeans(age ~ territoire, ylab="Age moyen",  p=0.9999999, xlab="Territoire de santé", main = "Age moyen selon le territoire de santé\n(avec intervalle de confiance à 99%)")
+TukeyHSD(mod)
+par(las=2)
+par(mar=c(5,8,4,2))
+plot(TukeyHSD(mod))
+
+tuk <- glht(mod, linfct=mcp(territoire="Tukey"))
+par(las=1)
+plot(cld(tuk, levels=0.05), col="lightgray")
+
+```
+
+L'intervalle de confiance a été augmenté à  p=0.9999999 pour qu'il soit visible. A p = 0.95 on ne les voit âs car inférieurs à 1 et des messages d'avertissement sont générés. La méthode __plotCI__ fait la même chose (voir notamment le premier exemple de cette méthode).
+
+Age moyen des adultes
+---------------------
+
+Une critique de l'analyse précédente est que l'absence de la pédiatrie strasbourgeoise explique la moyenne d'age plus élevée dans le secteur 2. On refait la même analyse uniquement avec les 18 ans et plus:
+
+```{r adultes}
+age <- d1$AGE[d1$AGE > 17]
+territoire <- d1$secteur[d1$AGE > 17]
+
+tapply(d1$AGE,d1$secteur,mean, na.rm=TRUE)
+tapply(d1$AGE,d1$secteur,sd, na.rm=TRUE)
+tapply(d1$AGE,d1$secteur,median, na.rm=TRUE)
+boxplot(d1$AGE ~ d1$secteur)
+
+mod <- aov(age ~ territoire)
+mod
+summary(mod)
+
+plotmeans(age ~ territoire, ylab="Age moyen",  p=0.95, xlab="Territoire de santé", main = "Age moyen selon le territoire de santé\n(avec intervalle de confiance à 95%)")
+TukeyHSD(mod)
+par(las=2)
+par(mar=c(5,8,4,2))
+plot(TukeyHSD(mod))
+
+tuk <- glht(mod, linfct=mcp(territoire="Tukey"))
+par(las=1)
+plot(cld(tuk, levels=0.05), col="lightgray")
+```
+

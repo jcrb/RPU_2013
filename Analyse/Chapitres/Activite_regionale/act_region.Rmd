@@ -4,7 +4,7 @@ RPU 2013 Analyse
 date()
 ```
 source: RPU2013
-Ce document exploite le fichier RData préparé à partir de la table *RPU__* de Sagec. Voir le document *RPU_2013_Preparation.Rmd* du dossier Resural.
+Ce document exploite le fichier RData préparé à partir de la table *RPU__* de Sagec. Voir le document *RPU_2013_Preparation.Rmd* du dossier Resural (Resural/Stat Resural/RPU2013/
 
 EN FONCTION DU MOIS MODIFIER LES LIGNES 12, 38, 39, 40 ET 66 
 
@@ -43,7 +43,7 @@ d1<-foo(path)
 Analyse des données
 ===================
 
-entrées par secteur sanitaire
+entrées par secteur sanitaire (voir Territoire_Sante.Rmd)
 -----------------------------
 On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
 ```{r secteur_rpu,echo=FALSE}
