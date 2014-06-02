@@ -408,7 +408,7 @@ Cette méthodologie a été présentée lors de la réunion FEDORU de mois de ma
 
 Une autre approche est d'observer la variabilité de codage des RPU. On compte le nombre de codes différents (unique) utiisés pour une journée sur une période donnée. On peut calculer le boxplot sur la période et comparer des établissements. En moyenne, combien de codes différents sont utilisés par Wissembourg, Saverne...
 
-```{r}
+```{r, comment=""}
 # Nombre de RPU par jour:
 a <- tapply(as.Date(d1$ENTREE), as.Date(d1$ENTREE), length)
 # Nombre de RPU renseignés
@@ -505,17 +505,18 @@ boxplot(as.numeric(z))
 Nombre de codes CIM10 utilisés par les SU
 ----------------------------------------- 
 
-On compte le nombre de codes uniques en fonction di FINESS, en urilisant la méthode _tapply_ (code). Puis on fait le total par établissement avec _lapply_ ce qui donne une liste de 12 éléments (code.par.hop).
+On compte le nombre de codes uniques en fonction du FINESS, en utilisant la méthode _tapply_ (code). Puis on fait le total par établissement avec _lapply_ ce qui donne une liste de 12 éléments (code.par.hop).
 
-```{r code_unique}
+```{r code_unique, comment=""}
 code <- tapply(d1$DP, d1$FINESS, unique)
 code.par.hop <- lapply(code, length)
 # print.xtable(xtable(as.data.frame(code.par.hop)), type="html")
 kable(as.data.frame(code.par.hop), format="markdown")
+
 ```
 Sur 14 SU, 12 envoient des RPU et 10 renseignent le code DP (71%). Calcul du taux de complétude par établissement. NB il faudrait retirer mes RPU où il n'est pas possible de mettre un DP (parti sans attendre...)
 
-```{r ex}
+```{r ex, comment=""}
 a <- tapply(d1$DP, d1$FINESS, function(x){!is.na(x)})
 b <- lapply(a, function(x){round(mean(x)*100, 2)})
 print("Taux de complétude des DP (en %)")

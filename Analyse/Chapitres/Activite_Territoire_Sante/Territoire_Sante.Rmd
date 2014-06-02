@@ -3,7 +3,7 @@ Analyse des données Par Territoire de santé (ex.secteur sanitaires)
 
 Variables globales:
 -------------------
-```{r var_globales}
+```{r var_globales, warning=FALSE, message=FALSE}
 source("../prologue.R")
 library("gplots")
 library("multcomp")
@@ -12,7 +12,7 @@ library("multcomp")
 entrées par Territoire de santé
 -------------------------------
 On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
-```{r secteur_rpu,echo=FALSE}
+```{r secteur_rpu,echo=FALSE, warning=FALSE, message=FALSE}
 d1$secteur[d1$FINESS %in% c("Wis","Hag","Sav")]<-1
 d1$secteur[d1$FINESS %in% c("Hus","Odi")]<-2
 d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
@@ -30,7 +30,7 @@ Remarques:
 
 Age moyen
 ----------
-```{r age, warning=TRUE}
+```{r age, warning=FALSE, echo=FALSE, comment=""}
 tapply(d1$AGE,d1$secteur,mean, na.rm=TRUE)
 tapply(d1$AGE,d1$secteur,sd, na.rm=TRUE)
 tapply(d1$AGE,d1$secteur,median, na.rm=TRUE)
@@ -59,7 +59,7 @@ Age moyen des adultes
 
 Une critique de l'analyse précédente est que l'absence de la pédiatrie strasbourgeoise explique la moyenne d'age plus élevée dans le secteur 2. On refait la même analyse uniquement avec les 18 ans et plus:
 
-```{r adultes}
+```{r adultes, echo=FALSE, comment=""}
 age <- d1$AGE[d1$AGE > 17]
 territoire <- d1$secteur[d1$AGE > 17]
 

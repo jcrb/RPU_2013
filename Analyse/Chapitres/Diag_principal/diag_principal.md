@@ -76,48 +76,46 @@ source("../prologue.R")
 ```
 
 ```r
-d1 <- foo(path, file)
+d1<-foo(path,file)
 
-# load('../../rpu2013d0107.Rda') d1<-d0107 rm(d0107)
+# load("../../rpu2013d0107.Rda")
+# d1<-d0107
+# rm(d0107)
 
-dp <- d1$DP
-ndp <- length(dp)
-dpr <- dp[!is.na(dp)]
-dpr <- d1[!is.na(d1$DP), c("DP", "CODE_POSTAL", "ENTREE", "FINESS", "GRAVITE", 
-    "ORIENTATION", "MODE_SORTIE", "AGE", "SEXE", "TRANSPORT")]
-dpr$DP <- gsub("\xe9", "é", dpr$DP)
-dpr$DP <- gsub(".", "", dpr$DP, fixed = TRUE)
+dp<-d1$DP
+ndp<-length(dp)
+dpr<-dp[!is.na(dp)]
+dpr<-d1[!is.na(d1$DP),c("DP","CODE_POSTAL","ENTREE","FINESS","GRAVITE","ORIENTATION","MODE_SORTIE","AGE","SEXE","TRANSPORT")]
+dpr$DP<-gsub("\xe9","é",dpr$DP)
+dpr$DP<-gsub(".","",dpr$DP,fixed=TRUE)
 
-# dpr$DP<-gsub('.','',as.character(dpr$DP),fixed=TRUE)
-dpr$DP <- gsub("+", "", dpr$DP, fixed = TRUE)
+#dpr$DP<-gsub(".","",as.character(dpr$DP),fixed=TRUE)
+dpr$DP<-gsub("+","",dpr$DP,fixed=TRUE)
 ```
-
 Nombre de diagnostics principaux (DP)
 
 ```r
-ndpr <- nrow(dpr)
+ndpr<-nrow(dpr)
 ndpr
 ```
 
 ```
 ## [1] 228524
 ```
-
 Exhaustivité
 
 ```r
-ex <- round(ndpr * 100/ndp, 2)
+ex<-round(ndpr * 100/ndp,2)
 ex
 ```
 
 ```
 ## [1] 66.42
 ```
-
 Nombre de diagnostic uniques:
 
 ```r
-a <- length(unique(dpr$DP))
+a<-length(unique(dpr$DP))
 a
 ```
 
@@ -126,8 +124,8 @@ a
 ```
 
 ```r
-a <- substr(dpr, 1, 1)
-tab1(a, horiz = T, sort.group = "decreasing", main = "Classes dignostiques de la CIM10")
+a<-substr(dpr,1,1)
+tab1(a,horiz=T,sort.group="decreasing",main="Classes dignostiques de la CIM10")
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
@@ -138,7 +136,6 @@ tab1(a, horiz = T, sort.group = "decreasing", main = "Classes dignostiques de la
 ## c              10     100          100
 ##   Total        10     100          100
 ```
-
 
 Etude des AVC
 -------------
@@ -206,9 +203,8 @@ tère intracrânienne, sans précision
 #'@param avc liste des AVC
 #'@param navc liste des codes Cim10 utilisés
 
-avc <- dpr[substr(dpr$DP, 1, 3) >= "I60" & substr(dpr$DP, 1, 3) < "I65" | substr(dpr$DP, 
-    1, 3) == "G46", ]
-navc <- unique(avc)
+avc<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46",]
+navc<-unique(avc)
 summary(as.factor(avc$DP))
 ```
 
@@ -222,9 +218,7 @@ summary(as.factor(avc$DP))
 ```
 
 ```r
-
-tab1(avc$DP, horiz = TRUE, sort.group = "decreasing", main = "AVC aux urgences (hors filière UNV", 
-    missing = FALSE)
+tab1(avc$DP,horiz=TRUE,sort.group="decreasing",main="AVC aux urgences (hors filière UNV",missing=FALSE)
 ```
 
 ![plot of chunk avc](figure/avc.png) 
@@ -269,7 +263,6 @@ tab1(avc$DP, horiz = TRUE, sort.group = "decreasing", main = "AVC aux urgences (
 ## G462            1     0.0        100.0
 ##   Total      2052   100.0        100.0
 ```
-
 # Etude des AVC+AIT
 
 avc_ait<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45"]
@@ -279,14 +272,11 @@ tab1(avc_ait,horiz=TRUE,sort.group="decreasing",main="AVC&AIT aux urgences (hors
 # Création d'un dataframe DP
 
 
-
 extraction d'un DF avc:
 
 ```r
-AVC <- dpr[substr(dpr$DP, 1, 3) >= "I60" & substr(dpr$DP, 1, 3) < "I65" | substr(dpr$DP, 
-    1, 3) == "G46" | substr(dpr$DP, 1, 3) == "G45", ]
+AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45" ,]
 ```
-
 Horaire des AVC  
 à comparer avec
 - les crises d'épilepsie
@@ -323,7 +313,6 @@ Horaire des AVC
 ## 23             55     2.0        100.0
 ##   Total      2800   100.0        100.0
 ```
-
 Selon le jour de la semaine
 
 
@@ -340,7 +329,6 @@ Selon le jour de la semaine
 ```
 
 ![plot of chunk avc_semaine](figure/avc_semaine.png) 
-
 Proportion théorique = 14.28% par jour de la semaine
 
 AVC selon le mois
@@ -371,11 +359,9 @@ AVC selon le mois
 ## Dec           236     8.4        100.0
 ##   Total      2800   100.0        100.0
 ```
-
 AVC par semaine
 ---------------
 ![plot of chunk avc_week](figure/avc_week.png) 
-
 
 
 Age et AVC
@@ -385,7 +371,6 @@ Age et AVC
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##     1.0    62.0    75.0    71.4    84.0   112.0
 ```
-
 Le rapport de 2009 donne age moyen = 70.5 et age médian = 75 ans.
 
 Sexe et AVC
@@ -401,31 +386,30 @@ summary(AVC$SEXE)
 ```
 
 ```r
-hist(AVC$AGE, main = "Répartition des AVC", col = "pink", xlab = "Age en années")
+hist(AVC$AGE,main="Répartition des AVC",col="pink",xlab="Age en années")
 ```
 
 ![plot of chunk avc_sexe](figure/avc_sexe1.png) 
 
 ```r
-t <- table(AVC$AGE)
-barplot(t, main = "AVC - Répartition des ages")
+t<-table(AVC$AGE)
+barplot(t,main="AVC - Répartition des ages")
 ```
 
 ![plot of chunk avc_sexe](figure/avc_sexe2.png) 
 
 ```r
-t <- table(AVC$SEXE, AVC$AGE)
-barplot(t, col = c("darkblue", "white", "red"), legend = TRUE)
+t<-table(AVC$SEXE,AVC$AGE)
+barplot(t,col=c("darkblue","white","red"),legend=TRUE)
 ```
 
 ![plot of chunk avc_sexe](figure/avc_sexe3.png) 
 
 ```r
-barplot(t, col = c("yellow", "red"), legend = TRUE, beside = TRUE)
+barplot(t,col=c("yellow","red"),legend=TRUE,beside=TRUE)
 ```
 
 ![plot of chunk avc_sexe](figure/avc_sexe4.png) 
-
 Etude AIT
 ---------
 Recommandations pour la sélection des données PMSI MCO concernant l’AVC (Juin 2009)
@@ -437,8 +421,8 @@ Recommandations pour la sélection des données PMSI MCO concernant l’AVC (Jui
 - G459  Accident ischémique cérébral transitoire, sans précision  
 
 ```r
-ait <- dpr$DP[substr(dpr$DP, 1, 3) == "G45" & substr(dpr$DP, 1, 4) != "G454"]
-tab1(ait, missing = FALSE)
+ait<-dpr$DP[substr(dpr$DP,1,3)=="G45" & substr(dpr$DP,1,4)!="G454"]
+tab1(ait,missing=FALSE)
 ```
 
 ![plot of chunk ait](figure/ait.png) 
@@ -454,7 +438,6 @@ tab1(ait, missing = FALSE)
 ## G459          617    87.3        100.0
 ##   Total       707   100.0        100.0
 ```
-
 
 Asthme
 ======
@@ -559,7 +542,6 @@ J46   Etat de mal asthmatique
 ```
 
 ![plot of chunk asthme](figure/asthme4.png) ![plot of chunk asthme](figure/asthme5.png) 
-
 Gravité des crises: prédominance CCMU  2  et 3 et qulques 4 ou 5   
 hospit = mutation+tranfert = 323+13=336  
 taux hospit supérieur à 30% (336/1001)   
@@ -570,7 +552,7 @@ sex ratio: 0.98
 Crise asthme hospitalisée et lieu d'hospitalisation:
 
 ```r
-table(asthme$DP, asthme$ORIENTATION)
+table(asthme$DP,asthme$ORIENTATION)
 ```
 
 ```
@@ -582,7 +564,6 @@ table(asthme$DP, asthme$ORIENTATION)
 ##   J459    3     0   0   0 179    2   0   4   0  44    2   1  101
 ##   J46     1     0   0   0  16    0   0   4   0  11    0   0    2
 ```
-
 #### Remarques INVS:
 Ce bulletin (Le point épidémiologique du 24 octobre 2013 | Surveillance épidémiologique de la Cire Lorraine-Alsace) clôt la surveillance de l’asthme. Pour l’association SOS Médecins de Strasbourg,
 l’activité liée à l’asthme a été particulièrement marqué de mi-avril (semaine 16) à fin mai
@@ -595,7 +576,7 @@ CIM10 = T62
 
 
 ```r
-champ <- dpr[substr(dpr$DP, 1, 3) == "T62", ]
+champ<-dpr[substr(dpr$DP,1,3)=="T62" ,]
 summary(champ)
 ```
 
@@ -617,15 +598,14 @@ summary(champ)
 ##  (Other): 0   (Other): 0   NA's     : 6   Max.   :91.0          VSAB : 7  
 ##  NA's   : 1   NA's   :51                                        NA's : 7
 ```
-
 Intoxication au CO
 ==================
 CIM10 = T58
 
 
 ```r
-co <- dpr[substr(dpr$DP, 1, 3) == "T58", ]
-m <- month(co$ENTREE, label = T)
+co<-dpr[substr(dpr$DP,1,3)=="T58" ,]
+m<-month(co$ENTREE,label=T)
 table(m)
 ```
 
@@ -636,11 +616,10 @@ table(m)
 ```
 
 ```r
-barplot(table(m), main = "Intoxication au CO - 2013", xlab = "Mois")
+barplot(table(m),main="Intoxication au CO - 2013",xlab="Mois")
 ```
 
 ![plot of chunk co](figure/co.png) 
-
 Bronchiolite
 ============
 Bronchiolite aiguë
@@ -654,16 +633,16 @@ J21.9 Bronchiolite aiguë, sans précision
 
 
 ```r
-bron <- dpr[substr(dpr$DP, 1, 3) == "J21", ]
-m <- month(bron$ENTREE, label = T)
-barplot(table(m), main = "Bronchiolites - 2013", xlab = "Mois")
+bron<-dpr[substr(dpr$DP,1,3)=="J21" ,]
+m<-month(bron$ENTREE,label=T)
+barplot(table(m),main="Bronchiolites - 2013",xlab="Mois")
 ```
 
 ![plot of chunk bron](figure/bron1.png) 
 
 ```r
-s <- week(bron$ENTREE)
-barplot(table(s), main = "Bronchiolites - 2013", xlab = "Semaines")
+s<-week(bron$ENTREE)
+barplot(table(s),main="Bronchiolites - 2013",xlab="Semaines")
 ```
 
 ![plot of chunk bron](figure/bron2.png) 
@@ -698,7 +677,6 @@ summary(bron)
 ##  VSAB :  3  
 ##  NA's : 56
 ```
-
 Surreprésentation de Mul  
 taux hospitalisation: 50%
 
@@ -737,7 +715,7 @@ Excl.:
     
 
 ```r
-ge <- dpr[substr(dpr$DP, 1, 3) == "A09", ]
+ge<-dpr[substr(dpr$DP,1,3)=="A09" ,]
 summary(ge)
 ```
 
@@ -769,7 +747,7 @@ summary(ge)
 ```
 
 ```r
-table(ge$FINESS, ge$DP)
+table(ge$FINESS,ge$DP)
 ```
 
 ```
@@ -790,26 +768,24 @@ table(ge$FINESS, ge$DP)
 ```
 
 ```r
-hist(ge$AGE, main = "Gasto-entérites - 2013", xlab = "Age (années)", ylab = "nombre", 
-    col = "gray90")
+hist(ge$AGE,main="Gasto-entérites - 2013",xlab="Age (années)", ylab="nombre",col="gray90")
 ```
 
 ![plot of chunk ge](figure/ge1.png) 
 
 ```r
-boxplot(ge$AGE, col = "yellow", main = "Gastro-entérite", ylab = "age (années)")
+boxplot(ge$AGE,col="yellow",main="Gastro-entérite",ylab="age (années)")
 ```
 
 ![plot of chunk ge](figure/ge2.png) 
 
 ```r
-m <- month(ge$ENTREE, label = T)
-x <- barplot(table(m), main = "Gestro-entérites - 2013", xlab = "Mois")
-lines(x = x, y = table(m), col = "red")
+m<-month(ge$ENTREE,label=T)
+x<-barplot(table(m),main="Gestro-entérites - 2013",xlab="Mois")
+lines(x=x,y=table(m),col="red")
 ```
 
 ![plot of chunk ge](figure/ge3.png) 
-
 #### NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On utilise lines avec les valeurs suivantes:
 - x = abcisse des colonnes. Elles sont contenues dans l'objet barplot. On peut les recueillir eplicitement par la fonction *str* (str(x)).
 - y = ordonnées des barres, récupérées avec la fonction *table* qui agglomère les données par mois
@@ -820,8 +796,8 @@ Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
 nombre de diagnostics de GE / nb total de diagnostics par semaine:
 
 ```r
-mge <- month(ge$ENTREE, label = T)
-mtot <- month(dpr$ENTREE, label = T)
+mge<-month(ge$ENTREE,label=T)
+mtot<-month(dpr$ENTREE,label=T)
 summary(mtot)
 ```
 
@@ -840,7 +816,7 @@ summary(mge)
 ```
 
 ```r
-a <- round(summary(mge) * 100/summary(mtot), 2)
+a<-round(summary(mge)*100/summary(mtot),2)
 a
 ```
 
@@ -854,7 +830,6 @@ barplot(a)
 ```
 
 ![plot of chunk invs](figure/invs.png) 
-
 dpt: tous les cas de traumato (S00 à T98)  
 dpnp:tous lescas de médecine  
 
@@ -873,7 +848,7 @@ Certains logiciels ne contôlent pas la cohérence du code CIM 10. Si on prend l
 On s'intéresse aux codes CIM10 renseignés. Pour celà on trace l'histogramme des DP en fonction de la longueur du code utilisé:
 
 ```r
-a <- nchar(dpr$DP)
+a<-nchar(dpr$DP)
 summary(a)
 ```
 
@@ -883,7 +858,7 @@ summary(a)
 ```
 
 ```r
-b <- summary(as.factor(a))
+b<-summary(as.factor(a))
 b
 ```
 
@@ -907,7 +882,7 @@ barplot(log(b))
 ![plot of chunk length_DP](figure/length_DP2.png) 
 
 ```r
-dpr[nchar(dpr$DP) > 6, c("FINESS", "DP")]
+dpr[nchar(dpr$DP)>6,c("FINESS","DP")]
 ```
 
 ```
@@ -1040,7 +1015,6 @@ dpr[nchar(dpr$DP) > 6, c("FINESS", "DP")]
 ## 330521    Hag             S526 01
 ## 330533    Hag             S011 02
 ```
-
 La Dixième Révision (CIM10) utilise un code alphanumérique avec une lettre en
 première position et des chiffres en seconde, troisième et quatrième position.
 Le quatrième caractère est précédé par un point. Les possibilités de codage
@@ -1050,7 +1024,7 @@ Wissembourg
 
 
 ```r
-cw <- dpr[dpr$FINESS == "Wis", "DP"]
+cw<-dpr[dpr$FINESS=="Wis","DP"]
 head(cw)
 ```
 
@@ -1059,7 +1033,7 @@ head(cw)
 ```
 
 ```r
-a <- nchar(cw)
+a<-nchar(cw)
 summary(a)
 ```
 
@@ -1078,14 +1052,13 @@ summary(as.factor(a))
 ```
 
 ```r
-cw[nchar(cw) > 5]
+cw[nchar(cw)>5]
 ```
 
 ```
 ##  [1] "M62890" "I21900" "F10241" "M62800" "I21100" "M62890" "M62890"
 ##  [8] "M62890" "M62890" "M62890"
 ```
-
 Le code M62890 (PMSI ?) correspond à la rhabdomyolyse, en CIM10 M62.8 (présent 5 fois sous ceete forme et 7 fois au total: "M62890" "M62800" "M6286"  "M62890" "M62890" "M62890" "M6285")
 
 DP renseignés versus RPU totaux
@@ -1102,62 +1075,54 @@ a <- tapply(as.Date(d1$ENTREE), as.Date(d1$ENTREE), length)
 # Nombre de RPU renseignés
 b <- tapply(!is.na(d1$DP), as.Date(d1$ENTREE), sum)
 # rapport
-c <- round(b * 100/a, 2)
-plot(c, type = "l", ylab = "% de DP renseignés", main = "Pourcentage de DP renseignés par rapport au nombre total de RPU", 
-    xlab = "2013")
+c <- round(b* 100 / a, 2)
+plot(c, type = "l", ylab="% de DP renseignés", main="Pourcentage de DP renseignés par rapport au nombre total de RPU", xlab="2013")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-41.png) 
 
 ```r
-
 # Application à Wissembourg
-wis <- d1[d1$FINESS == "Wis", c("ENTREE", "DP")]
+wis <- d1[d1$FINESS=="Wis",c("ENTREE", "DP")]                       
 a <- tapply(as.Date(wis$ENTREE), as.Date(wis$ENTREE), length)
 summary(a)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    16.0    29.0    34.0    34.7    40.0    56.0
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   16.0    29.0    34.0    34.7    40.0    56.0 
 ```
 
 ```r
-
 b <- tapply(!is.na(wis$DP), as.Date(wis$ENTREE), sum)
 summary(b)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    15.0    26.0    31.0    31.3    36.0    54.0
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   15.0    26.0    31.0    31.3    36.0    54.0 
 ```
 
 ```r
-
-c <- round(b * 100/a, 2)
+c <- round(b* 100 / a, 2)
 summary(c)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    48.0    86.0    93.1    90.4    97.6   100.0
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   48.0    86.0    93.1    90.4    97.6   100.0 
 ```
 
 ```r
-
-plot(a, type = "l", ylab = "Nombre de RPU", xlab = "2013")
-lines(b, col = "red")
-legend("bottomleft", legend = c("RPU totaux", "RPU avec DP"), col = c("black", 
-    "red"), lty = 1)
+plot(a, type="l", ylab="Nombre de RPU", xlab="2013")
+lines(b, col="red")
+legend("bottomleft", legend=c("RPU totaux","RPU avec DP"), col=c("black","red"), lty=1 )
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-42.png) 
 
 ```r
-
-plot(c, type = "l", ylab = "% de DP renseignés", main = "Poucentage de DP renseignés par rapport au nombre total de RPU", 
-    xlab = "2013")
+plot(c, type = "l", ylab="% de DP renseignés", main="Poucentage de DP renseignés par rapport au nombre total de RPU", xlab="2013")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-43.png) 
@@ -1167,38 +1132,36 @@ summary(c)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    48.0    86.0    93.1    90.4    97.6   100.0
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   48.0    86.0    93.1    90.4    97.6   100.0 
 ```
 
 ```r
-
 # nombre de code CIM10 différents
 a <- unique(wis$DP)
 length(a)
 ```
 
 ```
-## [1] 1507
+[1] 1507
 ```
 
 ```r
 # nombre de fois ou un code donné est utilisé:
 b <- tapply(wis$DP, wis$DP, length)
-b[b == max(b)]
+b[b==max(b)]
 ```
 
 ```
-## S934 
-##  313
+S934 
+ 313 
 ```
 
 ```r
-# nombre code CIM10 différents par jour: Crée une liste de codes utilisés
-# chaque jour
+# nombre code CIM10 différents par jour: Crée une liste de codes utilisés chaque jour
 wis.unique.dp <- tapply(wis$DP, as.Date(wis$ENTREE), unique)
 nb.dp.uniques.jour <- lapply(wis.unique.dp, length)
-plot(as.numeric(nb.dp.uniques.jour), type = "l")
+plot(as.numeric(nb.dp.uniques.jour), type="l")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-44.png) 
@@ -1208,8 +1171,8 @@ summary(as.numeric(nb.dp.uniques.jour))
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##      15      25      29      29      34      44
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+     15      25      29      29      34      44 
 ```
 
 ```r
@@ -1217,21 +1180,20 @@ sd(nb.dp.uniques.jour)
 ```
 
 ```
-## Error: is.atomic(x) n'est pas TRUE
+Error: is.atomic(x) n'est pas TRUE
 ```
 
 ```r
-
 # Application à Mulhouse
 
-mul <- d1[d1$FINESS == "Mul", c("ENTREE", "DP")]
+mul <- d1[d1$FINESS=="Mul",c("ENTREE", "DP")]
 a <- tapply(as.Date(mul$ENTREE), as.Date(mul$ENTREE), length)
 summary(a)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       7     152     166     162     179     229
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      7     152     166     162     179     229 
 ```
 
 ```r
@@ -1240,59 +1202,52 @@ summary(b)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       7     124     134     131     143     182
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      7     124     134     131     143     182 
 ```
 
 ```r
-
-# % de code renseignés. NB il faudrait retirer les RPU avec sortie atypique
-# dont le DP ne peut être rensigné.
-c <- round(b * 100/a, 2)
+# % de code renseignés. NB il faudrait retirer les RPU avec sortie atypique dont le DP ne peut être rensigné.
+c <- round(b* 100 / a, 2)
 summary(c)
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##    66.5    77.8    81.7    81.4    85.2   100.0
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   66.5    77.8    81.7    81.4    85.2   100.0 
 ```
 
 ```r
 z <- zoo(c, unique(as.Date(d1$ENTREE)))
-plot(z, type = "l", ylim = c(0, 100), main = "CHM - % de DP renseignés", xlab = "2013", 
-    ylab = "% de RPU où le DP est renseigné")
-lines(rollmean(z, 7), col = "red", type = "l", lwd = 2)
-legend("bottomleft", legend = "moyenne lissée", col = "red", lty = 1, cex = 0.8, 
-    bty = "n")
+plot(z, type="l", ylim=c(0,100), main="CHM - % de DP renseignés", xlab="2013", ylab="% de RPU où le DP est renseigné")
+lines(rollmean(z,7), col="red", type="l", lwd=2)
+legend("bottomleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-45.png) 
 
 ```r
-
-plot(a, type = "l", ylab = "Nombre de RPU", xlab = "2013")
-lines(b, col = "red")
-legend("bottomleft", legend = c("RPU Créés", "RPU avec DP"), col = c("black", 
-    "red"), lty = 1)
+plot(a, type="l", ylab="Nombre de RPU", xlab="2013")
+lines(b, col="red")
+legend("bottomleft", legend=c("RPU Créés","RPU avec DP"), col=c("black","red"), lty=1 )
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-46.png) 
 
 ```r
 b <- tapply(mul$DP, mul$DP, length)
-b[b == max(b)]
+b[b==max(b)]
 ```
 
 ```
-##  J00 
-## 1475
+ J00 
+1475 
 ```
 
 ```r
-
 mul.unique.dp <- tapply(mul$DP, as.Date(mul$ENTREE), unique)
 nb.dp.uniques.jour <- lapply(mul.unique.dp, length)
-plot(as.numeric(nb.dp.uniques.jour), type = "l")
+plot(as.numeric(nb.dp.uniques.jour), type="l")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-47.png) 
@@ -1302,8 +1257,8 @@ summary(as.numeric(nb.dp.uniques.jour))
 ```
 
 ```
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##     6.0    84.0    90.0    87.6    95.0   111.0
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+    6.0    84.0    90.0    87.6    95.0   111.0 
 ```
 
 ```r
@@ -1311,95 +1266,97 @@ sd(as.numeric(nb.dp.uniques.jour))
 ```
 
 ```
-## [1] 13.9
+[1] 13.9
 ```
 
 ```r
-
 # avec xts
 
 x <- t(as.data.frame(t(nb.dp.uniques.jour)))
-xx <- cbind(row.names(x), x[, 1])
-colnames(xx) <- c("date", "n")
+xx <- cbind(row.names(x), x[,1])
+colnames(xx) <-c("date","n")
 xx <- as.data.frame(xx)
 
 a <- as.Date(as.character(xx$date))
 b <- as.numeric(xx$n)
 
-xx <- data.frame(b, a)
+xx <- data.frame(b,a)
 
 ts <- xts(xx, order.by = xx$a)
-ts <- ts[-1, ]
+ts <- ts[-1,]
 plot(ts$b)
-lines(rollmean(as.numeric(ts$b), 7), col = "red", type = "l")
+lines(rollmean(as.numeric(ts$b),7), col="red", type="l")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-48.png) 
 
 ```r
-
 # alternative
 
 z <- zoo(xx$b, xx$a)
-plot(z, main = "Mulhouse - variation du codage CIM 10", xlab = "2013", ylab = "nombre de codes utilisés")
-lines(rollmean(z, 7), col = "red", lwd = 2)
+plot(z, main="Mulhouse - variation du codage CIM 10", xlab="2013", ylab="nombre de codes utilisés")
+lines(rollmean(z, 7), col="red", lwd=2)
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-49.png) 
 
 ```r
-
 boxplot(as.numeric(z))
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-410.png) 
 
-
 Nombre de codes CIM10 utilisés par les SU
 ----------------------------------------- 
 
-On compte le nombre de codes uniques en fonction di FINESS, en urilisant la méthode _tapply_ (code). Puis on fait le total par établissement avec _lapply_ ce qui donne une liste de 12 éléments (code.par.hop).
+On compte le nombre de codes uniques en fonction du FINESS, en utilisant la méthode _tapply_ (code). Puis on fait le total par établissement avec _lapply_ ce qui donne une liste de 12 éléments (code.par.hop).
 
 
 ```r
 code <- tapply(d1$DP, d1$FINESS, unique)
 code.par.hop <- lapply(code, length)
-# print.xtable(xtable(as.data.frame(code.par.hop)), type='html')
-kable(as.data.frame(code.par.hop), format = "markdown")
+# print.xtable(xtable(as.data.frame(code.par.hop)), type="html")
+kable(as.data.frame(code.par.hop), format="markdown")
 ```
 
 ```
-## |  X3Fr|  Alk|   Col|  Dia|   Geb|   Hag|   Hus|  Mul|  Odi|   Sel|   Wis|  Sav|
-## |-----:|----:|-----:|----:|-----:|-----:|-----:|----:|----:|-----:|-----:|----:|
-## |  1254|  860|  2429|    2|  1074|  1669|  1736|  918|  841|  2098|  1507|    2|
+
+
+| X3Fr| Alk|  Col| Dia|  Geb|  Hag|  Hus| Mul| Odi|  Sel|  Wis| Sav|
+|----:|---:|----:|---:|----:|----:|----:|---:|---:|----:|----:|---:|
+| 1254| 860| 2429|   2| 1074| 1669| 1736| 918| 841| 2098| 1507|   2|
 ```
 
+```r
+boxplot(d1$DP ~ d1$FINESS)
+```
+
+```
+Error: argument non numérique pour un opérateur binaire
+```
 Sur 14 SU, 12 envoient des RPU et 10 renseignent le code DP (71%). Calcul du taux de complétude par établissement. NB il faudrait retirer mes RPU où il n'est pas possible de mettre un DP (parti sans attendre...)
 
 
 ```r
-a <- tapply(d1$DP, d1$FINESS, function(x) {
-    !is.na(x)
-})
-b <- lapply(a, function(x) {
-    round(mean(x) * 100, 2)
-})
+a <- tapply(d1$DP, d1$FINESS, function(x){!is.na(x)})
+b <- lapply(a, function(x){round(mean(x)*100, 2)})
 print("Taux de complétude des DP (en %)")
 ```
 
 ```
-## [1] "Taux de complétude des DP (en %)"
+[1] "Taux de complétude des DP (en %)"
 ```
 
 ```r
-kable(as.data.frame(b), format = "markdown")
+kable(as.data.frame(b), format="markdown")
 ```
 
 ```
-## |   X3Fr|   Alk|    Col|  Dia|    Geb|    Hag|    Hus|    Mul|    Odi|    Sel|    Wis|   Sav|
-## |------:|-----:|------:|----:|------:|------:|------:|------:|------:|------:|------:|-----:|
-## |  87.81|  80.9|  88.53|    0|  99.62|  81.55|  35.61|  80.91|  27.05|  96.29|  90.17|  0.01|
-```
 
+
+|  X3Fr|  Alk|   Col| Dia|   Geb|   Hag|   Hus|   Mul|   Odi|   Sel|   Wis|  Sav|
+|-----:|----:|-----:|---:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|----:|
+| 87.81| 80.9| 88.53|   0| 99.62| 81.55| 35.61| 80.91| 27.05| 96.29| 90.17| 0.01|
+```
 
 
