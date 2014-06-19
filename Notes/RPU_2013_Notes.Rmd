@@ -329,4 +329,61 @@ Explications:
 
 ref: R in action pp 225-230
 
+Boxplot
+=======
+extrait de Uffler2014. Dessine une boxplot et rajoute les moyennes sous forme de points et de textes:
+```{}
+means <- tapply(motivation, CSP, mean, na.rm=TRUE)
+means
+boxplot(motivation ~ CSP, xlab="CSP", ylab="Score de motivation", main="Motivation selon la CSP", col="antiquewhite")
+points(1:length(means), means, pch = 23, cex = 0.75, bg = "red")
+text(1:length(means) , means + 10, labels = formatC(means, format = "f", digits = 1),pos = 1, cex = 0.9, col = "blue")
+```
+
+Pour supprimer la notation scientifique:
+------------------------------------------
+options(scipen = 6, digits = 2)
+
+
+Pour imposer un péparateur de milliers:
+-----------------------------------------
+knit_hooks$set(inline = function(x) {
+  prettyNum(x, big.mark=" ")
+})
+
+Barchart
+--------
+[Bar charts with percentage labels but counts on the y axis](http://socialdatablog.com/bar-charts-with-percentage-labels-but-counts-on-the-y-axis/)
+
+library(ggplot2)
+library(scales)
+perbar=function(xx){
+q=ggplot(data=data.frame(xx),aes(x=xx))+
+geom_bar(aes(y = (..count..)),fill="orange")+
+geom_text(aes(y = (..count..),label =   ifelse((..count..)==0,"",scales::percent((..count..)/sum(..count..)))), stat="bin",colour="darkgreen")
+q
+}
+perbar(mtcars$cyl)
+perbar(mtcars$wt)+coord_flip()
+
+Tracer 2 histogrammes en miroir
+-------------------------------
+[source](http://www.r-bloggers.com/making-back-to-back-histograms/)
+```{}
+df = data.frame(x = rnorm(100), x2 = rnorm(100, mean=2))
+h1 = hist(df$x, plot=FALSE)
+h2 = hist(df$x2, plot=FALSE)
+h2$counts = - h2$counts
+hmax = max(h1$counts)
+hmin = min(h2$counts)
+X = c(h1$breaks, h2$breaks)
+xmax = max(X)
+xmin = min(X)
+plot(h1, ylim=c(hmin, hmax), col="green", xlim=c(xmin, xmax))
+lines(h2, col="blue")
+
+Refusal of Care in the Prehospital Setting
+
+
+```
 

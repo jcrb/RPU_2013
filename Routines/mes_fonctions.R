@@ -391,6 +391,7 @@ completude <- function(data.hop){
 # 
 radar_completude <- function(x, y = NULL, ch.names = "titre", rp.type="p", poly.col = "khaki",line.col="goldenrod4"){
   library("openintro")
+  library("plotrix")
   # nom des branches du radar:
   rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode\nentrée","CCMU",
                  "Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
