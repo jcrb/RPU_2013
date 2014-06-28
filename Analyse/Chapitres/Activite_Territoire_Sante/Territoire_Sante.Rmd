@@ -64,10 +64,16 @@ d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 d1$secteur <- as.factor(d1$secteur)
 
 ```
-Nombre de RPU par secteur de santé
+#### Nombre de RPU par territoire de santé
 ```{r rpu_par_secteur}
-tapply(d1$ENTREE,d1$secteur,length)
+rpu.ts <- tapply(d1$ENTREE,d1$secteur,length)
 ```
+#### taux de recours par territoire de santé
+```{r tx.recours.territoire}
+rpu.ts/pop.ts
+```
+
+
 Remarques:
 - en 2013: secteur 2, manque St Anne, pediatrie HTP, une partie des RPU HUS adultes. Secteur 4, manque CH Thann.
 - en 2014: en cours d'année apparaissent St Anne, pédiatrie HUS (avril 2014), Diaconat Roosvelt (), Diaconat Strasbourg (). La clinique des 3 frontières deveint propriété du CH de Mulhouse et change de Finess (Mai 2014). CH Thann en attente absobtion par Mulhouse (2015) ne fornit pas de RPU.
