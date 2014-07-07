@@ -1,0 +1,38 @@
+---
+title: "Tableaux ARS"
+author: "JcB"
+date: "07/07/2014"
+output: html_document
+---
+
+```{r prologue,cache=FALSE,warning=FALSE}
+source("../prologue.R")
+source("../../../Routines/mes_fonctions.R")
+
+date()
+pt <-nrow(d1)
+# population totale
+pt
+```
+Essai tableau pour ARS: nombre de RPU dont l'age est <= 15 ans ou >= à 75 ans.
+Les données sont combinées pour formrt un fichier .csv exportable. Voir comment ajouter des métadonnées
+Pourquoi Haguenau a un nombre faible de cas pédiatriques par rapport aux autres SU ?
+
+- __age.lsore.15__ age less or equal 15
+- __age.grore.75__ age greater or equal 75
+- __age.ls.18__ age less 18
+
+```{r}
+age.lsore.15 <- tapply(d1$AGE[d1$AGE < 16], d1$FINESS[d1$AGE < 16], length)
+age.lsore.15
+age.grore.75 <- tapply(d1$AGE[d1$AGE > 74], d1$FINESS[d1$AGE > 74], length)
+age.grore.75
+rbind(age.lsore.15, age.grore.75)
+cbind(age.lsore.15, age.grore.75)
+tableau.ars <- cbind(age.lsore.15, age.grore.75)
+write.csv(tableau.ars, file = "tableau_ars.csv")
+age.ls.18 <- tapply(d1$AGE[d1$AGE < 18], d1$FINESS[d1$AGE < 18], length)
+age.ls.18
+
+```
+

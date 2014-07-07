@@ -25,11 +25,11 @@ On peut merger **zp** et **pop2010** pour former la population par territoire **
 A partir de *pop.tt* on extrait via tapply les population des territoires de santé **pop.ts** et des zones de proximités **pop.zp**.
 
 ```{r pop_ts}
-zp <- read.csv("/home/bart-rescue/Documents/JCB/R/RPU2013/cartograhie/data/zp.csv")
+zp <- read.csv("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/data/zp.csv")
 names(zp)
 head(zp)
 
-load("/home/bart-rescue/Documents/JCB/R/RPU2013/Demographie/newPopAlsace.Rda")
+load("~/Documents/Resural/Stat Resural/RPU_2013/doc/Demographie/newPopAlsace.Rda")
 names(newPopAlsace)
 head(newPopAlsace)
 pop_commune <- tapply(newPopAlsace$NB, factor(newPopAlsace$CODGEO), sum)
