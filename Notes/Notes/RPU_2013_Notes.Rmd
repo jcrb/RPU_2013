@@ -396,6 +396,15 @@ Liste de tous les packages installés sir la machine:
 a <- installed.packages()
 a[1:5, 1]
 ```
+Uniquement la liste des noms
+```{}
+a <- .packages(all.available = TRUE)
+save(a, file = "my_RPackages.R")
+rm(a)
+load("my_RPackages.R")
+
+```
+
 Pour installer des packages:
 ```{}
 install.packages(a)
