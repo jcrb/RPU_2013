@@ -383,7 +383,26 @@ plot(h1, ylim=c(hmin, hmax), col="green", xlim=c(xmin, xmax))
 lines(h2, col="blue")
 
 Refusal of Care in the Prehospital Setting
-
-
 ```
+
+Packages installés
+------------------
+
+source: http://www.ats.ucla.edu/stat/r/faq/packages.htm
+
+Liste de tous les packages installés sir la machine:
+
+```{}
+a <- installed.packages()
+a[1:5, 1]
+```
+Pour installer des packages:
+```{}
+install.packages(a)
+```
+Tous les packages disponibles:
+```{}
+a <- available.packages()
+```
+
 
