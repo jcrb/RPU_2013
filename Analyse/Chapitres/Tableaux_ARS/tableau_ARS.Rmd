@@ -35,4 +35,15 @@ age.ls.18 <- tapply(d1$AGE[d1$AGE < 18], d1$FINESS[d1$AGE < 18], length)
 age.ls.18
 
 ```
+pouvez-vous m'envoyer le même tableau mais en excluant les 15 ans (<15 ans) et en excluant les 75 ans (>75 ans), même si la première solution est davantage pertinente, la 2e solution me permettrait une comparaison avec les années précédentes. 
+
+```{r}
+age.ls.15 <- tapply(d1$AGE[d1$AGE < 15], d1$FINESS[d1$AGE < 15], length)
+age.ls.15
+age.gr.75 <- tapply(d1$AGE[d1$AGE > 75], d1$FINESS[d1$AGE > 75], length)
+age.gr.75
+tableau.ars2 <- cbind(age.ls.15, age.gr.75)
+write.csv2(tableau.ars2, file = "tableau_ars2.csv")
+
+```
 
