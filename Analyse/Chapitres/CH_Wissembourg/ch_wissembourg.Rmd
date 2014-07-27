@@ -19,7 +19,8 @@ Récupération des données
 ```{r init}
 library("epicalc")
 library("lubridate")
-library("stargazer")
+library(knitr)
+library(stargazer)
 
 source("odds.R")
 
@@ -61,9 +62,9 @@ ratio_hosp <- round(hosp * 100 / as.numeric(a["Domicile"]))
 ratio_hosp
 tx_hosp <- round(hosp * 100 / total)
 tx_hosp
-
-stargazer(table(hopital$MODE_SORTIE))
-
+# 
+# stargazer(table(hopital$MODE_SORTIE))
+# 
 tab1(hopital$MODE_SORTIE, main="Mode de sortie de l'hôpital")
 tab1(hopital$MODE_SORTIE, main="Mode de sortie de l'hôpital")
 ```
