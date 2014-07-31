@@ -10,6 +10,206 @@
 \contentsline {subsubsection}{Le concept de population municipale}{18}{section*.6}
 \contentsline {subsection}{\numberline {2.3.2}Classes d'\IeC {\^a}ge}{18}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}Les services d'accueil des urgences (SAU)}{19}{section.2.4}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {french}
+\select@language {french}
 \contentsline {chapter}{\numberline {3}Les acteurs}{25}{chapter.3}
 \contentsline {section}{\numberline {3.1}Exhaustivit\IeC {\'e} quantitative}{25}{section.3.1}
 \contentsline {section}{\numberline {3.2}Exhaustivit\IeC {\'e} qualitative}{26}{section.3.2}
@@ -17,19 +217,19 @@
 \contentsline {chapter}{\numberline {4}RESURAL}{29}{chapter.4}
 \contentsline {chapter}{\numberline {5}L'observatoire des urgences en Alsace (ORUDAL)}{31}{chapter.5}
 \contentsline {chapter}{\numberline {6}Le R\IeC {\'e}sum\IeC {\'e} du passage aux urgences}{33}{chapter.6}
-\contentsline {subsubsection}{L'identifiant (ID)}{34}{section*.22}
-\contentsline {subsubsection}{L'\IeC {\'e}tablissement de sant\IeC {\'e}}{34}{section*.23}
-\contentsline {subsubsection}{Le code postal de r\IeC {\'e}sidence}{34}{section*.24}
-\contentsline {subsubsection}{La commune de r\IeC {\'e}sidence}{34}{section*.25}
-\contentsline {subsubsection}{la date de naissance}{34}{section*.26}
-\contentsline {subsubsection}{le mode d'entr\IeC {\'e}e}{34}{section*.27}
-\contentsline {subsubsection}{la provenance}{35}{section*.28}
-\contentsline {subsubsection}{Le mode de transport}{35}{section*.29}
-\contentsline {subsubsection}{la prise en charge durant le transport}{35}{section*.30}
-\contentsline {subsubsection}{le motif de recours aux urgences}{35}{section*.31}
-\contentsline {subsubsection}{Le mode de sortie}{35}{section*.32}
-\contentsline {subsubsection}{Destination}{36}{section*.33}
-\contentsline {subsubsection}{Orientation}{36}{section*.34}
+\contentsline {subsubsection}{L'identifiant (ID)}{34}{section*.23}
+\contentsline {subsubsection}{L'\IeC {\'e}tablissement de sant\IeC {\'e}}{34}{section*.24}
+\contentsline {subsubsection}{Le code postal de r\IeC {\'e}sidence}{34}{section*.25}
+\contentsline {subsubsection}{La commune de r\IeC {\'e}sidence}{34}{section*.26}
+\contentsline {subsubsection}{la date de naissance}{34}{section*.27}
+\contentsline {subsubsection}{le mode d'entr\IeC {\'e}e}{34}{section*.28}
+\contentsline {subsubsection}{la provenance}{35}{section*.29}
+\contentsline {subsubsection}{Le mode de transport}{35}{section*.30}
+\contentsline {subsubsection}{la prise en charge durant le transport}{35}{section*.31}
+\contentsline {subsubsection}{le motif de recours aux urgences}{35}{section*.32}
+\contentsline {subsubsection}{Le mode de sortie}{35}{section*.33}
+\contentsline {subsubsection}{Destination}{36}{section*.34}
+\contentsline {subsubsection}{Orientation}{36}{section*.35}
 \contentsline {part}{II\hspace {1em}Activit\IeC {\'e} des services d'urgence d'Alsace}{39}{part.2}
 \contentsline {chapter}{\numberline {7}Activit\IeC {\'e} r\IeC {\'e}gionale totale}{41}{chapter.7}
 \contentsline {section}{\numberline {7.1}Nombre total de passages}{41}{section.7.1}
@@ -105,4 +305,4 @@
 \contentsline {chapter}{\numberline {C}RPU}{239}{appendix.C}
 \contentsline {chapter}{\numberline {D}A propos de ce document}{241}{appendix.D}
 \contentsline {chapter}{\numberline {E}Bibliographie}{243}{appendix.E}
-\contentsline {chapter}{Index}{247}{appendix*.176}
+\contentsline {chapter}{Index}{247}{appendix*.177}

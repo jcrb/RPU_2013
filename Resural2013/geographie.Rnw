@@ -1,4 +1,4 @@
-0% geographie.Rnw
+% geographie.Rnw
 
 L’Alsace est la plus petite région de France (n° 42) avec la Corse. Elle est formée de deux départements, le Bas-Rhin (67) et le Haut-Rhin (68), dont les chefs-lieux sont respectivement Strasbourg et Colmar. La préfecture régionale siège à Strasbourg comme l'agence régionale de santé \index{ARS} (ARS).
 
@@ -33,7 +33,7 @@ L’Alsace est divisée en quatre territoires de santé
  text(x,y,name,cex=0.9,col="red",font=2)
 }
 
- title(main="Secteur sanitaires d'Alsace")
+ title(main="Territoires de santé d'Alsace")
 @
 
 
@@ -79,7 +79,7 @@ Les populations légales millésimées 2010 entrent en vigueur le 1\ier{} janvie
 
 Ce document utilise la \emph{Population municipale} \ref{Population_municipale} \index{Population@Population!municipale}  qui est la nouvelle dénomination de la population sans double compte et qui correspond à la notion de \emph{population} utilisée usuellement en statistique.
 Le chiffre est donc inférieur de celui de la \emph{Population totale} qui est égale à la somme de la population municipale et de la population comptée à part d'une commune.
-Les chiffres de l'INSEE sont les suivants \footnote{http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/france-regions.asp?annee=2010}:
+Les chiffres de l'INSEE sont résumés dans la table \footnote{http://www.insee.fr/fr/ppp/bases-de-donnees/recensement/populations-legales/france-regions.asp?annee=2010} \ref{pop2010} page \pageref{pop2010}.
 
 \begin{table}
 \begin{center}
@@ -224,7 +224,7 @@ Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU
 \multirow{7}{*}{2} & \multirow{6}{*}{Strasbourg} & \multirow{3}{*}{HUS} &  & NHC &  & oui &  &  & \tabularnewline
 \cline{4-10} 
  &  &  &  & HTP &  & oui & oui & oui%
-\footnote{SMUR Néonatal%
+\footnote{SMUR Péd.%
 } & \tabularnewline
 \cline{4-10} 
  &  &  &  & PL &  &  &  & oui & oui\tabularnewline
@@ -266,6 +266,179 @@ Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU
 \end{center}
 \end{table}
 \end{landscape}
+
+
+% Visionner le code LaTeX du paragraphe 0
+
+\begin{landscape}
+\begin{table}
+\begin{center}
+
+% Visionner le code LaTeX du paragraphe 0
+
+\selectlanguage{french}%
+{\small{}}%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline 
+{\small{Territoire}} & {\small{ZProximité}} & {\small{Etablissement}} & {\small{FINESS J}} & {\small{Site}} & {\small{FINESS G}} & {\small{SU}} & {\small{SAMU/SMUR}} & {\small{PTSAD}}\tabularnewline
+\hline 
+\hline 
+\multirow{3}{*}{{\small{1}}} & {\small{Wissembourg}} & {\small{CH Wissembourg}} & {\small{670780543}} & {\small{Hôpital de la Lauter}} & {\small{670016237}} & {\small{oui}} & {\small{SMUR}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{2-9} 
+ & {\small{Haguenau}} & {\small{CH Haguenau}} & {\small{670780337}} & {\small{CH Haguenau}} & {\small{670000157}} & {\small{oui}} & {\small{SMUR}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{2-9} 
+ & {\small{Saverne}} & {\small{CH Saverne}} & {\small{670780345}} & {\small{Hôpital Ste Catherine}} & {\small{670000165}} & {\small{oui}} & {\small{SMUR}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\hline 
+\multirow{10}{*}{{\small{2}}} & \multirow{9}{*}{{\small{Strasbourg}}} & \multirow{5}{*}{{\small{HUS}}} & \multirow{5}{*}{{\small{670780055}}} & {\small{NHC}} & {\small{670000025}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{5-9} 
+ &  &  &  & {\small{HTP Adulte}} & {\small{670783273}} & {\small{oui}} & {\small{SMUR Ped.}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{5-9} 
+ &  &  &  & {\small{HTP Pédiatrie}} & {\small{670783273}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{5-9} 
+ &  &  &  & {\small{Pôle Logistique}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \textbf{\small{SAMU}}{\small{/SMUR}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{5-9} 
+ &  &  &  & {\small{CCOM}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & {\small{SOS mains}}\tabularnewline
+\cline{3-9} 
+ &  & {\small{Clinique de l'Orangerie}} & {\small{67000 0116}} & {\small{Clinique de l'Orangerie}} & {\small{670780170}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & {\small{USIC}}\tabularnewline
+\cline{3-9} 
+ &  & \multirow{2}{*}{{\small{Cliniques de Strasbourg}}} & {\small{670016211}} & {\small{Clinique Ste Odile}} & {\small{670016237}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{4-9} 
+ &  &  & {\small{670000108}} & {\small{Diaconat}} & {\small{670780162}} & {\small{SOS mains}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{3-9} 
+ &  & \multirow{2}{*}{{\small{Groupe St Vincent}}} & \multirow{2}{*}{{\small{670014604}}} & {\small{Clinique Ste Anne}} & {\small{670780212}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{2-2} \cline{5-9} 
+ & {\small{Schirmeck}} &  &  & {\small{Clinique St Luc}} & {\small{670798636}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\hline 
+\multirow{5}{*}{{\small{3}}} & {\small{Sélestat}} & {\small{CH Sélestat}} & {\small{670780691}} & {\small{CH Sélestat}} & {\small{670000397}} & {\small{oui}} & {\small{SMUR}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{2-9} 
+ & \multirow{3}{*}{{\small{Colmar}}} & \multirow{2}{*}{{\small{CH Colmar}}} & \multirow{2}{*}{{\small{680000973}}} & {\small{Louis Pasteur}} & {\small{680000684}} & {\small{oui}} & {\small{SMUR}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{5-9} 
+ &  &  &  & {\small{Clinique du Parc}} & {\small{680001245}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{3-9} 
+ &  & {\small{GHCA}} & {\small{680016011}} & {\small{Hôpital Schweitzer}} & {\small{680001195}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & {\small{USIC}}\tabularnewline
+\cline{2-9} 
+ & {\small{Guebwiller}} & {\small{CH Guebwiller}} & {\small{680000005}} & {\small{Hôpital Charles Haby}} & {\small{680000700}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\hline 
+\multirow{7}{*}{{\small{4}}} & \multirow{4}{*}{{\small{Mulhouse}}} & \multirow{2}{*}{{\small{CH Mulhouse}}} & \multirow{2}{*}{{\small{680000486}}} & {\small{Emile Muller}} & {\small{680000627}} & {\small{oui}} & \textbf{\small{SAMU}}{\small{/SMUR}} & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{5-9} 
+ &  &  &  & {\small{Hasenrain}} & {\small{680000627}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{3-9} 
+ &  & \multirow{2}{*}{{\small{Fondation du Diaconat}}} & {\small{680000643}} & {\small{Diaconat Fonderie}} & {\small{680000320}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{4-9} 
+ &  &  & \selectlanguage{english}%
+\selectlanguage{french}%
+ & {\small{Diaconat Roosvelt}} & {\small{680000494}} & {\small{SOS mains}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{2-9} 
+ & {\small{Thann}} & {\small{CH Thann}} & {\small{680000437}} & {\small{Hôpital St Jacques}} & {\small{680000601}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{2-9} 
+ & {\small{Altkirch}} & {\small{CH Altkirch}} & {\small{680000395}} & {\small{CH St Morand}} & {\small{680000395}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\cline{2-9} 
+ & {\small{Saint-Louis}} & {\small{Clinique des 3 frontières}} & {\small{680000049}} & {\small{C3F}} & {\small{680020096}} & {\small{oui}} & \selectlanguage{english}%
+\selectlanguage{french}%
+ & \selectlanguage{english}%
+\selectlanguage{french}%
+\tabularnewline
+\hline 
+\end{tabular}\selectlanguage{english}%
+
+
+\end{center}
+\end{table}
+\end{landscape}
+
+
 
 \begin{figure}[ht]
  \centering
