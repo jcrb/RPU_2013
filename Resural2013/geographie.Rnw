@@ -4,7 +4,10 @@ L’Alsace est la plus petite région de France (n° 42) avec la Corse. Elle est
 
 La région est divisée en quatre territoires de santé et douze territoires de proximité.
 
+
 \section{Les territoires de santé}
+%=================================
+
 \index{Alsace!territoires de santé}
 \index{territoires de santé}
 
@@ -19,15 +22,16 @@ L’Alsace est divisée en quatre territoires de santé
 <<carte_secteurs_sanitaires,echo=FALSE,message=FALSE,error=FALSE>>=
 # fond de carte des territoires de santé + villes principales
  library("sp")
- load("../Data/als_ts.Rda")
+ load("../Data/als_ts.Rda") #ctss
  plot(ctss)
  load("../Data/tsvilles.Rda")
  points(tsvilles[,2]*100,tsvilles[,3]*100,pch=20,col="blue")
  text(tsvilles[,2]*100,tsvilles[,3]*100,tsvilles[,1],cex=0.6,pos=4)
- for(i in 1:4){
+ n_ts <- 4 # nombre de territoires de santé
+ for(i in 1:n_ts){
  # name<-ctss@polygons[[i]]@ID
  name<-as.character(i)
- x<-ctss@polygons[[i]]@labpt[1]
+ x<-ctss@polygons[[i]]@labpt[1] # ccord.du centroïde
  y<-ctss@polygons[[i]]@labpt[2]
  symbols(x,y,circles=1,inches=.15,add=T,fg="red")
  text(x,y,name,cex=0.9,col="red",font=2)
@@ -38,6 +42,8 @@ L’Alsace est divisée en quatre territoires de santé
 
 
 \section{Les territoires de proximité}
+%======================================
+
 \index{Alsace!territoires de proximité}
 \index{Territoires de proximité}
 
@@ -57,12 +63,12 @@ Il existe douze territoires de proximité:
   \item territoire 12: Saint-Louis
 \end{enumerate}
 
-Chaque territoire dispose d'un établissement de santé de référence.
+Chaque territoire dispose d'un établissement de santé de référence et un service d'urgence (sauf Schirmeck qui n'est pas labellisé).
 
 % carte des territoires de santé
 \begin{figure}[ht]
  \centering
- \includegraphics[height=15cm,keepaspectratio=true]{../doc/cartographie/RPU2013_Carto_Pop/figure/zone_proximite.png}
+ \includegraphics[height=15cm,keepaspectratio=true]{../doc/cartographie/RPU2013_Carto_Pop/figure/zp_avec_villes.png}
  % image.: 0x0 pixel, 0dpi, nanxnan cm, bb=
  \caption{L’Alsace compte 12 territoires de proximité}
  \label{fig:zp}
@@ -193,88 +199,91 @@ Réglementairement, le CSP reconnaît deux types de structures pouvant être aut
 
 On peut trouver des PTSAD avec une autorisation SU mais qui ne concerne que la spécialité du plateau technique, des PTSAD non labellisés SU, des SU non labellisés pédiatriques mais ayant une activité pédiatrique exclusive.
 
-A la date du 23 mai 2013, l'Alsace compte 18 établissements ou structures autorisés pour l'activité de soins de médecine d'urgence (article R6123-1 du CSP) dont deux ayant une activité de PTDAD exclusive \cite{15}, 1 établissement labellisé SU pédiatrique.
+A la date du 23 mai 2013, l'Alsace compte 18 établissements ou structures autorisés pour l'activité de soins de médecine d'urgence (article R6123-1 du CSP) dont deux ayant une activité de PTDAD exclusive \cite{15}, et 1 établissement labellisé SU pédiatrique. Cette activité se répartit en:
+\begin{itemize}
+  \item 14 implantations "polyvalentes" (adultes et enfants): CH Wissembourg, CH Haguenau, CH Saverne, Clinique Sainte Odile, Clinique Sainte Anne, CH Sélestat, hôpital Pasteur, CH Guebwiller, CH Thann, CH Altkirch, Clinique des trois frontières, hôpital Emile Muller, clinique Diaconat-Fonderie.
+  \item 2 implantations "adultes": Nouvel Hôpital Civil, hôpital de Hautepierre
+  \item 3 implantations "pédiatriques": hôpital de Hautepierre, Clinique du Parc, Hôpital du Haserain.
+  \item 2 implantations "urgences mains": clinique du Diaconat-Strasbourg, clinique Diaconat-Roosvelt.
+\end{itemize}
 
-En pratique, à la question de savoir qui prend en charge 24h sur 24 des problèmes aigus de santé et/ou de permanence des soins, on se ramène a une liste de 14 établissements pratiquant la médecine d'urgence au sens où on l'entend communément. Trois établissements ont une activité multisite. Au final cela représente 18 sites. Les trois villes les plus importantes de la région concentrent la totalité des PTSAD.
+Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'a pas l'autorisation d'activité de soins de médecine d'urgence. Tpos les services SOS Mins d'Alsace sont labellisé par la FESUM\footnote{Fédération Européenne des Services d'Urgence de la Main}.
 
-Celle-ci se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Le SROS 2 avait introduit une distinction entre les services accueillant les urgences en fonction de leurs capacités et plateaux techniques. On distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser, même si elle n'a plus cours officiellement. 
+% En pratique, à la question de savoir qui prend en charge 24h sur 24 des problèmes aigus de santé et/ou de permanence des soins, on se ramène a une liste de 14 établissements pratiquant la médecine d'urgence au sens où on l'entend communément. Trois établissements ont une activité multisite. Au final cela représente 18 sites. Les trois villes les plus importantes de la région concentrent la totalité des PTSAD.
 
-La clinique du Diaconat de Strasbourg (groupe des "Cliniques de Strasbourg"), bien que disposant de cette autorisation, ne prend en charge que les urgences mains pour lesquelles elle dispose d'une labellisation FESUM \footnote{Fédération Européenne des Services d'Urgence de la Main}. Il en est de même pour la clinique Diaconat-Roosevelt de Mulhouse (groupe "Fondation de la maison du Diaconat" )
+L'activité de soins de médecine d'urgence se pratique au sein de ce qu'il est communément appelé services d'urgence (SU). Cette dénomination remplace la terminologie introduite par le SROS 2 qui distinguait alors les UPATOU, les POSU et les SAU. Cette nomenclature qui reposait sur une réalité avait été bien assimilée par les professionnels de santé et beaucoup continuent de l'utiliser, même si elle n'a plus cours officiellement. 
 
 Le réseau prend également en compte la clinique Saint-Luc de Schirmeck (groupe hospitalier Saint Vincent) qui fait fonctionner une policlinique recevant plus de \np{8000} passages par an. Officiellement, cet établissement de santé ne dispose pas d' autorisation de type SU bien qu'elle en effectue la mission et est le seul établissement de proximité de la zone Molsheim-Schirmeck.
 
-Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'est pas inclut dans les implantations de services d'urgence.
-
 Sont officiellement labellisés 18 sites (en y incluant SOS main Diaconat mais pas la clinique St Luc). Ces données sont résumées dans le tableau \ref{tab:sualsace} page \pageref{tab:sualsace}
 
+
+% \begin{landscape}
+% \begin{table}
+% \begin{center}
+% \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+% \hline 
+% Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU Ped & SMUR & SAMU\tabularnewline
+% \hline 
+% \hline 
+%  \multirow{3}{*}{1} & Wissembourg & CH Wissembourg &  & id &  & oui &  & oui & \tabularnewline
+% \cline{2-10} 
+%  & Haguenau & CH Haguenau &  & id &  & oui &  & oui & \tabularnewline
+% \cline{2-10} 
+%  & Saverne & CH Saverne &  & id &  & oui &  & oui & \tabularnewline
+% \hline 
+% \multirow{7}{*}{2} & \multirow{6}{*}{Strasbourg} & \multirow{3}{*}{HUS} &  & NHC &  & oui &  &  & \tabularnewline
+% \cline{4-10} 
+%  &  &  &  & HTP &  & oui & oui & oui%
+% \footnote{SMUR Péd.%
+% } & \tabularnewline
+% \cline{4-10} 
+%  &  &  &  & PL &  &  &  & oui & oui\tabularnewline
+% \cline{3-10} 
+%  &  & Ste Anne &  & id &  & oui &  &  & \tabularnewline
+% \cline{3-10} 
+%  &  & Ste Odile &  & id &  & oui &  &  & \tabularnewline
+% \cline{3-10} 
+%  &  & Diaconat &  & id &  & oui%
+% \footnote{SOS Mains%
+% } &  &  & \tabularnewline
+% \cline{2-10} 
+%  & Schirmeck & St Luc &  & id &  &  &  &  & \tabularnewline
+% \hline 
+% \multirow{4}{*}{3} & Sélestat & CH Sélestat &  & id &  & oui &  & oui & \tabularnewline
+% \cline{2-10} 
+%  & \multirow{2}{*}{Colmar} & \multirow{2}{*}{CH Colmar} &  & HC &  & oui &  & oui & \tabularnewline
+% \cline{4-10} 
+%  &  &  &  & Parc &  &  & oui &  & \tabularnewline
+% \cline{2-10} 
+%  & Guebwiller & CH Guebwiller &  & id &  & oui &  &  & \tabularnewline
+% \hline 
+% \multirow{5}{*}{4} & \multirow{3}{*}{Mulhouse} & \multirow{2}{*}{CH Mulhouse} &  & EM &  & oui & oui & oui & oui\tabularnewline
+% \cline{4-10} 
+%  &  &  &  & St Louis &  & oui &  & oui%
+% \footnote{antenne SMUR%
+% } & \tabularnewline
+% \cline{3-10} 
+%  &  & Diaconat-F &  & id &  & oui &  &  & \tabularnewline
+% \cline{2-10} 
+%  & Thann & CH Thann &  & id &  & oui &  &  & \tabularnewline
+% \cline{2-10} 
+%  & Altkirch & CH Altkirch &  & id &  & oui &  &  & \tabularnewline
+% \hline
+% \end{tabular}
+%  \caption[Structures d'urgence]{Services d'urgence d'Alsace}
+% 
+% \label{tab:sualsace}
+% \end{center}
+% \end{table}
+% \end{landscape}
+
+
+% Le tableau qui suit a été créé avec Lyx
+
 \begin{landscape}
 \begin{table}
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
-\hline 
-Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU Ped & SMUR & SAMU\tabularnewline
-\hline 
-\hline 
- \multirow{3}{*}{1} & Wissembourg & CH Wissembourg &  & id &  & oui &  & oui & \tabularnewline
-\cline{2-10} 
- & Haguenau & CH Haguenau &  & id &  & oui &  & oui & \tabularnewline
-\cline{2-10} 
- & Saverne & CH Saverne &  & id &  & oui &  & oui & \tabularnewline
-\hline 
-\multirow{7}{*}{2} & \multirow{6}{*}{Strasbourg} & \multirow{3}{*}{HUS} &  & NHC &  & oui &  &  & \tabularnewline
-\cline{4-10} 
- &  &  &  & HTP &  & oui & oui & oui%
-\footnote{SMUR Péd.%
-} & \tabularnewline
-\cline{4-10} 
- &  &  &  & PL &  &  &  & oui & oui\tabularnewline
-\cline{3-10} 
- &  & Ste Anne &  & id &  & oui &  &  & \tabularnewline
-\cline{3-10} 
- &  & Ste Odile &  & id &  & oui &  &  & \tabularnewline
-\cline{3-10} 
- &  & Diaconat &  & id &  & oui%
-\footnote{SOS Mains%
-} &  &  & \tabularnewline
-\cline{2-10} 
- & Schirmeck & St Luc &  & id &  &  &  &  & \tabularnewline
-\hline 
-\multirow{4}{*}{3} & Sélestat & CH Sélestat &  & id &  & oui &  & oui & \tabularnewline
-\cline{2-10} 
- & \multirow{2}{*}{Colmar} & \multirow{2}{*}{CH Colmar} &  & HC &  & oui &  & oui & \tabularnewline
-\cline{4-10} 
- &  &  &  & Parc &  &  & oui &  & \tabularnewline
-\cline{2-10} 
- & Guebwiller & CH Guebwiller &  & id &  & oui &  &  & \tabularnewline
-\hline 
-\multirow{5}{*}{4} & \multirow{3}{*}{Mulhouse} & \multirow{2}{*}{CH Mulhouse} &  & EM &  & oui & oui & oui & oui\tabularnewline
-\cline{4-10} 
- &  &  &  & St Louis &  & oui &  & oui%
-\footnote{antenne SMUR%
-} & \tabularnewline
-\cline{3-10} 
- &  & Diaconat-F &  & id &  & oui &  &  & \tabularnewline
-\cline{2-10} 
- & Thann & CH Thann &  & id &  & oui &  &  & \tabularnewline
-\cline{2-10} 
- & Altkirch & CH Altkirch &  & id &  & oui &  &  & \tabularnewline
-\hline
-\end{tabular}
- \caption[Structures d'urgence]{Services d'urgence d'Alsace}
-
-\label{tab:sualsace}
-\end{center}
-\end{table}
-\end{landscape}
-
-
-% Visionner le code LaTeX du paragraphe 0
-
-\begin{landscape}
-\begin{table}
-\begin{center}
-
-% Visionner le code LaTeX du paragraphe 0
 
 \selectlanguage{french}%
 {\small{}}%
@@ -283,7 +292,7 @@ Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU
 {\small{Territoire}} & {\small{ZProximité}} & {\small{Etablissement}} & {\small{FINESS J}} & {\small{Site}} & {\small{FINESS G}} & {\small{SU}} & {\small{SAMU/SMUR}} & {\small{PTSAD}}\tabularnewline
 \hline 
 \hline 
-\multirow{3}{*}{{\small{1}}} & {\small{Wissembourg}} & {\small{CH Wissembourg}} & {\small{670780543}} & {\small{Hôpital de la Lauter}} & {\small{670016237}} & {\small{oui}} & {\small{SMUR}} & \selectlanguage{english}%
+\multirow{3}{*}{{\small{1}}} & {\small{Wissembourg}} & {\small{CH Wissembourg}} & {\small{670780543}} & {\small{Hôpital de la Lauter}} & {\small{670016237}} & {\small{polyvalent}} & {\small{SMUR}} & \selectlanguage{english}%
 \selectlanguage{french}%
 \tabularnewline
 \cline{2-9} 
@@ -433,7 +442,8 @@ Territoire & ZProximité & Établissement & FINESS J & Site & FINESS G & SU & SU
 \hline 
 \end{tabular}\selectlanguage{english}%
 
-
+\caption[Structures d'urgence]{Services d'urgence d'Alsace}
+\label{tab:sualsace}
 \end{center}
 \end{table}
 \end{landscape}
@@ -452,36 +462,46 @@ hopitaux <-"../Data/Hopitaux2lambert/hopitaux_alsace.csv"
 h<-read.csv(hopitaux,header=TRUE,sep=",")
 for(i in 1:nrow(h)){points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");text(h$lam_lon[i],h$lam_lat[i],labels=h$hopital[i],cex=0.8,pos=h$pos[i])}
 @
- \caption[Services d'urgence d'Alsace]{L’Alsace compte 14 services d'urgence labellisés sur 15 sites.}
+ \caption[Services d'urgence d'Alsace]{Implantation des services d'urgence en Alsace.}
  \label{fig:su_alsace}
 \end{figure}
 
 
 
-\begin{table}
-\begin{center}
-\begin{tabular}{|c|c|c|c|l|}
-  \hline
-& FINESS utilisé & FINESS géographique & FINESS Juridique & Structure \\
-  \hline
-  \hline
-1 & 670780055 &   & 670780055 & HUS \\
-2 & 670780543 & 670000272 & 670780543 & CH Wissembourg \\
-3 & 670000397 & 670000397  & 670780691 & CH Sélestat \\
-4 & 670780337 & 670000157 & 670780337 & CH Haguenau \\
-5 &   & 670000165 & 670780345 & CH Saverne \\
-6 & 670016237  & 670016237  & 670016211 & Clinique Ste Odile \\
-7 &   & 670780212 & 670014604 & Clinique Ste Anne \\
-8 & 680000973 & 680000684 & 680000973 & CH Colmar \\
-9 & 680000197  & 680000197  & 680000049 & Clinique des trois frontières \\
-10 & 680000486 & 680000544  & 680000395 & CH Altkirch \\
-11 & 680000700 & 680000700 & 680001005 & CH Guebwiller \\
-12 & 680000627 & 680000627 & 680000486 & CH Mulhouse FG \\
-13 &   & 680000601 & 680000437 & CH Thann \\
-14 &   & 680000320  & 680000643 & Diaconat-Fonderie (St Sauveur) \\
-\hline
-\end{tabular}
-\caption{Service d'accueil des urgences d'Alsace}
-\label{summary}
-\end{center}
-\end{table}
+% \begin{table}
+% \begin{center}
+% \begin{tabular}{|c|c|c|c|l|}
+%   \hline
+% & FINESS utilisé & FINESS géographique & FINESS Juridique & Structure \\
+%   \hline
+%   \hline
+% 1 & 670780055 &   & 670780055 & HUS \\
+% 2 & 670780543 & 670000272 & 670780543 & CH Wissembourg \\
+% 3 & 670000397 & 670000397  & 670780691 & CH Sélestat \\
+% 4 & 670780337 & 670000157 & 670780337 & CH Haguenau \\
+% 5 &   & 670000165 & 670780345 & CH Saverne \\
+% 6 & 670016237  & 670016237  & 670016211 & Clinique Ste Odile \\
+% 7 &   & 670780212 & 670014604 & Clinique Ste Anne \\
+% 8 & 680000973 & 680000684 & 680000973 & CH Colmar \\
+% 9 & 680000197  & 680000197  & 680000049 & Clinique des trois frontières \\
+% 10 & 680000486 & 680000544  & 680000395 & CH Altkirch \\
+% 11 & 680000700 & 680000700 & 680001005 & CH Guebwiller \\
+% 12 & 680000627 & 680000627 & 680000486 & CH Mulhouse FG \\
+% 13 &   & 680000601 & 680000437 & CH Thann \\
+% 14 &   & 680000320  & 680000643 & Diaconat-Fonderie (St Sauveur) \\
+% \hline
+% \end{tabular}
+% \caption{Service d'accueil des urgences d'Alsace}
+% \label{summary}
+% \end{center}
+% \end{table}
+
+\section{Les plateaux techniques spécialisés à accès direct (PTSAD)} 
+
+Les PTSAD relevant de l'article R 6123-32-6 CSP doivent adhérer à un réseau d'urgence mais ne sont pas tenus de produire des RPU. Sont concernés en Alsace:
+\begin{itemize}
+\item Urgences main: Diaconat-Strasbourg, Diaconat-Roosvelt, CCOM.
+\item Urgences cardiologiques: clinique de l'Orangerie, clinique Schweitzer (GHCA).
+\item Urgences neuro-vasculaires: HTP, CH Colmar, CH Mulhouse, (CH Haguenau).
+\item Polytraumatisés: HTP, CH Colmar, CH Mulhouse.
+\end{itemize}
