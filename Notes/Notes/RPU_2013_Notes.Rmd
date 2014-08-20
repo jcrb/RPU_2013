@@ -71,6 +71,16 @@ tcna<-round(prop.table(table(c,dnn="%"))*100,3)
 - colnames(a) <- c("un", "deux")
 
 #### tapply et xtable
+
+Affichage avec formatage des chiffres:
+
+```{}
+t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
+t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
+names(t2) <- c("Etablissement", "RPU")
+print(xtable(t2,,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
+```
+
 On divise la colonne AGE en 3 groupes puis on calcule l'effectif de chaque groupe avec tapply. Pour obtenir un affichage latex avec xtable, il faut transformer le vecteur en dataframe. On obtient un affichage en colonne. Pour obtenir l'affichage en ligne, utiliser la transposée t(t).  
 
 tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))  
@@ -200,7 +210,7 @@ t <- round(tapply(d1$presence,d1$GRAVITE,mean,na.rm=TRUE),2)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
 rownames(r) <- c("mn","%")
-xtable(r, caption=c("Durée de présence et gravité","Durée de présence et gravité"), label = "duree_gravite")
+xtable(r, caption=c("Titre long","Titre court"), label = "duree_gravite")
 ou
 x <- xtable(r, caption=c("Durée de présence et gravité","Durée de présence et gravité"), label = "duree_gravite")
 print.xtable {x} permet d'utiliser d'autres arguments notamment longtable.

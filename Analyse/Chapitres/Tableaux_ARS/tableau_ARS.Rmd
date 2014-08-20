@@ -15,7 +15,7 @@ pt <-nrow(d1)
 pt
 ```
 Essai tableau pour ARS: nombre de RPU dont l'age est <= 15 ans ou >= à 75 ans.
-Les données sont combinées pour formrt un fichier .csv exportable. Voir comment ajouter des métadonnées
+Les données sont combinées pour former un fichier .csv exportable. Voir comment ajouter des métadonnées
 Pourquoi Haguenau a un nombre faible de cas pédiatriques par rapport aux autres SU ?
 
 - __age.lsore.15__ age less or equal 15

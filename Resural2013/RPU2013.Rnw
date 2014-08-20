@@ -235,11 +235,6 @@ N <- nrow(d1)
 @
 
 \newpage
-\chapter{Les acteurs}
-<<child='acteurs.Rnw'>>=
-@
-
-\newpage
 \chapter{RESURAL}
 <<child='resural.Rnw'>>=
 @
@@ -262,8 +257,16 @@ N <- nrow(d1)
 % ************************
 \part{Activité des services d'urgence d'Alsace}
 
+
+\newpage
+\chapter{Qualité des RPU en 2013} % ex chapitre "les acteurs"
+<<child='acteurs.Rnw'>>=
+@
+
 \newpage
 \chapter{Activité régionale totale}
+
+NOTE: dans les lignes qui suivent le terme \textbf{Passage} fait référence aux primo-passages ayant donnés lieu à la création d'un RPU (et non pas à la totalité des passages que peut enregistrer un service d'urgence.) \index{Passages (def.)}
 
 \section{Nombre total de passages}
 <<child='activite_regionale.Rnw'>>=

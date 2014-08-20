@@ -713,129 +713,6 @@ Les PTSAD relevant de l'article R 6123-32-6 CSP doivent adhérer à un réseau d
 \end{itemize}
 
 \newpage
-\chapter{Les acteurs}
-
-% acteurs.Rnw
-
-% penser au secteur libéral
-
-\section{Exhaustivité quantitative}
-
-
-On définit l'exhaustivité quantitative comme le nombre de RPU transmis par rapport au nombre de passages réels.
-Les données proviennent des RPU produits par les hôpitaux d'Alsace ayant l'autorisation de faire fonctionner un service d'urgence (SU). La liste des structures hospitalières ayant fournit des informations alimentant le présent rapport est fournie par la table \ref{tab1}, page \pageref{tab1}.
-
-Tous ces hôpitaux fournissent des données depuis le premier janvier 2013 sauf le CH Saverne qui a commencé en Juillet 2013.
-
-Deux structures ne fournissent pas encore de RPU. Il s'agit de la clinique Sainte-Anne à Strasbourg (Groupe hospitalier Saint-Vincent) et du Centre Hospitalier de Thann.
-
-Certaines données peuvent être recoupées avec celles du serveur régional mis en place en 2006 par l'ARS: 
-
-% \fbox{Voir SAU2013}
-
-% latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:06 2014
-\begin{table}[ht]
-\centering
-\begin{tabular}{|l|r|r|l|r|}
-  \hline
- & n & \% & Hôpitaux & Date d'inclusion \\ 
-  \hline
-3Fr & 15688 & 4.56 & Clinique des 3 frontières & 01/01/2013 \\ 
-  Alk & 10861 & 3.16 & CH Altkirch & 01/01/2013 \\ 
-  Col & 64758 & 18.82 & CH Colmar & 01/01/2013 \\ 
-  Dia & 29469 & 8.56 & Diaconat Fonderie & 01/01/2013 \\ 
-  Geb & 15103 & 4.39 & CH Guebwiller & 01/01/2013 \\ 
-  Hag & 34414 & 10 & CH Haguenau & 01/01/2013 \\ 
-  Hus & 37018 & 10.76 & Hôpitaux Universitaires de Strasbourg & 01/01/2013 \\ 
-  Mul & 56195 & 16.33 & CH Mulhouse & 07/01/2013 \\ 
-  Odi & 25963 & 7.55 & Clinique Ste Odile & 01/01/2013 \\ 
-  Sel & 29534 & 8.58 & CH Sélestat & 01/01/2013 \\ 
-  Wis & 12646 & 3.68 & CH Wissembourg & 01/01/2013 \\ 
-  Sav & 12424 & 3.61 & CH Saverne & 23/07/2013 \\ 
-   \hline
-\end{tabular}
-\caption{Structures hospitalières participantes en 2013} 
-\label{tab1}
-\end{table}
-
-
-\section{Exhaustivité qualitative}
-
-L'exhaustivité qualitative correspond à la fois à la complétude des items et à la cohérence de réponses.
-
-Les informations de nature administrative (code postal, commune d'origine, sexe, date de naissance,\dots ) sont correctement renseignées avec une exhaustivité de $100\%$.
-
-Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
-
-% latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:07 2014
-\begin{table}[ht]
-\centering
-\begin{tabular}{|l|r|}
-  \hline
- & \% \\ 
-  \hline
-id & 0.00 \\ 
-  CODE\_POSTAL & 0.00 \\ 
-  COMMUNE & 0.00 \\ 
-  ENTREE & 0.00 \\ 
-  EXTRACT & 0.00 \\ 
-  FINESS & 0.00 \\ 
-  NAISSANCE & 0.00 \\ 
-  SEXE & 0.00 \\ 
-  AGE & 0.00 \\ 
-  secteur & 0.00 \\ 
-  SORTIE & 8.82 \\ 
-  MODE\_ENTREE & 9.57 \\ 
-  MODE\_SORTIE & 13.88 \\ 
-  GRAVITE & 14.24 \\ 
-  TRANSPORT & 23.06 \\ 
-  TRANSPORT\_PEC & 26.26 \\ 
-  DP & 33.58 \\ 
-  PROVENANCE & 35.75 \\ 
-  MOTIF & 36.29 \\ 
-  DESTINATION & 78.79 \\ 
-  ORIENTATION & 80.14 \\ 
-   \hline
-\end{tabular}
-\caption{Données manquantes en 2013} 
-\label{tab2}
-\end{table}
-
-
-Les informations sont résumées dans la table \ref{tab2}, page \pageref{tab2}.
-
-\section{Diagramme de complétude}
-
-On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l'exhaustivité qualitative des données. Chaque item du RPU est représenté par le rayon d'une roue, gradué de 0 à 100\%. Sur chaque rayon, les points obtenus sont reliés entre eux pour dessiner un polygone qui figue la physionomie de l'ensemble des données.
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-           id   CODE_POSTAL       COMMUNE   DESTINATION            DP 
-          0.0           0.0           0.0          78.8          33.6 
-       ENTREE       EXTRACT        FINESS       GRAVITE   MODE_ENTREE 
-          0.0           0.0           0.0          14.2           9.6 
-  MODE_SORTIE         MOTIF     NAISSANCE   ORIENTATION    PROVENANCE 
-         13.9          36.3           0.0          80.1          35.8 
-         SEXE        SORTIE     TRANSPORT TRANSPORT_PEC           AGE 
-          0.0           8.8          23.1          26.3           0.0 
-      secteur 
-          0.0 
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/radar} 
-
-\end{knitrout}
-
-Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données sont à interpréter avec prudence. Ainsi l'item 4 qui correspond au mode de sortie ne distingue pas les non réponses des vrais retours à domicile (se reporter à la discussion page \pageref{ref:sortie})
-
-Les diagrammes de complétude propres à chaque établissement figurent au chapitre correspondant au service d'urgence.
-
-Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce dernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparaît dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})
-
-\newpage
 \chapter{RESURAL}
 
 % resural.Rnw
@@ -1112,8 +989,132 @@ Selon le cas ces codes sont incompatibles avec un \textbf{mode de sortie} à dom
 % ************************
 \part{Activité des services d'urgence d'Alsace}
 
+
+\newpage
+\chapter{Qualité des RPU en 2013} % ex chapitre "les acteurs"
+
+% acteurs.Rnw
+
+% penser au secteur libéral
+
+\section{Exhaustivité quantitative}
+
+
+On définit l'\emph{exhaustivité quantitative} \index{exhaustivité quantitative (def.)} comme le nombre de RPU transmis par rapport au nombre de passages réels.
+Les données proviennent des RPU produits par les hôpitaux d'Alsace ayant l'autorisation de faire fonctionner un service d'urgence (SU). La liste des structures hospitalières ayant fournit des informations alimentant le présent rapport est fournie par la table \ref{tab1}, page \pageref{tab1}.
+
+Tous ces hôpitaux fournissent des données depuis le premier janvier 2013 sauf le CH Saverne qui a commencé en Juillet 2013.
+
+Quatre structures ne fournissent pas encore de RPU. Il s'agit de la clinique Sainte-Anne à Strasbourg (Groupe hospitalier Saint-Vincent), du Centre Hospitalier de Thann, de la clinique du Diaconat à Strasbourg et de la clinique Roosvelt à Mulhouse.
+
+Certaines données peuvent être recoupées avec celles du serveur régional mis en place en 2006 par l'ARS: 
+
+% \fbox{Voir SAU2013}
+
+% latex table generated in R 3.1.1 by xtable 1.7-1 package
+% Wed Aug 20 14:34:27 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|r|r|l|r|}
+  \hline
+ & n & \% & Hôpitaux & Date d'inclusion \\ 
+  \hline
+3Fr & 15688 & 4.56 & Clinique des 3 frontières & 01/01/2013 \\ 
+  Alk & 10861 & 3.16 & CH Altkirch & 01/01/2013 \\ 
+  Col & 64758 & 18.82 & CH Colmar & 01/01/2013 \\ 
+  Dia & 29469 & 8.56 & Diaconat Fonderie & 01/01/2013 \\ 
+  Geb & 15103 & 4.39 & CH Guebwiller & 01/01/2013 \\ 
+  Hag & 34414 & 10 & CH Haguenau & 01/01/2013 \\ 
+  Hus & 37018 & 10.76 & Hôpitaux Universitaires de Strasbourg & 01/01/2013 \\ 
+  Mul & 56195 & 16.33 & CH Mulhouse & 07/01/2013 \\ 
+  Odi & 25963 & 7.55 & Clinique Ste Odile & 01/01/2013 \\ 
+  Sel & 29534 & 8.58 & CH Sélestat & 01/01/2013 \\ 
+  Wis & 12646 & 3.68 & CH Wissembourg & 01/01/2013 \\ 
+  Sav & 12424 & 3.61 & CH Saverne & 23/07/2013 \\ 
+   \hline
+\end{tabular}
+\caption[Structures hospitalières participantes en 2013]{Structures hospitalières participantes en 2013. Tous les paticipants fournissent des données depuis le 1/1/2013 sauf le CH Saverne.} 
+\label{tab1}
+\end{table}
+
+
+\section{Exhaustivité qualitative} } \index{exhaustivité qualitative (def.)} 
+
+L'\emph{exhaustivité qualitative} correspond à la fois à la complétude des items et à la cohérence de réponses.
+
+Les informations de nature administrative (code postal, commune d'origine, sexe, date de naissance,\dots ) sont correctement renseignées avec une exhaustivité de $100\%$.
+
+Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$. Les motifs DESTINATION et ORIENTATION sont à pondérer en fonction du MOTIF\_SORTIE. En effet la structure du RPU fait que par défaut, tous les retours à domicile génèrent automatiquement un non réponse pour les motifs DESTINATION et ORIENTATION qui ne concernent que les patients hospitalisés.
+
+% latex table generated in R 3.1.1 by xtable 1.7-1 package
+% Wed Aug 20 14:34:28 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|r|}
+  \hline
+ & \% \\ 
+  \hline
+id & 0.00 \\ 
+  CODE\_POSTAL & 0.00 \\ 
+  COMMUNE & 0.00 \\ 
+  ENTREE & 0.00 \\ 
+  EXTRACT & 0.00 \\ 
+  FINESS & 0.00 \\ 
+  NAISSANCE & 0.00 \\ 
+  SEXE & 0.00 \\ 
+  AGE & 0.00 \\ 
+  secteur & 0.00 \\ 
+  SORTIE & 8.82 \\ 
+  MODE\_ENTREE & 9.57 \\ 
+  MODE\_SORTIE & 13.88 \\ 
+  GRAVITE & 14.24 \\ 
+  TRANSPORT & 23.06 \\ 
+  TRANSPORT\_PEC & 26.26 \\ 
+  DP & 33.58 \\ 
+  PROVENANCE & 35.75 \\ 
+  MOTIF & 36.29 \\ 
+  DESTINATION & 78.79 \\ 
+  ORIENTATION & 80.14 \\ 
+   \hline
+\end{tabular}
+\caption{Données manquantes en 2013 en pourcentage du total des réponses. Les données administrative du RPU, notemment les paramètres saisis dès l'arrivée du patient sont exhaustifs. Par contre les données de suivis et médicales sont moins complètes. Les motifs DESTINATION et ORIENTATION sont à pondérer en fonction du MOTIF SORTIE (voir texte).} 
+\label{tab2}
+\end{table}
+
+
+Les informations sont résumées dans la table \ref{tab2}, page \pageref{tab2}.
+
+\section{Diagramme de complétude}
+
+On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l'exhaustivité qualitative des données. Chaque item du RPU est représenté par le rayon d'une roue, gradué de 0 à 100\%. Sur chaque rayon, les points obtenus sont reliés entre eux pour dessiner un polygone qui figue la physionomie de l'ensemble des données.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{verbatim}
+           id   CODE_POSTAL       COMMUNE   DESTINATION            DP 
+          0.0           0.0           0.0          78.8          33.6 
+       ENTREE       EXTRACT        FINESS       GRAVITE   MODE_ENTREE 
+          0.0           0.0           0.0          14.2           9.6 
+  MODE_SORTIE         MOTIF     NAISSANCE   ORIENTATION    PROVENANCE 
+         13.9          36.3           0.0          80.1          35.8 
+         SEXE        SORTIE     TRANSPORT TRANSPORT_PEC           AGE 
+          0.0           8.8          23.1          26.3           0.0 
+\end{verbatim}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/radar} 
+
+\end{knitrout}
+
+Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données sont à interpréter avec prudence. Ainsi l'item 4 qui correspond au mode de sortie ne distingue pas les non réponses des vrais retours à domicile (se reporter à la discussion page \pageref{ref:sortie})
+
+Les diagrammes de complétude propres à chaque établissement figurent au chapitre correspondant au service d'urgence.
+
+Pour les items \textbf{Orientation} et \textbf{Destination}, il s'agit d'un taux de réponse brut. Ce dernier doit être corrigé en soustrayant les patients rentrés à domicile pour lesquels ces deux items n'ont pas de sens. Le chiffre corrigé apparaît dans les diagrammes de complétude spécifiques d'un service d'urgence (Partie quatre: Activité par service d'urgence page \pageref{partie4})
+
 \newpage
 \chapter{Activité régionale totale}
+
+NOTE: dans les lignes qui suivent le terme \textbf{Passage} fait référence aux primo-passages ayant donnés lieu à la création d'un RPU (et non pas à la totalité des passages que peut enregistrer un service d'urgence.) \index{Passages (def.)}
 
 \section{Nombre total de passages}
 
@@ -1140,7 +1141,7 @@ Selon le cas ces codes sont incompatibles avec un \textbf{mode de sortie} à dom
 En \ancourante les SU produisant des RPU ont déclaré \np{344 073} passages au 31 décembre 2013, 
 soit une moyenne de \np{945} passages par jour (extrêmes 675 et \np{1 180})
 
-Passages par secteur sanitaire:
+Passages par territoire de santé:
 
 \begin{table}[ht]
 \centering
@@ -1191,25 +1192,25 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 %------------------------------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:12 2014
+% Wed Aug 20 14:34:32 2014
 \begin{table}[ht]
 \centering
-\begin{tabular}{llr}
+\begin{tabular}{rcr}
   \hline
- & Hôpital & RPU \\ 
+ & Etablissement & RPU \\ 
   \hline
-1 & 3Fr & 15688 \\ 
-  2 & Alk & 10861 \\ 
-  3 & Col & 64758 \\ 
-  4 & Dia & 29469 \\ 
-  5 & Geb & 15103 \\ 
-  6 & Hag & 34414 \\ 
-  7 & Hus & 37018 \\ 
-  8 & Mul & 56195 \\ 
-  9 & Odi & 25963 \\ 
-  10 & Sel & 29534 \\ 
-  11 & Wis & 12646 \\ 
-  12 & Sav & 12424 \\ 
+1 & 3Fr & 15 688 \\ 
+  2 & Alk & 10 861 \\ 
+  3 & Col & 64 758 \\ 
+  4 & Dia & 29 469 \\ 
+  5 & Geb & 15 103 \\ 
+  6 & Hag & 34 414 \\ 
+  7 & Hus & 37 018 \\ 
+  8 & Mul & 56 195 \\ 
+  9 & Odi & 25 963 \\ 
+  10 & Sel & 29 534 \\ 
+  11 & Wis & 12 646 \\ 
+  12 & Sav & 12 424 \\ 
    \hline
 \end{tabular}
 \caption[Nombre de passages par service d'urgence]{Passages par service d'urgence} 
@@ -1260,15 +1261,31 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 \subsection*{Activité par mois}
 %------------------------------
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-RPU.mois
-  Jan   Fev   Mar   Avr   Mai   Jun   Jui   Aou   Sep   Oct   Nov   Dec 
-26858 26115 28312 28428 27899 30038 30103 29693 29190 29858 27657 29922 
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+% latex table generated in R 3.1.1 by xtable 1.7-1 package
+% Wed Aug 20 14:34:33 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+ & RPU.mois \\ 
+  \hline
+Jan & 26 858 \\ 
+  Fev & 26 115 \\ 
+  Mar & 28 312 \\ 
+  Avr & 28 428 \\ 
+  Mai & 27 899 \\ 
+  Jun & 30 038 \\ 
+  Jui & 30 103 \\ 
+  Aou & 29 693 \\ 
+  Sep & 29 190 \\ 
+  Oct & 29 858 \\ 
+  Nov & 27 657 \\ 
+  Dec & 29 922 \\ 
+   \hline
+\end{tabular}
+\caption[RPU par mois]{Ativité mensuelle en nombre de RPU en 2013} 
+\end{table}
+
 
 %\begin{figure}
 \begin{center}
@@ -1287,29 +1304,29 @@ RPU.mois
 %---------------------------------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:13 2014
+% Wed Aug 20 14:34:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
   \hline
- & 1 & 2 & 3 & 4 \\ 
+ & T1 & T2 & T3 & T4 \\ 
   \hline
-1 & 4752.00 & 5170.00 & 6242.00 & 6885.00 \\ 
-  2 & 6823.00 & 6645.00 & 6530.00 & 6451.00 \\ 
-  3 & 6305.00 & 6712.00 & 6478.00 & 6060.00 \\ 
-  4 & 6232.00 & 6698.00 & 6632.00 & 6667.00 \\ 
-  5 & 6538.00 & 6462.00 & 6628.00 & 6720.00 \\ 
-  6 & 6314.00 & 5615.00 & 7116.00 & 7213.00 \\ 
-  7 & 7193.00 & 6569.00 & 6566.00 & 7083.00 \\ 
-  8 & 6391.00 & 7069.00 & 6995.00 & 6726.00 \\ 
-  9 & 6861.00 & 6502.00 & 6568.00 & 6768.00 \\ 
-  10 & 6474.00 & 6891.00 & 7152.00 & 6727.00 \\ 
-  11 & 6760.00 & 6763.00 & 6757.00 & 6500.00 \\ 
-  12 & 6427.00 & 6489.00 & 6620.00 & 6390.00 \\ 
-  13 & 6705.00 & 6411.00 & 6619.00 & 7260.00 \\ 
+1 & 4 752 & 5 170 & 6 242 & 6 885 \\ 
+  2 & 6 823 & 6 645 & 6 530 & 6 451 \\ 
+  3 & 6 305 & 6 712 & 6 478 & 6 060 \\ 
+  4 & 6 232 & 6 698 & 6 632 & 6 667 \\ 
+  5 & 6 538 & 6 462 & 6 628 & 6 720 \\ 
+  6 & 6 314 & 5 615 & 7 116 & 7 213 \\ 
+  7 & 7 193 & 6 569 & 6 566 & 7 083 \\ 
+  8 & 6 391 & 7 069 & 6 995 & 6 726 \\ 
+  9 & 6 861 & 6 502 & 6 568 & 6 768 \\ 
+  10 & 6 474 & 6 891 & 7 152 & 6 727 \\ 
+  11 & 6 760 & 6 763 & 6 757 & 6 500 \\ 
+  12 & 6 427 & 6 489 & 6 620 & 6 390 \\ 
+  13 & 6 705 & 6 411 & 6 619 & 7 260 \\ 
    \hline
 \end{tabular}
-\caption[Activité par semaine]{Activité des SU par semaine en 2013} 
+\caption[Activité par semaine]{Activité des services d'urgence en nombre de RPU par semaine en 2013} 
 \label{act_sem}
 \end{table}
 
@@ -1330,15 +1347,24 @@ RPU.mois
 \subsection*{Activité par jour de la semaine}
 %--------------------------------------------
 
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-RPU.jour.semaine
-  Dim   Lun   Mar   Mer   Jeu   Ven   Sam 
-50120 52804 48522 46335 48142 47782 50368 
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
+\begin{table}[ht]
+\centering
+\begin{tabular}{rr}
+  \hline
+ & RPU.jour.semaine \\ 
+  \hline
+Dim & 50 120 \\ 
+  Lun & 52 804 \\ 
+  Mar & 48 522 \\ 
+  Mer & 46 335 \\ 
+  Jeu & 48 142 \\ 
+  Ven & 47 782 \\ 
+  Sam & 50 368 \\ 
+   \hline
+\end{tabular}
+\caption[RPU par jour de semaine]{Ativité selon le jour de la semaine en nombre de RPU en 2013} 
+\end{table}
+
 
 \begin{center}
 \begin{knitrout}
@@ -1527,7 +1553,7 @@ Ce phénomène cyclique se répète tous les jours selon un profil immuable. La 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:17 2014
+% Wed Aug 20 14:34:38 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -1627,7 +1653,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % ce paragraphe utilise intensivement le dessin des pyramides: utiliser la syntaxe pp <- pyramid.plot() qui provoque le dessin de la pyramide tandis que les valeurs de retours sont stockées dans pp et n'apparaissent pas à l'impression.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:21 2014
+% Wed Aug 20 14:34:41 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
@@ -1710,7 +1736,7 @@ Il existe plusieurs façons de former de tranches d'âges.
 %----------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:21 2014
+% Wed Aug 20 14:34:42 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1746,7 +1772,7 @@ Moins de 1 an & 9233 \\
 %----------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:21 2014
+% Wed Aug 20 14:34:42 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -1808,7 +1834,7 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \r
 \index{âge!et sexe}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:21 2014
+% Wed Aug 20 14:34:42 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -1860,7 +1886,7 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \r
 % en pourcentages
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:21 2014
+% Wed Aug 20 14:34:42 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -1966,7 +1992,7 @@ Le recensement 2010 fait état de \textbf{358} centenaires en Alsace. Le taux de
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:23 2014
+% Wed Aug 20 14:34:43 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2031,7 +2057,7 @@ Le thésaurus est présenté sous la forme d'un fichier Excel. L'onglet \emph{re
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:23 2014
+% Wed Aug 20 14:34:43 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrrrrrr}
@@ -2100,7 +2126,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:23 2014
+% Wed Aug 20 14:34:43 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2129,7 +2155,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:23 2014
+% Wed Aug 20 14:34:43 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2306,7 +2332,7 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:28 2014
+% Wed Aug 20 14:34:48 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2321,7 +2347,7 @@ N & 44638.00 & 252428.00 & 39943.00 \\
 \label{tab:freq_periode}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:28 2014
+% Wed Aug 20 14:34:48 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2375,7 +2401,7 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 \end{center}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:28 2014
+% Wed Aug 20 14:34:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2418,7 +2444,7 @@ On peut répartir les âges des patients en trois catégories (tableau \ref{tab:
 % #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:29 2014
+% Wed Aug 20 14:34:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2436,7 +2462,7 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:29 2014
+% Wed Aug 20 14:34:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2473,7 +2499,7 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 \section{Selon le jour de la semaine}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:29 2014
+% Wed Aug 20 14:34:49 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2524,7 +2550,7 @@ Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de qu
 
 \section{Selon l'orientation}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:30 2014
+% Wed Aug 20 14:34:50 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -2550,7 +2576,7 @@ REO & 86.25 & 3.24 \\
 \label{tab:duree_orientation}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:30 2014
+% Wed Aug 20 14:34:50 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2591,7 +2617,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \section{Selon la gravité}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:30 2014
+% Wed Aug 20 14:34:50 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2999,7 +3025,7 @@ G459          617        87.3              100.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:33 2014
+% Wed Aug 20 14:34:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -3029,7 +3055,7 @@ En fonction de la gravité (CCMU):
 
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-39} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:33 2014
+% Wed Aug 20 14:34:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3055,7 +3081,7 @@ En fonction de la gravité (CCMU):
 En fonction de la destination: table \ref{tab:pneumo_dest}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:33 2014
+% Wed Aug 20 14:34:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3081,7 +3107,7 @@ NA & 0.00 & 0.00 & 0.00 \\
 En fonction de l'orientation: table \ref{tab:pneumo_orient}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:33 2014
+% Wed Aug 20 14:34:52 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3138,7 +3164,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:33 2014
+% Wed Aug 20 14:34:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3157,7 +3183,7 @@ J450 & 133 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:33 2014
+% Wed Aug 20 14:34:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3184,7 +3210,7 @@ On note \np{1 398} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:33 2014
+% Wed Aug 20 14:34:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3281,7 +3307,7 @@ NULL
 [6] "n"         
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:34 2014
+% Wed Aug 20 14:34:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -3295,7 +3321,7 @@ NULL
 \label{tab:age_asthme}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:34 2014
+% Wed Aug 20 14:34:53 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3594,7 +3620,7 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:36 2014
+% Wed Aug 20 14:34:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
@@ -3618,7 +3644,7 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:36 2014
+% Wed Aug 20 14:34:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -3668,7 +3694,7 @@ a
   SCAM     SI   UHCD   <NA> 
    522   1402  32452 275755 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:37 2014
+% Wed Aug 20 14:34:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3688,7 +3714,7 @@ NA &   0 &   0 &   0 &   0 &   0 &   0 &   0 \\
 \label{tab:dest_gravite}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:37 2014
+% Wed Aug 20 14:34:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3718,7 +3744,7 @@ CHIR & 181 & 3331 & 3662 & 363 &  11 &   1 & 140 \\
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:37 2014
+% Wed Aug 20 14:34:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3737,7 +3763,7 @@ HAD & 0.01 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:37 2014
+% Wed Aug 20 14:34:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3767,7 +3793,7 @@ On isole le groupe "mode de sortie = domicile" et on relève les résultats de l
 
 \includegraphics[width=\maxwidth]{figure/fausses_sorties} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:37 2014
+% Wed Aug 20 14:34:55 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3831,7 +3857,7 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:38 2014
+% Wed Aug 20 14:34:56 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3863,7 +3889,7 @@ Les variations du retour journalier à domicile sont calculées de la manière s
 \end{description}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:39 2014
+% Wed Aug 20 14:34:57 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3888,7 +3914,7 @@ On refait le calcul de q en tenant compte des non réponses:
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:40 2014
+% Wed Aug 20 14:34:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3943,7 +3969,7 @@ Les moins de 18 ans représentent $83 455$ passages en 2013 soit $230$ passages 
 % Pédiatrie et sexe
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:42 2014
+% Wed Aug 20 14:35:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3964,7 +3990,7 @@ Le sex-ratio est de $1.2$ (table \ref{tab:ped_sr})
 % Taux hospitalisation
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:42 2014
+% Wed Aug 20 14:35:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -4022,7 +4048,7 @@ Les 75 ans et plus représentent $53 081$ passages en 2013 soit $146$ passages p
 % Gériatrie et sexe
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:43 2014
+% Wed Aug 20 14:35:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -4045,7 +4071,7 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:43 2014
+% Wed Aug 20 14:35:00 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -4437,7 +4463,7 @@ Entre le 2013-01-01 00:11:00 et le 2013-12-31 23:13:00, \np{37 018} RPU ont ét�
 Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 40 par jour.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:12:52 2014
+% Wed Aug 20 14:35:08 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -4477,7 +4503,7 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: dim., août 03, 2014 - 12:12:52
+% Date and time: mer., août 20, 2014 - 14:35:08
 \begin{table}[!htbp] \centering 
   \caption{Totalité des passages: résumé des principales caractéristiques} 
   \label{} 
@@ -4500,7 +4526,7 @@ data\$total & 365 & 40.00 & 8.00 & 22 & 34 & 40 & 46 & 69 \\
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: dim., août 03, 2014 - 12:12:52
+% Date and time: mer., août 20, 2014 - 14:35:08
 \begin{table}[!htbp] \centering 
   \caption{De 1 à 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -4524,7 +4550,7 @@ data\$entre1\_75ans & 365 & 35.00 & 7.50 & 18 & 30 & 34 & 40 & 63 \\
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: dim., août 03, 2014 - 12:12:52
+% Date and time: mer., août 20, 2014 - 14:35:08
 \begin{table}[!htbp] \centering 
   \caption{Plus de 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -4545,7 +4571,7 @@ data\$sup75ans & 365 & 4.30 & 2.30 & 0 & 3 & 4 & 6 & 12 \\
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: dim., août 03, 2014 - 12:12:52
+% Date and time: mer., août 20, 2014 - 14:35:08
 \begin{table}[!htbp] \centering 
   \caption{Clinique Ste Anne: résumé des données} 
   \label{} 
@@ -5248,7 +5274,7 @@ Signification des intitulés des lignes:
 % \begin{table}
 % \begin{center}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:13:03 2014
+% Wed Aug 20 14:35:20 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrrrrrrrr}
@@ -5325,7 +5351,7 @@ Le interventions SMUR sont égales à la somme des interventions primaires et se
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:13:03 2014
+% Wed Aug 20 14:35:20 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -5388,7 +5414,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Sun Aug  3 12:13:04 2014
+% Wed Aug 20 14:35:20 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}

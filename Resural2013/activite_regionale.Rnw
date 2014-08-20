@@ -27,7 +27,7 @@ a<-a[-211]
 En \ancourante les SU produisant des RPU ont déclaré \np{\Sexpr{length(e)}} passages au \Sexpr{as.character(format(max(e),format="%d %B %Y"))}, 
 soit une moyenne de \np{\Sexpr{a1[4]}} passages par jour (extrêmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
 
-Passages par secteur sanitaire:
+Passages par territoire de santé:
 <<passages_secteur,echo=FALSE>>=
 t<-tapply(d1$ENTREE,d1$secteur,length)
 @
@@ -89,13 +89,12 @@ abline(h=mean(a),col="blue")
 %------------------------------
 
 <<val_abs,echo=FALSE,results='asis'>>=
-t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
-t2<-as.matrix(t)
-t2<-cbind(row.names(t),t)
-colnames(t2)<-c("Hôpital","RPU")
-rownames(t2)<-NULL
 
-xtable(t2,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("l","l","r"))
+t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
+t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
+names(t2) <- c("Etablissement", "RPU")
+print(xtable(t2,,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
+
 @
 
 %\begin{figure}
@@ -148,10 +147,14 @@ Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_a
 \subsection*{Activité par mois}
 %------------------------------
 
-<<parmois, echo=FALSE, comment="", fig.height=8>>=
+<<parmois, echo=FALSE, comment="", fig.height=8, results='asis'>>=
 RPU.mois <- month(d1$ENTREE,label=TRUE)
 levels(RPU.mois) <- mois.short # remplace les termes anglais
-table(RPU.mois)
+
+# print(xtable(table(RPU.mois)), format.args = list(big.mark = " ", decimal.mark = ","))
+
+print(xtable(table(RPU.mois), caption=c(paste0("Ativité mensuelle en nombre de RPU en ", anc),"RPU par mois")), format.args = list(big.mark = " ", decimal.mark = ","))
+
 @
 
 %\begin{figure}
@@ -171,13 +174,12 @@ table(RPU.mois)
 
 <<act_sem, echo=FALSE,results='asis'>>=
 m<-week(d1$ENTREE)
-
 a <- table(m)
 a <- a[-53] # supprime la dernière semaine
 b <- matrix(as.numeric(a), ncol=4, nrow=13, byrow=TRUE)
-colnames(b)<-c("1","2","3","4")
-c <- xtable(as.data.frame(b),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
-print.xtable(c) 
+colnames(b)<-c("T1","T2","T3","T4")
+
+print(xtable(b, caption=c(paste0("Activité des services d'urgence en nombre de RPU par semaine en ", anc),"Activité par semaine"),label="act_sem", digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
 
 
 # xtable(table(m),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
@@ -200,10 +202,12 @@ print.xtable(c)
 \subsection*{Activité par jour de la semaine}
 %--------------------------------------------
 
-<<activite_semaine, echo=FALSE, comment="", fig.height=8>>=
+<<activite_semaine, echo=FALSE, comment="", fig.height=8, results='asis'>>=
 RPU.jour.semaine <- wday(d1$ENTREE,label=T)
 levels(RPU.jour.semaine) <- week.short
-table(RPU.jour.semaine)
+# Jour de la semaine" <- table(RPU.jour.semaine)
+
+print(xtable(table(RPU.jour.semaine), caption=c(paste0("Ativité selon le jour de la semaine en nombre de RPU en ", anc),"RPU par jour de semaine")), format.args = list(big.mark = " ", decimal.mark = ","), comment = FALSE)
 @
 
 \begin{center}

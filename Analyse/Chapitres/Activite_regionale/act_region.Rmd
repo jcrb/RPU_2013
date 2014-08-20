@@ -141,5 +141,22 @@ q6<-q4/q
 head(q6)
 summary(q6)
 ```
-Vendenheim1
+remarque: la distribution de l'age n'est pas normale
+====================================================
+
+```{r age_normal}
+sd <- sd(d1$AGE, na.rm=TRUE)
+m <- mean(d1$AGE, na.rm=TRUE)
+age <- seq(0,120,1)
+hist(d1$AGE, freq = FALSE)
+lines(age, dnorm(age,m,sd))
+lines(c(m,m), c(0,dnorm(m,m,sd)), col="red")
+
+# si on étudie les majeurs
+ma <- mean(d1$AGE[d1$AGE > 17], na.rm=TRUE)
+sda <- sd(d1$AGE[d1$AGE > 17], na.rm=TRUE)
+hist(d1$AGE[d1$AGE > 17], freq = FALSE)
+
+```
+
 
