@@ -16,7 +16,7 @@ doc<-read.table(file,header=TRUE,sep=",", skip = 9)
 n <- sum(doc$Hommes,doc$Femmes) # pop totale
 # on supprime la dernière ligne qui correspond au total
 doc <- doc[-nrow(doc),]
-xtable(doc, caption=c("Population d'Alsace en 2010 (source INSEE)","Population d'Alsace en 2010"), label="tab:pop_insee")
+print(xtable(doc, caption=c("Population d'Alsace en 2010 (source INSEE)","Population d'Alsace en 2010"), label="tab:pop_insee"),format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 La répartition de la population alsacienne par tranche d'âge est fournie par l'INSEE (table \ref{tab:pop_insee} page \pageref{tab:pop_insee}). La somme des valeurs donne un chiffre de \Sexpr{n} personnes dans la région Alsace en 2010.
@@ -74,21 +74,29 @@ sex_age <- tapply(d1$AGE, d1$SEXE, mean, na.rm=TRUE)
 
 Les âges répertoriés vont de moins de 1 an à \Sexpr{s_age["Max."]} ans. L'âge moyen est de \Sexpr{s_age["Mean"]} ans (médiane \Sexpr{s_age["Median"]} ans). L'âge moyen des hommes est de \Sexpr{round(sex_age[3], 2)} ans et celui des femmes de \Sexpr{round(sex_age[1], 2)} ans.
 
-Il existe plusieurs façons de former de tranches d'âges.
+Il existe plusieurs façons de former des tranches d'âges.
 
 % ### Age 1
 %----------
 
 <<tranche,echo=FALSE,results='asis'>>=
-age<-cut(d1$AGE,breaks=c(-1,0.99,14,74,84,110),labels=c("Moins de 1 an","De 1 à 15 ans","De 15 à 75 ans","de 75 à 85 ans","Plus de 85 ans"))
-a<-tapply(d1$AGE,age,length)
-xtable(as.data.frame(a),caption=c("Répartition des RPU par tranches d'age","Répartition des RPU par tranches d'age"),label="tab:tranche")
+
+age <- cut(d1$AGE,breaks=c(-1,0.99,14,74,84,110),labels=c("Moins de 1 an","De 1 à 15 ans","De 15 à 75 ans","de 75 à 85 ans","Plus de 85 ans"))
+t <- tapply(d1$AGE, age, length)
+t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
+names(t2) <- c("Tranches d'age", "RPU")
+t2$pcent <- round(t2$RPU * 100 / sum(t), 2)
+names(t2) <- c("Tranches d'age", "RPU", "% ")
+
+print(xtable(t2,,caption=c("Répartition des RPU par tranches d'âge","Répartition des RPU par tranches d'âge"),label="tab:tranche",align=c("l","l","r","r"), display = c("s","s","f","f"), digits = c(0,0,0,2)),format.args = list(big.mark = " ", decimal.mark = ","), include.rownames = FALSE)
+
+#xtable(as.data.frame(a),caption=c("Répartition des RPU par tranches d'age","Répartition des RPU par tranches d'age"),label="tab:tranche")
 @
 
 %\begin{figure}
 \begin{center}
 <<tranches_age1, echo=FALSE, fig = TRUE, fig.height=5>>=
-  barplot(a,main="Répartition des RPU par tranches d'age",ylab="Nombre", las=2)
+  barplot(t ,main="Répartition des RPU par tranches d'age",ylab="Nombre", las= 1, cex.names = 0.8)
 @
 \captionof{figure}{Répartition des RPU par tanches d'âge}
 \label{fig:tranches_age1}
@@ -106,7 +114,8 @@ t1 <- table(age2)
 t2 <- round(prop.table(table(age2))*100,2)
 a <- rbind(t1,t2)
 rownames(a) <- c("n", "%")
-xtable(a, caption="Répartition en trois classe d'âge telles qu'elles sont définies par le serveur régional de veille et d'alerte", label="tranche_age2")
+print(xtable(a, caption="Répartition en trois classe d'âge telles qu'elles sont définies par le serveur régional de veille et d'alerte", label="tranche_age2"),format.args = list(big.mark = " ", decimal.mark = ","))
+
 @
 
 \begin{itemize}
@@ -119,10 +128,10 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \r
 %\begin{figure}
 \begin{center}
 <<tranches_age21, echo=FALSE, fig = TRUE, fig.height=5>>=
-  mp <- barplot(prop.table(t1)*100, ylab="Pourcentage de la population", main="Répartition des consultants en 2013", col="lavender")
+  mp <- barplot(prop.table(t1)*100, ylab="Pourcentage de la population", main= paste0("Répartition des RPU en ", anc), col="lavender")
   mtext(side=1, at=mp, line=-2, text=paste(round(prop.table(t1)*100,0), "%",sep=""), col="blue")
 @
-\captionof{figure}{Répartition des RPU par tanches d'âge}
+\captionof{figure}{Répartition des RPU en trois classes d'âge.}
 \label{fig:tranches_age2}
 \end{center}
 
@@ -163,8 +172,10 @@ t_age3 <- table(age3)
 %\begin{figure}
 \begin{center}
   <<affiche_age3, echo=FALSE, fig.height=5>>=
-  barplot(t_age3, las = 2)
-  barplot(round(prop.table(t_age3)*100,2), ylab = "% de la population", las = 2, xlab="", main="Pourcentage de consultants par tranche d'age")
+
+  barplot(t_age3, las = 2, ylab="effectifs", main=paste0("Nombre de RPU par classe d'âge en ", anc))
+
+  barplot(round(prop.table(t_age3)*100,2), las = 2, xlab="", main=paste0("Pourcentage de RPU par classe d'age en ", anc), ylab="% des RPU")
   @
 \end{center}
 \captionof{figure}{Répartition des RPU par tanches d'âge}
@@ -180,7 +191,7 @@ t_age3 <- table(age3)
 ts <- table(age3, d1$SEXE)
 ts <- cbind(ts[,3], ts[,1])
 colnames(ts)<- c("H","F")
-xtable(ts, caption=c("Distribution des RPU par âges et sexe. Le découpage des âges en tranche de 5 ans correspond au découpage de l'INSEE","Répartition par âges et sexe"), label="tab:age_sexe")
+print(xtable(ts, caption=c("Distribution des RPU par âges et sexe. Le découpage des âges en tranche de 5 ans correspond au découpage de l'INSEE","Répartition par âges et sexe"), label="tab:age_sexe"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 % pyramide des ages
@@ -203,7 +214,7 @@ pp <- pyramid.plot(lx= ts[,1], rx= ts[,2], labels=agelabels, top.labels=c("Homme
 % en pourcentages
 
 <<table_pyr_p100, echo=FALSE, results='asis'>>=
-  xtable(round(prop.table(ts) * 100, 2), caption=c("Répartition en pourcentages des classes d'âge en fonction du sexe des consultants","Sexe et age en pourcentages"), label="tab:pyr_p100")
+print(xtable(round(prop.table(ts) * 100, 2), caption=c("Répartition en pourcentages des classes d'âge en fonction du sexe des consultants","Sexe et age en pourcentages"), label="tab:pyr_p100"),format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 
@@ -251,19 +262,19 @@ pyr.urg <- pyramid.plot(lx= l, rx= r, labels=agelabels, top.labels=c("Hommes","A
 
 legend("topleft", legend=c("Région","Urgences"), col=c(myblue,myred), pch=15)
 @
-\captionof{figure}{Pyramide des âges des consultants aux urgences comparés à la population générale. Les âges extrêmes fréquentent davantage les SU}
+\captionof{figure}{Pyramide des âges des consultants aux urgences comparés à la population générale. Les âges extrêmes et les adultes jeunes fréquentent davantage les SU.}
 \label{fig:pyr_rpu_popgen}
 \end{center}
 
 %\end{figure}
 
-La pyramide des âges des personnes consultant aux urgences n'est pas superposable à celle de la population générale (figure \ref{fig:pyr_rpu_popgen} page \pageref{fig:pyr_rpu_popgen}). 
+La pyramide des âges des personnes consultant aux urgences n'est pas superposable à celle de la population générale (figure \ref{fig:pyr_rpu_popgen} page \pageref{fig:pyr_rpu_popgen}). Les enfants, les adultes jeunes et les personnes agées sont sur-représentés alors que les tranches d'âge 35-65 ans sont sous-représentées.
 
 
 \subsection*{Taux de recours aux urgences par âge et par sexe}
 %--------------------------------------------------------
 
-Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.
+Le taux de recours est le rapport du nombre de RPU produits dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne. 
 
 %\begin{figure}
 \begin{center}
@@ -278,17 +289,18 @@ pop_urg <- table(as.factor(pop_urg))
 
 tx <-round(pop_urg*100/pop_als, 2)
 tx_moyen <- sum(pop_urg)/sum(pop_als)
+
 plot(tx, ylab="Taux de recours aux urgences (%)", xlab="Age (années", main=paste0("Recours aux urgences en Alsace en ",anc), col="blue")
 abline(h=tx_moyen*100, col="red", lty=2)
 legend(0,100,legend="Taux moyen", col="red", lty=2, bty="n")
   @
-\captionof{figure}{Taux de recours aux urgences selon la classe d'age. Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
+\captionof{figure}{Taux de recours aux urgences selon la classe d'age. Le taux de recours est le rapport du nombre de RPU dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
 \label{fig:recours_su}
 \end{center}
 
 %\end{figure}
 
-Le taux moyen de recours aux urgences en \Sexpr{anc} est de \Sexpr{tx_moyen*100} \%. Ce taux reste assez stable jusque vers 70 ans puis croît de façon exponentielle avec l'âge (figure \ref{fig:recours_su} page \pageref{fig:recours_su}). Pour la tranche d'âge de 90 ans, on note une sur-représentation de ces patients, le nombre de consultants dépassant la population de cette classe d'âge.
+Le taux moyen de recours aux urgences en \Sexpr{anc} est de \textbf{\Sexpr{tx_moyen*100} \%}. Ce taux reste assez stable jusque vers 70 ans puis croît de façon exponentielle avec l'âge (figure \ref{fig:recours_su} page \pageref{fig:recours_su}). Pour la tranche d'âge de 90 ans, on note une sur-représentation de ces patients, le nombre de consultants dépassant la population de cette classe d'âge, traduisant un mode de recours itératif aux services d'urgence.
 
 \subsection*{Les Centenaires}
 %--------------------------------
@@ -320,8 +332,12 @@ sr <- a[3,]/a[1,]
 <<sr3, echo=FALSE, results='asis'>>=
 d1$age3 <- cut(d1$AGE, breaks =  brek, include.lowest=F, right=F, labels = x)
 a_table <- table(d1$SEXE, d1$age3)
+
+sx <- round(a_table[3,]/a_table[1,], 2)
+a_table <- cbind(t(table(d1$SEXE, d1$age3)), sx)
+colnames(a_table) <- c("Femmes","I","Hommes","sex ratio")
 # on utilise la transposée de a_table pour que le tableau soit vertical (sinon trop large)
- xtable(t(a_table), caption=c("Répartition des consultants aux urgences par tranche de cinq ans en fonction du sexe (I = sexe indéterminé)",""), label="tab:sr2")
+ print(xtable(a_table, caption=c("Répartition des consultants aux urgences par tranche de cinq ans en fonction du sexe (I = sexe indéterminé).",""), label="tab:sr2"),format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 

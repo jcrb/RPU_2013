@@ -1012,7 +1012,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 % \fbox{Voir SAU2013}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:27 2014
+% Sat Aug 23 10:57:05 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|l|r|}
@@ -1038,7 +1038,7 @@ Certaines données peuvent être recoupées avec celles du serveur régional mis
 \end{table}
 
 
-\section{Exhaustivité qualitative} } \index{exhaustivité qualitative (def.)} 
+\section{Exhaustivité qualitative} \index{exhaustivité qualitative (def.)} 
 
 L'\emph{exhaustivité qualitative} correspond à la fois à la complétude des items et à la cohérence de réponses.
 
@@ -1047,7 +1047,7 @@ Les informations de nature administrative (code postal, commune d'origine, sexe,
 Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$. Les motifs DESTINATION et ORIENTATION sont à pondérer en fonction du MOTIF\_SORTIE. En effet la structure du RPU fait que par défaut, tous les retours à domicile génèrent automatiquement un non réponse pour les motifs DESTINATION et ORIENTATION qui ne concernent que les patients hospitalisés.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:28 2014
+% Sat Aug 23 10:57:06 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|}
@@ -1139,9 +1139,10 @@ NOTE: dans les lignes qui suivent le terme \textbf{Passage} fait référence aux
 %   642.0   848.0   895.5   883.2   957.0  1050.0 
 
 En \ancourante les SU produisant des RPU ont déclaré \np{344 073} passages au 31 décembre 2013, 
-soit une moyenne de \np{945} passages par jour (extrêmes 675 et \np{1 180})
+soit une moyenne de \np{945} RPU par jour (extrêmes 675 et \np{1 180})
 
-Passages par territoire de santé:
+RPU par territoire de santé:
+\index{Territoires de santé!nombre de RPU}
 
 \begin{table}[ht]
 \centering
@@ -1167,24 +1168,29 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 \includegraphics[width=\maxwidth]{figure/activite_plot} 
 
 \end{knitrout}
-\captionof{figure}{Passages en SU en 2013.}
+\captionof{figure}{RPU produits par SU en 2013.}
 \label{fig:activite_plot}
 \end{center}
 
 %\end{figure}
 
-% Variante avec *xts*
+% Variante avec *xts*. Supprimé var n'apporte rien par rapport au précédent.
 
 %\begin{figure}
-\begin{center}
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/activite_plot2} 
-
-\end{knitrout}
-\captionof{figure}{Passages en SU en2013.}
-\label{fig:activite_plot2}
-\end{center}
+% \begin{center}
+% <<activite plot2, echo=FALSE, fig.height=5>>=
+%   main <- paste0("Passages en SU en", anc)
+%   x<-as.xts(z)
+%  plot(x,ylab="Nb. de passages aux Urgences",main=main, xlab="Période")
+% legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+% lines(rollmean(xts(z),7),col="red",lwd=2)
+% # moyenne générale
+% abline(h=mean(a),col="blue")
+%  mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
+% @
+% \captionof{figure}{main.}
+% \label{fig:activite_plot2}
+% \end{center}
 %\end{figure}
 
 %------------------------------
@@ -1192,7 +1198,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 %------------------------------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:32 2014
+% Sat Aug 23 10:57:11 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rcr}
@@ -1213,7 +1219,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
   12 & Sav & 12 424 \\ 
    \hline
 \end{tabular}
-\caption[Nombre de passages par service d'urgence]{Passages par service d'urgence} 
+\caption[Nombre de RPU par service d'urgence]{RPU par service d'urgence en 2013} 
 \label{fig:passage_su}
 \end{table}
 
@@ -1225,7 +1231,7 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 \includegraphics[width=\maxwidth]{figure/bplot_val_abs} 
 
 \end{knitrout}
-\captionof{figure}{SU d'Alsace: nombre de passages en 2013.}
+\captionof{figure}{SU d'Alsace: nombre de RPU produits en 2013.}
 \label{fig:bplot_val_abs}
 \end{center}
 %\end{figure}
@@ -1258,11 +1264,11 @@ Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \inde
 Le TRU 2013 estimé en Alsace à partir des RPU transmis est de 18\%.
 
 %------------------------------
-\subsection*{Activité par mois}
+\subsection*{Production mensuelle de RPU}
 %------------------------------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:33 2014
+% Sat Aug 23 10:57:11 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -1299,12 +1305,21 @@ Jan & 26 858 \\
 \end{center}
 %\end{figure}
 
+Nombre de RPU par mois standards de 30 jours.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/mois_nomalise} 
+
+\end{knitrout}
+
+
 %---------------------------------
 \subsection*{Activité par semaine}
 %---------------------------------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:34 2014
+% Sat Aug 23 10:57:12 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -1422,7 +1437,8 @@ Dim & 50 120 \\
 %---------------------------------------------
 
 \begin{itemize}
-  \item diurne: 8h - 19h59
+  \item diurne: 8h - 19h59   
+  
   \item nocturne: 20h - 7h59
 \end{itemize}
 
@@ -1553,7 +1569,7 @@ Ce phénomène cyclique se répète tous les jours selon un profil immuable. La 
 %----------------------------------------------------------------------------- Summary
 Résumé des horaires de passage aux urgences: les données figurent dans le tableau \ref{tab:24} page \pageref{tab:24}.
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:38 2014
+% Sat Aug 23 10:57:17 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -1563,7 +1579,7 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
  & 344073.00 & 0.00 & 10.00 & 13.90 & 5.60 & 14.00 & 18.00 & 23.00 \\ 
    \hline
 \end{tabular}
-\caption[Horaires de passage]{Résumé des horaires de passage aux urgences} 
+\caption[Horaires de passage]{Résumé des horaires de passage aux urgences en 2013. A 18 heures, 75 p.cent des RPU de la journée sont enregistés.} 
 \label{tab:24}
 \end{table}
 
@@ -1653,33 +1669,33 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 % ce paragraphe utilise intensivement le dessin des pyramides: utiliser la syntaxe pp <- pyramid.plot() qui provoque le dessin de la pyramide tandis que les valeurs de retours sont stockées dans pp et n'apparaissent pas à l'impression.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:41 2014
+% Sat Aug 23 10:57:20 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlrrr}
   \hline
  & X & Hommes & Femmes & Ensemble \\ 
   \hline
-1 & Moins de 5 ans & 55914 & 53240 & 109154 \\ 
-  2 & 5 à 9 ans & 56840 & 54235 & 111075 \\ 
-  3 & 10 à 14 ans & 56710 & 54357 & 111067 \\ 
-  4 & 15 à 19 ans & 58843 & 56599 & 115441 \\ 
-  5 & 20 à 24 ans & 58106 & 59818 & 117924 \\ 
-  6 & 25 à 29 ans & 57879 & 59193 & 117072 \\ 
-  7 & 30 à 34 ans & 57264 & 57915 & 115179 \\ 
-  8 & 35 à 39 ans & 65126 & 65588 & 130714 \\ 
-  9 & 40 à 44 ans & 68519 & 67953 & 136472 \\ 
-  10 & 45 à 49 ans & 67881 & 68439 & 136319 \\ 
-  11 & 50 à 54 ans & 64389 & 65566 & 129956 \\ 
-  12 & 55 à 59 ans & 61926 & 62187 & 124114 \\ 
-  13 & 60 à 64 ans & 50598 & 50280 & 100878 \\ 
-  14 & 65 à 69 ans & 36682 & 38515 & 75197 \\ 
-  15 & 70 à 74 ans & 31586 & 37465 & 69051 \\ 
-  16 & 75 à 79 ans & 25776 & 36071 & 61847 \\ 
-  17 & 80 à 84 ans & 16584 & 29995 & 46579 \\ 
-  18 & 85 à 89 ans & 8009 & 19326 & 27336 \\ 
-  19 & 90 à 94 ans & 1815 & 5825 & 7640 \\ 
-  20 & 95 à 99 ans & 430 & 1883 & 2313 \\ 
+1 & Moins de 5 ans & 55 914 & 53 240 & 109 154 \\ 
+  2 & 5 à 9 ans & 56 840 & 54 235 & 111 075 \\ 
+  3 & 10 à 14 ans & 56 710 & 54 357 & 111 067 \\ 
+  4 & 15 à 19 ans & 58 843 & 56 599 & 115 441 \\ 
+  5 & 20 à 24 ans & 58 106 & 59 818 & 117 924 \\ 
+  6 & 25 à 29 ans & 57 879 & 59 193 & 117 072 \\ 
+  7 & 30 à 34 ans & 57 264 & 57 915 & 115 179 \\ 
+  8 & 35 à 39 ans & 65 126 & 65 588 & 130 714 \\ 
+  9 & 40 à 44 ans & 68 519 & 67 953 & 136 472 \\ 
+  10 & 45 à 49 ans & 67 881 & 68 439 & 136 319 \\ 
+  11 & 50 à 54 ans & 64 389 & 65 566 & 129 956 \\ 
+  12 & 55 à 59 ans & 61 926 & 62 187 & 124 114 \\ 
+  13 & 60 à 64 ans & 50 598 & 50 280 & 100 878 \\ 
+  14 & 65 à 69 ans & 36 682 & 38 515 & 75 197 \\ 
+  15 & 70 à 74 ans & 31 586 & 37 465 & 69 051 \\ 
+  16 & 75 à 79 ans & 25 776 & 36 071 & 61 847 \\ 
+  17 & 80 à 84 ans & 16 584 & 29 995 & 46 579 \\ 
+  18 & 85 à 89 ans & 8 009 & 19 326 & 27 336 \\ 
+  19 & 90 à 94 ans & 1 815 & 5 825 & 7 640 \\ 
+  20 & 95 à 99 ans & 430 & 1 883 & 2 313 \\ 
   21 & 100 ans ou plus &  42 & 316 & 358 \\ 
    \hline
 \end{tabular}
@@ -1730,27 +1746,27 @@ Les RPU utilisent la date de naissance. L'âge est calculé en soustrayant l’a
 
 Les âges répertoriés vont de moins de 1 an à 113 ans. L'âge moyen est de 40 ans (médiane 38 ans). L'âge moyen des hommes est de 38 ans et celui des femmes de 43 ans.
 
-Il existe plusieurs façons de former de tranches d'âges.
+Il existe plusieurs façons de former des tranches d'âges.
 
 % ### Age 1
 %----------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:42 2014
+% Sat Aug 23 10:57:20 2014
 \begin{table}[ht]
 \centering
-\begin{tabular}{rr}
+\begin{tabular}{lrr}
   \hline
- & a \\ 
+Tranches d'age & RPU & \%  \\ 
   \hline
-Moins de 1 an & 9233 \\ 
-  De 1 à 15 ans & 62274 \\ 
-  De 15 à 75 ans & 219485 \\ 
-  de 75 à 85 ans & 31022 \\ 
-  Plus de 85 ans & 22016 \\ 
+Moins de 1 an & 9 233 & 2,68 \\ 
+  De 1 à 15 ans & 62 274 & 18,10 \\ 
+  De 15 à 75 ans & 219 485 & 63,80 \\ 
+  de 75 à 85 ans & 31 022 & 9,02 \\ 
+  Plus de 85 ans & 22 016 & 6,40 \\ 
    \hline
 \end{tabular}
-\caption[Répartition des RPU par tranches d'age]{Répartition des RPU par tranches d'age} 
+\caption[Répartition des RPU par tranches d'âge]{Répartition des RPU par tranches d'âge} 
 \label{tab:tranche}
 \end{table}
 
@@ -1772,15 +1788,15 @@ Moins de 1 an & 9233 \\
 %----------
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:42 2014
+% Sat Aug 23 10:57:20 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
   \hline
  & Pédiatrie & Adulte $<$ 75 ans & Gériatrie \\ 
   \hline
-n & 83445.00 & 207547.00 & 53038.00 \\ 
-  \% & 24.26 & 60.33 & 15.42 \\ 
+n & 83 445,00 & 207 547,00 & 53 038,00 \\ 
+  \% & 24,26 & 60,33 & 15,42 \\ 
    \hline
 \end{tabular}
 \caption{Répartition en trois classe d'âge telles qu'elles sont définies par le serveur régional de veille et d'alerte} 
@@ -1802,7 +1818,7 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \r
 \includegraphics[width=\maxwidth]{figure/tranches_age21} 
 
 \end{knitrout}
-\captionof{figure}{Répartition des RPU par tanches d'âge}
+\captionof{figure}{Répartition des RPU en trois classes d'âge.}
 \label{fig:tranches_age2}
 \end{center}
 
@@ -1834,32 +1850,32 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \r
 \index{âge!et sexe}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:42 2014
+% Sat Aug 23 10:57:21 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
   \hline
  & H & F \\ 
   \hline
-0-4 & 19105 & 14812 \\ 
-  5-9 & 10077 & 7930 \\ 
-  10-14 & 10666 & 8915 \\ 
-  15-19 & 10959 & 9868 \\ 
-  20-24 & 12667 & 11359 \\ 
-  25-29 & 12383 & 10263 \\ 
-  30-34 & 11813 & 9259 \\ 
-  35-39 & 10443 & 8109 \\ 
-  40-44 & 11170 & 8731 \\ 
-  45-49 & 10172 & 8291 \\ 
-  50-54 & 9371 & 8093 \\ 
-  55-59 & 8772 & 7669 \\ 
-  60-64 & 8609 & 6973 \\ 
-  65-69 & 6811 & 5498 \\ 
-  70-74 & 6438 & 5762 \\ 
-  75-79 & 6937 & 7489 \\ 
-  80-84 & 7034 & 9561 \\ 
-  85-89 & 4562 & 9127 \\ 
-  90-94 & 1942 & 5118 \\ 
+0-4 & 19 105 & 14 812 \\ 
+  5-9 & 10 077 & 7 930 \\ 
+  10-14 & 10 666 & 8 915 \\ 
+  15-19 & 10 959 & 9 868 \\ 
+  20-24 & 12 667 & 11 359 \\ 
+  25-29 & 12 383 & 10 263 \\ 
+  30-34 & 11 813 & 9 259 \\ 
+  35-39 & 10 443 & 8 109 \\ 
+  40-44 & 11 170 & 8 731 \\ 
+  45-49 & 10 172 & 8 291 \\ 
+  50-54 & 9 371 & 8 093 \\ 
+  55-59 & 8 772 & 7 669 \\ 
+  60-64 & 8 609 & 6 973 \\ 
+  65-69 & 6 811 & 5 498 \\ 
+  70-74 & 6 438 & 5 762 \\ 
+  75-79 & 6 937 & 7 489 \\ 
+  80-84 & 7 034 & 9 561 \\ 
+  85-89 & 4 562 & 9 127 \\ 
+  90-94 & 1 942 & 5 118 \\ 
   95-99 & 235 & 833 \\ 
   100+ &  83 & 149 \\ 
    \hline
@@ -1886,34 +1902,34 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \r
 % en pourcentages
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:42 2014
+% Sat Aug 23 10:57:21 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
   \hline
  & H & F \\ 
   \hline
-0-4 & 5.55 & 4.31 \\ 
-  5-9 & 2.93 & 2.30 \\ 
-  10-14 & 3.10 & 2.59 \\ 
-  15-19 & 3.19 & 2.87 \\ 
-  20-24 & 3.68 & 3.30 \\ 
-  25-29 & 3.60 & 2.98 \\ 
-  30-34 & 3.43 & 2.69 \\ 
-  35-39 & 3.04 & 2.36 \\ 
-  40-44 & 3.25 & 2.54 \\ 
-  45-49 & 2.96 & 2.41 \\ 
-  50-54 & 2.72 & 2.35 \\ 
-  55-59 & 2.55 & 2.23 \\ 
-  60-64 & 2.50 & 2.03 \\ 
-  65-69 & 1.98 & 1.60 \\ 
-  70-74 & 1.87 & 1.67 \\ 
-  75-79 & 2.02 & 2.18 \\ 
-  80-84 & 2.04 & 2.78 \\ 
-  85-89 & 1.33 & 2.65 \\ 
-  90-94 & 0.56 & 1.49 \\ 
-  95-99 & 0.07 & 0.24 \\ 
-  100+ & 0.02 & 0.04 \\ 
+0-4 & 5,55 & 4,31 \\ 
+  5-9 & 2,93 & 2,30 \\ 
+  10-14 & 3,10 & 2,59 \\ 
+  15-19 & 3,19 & 2,87 \\ 
+  20-24 & 3,68 & 3,30 \\ 
+  25-29 & 3,60 & 2,98 \\ 
+  30-34 & 3,43 & 2,69 \\ 
+  35-39 & 3,04 & 2,36 \\ 
+  40-44 & 3,25 & 2,54 \\ 
+  45-49 & 2,96 & 2,41 \\ 
+  50-54 & 2,72 & 2,35 \\ 
+  55-59 & 2,55 & 2,23 \\ 
+  60-64 & 2,50 & 2,03 \\ 
+  65-69 & 1,98 & 1,60 \\ 
+  70-74 & 1,87 & 1,67 \\ 
+  75-79 & 2,02 & 2,18 \\ 
+  80-84 & 2,04 & 2,78 \\ 
+  85-89 & 1,33 & 2,65 \\ 
+  90-94 & 0,56 & 1,49 \\ 
+  95-99 & 0,07 & 0,24 \\ 
+  100+ & 0,02 & 0,04 \\ 
    \hline
 \end{tabular}
 \caption[Sexe et age en pourcentages]{Répartition en pourcentages des classes d'âge en fonction du sexe des consultants} 
@@ -1945,19 +1961,19 @@ Voir figure \ref{fig:tranches_age2} page \pageref{fig:tranches_age2} et table \r
 \includegraphics[width=\maxwidth]{figure/comp_pyramides} 
 
 \end{knitrout}
-\captionof{figure}{Pyramide des âges des consultants aux urgences comparés à la population générale. Les âges extrêmes fréquentent davantage les SU}
+\captionof{figure}{Pyramide des âges des consultants aux urgences comparés à la population générale. Les âges extrêmes et les adultes jeunes fréquentent davantage les SU.}
 \label{fig:pyr_rpu_popgen}
 \end{center}
 
 %\end{figure}
 
-La pyramide des âges des personnes consultant aux urgences n'est pas superposable à celle de la population générale (figure \ref{fig:pyr_rpu_popgen} page \pageref{fig:pyr_rpu_popgen}). 
+La pyramide des âges des personnes consultant aux urgences n'est pas superposable à celle de la population générale (figure \ref{fig:pyr_rpu_popgen} page \pageref{fig:pyr_rpu_popgen}). Les enfants, les adultes jeunes et les personnes agées sont sur-représentés alors que les tranches d'âge 35-65 ans sont sous-représentées.
 
 
 \subsection*{Taux de recours aux urgences par âge et par sexe}
 %--------------------------------------------------------
 
-Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.
+Le taux de recours est le rapport du nombre de RPU produits dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne. 
 
 %\begin{figure}
 \begin{center}
@@ -1966,13 +1982,13 @@ Le taux de recours est le rapport du nombre de consultants dans une classe d'âg
 \includegraphics[width=\maxwidth]{figure/alsace_recours} 
 
 \end{knitrout}
-\captionof{figure}{Taux de recours aux urgences selon la classe d'age. Le taux de recours est le rapport du nombre de consultants dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
+\captionof{figure}{Taux de recours aux urgences selon la classe d'age. Le taux de recours est le rapport du nombre de RPU dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
 \label{fig:recours_su}
 \end{center}
 
 %\end{figure}
 
-Le taux moyen de recours aux urgences en 2013 est de 19 \%. Ce taux reste assez stable jusque vers 70 ans puis croît de façon exponentielle avec l'âge (figure \ref{fig:recours_su} page \pageref{fig:recours_su}). Pour la tranche d'âge de 90 ans, on note une sur-représentation de ces patients, le nombre de consultants dépassant la population de cette classe d'âge.
+Le taux moyen de recours aux urgences en 2013 est de \textbf{19 \%}. Ce taux reste assez stable jusque vers 70 ans puis croît de façon exponentielle avec l'âge (figure \ref{fig:recours_su} page \pageref{fig:recours_su}). Pour la tranche d'âge de 90 ans, on note une sur-représentation de ces patients, le nombre de consultants dépassant la population de cette classe d'âge, traduisant un mode de recours itératif aux services d'urgence.
 
 \subsection*{Les Centenaires}
 %--------------------------------
@@ -1992,37 +2008,37 @@ Le recensement 2010 fait état de \textbf{358} centenaires en Alsace. Le taux de
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:43 2014
+% Sat Aug 23 10:57:22 2014
 \begin{table}[ht]
 \centering
-\begin{tabular}{rrrr}
+\begin{tabular}{rrrrr}
   \hline
- & F & I & M \\ 
+ & Femmes & I & Hommes & sex ratio \\ 
   \hline
-0-4 & 14812 &   1 & 19105 \\ 
-  5-9 & 7930 &   1 & 10077 \\ 
-  10-14 & 8915 &   0 & 10666 \\ 
-  15-19 & 9868 &   2 & 10959 \\ 
-  20-24 & 11359 &   0 & 12667 \\ 
-  25-29 & 10263 &   0 & 12383 \\ 
-  30-34 & 9259 &   0 & 11813 \\ 
-  35-39 & 8109 &   0 & 10443 \\ 
-  40-44 & 8731 &   0 & 11170 \\ 
-  45-49 & 8291 &   0 & 10172 \\ 
-  50-54 & 8093 &   0 & 9371 \\ 
-  55-59 & 7669 &   0 & 8772 \\ 
-  60-64 & 6973 &   0 & 8609 \\ 
-  65-69 & 5498 &   0 & 6811 \\ 
-  70-74 & 5762 &   0 & 6438 \\ 
-  75-79 & 7489 &   0 & 6937 \\ 
-  80-84 & 9561 &   1 & 7034 \\ 
-  85-89 & 9127 &   0 & 4562 \\ 
-  90-94 & 5118 &   0 & 1942 \\ 
-  95-99 & 833 &   0 & 235 \\ 
-  100+ & 149 &   0 &  83 \\ 
+0-4 & 14 812,00 & 1,00 & 19 105,00 & 1,29 \\ 
+  5-9 & 7 930,00 & 1,00 & 10 077,00 & 1,27 \\ 
+  10-14 & 8 915,00 & 0,00 & 10 666,00 & 1,20 \\ 
+  15-19 & 9 868,00 & 2,00 & 10 959,00 & 1,11 \\ 
+  20-24 & 11 359,00 & 0,00 & 12 667,00 & 1,12 \\ 
+  25-29 & 10 263,00 & 0,00 & 12 383,00 & 1,21 \\ 
+  30-34 & 9 259,00 & 0,00 & 11 813,00 & 1,28 \\ 
+  35-39 & 8 109,00 & 0,00 & 10 443,00 & 1,29 \\ 
+  40-44 & 8 731,00 & 0,00 & 11 170,00 & 1,28 \\ 
+  45-49 & 8 291,00 & 0,00 & 10 172,00 & 1,23 \\ 
+  50-54 & 8 093,00 & 0,00 & 9 371,00 & 1,16 \\ 
+  55-59 & 7 669,00 & 0,00 & 8 772,00 & 1,14 \\ 
+  60-64 & 6 973,00 & 0,00 & 8 609,00 & 1,23 \\ 
+  65-69 & 5 498,00 & 0,00 & 6 811,00 & 1,24 \\ 
+  70-74 & 5 762,00 & 0,00 & 6 438,00 & 1,12 \\ 
+  75-79 & 7 489,00 & 0,00 & 6 937,00 & 0,93 \\ 
+  80-84 & 9 561,00 & 1,00 & 7 034,00 & 0,74 \\ 
+  85-89 & 9 127,00 & 0,00 & 4 562,00 & 0,50 \\ 
+  90-94 & 5 118,00 & 0,00 & 1 942,00 & 0,38 \\ 
+  95-99 & 833,00 & 0,00 & 235,00 & 0,28 \\ 
+  100+ & 149,00 & 0,00 & 83,00 & 0,56 \\ 
    \hline
 \end{tabular}
-\caption[]{Répartition des consultants aux urgences par tranche de cinq ans en fonction du sexe (I = sexe indéterminé)} 
+\caption[]{Répartition des consultants aux urgences par tranche de cinq ans en fonction du sexe (I = sexe indéterminé).} 
 \label{tab:sr2}
 \end{table}
 
@@ -2057,14 +2073,25 @@ Le thésaurus est présenté sous la forme d'un fichier Excel. L'onglet \emph{re
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:43 2014
+% Sat Aug 23 10:57:22 2014
 \begin{table}[ht]
 \centering
-\begin{tabular}{rrrrrrrrrrrrr}
+\begin{tabular}{rlr}
   \hline
- & X3Fr & Alk & Col & Dia & Geb & Hag & Hus & Mul & Odi & Sel & Wis & Sav \\ 
+ & Etablissement & Motif (p.cent) \\ 
   \hline
-1 & 7.22 & 23.50 & 100.00 & 95.50 & 0.03 & 13.10 & 0.00 & 83.00 & 94.92 & 98.20 & 99.69 & 42.02 \\ 
+1 & 3Fr & 7,22 \\ 
+  2 & Alk & 23,50 \\ 
+  3 & Col & 100,00 \\ 
+  4 & Dia & 95,50 \\ 
+  5 & Geb & 0,03 \\ 
+  6 & Hag & 13,10 \\ 
+  7 & Hus & 0,00 \\ 
+  8 & Mul & 83,00 \\ 
+  9 & Odi & 94,92 \\ 
+  10 & Sel & 98,20 \\ 
+  11 & Wis & 99,69 \\ 
+  12 & Sav & 42,02 \\ 
    \hline
 \end{tabular}
 \caption[Motif de consultation]{Taux de réponse à l'item motif de consultation selon le services d'urgence} 
@@ -2126,7 +2153,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 \includegraphics[width=\maxwidth]{figure/mode_entree} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:43 2014
+% Sat Aug 23 10:57:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2155,7 +2182,7 @@ La grande majorité des patients arrivent aux urgences par leurs propres moyens 
 
 \includegraphics[width=\maxwidth]{figure/transport} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:43 2014
+% Sat Aug 23 10:57:22 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2332,7 +2359,7 @@ Une période de 24 heures est habituellement divisée de la manière suivante:
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:48 2014
+% Sat Aug 23 10:57:26 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2347,7 +2374,7 @@ N & 44638.00 & 252428.00 & 39943.00 \\
 \label{tab:freq_periode}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:48 2014
+% Sat Aug 23 10:57:27 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2401,7 +2428,7 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 \end{center}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:49 2014
+% Sat Aug 23 10:57:27 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2444,7 +2471,7 @@ On peut répartir les âges des patients en trois catégories (tableau \ref{tab:
 % #'@details utilisation de cut et split pour former des groupes d'age. CUT divise un groupe e valeurs x en différents intervalles. L'intervalle le plus à gauche correspond au niveau 1. Par défaut les intervalles sont fermés à droite. On met -1 comme borne inférieure pour inclure la valeur 0.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:49 2014
+% Sat Aug 23 10:57:27 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -2462,7 +2489,7 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:49 2014
+% Sat Aug 23 10:57:28 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -2499,12 +2526,12 @@ n & 75414.00 & 218219.00 & 50430.00 \\
 \section{Selon le jour de la semaine}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:49 2014
+% Sat Aug 23 10:57:28 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
   \hline
- & Sun & Mon & Tues & Wed & Thurs & Fri & Sat \\ 
+ & Dim & Lun & Mar & Mer & Jeu & Ven & Sam \\ 
   \hline
 mn & 149.85 & 171.44 & 166.78 & 162.48 & 163.29 & 163.99 & 161.35 \\ 
   \% & 13.15 & 15.05 & 14.64 & 14.26 & 14.33 & 14.40 & 14.16 \\ 
@@ -2550,7 +2577,7 @@ Pour l'ensemble des patients d'Alsace, 80\% quittent les urgences en moins de qu
 
 \section{Selon l'orientation}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:50 2014
+% Sat Aug 23 10:57:29 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -2576,7 +2603,7 @@ REO & 86.25 & 3.24 \\
 \label{tab:duree_orientation}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:50 2014
+% Sat Aug 23 10:57:29 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -2617,7 +2644,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 \section{Selon la gravité}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:50 2014
+% Sat Aug 23 10:57:29 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3025,7 +3052,7 @@ G459          617        87.3              100.0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:52 2014
+% Sat Aug 23 10:57:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -3055,7 +3082,7 @@ En fonction de la gravité (CCMU):
 
 \includegraphics[width=\maxwidth]{figure/unnamed-chunk-39} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:52 2014
+% Sat Aug 23 10:57:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3081,7 +3108,7 @@ En fonction de la gravité (CCMU):
 En fonction de la destination: table \ref{tab:pneumo_dest}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:52 2014
+% Sat Aug 23 10:57:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3107,7 +3134,7 @@ NA & 0.00 & 0.00 & 0.00 \\
 En fonction de l'orientation: table \ref{tab:pneumo_orient}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:52 2014
+% Sat Aug 23 10:57:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3164,7 +3191,7 @@ Classification selon la CIM10:
 \end{itemize}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:53 2014
+% Sat Aug 23 10:57:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3183,7 +3210,7 @@ J450 & 133 \\
 
 \includegraphics[width=\maxwidth]{figure/asthme} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:53 2014
+% Sat Aug 23 10:57:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3210,7 +3237,7 @@ On note \np{1 398} cas d'asthme en 2013.
 
 \includegraphics[width=\maxwidth]{figure/asthme22} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:53 2014
+% Sat Aug 23 10:57:31 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3307,7 +3334,7 @@ NULL
 [6] "n"         
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:53 2014
+% Sat Aug 23 10:57:32 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrr}
@@ -3321,7 +3348,7 @@ NULL
 \label{tab:age_asthme}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:53 2014
+% Sat Aug 23 10:57:32 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3620,7 +3647,7 @@ Le RPU connaît trois mode de sortie des urgences:
 \end{figure}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:55 2014
+% Sat Aug 23 10:57:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|}
@@ -3644,7 +3671,7 @@ Décès & 2 & 0.00 \\
 Les données par établissement sont résumées dans le tableau \ref{tab.sortie_etab} page \pageref{tab.sortie_etab}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:55 2014
+% Sat Aug 23 10:57:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{|l|r|r|r|r|r|r|}
@@ -3694,7 +3721,7 @@ a
   SCAM     SI   UHCD   <NA> 
    522   1402  32452 275755 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:55 2014
+% Sat Aug 23 10:57:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3714,7 +3741,7 @@ NA &   0 &   0 &   0 &   0 &   0 &   0 &   0 \\
 \label{tab:dest_gravite}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:55 2014
+% Sat Aug 23 10:57:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -3744,7 +3771,7 @@ CHIR & 181 & 3331 & 3662 & 363 &  11 &   1 & 140 \\
 \section{Destination}
 \index{destination}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:55 2014
+% Sat Aug 23 10:57:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3763,7 +3790,7 @@ HAD & 0.01 \\
 \label{tab.dest.hosp}
 \end{table}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:55 2014
+% Sat Aug 23 10:57:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rr}
@@ -3793,7 +3820,7 @@ On isole le groupe "mode de sortie = domicile" et on relève les résultats de l
 
 \includegraphics[width=\maxwidth]{figure/fausses_sorties} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:55 2014
+% Sat Aug 23 10:57:34 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -3857,7 +3884,7 @@ Le mode d'orientation au sens du RPU est une rubrique un peu fourre-tout regroup
 
 \includegraphics[width=\maxwidth]{figure/passages_totaux1} 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:56 2014
+% Sat Aug 23 10:57:35 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3889,7 +3916,7 @@ Les variations du retour journalier à domicile sont calculées de la manière s
 \end{description}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:57 2014
+% Sat Aug 23 10:57:36 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3914,7 +3941,7 @@ On refait le calcul de q en tenant compte des non réponses:
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:34:58 2014
+% Sat Aug 23 10:57:37 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -3969,7 +3996,7 @@ Les moins de 18 ans représentent $83 455$ passages en 2013 soit $230$ passages 
 % Pédiatrie et sexe
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:00 2014
+% Sat Aug 23 10:57:38 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -3990,7 +4017,7 @@ Le sex-ratio est de $1.2$ (table \ref{tab:ped_sr})
 % Taux hospitalisation
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:00 2014
+% Sat Aug 23 10:57:39 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -4048,7 +4075,7 @@ Les 75 ans et plus représentent $53 081$ passages en 2013 soit $146$ passages p
 % Gériatrie et sexe
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:00 2014
+% Sat Aug 23 10:57:39 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrr}
@@ -4071,7 +4098,7 @@ Le sex-ratio est de $0.64$
 % Taux d'hospitalisation
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:00 2014
+% Sat Aug 23 10:57:39 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrr}
@@ -4463,7 +4490,7 @@ Entre le 2013-01-01 00:11:00 et le 2013-12-31 23:13:00, \np{37 018} RPU ont ét�
 Le SU Sainte Anne a reçu en 2013 un total de \np{14 661} consultants, soit en moyenne 40 par jour.
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:08 2014
+% Sat Aug 23 10:57:47 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrr}
@@ -4503,7 +4530,7 @@ Le taux moyen d'hospitalisation \footnote{L'hospitalisation est la somme des mut
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., août 20, 2014 - 14:35:08
+% Date and time: sam., août 23, 2014 - 10:57:47
 \begin{table}[!htbp] \centering 
   \caption{Totalité des passages: résumé des principales caractéristiques} 
   \label{} 
@@ -4526,7 +4553,7 @@ data\$total & 365 & 40.00 & 8.00 & 22 & 34 & 40 & 46 & 69 \\
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., août 20, 2014 - 14:35:08
+% Date and time: sam., août 23, 2014 - 10:57:47
 \begin{table}[!htbp] \centering 
   \caption{De 1 à 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -4550,7 +4577,7 @@ data\$entre1\_75ans & 365 & 35.00 & 7.50 & 18 & 30 & 34 & 40 & 63 \\
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., août 20, 2014 - 14:35:08
+% Date and time: sam., août 23, 2014 - 10:57:47
 \begin{table}[!htbp] \centering 
   \caption{Plus de 75 ans: résumé des principales caractéristiques} 
   \label{} 
@@ -4571,7 +4598,7 @@ data\$sup75ans & 365 & 4.30 & 2.30 & 0 & 3 & 4 & 6 & 12 \\
 
 
 % Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: mer., août 20, 2014 - 14:35:08
+% Date and time: sam., août 23, 2014 - 10:57:47
 \begin{table}[!htbp] \centering 
   \caption{Clinique Ste Anne: résumé des données} 
   \label{} 
@@ -5274,7 +5301,7 @@ Signification des intitulés des lignes:
 % \begin{table}
 % \begin{center}
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:20 2014
+% Sat Aug 23 10:57:57 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrrrrrrrr}
@@ -5351,7 +5378,7 @@ Le interventions SMUR sont égales à la somme des interventions primaires et se
 
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:20 2014
+% Sat Aug 23 10:57:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}
@@ -5414,7 +5441,7 @@ L'activité du SAMU 67 est élevée avec un taux de recours de l'ordre de 25\%. 
 \index{SAMU!taux de  recours}
 
 % latex table generated in R 3.1.1 by xtable 1.7-1 package
-% Wed Aug 20 14:35:20 2014
+% Sat Aug 23 10:57:58 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrrrrrr}

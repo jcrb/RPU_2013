@@ -1,0 +1,27 @@
+---
+title: "Thesaurus ORUMIP"
+author: "JcB"
+date: "23/08/2014"
+output: html_document
+---
+
+Chrgement du fichier des regroupements de l'ORUMIP et analyse. Essai de merging avec les RPU.
+
+```{r}
+path <- "~/Documents/Resural/FEDORU/"
+file <- "Regroupements ORUMiP Thésaurus SFMU.csv"
+teso <- read.csv2(paste0(path,file), skip = 1)
+names(teso) <- c("cim10","code_urg","lib_urg","code_dis","lib_dis","code_pat","lib_pat")
+str(teso)
+table(teso$code_urg)
+table(teso$code_dis)
+
+# établissements qui donnent un motif a prori correct
+motif <- d1[d1$FINESS %in% c('Mul','Wis','Odi','Dia','3Fr','Alk'), c("FINESS","MOTIF")]
+# merging
+cas <- merge(motif, teso, by.x="MOTIF", by.y="cim10", all.x=TRUE)
+summary(cas$code_urg)
+
+```
+La code A09 (GE sans pécision) n'existe pas dans le code ORUMIP qui donne un code A10 inexistant dans la CIM10 ?
+

@@ -18,16 +18,17 @@ a<-tapply(e,as.Date(d1$ENTREE),length)
 % On supprime l'enregistrement 211 correspondant au 31 juillet et qui ne contient que 2 éléments:
 %a[211]  2013-07-31 2 
 <<activite2,echo=FALSE>>=
-a<-a[-211]
+# a<-a[-211]
   a1<-summary(a)
 @
 % Min. 1 st Qu.  Median    Mean 3rd Qu.    Max. 
 %   642.0   848.0   895.5   883.2   957.0  1050.0 
 
 En \ancourante les SU produisant des RPU ont déclaré \np{\Sexpr{length(e)}} passages au \Sexpr{as.character(format(max(e),format="%d %B %Y"))}, 
-soit une moyenne de \np{\Sexpr{a1[4]}} passages par jour (extrêmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
+soit une moyenne de \np{\Sexpr{a1[4]}} RPU par jour (extrêmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
 
-Passages par territoire de santé:
+RPU par territoire de santé:
+\index{Territoires de santé!nombre de RPU}
 <<passages_secteur,echo=FALSE>>=
 t<-tapply(d1$ENTREE,d1$secteur,length)
 @
@@ -52,10 +53,11 @@ Les données du secteur 2 sont très sous-estimées car il manque celles de la C
 \begin{center}
 <<activite plot, echo=FALSE, fig.height=5>>=
   z<-zoo(a,unique(as.Date(d1$ENTREE)))
-main <- paste0("Passages en SU en ", anc)
-  plot(z,ylab="Nb. de passages aux Urgences",main=main,xlab="Période")
-  legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+  main <- paste0("RPU produits par SU en ", anc)
+  plot(z,ylab="Nombre de passages au SU ayant générés un RPU",main=main,xlab="Période", col="gray60")
+  legend("topleft",legend=c("moyenne lissée","RPU moyen"),col=c("red","blue"),lty=c(1,2),cex=0.8,bty="n")
   lines(rollmean(z[,2],7),col="red",lwd=2)
+  abline(h=mean(a),col="blue", lty=2) # mpyenne
   # copyright
   mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
 @
@@ -65,23 +67,23 @@ main <- paste0("Passages en SU en ", anc)
 
 %\end{figure}
 
-% Variante avec *xts*
+% Variante avec *xts*. Supprimé var n'apporte rien par rapport au précédent.
 
 %\begin{figure}
-\begin{center}
-<<activite plot2, echo=FALSE, fig.height=5>>=
-  main <- paste0("Passages en SU en", anc)
-  x<-as.xts(z)
- plot(x,ylab="Nb. de passages aux Urgences",main=main, xlab="Période")
-legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
-lines(rollmean(xts(z),7),col="red",lwd=2)
-# moyenne générale
-abline(h=mean(a),col="blue")
- mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
-@
-\captionof{figure}{\Sexpr{main}.}
-\label{fig:activite_plot2}
-\end{center}
+% \begin{center}
+% <<activite plot2, echo=FALSE, fig.height=5>>=
+%   main <- paste0("Passages en SU en", anc)
+%   x<-as.xts(z)
+%  plot(x,ylab="Nb. de passages aux Urgences",main=main, xlab="Période")
+% legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+% lines(rollmean(xts(z),7),col="red",lwd=2)
+% # moyenne générale
+% abline(h=mean(a),col="blue")
+%  mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
+% @
+% \captionof{figure}{\Sexpr{main}.}
+% \label{fig:activite_plot2}
+% \end{center}
 %\end{figure}
 
 %------------------------------
@@ -93,14 +95,14 @@ abline(h=mean(a),col="blue")
 t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
 t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
 names(t2) <- c("Etablissement", "RPU")
-print(xtable(t2,,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
+print(xtable(t2,,caption=c(paste0("RPU par service d'urgence en ", anc),"Nombre de RPU par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
 
 @
 
 %\begin{figure}
 \begin{center}
 <<bplot_val_abs, echo=FALSE, fig.height=5>>=
-  main <- paste0("SU d'Alsace: nombre de passages en ", anc)
+  main <- paste0("SU d'Alsace: nombre de RPU produits en ", anc)
   barplot(sort(t),horiz=T,las=2,main=main)
 @
 \captionof{figure}{\Sexpr{main}.}
@@ -119,7 +121,7 @@ p<-sort(round(prop.table(t)*100,2))
 %\begin{figure}
 \begin{center}
 <<bp_en_pourcentage, echo=FALSE, fig.height=5>>=
-  main1 <- paste0("SU d'Alsace: nombre de passages (en %) en ", anc)
+  main1 <- paste0("SU d'Alsace: nombre de RPU (en % du total) en ", anc)
   barplot(p,horiz=T,las=2,xlim=c(0,20),xlab="pourcentage du total",main=main1)
 @
 % \caption{\Sexpr{main1}.} # cette ligne fait bugger, pourquoi ?
@@ -144,7 +146,7 @@ Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \inde
 Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_alsace}\%.
 
 %------------------------------
-\subsection*{Activité par mois}
+\subsection*{Production mensuelle de RPU}
 %------------------------------
 
 <<parmois, echo=FALSE, comment="", fig.height=8, results='asis'>>=
@@ -167,6 +169,16 @@ print(xtable(table(RPU.mois), caption=c(paste0("Ativité mensuelle en nombre de 
 \label{fig:bp_parmois}
 \end{center}
 %\end{figure}
+
+Nombre de RPU par mois standards de 30 jours.
+
+<<mois_nomalise, echo=FALSE, fig.height=5>>=
+nb.jour.mois <- as.numeric(diff(seq(as.Date("2013-01-01"), as.Date("2014-01-01"), by = "month"))) # source: https://stat.ethz.ch/pipermail/r-help/2007-August/138113.html
+mois.normalise <- round(30 * table(RPU.mois) / nb.jour.mois, 0)
+names(mois.normalise) <- mois.short
+barplot(mois.normalise, main="RPU produits par mois standardisés")
+@
+
 
 %---------------------------------
 \subsection*{Activité par semaine}
@@ -277,7 +289,8 @@ t<-table(h)
 %---------------------------------------------
 
 \begin{itemize}
-  \item diurne: 8h - 19h59
+  \item diurne: 8h - 19h59   
+  
   \item nocturne: 20h - 7h59
 \end{itemize}
 

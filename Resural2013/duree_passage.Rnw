@@ -281,6 +281,8 @@ xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'�
 t <- tapply(d1$presence,wday(e,label=TRUE),mean,na.rm=TRUE)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
+dimnames(r)[[2]] <- week.short <- c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
+
 rownames(r) <- c("mn","%")
 xtable(r, caption=c("Durée de présence et selon le jour de la semaine. Temps passé en minutes (mn) aux urgences en fonction du jour","Durée de présence et jour de la semaine"), label = "tab:jour_semaine")
 @

@@ -80,6 +80,11 @@ t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
 names(t2) <- c("Etablissement", "RPU")
 print(xtable(t2,,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
 ```
+Formatage simple:
+```{}
+print(xtable(x),format.args = list(big.mark = " ", decimal.mark = ","))
+```
+
 
 On divise la colonne AGE en 3 groupes puis on calcule l'effectif de chaque groupe avec tapply. Pour obtenir un affichage latex avec xtable, il faut transformer le vecteur en dataframe. On obtient un affichage en colonne. Pour obtenir l'affichage en ligne, utiliser la transposée t(t).  
 

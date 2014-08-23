@@ -29,7 +29,7 @@ colnames(c)<-c("n","%","Hôpitaux","Date d'inclusion")
 xtable(c, caption = c("Structures hospitalières participantes en 2013. Tous les paticipants fournissent des données depuis le 1/1/2013 sauf le CH Saverne.","Structures hospitalières participantes en 2013"), label = "tab1",align="|l|r|r|l|r|",digits = c(0,0,2,0,0), table.placement = "ht",caption.placement = "top")
 @
 
-\section{Exhaustivité qualitative} } \index{exhaustivité qualitative (def.)} 
+\section{Exhaustivité qualitative} \index{exhaustivité qualitative (def.)} 
 
 L'\emph{exhaustivité qualitative} correspond à la fois à la complétude des items et à la cohérence de réponses.
 
