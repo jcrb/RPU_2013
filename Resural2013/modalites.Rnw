@@ -13,7 +13,7 @@ L'immense majorité des patients provient du domicile ou son équivalent. Une tr
 
 d1$MODE_ENTREE[as.character(d1$MODE_ENTREE)=="Transfe  rt"]<-"Transfert"
 
-a <- tab1(factor(d1$MODE_ENTREE),main="Origine des patients (en %)",ylab="Pourcentage",bar.values = "percent", missing=FALSE)
+a <- tab1(factor(d1$MODE_ENTREE),sort.group = "decreasing", main="Origine des patients (en %)",ylab="Pourcentage", bar.values = "percent", missing=FALSE)
 a$first.line<-"Origine des patients"
 t <- a$output.table
 colnames(t)<-c("Fréquence","Pourcentage","Pourcentage cumulé")
@@ -31,7 +31,7 @@ Dans \Sexpr{missing} \% des cas, l'origine du patient n'est pas précisée.
 La grande majorité des patients arrivent aux urgences par leurs propres moyens (PERSO). Lorsqu'ils font appel à un tiers, il s'agit le plus souvent d'une ambulance privée (AMBU), puis du SDIS (AMBU). Les transports par un vecteur médicalisé (SMUR) ou héliporté (HELI) sont rares. Enfin l'utilisation des forces de l'ordre (FO) comme moyen de transport reste marginale.
 
 <<transport,echo=FALSE ,results='asis'>>=
-a<-tab1(d1$TRANSPORT,main="Mode de transport vers l'hôpital (en %)",ylab="Pourcentage",bar.values = "percent",missing=FALSE)
+a<-tab1(d1$TRANSPORT, sort.group = "decreasing", main="Mode de transport vers l'hôpital (en %)",ylab="Pourcentage",bar.values = "percent",missing=FALSE)
 a$first.line<-"Mode de transport"
 t <- a$output.table
 colnames(t)<-c("Fréquence","Pourcentage","Pourcentage cumulé")

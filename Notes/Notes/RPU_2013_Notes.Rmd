@@ -78,7 +78,7 @@ Affichage avec formatage des chiffres:
 t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
 t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
 names(t2) <- c("Etablissement", "RPU")
-print(xtable(t2,,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
+print(xtable(t2,,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0), format.args = list(big.mark = " ", decimal.mark = ","))
 ```
 Formatage simple:
 ```{}
@@ -191,7 +191,7 @@ date<-"2013-02-05"
 
 #### tab1
 Nécessite le package **epicalc**
-- a<-tab1(factor(d1$MODE_ENTREE),main="Origine des patients (en %)",ylab="Pourcentage",bar.values = "percent")
+- a<-tab1(factor(d1$MODE_ENTREE),sort.group = "decreasing", main="Origine des patients (en %)",ylab="Pourcentage",bar.values = "percent")
 - est un objet composé d'un graphique et d'un tableau
 - l'intitulé est accessible par a$first.line<-"Origine des patients"
 - le tableau est accessible via a$output.table. Permet d'utiliser xtable(a$output.table).
@@ -199,6 +199,7 @@ Nécessite le package **epicalc**
 - noms des lignes: row.names(a$output.table)
 - nom des colonnes: colnames(a$output.table)
 - franciser le nom des colonnes: colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+- sort.group = "decreasing", affiche les colonnes par ordre décroissant.
 
 #### Supprimer la notation scientifique
 Par défaut R transforme tout nombre supérieur à 10^5 en notation scientifique. Voir **?option** puis *scipen* pour explication (et http://yihui.name/knitr/demo/output/).
@@ -332,6 +333,9 @@ plot(TukeyHSD(mod))
 tuk <- glht(mod, linfct=mcp(territoire="Tukey"))
 par(las=1)
 plot(cld(tuk, levels=0.05), col="lightgray")
+
+Impression de qualité:
+
 
 ```
 L'intervalle de confiance a été augmenté à  p=0.9999999 pour qu'il soit visible. A p = 0.95 on ne les voit âs car inférieurs à 1 et des messages d'avertissement sont générés. La méthode __plotCI__ fait la même chose (voir notamment le premier exemple de cette méthode).

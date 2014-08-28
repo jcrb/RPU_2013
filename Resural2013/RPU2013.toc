@@ -241,7 +241,7 @@
 \contentsline {chapter}{\numberline {9}Modalit\IeC {\'e} d'admission}{75}{chapter.9}
 \contentsline {chapter}{\numberline {10}Dur\IeC {\'e}e de passage}{79}{chapter.10}
 \contentsline {section}{\numberline {10.1}Cas g\IeC {\'e}n\IeC {\'e}ral}{79}{section.10.1}
-\contentsline {section}{\numberline {10.2}Moyenne des dur\IeC {\'e}es de passages par jour}{81}{section.10.2}
+\contentsline {section}{\numberline {10.2}Moyenne des dur\IeC {\'e}es de passages par jour}{82}{section.10.2}
 \contentsline {section}{\numberline {10.3}Selon l'heure}{83}{section.10.3}
 \contentsline {section}{\numberline {10.4}Selon l'\IeC {\^a}ge}{87}{section.10.4}
 \contentsline {section}{\numberline {10.5}Selon le jour de la semaine}{88}{section.10.5}
@@ -306,4 +306,4 @@
 \contentsline {chapter}{\numberline {C}RPU}{239}{appendix.C}
 \contentsline {chapter}{\numberline {D}A propos de ce document}{241}{appendix.D}
 \contentsline {chapter}{\numberline {E}Bibliographie}{243}{appendix.E}
-\contentsline {chapter}{Index}{247}{appendix*.177}
+\contentsline {chapter}{Index}{247}{appendix*.182}

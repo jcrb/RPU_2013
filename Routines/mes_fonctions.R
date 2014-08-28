@@ -543,24 +543,26 @@ resume2<-function (x, echo=FALSE, tl=NULL, tc=NULL, label=NULL)
 #'@param short (défaut) n'affiche que min, max, mediane, moyenne
 #'@param xtable retourne la version latex
 #'@usage voir activite_su.Rnw
+#'@maj  26/08/2014 ajout de na.rm=TRUE
 #'
 xsummary<-function(x,short=FALSE,xtable=FALSE,count=FALSE,sd=FALSE,tl="titre long",
                    tc="titre court",lab="label"){
   # s<-as.matrix(t(summary(x)))
   # colnames(s)<-c("Min.","Q1","Médiane","Moyenne","Q3","Max.")
-  a<-data.frame(length(x),min(x),quantile(x,.25),mean(x),sd(x),median(x),quantile(x,.75),max(x))
-  colnames(a)<-c("n","Min","Q25","Moyenne","E-type","Médiane","Q75","Max")
+  a<-data.frame(length(x),min(x, na.rm=T),quantile(x,.25, na.rm=T),mean(x, na.rm=T),sd(x, na.rm=T),median(x, na.rm=T),
+    quantile(x,.75, na.rm=T), max(x, na.rm=T), sum(is.na(x)), mean(is.na(x))*100)
+  colnames(a)<-c("n","Min","Q25","Moyenne","E-type","Médiane","Q75","Max","Na","%Na")
   a<-round(a,1)
   rownames(a)<-""
   # si on veut limiter:
   if(short==TRUE){
-    s<-s[,c(1,3,4,6)]
+    a <- a[, c(1,2,4,5,6,7)]
   }
   if(xtable==TRUE){
     require("xtable")
     # remplacer s par t(s) pour avoir un tableau vertical
     print(xtable(a,caption=c(tl,tc),label=lab,type="latex",table.placement="tp",
-                 latex.environments=c("center", "footnotesize")))
+                 latex.environments=c("center", "footnotesize")), format.args = list(big.mark = " ", decimal.mark = ","))
   }
   return(a)
 }
