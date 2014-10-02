@@ -27,6 +27,8 @@ rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transpor
 
 week.short <- c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
 week.long <- c("Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi")
+french.short.week <- c("Lun","Mar","Mer","Jeu","Ven","Sam","Dim")
+french.long.week <- c("Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
 
 mois.short <- c("Jan","Fev","Mar","Avr","Mai","Jun","Jui","Aou","Sep","Oct","Nov","Dec")
 mois.long <- c("Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Decembre")
@@ -229,16 +231,25 @@ mysql2resural<-function(an,mois)
 #===========================================================================
 # Sex Ratio
 #===========================================================================
+#'
+#' Calcuke le rapport hommes/femmes
 #'@title sr
-sr <- function(g){
-  sg <- table(g$SEXE)
+#'@return une liste de 2 éléments: le sex-ratio et un tableau 2 x 2
+#'@param g un vecteur contenant les sexes
+#'@author jcb, 2014-08-28
+#'@details le tableau 2 x 2 est compatible avec xtable
+#'@example sr <- sr(AVC$SEXE); sr[[1]]; xtable(sr[[2]])
+#'
+sexr <- function(g){
+  sg <- table(g)
   sg <- sg[-2] # retire les sexes indéterminés
   psg <- round(prop.table(sg)*100,2)
   b <- rbind(sg,psg)
-  rownames(b) <- c("n","%")
-  
   sex_ratio <- sg["M"]/sg["F"]
-  return(sex_ratio)
+  rownames(b) <- c("n","%")
+  colnames(b) <- c("Femmes","Hommes")
+  
+  return(list(as.numeric(sex_ratio), b))
 }
 
 #===========================================================================

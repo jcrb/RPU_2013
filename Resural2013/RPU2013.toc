@@ -1,15 +1,15 @@
 \select@language {french}
 \select@language {french}
-\contentsline {part}{I\hspace {1em}Le R\IeC {\'e}seau des urgences en Alsace}{11}{part.1}
-\contentsline {chapter}{\numberline {1}Historique}{13}{chapter.1}
-\contentsline {chapter}{\numberline {2}Organisation g\IeC {\'e}ographique}{15}{chapter.2}
-\contentsline {section}{\numberline {2.1}Les territoires de sant\IeC {\'e}}{15}{section.2.1}
-\contentsline {section}{\numberline {2.2}Les territoires de proximit\IeC {\'e}}{16}{section.2.2}
-\contentsline {section}{\numberline {2.3}D\IeC {\'e}mographie}{17}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}G\IeC {\'e}n\IeC {\'e}ralit\IeC {\'e}s}{17}{subsection.2.3.1}
-\contentsline {subsubsection}{Le concept de population municipale}{18}{section*.6}
-\contentsline {subsection}{\numberline {2.3.2}Classes d'\IeC {\^a}ge}{18}{subsection.2.3.2}
-\contentsline {section}{\numberline {2.4}Les services d'accueil des urgences (SAU)}{19}{section.2.4}
+\contentsline {part}{I\hspace {1em}Le R\IeC {\'e}seau des urgences en Alsace}{13}{part.1}
+\contentsline {chapter}{\numberline {1}Historique}{15}{chapter.1}
+\contentsline {chapter}{\numberline {2}Organisation g\IeC {\'e}ographique}{17}{chapter.2}
+\contentsline {section}{\numberline {2.1}Les territoires de sant\IeC {\'e}}{17}{section.2.1}
+\contentsline {section}{\numberline {2.2}Les territoires de proximit\IeC {\'e}}{18}{section.2.2}
+\contentsline {section}{\numberline {2.3}D\IeC {\'e}mographie}{19}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}G\IeC {\'e}n\IeC {\'e}ralit\IeC {\'e}s}{19}{subsection.2.3.1}
+\contentsline {subsubsection}{Le concept de population municipale}{20}{section*.6}
+\contentsline {subsection}{\numberline {2.3.2}Classes d'\IeC {\^a}ge}{20}{subsection.2.3.2}
+\contentsline {section}{\numberline {2.4}Les services d'accueil des urgences (SAU)}{21}{section.2.4}
 \select@language {french}
 \select@language {english}
 \select@language {french}
@@ -210,48 +210,48 @@
 \select@language {english}
 \select@language {french}
 \select@language {french}
-\contentsline {section}{\numberline {2.5}Les plateaux techniques sp\IeC {\'e}cialis\IeC {\'e}s \IeC {\`a} acc\IeC {\`e}s direct (PTSAD)}{22}{section.2.5}
-\contentsline {chapter}{\numberline {3}RESURAL}{23}{chapter.3}
-\contentsline {chapter}{\numberline {4}L'observatoire des urgences en Alsace (ORUDAL)}{25}{chapter.4}
-\contentsline {chapter}{\numberline {5}Le R\IeC {\'e}sum\IeC {\'e} du passage aux urgences}{27}{chapter.5}
-\contentsline {subsubsection}{L'identifiant (ID)}{28}{section*.19}
-\contentsline {subsubsection}{L'\IeC {\'e}tablissement de sant\IeC {\'e}}{28}{section*.20}
-\contentsline {subsubsection}{Le code postal de r\IeC {\'e}sidence}{28}{section*.21}
-\contentsline {subsubsection}{La commune de r\IeC {\'e}sidence}{28}{section*.22}
-\contentsline {subsubsection}{la date de naissance}{28}{section*.23}
-\contentsline {subsubsection}{le mode d'entr\IeC {\'e}e}{28}{section*.24}
-\contentsline {subsubsection}{la provenance}{29}{section*.25}
-\contentsline {subsubsection}{Le mode de transport}{29}{section*.26}
-\contentsline {subsubsection}{la prise en charge durant le transport}{29}{section*.27}
-\contentsline {subsubsection}{le motif de recours aux urgences}{29}{section*.28}
-\contentsline {subsubsection}{Le mode de sortie}{29}{section*.29}
-\contentsline {subsubsection}{Destination}{30}{section*.30}
-\contentsline {subsubsection}{Orientation}{30}{section*.31}
-\contentsline {part}{II\hspace {1em}Activit\IeC {\'e} des services d'urgence d'Alsace}{33}{part.2}
-\contentsline {chapter}{\numberline {6}Qualit\IeC {\'e} des RPU en 2013}{35}{chapter.6}
-\contentsline {section}{\numberline {6.1}Exhaustivit\IeC {\'e} quantitative}{35}{section.6.1}
-\contentsline {section}{\numberline {6.2}Exhaustivit\IeC {\'e} qualitative}{36}{section.6.2}
-\contentsline {section}{\numberline {6.3}Diagramme de compl\IeC {\'e}tude}{37}{section.6.3}
-\contentsline {chapter}{\numberline {7}Activit\IeC {\'e} r\IeC {\'e}gionale totale}{39}{chapter.7}
-\contentsline {section}{\numberline {7.1}Nombre total de passages}{39}{section.7.1}
-\contentsline {subsection}{\numberline {7.1.1}Typologie des passages}{46}{subsection.7.1.1}
-\contentsline {section}{\numberline {7.2}Passages aux urgences}{52}{section.7.2}
-\contentsline {section}{\numberline {7.3}Passages en fonction de l'\IeC {\^a}ge}{58}{section.7.3}
-\contentsline {chapter}{\numberline {8}Motif de consultation}{71}{chapter.8}
-\contentsline {chapter}{\numberline {9}Modalit\IeC {\'e} d'admission}{75}{chapter.9}
-\contentsline {chapter}{\numberline {10}Dur\IeC {\'e}e de passage}{79}{chapter.10}
-\contentsline {section}{\numberline {10.1}Cas g\IeC {\'e}n\IeC {\'e}ral}{79}{section.10.1}
-\contentsline {section}{\numberline {10.2}Moyenne des dur\IeC {\'e}es de passages par jour}{82}{section.10.2}
-\contentsline {section}{\numberline {10.3}Selon l'heure}{83}{section.10.3}
-\contentsline {section}{\numberline {10.4}Selon l'\IeC {\^a}ge}{87}{section.10.4}
-\contentsline {section}{\numberline {10.5}Selon le jour de la semaine}{88}{section.10.5}
-\contentsline {subsection}{\numberline {10.5.1}Pourcentage de passages en moins de 4 heures par \IeC {\'e}tablissement}{89}{subsection.10.5.1}
-\contentsline {section}{\numberline {10.6}Selon l'orientation}{89}{section.10.6}
-\contentsline {section}{\numberline {10.7}Selon la gravit\IeC {\'e}}{91}{section.10.7}
-\contentsline {section}{\numberline {10.8}Selon la structure}{92}{section.10.8}
-\contentsline {chapter}{\numberline {11}Codage diagnostique}{93}{chapter.11}
-\contentsline {section}{\numberline {11.1}CIM10}{93}{section.11.1}
-\contentsline {section}{\numberline {11.2}Etude des AVC}{96}{section.11.2}
+\contentsline {section}{\numberline {2.5}Les plateaux techniques sp\IeC {\'e}cialis\IeC {\'e}s \IeC {\`a} acc\IeC {\`e}s direct (PTSAD)}{24}{section.2.5}
+\contentsline {chapter}{\numberline {3}RESURAL}{25}{chapter.3}
+\contentsline {chapter}{\numberline {4}L'observatoire des urgences en Alsace (ORUDAL)}{27}{chapter.4}
+\contentsline {chapter}{\numberline {5}Le R\IeC {\'e}sum\IeC {\'e} du passage aux urgences}{29}{chapter.5}
+\contentsline {subsubsection}{L'identifiant (ID)}{30}{section*.19}
+\contentsline {subsubsection}{L'\IeC {\'e}tablissement de sant\IeC {\'e}}{30}{section*.20}
+\contentsline {subsubsection}{Le code postal de r\IeC {\'e}sidence}{30}{section*.21}
+\contentsline {subsubsection}{La commune de r\IeC {\'e}sidence}{30}{section*.22}
+\contentsline {subsubsection}{la date de naissance}{30}{section*.23}
+\contentsline {subsubsection}{le mode d'entr\IeC {\'e}e}{30}{section*.24}
+\contentsline {subsubsection}{la provenance}{31}{section*.25}
+\contentsline {subsubsection}{Le mode de transport}{31}{section*.26}
+\contentsline {subsubsection}{la prise en charge durant le transport}{31}{section*.27}
+\contentsline {subsubsection}{le motif de recours aux urgences}{31}{section*.28}
+\contentsline {subsubsection}{Le mode de sortie}{31}{section*.29}
+\contentsline {subsubsection}{Destination}{32}{section*.30}
+\contentsline {subsubsection}{Orientation}{32}{section*.31}
+\contentsline {part}{II\hspace {1em}Activit\IeC {\'e} des services d'urgence d'Alsace}{35}{part.2}
+\contentsline {chapter}{\numberline {6}Qualit\IeC {\'e} des RPU en 2013}{37}{chapter.6}
+\contentsline {section}{\numberline {6.1}Exhaustivit\IeC {\'e} quantitative}{37}{section.6.1}
+\contentsline {section}{\numberline {6.2}Exhaustivit\IeC {\'e} qualitative}{38}{section.6.2}
+\contentsline {section}{\numberline {6.3}Diagramme de compl\IeC {\'e}tude}{39}{section.6.3}
+\contentsline {chapter}{\numberline {7}Activit\IeC {\'e} r\IeC {\'e}gionale totale}{41}{chapter.7}
+\contentsline {section}{\numberline {7.1}Nombre total de passages}{41}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Typologie des passages}{48}{subsection.7.1.1}
+\contentsline {section}{\numberline {7.2}Passages aux urgences}{54}{section.7.2}
+\contentsline {section}{\numberline {7.3}Passages en fonction de l'\IeC {\^a}ge}{60}{section.7.3}
+\contentsline {chapter}{\numberline {8}Motif de consultation}{73}{chapter.8}
+\contentsline {chapter}{\numberline {9}Modalit\IeC {\'e} d'admission}{77}{chapter.9}
+\contentsline {chapter}{\numberline {10}Dur\IeC {\'e}e de passage}{81}{chapter.10}
+\contentsline {section}{\numberline {10.1}Cas g\IeC {\'e}n\IeC {\'e}ral}{81}{section.10.1}
+\contentsline {section}{\numberline {10.2}Moyenne des dur\IeC {\'e}es de passages par jour}{84}{section.10.2}
+\contentsline {section}{\numberline {10.3}Selon l'heure}{85}{section.10.3}
+\contentsline {section}{\numberline {10.4}Selon l'\IeC {\^a}ge}{89}{section.10.4}
+\contentsline {section}{\numberline {10.5}Selon le jour de la semaine}{90}{section.10.5}
+\contentsline {subsection}{\numberline {10.5.1}Pourcentage de passages en moins de 4 heures par \IeC {\'e}tablissement}{91}{subsection.10.5.1}
+\contentsline {section}{\numberline {10.6}Selon l'orientation}{91}{section.10.6}
+\contentsline {section}{\numberline {10.7}Selon la gravit\IeC {\'e}}{93}{section.10.7}
+\contentsline {section}{\numberline {10.8}Selon la structure}{94}{section.10.8}
+\contentsline {chapter}{\numberline {11}Codage diagnostique}{95}{chapter.11}
+\contentsline {section}{\numberline {11.1}CIM10}{95}{section.11.1}
+\contentsline {section}{\numberline {11.2}Etude des AVC}{98}{section.11.2}
 \contentsline {section}{\numberline {11.3}Accidents isch\IeC {\'e}miques transitoires (AIT)}{105}{section.11.3}
 \contentsline {section}{\numberline {11.4}Pneumonies}{106}{section.11.4}
 \contentsline {section}{\numberline {11.5}Syndrome grippal}{109}{section.11.5}
@@ -306,4 +306,4 @@
 \contentsline {chapter}{\numberline {C}RPU}{239}{appendix.C}
 \contentsline {chapter}{\numberline {D}A propos de ce document}{241}{appendix.D}
 \contentsline {chapter}{\numberline {E}Bibliographie}{243}{appendix.E}
-\contentsline {chapter}{Index}{247}{appendix*.182}
+\contentsline {chapter}{Index}{247}{appendix*.188}

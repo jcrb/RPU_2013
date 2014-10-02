@@ -56,6 +56,7 @@ Création d'un tableau avec *cbind* et une matrice (et xtable pour pdf): voir ex
 ### Tables
 
 #### Tables trop larges
+
 Les tables trop larges pour tenir sur une largeur de page, on la scinde en deux (pas trouvé d'autre solution). Exemple dans sau_rpu.Rnw.
 
 #### Transformer une *table* en *dataframe*:
@@ -63,10 +64,12 @@ Les tables trop larges pour tenir sur une largeur de page, on la scinde en deux 
 as.data.frame.matrix(ma_table)
 
 #### Modifier l'entête de colonne d'un tableau
+
 Losqu'un tableau n'a qu'une seule colonne, R l'intitule *c* (count) par défaut. Pour changer l'intitulé ajouter *dnn = "%"*:  
-tcna<-round(prop.table(table(c,dnn="%"))*100,3)
+tcna<-round(prop.table(table(c, dnn="%"))*100,3)
 
 #### Renomer les lignes et/ou les colonnes
+
 - rownames(a) <- c("un", "deux")
 - colnames(a) <- c("un", "deux")
 
@@ -78,7 +81,7 @@ Affichage avec formatage des chiffres:
 t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
 t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
 names(t2) <- c("Etablissement", "RPU")
-print(xtable(t2,,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0), format.args = list(big.mark = " ", decimal.mark = ","))
+print(xtable(t2, caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("r","c","r"), display = c("s","s","f"), digits = 0), format.args = list(big.mark = " ", decimal.mark = ","))
 ```
 Formatage simple:
 ```{}
@@ -106,6 +109,7 @@ This is necessary because the margintable environment does not allow placement o
 > print(x.small,floating.environment='margintable',latex.environments = "", table.placement = NULL)
 
 #### xprop.table(x) [mes_fonctions.R]  
+
 Affiche un vecteur de FACTOR sur deux lignes: n et %  
 
 xprop.table(table(tranche_age))  
@@ -115,6 +119,7 @@ n        74739.00   215694.00       49895.00
 %           21.96       63.38          14.66  
 
 #### sélectionner des variables avec TRUE et FALSE
+
 - v<-c("ajax","troie","voiture")
 - x<-nchar(v)<6
 - x
@@ -127,7 +132,8 @@ n        74739.00   215694.00       49895.00
   [1] "voiture"
 
 #### Version:
-```{r version}
+
+```{}
 sessionInfo()
 toLatex(sessionInfo())
 ```
@@ -140,14 +146,17 @@ Voir aussi les aides suivantes:
 - toLatex(object, ...)
 
 #### Copyright
-```{r}
+
+```{}
  mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
 ```
 ####Informations de session
+
 sessionInfo()
 toLatex(sessionInfo(), locale = FALSE)
 
 #### xtable
+
 Crée des tables en latex:  
 <<label=tab2,echo=FALSE,results='asis'>>=  
 Attention pour results mettre *asis* (et non pas *tex* qui correspond à sweawe)  
@@ -160,19 +169,22 @@ table \ref{tab1}, page \pageref{tab1}.
 
 
 #### Pour présenter en latex un tableau type *summary*:
+
 stargazer(as.data.frame(a2[1:length(a)]),summary=TRUE,digit.separator=" ",digits=2,median=TRUE,iqr=TRUE)
 
 stargazer(as.data.frame(data$total),summary=TRUE,digit.separator=" ",digits=2, median=TRUE, iqr=TRUE, title ="Totalité des passages: résumé des principales caractéristiques")
 
 #### Séparateur de milliers:
+
 \np{x} génère une erreur si x est en notation scientifique
 
 #### Se débarasser des NA
+
 Procéder en 2 temsps:
 - créer un vecteur de *logical* avec *!is.na*
 - extraire les valeurs qui ne sont pas de NA à l'aide du vecteur précédent
 exemple:
-```{r}
+```{}
 vector<-c(1,NA,2)
 vector
 select<-!is.na(vector)
@@ -181,17 +193,21 @@ mean(vector)
 mean(vector[select])
 ```
 #### couleur
+
 The argument col will set the colours, you could use this in conjunction with an ifelse statement  col<-
 plot(x,y,xlab="PC1",ylab="PC2", col = ifelse(x < 0,'red','green'), pch = 19 )
 
 #### Dates
+
 Transformer une date *R* en date *française*:  
 date<-"2013-02-05"
 \Sexpr{format(date,format="%d %B %Y")}
 
 #### tab1
+
 Nécessite le package **epicalc**
 - a<-tab1(factor(d1$MODE_ENTREE),sort.group = "decreasing", main="Origine des patients (en %)",ylab="Pourcentage",bar.values = "percent")
+
 - est un objet composé d'un graphique et d'un tableau
 - l'intitulé est accessible par a$first.line<-"Origine des patients"
 - le tableau est accessible via a$output.table. Permet d'utiliser xtable(a$output.table).
@@ -201,7 +217,16 @@ Nécessite le package **epicalc**
 - franciser le nom des colonnes: colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
 - sort.group = "decreasing", affiche les colonnes par ordre décroissant.
 
+Pour imprimer avec xtable, utiliser tab1$output.table :
+
+```{}
+a <- tab1(heure.AVC, missing=FALSE,main="Heures d'admission des AVC", ylab="Fréquence")
+colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
+print(xtable(a$output.table,  caption=c(paste0("Horaires de passages des AVC en ", anc, "."),"Horaire de passage des AVC"),label="fig:passage_avc"), format.args = list(big.mark = " ", decimal.mark = ","))
+```
+
 #### Supprimer la notation scientifique
+
 Par défaut R transforme tout nombre supérieur à 10^5 en notation scientifique. Voir **?option** puis *scipen* pour explication (et http://yihui.name/knitr/demo/output/).
 ex: options(scipen = 6, digits = 2) Accepté par knitr rt Sweave. A mettre en début de programme.
 
@@ -212,6 +237,8 @@ knit_hooks$set(inline = function(x) {
 })
 
 #### tapply et xtable
+
+```{}
 t <- round(tapply(d1$presence,d1$GRAVITE,mean,na.rm=TRUE),2)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
@@ -220,6 +247,8 @@ xtable(r, caption=c("Titre long","Titre court"), label = "duree_gravite")
 ou
 x <- xtable(r, caption=c("Durée de présence et gravité","Durée de présence et gravité"), label = "duree_gravite")
 print.xtable {x} permet d'utiliser d'autres arguments notamment longtable.
+
+```
 
 #### afficher un tableau en Latex
 \begin{figure}[ht!]
@@ -385,6 +414,14 @@ q
 perbar(mtcars$cyl)
 perbar(mtcars$wt)+coord_flip()
 
+Histogramme de qualité
+----------------------
+```{}
+heure.AVC <- hour(AVC$ENTREE)
+hist(heure.AVC, breaks=24, xlab="Heure de la journée", main="Répartition des AVC dans la journée", ylab="Fréquence", col="cornflowerblue", border="white")
+```
+
+
 Tracer 2 histogrammes en miroir
 -------------------------------
 [source](http://www.r-bloggers.com/making-back-to-back-histograms/)
@@ -433,4 +470,19 @@ Tous les packages disponibles:
 a <- available.packages()
 ```
 
+#### Franciser et réorganiser la semaine
+---------------------------------------
+
+La se
+```{}
+library("gdata")
+w<-wday(AVC$ENTREE,label=TRUE)
+levels(w) <- week.short
+w <- reorder(w,new.order = french.short.week)
+wt <- table(w, dnn = "Nombre d'AVC selon le jour de la semaine")
+pwt <- round( prop.table(table(w, dnn = "Pourcentage d'AVC selon le jour de la semaine"))*100,2)
+a <- rbind(wt, pwt)
+rownames(a) <- c("fréquence", "p.cent")
+xtable(a, caption = c("Distribution des AVC en fonction du jour de la semaine. La fréquence quotidienne théorique est de 14.28 p.cent d'AVC par jour. Les AvC sont plus fréquents en début de semainet plus rares en fin de semaine.","AVC selon le jour de la semaine"), label = "tab:avc_jour")
+```
 
