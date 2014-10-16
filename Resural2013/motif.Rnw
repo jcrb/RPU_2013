@@ -17,7 +17,7 @@ print(xtable(t2,caption=c("Taux de réponse à l'item motif de consultation selo
 
 barplot(sort(round(c*100,2)),main="Taux de renseignement de l'item 'Motif de consultation'",ylab="pourcentage",xlab="Services d'urgence")
 
-barplot(sort(round(c*100,2),decreasing=TRUE),main="Taux de renseignement de l'item 'Motif de consultation'",xlab="pourcentage",ylab="Services d'urgence",horiz=TRUE,las=2)
+# barplot(sort(round(c*100,2),decreasing=TRUE),main="Taux de renseignement de l'item 'Motif de consultation'",xlab="pourcentage",ylab="Services d'urgence",horiz=TRUE,las=2)
 @
 
 \index{exhaustivité@motif}

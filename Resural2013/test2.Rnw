@@ -46,16 +46,14 @@ par(mfrow = c(1, 1))
 %\end{figure}
 
 %---------------------------------------------------------Radar HUS
-%\begin{figure}
-\begin{center}
-  <<test2, echo=FALSE,fig = TRUE,fig.height=5,warning=FALSE>>=
-    passages("Hus","HUS",sens=3)
-    @
-\captionof{figure}{HUS: répartition des arrivées et départs aux urgences}
-\label{passage:hus}
-\end{center}
 
-%\end{figure}
+% \begin{center}
+%   <<test2, echo=FALSE,fig = TRUE,fig.height=5,warning=FALSE>>=
+%     passages("Hus","HUS",sens=3)
+%     @
+% \captionof{figure}{HUS: répartition des arrivées et départs aux urgences}
+% \label{passage:hus}
+% \end{center}
 
 %---------------------------------------------------------Radar Colmar
 %\begin{figure}

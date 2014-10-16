@@ -200,6 +200,8 @@ d1$secteur[d1$FINESS %in% c("Hus","Odi")]<-2
 d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
 d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 
+#
+
 # names(d1)
 
 n_jours <- as.numeric(max(as.Date(d1$ENTREE))-min(as.Date(d1$ENTREE)))

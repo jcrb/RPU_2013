@@ -13,10 +13,10 @@
 # Onrécupère le fichier de l'insee qui donne les chiffres régionaux par tranches de 5 ans:
 file<-"~/Documents/Resural/Stat Resural/population_alsace/pop_legale_2010/rp2010_POP1B_n1_REG-42.csv"
 doc<-read.table(file,header=TRUE,sep=",", skip = 9)
-n <- sum(doc$Hommes,doc$Femmes) # pop totale
 # on supprime la dernière ligne qui correspond au total
 doc <- doc[-nrow(doc),]
-print(xtable(doc, caption=c("Population d'Alsace en 2010 (source INSEE)","Population d'Alsace en 2010"), label="tab:pop_insee"),format.args = list(big.mark = " ", decimal.mark = ","))
+n <- sum(doc$Hommes,doc$Femmes) # pop totale
+print(xtable(doc, caption=c("Population d'Alsace en 2010 (source INSEE - Population légale 2010)","Population d'Alsace en 2010"), label="tab:pop_insee"),format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 La répartition de la population alsacienne par tranche d'âge est fournie par l'INSEE (table \ref{tab:pop_insee} page \pageref{tab:pop_insee}). La somme des valeurs donne un chiffre de \Sexpr{n} personnes dans la région Alsace en 2010.
@@ -293,8 +293,9 @@ tx_moyen <- sum(pop_urg)/sum(pop_als)
 plot(tx, ylab="Taux de recours aux urgences (%)", xlab="Age (années", main=paste0("Recours aux urgences en Alsace en ",anc), col="blue")
 abline(h=tx_moyen*100, col="red", lty=2)
 legend(0,100,legend="Taux moyen", col="red", lty=2, bty="n")
+
   @
-\captionof{figure}{Taux de recours aux urgences selon la classe d'age. Le taux de recours est le rapport du nombre de RPU dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
+\captionof{figure}{Taux de recours aux urgences en \Sexpr{anc} selon la classe d'age. Le taux de recours est le rapport du nombre de RPU dans une classe d'âge donnée, à l'effectif de cette classe dans la population alsacienne.}
 \label{fig:recours_su}
 \end{center}
 

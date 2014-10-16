@@ -207,7 +207,7 @@ A la date du 23 mai 2013, l'Alsace compte 18 établissements ou structures autor
   \item 2 implantations "urgences mains": clinique du Diaconat-Strasbourg, clinique Diaconat-Roosvelt.
 \end{itemize}
 
-Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'a pas l'autorisation d'activité de soins de médecine d'urgence. Tpos les services SOS Mins d'Alsace sont labellisé par la FESUM\footnote{Fédération Européenne des Services d'Urgence de la Main}.
+Les HUS sont le seul établissement d'Alsace a posséder un SU pédiatrique labellisé. Les HUS ont également un service labellisé urgences main (FESUM) situé au CCOM d'Illkirch mais ce dernier n'a pas l'autorisation d'activité de soins de médecine d'urgence. Tous les services SOS Mains d'Alsace sont labellisé par la FESUM\footnote{Fédération Européenne des Services d'Urgence de la Main}.
 
 % En pratique, à la question de savoir qui prend en charge 24h sur 24 des problèmes aigus de santé et/ou de permanence des soins, on se ramène a une liste de 14 établissements pratiquant la médecine d'urgence au sens où on l'entend communément. Trois établissements ont une activité multisite. Au final cela représente 18 sites. Les trois villes les plus importantes de la région concentrent la totalité des PTSAD.
 

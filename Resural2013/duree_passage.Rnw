@@ -1,4 +1,4 @@
-<<<<<<<% duree_passage.Rnw
+% duree_passage.Rnw
 \index{Durée de passage}
 
 La durée de passage est le temps compris entre la date d'entrée et celle de sortie. Il s'agit d'une durée de transit total. Les données transmises par les RPU ne permettent pas de calculer les temps d'attente.
@@ -34,8 +34,8 @@ Une transformation logarithmique des données permet de mieux représenter l'his
 
 %\begin{figure}[ht!]
 \begin{center}
-<<log_passages,echo=FALSE,fig.width=8>>=
-hist(log10(as.numeric(d1$presence)),ylab="nombre", xlab="Logarithme de la durée de présence en mn", main="Durée de présence au SU en 2013", col="gray")
+<<log_passages,echo=FALSE,fig.height=5>>=
+hist(log10(as.numeric(d1$presence)),ylab="nombre", xlab="Durée de présence en en heure (après transformation logarithmique).", main="Durée de présence au SU en 2013", col="gray")
 @
  \captionof{figure}{Durée de passage (log 10)}
 \end{center}
@@ -82,7 +82,7 @@ Finalement, on conserve le groupe $b$ qui regroupe la majorité (\Sexpr{clean}\%
 
 %\begin{figure}[ht!]
 \begin{center}
-<<passages_clean_hist,echo=FALSE,fig.width=8>>=
+<<passages_clean_hist,echo=FALSE,fig.height=5>>=
 hist(b,ylab="nombre", xlab="Durée de présence (mn)", main=paste("Durée de présence au SU (2013) n =",length(b)),sub="Sont exclus les patients présents moins de 10 mn ou plus de 1440 mn", col="gray")
 @
  \captionof{figure}{Durée de passage aux urgences}
@@ -111,7 +111,7 @@ a<-zoo(c,d)
 
 %\begin{figure}[ht!]
 \begin{center}
-<<graphe_duree_moyenne_passage,echo=FALSE,fig.width=8>>=
+<<graphe_duree_moyenne_passage,echo=FALSE,fig.height=5>>=
 plot(a,ylab="durée (minutes)",main= paste0("Durée moyenne de passage - ", 2013), xlab= paste0("Année ", anc), col="lightblue")
 lines(rollmean(a,7),col="blue")
 lines(rollapply(a,7,function(x) mean(x) + sd(x)),col="red")
@@ -134,7 +134,7 @@ La distribution des durées de passage n'est pas normale mais présente une dév
 
 %\begin{figure}[ht!]
  \begin{center}
-<<hist_tous_passages,echo=FALSE,fig.width=8>>=
+<<hist_tous_passages,echo=FALSE,fig.height=5>>=
   a <- (as.numeric(d1$presence))
   a <- a[!is.na(a)]
   a<-a[a > 10 & a < 1440]
@@ -291,7 +291,7 @@ print(xtable(r, caption=c("Durée de passage en fonction de l'âge","Durée de p
 
 %\begin{figure}[ht!]
 \begin{center}
-  <<age_groupe2,echo=FALSE,fig.width=8>>=
+  <<age_groupe2,echo=FALSE,fig.height=5>>=
   # outline=F empeche l'affichage des outliners
   boxplot(d1$presence~tranche_age,ylab="Temps (en mn)",main="Durée de passage en fonction de l'age",col="yellow",outline=F)
   @
@@ -322,7 +322,7 @@ Il existe une relation entre le jour de la semaine et la durée de présence aux
 
 %\begin{figure}[ht!]
 \begin{center}
-  <<bp_jour_presence,echo=FALSE,fig.width=8>>=
+  <<bp_jour_presence,echo=FALSE,fig.height=5>>=
 boxplot(as.numeric(d1$presence) ~ wday(e,label=TRUE),outline=F,ylab="durée de présence moyenne (mn)",main="Durée de présence moyenne selon le jour de la semaine", col="pink", names= week.short)
   @
  \captionof{figure}{Durée de passage en fonction du jour de la semaine}
@@ -396,7 +396,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 
 %\begin{figure}[ht!]
 \begin{center}
-  <<bp_duree_dest,echo=FALSE,fig.width=8>>=
+  <<bp_duree_dest,echo=FALSE,fig.height=5>>=
 boxplot(d1$presence ~ x_dest, outline=F,main="Durée de passage selon la destination",ylab="Durée de passage (mn)")
   @
  \captionof{figure}{Durée de passage en fonction de la destination}
@@ -424,7 +424,7 @@ Il existe une relation entre la gravité et la durée de présence aux urgences 
 
 %\begin{figure}[ht!]
  \begin{center}
-  <<duree_gravite2,echo=FALSE,fig.width=8>>=
+  <<duree_gravite2,echo=FALSE,fig.height=5>>=
   boxplot(d1$presence ~ d1$GRAVITE,,outline=F,main="Durée de présence selon la gravité",ylab="durée de présence",xlab="Gravité en unités CCMU")
   @
  \captionof{figure}{Durée de passage en fonction de la gravité exprimée en unité CCMU}

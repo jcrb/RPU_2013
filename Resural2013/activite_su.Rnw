@@ -7,17 +7,21 @@
 \section{Variation du nombre total de passages journaliers}
 \index{Passages@journaliers}
 
-<<passages_totaux,echo=FALSE,results='asis'>>=
+<<passages_totaux,echo=FALSE,results='asis', fig.height=6 >>=
+
 e<-as.Date(d1$ENTREE)
 q<-tapply(e,yday(e),length)
-plot(q,type="l")
-a<-xsummary(q,xtable=TRUE,tl="Passages totaux",tc="Passages totaux",lab="tab:pt")
+# plot(q,type="l")
 
 z<-zoo(q,unique(as.Date(d1$ENTREE)))
-plot(z,main="Passages totaux")
-plot(xts(z),main="Passages totaux")
+
+# plot(z,main="Passages totaux", xlab=paste("Année", anc), ylab="nombre de RPU transmis")
+
+plot(xts(z),main="Evolution annuelle du nombre de RPU", xlab=paste("Année", anc), ylab="nombre de RPU transmis", minor.ticks = FALSE)
 lines(rollmean(xts(z), 7),col="red",lwd=2)
 copyright()
+
+a<-xsummary(q,xtable=TRUE,tl= paste0("Nombre de RPU transmis quotidiennement en ", anc,". Principaux paramètres statistiques."),tc="Passages totaux",lab="tab:pt")
 @
 
 
@@ -37,7 +41,14 @@ q2<-tapply(d1[d1$MODE_SORTIE=="Domicile",6],yday(d1[d1$MODE_SORTIE == "Domicile"
 #head(q2)
 q3<-q2*100/q
 a<-xsummary(q3,xtable=TRUE,tl="Pourcentage de retours à domicile - patients n'ayant été ni hospitalisés, ni transférés dans un autre établissement. Ce taux est plus faible en début d'année, lorsque les épisodes de tension sont plus fréquents.",tc="Retour à domicile",lab="tab:rd")
-plot(q3,type="l", main="Retours à domicile", ylab="% de retour à domicile", xlab = "jours")
+
+# plot(q3,type="l", main="Retours à domicile", ylab="% de retour à domicile", xlab = "jours")
+# lines(rollmean(xts(q3), 7),col="red",lwd=2)
+
+z<-zoo(q3,unique(as.Date(d1$ENTREE)))
+plot(xts(z),type="l", main="Retours à domicile", sub="(en % du nombre de passages)", ylab="% de retour à domicile", xlab=paste("Année", anc), minor.ticks = FALSE)
+lines(rollmean(xts(z), 7),col="blue",lwd=2)
+
 @
 
 On refait le calcul de q en tenant compte des non réponses:

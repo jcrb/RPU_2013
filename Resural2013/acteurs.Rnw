@@ -61,7 +61,9 @@ a <- apply(is.na(d1[,1:20]),2,mean)
 r <- round(a*100,2)
 r
 # radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
-radial.plot(1-a,rp.type="p",radial.pos=NULL,labels= names(a),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main= paste0("Taux de complétude des RPU transmis en ",anc))
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels= names(a),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main= paste0("Taux de complétude des RPU transmis en ",anc), mar=c(2,2,5,2))
+par(mar=c(5.1,4.1,4.1,2.1))
+
 @
 
 Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données sont à interpréter avec prudence. Ainsi l'item 4 qui correspond au mode de sortie ne distingue pas les non réponses des vrais retours à domicile (se reporter à la discussion page \pageref{ref:sortie})

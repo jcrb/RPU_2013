@@ -28,7 +28,7 @@ d09 <- d1[d1$ENTREE >= "2013-09-01" & d1$ENTREE  <= "2013-09-30",]
 b<-apply(is.na(d09),2,mean)
 radial.plot(1-b,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col="blue",radial.lim=c(0,1),add=T)
 ```
-Taux de comolétude du mois
+Taux de complétude du mois
 --------------------------
 ```{r completude_mois}
 c <- rbind(a,b)

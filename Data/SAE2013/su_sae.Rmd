@@ -1,0 +1,22 @@
+---
+title: "SU_SAE"
+author: "JcB"
+date: "14/10/2014"
+output: html_document
+---
+
+
+Exploitation des données SAE
+
+```{r sae}
+file <- "Data/SAE2013/su_base_administrative_SAE 2013_2014_09_30.csv"
+
+su1 <- read.csv(file, header=TRUE, skip=2, nrow=18)
+
+su2 <- read.csv(file, header=TRUE, skip=24, nrow=47)
+su2 <- su2[c(-23,-24),] # 2 lignes inutiles
+su2$ter <- c(2,1,1,1,1,1,3,2,2,2,2,4,4,4,4,4,4,3,3,3,3,4) # ajout d'une colonne territoires de santé
+tapply(su2$PASSU, su2$ter, sum, na.rm=T) # nb de passages par territoire
+
+```
+

@@ -32,6 +32,9 @@ ref: http://www.omegahat.org/RCurl/FAQ.html
 
 
 #### A NE FAIRE QU'UNE FOIS AU DEBUT DE LA SESSION:
+
+- rm(list=ls(all=TRUE)) pour vider complètement la mémoire
+
 - loadhistory(file = ".Rhistory")
 - timestamp()
 - A FAIRE SI ON CHANGE DE WORKING DIRECTORY
@@ -269,14 +272,18 @@ NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On 
 - y = ordonnées des barres, récupérées avec la fonction *table* qui agglomère les données par mois
 Voir aussi: http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm
 
-#### Renomer des levels prédéfini
+#### Renommer des levels prédéfini
 Notamment pour franciser certains tableau:
 ```
 RPU.jour.semaine <- wday(d1$ENTREE,label=T)
 levels(RPU.jour.semaine) <- week.short
+
+On réordonne les jours pour que la semaines commence le lundi. Source: http://www.r-bloggers.com/reorder-factor-levels-2/
+RPU.jour.semaine  <- factor(RPU.jour.semaine, levels(RPU.jour.semaine)[c(2:7,1)])
+
 table(RPU.jour.semaine)
 ```
-wday retourne le nom du jour en anglais. _week.short_ contient la même liste en français
+wday retourne le nom du jour en anglais. _week.short_ contient la même liste en français. Par défaut le premier jour de la semaine est le dimanche = 1. En réordonnant les niveaux on le place en dernier.
 
 #### notes sur les spatialPolygons
 > str(poly)
@@ -486,3 +493,10 @@ rownames(a) <- c("fréquence", "p.cent")
 xtable(a, caption = c("Distribution des AVC en fonction du jour de la semaine. La fréquence quotidienne théorique est de 14.28 p.cent d'AVC par jour. Les AvC sont plus fréquents en début de semainet plus rares en fin de semaine.","AVC selon le jour de la semaine"), label = "tab:avc_jour")
 ```
 
+# radial.plot
+=============
+
+```{}
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels= names(a),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main= paste0("Taux de complétude des RPU transmis en ",anc), mar=c(2,2,5,2))
+```
+Le paramètre __mar__ permet de faire de la place pour le titre et les labels.
