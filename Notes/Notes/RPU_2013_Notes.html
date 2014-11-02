@@ -6,7 +6,6 @@
 
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
 <meta name="generator" content="pandoc" />
 
 
@@ -94,10 +93,11 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="a-ne-faire-quune-fois-au-debut-de-la-session" class="section level4">
 <h4>A NE FAIRE QU’UNE FOIS AU DEBUT DE LA SESSION:</h4>
 <ul>
+<li><p>rm(list=ls(all=TRUE)) pour vider complètement la mémoire</p></li>
 <li>loadhistory(file = “.Rhistory”)</li>
 <li>timestamp()</li>
 <li>A FAIRE SI ON CHANGE DE WORKING DIRECTORY</li>
-<li>sauvegarde: savehistory(file = “.Rhistory”)</li>
+<li><p>sauvegarde: savehistory(file = “.Rhistory”)</p></li>
 </ul>
 </div>
 <div id="legendes-graphes" class="section level4">
@@ -263,13 +263,17 @@ print.xtable {x} permet d'utiliser d'autres arguments notamment longtable.
 <h4>tracer une ligne joignant les sommets des barres du barplot</h4>
 <p>NOTE TECHNIQUE: tracer une ligne joignant les sommets des barres du barplot. On utilise lines avec les valeurs suivantes: - x = abcisse des colonnes. Elles sont contenues dans l’objet barplot. On peut les recueillir eplicitement par la fonction <em>str</em> (str(x)). - y = ordonnées des barres, récupérées avec la fonction <em>table</em> qui agglomère les données par mois Voir aussi: <a href="http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm">http://www.ats.ucla.edu/stat/r/faq/barplotplus.htm</a></p>
 </div>
-<div id="renomer-des-levels-predefini" class="section level4">
-<h4>Renomer des levels prédéfini</h4>
+<div id="renommer-des-levels-predefini" class="section level4">
+<h4>Renommer des levels prédéfini</h4>
 <p>Notamment pour franciser certains tableau:</p>
 <pre><code>RPU.jour.semaine &lt;- wday(d1$ENTREE,label=T)
 levels(RPU.jour.semaine) &lt;- week.short
+
+On réordonne les jours pour que la semaines commence le lundi. Source: http://www.r-bloggers.com/reorder-factor-levels-2/
+RPU.jour.semaine  &lt;- factor(RPU.jour.semaine, levels(RPU.jour.semaine)[c(2:7,1)])
+
 table(RPU.jour.semaine)</code></pre>
-<p>wday retourne le nom du jour en anglais. <em>week.short</em> contient la même liste en français</p>
+<p>wday retourne le nom du jour en anglais. <em>week.short</em> contient la même liste en français. Par défaut le premier jour de la semaine est le dimanche = 1. En réordonnant les niveaux on le place en dernier.</p>
 </div>
 <div id="notes-sur-les-spatialpolygons" class="section level4">
 <h4>notes sur les spatialPolygons</h4>
@@ -381,6 +385,24 @@ load(&quot;my_RPackages.R&quot;)
 <p>Tous les packages disponibles:</p>
 <pre><code>a &lt;- available.packages()</code></pre>
 </div>
+<div id="franciser-et-reorganiser-la-semaine" class="section level2">
+<h2>#### Franciser et réorganiser la semaine</h2>
+<p>La se</p>
+<pre><code>library(&quot;gdata&quot;)
+w&lt;-wday(AVC$ENTREE,label=TRUE)
+levels(w) &lt;- week.short
+w &lt;- reorder(w,new.order = french.short.week)
+wt &lt;- table(w, dnn = &quot;Nombre d'AVC selon le jour de la semaine&quot;)
+pwt &lt;- round( prop.table(table(w, dnn = &quot;Pourcentage d'AVC selon le jour de la semaine&quot;))*100,2)
+a &lt;- rbind(wt, pwt)
+rownames(a) &lt;- c(&quot;fréquence&quot;, &quot;p.cent&quot;)
+xtable(a, caption = c(&quot;Distribution des AVC en fonction du jour de la semaine. La fréquence quotidienne théorique est de 14.28 p.cent d'AVC par jour. Les AvC sont plus fréquents en début de semainet plus rares en fin de semaine.&quot;,&quot;AVC selon le jour de la semaine&quot;), label = &quot;tab:avc_jour&quot;)</code></pre>
+</div>
+</div>
+<div id="radial.plot" class="section level1">
+<h1># radial.plot</h1>
+<pre><code>radial.plot(1-a,rp.type=&quot;p&quot;,radial.pos=NULL,labels= names(a),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main= paste0(&quot;Taux de complétude des RPU transmis en &quot;,anc), mar=c(2,2,5,2))</code></pre>
+<p>Le paramètre <strong>mar</strong> permet de faire de la place pour le titre et les labels.</p>
 </div>
 
 
@@ -395,12 +417,12 @@ $(document).ready(function () {
 
 </script>
 
-<!-- dynamically load mathjax for compatibility with --self-contained -->
+<!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

@@ -1,3 +1,9 @@
+---
+output:
+  html_document:
+    fig_caption: yes
+    keep_md: yes
+---
 Calcul des durées de présence
 ========================================================
 
@@ -30,6 +36,8 @@ summary(d)
 hist(d, breaks = 18, col = "lightblue", border = "pink")
 # si on ne conserve que les dossier de 24 heures
 hist(d[d<1440], breaks = 24, col = "lightblue", border = "pink", ylab="Fréquence", xlab="Temps en minutes", main="Durée de présence")
+
+hist(log10(d),ylab="nombre", xlab="Durée de présence en en heure (après transformation logarithmique).", main="Durée de présence au SU en 2013", col="gray")
 
 # i <- new_interval(e,s)
 # d<- as.duration(i)

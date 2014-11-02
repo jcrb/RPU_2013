@@ -46,8 +46,8 @@
 \fancyhead[RE]{\scshape\leftmark} 
 \fancyhead[LO]{\scshape\rightmark}
 
-\fancyfoot[CE]{Document de travail - non validé}
-\fancyfoot[CO]{Document de travail - non validé}
+% \fancyfoot[CE]{Document de travail - non validé}
+% \fancyfoot[CO]{Document de travail - non validé}
 
 \usepackage{fancyvrb}
 \usepackage{longtable}
