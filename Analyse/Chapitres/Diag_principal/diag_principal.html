@@ -214,47 +214,35 @@ library(&quot;epicalc&quot;)
 </code></pre>
 
 <pre><code class="r">library(&quot;lubridate&quot;)
-
-source(&quot;../prologue.R&quot;)
+getwd()
 </code></pre>
 
-<pre><code>## Loading required package: questionr
-## 
-## Attaching package: &#39;rgrs&#39;
-## 
-## Les objets suivants sont masqués from &#39;package:questionr&#39;:
-## 
-##     copie, copie.default, copie.proptab, cprop, cramer.v,
-##     format.proptab, freq, lprop, print.proptab, prop, quant.cut,
-##     renomme.variable, residus, wtd.mean, wtd.table, wtd.var
-## 
-## Rattle : une interface graphique gratuite pour l&#39;exploration de données avec R.
-## Version 3.0.2 r169 Copyright (c) 2006-2013 Togaware Pty Ltd.
-## Entrez &#39;rattle()&#39; pour secouer, faire vibrer, et faire défiler vos données.
-## 
+<pre><code>## [1] &quot;/home/aphar/Documents/Resural/RPU_2013/Analyse/Chapitres/Diag_principal&quot;
+</code></pre>
+
+<pre><code class="r">source(&quot;../prologue.R&quot;)
+</code></pre>
+
+<pre><code>## 
 ## Attaching package: &#39;zoo&#39;
 ## 
 ## Les objets suivants sont masqués from &#39;package:base&#39;:
 ## 
 ##     as.Date, as.Date.numeric
-## 
-## Please visit openintro.org for free statistics materials
-## 
-## Attaching package: &#39;openintro&#39;
-## 
-## L&#39;objet suivant est masqué from &#39;package:MASS&#39;:
-## 
-##     mammals
-## 
-## L&#39;objet suivant est masqué from &#39;package:datasets&#39;:
-## 
-##     cars
 </code></pre>
 
 <pre><code>## [1] &quot;Fichier courant: rpu2013d0112.Rda&quot;
 </code></pre>
 
-<pre><code class="r">d1&lt;-foo(path,file)
+<pre><code>## Warning: impossible d&#39;ouvrir le fichier &#39;../../../../mes_fonctions.R&#39; :
+## Aucun fichier ou dossier de ce type
+</code></pre>
+
+<pre><code>## Error: impossible d&#39;ouvrir la connexion
+</code></pre>
+
+<pre><code class="r">#d1&lt;-foo(path,file)
+
 
 # load(&quot;../../rpu2013d0107.Rda&quot;)
 # d1&lt;-d0107
@@ -1405,12 +1393,6 @@ kable(as.data.frame(code.par.hop), format=&quot;markdown&quot;)
 | X3Fr| Alk|  Col| Dia|  Geb|  Hag|  Hus| Mul| Odi|  Sel|  Wis| Sav|
 |----:|---:|----:|---:|----:|----:|----:|---:|---:|----:|----:|---:|
 | 1254| 860| 2429|   2| 1074| 1669| 1736| 918| 841| 2098| 1507|   2|
-</code></pre>
-
-<pre><code class="r">boxplot(d1$DP ~ d1$FINESS)
-</code></pre>
-
-<pre><code>Error: argument non numérique pour un opérateur binaire
 </code></pre>
 
 <p>Sur 14 SU, 12 envoient des RPU et 10 renseignent le code DP (71%). Calcul du taux de complétude par établissement. NB il faudrait retirer mes RPU où il n&#39;est pas possible de mettre un DP (parti sans attendre&hellip;)</p>

@@ -7,15 +7,15 @@
 #' Auteur: JcB
 #' 
 #library("gdata")
-library("rgrs")
+# library("rgrs")
 library("lubridate")
-library("rattle")
+# library("rattle")
 library("epicalc")
 library("zoo")
 library("xts")
-library("xtable")
-library("plotrix")
-library("openintro")
+# library("xtable")
+# library("plotrix")
+# library("openintro")
 
 
 #'@name foo

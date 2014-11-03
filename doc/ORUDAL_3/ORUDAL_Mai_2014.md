@@ -8,12 +8,76 @@ Retour sur les tensions
 
 ![tensions](tensions20140211.png)
 
+---
+
+- Durée plus longue et plus soutenue que les années précédentes
+- production de cartes régionales
+- un dispositif qui reste encore confus
+- Suivi permanent ?
+
 
 RPU et DSI
 ==========
 
 - Strasbourg
 - Colmar
+
+- Evolutions réglementaires
+- Impératifs horaires de l'InVS
+- Nature de l'envoi
+
+Recommandations
+========================================================
+
+Un **RPU** est composé de **18 items** qui peuvent être
+divisés en deux groupes.
+
+- groupe principal ou __RPU administratif__ (**core**)
+
+  éléments de base qui peuvent **toujours** être relevés de manière exhaustive dès l'admission du patient et transmis au fil de l'eau au concentrateur régional.
+
+  C'est le minimum qui doit pouvoir être transmis au moins une fois par 24 heures.
+
+- groupe complémentaire ou __RPU médical__ (**supplementary**)
+
+RPU Administratif (Core)
+========================================================
+
+- Il doit être transmis tous les jours avant 4 heures du matin
+- Codage __UTF-8__
+- Le fichier doit comporter un nombre d'enregistrements égal au nombre de passages (inscriptions) au service des urgences(SU)
+- Il comprend l'ensemble des données recueillies au moment de l'enregistrement administratif du patient:
+
+RPU Administratif (Core)
+========================================================
+
+  1. n° de dossier
+  2. Date et heure d'enregistrement
+  3. Le n° FINESS (géographique) de l'établissement
+  4. La commune de résidence
+  5. Le code postal  
+  6. Date de naissance
+  7. Mode d'entrée
+  8. Provenance
+  9. Mode de transport
+  10. Prise en charge durant le transport
+  11. Sexe
+
+RPU Médical (Supplementary)
+===========================
+
+- RPU administratif +
+  1. Diagnostic principal (DP)
+  2. Diagnostics associés
+  3. Motif de recours
+  4. Gravité
+  5. Actes réalisés
+  6. Date et heure de sortie
+  7. Mode de sortie
+  8. Destination
+  9. Orientation
+- Cette partie du dossier est transmise au plus tard dans les 6 jours.
+
 
 CR AG FEDORU du 20 mai 2014
 ========================================================
@@ -59,6 +123,9 @@ ATIH (Max Bensadon)
   - validité du schéma XML
   - cohérence du nombre de RPU transmis
   - en test depuis le 18 avril 2014
+
+ATIH
+========
 - pour le contrôle/accès aux données ont défini 4 rôles dont 2 sont régionaux:
   - gestionnaire de fichier (référent technique)
     - demander un identifiant PLAGE auprès de l'administrateur régional (ARS)
@@ -68,29 +135,33 @@ ATIH (Max Bensadon)
 
 ===
 
-- anonymisation renforcée:
+- __anonymisation renforcée__:
   - suppression du nom de commune
   - date de naissance transformée en age
   - code postal transformé en code PMSI
-- Validation des champs: unique ment MONOchamp (pas de validation croisée)
+- Validation des champs: __uniquement MONOchamp__ (pas de validation croisée)
   - production de 16 tableaux:
   - 0 < age <120
   - ZIP existe, etc...
   - durée de passage censurées à 24 h
   - moyennes mobiles pour 3 classes d'age
-- encours de discussion: qui a accès à ces tableau de bord
+- encours de discussion: qui a accès à ces tableaux de bord
 
 OSCOUR-InVS (Vanina Bousquet)
 ==============================
-
-- les ORU peuvent avor accès aux données régionales et nationales (faire une demande)
-- Chiffres pour l'Alsace:
-  - 62% des RPU sont remontés par rapport aux données SAE (moyenne nationale 72%)
-  - 64% de RPU avec codage diagnostic. Entre 2012-2013 la qualité du codage a diminué probablement pat introduction d'établissements ne codant pas.
-  - Exhaustivité diagnostique de 40% (% couverture x % codage). Varie en france de 20% à 100% avec une moyenne à 56%
 - 451 établissement transmettent des RPU
 - 12 M de RPU et 13.000 DP différents
 - L'Alsace se situe dans la moyenne avec une médiane de 56 DP/j
+- les ORU peuvent avoir accès aux données régionales et nationales (faire une demande)
+
+===
+
+- Chiffres pour l'Alsace:
+  - __62%__ des RPU sont remontés par rapport aux données SAE (moyenne nationale 72%)
+  - __64%__ de RPU avec codage diagnostic. Entre 2012-2013 la qualité du codage a diminué probablement par introduction d'établissements ne codant pas.
+  - __Exhaustivité diagnostique de 40%__ (% couverture x % codage).
+  
+  Varie en france de 20% à 100% avec une moyenne à 56%
 
 OSCOUR-InVS (Vanina Bousquet)
 ==============================
@@ -109,7 +180,10 @@ Qualité des données (groupe de travail 1)
 Envoi des RPU
 -------------
 - entre 0 et 4h du matin envoi à la plateforme régionale de la totalité des RPU de la veille (cloturés ou non), ainsi que les RPU des 6 jours précédents.
+
 - tout fichier transmis annule et remplace le fichier précédent, c'est à dire que c'est la totalité de l'information qui est transmise (et pas seulement les mises à jour)
+
+===
 
 - cependant cette règle est difficile à respecter pour les établissements qui font une saisie différée des RPU (notemment pendant la période de fermeture des secrétariats administratifs).
 
@@ -138,9 +212,11 @@ Cohérence des données
 1.Respect des Thésaurus
 -----------------------
 - DP: CIM10
-- Motifd de passage: thésaurus SFMU
+- Motifs de passage: thésaurus SFMU
 - Actes: CCAM
 - gravité: CCMU
+
+===
 
 2.Analyse monochamps
 --------------------
@@ -158,7 +234,7 @@ Cohérence des données
 - travail en cours InVS FEDORU pour avoir des règles communes.
 - pas de recommandations nationale
 - contrôle local (périodicité ?)
-  - mode entrée ét provenance
+  - mode entrée et provenance
   - CCMU et orientation
   - Mode de sortie et orientation
 
@@ -173,7 +249,7 @@ Cohérence des données
 Définitions des bornes 
 ======================
 
-Sont définis:
+Sont définies:
 -------------
 - Horaires: jour, semaine, mois, journée, nuit, nuit profonde, PDS semaine, Weekend....
 - Tranches d'age
@@ -182,12 +258,14 @@ Sont définis:
 - Taux de recours aux urgences
 - sorties non convenues: regroupe fugue, sortie contre avis médical et parti sans attendre.
 
+===
+
 A définir:
 ----------
 - TOP
 - Patients en attente de lit d'hospitalisation
 
-et axes d'analyse
+Axes d'analyse
 =================
 
 Nombre total de passages avec répartition par
@@ -195,15 +273,16 @@ Nombre total de passages avec répartition par
 
 - région
 - département
+- territoires de santé (?)
 - type d'établissement (public, privé, PSPH)
 - commune de domicile
 - année, jour de la semaine, mois, heure, période PDS et non PDS
-- sexe
-- age
-- mode entrée
 
 ---
 
+- sexe
+- age
+- mode entrée
 - mode de transport
 - durée de passage
 - gravité
@@ -211,7 +290,7 @@ Nombre total de passages avec répartition par
 - mode de sortie
 - mode orientation
 - actes CCAM
-Taux de recours par région, département (territoire de santé)
+- Taux de recours par région, département (territoire de santé)
 
 SAMU et SMUR
 ============
@@ -223,6 +302,7 @@ Charte de Qualité de l'Observatoire
 
 - Charte de qualité régionale précisant les rôles et engagements mutuels des membres de l'ORU
 - modèle: charte ORULOR
+- rédaction __Charte ORUDAL__ en cours.
 
 Activité des structures d'urgence en Alsace
 ============================================
@@ -239,8 +319,26 @@ Etat des lieux en Mai 2014
 - SOS mains Diaconat Strasbourg (en cours)
 - SOS Mains Diaconat Mulhouse (février 2014)
 - Clinique des trois frontières change de n°FINESS (16 mai 2014)
-- CH Thann (?)
+- CH Thann (2015 ?)
 
 ===
 
 ![rpu](hop3.png)
+
+En cours
+=============
+
+Registre des AVC à la phase aigüe
+-----------------
+- SAMU
+- SU
+- UNV
+
+
+Petites annonces
+================
+
+
+__ODYS Grands Brûlés__ en cours de déploiement en Lorraine. Téléexpertise pour drands brûlés avec transmission d'images à partir d'un smartphone (Septembre 2014)
+
+__Directives anticipées__ webminar organisé le __13 juin 2014__ à 17 heures par Alsace e-santé.

@@ -33,50 +33,42 @@ library("epicalc")
 
 ```r
 library("lubridate")
+getwd()
+```
 
+```
+## [1] "/home/aphar/Documents/Resural/RPU_2013/Analyse/Chapitres/Diag_principal"
+```
+
+```r
 source("../prologue.R")
 ```
 
 ```
-## Loading required package: questionr
-## 
-## Attaching package: 'rgrs'
-## 
-## Les objets suivants sont masqués from 'package:questionr':
-## 
-##     copie, copie.default, copie.proptab, cprop, cramer.v,
-##     format.proptab, freq, lprop, print.proptab, prop, quant.cut,
-##     renomme.variable, residus, wtd.mean, wtd.table, wtd.var
-## 
-## Rattle : une interface graphique gratuite pour l'exploration de données avec R.
-## Version 3.0.2 r169 Copyright (c) 2006-2013 Togaware Pty Ltd.
-## Entrez 'rattle()' pour secouer, faire vibrer, et faire défiler vos données.
 ## 
 ## Attaching package: 'zoo'
 ## 
 ## Les objets suivants sont masqués from 'package:base':
 ## 
 ##     as.Date, as.Date.numeric
-## 
-## Please visit openintro.org for free statistics materials
-## 
-## Attaching package: 'openintro'
-## 
-## L'objet suivant est masqué from 'package:MASS':
-## 
-##     mammals
-## 
-## L'objet suivant est masqué from 'package:datasets':
-## 
-##     cars
 ```
 
 ```
 ## [1] "Fichier courant: rpu2013d0112.Rda"
 ```
 
+```
+## Warning: impossible d'ouvrir le fichier '../../../../mes_fonctions.R' :
+## Aucun fichier ou dossier de ce type
+```
+
+```
+## Error: impossible d'ouvrir la connexion
+```
+
 ```r
-d1<-foo(path,file)
+#d1<-foo(path,file)
+
 
 # load("../../rpu2013d0107.Rda")
 # d1<-d0107
@@ -1325,14 +1317,6 @@ kable(as.data.frame(code.par.hop), format="markdown")
 | X3Fr| Alk|  Col| Dia|  Geb|  Hag|  Hus| Mul| Odi|  Sel|  Wis| Sav|
 |----:|---:|----:|---:|----:|----:|----:|---:|---:|----:|----:|---:|
 | 1254| 860| 2429|   2| 1074| 1669| 1736| 918| 841| 2098| 1507|   2|
-```
-
-```r
-boxplot(d1$DP ~ d1$FINESS)
-```
-
-```
-Error: argument non numérique pour un opérateur binaire
 ```
 Sur 14 SU, 12 envoient des RPU et 10 renseignent le code DP (71%). Calcul du taux de complétude par établissement. NB il faudrait retirer mes RPU où il n'est pas possible de mettre un DP (parti sans attendre...)
 

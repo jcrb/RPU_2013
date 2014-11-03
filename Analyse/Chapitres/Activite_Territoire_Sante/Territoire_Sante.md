@@ -12,6 +12,10 @@ source("../prologue.R")
 ## [1] "Fichier courant: rpu2013d0112.Rda"
 ```
 
+```
+## Error: impossible d'ouvrir la connexion
+```
+
 ```r
 library("gplots")
 library("multcomp")

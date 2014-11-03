@@ -21,9 +21,10 @@ Analyse spécifique de certains items:
 
 library("epicalc")
 library("lubridate")
-
+getwd()
 source("../prologue.R")
-d1<-foo(path,file)
+#d1<-foo(path,file)
+
 
 # load("../../rpu2013d0107.Rda")
 # d1<-d0107
