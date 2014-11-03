@@ -1,0 +1,85 @@
+Qualité des données RPU
+========================================================
+
+On peut attribuer aux données quatre caractéristiques:
+- conformité
+- exhaustivité
+- qualité
+- cohérence
+
+Permet de définir
+- contenu minimal d'un RPU
+- ceux à rejeter
+
+Conformité
+----------
+1. contenant (conformité structurelle)
+  - respect du format XML
+2. contenu
+  - champ vides
+  - champs incomplets (heure de sortie)
+  - champs non conformes (CIM10)
+  - champs incohérents (pb. des bornes, durée de passage négatives ou supérieures à 72 heures)
+3. unicité
+  - CCMU à l'admission
+  - étanchéité SU-UHTCD
+  
+Que faire en cas de non conformité ?
+- auto complétion (avec heure médiane)
+- stockage et information du producteur
+- auto-correction (CIM10)
+- rejet du RPU
+- analyse dur RPU incomplets
+
+Exhaustivité
+------------
+
+1. exhaustivité des passages (radar quantitatif)
+  - prise en compte de la pédiatrie
+  - urgences gyneco, mains
+  - multi-sites
+  
+2. exhaustivité des données (qualitative)
+  - champs bloquants
+  - seuil d'analyse
+  - pb champs associés (CCAM, diagassociés)
+  
+Qualité
+-------
+
+1. problèmes techniques
+  - zone de saisie en texte libre
+  - absence de détrompage (code commune)
+  - durées de passage et cloture de dossier retardée
+  - absence de transcodage ou transcodage non pertinent
+  - absence de champs bloquants
+  
+2. problèmes de codage
+  - CCMU: consult simple (1), + bio ou rx (2), hospitalisé (3)
+  - TDS bégnine et cotation P
+  - FINESS geographique et juridique
+  
+Cohérence
+---------
+
+- provenance et mode d'entrée
+- CCMU et orientation (CCMU5 et RAD)
+- sexe ou age et diagnostic
+- mode de sortie et mode d'orientation (RAD et hospitalisation en UHCD)
+- faux non renseignés
+- bornes et définitions
+  - ages et classes d'age
+  - heures, semaine, WE, PDS
+  - heure de sortie ?
+  - temps d'attente avant exemen, soins, sortie ?
+
+Axes d'analyse
+--------------
+
+- définition du TOP
+- def du taux de recours aux urgences
+- prise en compte des sorties atypiques, des réorientations
+- durée moyenne de passage: eléments de pondération ?
+- moyenne ou médiane ?
+- réalisation ou non d'examens complémentaires
+- les DP sont soit exagérément précis soit totalement vagues (intérêt d'une CIM10 réduitr)

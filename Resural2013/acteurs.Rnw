@@ -7,12 +7,12 @@
 <<origine,echo=FALSE>>=
 hop<-c("Clinique des 3 frontières","CH Altkirch","CH Colmar","Diaconat Fonderie","CH Guebwiller","CH Haguenau","Hôpitaux Universitaires de Strasbourg","CH Mulhouse","Clinique Ste Odile","CH Sélestat","CH Wissembourg","CH Saverne")
 @
-On définit l'exhaustivité quantitative comme le nombre de RPU transmis par rapport au nombre de passages réels.
+On définit l'\emph{exhaustivité quantitative} \index{exhaustivité quantitative (def.)} comme le nombre de RPU transmis par rapport au nombre de passages réels.
 Les données proviennent des RPU produits par les hôpitaux d'Alsace ayant l'autorisation de faire fonctionner un service d'urgence (SU). La liste des structures hospitalières ayant fournit des informations alimentant le présent rapport est fournie par la table \ref{tab1}, page \pageref{tab1}.
 
 Tous ces hôpitaux fournissent des données depuis le premier janvier 2013 sauf le CH Saverne qui a commencé en Juillet 2013.
 
-Deux structures ne fournissent pas encore de RPU. Il s'agit de la clinique Sainte-Anne à Strasbourg (Groupe hospitalier Saint-Vincent) et du Centre Hospitalier de Thann.
+Quatre structures ne fournissent pas encore de RPU. Il s'agit de la clinique Sainte-Anne à Strasbourg (Groupe hospitalier Saint-Vincent), du Centre Hospitalier de Thann, de la clinique du Diaconat à Strasbourg et de la clinique Roosvelt à Mulhouse.
 
 Certaines données peuvent être recoupées avec celles du serveur régional mis en place en 2006 par l'ARS: 
 
@@ -26,16 +26,16 @@ d<-as.Date(d,origin="1970-01-01")
 d<-format(d,"%d/%m/%Y")               
 c<-cbind(a,b,hop,d)
 colnames(c)<-c("n","%","Hôpitaux","Date d'inclusion")
-xtable(c, caption = "Structures hospitalières participantes en 2013", label = "tab1",align="|l|r|r|l|r|",digits = c(0,0,2,0,0), table.placement = "ht",caption.placement = "top")
+xtable(c, caption = c("Structures hospitalières participantes en 2013. Tous les paticipants fournissent des données depuis le 1/1/2013 sauf le CH Saverne.","Structures hospitalières participantes en 2013"), label = "tab1",align="|l|r|r|l|r|",digits = c(0,0,2,0,0), table.placement = "ht",caption.placement = "top")
 @
 
-\section{Exhaustivité qualitative}
+\section{Exhaustivité qualitative} \index{exhaustivité qualitative (def.)} 
 
-L'exhaustivité qualitative correspond à la fois à la complétude des items et à la cohérence de réponses.
+L'\emph{exhaustivité qualitative} correspond à la fois à la complétude des items et à la cohérence de réponses.
 
 Les informations de nature administrative (code postal, commune d'origine, sexe, date de naissance,\dots ) sont correctement renseignées avec une exhaustivité de $100\%$.
 
-Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$.
+Les données à caractère plus médical comme le motif de consultation ou le diagnostic principal ont une exhaustivité moins bonne, de l'ordre de $70\%$. Les motifs DESTINATION et ORIENTATION sont à pondérer en fonction du MOTIF\_SORTIE. En effet la structure du RPU fait que par défaut, tous les retours à domicile génèrent automatiquement un non réponse pour les motifs DESTINATION et ORIENTATION qui ne concernent que les patients hospitalisés.
 
 <<label=tab2,echo=FALSE,results='asis'>>=
 a<-is.na(d1)
@@ -44,7 +44,7 @@ b<-sort(b)
 b<-cbind(b)
 colnames(b)<-"%"
 
-xtable(b,caption = "Données manquantes en 2013", label = "tab2", table.placement = "ht",caption.placement = "top",align="|l|r|")
+xtable(b,caption = "Données manquantes en 2013 en pourcentage du total des réponses. Les données administrative du RPU, notemment les paramètres saisis dès l'arrivée du patient sont exhaustifs. Par contre les données de suivis et médicales sont moins complètes. Les motifs DESTINATION et ORIENTATION sont à pondérer en fonction du MOTIF SORTIE (voir texte).", label = "tab2", table.placement = "ht",caption.placement = "top",align="|l|r|")
 @
 
 Les informations sont résumées dans la table \ref{tab2}, page \pageref{tab2}.
@@ -57,9 +57,13 @@ On peut représenter sous forme d'un diagramme en radar (ou toile d'araignée) l
 fadeBlue<-fadeColor("blue", fade = "15")
 fadeRed<-fadeColor("red", fade = "15")
 
-a<-apply(is.na(d1),2,mean)
-round(a*100,2)
-radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
+a <- apply(is.na(d1[,1:20]),2,mean)
+r <- round(a*100,2)
+r
+# radial.plot(1-a,rp.type="p",radial.pos=NULL,labels=c(1:20),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main="Taux de complétude des RPU transmis")
+radial.plot(1-a,rp.type="p",radial.pos=NULL,labels= names(a),line.col=fadeBlue,poly.col=fadeBlue,radial.lim=c(0,1),main= paste0("Taux de complétude des RPU transmis en ",anc), mar=c(2,2,5,2))
+par(mar=c(5.1,4.1,4.1,2.1))
+
 @
 
 Le renseignement des items varie entre $20\%$ et $100\%$. Cependant ces données sont à interpréter avec prudence. Ainsi l'item 4 qui correspond au mode de sortie ne distingue pas les non réponses des vrais retours à domicile (se reporter à la discussion page \pageref{ref:sortie})

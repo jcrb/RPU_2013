@@ -11,7 +11,7 @@ La durée de passage est le temps compris entre la date d'entrée et celle de so
 
 \section{Cas général}
 
-<< passages_comment,echo=FALSE>>=
+<< passages_comment,echo=FALSE, results='asis'>>=
 e<-ymd_hms(d1$ENTREE)
 s<-ymd_hms(d1$SORTIE)
 d1$presence<-(s-e)/60 # transforme les secondes en mn
@@ -19,9 +19,12 @@ summary1 <- summary(as.numeric(d1$presence))
 # suppression des valeurs négatives
 d1$presence[d1$presence < 0]<-NA
 d1$presence <- as.numeric(d1$presence)
+
 summary2 <- summary(d1$presence)
 et2 <- round(sd(d1$presence,na.rm=T),2)
 completion <- round((1-summary2["NA's"]/nrow(d1))*100,2)
+
+xs <- xsummary(d1$presence, xtable=TRUE, tl=paste0("Temps de passage brut en ",anc, ". Les valeurs non disponibles (Na) correspondent aux valeurs manquantes ou aberrantes (négatives)."), tc="temps de passage brut", lab="lab:temps_brut")
 @
 
 La dispersion des durées de passage est très importante, variant de \Sexpr{summary1["Min."]} à \np{\Sexpr{summary1["Max."]}} minutes. Les valeurs négatives sont considérées comme des valeurs manquantes. 
@@ -31,39 +34,47 @@ Une transformation logarithmique des données permet de mieux représenter l'his
 
 %\begin{figure}[ht!]
 \begin{center}
-<<log_passages,echo=FALSE,fig.width=8>>=
-hist(log10(as.numeric(d1$presence)),ylab="nombre", xlab="Logarithme de la durée de présence en mn", main="Durée de présence au SU en 2013")
+<<log_passages,echo=FALSE,fig.height=5>>=
+hist(log10(as.numeric(d1$presence)),ylab="nombre", xlab="Durée de présence en en heure (après transformation logarithmique).", main="Durée de présence au SU en 2013", col="gray")
 @
  \captionof{figure}{Durée de passage (log 10)}
 \end{center}
 %\end{figure}
 
-la transformation log produit une courbe normale où la majorité des consultants ont une durée de présence comprise entre 10 et 1000 minutes (environ 17 heures). On nettoie les données en supprimant les enregistrements où présence = NA, puis on forme 3 sous-groupes:
+la transformation log produit une courbe normale où la majorité des consultants ont une durée de présence comprise entre 10 et 1000 minutes (environ 17 heures). On nettoie les données en supprimant les enregistrements où le durée de présence est indéterminée, puis on forme 3 sous-groupes:
 \begin{itemize}
-  \item a moins de 10 mn
-  \item b de 10 à 1000 mn
-  \item c plus de 1000 mn
+  \item a moins de 10 minutes
+  \item b de 10 à 1440 minutes (24 heures)
+  \item c plus de 1440 minutes
 \end{itemize}
 
-<<passage_clean,echo=FALSE,comment="">>=
+<<passage_clean,echo=FALSE,comment="", results='asis'>>=
 d2<-d1[!is.na(d1$presence),]
 a<-d2$presence[d2$presence < 10]
-c<-d2$presence[d2$presence > 1000]
-b<-d2$presence[d2$presence > 9 & d2$presence < 1001]
+c<-d2$presence[d2$presence > 1440]
+b<-d2$presence[d2$presence > 9 & d2$presence < 1441]
 t<-length(a)+length(b)+length(c)
 clean<-round(length(b)*100/t,2)
 summary3 <- summary(b)
 et3 <- sd(b)
-summary3
+
+xs <- xsummary(b, xtable=TRUE, short=TRUE,,tl=paste0("Temps de passage corrigé en ",anc, ". Ne sont pris en compte que les temps de passage supérieurs à 10 minutes et inférieur à 24 heures."), tc="temps de passage corrigé", lab="lab:temps_corrige")
 @
 
 Les durées de présences inférieures à 10 minutes proviennent à plus de 90\% des HUS (Erreur logicielle signalée au CRIH):
-<<passages_erronés, echo=FALSE, comment="">>= 
+<<passages_erronés, echo=FALSE, comment="", results='asis'>>= 
 # Origine despatients restants moins de 10 mn: ils proviennent majoritairement des HUS:
 a <- d2[d2$presence < 10,"FINESS"]
 r <- rbind(table(a),round(prop.table(table(a))*100,2))
 rownames(r) <- c("n","%")
-r
+# r
+
+t2 <- data.frame(table(a),round(prop.table(table(a))*100,2))
+t2 <- t2[,-3]
+names(t2) <- c("Etablissement", "Passages < 10 mn", "%")
+
+print(xtable(t2,,caption=c("Nombre de RPU où la durée de passage est inférieure à 10 minutes et par établissement. On note que plus de 90 p.cent des passages des HUS sont inférieurs à cette durée.","Nombre de passages par service d'urgence de moins de 10 mn"),label="fig:passages10", align=c("r", "c","c","c"), display = c("s","s","f","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
+
 # Plus de 90% proviennent des HUS
 @
 
@@ -71,8 +82,8 @@ Finalement, on conserve le groupe $b$ qui regroupe la majorité (\Sexpr{clean}\%
 
 %\begin{figure}[ht!]
 \begin{center}
-<<passages_clean_hist,echo=FALSE,fig.width=8>>=
-hist(b,ylab="nombre", xlab="Durée de présence (mn)", main=paste("Durée de présence au SU (2013) n =",length(b)),sub="Sont exclus les patients présents moins de 10 mn ou plus de 1000 mn")
+<<passages_clean_hist,echo=FALSE,fig.height=5>>=
+hist(b,ylab="nombre", xlab="Durée de présence (mn)", main=paste("Durée de présence au SU (2013) n =",length(b)),sub="Sont exclus les patients présents moins de 10 mn ou plus de 1440 mn", col="gray")
 @
  \captionof{figure}{Durée de passage aux urgences}
 \end{center}
@@ -100,13 +111,13 @@ a<-zoo(c,d)
 
 %\begin{figure}[ht!]
 \begin{center}
-<<graphe_duree_moyenne_passage,echo=FALSE,fig.width=8>>=
-plot(a,ylab="durée (minutes)",main="Durée moyenne de passage - 2013",xlab="Année 2013",col="lightblue")
+<<graphe_duree_moyenne_passage,echo=FALSE,fig.height=5>>=
+plot(a,ylab="durée (minutes)",main= paste0("Durée moyenne de passage - ", 2013), xlab= paste0("Année ", anc), col="lightblue")
 lines(rollmean(a,7),col="blue")
 lines(rollapply(a,7,function(x) mean(x) + sd(x)),col="red")
 lines(rollapply(a,7,function(x) mean(x) - sd(x)),col="red")
 @
- \captionof{figure}{Durée moyenne de passage aux urgences en 2013}
+ \captionof{figure}{Durée moyenne de passage aux urgences en \ancourante)}
 \end{center}
 
 <<menage,echo=FALSE>>=
@@ -119,15 +130,15 @@ rm(d2)
 % *                               *
 % *********************************
 
-La distribution des durées de passage n'est pas normale mais présente une déviation axiale gauche importante (figure \ref{fig:hist_passages}). Cette notion est à prendre en considération lors de l'interprétation de la durée moyenne de passage.
+La distribution des durées de passage n'est pas normale mais présente une déviation axiale gauche importante (figure \ref{fig:hist_passages}). Cette notion est à prendre en considération lors de l'interprétation de la durée moyenne de passage. L'allure générale de l'histogramme évoque une loi de Poisson.
 
 %\begin{figure}[ht!]
  \begin{center}
-<<hist_tous_passages,echo=FALSE,fig.width=8>>=
+<<hist_tous_passages,echo=FALSE,fig.height=5>>=
   a <- (as.numeric(d1$presence))
   a <- a[!is.na(a)]
   a<-a[a > 10 & a < 1440]
-  hist(a, breaks=30, xlab="temps de passage (mn)",main="Histogramme du temps de passage",ylab="nombre")
+  hist(a, breaks=30, xlab="temps de passage (mn)",main="Histogramme du temps de passage",ylab="nombre", col="gray")
 @
  \captionof{figure}{Histogramme des passages en 2013 (\Sexpr{length(a)} patients). Ne sont pris en compte que les RPU dont la durée de passage est renseignée et inférieure à 24 heures.}
  \label{fig:hist_passages}
@@ -162,20 +173,36 @@ periode<-cut(hour(d1$ENTREE),breaks=c(0,8,20,24),labels=c("nuit profonde","journ
 
 t <- table(periode)
 p <- round(prop.table(t)*100,2)
-r <- rbind(t,p)
-rownames(r) <- c("N","%")
-xtable(r, caption=c("Fréquentation des urgences et période de la journée","Fréquentation des SU et période"), label = "tab:freq_periode")
+m <- t/365 # moyenne par jour et par période
+th <- c(m[1]/8, m[2]/12, m[3]/4) # motenne par heure
+r <- rbind(t, p, m, th)
+rownames(r) <- c("N","%", "MJ", "TH")
+print(xtable(r, caption=c("Fréquentation des urgences et période de la journée pour l'ensemble des SU d'Alsace. N: valeur absolue, MJ: moyenne journalière, TH: taux horaire. 2/3 des RRPU sont enregistrés entre 8 et 20 heures.","Fréquentation des SU et période"), label = "tab:freq_periode"), format.args = list(big.mark = " ", decimal.mark = ","))
 
-t <- tapply(d1$presence,periode,mean,na.rm=TRUE)
-p <- round(prop.table(t)*100,2)
-r <- rbind(t,p)
-rownames(r) <- c("mn","%")
-xtable(r, caption=c("Durée  moyenne de présence (mn) et période de la journée","Durée de présence et période"), label = "duree_periode")
+#------------------------------------------------------------
+#   Période et durée de présence
+#------------------------------------------------------------
+t <- tapply(d1$presence,periode, mean,na.rm=TRUE) # moyenne
+sd <- tapply(d1$presence,periode, sd,na.rm=TRUE) # ecart type
+md  <- tapply(d1$presence,periode, median,na.rm=TRUE) # médiane
+# p <- round(prop.table(t)*100,2)
+r <- rbind(t, sd, md)
+rownames(r) <- c("moyenne","écart-type", "médiane")
+
+print(xtable(r, caption=c("Durée de présence et période de la journée. La durée de passage en nuit profonde est plus longue qu'en journée ou en soirée. Cette différence est fortement significative (p < 0.001)","Durée de présence et période"), label = "duree_periode"), format.args = list(big.mark = " ", decimal.mark = ","))
+
+# vérification par ANOVA
+fit <- aov(d1$presence ~ periode)
+a <- xtable(fit, caption="Comparaison des moyennes des durées de passage en fonction de la période de la journée (ANOVA). Au moins une des moyennes est significativement différente des autres.")
+names(a) <- c("DDL","Somme des carrés","Carré moyen","test F"," p")
+print(a, format.args = list(big.mark = " ", decimal.mark = ","))
+tuk <- TukeyHSD(fit)
+print(xtable(tuk$periode, caption="Le test HSD de Tukey montre que c'est la durée de passage en nuit profonde qui de distingue des autres. Il n'y a pas de différences entre la journée et la soirée."))
 @
 
 %\begin{figure}[ht!]
 \begin{center}
-<<bp_periode,echo=FALSE,fig.width=8>>=
+<<bp_periode,echo=FALSE,fig.height=5>>=
 barplot(table(periode),main="Passages selon la période de la journée", ylab="Fréquence")
 @
  \captionof{figure}{Passages selon la période de la journée}
@@ -187,7 +214,7 @@ Les passages ont lieu majoritairement en journée (fig. \ref{fig:bp_periode} pp.
 
 %\begin{figure}[ht!]
 \begin{center}
-<<periode_2,echo=FALSE,fig.width=8>>=
+<<periode_2,echo=FALSE,fig.height=5>>=
 boxplot(as.numeric(d1$presence) ~ periode,main="Durée de passage selon la période de la journée",outline=F, ylab="Temps en minutes")
 @
  \captionof{figure}{Passages selon la période de la journée}
@@ -197,7 +224,7 @@ boxplot(as.numeric(d1$presence) ~ periode,main="Durée de passage selon la péri
 
 %\begin{figure}[ht!]
 \begin{center}
-<<periode_1,echo=FALSE,fig.width=8>>=
+<<periode_1,echo=FALSE,fig.height=5>>=
 barplot(summary(periode),main="Passages selon la période de la journée")
 @
  \captionof{figure}{Passages selon la période de la journée}
@@ -205,21 +232,21 @@ barplot(summary(periode),main="Passages selon la période de la journée")
 \end{center}
 
 <<periode_3,echo=FALSE,results='asis'>>=
-# uniquement sr le groupe b (10 à 1000  mn). outline=F empeche l'affichage des outliners
+# uniquement sr le groupe b (10 à 1440  mn). outline=F empeche l'affichage des outliners
 periode2<-cut(hour(b$ENTREE),breaks=c(0,8,20,24),labels=c("nuit profonde","journée","soirée"))
 t <- tapply(b$presence,periode2,mean,na.rm=TRUE)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
 rownames(r) <- c("mn","%")
-xtable(r, caption=c("Durée moyenne de présence pour le groupe b (10-1000 mn)"), label = "b_periode")
+print(xtable(r, caption=c("Durée moyenne de présence pour le groupe b (10-1440 minutes)"), label = "b_periode"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
-Durée moyenne de présence pour le groupe b (10-1000 mn) (fig. \ref{b_periode} pp.\pageref{b_periode}).
+Durée moyenne de présence pour le groupe b (10-1440 minutes) (fig. \ref{b_periode} pp.\pageref{b_periode}).
 
 %\begin{figure}[ht!]
 \begin{center}
-  <<periode_4,echo=FALSE,fig.width=8>>=
-  boxplot(as.numeric(b$presence) ~ periode2, main="Durée de passage selon la période de la journée",sub="Groupe 10 à 1000 mn",ylab="durée de passage",outline=F)
+  <<periode_4,echo=FALSE, fig.height=5>>=
+  boxplot(as.numeric(b$presence) ~ periode2, main="Durée de passage selon la période de la journée",sub="Groupe 10 à 1440 mn",ylab="durée de passage",outline=F)
   @
  \captionof{figure}{Passages selon la période de la journée}
 \end{center}
@@ -243,7 +270,7 @@ tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans 
 # s <- table(tranche_age)
 # s
 x <- xprop.table(table(tranche_age))
-xtable(x, caption=c("Répartition des RPU par tranches d'age ","Répartition des RPU par tranches d'age"), label="tab:tranches_age")
+print(xtable(x, caption=c("Répartition des RPU par tranches d'age ","Répartition des RPU par tranches d'age"), label="tab:tranches_age"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 
@@ -253,14 +280,18 @@ xtable(x, caption=c("Répartition des RPU par tranches d'age ","Répartition des
 #
 tranche_age<-cut(d1$AGE,breaks=c(-1,15,75,max(d1$AGE,na.rm=T)),labels=c("15 ans et moins","16 à 74 ans","75 ans et plus"))
 t <- tapply(d1$presence,tranche_age,mean,na.rm=TRUE)
-t <- t(t)
-rownames(t)<-"mn"
-xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'âge","Durée de passage et age"), label="tab:age_dp")
+sd <- tapply(d1$presence,tranche_age,sd,na.rm=TRUE)
+md <- tapply(d1$presence,tranche_age,median,na.rm=TRUE)
+r <- rbind(t,sd,md)
+rownames(r) <- c("moyenne","ecart-type","médiane")
+r <- t(r)
+
+print(xtable(r, caption=c("Durée de passage en fonction de l'âge","Durée de passage et age"), label="tab:age_dp"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 %\begin{figure}[ht!]
 \begin{center}
-  <<age_groupe2,echo=FALSE,fig.width=8>>=
+  <<age_groupe2,echo=FALSE,fig.height=5>>=
   # outline=F empeche l'affichage des outliners
   boxplot(d1$presence~tranche_age,ylab="Temps (en mn)",main="Durée de passage en fonction de l'age",col="yellow",outline=F)
   @
@@ -281,16 +312,18 @@ xtable(as.data.frame(t(t)), caption=c("Durée de passage (mn) en fonction de l'�
 t <- tapply(d1$presence,wday(e,label=TRUE),mean,na.rm=TRUE)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
+dimnames(r)[[2]] <- week.short <- c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
+
 rownames(r) <- c("mn","%")
-xtable(r, caption=c("Durée de présence et selon le jour de la semaine. Temps passé en minutes (mn) aux urgences en fonction du jour","Durée de présence et jour de la semaine"), label = "tab:jour_semaine")
+print(xtable(r, caption=c("Durée de présence et selon le jour de la semaine. Temps passé en minutes (mn) aux urgences en fonction du jour","Durée de présence et jour de la semaine"), label = "tab:jour_semaine"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 Il existe une relation entre le jour de la semaine et la durée de présence aux urgences (table \ref{tab:jour_semaine} pp.\pageref{tab:jour_semaine}). La durée de présence est plus longue en début de semaine avec un maximum pour le lundi puis diminue progressivement pour atteindre un minimum le dimanche.
 
 %\begin{figure}[ht!]
 \begin{center}
-  <<bp_jour_presence,echo=FALSE,fig.width=8>>=
-boxplot(as.numeric(d1$presence) ~ wday(e,label=TRUE),outline=F,ylab="durée de présence moyenne (mn)",main="Durée de présence moyenne selon le jour de la semaine", col="pink")
+  <<bp_jour_presence,echo=FALSE,fig.height=5>>=
+boxplot(as.numeric(d1$presence) ~ wday(e,label=TRUE),outline=F,ylab="durée de présence moyenne (mn)",main="Durée de présence moyenne selon le jour de la semaine", col="pink", names= week.short)
   @
  \captionof{figure}{Durée de passage en fonction du jour de la semaine}
  \label{duree_jour}
@@ -321,7 +354,7 @@ b2<-length(m4)
 p2<-round(b2*100/n2,2)
 @
 
-Pour l'ensemble des patients d'Alsace, \Sexpr{p2}\% quittent les urgences en moins de quatre heures.
+Pour l'ensemble des patients d'Alsace, \Sexpr{p2}\% d'entre eux quittent les urgences en moins de quatre heures.
 
 % ************************
 % *                      *  
@@ -354,7 +387,7 @@ t <- tapply(d1$presence, x_dest, mean,na.rm=TRUE)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
 rownames(r) <- c("mn","%")
-xtable(r, caption=c("Durée de présence et destination. Temps passé en minutes (mn) aux urgences en fonction de la destination à l'issue de la prise en charge","Durée de présence et destination"), label = "tab:duree_destination")
+print(xtable(r, caption=c("Durée de présence et destination. Temps passé en minutes (mn) aux urgences en fonction de la destination à l'issue de la prise en charge","Durée de présence et destination"), label = "tab:duree_destination"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 Il existe une relation entre l'orientation et la durée de présence aux urgences (table \ref{tab:duree_orientation} pp.\pageref{tab:duree_orientation}).
@@ -363,7 +396,7 @@ Il existe une relation entre la destination et la durée de présence aux urgenc
 
 %\begin{figure}[ht!]
 \begin{center}
-  <<bp_duree_dest,echo=FALSE,fig.width=8>>=
+  <<bp_duree_dest,echo=FALSE,fig.height=5>>=
 boxplot(d1$presence ~ x_dest, outline=F,main="Durée de passage selon la destination",ylab="Durée de passage (mn)")
   @
  \captionof{figure}{Durée de passage en fonction de la destination}
@@ -385,13 +418,13 @@ t <- round(tapply(d1$presence,d1$GRAVITE,mean,na.rm=TRUE),2)
 p <- round(prop.table(t)*100,2)
 r <- rbind(t,p)
 rownames(r) <- c("mn","%")
-xtable(r, caption=c("Durée de présence et gravité. Temps passé en minutes (mn) aux urgences en fonction de la CCMU","Durée de présence et gravité"), label = "duree_gravite")
+print(xtable(r, caption=c("Durée de présence et gravité. Temps passé en minutes (mn) aux urgences en fonction de la CCMU","Durée de présence et gravité"), label = "duree_gravite"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 Il existe une relation entre la gravité et la durée de présence aux urgences (table \ref{duree_gravite} pp.\pageref{duree_gravite}).
 
 %\begin{figure}[ht!]
  \begin{center}
-  <<duree_gravite2,echo=FALSE,fig.width=8>>=
+  <<duree_gravite2,echo=FALSE,fig.height=5>>=
   boxplot(d1$presence ~ d1$GRAVITE,,outline=F,main="Durée de présence selon la gravité",ylab="durée de présence",xlab="Gravité en unités CCMU")
   @
  \captionof{figure}{Durée de passage en fonction de la gravité exprimée en unité CCMU}

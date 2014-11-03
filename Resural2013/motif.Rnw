@@ -7,14 +7,17 @@ Le motif de consultation est l'un des items les plus mal renseigné. Cela est d�
 Le thésaurus est présenté sous la forme d'un fichier Excel. L'onglet \emph{recours} liste environ \emph{150} motifs de recours aux urgences avec leur correspondance CIM10, répartis en 17 groupes. Aucune méthode n'est parfaite mais cette page constitue une base acceptable d'harmonisation des données.
 
 
-<<motifss,echo=FALSE,results='asis'>>=
+<<motifss,echo=FALSE,results='asis', fig.height=5>>=
 c<-tapply(!is.na(d1$MOTIF),d1$FINESS,mean)
+t2 <- data.frame(as.character(row.names(c)), as.numeric(c))
+names(t2) <- c("Etablissement", "Motif (p.cent)")
+t2[,2] <- round(t2[,2] * 100, 2) # arrondi du motif
 
-xtable(data.frame(t(round(c*100,2))),caption=c("Taux de réponse à l'item motif de consultation selon le services d'urgence","Motif de consultation"),label="lab:motif")
+print(xtable(t2,caption=c("Taux de réponse à l'item motif de consultation selon le services d'urgence","Motif de consultation"),label="lab:motif"),format.args = list(big.mark = " ", decimal.mark = ","))
 
 barplot(sort(round(c*100,2)),main="Taux de renseignement de l'item 'Motif de consultation'",ylab="pourcentage",xlab="Services d'urgence")
 
-barplot(sort(round(c*100,2),decreasing=TRUE),main="Taux de renseignement de l'item 'Motif de consultation'",xlab="pourcentage",ylab="Services d'urgence",horiz=TRUE,las=2)
+# barplot(sort(round(c*100,2),decreasing=TRUE),main="Taux de renseignement de l'item 'Motif de consultation'",xlab="pourcentage",ylab="Services d'urgence",horiz=TRUE,las=2)
 @
 
 \index{exhaustivité@motif}

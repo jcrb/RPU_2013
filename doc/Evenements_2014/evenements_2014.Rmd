@@ -3,6 +3,53 @@ Evènements remarquables 2014
 
 - tensions hospitalières
 - pic de pollution: semaine 11 (10-16 mars, circulation alternée Paris le 17/3)
+- ponts ?
+- congés scolaires ?
+
+Jours fériés en France
+----------------------
+
+Date   Nom 	Remarques
+
+__1er janvier__ 	Jour de l’an 	Premier jour de l’année ; Pour les catholiques, fête de Sainte Marie Mère de Dieu (avant le concile Vatican II, Circoncision de Jésus-Christ.)
+
+47ème et 46ème jours avant Pâques 	Mardi gras et Mercredi des cendres 	Jours fériés supplémentaires spécifiques aux Antilles
+
+__Vendredi saint__ 	Jour férié chrétien supplémentaire spécifique aux départements de la Moselle, du Bas-Rhin et du Haut-Rhin et des Antilles.
+
+__Lundi de Pâques__ 	Pâques (fête chrétienne commune aux catholiques et aux protestants) est le premier dimanche qui suit la première pleine lune de printemps.
+
+__1er mai__ 	Fête du Travail 	Commémore la ratification de la journée de travail de 8 heures ; traditionnellement le jour de nombreuses manifestations syndicales et politiques en France. (Depuis 1947, l’appellation "Fête du Travail" n’est que coutumière, i.e. non officielle).
+
+__8 mai__ 	Fête de la Victoire 	Commémoration de la capitulation de l'Allemagne nazie mettant fin à la Seconde Guerre mondiale en Europe.
+
+22 mai 	Abolition de l’esclavage 	Dans le département de la Martinique uniquement
+
+27 mai 	Abolition de l’esclavage 	Dans le département de la Guadeloupe uniquement
+
+__Jeudi Ascension__ 40 jours après Pâques 	Fête chrétienne célébrant la montée de Jésus aux cieux
+
+__Lundi de Pentecôte__ Le lundi suivant le dimanche de Pentecôte (le septième après Pâques). 	Fête chrétienne célébrant la descente du Saint-Esprit parmi les apôtres. Même si cette journée est redevenue chômée, le Lundi de Pentecôte fut choisi comme journée de solidarité de 2005 à 2007 (inclus) et devait être considéré comme travaillé (sans rémunération).
+
+10 juin 	Abolition de l’esclavage 	Dans le département de la Guyane uniquement
+
+__14 juillet__ 	Fête nationale 	Commémoration de la Fête de la Fédération du 14 juillet 1790 (elle-même anniversaire de la prise de la Bastille en 1789).
+
+__15 août__ 	Assomption 	Fête catholique célébrant la montée de la Vierge Marie aux cieux. Fête de Marie, sainte patronne de la France et Fête nationale sous la Monarchie
+
+9 octobre 	Abolition de l’esclavage 	Dans collectivité d'outre-mer de Saint-Barthélemy uniquement
+
+__1er novembre__ 	Toussaint 	Fête de tous les saints de l’Église catholique
+
+2 novembre 	Fête des Morts 	Le jour des morts, est à la fois une journée de commémoraison et une journée d'intercession, de prière pour les morts. Jour férié chrétien supplémentaire spécifique aux départements des Antilles.
+
+__11 novembre__ 	Armistice de 1918 	Commémoration de l’armistice mettant fin à la Première Guerre mondiale
+
+20 décembre 	Abolition de l’esclavage 	Dans le département de la Réunion uniquement
+
+__25 décembre__ 	Noël 	Naissance de Jésus-Christ
+
+__26 décembre__ 	Saint Étienne 	Jour férié chrétien supplémentaire spécifique aux départements de la Moselle, du Bas-Rhin et du Haut-Rhin
 
 Principales fêtes de 2014
 -------------------------
@@ -51,5 +98,61 @@ print(paste("Pentecote:", wday(a, label=T), a))
 
 a <- PentecostMonday(year)
 print(paste("Lundi de pentecote:", wday(a, label=T), a))
+```
+
+Liste des dimanches:
+- on forme une liste de tous les jours de l'année
+- on extrait les dimanches (dim)
+- les samedis (sam)
+- les jours fériés (ferie) il manque le 26 décembre
+
+```{r}
+library("timeDate")
+
+year <- 2013
+
+y <- timeSequence(from = paste0(year,"-01-01"), to = paste0(year, "-12-31"), by = "day")
+y <- as.Date(y)
+length(y)
+
+dim <- y[weekdays(as.Date(y)) == "dimanche"]
+sam <- y[weekdays(as.Date(y)) == "samedi"]
+
+length(dim)
+length(sam)
+
+ferie <- c(Pentecost(year), PentecostMonday(year), LaborDay(year), FRAscension(year), FRBastilleDay(year), FRAssumptionVirginMary(year), FRAscension(year), FRArmisticeDay(year),  FRAllSaints(year), GoodFriday(year), EasterMonday(year), NewYearsDay(year), ChristmasDay(year))
+ferie <- as.Date(ferie)
+
+```
+Ensemble des jours qui ne sont ni des samedis, ni des dimanches, ni des jours fériés
+```{r}
+ouvrable <- y[!match(as.character(y), as.character(dim), nomatch = 0)]
+length(ouvrable)
+ouvrable <- ouvrable[!match(as.character(ouvrable), as.character(sam), nomatch = 0)]
+length(ouvrable)
+ouvrable <- ouvrable[!match(as.character(ouvrable), as.character(ferie), nomatch = 0)]
+length(ouvrable)
+```
+Samedi et dimanche fériés
+```{r}
+samedi.ferie <- a <- merge(as.character(sam), as.character(ferie), by=1)
+samedi.ferie
+dimanche.ferie <- merge(as.character(dim), as.character(ferie), by=1)
+dimanche.ferie
+```
+
+Jours de semaine fériés
+```{r}
+ouvrable <- y[!match(as.character(y), as.character(dim), nomatch = 0)]
+ouvrable <- ouvrable[!match(as.character(ouvrable), as.character(sam), nomatch = 0)]
+ouvrable.ferie <- merge(as.character(ouvrable), as.character(ferie), by=1)
+ouvrable.ferie
+wday(ouvrable.ferie$x, label = TRUE)
+```
+Dimanches et jours fériés en Alsace
+```{r}
+dim.and.ferie <- c(dim, ouvrable.ferie)
+
 ```
 

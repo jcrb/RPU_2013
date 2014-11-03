@@ -114,7 +114,7 @@ base$zone_proximite[57]<-3
 ```{r save_base}
 names(base)
 getwd()
-save(base,file="doc/Demographie/base.Rda")
+save(base,file="../../Demographie/base.Rda")
 ```
 load("base.Rda")
 
@@ -167,6 +167,7 @@ pop.a.part
 Pour les raisons expliquées plus haut, les calculs statistiques font référence à la population **municipale**.
 
 #### Population par territoire de proximité:
+
 ATTENTION: les territoires de proximité sont dans l'ordre de SAGEC qui n'est pas celui de l'ARS
 ```{r pop_t_proximite}
 territoire.prox<-c("Altkirch","Colmar","Guebwiller","Haguenau","Molsheim-Schirmeck","Mulhouse","Sélestat-Obernai","Saint-Louis","Saverne","Strasbourg","Thann","Wissembourg")
@@ -283,6 +284,7 @@ qui retourne une lise de 13 éléments, chacun contenant les caractéristiques d
 NB: voir la vignette **sp** pour ub exemple de création d'un objet spatialpolygon à partir de polygones élémentaires.
 
 #### Coloriage spécifique d'une zone
+
 On veut rprésenter la carte des arrondissements (objet *contour*) avec 2 couleurs pour chaque département. On utilise le *Spatial polygon* contour (cf carto_alsace ci-dessus) qui contient 13 polygones. On crée un vecteur contenant 13 couleurs: "springgreen3" si l'arrondissement appartient au 67 et "steelblue3" sinon. Puis on dessinne la carte en couleur: 
 ```{r alsace}
 cols<-ifelse(substr(names(contour),1,2)=="67","springgreen3","steelblue3")
@@ -298,6 +300,7 @@ merge(a,b,by.x="id",by.y="id")
 d<-merge(a,b,by.x="id",by.y="id",all.x=TRUE)
 ```
 #### Les options de plot.SpatialPolygon
+
 ```{r density}
 plot(contour[1])  
 plot(contour[1],border="blue")  
@@ -311,6 +314,7 @@ plot(contour[1],border="blue",col="yellow",density=5,angle=90,axes=TRUE, lty=3)
 text(coordinates(contour[1]), labels="Haguenau")  
 ```
 #### la méthode *coordinates* de SpatialPolygon
+
 Retourne les coordonnées du barycentre du polygone. Pour l'illuster on forme le vecteur des chef-lieu des arrondissement d'Alsace dans l'ordre définit par R.
 ```{r contour1}
 a<-coordinates(contour)
@@ -325,7 +329,7 @@ legend("topleft",legend="Les arrondissements d'Alsace",bty="n",adj=-0.5)
 
 a<-coordinates(contour)
 
-Contour de la zone de proximié n°1
+Contour de la zone de proximité n°1
 ----------------------------------
 (code INSEE stockés dans b) dans la région Alsace
 ```{r contour}
@@ -418,7 +422,8 @@ Utilisation du fichier *zpo* à la place du fichier *ville*
 Crée un objet *zone de proximité 2*, en dessine le contour ainsi que le chef lieu:
 
 ```{r zp2_haguenau}
-zpo<-read.csv("~/Documents/Resural/Stat Resural/RPU2013/cartograhie/data/zp.csv",header=TRUE, sep=",")
+#zpo<-read.csv("~/Documents/Resural/Stat Resural/RPU2013/cartograhie/data/zp.csv",header=TRUE, sep=",")
+zpo<-read.csv("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/data/zp.csv",header=TRUE, sep=",")
 base1<-merge(zpo,pop67,by.x="CODE.COMMUNE",by.y="insee")
 base2<-merge(zpo,pop68,by.x="CODE.COMMUNE",by.y="insee")
 base<-rbind(base1,base2)
@@ -453,7 +458,7 @@ points(x,y,pch=19,col="red")
 text(x,y,labels=nom,cex=0.8,pos=3)
 
 library("pixmap")
-img<-"../../Fichiers source/logos/hop11.pnm"
+img<-"/home/jcb/Documents/Resural/Stat Resural/RPU2013/Fichiers source/logos/hop11.pnm"
 hop<-read.pnm(img)
 plot(contour2)
 x<-2.5
@@ -717,16 +722,20 @@ plot(contour12,add=T)
 ```
 Analyse de la superficie
 ========================
+
 #### superficie de l'Alsace en km2:
+
 surface<-sum(als$SUPERFICIE)/100
 
 #### superficie de l'arrondissement 1
+
 s1<-als[als$CODE_ARR=="1","SUPERFICIE"]
 summary(s1)
 names(s1)
 sum(s1$SUPERFICIE)/100
 
 #### Merging des fichiers *als* et *base*
+
 On fusionne les tables als et base sur la colonne INSEE, ce qui permet de mettre dans la même table las zones de proximite, la surface et la population.
 names(als)
 names(base)
@@ -744,6 +753,7 @@ s<-0;for(i in 1:12){szp<-als[base_als$zone_proximite==i,"SUPERFICIE"];s1<-sum(sz
 s<-0;for(i in 1:12){szp<-als[base_als$zone_proximite==i,"SUPERFICIE"];s[i]<-sum(szp$SUPERFICIE)/100;s<-s+s[i];print(paste(i," ->",s[i],"(",s,")",sep=" "))}
 
 #### Merging des fichiers *als* et *title(main="2 Départements en Alsace")
+
 legend("bottomleft",legend="Haut-Rhin",bty="n")
 legend("topleft",legend="Bas-Rhin",bty="n")*
 
@@ -801,6 +811,7 @@ getwd()
 save(ctss,file="als_ts.Rda")
 ```
 #### Dessin territoires de santé (ctss) et des zones de proximité (czps)
+
 ```{r czps}
 plot(czps)
 plot(ctss, border = "red",add=T)
@@ -886,14 +897,21 @@ plot(czps,col=col)
 
 Utilisation des cartes pré-enregistrées
 ---------------------------------------
+Le fichier __als_ts.Rda__ contient le spatial polygon __ctss__ qui affiche la carte de l'Alsace et les contours des 4 territoires de santé.
+Le fichier __hopitaux_alsace.csv__ contient les coordonnées Lambert des hôpitaux
+Au total affiche la carte des secteurs sanitaires et les principaux hôpitaux (rond plein rouge).
+
 ```{r carto generale}
 # fond de carte des territoires de santé
-load("als_ts.Rda")
+load("/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Data/als_ts.Rda")
 plot(ctss)
 # surimpression des SAU
-hopitaux<-"../../Fichiers source/Hopitaux2lambert/hopitaux_alsace.csv"
+hopitaux<-"/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Data/Hopitaux2lambert/hopitaux_alsace.csv"
 h<-read.csv(hopitaux,header=TRUE,sep=",")
-for(i in 1:nrow(h)){points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");text(h$lam_lon[i],h$lam_lat[i],labels=h$hopital[i],cex=0.8,pos=h$pos[i])}
+for(i in 1:nrow(h)){
+  points(h$lam_lon[i],h$lam_lat[i],pch=19,col="red");
+  text(h$lam_lon[i],h$lam_lat[i],labels=h$hopital[i],cex=0.8,pos=h$pos[i])
+  }
 ```
 Zones en tension
 =================
@@ -940,7 +958,7 @@ for(i in 1:12){
 # Création d'un dataframe contenant le nom et les coordonnées de la ville chef lieu de la zone de proximité et la position d'affichage par rapport à son barycentre. Ce data frame est sauvegardé pour un usage ultérieur.
 
 load("zone_proximite.Rda") # czps
-load("../carto_alsace.rda")# als
+load("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/carto_alsace.rda")# als
 a <- als@data
 
 villes <- c("WISSEMBOURG","SAVERNE","HAGUENAU","STRASBOURG","SCHIRMECK","SELESTAT","COLMAR","GUEBWILLER","THANN","ALTKIRCH","MULHOUSE","SAINT-LOUIS")
@@ -955,6 +973,7 @@ for(i in 1:length(villes)){
 d <- cbind(d,pos)
 print(d)
 save(d, file = "zp_villes.Rda")
+# load("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop/zp_villes.Rda")
 
 # dessin de la carte avec les zonzes de proximité. Mettre axes=F en production. Les axes sont utiles pour positionner des éléments comme la rose des vents ou l'échelle. On peut s'aider de la fct locator(). Les distances sont en mètres.
 plot(czps, col=col, axes=FALSE)
@@ -978,6 +997,28 @@ text(x_scale+50000, 6753387+2000, "50 km", cex=0.6)
 legend("topleft", legend=c("Pas de tension","Surcharge","Tension avérée","Pas d'informations"), col=c("green","orange","red","grey"), pch=15, bty="n")
 # title  permet de mettre un titre et un sous*titre au graphique
 title("Carte des tensions en Alsace", sub = format(Sys.time(), "%a %d %b %Y %H:%M:%S"))
+
+```
+
+Dessin des zones de proximité avec les villes
+---------------------------------------------
+
+```{r zp_avec_villes}
+library("RColorBrewer")
+wp<-brewer.pal(12,"Set3")
+load("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop/zone_proximite.Rda")
+load("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/RPU2013_Carto_Pop/zp_villes.Rda")
+
+# zones de proximité
+plot(czps,col=wp)
+title(main="Zone de proximité en Alsace")
+
+# ajout des villes
+for(i in 1:length(villes)){
+points(d[i,2], d[i,3], pch=19, col="blue")
+text(x=as.numeric(d[i,2]), y=as.numeric(d[i,3]), labels=d[i,1], cex=0.6, pos=d[i,4])
+}
+
 ```
 
 A partir des fichies source:

@@ -18,44 +18,55 @@ a<-tapply(e,as.Date(d1$ENTREE),length)
 % On supprime l'enregistrement 211 correspondant au 31 juillet et qui ne contient que 2 éléments:
 %a[211]  2013-07-31 2 
 <<activite2,echo=FALSE>>=
-a<-a[-211]
+# a<-a[-211]
   a1<-summary(a)
 @
 % Min. 1 st Qu.  Median    Mean 3rd Qu.    Max. 
 %   642.0   848.0   895.5   883.2   957.0  1050.0 
 
 En \ancourante les SU produisant des RPU ont déclaré \np{\Sexpr{length(e)}} passages au \Sexpr{as.character(format(max(e),format="%d %B %Y"))}, 
-soit une moyenne de \np{\Sexpr{a1[4]}} passages par jour (extrêmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
+soit une moyenne de \np{\Sexpr{a1[4]}} RPU par jour (extrêmes \Sexpr{a1[1]} et \np{\Sexpr{a1[6]}})
 
-Passages par secteur sanitaire:
+RPU par territoire de santé:
+\index{Territoires de santé!nombre de RPU}
+
 <<passages_secteur,echo=FALSE>>=
 t<-tapply(d1$ENTREE,d1$secteur,length)
+
+# données SAE 2013
+#     1      2      3      4 
+#  83722 144095 115459 150045 
+
+tot_sae <- 83722 + 144095 + 115459 + 150045
 @
+
 \begin{table}[ht]
 \centering
-\begin{tabular}{rr}
+\begin{tabular}{crr}
   \hline
- Territoire & RPU déclarés \\ 
+ Territoire & RPU déclarés & Données SAE\\ 
   \hline
-  1 & \np{\Sexpr{t[1]}} \\ 
-  2 & \np{\Sexpr{t[2]}} \\ 
-  3 & \np{\Sexpr{t[3]}} \\ 
-  4 & \np{\Sexpr{t[4]}} \\ 
+  1 & \np{\Sexpr{t[1]}} & \np{\Sexpr{83722}} \\ 
+  2 & \np{\Sexpr{t[2]}} & \np{\Sexpr{144095}} \\ 
+  3 & \np{\Sexpr{t[3]}} & \np{\Sexpr{115459}} \\ 
+  4 & \np{\Sexpr{t[4]}} & \np{\Sexpr{150045}} \\ 
    \hline
 \end{tabular}
 \end{table}
 
-Les données du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi qu'une part importante des RPU des urgences adulte des HUS.
+Les valeurs du fichier SAE permettent d'avoir une idée de l'exhaustivité quantitative des RPU transmis.
+Les données RPU du secteur 2 sont très sous-estimées car il manque celles de la Clinique Sainte-Anne, des urgences pédiatriques de Hautepierre ainsi qu'une part importante des RPU des urgences adulte des HUS. Pour le secteur 1, il manque 6 mois de données du CH Saverne. Les données du CH Thann manquent pour le secteur 4. Seul le secteur 3 a un nombre de RPU cohérent avec les données SAE. Au total le fichier SAE répertorie \np{\Sexpr{tot_sae}} passages aux urgences soit \np{\Sexpr{tot_sae - length(e)}} RPU manquants (\Sexpr{round(100*(tot_sae - length(e))/tot_sae, 2)} \%).
 
 %affichage du graphique
 %\begin{figure}
 \begin{center}
 <<activite plot, echo=FALSE, fig.height=5>>=
   z<-zoo(a,unique(as.Date(d1$ENTREE)))
-main <- paste0("Passages en SU en ", anc)
-  plot(z,ylab="Nb. de passages aux Urgences",main=main,xlab="Période")
-  legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+  main <- paste0("RPU produits par SU en ", anc)
+  plot(z,ylab="Nombre de passages au SU ayant générés un RPU",main=main,xlab="Période", col="gray60")
+  legend("topleft",legend=c("moyenne lissée","RPU moyen"),col=c("red","blue"),lty=c(1,2),cex=0.8,bty="n")
   lines(rollmean(z[,2],7),col="red",lwd=2)
+  abline(h=mean(a),col="blue", lty=2) # mpyenne
   # copyright
   mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
 @
@@ -65,23 +76,23 @@ main <- paste0("Passages en SU en ", anc)
 
 %\end{figure}
 
-% Variante avec *xts*
+% Variante avec *xts*. Supprimé var n'apporte rien par rapport au précédent.
 
 %\begin{figure}
-\begin{center}
-<<activite plot2, echo=FALSE, fig.height=5>>=
-  main <- paste0("Passages en SU en", anc)
-  x<-as.xts(z)
- plot(x,ylab="Nb. de passages aux Urgences",main=main, xlab="Période")
-legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
-lines(rollmean(xts(z),7),col="red",lwd=2)
-# moyenne générale
-abline(h=mean(a),col="blue")
- mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
-@
-\captionof{figure}{\Sexpr{main}.}
-\label{fig:activite_plot2}
-\end{center}
+% \begin{center}
+% <<activite plot2, echo=FALSE, fig.height=5>>=
+%   main <- paste0("Passages en SU en", anc)
+%   x<-as.xts(z)
+%  plot(x,ylab="Nb. de passages aux Urgences",main=main, xlab="Période")
+% legend("topleft",legend="moyenne lissée",col="red",lty=1,cex=0.8,bty="n")
+% lines(rollmean(xts(z),7),col="red",lwd=2)
+% # moyenne générale
+% abline(h=mean(a),col="blue")
+%  mtext("© RESURAL 2013",cex=0.6,side=4,line=-1,adj=0.1)
+% @
+% \captionof{figure}{\Sexpr{main}.}
+% \label{fig:activite_plot2}
+% \end{center}
 %\end{figure}
 
 %------------------------------
@@ -89,19 +100,21 @@ abline(h=mean(a),col="blue")
 %------------------------------
 
 <<val_abs,echo=FALSE,results='asis'>>=
-t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
-t2<-as.matrix(t)
-t2<-cbind(row.names(t),t)
-colnames(t2)<-c("Hôpital","RPU")
-rownames(t2)<-NULL
 
-xtable(t2,caption=c("Passages par service d'urgence","Nombre de passages par service d'urgence"),label="fig:passage_su",align=c("l","l","r"))
+t<-tapply(as.Date(d1$ENTREE),d1$FINESS,length)
+t2 <- data.frame(as.character(row.names(t)), as.numeric(t))
+names(t2) <- c("Etablissement", "RPU")
+SAE <- c(16367,15711,46870+17246,NA,21644,33382+10059,34986+36805+31655,59015+2251,26025,29699,12545,19563+8173)
+t2 <- cbind(t2, SAE)
+
+print(xtable(t2,,caption=c(paste0("Nombre de RPU déclarés par service d'urgence en ", anc, " et données du fichier SAE"),"Nombre de RPU par service d'urgence"),label="fig:passage_su",align=c("r","c","r","r"), display = c("s","s","f","f"), digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
+
 @
 
 %\begin{figure}
 \begin{center}
 <<bplot_val_abs, echo=FALSE, fig.height=5>>=
-  main <- paste0("SU d'Alsace: nombre de passages en ", anc)
+  main <- paste0("SU d'Alsace: nombre de RPU produits en ", anc)
   barplot(sort(t),horiz=T,las=2,main=main)
 @
 \captionof{figure}{\Sexpr{main}.}
@@ -120,7 +133,7 @@ p<-sort(round(prop.table(t)*100,2))
 %\begin{figure}
 \begin{center}
 <<bp_en_pourcentage, echo=FALSE, fig.height=5>>=
-  main1 <- paste0("SU d'Alsace: nombre de passages (en %) en ", anc)
+  main1 <- paste0("SU d'Alsace: nombre de RPU (en % du total) en ", anc)
   barplot(p,horiz=T,las=2,xlim=c(0,20),xlab="pourcentage du total",main=main1)
 @
 % \caption{\Sexpr{main1}.} # cette ligne fait bugger, pourquoi ?
@@ -134,24 +147,35 @@ p<-sort(round(prop.table(t)*100,2))
 
 <<tru,echo=FALSE>>=
 tru2011_lorraine <- 0.2345
-tru_estime<-pop.als.2010.totale*tru2011_lorraine
-# tru2013_alsace<-round(length(e)*100/pop.als.2010.totale,2)
-tru2013_alsace<-round(nrow(d1)*100/pop.als.2010.totale,2)
+tru_estime<-pop.als.2010.municipale * tru2011_lorraine
+
+tru2013_alsace<-round(nrow(d1)*100/pop.als.2010.municipale,2)
+
+tru2013_sae <- round(100 * tot_sae/pop.als.2010.municipale, 2)
 
 # print(tru_estime)
 @
-Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). En supposant que la population alsacienne se comporte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à \Sexpr{tru_estime}.
+Le taux de recours aux urgences \index{taux de recours aux urgences} (TRU) \index{TRU} est défini comme le nombre total de passages aux urgences, rapporté à la population de la région (INSEE 1er janvier 2010). 
 
-Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_alsace}\%.
+Le TRU 2013 estimé en Alsace à partir des RPU transmis est de \Sexpr{tru2013_alsace}\% et de \Sexpr{tru2013_sae}\% en se basant sur les données SAE.
+
+En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}). 
+
+%En supposant que la population alsacienne se comporte comme la population lorraine, le nombre de passages aux urgences devrait s'établir à \Sexpr{tru_estime}.
 
 %------------------------------
-\subsection*{Activité par mois}
+\subsection*{Production mensuelle de RPU}
 %------------------------------
 
-<<parmois, echo=FALSE, comment="", fig.height=8>>=
+<<parmois, echo=FALSE, comment="", fig.height=8, results='asis'>>=
 RPU.mois <- month(d1$ENTREE,label=TRUE)
 levels(RPU.mois) <- mois.short # remplace les termes anglais
-table(RPU.mois)
+t <- table(RPU.mois, dnn="RPU mensuels")
+
+# print(xtable(table(RPU.mois)), format.args = list(big.mark = " ", decimal.mark = ","))
+
+print(xtable(t, caption=c(paste0("Ativité mensuelle en nombre de RPU en ", anc,". ",  round(mean(t),0), " RPU en été produits en moyenne par mois en ", anc))), format.args = list(big.mark = " ", decimal.mark = ","))
+
 @
 
 %\begin{figure}
@@ -165,19 +189,32 @@ table(RPU.mois)
 \end{center}
 %\end{figure}
 
+Nombre de RPU par mois standards de 30 jours.
+
+\begin{center}
+<<mois_nomalise, echo=FALSE, fig.height=5>>=
+nb.jour.mois <- as.numeric(diff(seq(as.Date("2013-01-01"), as.Date("2014-01-01"), by = "month"))) # source: https://stat.ethz.ch/pipermail/r-help/2007-August/138113.html
+mois.normalise <- round(30 * table(RPU.mois) / nb.jour.mois, 0)
+names(mois.normalise) <- mois.short
+main <- paste0(anc, " - Nombre de RPU par mois standardisés de 30 jours")
+barplot(mois.normalise, main="RPU produits par mois standardisés")
+@
+\captionof{figure}{\Sexpr{main}.}
+\label{fig:bp_parmois_std}
+\end{center}
+
 %---------------------------------
 \subsection*{Activité par semaine}
 %---------------------------------
 
 <<act_sem, echo=FALSE,results='asis'>>=
 m<-week(d1$ENTREE)
-
 a <- table(m)
 a <- a[-53] # supprime la dernière semaine
 b <- matrix(as.numeric(a), ncol=4, nrow=13, byrow=TRUE)
-colnames(b)<-c("1","2","3","4")
-c <- xtable(as.data.frame(b),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
-print.xtable(c) 
+colnames(b)<-c("T1","T2","T3","T4")
+
+print(xtable(b, caption=c(paste0("Activité des services d'urgence en nombre de RPU par semaine en ", anc),"Activité par semaine"),label="act_sem", digits = 0),format.args = list(big.mark = " ", decimal.mark = ","))
 
 
 # xtable(table(m),caption=c("Activité des SU par semaine en 2013","Activité par semaine"),label="act_sem")
@@ -200,16 +237,21 @@ print.xtable(c)
 \subsection*{Activité par jour de la semaine}
 %--------------------------------------------
 
-<<activite_semaine, echo=FALSE, comment="", fig.height=8>>=
+<<activite_semaine, echo=FALSE, comment="", fig.height=8, results='asis'>>=
 RPU.jour.semaine <- wday(d1$ENTREE,label=T)
 levels(RPU.jour.semaine) <- week.short
-table(RPU.jour.semaine)
+# on réordonne les jours pour que la semaines commence le lundi
+RPU.jour.semaine  <- factor(RPU.jour.semaine, levels(RPU.jour.semaine)[c(2:7,1)])
+# Jour de la semaine" <- table(RPU.jour.semaine)
+
+print(xtable(table(RPU.jour.semaine, dnn="RPU selon le jour"), caption=c(paste0("Ativité selon le jour de la semaine en nombre de RPU en ", anc),"RPU par jour de semaine")), format.args = list(big.mark = " ", decimal.mark = ","), comment = FALSE)
 @
 
 \begin{center}
 <<bp_activite_semaine, echo=FALSE, fig.height=5>>=
-  main <- paste0("Activité selon le jour de la semaine en ", anc)
-barplot(table(RPU.jour.semaine),names.arg = week.short, main=main)
+main <- paste0("Activité selon le jour de la semaine en ", anc)
+barplot(table(RPU.jour.semaine),names.arg = levels(RPU.jour.semaine), main=main)
+main <- paste0("Activité selon le jour de la semaine en ", anc, ". Le lundi est le jour où la fréquentation des urgences est la plus importante. C'est aussi le jour des admission réglée dans les services. Le lundi est un jour à risque de tension hospitalière de type organisationnelle")
 @
 \captionof{figure}{\Sexpr{main}.}
 \label{fig:activite_semaine}
@@ -233,8 +275,11 @@ t<-table(h)
 \label{fig:activite_heure}
 \end{center}
 
+Le profil du graphe est identique à celui de l'activité des SAMU. Urgences intra-hospitalières et extra-hospitalières ont des profils d'ativité identiques rendant difficile la mutualisation des activités.
+
 %----------------------------------
-\subsection{Typologie des passages} \footnote{attente.Rmd}
+\subsection{Typologie des passages \protect\footnote{attente.Rmd}} 
+% si on met une note dans un titre de section, il faut la protéger avec \protect. Source: http://www.tuteurs.ens.fr/logiciels/latex/footnote.html
 %----------------------------------
 
 \index{passages!typologie}
@@ -247,8 +292,8 @@ t<-table(h)
 % une fonction générique serait utile.
  
  \begin{center}
-<<sau_arrive_depart, echo=FALSE, fig.height=6>>=
-  main <- paste0("Répartition des passages (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences", anc)
+<<sau_arrive_depart, echo=FALSE, fig.height=5>>=
+  main <- paste0("Répartition des passages (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences en ", anc)
   s<-ymd_hms(d1$SORTIE)
   e<-ymd_hms(d1$ENTREE)
   h<-hour(e)
@@ -273,11 +318,12 @@ t<-table(h)
 %---------------------------------------------
 
 \begin{itemize}
-  \item diurne: 8h - 19h59
+  \item diurne: 8h - 19h59   
+  
   \item nocturne: 20h - 7h59
 \end{itemize}
 
-  <<diurne_nocturne, echo=FALSE, fig.height=6>>=
+  <<diurne_nocturne, echo=FALSE, fig.height=5>>=
   h<-hour(e)
   t <- table(h) # t[1] correspond à t0
   e_nocturne <- sum(t[1:8]) + sum(t[21:24])
@@ -312,7 +358,7 @@ t<-table(h)
 %-----------------------------------------
 
 \begin{center}
-  <<es_adultes, echo=FALSE, fig.height=6>>=
+  <<es_adultes, echo=FALSE, fig.height=5>>=
   e<-ymd_hms(d1$ENTREE[d1$AGE >= 18 & d1$AGE < 75])
   h<-hour(e)
   sh <- table(as.factor(h))
@@ -365,7 +411,7 @@ n_swe <- length(s_weekend)
 % # graphe entrées semaine/we
 
 \begin{center}
-<<graphe_es_we, echo=FALSE, fig.height=6>>=
+<<graphe_es_we, echo=FALSE, fig.height=5>>=
 
 h<-hour(semaine)
 sh <- table(as.factor(h))
@@ -381,7 +427,7 @@ for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
 
 legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
 @
-\captionof{figure}{"Répartition des passages en semaine (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences"}
+\captionof{figure}{"Répartition des passages en semaine (en pourcentage)\\ en fonction de l'heure d'entrée - sortie du patient aux urgences"}
 \label{fig:graphe_es_we} %
 \end{center}
 
@@ -389,7 +435,7 @@ legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
 % graphe des sorties semaine/we
 
 \begin{center}
-<<graphe2_es_we, echo=FALSE, fig.height=6>>=
+<<graphe2_es_we, echo=FALSE, fig.height=5>>=
 
 h<-hour(s_semaine)
 sh <- table(as.factor(h))
@@ -405,7 +451,7 @@ for(i in 1:24){segments(psh[i],-0.25,psh[i],prsh[i])}
 
 legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
 @
-\captionof{figure}{"Répartition des passages en semaine (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences"}
+\captionof{figure}{"Répartition des passages en semaine (en pourcentage)\\ en fonction de l'heure d'entrée - sortie du patient aux urgences"}
 \label{fig:graphe2_es_we} %
 \end{center}
 
@@ -428,7 +474,7 @@ legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
 \index{Entrées sorties des hospitalisés}
 
 \begin{center}
-<<es_hospitalise, echo=FALSE, fig.height=6>>=
+<<es_hospitalise, echo=FALSE, fig.height=5>>=
 main="Répartition des passages des patients hospitalisés (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences"
 e_hosp <- d1$ENTREE[d1$MODE_SORTIE %in% c("Mutation","Transfert")]
 s_hosp <- d1$SORTIE[d1$MODE_SORTIE %in% c("Mutation","Transfert")]
@@ -458,7 +504,7 @@ legend("topleft", legend=c("entrées","sorties"), col=c("red","blue"), lty=1)
 
 \begin{center}
 
-<<es_dom, echo=FALSE, fig.height=6>>=
+<<es_dom, echo=FALSE, fig.height=5>>=
 main <- paste0("Répartition des passages des retours à domicile (en pourcentage)\n en fonction de l'heure d'entrée - sortie du patient aux urgences - ", anc)
 
 e_dom <- d1$ENTREE[d1$MODE_SORTIE %in% c("Domicile")]

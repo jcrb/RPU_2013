@@ -9,7 +9,9 @@ Résumé des horaires de passage aux urgences: les données figurent dans le tab
 <<fig24,echo=FALSE,comment="",results='asis'>>=
 e<-ymd_hms(d1$ENTREE)
 h<-hour(e)
-a<-xsummary(h,xtable=T,tl="Résumé des horaires de passage aux urgences",tc="Horaires de passage",lab="tab:24")
+b <- summary(h) #b["3rd Qu."]
+a<-xsummary(h,xtable=T,tl= paste0("Résumé des horaires de passage aux urgences en ", anc, ". A ", b['3rd Qu.'], " heures, 75 p.cent des RPU de la journée sont enregistés."), tc="Horaires de passage", lab="tab:24")
+# , b["3rd Qu."], " heures, 75% des RPU de la journée sont enregistés."
 @
 
 % \input{../blah.gen}
@@ -44,16 +46,14 @@ par(mfrow = c(1, 1))
 %\end{figure}
 
 %---------------------------------------------------------Radar HUS
-%\begin{figure}
-\begin{center}
-  <<test2, echo=FALSE,fig = TRUE,fig.height=5,warning=FALSE>>=
-    passages("Hus","HUS",sens=3)
-    @
-\captionof{figure}{HUS: répartition des arrivées et départs aux urgences}
-\label{passage:hus}
-\end{center}
 
-%\end{figure}
+% \begin{center}
+%   <<test2, echo=FALSE,fig = TRUE,fig.height=5,warning=FALSE>>=
+%     passages("Hus","HUS",sens=3)
+%     @
+% \captionof{figure}{HUS: répartition des arrivées et départs aux urgences}
+% \label{passage:hus}
+% \end{center}
 
 %---------------------------------------------------------Radar Colmar
 %\begin{figure}

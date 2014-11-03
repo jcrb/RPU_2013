@@ -41,7 +41,7 @@ La comparaison entre le nombre de RPU reçus et le nombre de diagnostics renseig
 
 Ventilation des diagnostics principaux en fonction des 22 chapitres de la CIM10. Le tableau qui suit indique pour chaque chapitre, le nombre total de cas rapportés, le pourcentage par rapport à l'ensemble, et le pourcentage de cas déduction faite de la traumatologie. En effet celle-ci représente environ la moitié des cas et il parait intéressant de séparer les pathologies traumatiques des non traumatiques.
 
-<< table_cim10,echo=FALSE>>=
+<< table_cim10,echo=FALSE, fig.height=5>>=
 
 traumato<-length(d1[substr(dpr,1,1)=="S" | substr(dpr,1,1)=="T",1])
 cardio<-length(d1[substr(dpr,1,1)=="I",1])
@@ -65,6 +65,13 @@ morta<-length(d1[substr(dpr,1,1)>="V" & substr(dpr,1,1)<"z",1])
 sang<-length(d1[substr(dpr,1,3)>="D50" & substr(dpr,1,3)<"D59",1])
 meta<-length(d1[substr(dpr,1,1)=="E",1])
 codeU <- length(d1[substr(dpr,1,1)=="U",1])
+
+Chapitre <- c("I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI","XVII","XVIII","XIX","XX","XXI","XXII")
+Frequence <- c(infec, cancer, sang, meta, psy, neuro, oeil, orl, cardio, respi, digestif, peau, os, genital, obst, nne, cong, labo, traumato, morta, autre, codeU)
+
+cim <- data.frame(Chapitre, Frequence)
+pie(cim$Frequence, labels=cim$Chapitre, main="Ventilation des RPU en fonction des chapitres de la CIM 10")
+
 @
 
 
@@ -76,6 +83,7 @@ codeU <- length(d1[substr(dpr,1,1)=="U",1])
  \hline
  
 I & A00–B99 & Certaines maladies infectieuses et parasitaires & \Sexpr{infec} & \Sexpr{round(infec*100/total,digits=2)} & \Sexpr{round(infec*100/(total-traumato),digit=2)} \\
+
  II&C00–D48&Tumeurs&\Sexpr{cancer}&\Sexpr{round(cancer*100/total,digits=2)}&\Sexpr{round(cancer*100/(total-traumato),digits=2)}\\
  
 III&D50–D89&Maladies du sang et des organes hématopoïétiques et certains troubles du système immunitaire&\Sexpr{sang}&\Sexpr{round(sang*100/total,digits=2)}&\Sexpr{round(sang*100/(total-traumato),digits=2)}\\
@@ -213,8 +221,10 @@ dpr$DP<-gsub("+","",as.character(dpr$DP),fixed=TRUE)
 AVC<-dpr[substr(dpr$DP,1,3)>="I60" & substr(dpr$DP,1,3)<"I65" | substr(dpr$DP,1,3)=="G46" | substr(dpr$DP,1,3)=="G45" ,]
 @
 
-
+%-----------------------------
 \subsection*{Horaire des AVC}
+%-----------------------------
+
 \index{AVC!heure}
 
 Horaire des AVC, à comparer avec:
@@ -223,61 +233,94 @@ Horaire des AVC, à comparer avec:
   \item la pression atmosphérique
 \end{itemize}
 
-<<heure_avc,echo=FALSE>>=
-heure.AVC <- hour(AVC$ENTREE)
-hist(heure.AVC, breaks=24, xlab="Heure de la journée", main="Répartition des AVC dans la journée", ylab="Fréquence", col="cornflowerblue", border="white")
+\begin{figure}[ht!]
+ \centering
+  <<heure_avc,echo=FALSE, fig.height=5 >>=
+  heure.AVC <- hour(AVC$ENTREE)
+  hist(heure.AVC, breaks=24, xlab="Heure de la journée", main="Répartition des AVC dans la journée", ylab="Fréquence", col="cornflowerblue", border="white")
+  @
+ \caption{Horaire de survenue des AVC}
+ \label{fig:horaire_avc}
+\end{figure}
+
+
+<<heure_avc2,echo=FALSE, comment="", fig.height=6 >>=
+a <- tab1(heure.AVC, missing=FALSE,main="Heures d'admission des AVC", ylab="Fréquence", horiz=TRUE)
+
 @
 
-<<heure_avc2,echo=FALSE, comment="">>=
-a <- tab1(heure.AVC, missing=FALSE,main="Heures d'admission des AVC", ylab="Fréquence")
+<<heure_avc3, echo=FALSE, results='asis'>>=
 colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
-print(a)
+print(xtable(a$output.table,  caption=c(paste0("Horaires de passages des AVC en ", anc, "."),"Horaire de passage des AVC"),label="fig:passage_avc"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 
+%-----------------------------------------
 \subsection*{Selon le jour de la semaine}
-\index{AVC!age}
+%-----------------------------------------
 
-<<avc_jour_semaine,echo=FALSE,comment="">>=
+\index{AVC!jour de la semaine}
+
+<<avc_jour_semaine,echo=FALSE,comment="", results='asis', fig.height=5 >>=
 library("gdata")
 w<-wday(AVC$ENTREE,label=TRUE)
-levels(w)<-c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
-
-table(w, dnn = "Nombre d'AVC selon le jour de la semaine")
-
-
-round( prop.table(table(w, dnn = "Pourcentage d'AVC selon le jour de la semaine"))*100,2)
+levels(w) <- week.short
+w <- reorder(w,new.order = french.short.week)
+wt <- table(w, dnn = "Nombre d'AVC selon le jour de la semaine")
+pwt <- round( prop.table(table(w, dnn = "Pourcentage d'AVC selon le jour de la semaine"))*100,2)
+a <- rbind(wt, pwt)
+rownames(a) <- c("fréquence", "p.cent")
+xtable(a, caption = c("Distribution des AVC en fonction du jour de la semaine. La fréquence quotidienne théorique est de 14.28 p.cent d'AVC par jour. Les AvC sont plus fréquents en début de semainet plus rares en fin de semaine.","AVC selon le jour de la semaine"), label = "tab:avc_jour")
 
 
 
 # plot(w,main="AVC selon le jour de la semaine")
 # abline(h=nrow(AVC)/7,col="red")
 # on rordonne pour que la semaine commence le lundi
-w2<-reorder(w,new.order=c("Lun","Mar","Mer","Jeu","Ven","Sam","Dim"))
-plot(w2,main="AVC selon le jour de la semaine")
+
+plot(w,main="AVC selon le jour de la semaine")
 abline(h=nrow(AVC)/7,col="red")
 @
 Proportion théorique = 14.28\% par jour de la semaine.
 
+%------------------------
 \subsection*{AVC et âge}
-\index{AVC!age}
-<<avs_age,echo=FALSE, comment="">>=
-# summary(AVC$AGE)
-resume2(AVC$AGE)
-@
-Le rapport de 2009 donne âge moyen = 70.5 et âge médian = 75 ans.
+%------------------------
 
+\index{AVC!âge}
+<<avc_age,echo=FALSE, comment="", results='asis', fig.height=5 >>=
+# summary(AVC$AGE)
+r <- resume2(AVC$AGE, echo = TRUE)
+@
+Le rapport de 2009 donne âge moyen = 70.5 et âge médian = 75 ans. La population alsacienne, vue sous l'angle des RPU, semble se distribuer comme la population française.
+
+<<avc_age2, echo=FALSE, fig.height=5>>=
+hist(AVC$AGE,main="Répartition de l'age de survenue des AVC",col="pink",xlab="Âge en années", ylab="Fréquence")
+
+t<-table(AVC$AGE)
+barplot(t, main="AVC - Répartition des âges")
+@
+
+
+
+%------------------------
 \subsection*{AVC et sexe}
+%------------------------
+
 \index{AVC!sexe}
 
-<<avc_sexe,echo=FALSE, comment="">>=
-summary(factor(AVC$SEXE))
-hist(AVC$AGE,main="Répartition des AVC",col="pink",xlab="Âge en années")
-t<-table(AVC$AGE)
-barplot(t,main="AVC - Répartition des âges")
+<<avc_sexe,echo=FALSE, comment="", results='asis', fig.height=5 >>=
+sr <- sexr(AVC$SEXE)
+print(xtable(sr[[2]], caption = c("Répartition des AVC entre les hommes et les femmes","AVC et sexe"), label="tab:sr_avc"),  format.args = list(big.mark = " ", decimal.mark = ","))
+@
+
+Le \textbf{sexe-ratio} est égal à \textbf{\Sexpr{sr[[1]]}}, traduisant une prédominance féminine (table \ref{tab:sr_avc}).
+
+<<avc_sexe2,echo=FALSE, comment="", fig.height=5>>=
 t<-table(AVC$SEXE,AVC$AGE)
-barplot(t,col=c("red","white","darkblue"),main="Répartion des AVC selon l'âge et le sexe",legend=TRUE)
-barplot(t,col=c("yellow","white","red"),main="Répartion des AVC selon l'âge et le sexe",legend=TRUE,beside=TRUE)
+t <- t[-2,] # on ignore les indéterminés
+barplot(t,col=c("red","darkblue"),main="Répartion des AVC selon l'âge et le sexe",legend=TRUE)
+barplot(t,col=c("yellow","red"),main="Répartion des AVC selon l'âge et le sexe",legend=TRUE,beside=TRUE)
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,11 +348,11 @@ G459  & Accident ischémique cérébral transitoire, sans précision \\
 Le thésaurus SFMU (2013) \cite{9} recommande d'utiliser G45.9 (ou G459) pour tout diagnostic d'AIT.
 \index{AIT!thésaurus}
 
-<<ait,echo=FALSE, comment="">>=
+<<ait,echo=FALSE, comment="", fig.height=5, results='asis'>>=
 AIT <- dpr$DP[substr(dpr$DP,1,3)=="G45" & substr(dpr$DP,1,4)!="G454"]
 a <- tab1(AIT,missing=FALSE, main="Distribution des AIT", ylab="Fréquence")
 colnames(a$output.table)<-c("Fréquence","Pourcentage","Pourcentage cumul.")
-print(a)
+print(xtable(a$output.table,  caption=c(paste0("Distribution des AIT en ", anc, "."),"Types d'AIT"),label="tab:ait"), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -317,7 +360,7 @@ print(a)
 \index{pneumonies}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-<<pneumo_intro,echo=FALSE,message=FALSE, results='asis'>>=
+<<pneumo_intro,echo=FALSE,message=FALSE, results='asis', fig.height=5 >>=
 
 library("epitools")
 source("../Routines/mes_fonctions.R")
@@ -338,7 +381,7 @@ Les pneumonies bactériennes concernent les adultes âgés des deux sexes. L'âg
 # copyright<-"© 2013 Résural"
 seq3.r<-colorbrewer.palette(3,"seq","r")
 
-a<-epigraphe(pneumo$ENTREE,min.date="2013-01-01", strata = pneumo$SEXE,col=seq3.r[3:1],main="Infections respiratoires",xlab="",ylab="Nombre de RPU")
+a<-epigraphe(pneumo$ENTREE,min.date="2013-01-01", strata = pneumo$SEXE, col=seq3.r[3:1],main="Infections respiratoires",xlab="",ylab="Nombre de RPU")
 @
 
 En fonction de la gravité (CCMU):

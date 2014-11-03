@@ -46,8 +46,8 @@
 \fancyhead[RE]{\scshape\leftmark} 
 \fancyhead[LO]{\scshape\rightmark}
 
-\fancyfoot[CE]{Document de travail - non validé}
-\fancyfoot[CO]{Document de travail - non validé}
+% \fancyfoot[CE]{Document de travail - non validé}
+% \fancyfoot[CO]{Document de travail - non validé}
 
 \usepackage{fancyvrb}
 \usepackage{longtable}
@@ -200,6 +200,8 @@ d1$secteur[d1$FINESS %in% c("Hus","Odi")]<-2
 d1$secteur[d1$FINESS %in% c("Sel","Col","Geb")]<-3
 d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 
+#
+
 # names(d1)
 
 n_jours <- as.numeric(max(as.Date(d1$ENTREE))-min(as.Date(d1$ENTREE)))
@@ -235,11 +237,6 @@ N <- nrow(d1)
 @
 
 \newpage
-\chapter{Les acteurs}
-<<child='acteurs.Rnw'>>=
-@
-
-\newpage
 \chapter{RESURAL}
 <<child='resural.Rnw'>>=
 @
@@ -262,8 +259,16 @@ N <- nrow(d1)
 % ************************
 \part{Activité des services d'urgence d'Alsace}
 
+
+\newpage
+\chapter{Qualité des RPU en 2013} % ex chapitre "les acteurs"
+<<child='acteurs.Rnw'>>=
+@
+
 \newpage
 \chapter{Activité régionale totale}
+
+NOTE: dans les lignes qui suivent le terme \textbf{Passage} fait référence aux primo-passages ayant donnés lieu à la création d'un RPU (et non pas à la totalité des passages que peut enregistrer un service d'urgence.) \index{Passages (def.)}
 
 \section{Nombre total de passages}
 <<child='activite_regionale.Rnw'>>=

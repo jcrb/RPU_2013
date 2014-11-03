@@ -27,6 +27,8 @@ rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transpor
 
 week.short <- c("Dim","Lun","Mar","Mer","Jeu","Ven","Sam")
 week.long <- c("Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi")
+french.short.week <- c("Lun","Mar","Mer","Jeu","Ven","Sam","Dim")
+french.long.week <- c("Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
 
 mois.short <- c("Jan","Fev","Mar","Avr","Mai","Jun","Jui","Aou","Sep","Oct","Nov","Dec")
 mois.long <- c("Janvier","Fevrier","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Decembre")
@@ -63,12 +65,13 @@ load_libraries<-function(){
 #'@param an (str) année du copyright (par défaut 2013)
 #'@param side coté de l'écriture (défaut = 4)
 #'@param line distance par rapport au bord. Défaut=-1, immédiatement à l'intérieur du cadre
+#'@param titre
 #'@param cex taille du texte (défaut 0.8)
 #'@return "© 2012 Resural"
 #'@usage copyright()
 #'
-copyright<-function(an ="2013",side=4,line=-1,cex=0.8){
-  titre<-paste("©",an,"Resural",sep=" ")
+copyright<-function(an ="2013",side=4,line=-1,cex=0.8, titre = "Resural"){
+  titre<-paste("©", an, titre, sep=" ")
   mtext(titre,side=side,line=line,cex=cex)
 }
 
@@ -228,16 +231,25 @@ mysql2resural<-function(an,mois)
 #===========================================================================
 # Sex Ratio
 #===========================================================================
+#'
+#' Calcuke le rapport hommes/femmes
 #'@title sr
-sr <- function(g){
-  sg <- table(g$SEXE)
+#'@return une liste de 2 éléments: le sex-ratio et un tableau 2 x 2
+#'@param g un vecteur contenant les sexes
+#'@author jcb, 2014-08-28
+#'@details le tableau 2 x 2 est compatible avec xtable
+#'@example sr <- sr(AVC$SEXE); sr[[1]]; xtable(sr[[2]])
+#'
+sexr <- function(g){
+  sg <- table(g)
   sg <- sg[-2] # retire les sexes indéterminés
   psg <- round(prop.table(sg)*100,2)
   b <- rbind(sg,psg)
-  rownames(b) <- c("n","%")
-  
   sex_ratio <- sg["M"]/sg["F"]
-  return(sex_ratio)
+  rownames(b) <- c("n","%")
+  colnames(b) <- c("Femmes","Hommes")
+  
+  return(list(as.numeric(sex_ratio), b))
 }
 
 #===========================================================================
@@ -391,6 +403,7 @@ completude <- function(data.hop){
 # 
 radar_completude <- function(x, y = NULL, ch.names = "titre", rp.type="p", poly.col = "khaki",line.col="goldenrod4"){
   library("openintro")
+  library("plotrix")
   # nom des branches du radar:
   rpu.names <- c("Entrée","Sexe","Age","Commune","ZIP","Provenance","PEC Transport","Mode Transport","Mode\nentrée","CCMU",
                  "Motif","DP","Sortie", "Mode sortie","Orientation","Destination")
@@ -541,24 +554,26 @@ resume2<-function (x, echo=FALSE, tl=NULL, tc=NULL, label=NULL)
 #'@param short (défaut) n'affiche que min, max, mediane, moyenne
 #'@param xtable retourne la version latex
 #'@usage voir activite_su.Rnw
+#'@maj  26/08/2014 ajout de na.rm=TRUE
 #'
 xsummary<-function(x,short=FALSE,xtable=FALSE,count=FALSE,sd=FALSE,tl="titre long",
                    tc="titre court",lab="label"){
   # s<-as.matrix(t(summary(x)))
   # colnames(s)<-c("Min.","Q1","Médiane","Moyenne","Q3","Max.")
-  a<-data.frame(length(x),min(x),quantile(x,.25),mean(x),sd(x),median(x),quantile(x,.75),max(x))
-  colnames(a)<-c("n","Min","Q25","Moyenne","E-type","Médiane","Q75","Max")
+  a<-data.frame(length(x),min(x, na.rm=T),quantile(x,.25, na.rm=T),mean(x, na.rm=T),sd(x, na.rm=T),median(x, na.rm=T),
+    quantile(x,.75, na.rm=T), max(x, na.rm=T), sum(is.na(x)), mean(is.na(x))*100)
+  colnames(a)<-c("n","Min","Q25","Moyenne","E-type","Médiane","Q75","Max","Na","%Na")
   a<-round(a,1)
   rownames(a)<-""
   # si on veut limiter:
   if(short==TRUE){
-    s<-s[,c(1,3,4,6)]
+    a <- a[, c(1,2,4,5,6,7)]
   }
   if(xtable==TRUE){
     require("xtable")
     # remplacer s par t(s) pour avoir un tableau vertical
     print(xtable(a,caption=c(tl,tc),label=lab,type="latex",table.placement="tp",
-                 latex.environments=c("center", "footnotesize")))
+                 latex.environments=c("center", "footnotesize")), format.args = list(big.mark = " ", decimal.mark = ","))
   }
   return(a)
 }
