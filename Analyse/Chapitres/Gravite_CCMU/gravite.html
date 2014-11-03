@@ -55,14 +55,14 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <div id="gravite---ccmu" class="section level1">
 <h1>Gravité - CCMU</h1>
 <pre class="r"><code>date()</code></pre>
-<pre><code>## [1] &quot;Mon Nov  3 20:14:14 2014&quot;</code></pre>
+<pre><code>## [1] &quot;Mon Nov  3 20:50:34 2014&quot;</code></pre>
 <div id="variables-globales" class="section level2">
 <h2>Variables globales:</h2>
 <p>Charge le fichier source <strong>d1</strong></p>
 <pre class="r"><code>source(&quot;../prologue.R&quot;)</code></pre>
 <pre><code>[1] &quot;Fichier courant: rpu2013d0112.Rda&quot;</code></pre>
 <pre class="r"><code>wd</code></pre>
-<pre><code>[1] &quot;/home/jcb/Documents/Resural/Stat Resural/RPU_2013/Analyse/Chapitres/Gravite_CCMU&quot;</code></pre>
+<pre><code>[1] &quot;/home/aphar/Documents/Resural/RPU_2013/Analyse/Chapitres/Gravite_CCMU&quot;</code></pre>
 <pre class="r"><code>N &lt;- nrow(d1)
 N</code></pre>
 <pre><code>[1] 344073</code></pre>
@@ -106,8 +106,28 @@ g</code></pre>
 g$dep[g$FINESS %in% c(&quot;Wis&quot;,&quot;Hag&quot;,&quot;Sav&quot;,&quot;Hus&quot;,&quot;Sel&quot;,&quot;Odi&quot;)] &lt;- 67
 g$dep[is.na(g$dep)] &lt;- 68
 t &lt;- table(g$GRAVITE, g$dep)
-pt &lt;- round(prop.table(t)*100, 2)
-br &lt;- sum(pt[3:5,1])
+t</code></pre>
+<pre><code>##    
+##         67     68
+##   1   9623  29216
+##   2  87166 122134
+##   3  18779  22299
+##   4   1676   1885
+##   5    393    475
+##   D     25     13
+##   P    225   1155</code></pre>
+<pre class="r"><code>pt &lt;- round(prop.table(t)*100, 2)
+pt</code></pre>
+<pre><code>##    
+##        67    68
+##   1  3.26  9.90
+##   2 29.54 41.39
+##   3  6.36  7.56
+##   4  0.57  0.64
+##   5  0.13  0.16
+##   D  0.01  0.00
+##   P  0.08  0.39</code></pre>
+<pre class="r"><code>br &lt;- sum(pt[3:5,1])
 hr &lt;- sum(pt[3:5,2])
 br</code></pre>
 <pre><code>## [1] 7.06</code></pre>

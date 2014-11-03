@@ -42,7 +42,11 @@ g <- d1[, c("GRAVITE","FINESS")]
 g$dep[g$FINESS %in% c("Wis","Hag","Sav","Hus","Sel","Odi")] <- 67
 g$dep[is.na(g$dep)] <- 68
 t <- table(g$GRAVITE, g$dep)
+t
+
 pt <- round(prop.table(t)*100, 2)
+pt
+
 br <- sum(pt[3:5,1])
 hr <- sum(pt[3:5,2])
 br
