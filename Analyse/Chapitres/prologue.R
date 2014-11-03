@@ -40,7 +40,7 @@ foo<-function(path="",file=file){
 
 mois_courant <- 12
 annee_courante <- 2013
-path <- "../../../../"
+path <- "../../../"
 a=paste("00",mois_courant,sep="")
 a
 mois<-substr(a,nchar(a)-1,nchar(a))
@@ -50,7 +50,7 @@ file<-paste("rpu",annee_courante,"d01",mois,".Rda",sep="")
 print(paste("Fichier courant: ",file,sep=""))
 d1<-foo(path="../../../",file=file)
 
-source(paste(path,"mes_fonctions.R",sep=""))
+source(paste(path,"Routines/mes_fonctions.R",sep=""))
 
 wd<-getwd()
 

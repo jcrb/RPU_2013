@@ -9,6 +9,55 @@ library("gplots")
 library("multcomp")
 ```
 
+Populations par territoire de santé
+-----------------------------------
+
+Quel est le nombre d'habitants des 4 territoires de santé et des 12 territoires de proximité ?
+
+Pour faire le calcul, il faut merger:
+
+- **zp.csv** /home/bart-rescue/Documents/JCB/R/RPU2013/cartograhie/data/zp.csv
+
+- **newPopAlsace.Rda** /home/bart-rescue/Documents/JCB/R/RPU2013/Demographie/newPopAlsace.Rda. *newPop.Alsace* liste la population par tranches d'age de 1 an et par sexe. Il faut faire le total par commune via la fonction *tapply* (il faut coerciser en factor la rubrique CODGEO pour éliminer tous les codes INSEE qui ne correspondent pqs à l'Alsace. Défaut de newPopAlsace à corriger dans le fichier source). On obtient **pop_commune**, population par commune. Il faut l'associer au code INSEE, ce qui donne le dataframe **pop2010**.
+
+On peut merger **zp** et **pop2010** pour former la population par territoire **pop.tt**.
+
+A partir de *pop.tt* on extrait via tapply les population des territoires de santé **pop.ts** et des zones de proximités **pop.zp**.
+
+```{r pop_ts}
+zp <- read.csv("~/Documents/Resural/Stat Resural/RPU_2013/doc/cartographie/data/zp.csv")
+names(zp)
+head(zp)
+
+load("~/Documents/Resural/Stat Resural/RPU_2013/doc/Demographie/newPopAlsace.Rda")
+names(newPopAlsace)
+head(newPopAlsace)
+pop_commune <- tapply(newPopAlsace$NB, factor(newPopAlsace$CODGEO), sum)
+
+a <- data.frame(unique(newPopAlsace$CODGEO), pop_commune)
+names(a) <- c("CODGEO", "pop_commune")
+pop2010 <- a
+rm(a)
+
+pop.tt <- merge(zp, pop2010, by.x="CODE.COMMUNE", by.y = "CODGEO")
+
+pop.ts <- tapply(pop.tt$pop_commune, pop.tt$LIBELLE.DES.TERRITOIRES.DE.SANTE, sum)
+pop.zp <- tapply(pop.tt$pop_commune, pop.tt$LIBELLE.DES.ZONES.DE.PROXIMITE, sum)
+
+options(scipen = 6, digits = 2)
+
+pop.ts
+pop.zp
+
+barplot(pop.ts, names.arg = c("T1","T2","T3","T4"), main="Population par territoire de santé en Alsace", ylab = "Effectifs", xlab = "Territoires de santé", sub="Chiffres INSEE 2010", las=1, cex.axis=0.5)
+
+par(mar=c(5.1,8.1,4.1,2.1))
+barplot(sort(pop.zp, decreasing=TRUE), main="Population par zone de proximité en Alsace", ylab = "", xlab = "Effectifs (Chiffres INSEE 2010)", sub="", las=1, cex.axis=0.8, cex.names = 0.7, horiz = TRUE)
+par(mar=c(5.1,4.1,4.1,2.1))
+
+```
+
+
 entrées par Territoire de santé
 -------------------------------
 On creé une colonne supplémentaire *secteur* qui indique à quel secteur sanitaire correspond le RPU:
@@ -20,21 +69,39 @@ d1$secteur[d1$FINESS %in% c("Mul","Alk","3Fr","Dia")]<-4
 d1$secteur <- as.factor(d1$secteur)
 
 ```
-Nombre de RPU par secteur de santé
+#### Nombre de RPU par territoire de santé
 ```{r rpu_par_secteur}
-tapply(d1$ENTREE,d1$secteur,length)
+rpu.ts <- tapply(d1$ENTREE,d1$secteur,length)
+rpu.ts
 ```
+#### taux de recours par territoire de santé
+```{r tx.recours.territoire}
+rpu.ts/pop.ts
+```
+#### Taux standardisé pour 10.000 habitants
+```{r tx_standardisé}
+rpu.ts * 10000 / pop.ts
+```
+
+
 Remarques:
+
 - en 2013: secteur 2, manque St Anne, pediatrie HTP, une partie des RPU HUS adultes. Secteur 4, manque CH Thann.
-- en 2014: en cours d'année apparaissent St Anne, pédiatrie HUS (avril 2014), Diaconat Roosvelt (), Diaconat Strasbourg (). La clinique des 3 frontières deveint propriété du CH de Mulhouse et change de Finess (Mai 2014). CH Thann en attente absobtion par Mulhouse (2015) ne fornit pas de RPU.
+
+- en 2014: en cours d'année apparaissent St Anne, pédiatrie HUS (avril 2014), Diaconat Roosvelt (), Diaconat Strasbourg (). La clinique des 3 frontières devient propriété du CH de Mulhouse et change de Finess (Mai 2014). CH Thann en attente absobtion par Mulhouse (2015) ne fornit pas de RPU.
 
 Age moyen
 ----------
 ```{r age, warning=FALSE, echo=FALSE, comment=""}
+# Age moyen
 tapply(d1$AGE,d1$secteur,mean, na.rm=TRUE)
+# Ecart-type
 tapply(d1$AGE,d1$secteur,sd, na.rm=TRUE)
+# Médiane
 tapply(d1$AGE,d1$secteur,median, na.rm=TRUE)
+
 boxplot(d1$AGE ~ d1$secteur, ylab="Age", xlab="Territoitre de santé", main="Age des consultants selon le territoire de santé")
+
 age <- d1$AGE
 territoire <- d1$secteur
 mod <- aov(age ~ territoire)
@@ -63,9 +130,13 @@ Une critique de l'analyse précédente est que l'absence de la pédiatrie strasb
 age <- d1$AGE[d1$AGE > 17]
 territoire <- d1$secteur[d1$AGE > 17]
 
+# Moyenne
 tapply(d1$AGE,d1$secteur,mean, na.rm=TRUE)
+# Ecart-type
 tapply(d1$AGE,d1$secteur,sd, na.rm=TRUE)
+# Médiane
 tapply(d1$AGE,d1$secteur,median, na.rm=TRUE)
+
 boxplot(d1$AGE ~ d1$secteur)
 
 mod <- aov(age ~ territoire)

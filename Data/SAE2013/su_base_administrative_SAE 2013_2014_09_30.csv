@@ -1,0 +1,49 @@
+"Extraction base administrative SAE 2013 - 30/09/2014",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+"bordereau","Année","N° finess géographique","Raison sociale","N° finess juridique","implantation structure des urgences 1 = oui","Structure des urgences générales 1 = oui","saisionnière 1 = oui","structure des urgences pédiatriques 1 = oui","Accueil malades pour l'une ou l'autre de ces spécialités 1 = oui","Si oui lesquels cardiologie 1 = oui","Si oui lesquels chirurgie 1 = oui","Si oui lesquels neurologie 1 = oui","Si oui lesquels ophtalmologie 1 = oui","Si oui lesquels autres 1 = oui","Equipe mobile de gériatrie intervient-elle au SU? 1 = oui","Mise en place d'un recueil systématique de Résumés de passages aux urgences 1 = oui","transmission des RPU à yb observatoire régional 1 = oui",,,,,,,,,,,,,
+"BOR","AN","FI",,"FI_EJ","AUTSU","AUTGEN","AUTSAIS","AUTPED","SPEC","CARD","CHIR","NEURO","OPHTA","AUTRE","EMG","RPU","TRSPU",,,,,,,,,,,,,
+"URGENCES",2013,670000025,"NHC Strasbourg",670780055,1,1,0,0,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,670000157,"CH Haguenau",670780337,1,1,0,1,,,,,,,1,1,1,,,,,,,,,,,,,
+"URGENCES",2013,670000165,"CH Saverne",670780345,1,1,0,1,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,670000272,"CH Interc Wissembourg",670780543,1,1,0,0,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,670000397,"CENTRE HOSPITALIER DE SELESTAT",670780691,1,1,0,0,0,,,,,,1,1,1,,,,,,,,,,,,,
+"URGENCES",2013,670016237,"CLINIQUE SAINTE ODILE",670016211,1,1,0,0,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,670780162,"CLINIQUE DES DIACONESSES",670000108,0,1,0,0,,,,,,,,,,,,,,,,,,,,,,
+"URGENCES",2013,670780212,"CLINIQUE SAINTE-ANNE",670014604,1,1,0,0,0,,,,,,0,0,0,,,,,,,,,,,,,
+"URGENCES",2013,670783273,"CHU STRASBOURG / HOP HAUTEPIERRE",670780055,1,1,0,1,1,1,1,1,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,680000197,"CLINIQUE DES TROIS FRONTIERES",680000049,1,1,0,0,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,680000320,"CLINIQUE DIACONAT FONDERIE",680000643,1,1,0,0,0,1,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,680000544,"CENTRE HOSPITALIER D'ALTKIRCH",680000395,1,1,0,0,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,680000601,"CENTRE HOSPITALIER DE THANN",680000437,1,1,0,0,0,,,,,,0,0,0,,,,,,,,,,,,,
+"URGENCES",2013,680000627,"HOPITAL DU HASENRAIN",680000486,1,0,0,1,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,680000684,"HOPITAL LOUIS PASTEUR",680000973,1,1,0,0,,,,,1,,1,1,1,,,,,,,,,,,,,
+"URGENCES",2013,680000700,"CENTRE HOSPITALIER DE GUEBWILLER",680001005,1,1,0,0,0,,,,,,0,,,,,,,,,,,,,,,
+"URGENCES",2013,680001245,"CENTRE MERE ENFANT -LE PARC-",680000973,1,0,0,1,0,,,,,,0,1,1,,,,,,,,,,,,,
+"URGENCES",2013,680004546,"CENTRE HOSPITALIER DE MULHOUSE - HOP EMILE MULLER",680000486,1,1,0,0,0,,,,,,1,1,1,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,"Nombre hebdomadaire moyen postées sur l'année",,,,,,,,,,,,,,,,,,,,,,,
+"bordereau","Année","N° finess géographique","Raison sociale","N° finess juridique","4 = public 9 = privé","Type d'urgence","Médecins","IDE","Soignant d'accueil et d'orientation 1 = oui","Accueil réalisé par MAO ou IAO","nombre de passages aux urgences","dont hospitalisés (pediatrie)","Dont hospitalisés en MCO dans la même entité juridique","dont hospitalisé en SSR PSY USLD de la même entité juridique","dont hospitalisés dans une autre entité juridique","dont passages aux urgence pour les + de 80 ans","dont + 80 ans hospitalisés en MCO","dont + 80 ans hospitalisé en SSR PSY USLD de la même entité juridique","dont +80 ans hospitalisés dans une autre entité juridique","dont passages aux urgence pour les - de 18 ans","dont - de 18 ans hospitalisés en MCO","dont - de 18 ans hospitalisé en SSR PSY USLD de la même entité juridique","dont - de 18 ans hospitalisés dans une autre entité juridique","nombre de lits installés au 31/12/2013","Nombre de journées lits exploitables","Nombre de séjours","dont séjour de 0 jour","nombre de journées","Suivi du temps de passage 1 = oui","revue de motalité et de morbidité 1 = oui"
+"bor","an","fi",,"FI_EJ","grp","URG","HMED","HIDE","SAO","ACC","PASSU","dtHOSP","dtMCO","dtLS80","dtEXT","dt80","dtMCO80","dtLS","dtEXT80","dt18","dtMCO18","dtLS18","dtEXT18","LIT_UHCD","JLI_UHCD","SEJ_UHCD","SEJ0_UHCD","JOU_UHCD","STAP","RMM"
+"URGENCES",2013,670000025,"NHC Strasbourg",670780055,4,"GEN",538,1330,1,"MAO",31655,,9289,129,1101,4693,2926,9,294,769,51,3,4,18,6570,15342,7032,10470,1,1
+"URGENCES",2013,670000157,"CH Haguenau",670780337,4,"GEN",473,868,1,"IAO",33382,,9464,5,886,4080,2910,4,,4447,116,0,,10,3650,5032,936,4748,1,0
+"URGENCES",2013,670000157,"CH Haguenau",670780337,4,"PED",496,270,0,,10059,1038,,,,,,,,,,,,,,0,0,0,,
+"URGENCES",2013,670000165,"CH Saverne",670780345,4,"GEN",236,770,1,"IAO",19563,,5123,133,869,2984,1990,91,364,2012,4,,1,4,1460,1469,302,1295,,
+"URGENCES",2013,670000165,"CH Saverne",670780345,4,"PED",,,,,8173,1099,,,,,,,,,,,,1,365,305,153,166,,
+"URGENCES",2013,670000272,"CH Interc Wissembourg",670780543,4,"GEN",224,175,1,"IAO",12545,,2676,12,241,1500,984,3,17,2868,78,0,58,2,730,230,116,114,1,1
+"URGENCES",2013,670000397,"CENTRE HOSPITALIER DE SELESTAT",670780691,4,"GEN",296,635,1,"IAO",29699,,5128,,649,2914,1698,,243,8496,963,,35,4,1460,1819,750,1086,1,1
+"URGENCES",2013,670016237,"CLINIQUE SAINTE ODILE",670016211,9,"GEN",168,368,1,"IAO",26025,,682,2,687,781,144,2,48,6534,54,0,117,5,1825,1452,1003,453,1,1
+"URGENCES",2013,670780212,"CLINIQUE SAINTE-ANNE",670014604,9,"GEN",,,1,"IAO",14624,,2291,,12,1023,543,,,3528,37,,,5,1825,2291,1347,953,0,0
+"URGENCES",2013,670783273,"CHU STRASBOURG / HOP HAUTEPIERRE",670780055,4,"GEN",504,1505,1,"IAO",34986,,6765,118,720,4655,1834,21,356,446,39,0,0,12,4532,12647,6467,7752,1,1
+"URGENCES",2013,670783273,"CHU STRASBOURG / HOP HAUTEPIERRE",670780055,4,"PED",196,753,1,"IAO",36805,4148,,,,,,,,,,,,8,2920,4148,2332,1977,,
+"URGENCES",2013,680000197,"CLINIQUE DES TROIS FRONTIERES",680000049,9,"GEN",168,168,1,"IAO",16367,,1810,,216,1758,690,,,3240,71,,,,,0,0,0,1,0
+"URGENCES",2013,680000320,"CLINIQUE DIACONAT FONDERIE",680000643,9,"GEN",168,408,1,"IAO",29887,,5475,0,891,2593,1419,0,126,5550,60,0,90,4,,1975,1480,515,1,0
+"URGENCES",2013,680000544,"CENTRE HOSPITALIER D'ALTKIRCH",680000395,4,"GEN",218,262,1,"IAO",15711,,2161,2,0,1408,687,0,0,3413,134,0,0,2,730,537,265,312,1,0
+"URGENCES",2013,680000601,"CENTRE HOSPITALIER DE THANN",680000437,4,"GEN",238,280,0,,15407,,1688,0,584,1727,792,,90,3841,48,,96,2,730,535,238,305,1,0
+"URGENCES",2013,680000627,"HOPITAL DU HASENRAIN",680000486,4,"GEN",,,,,,,,,,,,,,,,,,,,0,0,0,,
+"URGENCES",2013,680000627,"HOPITAL DU HASENRAIN",680000486,4,"PED",193,250,0,,13658,2251,,,,,,,,,,,,2,730,497,297,211,,
+"URGENCES",2013,680000684,"HOPITAL LOUIS PASTEUR",680000973,4,"GEN",772,1365,1,"IAO",46870,,11940,,,4873,2658,,,3449,209,,,10,3650,3943,1006,3112,0,0
+"URGENCES",2013,680000700,"CENTRE HOSPITALIER DE GUEBWILLER",680001005,4,"GEN",168,295,,,21644,,1322,,,1535,,,,3187,,,,3,1095,686,363,325,,
+"URGENCES",2013,680001245,"CENTRE MERE ENFANT -LE PARC-",680000973,4,"GEN",,,,,,,,,,,,,,,,,,,,0,0,0,,
+"URGENCES",2013,680001245,"CENTRE MERE ENFANT -LE PARC-",680000973,4,"PED",228,290,0,,17246,2791,,,,,,,,,,,,4,1460,45,27,18,,
+"URGENCES",2013,680004546,"CENTRE HOSPITALIER DE MULHOUSE - HOP EMILE MULLER",680000486,4,"GEN",929,1208,1,"IAO",59015,,10875,,1282,6591,485,,109,7264,3157,,67,15,5475,4372,960,4149,0,0
+,,,,,,,,,,,493321,,,,,,,,,,,,,,,,,,,
+,,,,,,,,"données corrigées mail établissement (correction ARS)",,,,,,,,,,,,,,,,,,,,,,

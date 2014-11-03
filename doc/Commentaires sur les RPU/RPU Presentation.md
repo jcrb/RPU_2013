@@ -13,7 +13,6 @@ type: section
 
 Introduction
 ============
-incremental: true
 
 - Démarche d'amélioration de la qualité et de la sécurité des soins
 
@@ -48,7 +47,6 @@ Structures hospitalières
 
 Généralités
 ========================================================
-incremental: true
 
 Un **RPU** est composé de **18 items** qui peuvent être
 divisés en deux groupes.
@@ -140,7 +138,6 @@ type: section
  
 Suivi des RPU
 =============
-incremental: true
 
 - alertes
   - non transmission des fichiers
