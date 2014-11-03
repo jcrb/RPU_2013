@@ -6,7 +6,7 @@ date()
 Variables globales:
 -------------------
 Charge le fichier source **d1**
-```{r var_globales}
+```{r var_globales, comment="", message=FALSE}
 source("../prologue.R")
 wd
 N <- nrow(d1)
@@ -35,7 +35,7 @@ Taux d'urgences réelles: **`r tx_urg` %**
 
 Analyse CCMU par département
 ----------------------------
-On forme un dataframe de 3 colonnes, puis on réduit le cose postal à celui du département
+On forme un dataframe de 3 colonnes, puis on réduit le code postal à celui du département
 
 ```{r ccmu_dep}
 g <- d1[, c("GRAVITE","FINESS")]
@@ -59,4 +59,31 @@ pt <- round(prop.table(t, margin=2)*100, 2)
 cbind(t, pt)
 ```
 On note des disparités importantes entre établissements.
+
+Analyse par destination
+------------------------
+
+####Par DESTINATION
+
+```{r ccmu_dest}
+t <- table(d1$GRAVITE, d1$DESTINATION)
+t
+```
+
+#### Par ORIENTATION:
+```{r ccmu_orientation}
+t2 <- table(d1$GRAVITE, d1$ORIENTATION)
+t2
+```
+
+#### Par MODE_SORTIE
+
+```{r ccmu_mode_sortie}
+t3 <- table(d1$GRAVITE, d1$MODE_SORTIE)
+t3
+```
+
+
+
+
 
