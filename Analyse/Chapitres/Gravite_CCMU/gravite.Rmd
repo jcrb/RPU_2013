@@ -21,6 +21,7 @@ gravite <- d1$GRAVITE
 
 Analyse CCMU régionale
 ----------------------
+Le tableau __g__ retourne la ventilation des RPU en fonction de la CCMU. La première ligne  = valeur absolue, 2ème = %
 ```{r analyse_ccmu}
 
 t <- table(gravite)
@@ -41,11 +42,20 @@ On forme un dataframe de 3 colonnes, puis on réduit le code postal à celui du 
 g <- d1[, c("GRAVITE","FINESS")]
 g$dep[g$FINESS %in% c("Wis","Hag","Sav","Hus","Sel","Odi")] <- 67
 g$dep[is.na(g$dep)] <- 68
+
+# en valeur absolue
+
 t <- table(g$GRAVITE, g$dep)
 t
 
+chisq.test(t)
+
+# en pourcentage
+
 pt <- round(prop.table(t)*100, 2)
 pt
+
+# uniquement les CCMU 3 à 5
 
 br <- sum(pt[3:5,1])
 hr <- sum(pt[3:5,2])
@@ -87,6 +97,16 @@ t3 <- table(d1$GRAVITE, d1$MODE_SORTIE)
 t3
 ```
 
+C'eest Haguenau qui déclare le plus de décès aux urgences. La majorité de ces patients ont  été adressés par le SMUR.
+```{r dcd_hag}
+a <- d1[d1$FINESS == "Hag",]
+b <- a[!is.na(a$GRAVITE) & a$GRAVITE == "D", ]
+mean(b$AGE)
+sd(b$AGE)
+table(b$TRANSPORT)
+prop.table(table(b$TRANSPORT))
+
+```
 
 
 

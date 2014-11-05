@@ -1,0 +1,117 @@
+% Analyse de la gravité
+%gravite.Rnw
+
+\index{Gravité (CCMU)}
+\index{CCMU}
+
+La gravité de la pathologie s'exprime au travers de la Classification Clinique des Maladies aux Urgences (CCMU). Cette classification répond à une logique médicale mais les items qui la composent lui confèrent une approche très subjective qui nuit à sa repoductibilité entre différents observateurs. C'est pourquoi une majorité d'entre eux souhaitent son abandon mais  faute d'un consenssus autour d'un autre indicateur de gravité, son usage perdure.
+
+\section{La classification CCMU}
+
+\begin{itemize}
+  \item CCMU 1: situation stable, absence d'acte complémentaire diagnostic ou thérapeutique
+  \item CCMU 2: situation stable, réalisation d'acte complémentaire, diagnostic ou thérapeutique
+  \item CCMU 3: situation susceptible de s'aggraver sans mise en jeu du pronostic vital
+  \item CCMU 4: pronostic vital engagé, pas de manoeuvre de réanimation immédiate
+  \item CCMU 5: pronostic vital engagé, manoeuvres de réanimation immédiates
+  
+  \item CCMU P: problème psychiatrique ou psychologique dominant, isolé ou associé à une pathologie somatique jugée stable. Pas d'actes diagnostiques ou thérapeutiques complémentaires.
+  \item CCMU D: patient arrivé décédé aux urgences. Pas de manoeuvres de réanimation.
+\end{itemize}
+
+\section{Analyse CCMU régionale}
+
+<<ccmu_region, echo=FALSE, fig.height=6, results='asis' >>=
+gravite <- d1$GRAVITE
+
+t <- table(gravite)
+pt <- round(prop.table(t)*100, 2)
+g <- rbind(t,pt)
+rownames(g) <- c("n","%")
+
+titre1 <- paste0("Ventilation des RPU selon la classification CCMU en ", anc, ". Les résultats sont données en valeur absolue et en pourcentage.")
+titre2 <- "Répartition des RPU selon la CCMU"
+print(xtable(g, caption = c(titre1, titre2), label = "fig:ccmu", digits=1), format.args = list(big.mark = " ", decimal.mark = ","))
+
+tx_urg <- sum(pt[3:5])
+@
+
+\section{CCMU par département}
+
+<<ccmu_dpt, echo=FALSE, fig.height=6, results='asis' >>=
+g <- d1[, c("GRAVITE","FINESS")]
+g$dep[g$FINESS %in% c("Wis","Hag","Sav","Hus","Sel","Odi")] <- 67
+g$dep[is.na(g$dep)] <- 68
+
+# en valeur absolue
+
+t <- table(g$GRAVITE, g$dep, dnn=c("CCMU","Départements"))
+titre1 <- ""
+titre2 <- ""
+print(xtable(t(t), digits=2), format.args = list(big.mark = " ", decimal.mark = ","))
+
+chisq.test(t)
+@
+
+soit en pourcentages:
+
+<<ccmu_dpt_pcent, echo=FALSE, fig.height=6, results='asis' >>=
+pt <- round(prop.table(t)*100, 2)
+titre1 <- ""
+titre2 <- ""
+print(xtable(t(pt), digits=2), format.args = list(big.mark = " ", decimal.mark = ","))
+@
+
+\section{CCMU par établissement}
+
+<<ccmu_finess, echo=FALSE, fig.height=6, results='asis' >>=
+t <- table(g$GRAVITE, g$FINESS)
+
+titre1 <- "CCMU et établissement"
+titre2 <- "CCMU et établissement"
+print(xtable(t(t), caption = c(titre1, titre2), digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
+@
+
+et en pourcentage:
+
+<<ccmu_finess_p, echo=FALSE, fig.height=6, results='asis' >>=
+
+pt <- round(prop.table(t, margin=2)*100, 2)
+
+titre1 <- "CCMU et établissement (en pourcentages)"
+titre2 <- "CCMU et établissement "
+print(xtable(t(pt), caption = c(titre1, titre2), digits=2), format.args = list(big.mark = " ", decimal.mark = ","))
+@
+
+On note des disparités importantes entre établissements.
+
+\section{CCMU et mode de sortie}
+
+<<ccmu_mode_sortie, echo=FALSE, fig.height=6, results='asis' >>=
+t3 <- table(d1$GRAVITE, d1$MODE_SORTIE)
+t3 <- t3[,-1]
+titre1 <- "CCMU et mode de sortie"
+titre2 <- "CCMU et mode de sortie"
+print(xtable(t3, caption = c(titre1, titre2), digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
+@
+
+\section{CCMU et destination}
+
+<<ccmu_dest, echo=FALSE, fig.height=6, results='asis' >>=
+
+t <- table(d1$GRAVITE, d1$DESTINATION)
+t <- t[,-1]
+titre1 <- "CCMU et destination"
+titre2 <- "CCMU et destination"
+print(xtable(t, caption = c(titre1, titre2), digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
+@
+
+\section{CCMU et Orientation}
+
+<<ccmu_orient, echo=FALSE, fig.height=6, results='asis' >>=
+
+t2 <- table(d1$GRAVITE, d1$ORIENTATION)
+titre1 <- "CCMU et orientation"
+titre2 <- "CCMU et orientation"
+print(xtable(t(t2), caption = c(titre1, titre2), digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
+@

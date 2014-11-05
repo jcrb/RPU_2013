@@ -283,6 +283,11 @@ NOTE: dans les lignes qui suivent le terme \textbf{Passage} fait référence aux
 @
 
 \newpage
+\chapter{Analyse de la gravité}
+<<child='gravite.Rnw'>>=
+@
+
+\newpage
 \chapter{Motif de consultation}
 <<child='motif.Rnw'>>=
 @

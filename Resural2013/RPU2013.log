@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.23)  27 OCT 2014 18:43
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.4.23)  5 NOV 2014 19:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1087,7 +1087,7 @@ File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
 
 Package xcolor Warning: Incompatible color definition on input line 266.
 
-<figure/carte_secteurs_sanitaires-1.pdf, id=788, 505.89pt x 505.89pt>
+<figure/carte_secteurs_sanitaires-1.pdf, id=840, 505.89pt x 505.89pt>
 File: figure/carte_secteurs_sanitaires-1.pdf Graphic file (type pdf)
 
 <use figure/carte_secteurs_sanitaires-1.pdf>
@@ -1103,7 +1103,7 @@ Overfull \hbox (17.62482pt too wide) in paragraph at lines 267--268
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [17]
-<../doc/cartographie/RPU2013_Carto_Pop/figure/zp_avec_villes.png, id=798, 769.8
+<../doc/cartographie/RPU2013_Carto_Pop/figure/zp_avec_villes.png, id=850, 769.8
 7625pt x 639.38875pt>
 File: ../doc/cartographie/RPU2013_Carto_Pop/figure/zp_avec_villes.png Graphic f
 ile (type png)
@@ -1130,7 +1130,7 @@ ent/populations-legales/france-
 
 [19 <../doc/cartographie/RPU2013_Carto_Pop/figure/zp_avec_villes.png (PNG copy)
 >]
-<../doc/cartographie/RPU2013_Carto_Pop/figure/75ans.png, id=831, 505.89pt x 505
+<../doc/cartographie/RPU2013_Carto_Pop/figure/75ans.png, id=884, 505.89pt x 505
 .89pt>
 File: ../doc/cartographie/RPU2013_Carto_Pop/figure/75ans.png Graphic file (type
  png)
@@ -1155,7 +1155,7 @@ LaTeX Warning: Float too large for page by 5.17383pt on input line 659.
 
 Package xcolor Warning: Incompatible color definition on input line 667.
 
-<figure/carte_sau_2-1.pdf, id=870, 505.89pt x 505.89pt>
+<figure/carte_sau_2-1.pdf, id=922, 505.89pt x 505.89pt>
 File: figure/carte_sau_2-1.pdf Graphic file (type pdf)
 
 <use figure/carte_sau_2-1.pdf>
@@ -1255,7 +1255,7 @@ Overfull \hbox (10.94249pt too wide) in paragraph at lines 1102--1102
      0.0[] 
  []
 
-<figure/radar-1.pdf, id=1000, 505.89pt x 505.89pt>
+<figure/radar-1.pdf, id=1052, 505.89pt x 505.89pt>
 File: figure/radar-1.pdf Graphic file (type pdf)
  <use figure/radar-1.pdf>
 Package pdftex.def Info: figure/radar-1.pdf used on input line 1104.
@@ -1270,7 +1270,7 @@ Chapitre 7.
 
 Package xcolor Warning: Incompatible color definition on input line 1170.
 
-<figure/activite_plot-1.pdf, id=1021, 505.89pt x 361.35pt>
+<figure/activite_plot-1.pdf, id=1073, 505.89pt x 361.35pt>
 File: figure/activite_plot-1.pdf Graphic file (type pdf)
 
 <use figure/activite_plot-1.pdf>
@@ -1291,7 +1291,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1233.
 
-<figure/bplot_val_abs-1.pdf, id=1028, 505.89pt x 361.35pt>
+<figure/bplot_val_abs-1.pdf, id=1081, 505.89pt x 361.35pt>
 File: figure/bplot_val_abs-1.pdf Graphic file (type pdf)
 
 <use figure/bplot_val_abs-1.pdf>
@@ -1310,7 +1310,7 @@ Underfull \vbox (badness 1490) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1251.
 
-<figure/bp_en_pourcentage-1.pdf, id=1040, 505.89pt x 361.35pt>
+<figure/bp_en_pourcentage-1.pdf, id=1093, 505.89pt x 361.35pt>
 File: figure/bp_en_pourcentage-1.pdf Graphic file (type pdf)
 
 <use figure/bp_en_pourcentage-1.pdf>
@@ -1324,7 +1324,7 @@ Underfull \vbox (badness 1831) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1306.
 
-<figure/bp_parmois-1.pdf, id=1060, 505.89pt x 361.35pt>
+<figure/bp_parmois-1.pdf, id=1113, 505.89pt x 361.35pt>
 File: figure/bp_parmois-1.pdf Graphic file (type pdf)
 
 <use figure/bp_parmois-1.pdf>
@@ -1343,7 +1343,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1319.
 
-<figure/mois_nomalise-1.pdf, id=1070, 505.89pt x 361.35pt>
+<figure/mois_nomalise-1.pdf, id=1122, 505.89pt x 361.35pt>
 File: figure/mois_nomalise-1.pdf Graphic file (type pdf)
 
 <use figure/mois_nomalise-1.pdf>
@@ -1359,7 +1359,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1362.
 
-<figure/bp_act_sem-1.pdf, id=1087, 505.89pt x 361.35pt>
+<figure/bp_act_sem-1.pdf, id=1139, 505.89pt x 361.35pt>
 File: figure/bp_act_sem-1.pdf Graphic file (type pdf)
 
 <use figure/bp_act_sem-1.pdf>
@@ -1374,7 +1374,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1396.
 
-<figure/bp_activite_semaine-1.pdf, id=1088, 505.89pt x 361.35pt>
+<figure/bp_activite_semaine-1.pdf, id=1140, 505.89pt x 361.35pt>
 File: figure/bp_activite_semaine-1.pdf Graphic file (type pdf)
 
 <use figure/bp_activite_semaine-1.pdf>
@@ -1391,7 +1391,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1412.
 
-<figure/bp_activite_heure-1.pdf, id=1101, 505.89pt x 361.35pt>
+<figure/bp_activite_heure-1.pdf, id=1153, 505.89pt x 361.35pt>
 File: figure/bp_activite_heure-1.pdf Graphic file (type pdf)
 
 <use figure/bp_activite_heure-1.pdf>
@@ -1415,7 +1415,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 Package xcolor Warning: Incompatible color definition on input line 1438.
 
-<figure/sau_arrive_depart-1.pdf, id=1115, 505.89pt x 361.35pt>
+<figure/sau_arrive_depart-1.pdf, id=1167, 505.89pt x 361.35pt>
 File: figure/sau_arrive_depart-1.pdf Graphic file (type pdf)
 
 <use figure/sau_arrive_depart-1.pdf>
@@ -1435,7 +1435,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1480.
 
-<figure/es_adultes-1.pdf, id=1128, 505.89pt x 361.35pt>
+<figure/es_adultes-1.pdf, id=1180, 505.89pt x 361.35pt>
 File: figure/es_adultes-1.pdf Graphic file (type pdf)
 
 <use figure/es_adultes-1.pdf>
@@ -1454,7 +1454,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1508.
 
-<figure/graphe_es_we-1.pdf, id=1143, 505.89pt x 361.35pt>
+<figure/graphe_es_we-1.pdf, id=1195, 505.89pt x 361.35pt>
 File: figure/graphe_es_we-1.pdf Graphic file (type pdf)
 
 <use figure/graphe_es_we-1.pdf>
@@ -1473,7 +1473,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1521.
 
-<figure/graphe2_es_we-1.pdf, id=1155, 505.89pt x 361.35pt>
+<figure/graphe2_es_we-1.pdf, id=1208, 505.89pt x 361.35pt>
 File: figure/graphe2_es_we-1.pdf Graphic file (type pdf)
 
 <use figure/graphe2_es_we-1.pdf>
@@ -1489,7 +1489,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1549.
 
-<figure/es_hospitalise-1.pdf, id=1172, 505.89pt x 361.35pt>
+<figure/es_hospitalise-1.pdf, id=1225, 505.89pt x 361.35pt>
 File: figure/es_hospitalise-1.pdf Graphic file (type pdf)
 
 <use figure/es_hospitalise-1.pdf>
@@ -1504,7 +1504,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1566.
 
-<figure/es_dom-1.pdf, id=1173, 505.89pt x 361.35pt>
+<figure/es_dom-1.pdf, id=1226, 505.89pt x 361.35pt>
 File: figure/es_dom-1.pdf Graphic file (type pdf)
  <use figure/es_dom-1.pdf>
 Package pdftex.def Info: figure/es_dom-1.pdf used on input line 1567.
@@ -1526,7 +1526,7 @@ Overfull \hbox (41.12811pt too wide) in paragraph at lines 1588--1595
 
 Package xcolor Warning: Incompatible color definition on input line 1606.
 
-<figure/test23-1.pdf, id=1193, 505.89pt x 361.35pt>
+<figure/test23-1.pdf, id=1245, 505.89pt x 361.35pt>
 File: figure/test23-1.pdf Graphic file (type pdf)
  <use figure/test23-1.pdf>
 Package pdftex.def Info: figure/test23-1.pdf used on input line 1607.
@@ -1541,7 +1541,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1620.
 
-<figure/test25-1.pdf, id=1205, 505.89pt x 722.7pt>
+<figure/test25-1.pdf, id=1257, 505.89pt x 722.7pt>
 File: figure/test25-1.pdf Graphic file (type pdf)
  <use figure/test25-1.pdf>
 Package pdftex.def Info: figure/test25-1.pdf used on input line 1621.
@@ -1559,7 +1559,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1644.
 
-<figure/test26-1.pdf, id=1216, 505.89pt x 722.7pt>
+<figure/test26-1.pdf, id=1268, 505.89pt x 722.7pt>
 File: figure/test26-1.pdf Graphic file (type pdf)
  <use figure/test26-1.pdf>
 Package pdftex.def Info: figure/test26-1.pdf used on input line 1645.
@@ -1577,7 +1577,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1657.
 
-<figure/test27-1.pdf, id=1227, 505.89pt x 722.7pt>
+<figure/test27-1.pdf, id=1279, 505.89pt x 722.7pt>
 File: figure/test27-1.pdf Graphic file (type pdf)
  <use figure/test27-1.pdf>
 Package pdftex.def Info: figure/test27-1.pdf used on input line 1658.
@@ -1598,7 +1598,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1721.
 
-<figure/pyramide_graphe-1.pdf, id=1250, 505.89pt x 505.89pt>
+<figure/pyramide_graphe-1.pdf, id=1302, 505.89pt x 505.89pt>
 File: figure/pyramide_graphe-1.pdf Graphic file (type pdf)
 
 <use figure/pyramide_graphe-1.pdf>
@@ -1617,7 +1617,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1734.
 
-<figure/pyramide_graphe2-1.pdf, id=1256, 505.89pt x 505.89pt>
+<figure/pyramide_graphe2-1.pdf, id=1308, 505.89pt x 505.89pt>
 File: figure/pyramide_graphe2-1.pdf Graphic file (type pdf)
 
 <use figure/pyramide_graphe2-1.pdf>
@@ -1637,7 +1637,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1786.
 
-<figure/tranches_age1-1.pdf, id=1268, 505.89pt x 361.35pt>
+<figure/tranches_age1-1.pdf, id=1321, 505.89pt x 361.35pt>
 File: figure/tranches_age1-1.pdf Graphic file (type pdf)
 
 <use figure/tranches_age1-1.pdf>
@@ -1656,7 +1656,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 Package xcolor Warning: Incompatible color definition on input line 1826.
 
-<figure/tranches_age21-1.pdf, id=1284, 505.89pt x 361.35pt>
+<figure/tranches_age21-1.pdf, id=1337, 505.89pt x 361.35pt>
 File: figure/tranches_age21-1.pdf Graphic file (type pdf)
 
 <use figure/tranches_age21-1.pdf>
@@ -1672,14 +1672,14 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1845.
 
-<figure/affiche_age3-1.pdf, id=1297, 505.89pt x 361.35pt>
+<figure/affiche_age3-1.pdf, id=1349, 505.89pt x 361.35pt>
 File: figure/affiche_age3-1.pdf Graphic file (type pdf)
 
 <use figure/affiche_age3-1.pdf>
 Package pdftex.def Info: figure/affiche_age3-1.pdf used on input line 1846.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
-<figure/affiche_age3-2.pdf, id=1298, 505.89pt x 361.35pt>
+<figure/affiche_age3-2.pdf, id=1350, 505.89pt x 361.35pt>
 File: figure/affiche_age3-2.pdf Graphic file (type pdf)
 
 <use figure/affiche_age3-2.pdf>
@@ -1702,7 +1702,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1902.
 
-<figure/pyr_consult-1.pdf, id=1315, 505.89pt x 361.35pt>
+<figure/pyr_consult-1.pdf, id=1367, 505.89pt x 361.35pt>
 File: figure/pyr_consult-1.pdf Graphic file (type pdf)
 
 <use figure/pyr_consult-1.pdf>
@@ -1718,7 +1718,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1953.
 
-<figure/pyr_consult_p100-1.pdf, id=1333, 505.89pt x 361.35pt>
+<figure/pyr_consult_p100-1.pdf, id=1385, 505.89pt x 361.35pt>
 File: figure/pyr_consult_p100-1.pdf Graphic file (type pdf)
 
 <use figure/pyr_consult_p100-1.pdf>
@@ -1742,7 +1742,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1963--1963
 
 Package xcolor Warning: Incompatible color definition on input line 1969.
 
-<figure/comp_pyramides-1.pdf, id=1349, 505.89pt x 578.16pt>
+<figure/comp_pyramides-1.pdf, id=1401, 505.89pt x 578.16pt>
 File: figure/comp_pyramides-1.pdf Graphic file (type pdf)
 
 <use figure/comp_pyramides-1.pdf>
@@ -1758,7 +1758,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 1990.
 
-<figure/alsace_recours-1.pdf, id=1366, 505.89pt x 361.35pt>
+<figure/alsace_recours-1.pdf, id=1418, 505.89pt x 361.35pt>
 File: figure/alsace_recours-1.pdf Graphic file (type pdf)
 
 <use figure/alsace_recours-1.pdf>
@@ -1774,7 +1774,7 @@ See the caption package documentation for explanation.
 
 Package xcolor Warning: Incompatible color definition on input line 2061.
 
-<figure/sr_graphe-1.pdf, id=1383, 505.89pt x 361.35pt>
+<figure/sr_graphe-1.pdf, id=1436, 505.89pt x 361.35pt>
 File: figure/sr_graphe-1.pdf Graphic file (type pdf)
 
 <use figure/sr_graphe-1.pdf>
@@ -1794,729 +1794,733 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ]
 Chapitre 8.
-<figure/motifss-1.pdf, id=1406, 505.89pt x 361.35pt>
+[71] [72] [73] [74]
+Chapitre 9.
+<figure/motifss-1.pdf, id=1478, 505.89pt x 361.35pt>
 File: figure/motifss-1.pdf Graphic file (type pdf)
 
 <use figure/motifss-1.pdf>
-Package pdftex.def Info: figure/motifss-1.pdf used on input line 2110.
+Package pdftex.def Info: figure/motifss-1.pdf used on input line 2326.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [71]
-[72 <./figure/motifss-1.pdf>]
-Chapitre 9.
-<figure/mode_entree-1.pdf, id=1426, 505.89pt x 505.89pt>
+ [75
+
+]
+[76 <./figure/motifss-1.pdf>]
+Chapitre 10.
+<figure/mode_entree-1.pdf, id=1496, 505.89pt x 505.89pt>
 File: figure/mode_entree-1.pdf Graphic file (type pdf)
 
 <use figure/mode_entree-1.pdf>
-Package pdftex.def Info: figure/mode_entree-1.pdf used on input line 2161.
+Package pdftex.def Info: figure/mode_entree-1.pdf used on input line 2377.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [73
+ [77
 
 ]
-[74 <./figure/mode_entree-1.pdf>]
-<figure/transport-1.pdf, id=1443, 505.89pt x 505.89pt>
+[78 <./figure/mode_entree-1.pdf>]
+<figure/transport-1.pdf, id=1514, 505.89pt x 505.89pt>
 File: figure/transport-1.pdf Graphic file (type pdf)
 
 <use figure/transport-1.pdf>
-Package pdftex.def Info: figure/transport-1.pdf used on input line 2190.
+Package pdftex.def Info: figure/transport-1.pdf used on input line 2406.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
- [75 <./figure/transport-1.pdf>]
+ [79 <./figure/transport-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2223.
+Package xcolor Warning: Incompatible color definition on input line 2439.
 
-<figure/origine_geo-1.pdf, id=1454, 505.89pt x 361.35pt>
+<figure/origine_geo-1.pdf, id=1525, 505.89pt x 361.35pt>
 File: figure/origine_geo-1.pdf Graphic file (type pdf)
 
 <use figure/origine_geo-1.pdf>
-Package pdftex.def Info: figure/origine_geo-1.pdf used on input line 2224.
+Package pdftex.def Info: figure/origine_geo-1.pdf used on input line 2440.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
-<figure/origine_geo-2.pdf, id=1455, 505.89pt x 361.35pt>
+<figure/origine_geo-2.pdf, id=1526, 505.89pt x 361.35pt>
 File: figure/origine_geo-2.pdf Graphic file (type pdf)
 
 <use figure/origine_geo-2.pdf>
-Package pdftex.def Info: figure/origine_geo-2.pdf used on input line 2226.
+Package pdftex.def Info: figure/origine_geo-2.pdf used on input line 2442.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
- [76 <./figure/origine_geo-1.pdf> <./figure/origine_geo-2.pdf>] [77] [78
+ [80 <./figure/origine_geo-1.pdf> <./figure/origine_geo-2.pdf>] [81] [82
 
 ]
-Chapitre 10.
+Chapitre 11.
 
-Overfull \hbox (90.08623pt too wide) in paragraph at lines 2256--2263
+Overfull \hbox (90.08623pt too wide) in paragraph at lines 2472--2479
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 2276.
+Package xcolor Warning: Incompatible color definition on input line 2492.
 
-<figure/log_passages-1.pdf, id=1482, 505.89pt x 361.35pt>
+<figure/log_passages-1.pdf, id=1553, 505.89pt x 361.35pt>
 File: figure/log_passages-1.pdf Graphic file (type pdf)
 
 <use figure/log_passages-1.pdf>
-Package pdftex.def Info: figure/log_passages-1.pdf used on input line 2277.
+Package pdftex.def Info: figure/log_passages-1.pdf used on input line 2493.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2280.
+(caption)                particular \caption on input line 2496.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [79]
+ [83]
 
-Package xcolor Warning: Incompatible color definition on input line 2340.
+Package xcolor Warning: Incompatible color definition on input line 2556.
 
-<figure/passages_clean_hist-1.pdf, id=1487, 505.89pt x 361.35pt>
+<figure/passages_clean_hist-1.pdf, id=1559, 505.89pt x 361.35pt>
 File: figure/passages_clean_hist-1.pdf Graphic file (type pdf)
 
 <use figure/passages_clean_hist-1.pdf>
-Package pdftex.def Info: figure/passages_clean_hist-1.pdf used on input line 23
-41.
+Package pdftex.def Info: figure/passages_clean_hist-1.pdf used on input line 25
+57.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2344.
+(caption)                particular \caption on input line 2560.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 3312) has occurred while \output is active []
 
- [80 <./figure/log_passages-1.pdf>]
+ [84 <./figure/log_passages-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2360.
+Package xcolor Warning: Incompatible color definition on input line 2576.
 
-<figure/graphe_duree_moyenne_passage-1.pdf, id=1498, 505.89pt x 361.35pt>
+<figure/graphe_duree_moyenne_passage-1.pdf, id=1570, 505.89pt x 361.35pt>
 File: figure/graphe_duree_moyenne_passage-1.pdf Graphic file (type pdf)
 
 <use figure/graphe_duree_moyenne_passage-1.pdf>
 Package pdftex.def Info: figure/graphe_duree_moyenne_passage-1.pdf used on inpu
-t line 2361.
+t line 2577.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2364.
+(caption)                particular \caption on input line 2580.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [81 <./figure/passages_clean_hist-1.pdf>]
+ [85 <./figure/passages_clean_hist-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2380.
+Package xcolor Warning: Incompatible color definition on input line 2596.
 
-<figure/hist_tous_passages-1.pdf, id=1510, 505.89pt x 361.35pt>
+<figure/hist_tous_passages-1.pdf, id=1582, 505.89pt x 361.35pt>
 File: figure/hist_tous_passages-1.pdf Graphic file (type pdf)
 
 <use figure/hist_tous_passages-1.pdf>
-Package pdftex.def Info: figure/hist_tous_passages-1.pdf used on input line 238
-1.
+Package pdftex.def Info: figure/hist_tous_passages-1.pdf used on input line 259
+7.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2384.
+(caption)                particular \caption on input line 2600.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [82 <./figure/graphe_duree_moyenne_passage-1.pdf>]
+ [86 <./figure/graphe_duree_moyenne_passage-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2472.
+Package xcolor Warning: Incompatible color definition on input line 2688.
 
-<figure/bp_periode-1.pdf, id=1521, 505.89pt x 361.35pt>
+<figure/bp_periode-1.pdf, id=1593, 505.89pt x 361.35pt>
 File: figure/bp_periode-1.pdf Graphic file (type pdf)
 
 <use figure/bp_periode-1.pdf>
-Package pdftex.def Info: figure/bp_periode-1.pdf used on input line 2473.
+Package pdftex.def Info: figure/bp_periode-1.pdf used on input line 2689.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2476.
+(caption)                particular \caption on input line 2692.
 See the caption package documentation for explanation.
 
-[83 <./figure/hist_tous_passages-1.pdf>]
+[87 <./figure/hist_tous_passages-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2486.
+Package xcolor Warning: Incompatible color definition on input line 2702.
 
-<figure/periode_2-1.pdf, id=1539, 505.89pt x 361.35pt>
+<figure/periode_2-1.pdf, id=1609, 505.89pt x 361.35pt>
 File: figure/periode_2-1.pdf Graphic file (type pdf)
 
 <use figure/periode_2-1.pdf>
-Package pdftex.def Info: figure/periode_2-1.pdf used on input line 2487.
+Package pdftex.def Info: figure/periode_2-1.pdf used on input line 2703.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2490.
+(caption)                particular \caption on input line 2706.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [84 <./figure/bp_periode-1.pdf>]
+ [88 <./figure/bp_periode-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2498.
+Package xcolor Warning: Incompatible color definition on input line 2714.
 
-<figure/periode_1-1.pdf, id=1550, 505.89pt x 361.35pt>
+<figure/periode_1-1.pdf, id=1620, 505.89pt x 361.35pt>
 File: figure/periode_1-1.pdf Graphic file (type pdf)
 
 <use figure/periode_1-1.pdf>
-Package pdftex.def Info: figure/periode_1-1.pdf used on input line 2499.
+Package pdftex.def Info: figure/periode_1-1.pdf used on input line 2715.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2502.
+(caption)                particular \caption on input line 2718.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [85 <./figure/periode_2-1.pdf>]
+ [89 <./figure/periode_2-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2528.
+Package xcolor Warning: Incompatible color definition on input line 2744.
 
-<figure/periode_4-1.pdf, id=1563, 505.89pt x 361.35pt>
+<figure/periode_4-1.pdf, id=1634, 505.89pt x 361.35pt>
 File: figure/periode_4-1.pdf Graphic file (type pdf)
 
 <use figure/periode_4-1.pdf>
-Package pdftex.def Info: figure/periode_4-1.pdf used on input line 2529.
+Package pdftex.def Info: figure/periode_4-1.pdf used on input line 2745.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2532.
+(caption)                particular \caption on input line 2748.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [86 <./figure/periode_1-1.pdf>]
+ [90 <./figure/periode_1-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2588.
+Package xcolor Warning: Incompatible color definition on input line 2804.
 
-<figure/age_groupe2-1.pdf, id=1579, 505.89pt x 361.35pt>
+<figure/age_groupe2-1.pdf, id=1650, 505.89pt x 361.35pt>
 File: figure/age_groupe2-1.pdf Graphic file (type pdf)
 
 <use figure/age_groupe2-1.pdf>
-Package pdftex.def Info: figure/age_groupe2-1.pdf used on input line 2589.
+Package pdftex.def Info: figure/age_groupe2-1.pdf used on input line 2805.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2592.
+(caption)                particular \caption on input line 2808.
 See the caption package documentation for explanation.
 
-[87 <./figure/periode_4-1.pdf>]
+[91 <./figure/periode_4-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2626.
+Package xcolor Warning: Incompatible color definition on input line 2842.
 
-<figure/bp_jour_presence-1.pdf, id=1592, 505.89pt x 361.35pt>
+<figure/bp_jour_presence-1.pdf, id=1664, 505.89pt x 361.35pt>
 File: figure/bp_jour_presence-1.pdf Graphic file (type pdf)
 
 <use figure/bp_jour_presence-1.pdf>
-Package pdftex.def Info: figure/bp_jour_presence-1.pdf used on input line 2627.
+Package pdftex.def Info: figure/bp_jour_presence-1.pdf used on input line 2843.
 
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2630.
+(caption)                particular \caption on input line 2846.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [88 <./figure/age_groupe2-1.pdf>]
+ [92 <./figure/age_groupe2-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2705.
+Package xcolor Warning: Incompatible color definition on input line 2921.
 
-<figure/bp_duree_dest-1.pdf, id=1609, 505.89pt x 361.35pt>
+<figure/bp_duree_dest-1.pdf, id=1681, 505.89pt x 361.35pt>
 File: figure/bp_duree_dest-1.pdf Graphic file (type pdf)
 
 <use figure/bp_duree_dest-1.pdf>
-Package pdftex.def Info: figure/bp_duree_dest-1.pdf used on input line 2706.
+Package pdftex.def Info: figure/bp_duree_dest-1.pdf used on input line 2922.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2709.
+(caption)                particular \caption on input line 2925.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [89 <./figure/bp_jour_presence-1.pdf>] [90 <./figure/bp_duree_dest-1.pdf>]
+ [93 <./figure/bp_jour_presence-1.pdf>] [94 <./figure/bp_duree_dest-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2743.
+Package xcolor Warning: Incompatible color definition on input line 2959.
 
-<figure/duree_gravite2-1.pdf, id=1635, 505.89pt x 361.35pt>
+<figure/duree_gravite2-1.pdf, id=1706, 505.89pt x 361.35pt>
 File: figure/duree_gravite2-1.pdf Graphic file (type pdf)
 
 <use figure/duree_gravite2-1.pdf>
-Package pdftex.def Info: figure/duree_gravite2-1.pdf used on input line 2744.
+Package pdftex.def Info: figure/duree_gravite2-1.pdf used on input line 2960.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 2747.
+(caption)                particular \caption on input line 2963.
 See the caption package documentation for explanation.
 
-[91 <./figure/duree_gravite2-1.pdf>] [92
+[95 <./figure/duree_gravite2-1.pdf>] [96
 
 ]
-Chapitre 11.
+Chapitre 12.
 
-Package xcolor Warning: Incompatible color definition on input line 2815.
+Package xcolor Warning: Incompatible color definition on input line 3031.
 
-<figure/table_cim10-1.pdf, id=1654, 505.89pt x 361.35pt>
+<figure/table_cim10-1.pdf, id=1725, 505.89pt x 361.35pt>
 File: figure/table_cim10-1.pdf Graphic file (type pdf)
 
 <use figure/table_cim10-1.pdf>
-Package pdftex.def Info: figure/table_cim10-1.pdf used on input line 2816.
+Package pdftex.def Info: figure/table_cim10-1.pdf used on input line 3032.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
-Underfull \hbox (badness 4013) in paragraph at lines 2828--2828
+Underfull \hbox (badness 4013) in paragraph at lines 3044--3044
 \T1/lmr/m/n/12 fec-tieuses et pa-ra-si-
  []
 
 
-Underfull \hbox (badness 1308) in paragraph at lines 2832--2832
+Underfull \hbox (badness 1308) in paragraph at lines 3048--3048
 \T1/lmr/m/n/12 des or-ganes hé-ma-to-
  []
 
 
-Underfull \hbox (badness 2495) in paragraph at lines 2832--2832
+Underfull \hbox (badness 2495) in paragraph at lines 3048--3048
 \T1/lmr/m/n/12 troubles du sys-tème
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2834--2834
+Underfull \hbox (badness 10000) in paragraph at lines 3050--3050
 []|\T1/lmr/m/n/12 Maladies en-do-cri-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2834--2834
+Underfull \hbox (badness 10000) in paragraph at lines 3050--3050
 \T1/lmr/m/n/12 niennes, nu-tri-tion-
  []
 
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-1.def
 File: uni-1.def 2013/05/13 UCS: Unicode data U+0100..U+01FF
 )
-Underfull \hbox (badness 2582) in paragraph at lines 2842--2842
+Underfull \hbox (badness 2582) in paragraph at lines 3058--3058
 []|\T1/lmr/m/n/12 Maladies de l'oreille
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2852--2852
+Underfull \hbox (badness 10000) in paragraph at lines 3068--3068
 \T1/lmr/m/n/12 os-téoar-ti-cu-laire, des
  []
 
 
-Underfull \hbox (badness 2253) in paragraph at lines 2852--2852
+Underfull \hbox (badness 2253) in paragraph at lines 3068--3068
 \T1/lmr/m/n/12 muscles et du tissu
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2856--2856
+Underfull \hbox (badness 10000) in paragraph at lines 3072--3072
 []|\T1/lmr/m/n/12 Grossesse, ac-cou-che-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2858--2858
+Underfull \hbox (badness 10000) in paragraph at lines 3074--3074
 []|\T1/lmr/m/n/12 Certaines af-fec-tions
  []
 
 
-Underfull \hbox (badness 2050) in paragraph at lines 2858--2858
+Underfull \hbox (badness 2050) in paragraph at lines 3074--3074
 \T1/lmr/m/n/12 dont l'ori-gine se si-
  []
 
 
-Underfull \hbox (badness 1721) in paragraph at lines 2858--2858
+Underfull \hbox (badness 1721) in paragraph at lines 3074--3074
 \T1/lmr/m/n/12 tue dans la pé-riode
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2862--2862
+Underfull \hbox (badness 10000) in paragraph at lines 3078--3078
 \T1/lmr/m/n/12 ré-sul-tats anor-maux
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2862--2862
+Underfull \hbox (badness 10000) in paragraph at lines 3078--3078
 \T1/lmr/m/n/12 d'exa-mens cli-niques
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2864--2864
+Underfull \hbox (badness 10000) in paragraph at lines 3080--3080
 \T1/lmr/m/n/12 em-poi-son-ne-ments
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2864--2864
+Underfull \hbox (badness 10000) in paragraph at lines 3080--3080
 \T1/lmr/m/n/12 et cer-taines autres
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2864--2864
+Underfull \hbox (badness 10000) in paragraph at lines 3080--3080
 \T1/lmr/m/n/12 consé-quences de
  []
 
 
-Underfull \hbox (badness 7704) in paragraph at lines 2866--2866
+Underfull \hbox (badness 7704) in paragraph at lines 3082--3082
 []|\T1/lmr/m/n/12 Causes ex-ternes de
  []
 
 
-Overfull \hbox (20.22835pt too wide) in alignment at lines 2823--2867
+Overfull \hbox (20.22835pt too wide) in alignment at lines 3039--3083
  [] [] [] [] [] [] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [93]
-Underfull \vbox (badness 10000) detected at line 2867
+ [97]
+Underfull \vbox (badness 10000) detected at line 3083
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2870--2870
+Underfull \hbox (badness 10000) in paragraph at lines 3086--3086
 []|\T1/lmr/m/n/12 Codes d'uti-li-sa-tion
  []
 
 
-Overfull \hbox (20.22835pt too wide) in alignment at lines 2867--2873
+Overfull \hbox (20.22835pt too wide) in alignment at lines 3083--3089
  [] [] [] [] [] [] 
  []
 
-[94 <./figure/table_cim10-1.pdf>]
+[98 <./figure/table_cim10-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 2878.
+Package xcolor Warning: Incompatible color definition on input line 3094.
 
-<figure/class_cim10-1.pdf, id=1673, 505.89pt x 505.89pt>
+<figure/class_cim10-1.pdf, id=1744, 505.89pt x 505.89pt>
 File: figure/class_cim10-1.pdf Graphic file (type pdf)
 
 <use figure/class_cim10-1.pdf>
-Package pdftex.def Info: figure/class_cim10-1.pdf used on input line 2879.
+Package pdftex.def Info: figure/class_cim10-1.pdf used on input line 3095.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [95]
-[96 <./figure/class_cim10-1.pdf>]
-Overfull \hbox (68.9491pt too wide) in alignment at lines 2927--2950
+ [99]
+[100 <./figure/class_cim10-1.pdf>]
+Overfull \hbox (68.9491pt too wide) in alignment at lines 3143--3166
  [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 2950
+Underfull \vbox (badness 10000) detected at line 3166
  []
 
 
-Overfull \hbox (68.9491pt too wide) in alignment at lines 2950--2970
+Overfull \hbox (68.9491pt too wide) in alignment at lines 3166--3186
  [] [] 
  []
 
 
-Overfull \hbox (68.9491pt too wide) in alignment at lines 2970--2980
+Overfull \hbox (68.9491pt too wide) in alignment at lines 3186--3196
  [] [] 
  []
 
-[97]
+[101]
 
-Package xcolor Warning: Incompatible color definition on input line 3000.
+Package xcolor Warning: Incompatible color definition on input line 3216.
 
-<figure/heure_avc-1.pdf, id=1694, 505.89pt x 361.35pt>
+<figure/heure_avc-1.pdf, id=1766, 505.89pt x 361.35pt>
 File: figure/heure_avc-1.pdf Graphic file (type pdf)
 
 <use figure/heure_avc-1.pdf>
-Package pdftex.def Info: figure/heure_avc-1.pdf used on input line 3001.
+Package pdftex.def Info: figure/heure_avc-1.pdf used on input line 3217.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 3010.
+Package xcolor Warning: Incompatible color definition on input line 3226.
 
-<figure/heure_avc2-1.pdf, id=1695, 505.89pt x 433.62pt> [98 <./figure/heure_avc
--1.pdf>]
+<figure/heure_avc2-1.pdf, id=1767, 505.89pt x 433.62pt> [102 <./figure/heure_av
+c-1.pdf>]
 File: figure/heure_avc2-1.pdf Graphic file (type pdf)
  <use figure/heure_avc2-1.pdf>
-Package pdftex.def Info: figure/heure_avc2-1.pdf used on input line 3011.
+Package pdftex.def Info: figure/heure_avc2-1.pdf used on input line 3227.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
-<figure/avc_jour_semaine-1.pdf, id=1707, 505.89pt x 361.35pt>
+<figure/avc_jour_semaine-1.pdf, id=1779, 505.89pt x 361.35pt>
 File: figure/avc_jour_semaine-1.pdf Graphic file (type pdf)
 
 <use figure/avc_jour_semaine-1.pdf>
-Package pdftex.def Info: figure/avc_jour_semaine-1.pdf used on input line 3078.
+Package pdftex.def Info: figure/avc_jour_semaine-1.pdf used on input line 3294.
 
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [99 <./figure/heure_avc2-1.pdf>]
+ [103 <./figure/heure_avc2-1.pdf>]
 Overfull \vbox (57.61453pt too high) has occurred while \output is active []
 
 
-[100 <./figure/avc_jour_semaine-1.pdf>]
+[104 <./figure/avc_jour_semaine-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3103.
+Package xcolor Warning: Incompatible color definition on input line 3319.
 
-<figure/avc_age2-1.pdf, id=1729, 505.89pt x 361.35pt>
+<figure/avc_age2-1.pdf, id=1801, 505.89pt x 361.35pt>
 File: figure/avc_age2-1.pdf Graphic file (type pdf)
 
 <use figure/avc_age2-1.pdf>
-Package pdftex.def Info: figure/avc_age2-1.pdf used on input line 3104.
+Package pdftex.def Info: figure/avc_age2-1.pdf used on input line 3320.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
-<figure/avc_age2-2.pdf, id=1730, 505.89pt x 361.35pt>
+<figure/avc_age2-2.pdf, id=1802, 505.89pt x 361.35pt>
 File: figure/avc_age2-2.pdf Graphic file (type pdf)
 
 <use figure/avc_age2-2.pdf>
-Package pdftex.def Info: figure/avc_age2-2.pdf used on input line 3106.
+Package pdftex.def Info: figure/avc_age2-2.pdf used on input line 3322.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [101 <./figure/avc_age2-1.pdf>]
+ [105 <./figure/avc_age2-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3138.
+Package xcolor Warning: Incompatible color definition on input line 3354.
 
-<figure/avc_sexe2-1.pdf, id=1745, 505.89pt x 361.35pt>
+<figure/avc_sexe2-1.pdf, id=1816, 505.89pt x 361.35pt>
 File: figure/avc_sexe2-1.pdf Graphic file (type pdf)
 
 <use figure/avc_sexe2-1.pdf>
-Package pdftex.def Info: figure/avc_sexe2-1.pdf used on input line 3139.
+Package pdftex.def Info: figure/avc_sexe2-1.pdf used on input line 3355.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
-<figure/avc_sexe2-2.pdf, id=1746, 505.89pt x 361.35pt>
+<figure/avc_sexe2-2.pdf, id=1817, 505.89pt x 361.35pt>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [102 <./figure/avc_age2-2.pdf>]
+ [106 <./figure/avc_age2-2.pdf>]
 File: figure/avc_sexe2-2.pdf Graphic file (type pdf)
  <use figure/avc_sexe2-2.pdf>
-Package pdftex.def Info: figure/avc_sexe2-2.pdf used on input line 3141.
+Package pdftex.def Info: figure/avc_sexe2-2.pdf used on input line 3357.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
-Overfull \hbox (70.08124pt too wide) in alignment at lines 3153--3164
+Overfull \hbox (70.08124pt too wide) in alignment at lines 3369--3380
  [] [] 
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3164
+Underfull \vbox (badness 10000) detected at line 3380
  []
 
-[103 <./figure/avc_sexe2-1.pdf> <./figure/avc_sexe2-2.pdf>]
-<figure/ait-1.pdf, id=1777, 505.89pt x 361.35pt>
+[107 <./figure/avc_sexe2-1.pdf> <./figure/avc_sexe2-2.pdf>]
+<figure/ait-1.pdf, id=1848, 505.89pt x 361.35pt>
 File: figure/ait-1.pdf Graphic file (type pdf)
  <use figure/ait-1.pdf>
-Package pdftex.def Info: figure/ait-1.pdf used on input line 3171.
+Package pdftex.def Info: figure/ait-1.pdf used on input line 3387.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 Underfull \vbox (badness 7704) has occurred while \output is active []
 
- [104 <./figure/ait-1.pdf>]
+ [108 <./figure/ait-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3221.
+Package xcolor Warning: Incompatible color definition on input line 3437.
 
-<figure/pneumo-1.pdf, id=1790, 505.89pt x 505.89pt>
+<figure/pneumo-1.pdf, id=1861, 505.89pt x 505.89pt>
 File: figure/pneumo-1.pdf Graphic file (type pdf)
  <use figure/pneumo-1.pdf>
-Package pdftex.def Info: figure/pneumo-1.pdf used on input line 3222.
+Package pdftex.def Info: figure/pneumo-1.pdf used on input line 3438.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
-<figure/unnamed-chunk-39-1.pdf, id=1791, 505.89pt x 505.89pt>
-File: figure/unnamed-chunk-39-1.pdf Graphic file (type pdf)
+<figure/unnamed-chunk-40-1.pdf, id=1862, 505.89pt x 505.89pt>
+File: figure/unnamed-chunk-40-1.pdf Graphic file (type pdf)
 
-<use figure/unnamed-chunk-39-1.pdf>
-Package pdftex.def Info: figure/unnamed-chunk-39-1.pdf used on input line 3228.
+<use figure/unnamed-chunk-40-1.pdf>
+Package pdftex.def Info: figure/unnamed-chunk-40-1.pdf used on input line 3444.
 
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [105 <./figure/pneumo-1.pdf>] [106 <./figure/unnamed-chunk-39-1.pdf>]
+ [109 <./figure/pneumo-1.pdf>] [110 <./figure/unnamed-chunk-40-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3319.
+Package xcolor Warning: Incompatible color definition on input line 3535.
 
-<figure/grippe-1.pdf, id=1814, 505.89pt x 505.89pt>
+<figure/grippe-1.pdf, id=1886, 505.89pt x 505.89pt>
 File: figure/grippe-1.pdf Graphic file (type pdf)
  <use figure/grippe-1.pdf>
-Package pdftex.def Info: figure/grippe-1.pdf used on input line 3320.
+Package pdftex.def Info: figure/grippe-1.pdf used on input line 3536.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [107]
+ [111]
 Overfull \vbox (22.17426pt too high) has occurred while \output is active []
 
 
-[108 <./figure/grippe-1.pdf>]
-<figure/asthme-1.pdf, id=1830, 505.89pt x 505.89pt>
+[112 <./figure/grippe-1.pdf>]
+<figure/asthme-1.pdf, id=1901, 505.89pt x 505.89pt>
 File: figure/asthme-1.pdf Graphic file (type pdf)
  <use figure/asthme-1.pdf>
-Package pdftex.def Info: figure/asthme-1.pdf used on input line 3356.
+Package pdftex.def Info: figure/asthme-1.pdf used on input line 3572.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
-<figure/asthme2-1.pdf, id=1831, 505.89pt x 505.89pt> [109 <./figure/asthme-1.pd
+<figure/asthme2-1.pdf, id=1902, 505.89pt x 505.89pt> [113 <./figure/asthme-1.pd
 f>]
 File: figure/asthme2-1.pdf Graphic file (type pdf)
  <use figure/asthme2-1.pdf>
-Package pdftex.def Info: figure/asthme2-1.pdf used on input line 3381.
+Package pdftex.def Info: figure/asthme2-1.pdf used on input line 3597.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
-<figure/asthme2-2.pdf, id=1843, 505.89pt x 505.89pt>
+<figure/asthme2-2.pdf, id=1915, 505.89pt x 505.89pt>
 File: figure/asthme2-2.pdf Graphic file (type pdf)
 
 <use figure/asthme2-2.pdf>
-Package pdftex.def Info: figure/asthme2-2.pdf used on input line 3383.
+Package pdftex.def Info: figure/asthme2-2.pdf used on input line 3599.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 
-LaTeX Warning: Float too large for page by 142.04015pt on input line 3450.
+LaTeX Warning: Float too large for page by 142.04015pt on input line 3666.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [110 <./figure/asthme2-1.pdf>]
+ [114 <./figure/asthme2-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3458.
+Package xcolor Warning: Incompatible color definition on input line 3674.
 
-<figure/asthme_age-1.pdf, id=1856, 505.89pt x 361.35pt>
+<figure/asthme_age-1.pdf, id=1928, 505.89pt x 361.35pt>
 File: figure/asthme_age-1.pdf Graphic file (type pdf)
 
 <use figure/asthme_age-1.pdf>
-Package pdftex.def Info: figure/asthme_age-1.pdf used on input line 3459.
+Package pdftex.def Info: figure/asthme_age-1.pdf used on input line 3675.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 3462.
+(caption)                particular \caption on input line 3678.
 See the caption package documentation for explanation.
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [111 <./figure/asthme2-2.pdf>]
+ [115 <./figure/asthme2-2.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3467.
+Package xcolor Warning: Incompatible color definition on input line 3683.
 
-<figure/asthme_ccmu-1.pdf, id=1867, 505.89pt x 361.35pt>
+<figure/asthme_ccmu-1.pdf, id=1939, 505.89pt x 361.35pt>
 File: figure/asthme_ccmu-1.pdf Graphic file (type pdf)
 
 <use figure/asthme_ccmu-1.pdf>
-Package pdftex.def Info: figure/asthme_ccmu-1.pdf used on input line 3468.
+Package pdftex.def Info: figure/asthme_ccmu-1.pdf used on input line 3684.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 3471.
+(caption)                particular \caption on input line 3687.
 See the caption package documentation for explanation.
 
-[112 <./figure/asthme_age-1.pdf> <./figure/asthme_ccmu-1.pdf>]
+[116 <./figure/asthme_age-1.pdf> <./figure/asthme_ccmu-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3533.
+Package xcolor Warning: Incompatible color definition on input line 3749.
 
-<figure/bron-1.pdf, id=1887, 505.89pt x 505.89pt>
+<figure/bron-1.pdf, id=1958, 505.89pt x 505.89pt>
 File: figure/bron-1.pdf Graphic file (type pdf)
  <use figure/bron-1.pdf>
-Package pdftex.def Info: figure/bron-1.pdf used on input line 3534.
+Package pdftex.def Info: figure/bron-1.pdf used on input line 3750.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
-<figure/bron-2.pdf, id=1888, 505.89pt x 505.89pt>
+<figure/bron-2.pdf, id=1959, 505.89pt x 505.89pt>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [113]
+ [117]
 File: figure/bron-2.pdf Graphic file (type pdf)
 
 <use figure/bron-2.pdf>
-Package pdftex.def Info: figure/bron-2.pdf used on input line 3536.
+Package pdftex.def Info: figure/bron-2.pdf used on input line 3752.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [114 <./figure/bron-1.pdf>]
+ [118 <./figure/bron-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3552.
+Package xcolor Warning: Incompatible color definition on input line 3768.
 
-<figure/co-1.pdf, id=1904, 505.89pt x 505.89pt>
+<figure/co-1.pdf, id=1974, 505.89pt x 505.89pt>
 File: figure/co-1.pdf Graphic file (type pdf)
  <use figure/co-1.pdf>
-Package pdftex.def Info: figure/co-1.pdf used on input line 3558.
+Package pdftex.def Info: figure/co-1.pdf used on input line 3774.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [115 <./figure/bron-2.pdf>]
+ [119 <./figure/bron-2.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3579.
+Package xcolor Warning: Incompatible color definition on input line 3795.
 
-<figure/malaises-1.pdf, id=1915, 505.89pt x 505.89pt>
+<figure/malaises-1.pdf, id=1986, 505.89pt x 505.89pt>
 File: figure/malaises-1.pdf Graphic file (type pdf)
 
 <use figure/malaises-1.pdf>
-Package pdftex.def Info: figure/malaises-1.pdf used on input line 3580.
+Package pdftex.def Info: figure/malaises-1.pdf used on input line 3796.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [116 <./figure/co-1.pdf>]
+ [120 <./figure/co-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3589.
+Package xcolor Warning: Incompatible color definition on input line 3805.
 
-<figure/malaises_invs-1.pdf, id=1927, 505.89pt x 505.89pt>
+<figure/malaises_invs-1.pdf, id=1998, 505.89pt x 505.89pt>
 File: figure/malaises_invs-1.pdf Graphic file (type pdf)
 
 <use figure/malaises_invs-1.pdf>
-Package pdftex.def Info: figure/malaises_invs-1.pdf used on input line 3590.
+Package pdftex.def Info: figure/malaises_invs-1.pdf used on input line 3806.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [117 <./figure/malaises-1.pdf>]
+ [121 <./figure/malaises-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3605.
+Package xcolor Warning: Incompatible color definition on input line 3821.
 
-<figure/canicule-1.pdf, id=1939, 505.89pt x 505.89pt>
+<figure/canicule-1.pdf, id=2011, 505.89pt x 505.89pt>
 File: figure/canicule-1.pdf Graphic file (type pdf)
 
 <use figure/canicule-1.pdf>
-Package pdftex.def Info: figure/canicule-1.pdf used on input line 3606.
+Package pdftex.def Info: figure/canicule-1.pdf used on input line 3822.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
-<figure/canicule-2.pdf, id=1940, 505.89pt x 505.89pt>
+<figure/canicule-2.pdf, id=2012, 505.89pt x 505.89pt>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [118 <./figure/malaises_invs-1.pdf>]
+ [122 <./figure/malaises_invs-1.pdf>]
 File: figure/canicule-2.pdf Graphic file (type pdf)
  <use figure/canicule-2.pdf>
-Package pdftex.def Info: figure/canicule-2.pdf used on input line 3608.
+Package pdftex.def Info: figure/canicule-2.pdf used on input line 3824.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [119 <./figure/canicule-1.pdf>] <figure/canicule-3.pdf, id=1962, 505.89pt x 50
+ [123 <./figure/canicule-1.pdf>] <figure/canicule-3.pdf, id=2033, 505.89pt x 50
 5.89pt>
 File: figure/canicule-3.pdf Graphic file (type pdf)
 
 <use figure/canicule-3.pdf>
-Package pdftex.def Info: figure/canicule-3.pdf used on input line 3622.
+Package pdftex.def Info: figure/canicule-3.pdf used on input line 3838.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [120 <./figure/canicule-2.pdf>]
-Underfull \hbox (badness 1584) in paragraph at lines 3637--3639
+ [124 <./figure/canicule-2.pdf>]
+Underfull \hbox (badness 1584) in paragraph at lines 3853--3855
 []\T1/lmr/m/n/12 Inclus : Ca-tarrhe in-tes-ti-nale (Co-lite,Entérite, Gastro-en
 térite,SAI hé-mor-ra-
  []
@@ -2524,205 +2528,205 @@ térite,SAI hé-mor-ra-
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [121 <./figure/canicule-3.pdf>]
+ [125 <./figure/canicule-3.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3652.
+Package xcolor Warning: Incompatible color definition on input line 3868.
 
-<figure/ge_hist-1.pdf, id=1983, 505.89pt x 578.16pt>
+<figure/ge_hist-1.pdf, id=2055, 505.89pt x 578.16pt>
 File: figure/ge_hist-1.pdf Graphic file (type pdf)
 
 <use figure/ge_hist-1.pdf>
-Package pdftex.def Info: figure/ge_hist-1.pdf used on input line 3654.
+Package pdftex.def Info: figure/ge_hist-1.pdf used on input line 3870.
 (pdftex.def)             Requested size: 415.12572pt x 474.43832pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 3663.
+Package xcolor Warning: Incompatible color definition on input line 3879.
 
-<figure/ge_age_box-1.pdf, id=1984, 505.89pt x 433.62pt>
+<figure/ge_age_box-1.pdf, id=2056, 505.89pt x 433.62pt>
 File: figure/ge_age_box-1.pdf Graphic file (type pdf)
 
 <use figure/ge_age_box-1.pdf>
-Package pdftex.def Info: figure/ge_age_box-1.pdf used on input line 3665.
+Package pdftex.def Info: figure/ge_age_box-1.pdf used on input line 3881.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [122 <./figure/ge_hist-1.pdf>]
+ [126 <./figure/ge_hist-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3676.
+Package xcolor Warning: Incompatible color definition on input line 3892.
 
-<figure/ge_epidemio-1.pdf, id=1996, 505.89pt x 505.89pt>
+<figure/ge_epidemio-1.pdf, id=2068, 505.89pt x 505.89pt>
 File: figure/ge_epidemio-1.pdf Graphic file (type pdf)
 
 <use figure/ge_epidemio-1.pdf>
-Package pdftex.def Info: figure/ge_epidemio-1.pdf used on input line 3677.
+Package pdftex.def Info: figure/ge_epidemio-1.pdf used on input line 3893.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [123 <./figure/ge_age_box-1.pdf>]
+ [127 <./figure/ge_age_box-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3685.
+Package xcolor Warning: Incompatible color definition on input line 3901.
 
 
-Overfull \hbox (4.77449pt too wide) in paragraph at lines 3695--3695
+Overfull \hbox (4.77449pt too wide) in paragraph at lines 3911--3911
 []                      \T1/lmtt/m/n/12 Jui     Aou      Sep      Oct      Nov 
     Dec[] 
  []
 
 
-Overfull \hbox (4.75348pt too wide) in paragraph at lines 3695--3695
+Overfull \hbox (4.75348pt too wide) in paragraph at lines 3911--3911
 []\T1/lmtt/m/n/12 RPU totaux       20387.00 19275.0 18272.00 18519.00 17387.00 
 18436.0[] 
  []
 
 
-Overfull \hbox (4.74648pt too wide) in paragraph at lines 3695--3695
+Overfull \hbox (4.74648pt too wide) in paragraph at lines 3911--3911
 []\T1/lmtt/m/n/12 Gastro-entérites   173.00   219.0   174.00   165.00   149.00 
   360.0[] 
  []
 
 
-Overfull \hbox (4.74648pt too wide) in paragraph at lines 3695--3695
+Overfull \hbox (4.74648pt too wide) in paragraph at lines 3911--3911
 []\T1/lmtt/m/n/12 Rapport              0.85     1.1     0.95     0.89     0.86 
     1.9[] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 3700.
+Package xcolor Warning: Incompatible color definition on input line 3916.
 
-<figure/invs_barplot-1.pdf, id=2009, 505.89pt x 578.16pt>
+<figure/invs_barplot-1.pdf, id=2080, 505.89pt x 578.16pt>
 File: figure/invs_barplot-1.pdf Graphic file (type pdf)
 
 <use figure/invs_barplot-1.pdf>
-Package pdftex.def Info: figure/invs_barplot-1.pdf used on input line 3702.
+Package pdftex.def Info: figure/invs_barplot-1.pdf used on input line 3918.
 (pdftex.def)             Requested size: 415.12572pt x 474.43832pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 3712.
+Package xcolor Warning: Incompatible color definition on input line 3928.
 
 
 Underfull \vbox (badness 7308) has occurred while \output is active []
 
- [124 <./figure/ge_epidemio-1.pdf>] [125 <./figure/invs_barplot-1.pdf>]
+ [128 <./figure/ge_epidemio-1.pdf>] [129 <./figure/invs_barplot-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 3741.
+Package xcolor Warning: Incompatible color definition on input line 3957.
 
 
-Overfull \hbox (17.1245pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (17.1245pt too wide) in paragraph at lines 3971--3971
 []                      \T1/lmtt/m/n/12 Jan      Fev      Mar      Avr      Mai
       Jun[] 
  []
 
 
-Overfull \hbox (17.11049pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (17.11049pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 RPU médicaux     11670.00 11891.00 12170.00 12812.00 11411.00
  12152.00[] 
  []
 
 
-Overfull \hbox (17.07547pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (17.07547pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 Traumatologie     6722.00  6161.00  7353.00  7490.00  7796.00
   8620.00[] 
  []
 
 
-Overfull \hbox (17.09648pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (17.09648pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 Ratio med/trauma     1.74     1.93     1.66     1.71     1.46
      1.41[] 
  []
 
 
-Overfull \hbox (17.07547pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (17.07547pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 Trauma ratio         0.63     0.66     0.62     0.63     0.59
      0.59[] 
  []
 
 
-Overfull \hbox (4.77449pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (4.77449pt too wide) in paragraph at lines 3971--3971
 []                     \T1/lmtt/m/n/12 Jui      Aou     Sep      Oct      Nov  
     Dec[] 
  []
 
 
-Overfull \hbox (4.73247pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (4.73247pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 RPU médicaux     12326.0 11792.00 11006.0 11478.00 10901.00 1
 1965.00[] 
  []
 
 
-Overfull \hbox (4.73247pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (4.73247pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 Traumatologie     8061.0  7483.00  7266.0  7041.00  6486.00  
 6471.00[] 
  []
 
 
-Overfull \hbox (4.76048pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (4.76048pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 Ratio med/trauma     1.5     1.58     1.5     1.63     1.68  
    1.85[] 
  []
 
 
-Overfull \hbox (4.73247pt too wide) in paragraph at lines 3755--3755
+Overfull \hbox (4.73247pt too wide) in paragraph at lines 3971--3971
 []\T1/lmtt/m/n/12 Trauma ratio         0.6     0.61     0.6     0.62     0.63  
    0.65[] 
  []
 
-[126] [127] [128]
-Chapitre 12.
+[130] [131] [132]
+Chapitre 13.
 
 Package pdftex.def Warning: Option `bb' does not make sense,
-(pdftex.def)                using `viewport' instead on input line 3790.
+(pdftex.def)                using `viewport' instead on input line 4006.
 
 
-LaTeX Warning: File `figure/Mode de SORTIE.png' not found on input line 3790.
+LaTeX Warning: File `figure/Mode de SORTIE.png' not found on input line 4006.
 
-<figure/Mode de SORTIE.png, id=2043, 671.50874pt x 438.63875pt>
+<figure/Mode de SORTIE.png, id=2114, 671.50874pt x 438.63875pt>
 File: figure/Mode de SORTIE.png Graphic file (type png)
 
 <use figure/Mode de SORTIE.png>
-Package pdftex.def Info: figure/Mode de SORTIE.png used on input line 3790.
+Package pdftex.def Info: figure/Mode de SORTIE.png used on input line 4006.
 (pdftex.def)             Requested size: 256.06804pt x 199.17314pt.
- [129
+ [133
 
  <./figure/Mode de SORTIE.png (PNG copy)>]
-<figure/fausses_sorties-1.pdf, id=2053, 505.89pt x 505.89pt>
+<figure/fausses_sorties-1.pdf, id=2124, 505.89pt x 505.89pt>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [130]
+ [134]
 File: figure/fausses_sorties-1.pdf Graphic file (type pdf)
 
 <use figure/fausses_sorties-1.pdf>
-Package pdftex.def Info: figure/fausses_sorties-1.pdf used on input line 3966.
+Package pdftex.def Info: figure/fausses_sorties-1.pdf used on input line 4182.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [131]
+ [135]
 Overfull \vbox (84.87424pt too high) has occurred while \output is active []
 
 
-[132 <./figure/fausses_sorties-1.pdf>] [133] [134
-
-]
-Chapitre 13.
-[135] [136
+[136 <./figure/fausses_sorties-1.pdf>] [137] [138
 
 ]
 Chapitre 14.
-<figure/passages_totaux-1.pdf, id=2089, 505.89pt x 433.62pt>
+[139] [140
+
+]
+Chapitre 15.
+<figure/passages_totaux-1.pdf, id=2161, 505.89pt x 433.62pt>
 File: figure/passages_totaux-1.pdf Graphic file (type pdf)
 
 <use figure/passages_totaux-1.pdf>
-Package pdftex.def Info: figure/passages_totaux-1.pdf used on input line 4030.
+Package pdftex.def Info: figure/passages_totaux-1.pdf used on input line 4246.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
-Overfull \hbox (58.75307pt too wide) in paragraph at lines 4035--4042
+Overfull \hbox (58.75307pt too wide) in paragraph at lines 4251--4258
  [][] 
  []
 
 
-Underfull \hbox (badness 2922) in paragraph at lines 4051--4052
+Underfull \hbox (badness 2922) in paragraph at lines 4267--4268
 []\T1/lmr/m/n/12 Le nombre de re-tours à do-mi-cile est ob-tenu à par-tir de la
  ru-brique
  []
@@ -2730,699 +2734,699 @@ Underfull \hbox (badness 2922) in paragraph at lines 4051--4052
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [137 <./figure/passages_totaux-1.pdf>]
-Overfull \hbox (25.46153pt too wide) in paragraph at lines 4063--4070
+ [141 <./figure/passages_totaux-1.pdf>]
+Overfull \hbox (25.46153pt too wide) in paragraph at lines 4279--4286
  [][] 
  []
 
-<figure/retour_dom-1.pdf, id=2101, 505.89pt x 505.89pt>
+<figure/retour_dom-1.pdf, id=2172, 505.89pt x 505.89pt>
 File: figure/retour_dom-1.pdf Graphic file (type pdf)
 
 <use figure/retour_dom-1.pdf>
-Package pdftex.def Info: figure/retour_dom-1.pdf used on input line 4074.
+Package pdftex.def Info: figure/retour_dom-1.pdf used on input line 4290.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [138]
-<figure/retour_dom2-1.pdf, id=2106, 505.89pt x 505.89pt>
+ [142]
+<figure/retour_dom2-1.pdf, id=2177, 505.89pt x 505.89pt>
 File: figure/retour_dom2-1.pdf Graphic file (type pdf)
 
 <use figure/retour_dom2-1.pdf>
-Package pdftex.def Info: figure/retour_dom2-1.pdf used on input line 4079.
+Package pdftex.def Info: figure/retour_dom2-1.pdf used on input line 4295.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [139 <./figure/retour_dom-1.pdf>]
-Overfull \hbox (3.9162pt too wide) in paragraph at lines 4088--4095
+ [143 <./figure/retour_dom-1.pdf>]
+Overfull \hbox (3.9162pt too wide) in paragraph at lines 4304--4311
  [][] 
  []
 
-<figure/hospit-1.pdf, id=2118, 505.89pt x 505.89pt>
+<figure/hospit-1.pdf, id=2189, 505.89pt x 505.89pt>
 File: figure/hospit-1.pdf Graphic file (type pdf)
  <use figure/hospit-1.pdf>
-Package pdftex.def Info: figure/hospit-1.pdf used on input line 4101.
+Package pdftex.def Info: figure/hospit-1.pdf used on input line 4317.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [140 <./figure/retour_dom2-1.pdf>]
-<figure/retour_dom3-1.pdf, id=2129, 505.89pt x 505.89pt>
+ [144 <./figure/retour_dom2-1.pdf>]
+<figure/retour_dom3-1.pdf, id=2200, 505.89pt x 505.89pt>
 File: figure/retour_dom3-1.pdf Graphic file (type pdf)
 
 <use figure/retour_dom3-1.pdf>
-Package pdftex.def Info: figure/retour_dom3-1.pdf used on input line 4107.
+Package pdftex.def Info: figure/retour_dom3-1.pdf used on input line 4323.
 (pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [141 <./figure/hospit-1.pdf>] [142 <./figure/retour_dom3-1.pdf>] [143
+ [145 <./figure/hospit-1.pdf>] [146 <./figure/retour_dom3-1.pdf>] [147
 
-] [144]
-Chapitre 15.
+] [148]
+Chapitre 16.
 
-Package xcolor Warning: Incompatible color definition on input line 4132.
+Package xcolor Warning: Incompatible color definition on input line 4348.
 
-<figure/passages_pediatrie-1.pdf, id=2159, 505.89pt x 361.35pt>
+<figure/passages_pediatrie-1.pdf, id=2229, 505.89pt x 361.35pt>
 File: figure/passages_pediatrie-1.pdf Graphic file (type pdf)
 
 <use figure/passages_pediatrie-1.pdf>
-Package pdftex.def Info: figure/passages_pediatrie-1.pdf used on input line 413
-3.
+Package pdftex.def Info: figure/passages_pediatrie-1.pdf used on input line 434
+9.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 4192.
+Package xcolor Warning: Incompatible color definition on input line 4408.
 
-<figure/es_pediatriques-1.pdf, id=2162, 505.89pt x 361.35pt> [145
+<figure/es_pediatriques-1.pdf, id=2232, 505.89pt x 361.35pt> [149
 
  <./figure/passages_pediatrie-1.pdf>]
 File: figure/es_pediatriques-1.pdf Graphic file (type pdf)
  <use figure/es_pediatriques-1.pdf>
-Package pdftex.def Info: figure/es_pediatriques-1.pdf used on input line 4193.
+Package pdftex.def Info: figure/es_pediatriques-1.pdf used on input line 4409.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
- [146 <./figure/es_pediatriques-1.pdf>]
-Chapitre 16.
+ [150 <./figure/es_pediatriques-1.pdf>]
+Chapitre 17.
 
-Package xcolor Warning: Incompatible color definition on input line 4211.
+Package xcolor Warning: Incompatible color definition on input line 4427.
 
-<figure/passages_geriatrie-1.pdf, id=2184, 505.89pt x 361.35pt>
+<figure/passages_geriatrie-1.pdf, id=2256, 505.89pt x 361.35pt>
 File: figure/passages_geriatrie-1.pdf Graphic file (type pdf)
 
 <use figure/passages_geriatrie-1.pdf>
-Package pdftex.def Info: figure/passages_geriatrie-1.pdf used on input line 421
-2.
+Package pdftex.def Info: figure/passages_geriatrie-1.pdf used on input line 442
+8.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
- [147
+ [151
 
  <./figure/passages_geriatrie-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 4273.
+Package xcolor Warning: Incompatible color definition on input line 4489.
 
-<figure/es_geriatriques-1.pdf, id=2196, 505.89pt x 361.35pt>
+<figure/es_geriatriques-1.pdf, id=2268, 505.89pt x 361.35pt>
 File: figure/es_geriatriques-1.pdf Graphic file (type pdf)
 
 <use figure/es_geriatriques-1.pdf>
-Package pdftex.def Info: figure/es_geriatriques-1.pdf used on input line 4274.
+Package pdftex.def Info: figure/es_geriatriques-1.pdf used on input line 4490.
 (pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
- [148 <./figure/es_geriatriques-1.pdf>]
-[149
+ [152 <./figure/es_geriatriques-1.pdf>]
+[153
 
-] [150]
-Chapitre 17.
+] [154]
+Chapitre 18.
 
-Package xcolor Warning: Incompatible color definition on input line 4346.
+Package xcolor Warning: Incompatible color definition on input line 4562.
 
-<figure/graphe_wis-1.pdf, id=2217, 505.89pt x 433.62pt>
+<figure/graphe_wis-1.pdf, id=2288, 505.89pt x 433.62pt>
 File: figure/graphe_wis-1.pdf Graphic file (type pdf)
 
 <use figure/graphe_wis-1.pdf>
-Package pdftex.def Info: figure/graphe_wis-1.pdf used on input line 4347.
+Package pdftex.def Info: figure/graphe_wis-1.pdf used on input line 4563.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [151
+ [155
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 4355.
+Package xcolor Warning: Incompatible color definition on input line 4571.
 
-<figure/compl_wis-1.pdf, id=2224, 578.16pt x 505.89pt>
+<figure/compl_wis-1.pdf, id=2296, 578.16pt x 505.89pt>
 File: figure/compl_wis-1.pdf Graphic file (type pdf)
 
 <use figure/compl_wis-1.pdf>
-Package pdftex.def Info: figure/compl_wis-1.pdf used on input line 4356.
+Package pdftex.def Info: figure/compl_wis-1.pdf used on input line 4572.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [152 <./figure/graphe_wis-1.pdf>] [153 <./figure/compl_wis-1.pdf>] [154
-
-]
-Chapitre 18.
-
-Package xcolor Warning: Incompatible color definition on input line 4416.
-
-<figure/graphe_hag-1.pdf, id=2254, 505.89pt x 433.62pt>
-File: figure/graphe_hag-1.pdf Graphic file (type pdf)
-
-<use figure/graphe_hag-1.pdf>
-Package pdftex.def Info: figure/graphe_hag-1.pdf used on input line 4417.
-(pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [155]
-
-Package xcolor Warning: Incompatible color definition on input line 4425.
-
-<figure/compl_hag-1.pdf, id=2261, 578.16pt x 505.89pt>
-File: figure/compl_hag-1.pdf Graphic file (type pdf)
-
-<use figure/compl_hag-1.pdf>
-Package pdftex.def Info: figure/compl_hag-1.pdf used on input line 4426.
-(pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [156 <./figure/graphe_hag-1.pdf>] [157 <./figure/compl_hag-1.pdf>] [158
+ [156 <./figure/graphe_wis-1.pdf>] [157 <./figure/compl_wis-1.pdf>] [158
 
 ]
 Chapitre 19.
 
-Package xcolor Warning: Incompatible color definition on input line 4486.
+Package xcolor Warning: Incompatible color definition on input line 4632.
 
-<figure/graphe_sav-1.pdf, id=2290, 505.89pt x 433.62pt>
-File: figure/graphe_sav-1.pdf Graphic file (type pdf)
+<figure/graphe_hag-1.pdf, id=2325, 505.89pt x 433.62pt>
+File: figure/graphe_hag-1.pdf Graphic file (type pdf)
 
-<use figure/graphe_sav-1.pdf>
-Package pdftex.def Info: figure/graphe_sav-1.pdf used on input line 4487.
+<use figure/graphe_hag-1.pdf>
+Package pdftex.def Info: figure/graphe_hag-1.pdf used on input line 4633.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [159]
 
-Package xcolor Warning: Incompatible color definition on input line 4495.
+Package xcolor Warning: Incompatible color definition on input line 4641.
 
-<figure/compl_sav-1.pdf, id=2296, 578.16pt x 505.89pt>
-File: figure/compl_sav-1.pdf Graphic file (type pdf)
+<figure/compl_hag-1.pdf, id=2331, 578.16pt x 505.89pt>
+File: figure/compl_hag-1.pdf Graphic file (type pdf)
 
-<use figure/compl_sav-1.pdf>
-Package pdftex.def Info: figure/compl_sav-1.pdf used on input line 4496.
+<use figure/compl_hag-1.pdf>
+Package pdftex.def Info: figure/compl_hag-1.pdf used on input line 4642.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [160 <./figure/graphe_sav-1.pdf>] [161 <./figure/compl_sav-1.pdf>] [162
+ [160 <./figure/graphe_hag-1.pdf>] [161 <./figure/compl_hag-1.pdf>] [162
 
 ]
 Chapitre 20.
 
-Package xcolor Warning: Incompatible color definition on input line 4556.
+Package xcolor Warning: Incompatible color definition on input line 4702.
 
-<figure/graphe_odi-1.pdf, id=2326, 505.89pt x 433.62pt>
-File: figure/graphe_odi-1.pdf Graphic file (type pdf)
+<figure/graphe_sav-1.pdf, id=2361, 505.89pt x 433.62pt>
+File: figure/graphe_sav-1.pdf Graphic file (type pdf)
 
-<use figure/graphe_odi-1.pdf>
-Package pdftex.def Info: figure/graphe_odi-1.pdf used on input line 4557.
+<use figure/graphe_sav-1.pdf>
+Package pdftex.def Info: figure/graphe_sav-1.pdf used on input line 4703.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [163]
 
-Package xcolor Warning: Incompatible color definition on input line 4565.
+Package xcolor Warning: Incompatible color definition on input line 4711.
 
-<figure/compl_odi-1.pdf, id=2332, 578.16pt x 505.89pt>
-File: figure/compl_odi-1.pdf Graphic file (type pdf)
+<figure/compl_sav-1.pdf, id=2368, 578.16pt x 505.89pt>
+File: figure/compl_sav-1.pdf Graphic file (type pdf)
 
-<use figure/compl_odi-1.pdf>
-Package pdftex.def Info: figure/compl_odi-1.pdf used on input line 4566.
+<use figure/compl_sav-1.pdf>
+Package pdftex.def Info: figure/compl_sav-1.pdf used on input line 4712.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [164 <./figure/graphe_odi-1.pdf>] [165 <./figure/compl_odi-1.pdf>] [166
+ [164 <./figure/graphe_sav-1.pdf>] [165 <./figure/compl_sav-1.pdf>] [166
 
 ]
 Chapitre 21.
 
-Package xcolor Warning: Incompatible color definition on input line 4609.
+Package xcolor Warning: Incompatible color definition on input line 4772.
 
-<figure/graphe_hus-1.pdf, id=2361, 505.89pt x 433.62pt>
-File: figure/graphe_hus-1.pdf Graphic file (type pdf)
+<figure/graphe_odi-1.pdf, id=2397, 505.89pt x 433.62pt>
+File: figure/graphe_odi-1.pdf Graphic file (type pdf)
 
-<use figure/graphe_hus-1.pdf>
-Package pdftex.def Info: figure/graphe_hus-1.pdf used on input line 4610.
+<use figure/graphe_odi-1.pdf>
+Package pdftex.def Info: figure/graphe_odi-1.pdf used on input line 4773.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
-Underfull \vbox (badness 1430) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [167]
 
-Package xcolor Warning: Incompatible color definition on input line 4618.
+Package xcolor Warning: Incompatible color definition on input line 4781.
 
-<figure/compl_hus-1.pdf, id=2379, 578.16pt x 505.89pt>
-File: figure/compl_hus-1.pdf Graphic file (type pdf)
+<figure/compl_odi-1.pdf, id=2404, 578.16pt x 505.89pt>
+File: figure/compl_odi-1.pdf Graphic file (type pdf)
 
-<use figure/compl_hus-1.pdf>
-Package pdftex.def Info: figure/compl_hus-1.pdf used on input line 4619.
+<use figure/compl_odi-1.pdf>
+Package pdftex.def Info: figure/compl_odi-1.pdf used on input line 4782.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [168 <./figure/graphe_hus-1.pdf>] [169 <./figure/compl_hus-1.pdf>] [170
+ [168 <./figure/graphe_odi-1.pdf>] [169 <./figure/compl_odi-1.pdf>] [170
 
 ]
 Chapitre 22.
 
-Overfull \hbox (24.36166pt too wide) in paragraph at lines 4637--4645
- [][] 
- []
+Package xcolor Warning: Incompatible color definition on input line 4825.
 
+<figure/graphe_hus-1.pdf, id=2433, 505.89pt x 433.62pt>
+File: figure/graphe_hus-1.pdf Graphic file (type pdf)
 
-Package xcolor Warning: Incompatible color definition on input line 4651.
-
-<figure/stAnne_tx_moyen_passages-1.pdf, id=2408, 505.89pt x 361.35pt>
-File: figure/stAnne_tx_moyen_passages-1.pdf Graphic file (type pdf)
-
-<use figure/stAnne_tx_moyen_passages-1.pdf>
-Package pdftex.def Info: figure/stAnne_tx_moyen_passages-1.pdf used on input li
-ne 4652.
-(pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
-
-<figure/stAnne_tx_moyen_passages-2.pdf, id=2409, 505.89pt x 361.35pt>
-File: figure/stAnne_tx_moyen_passages-2.pdf Graphic file (type pdf)
-
-<use figure/stAnne_tx_moyen_passages-2.pdf>
-Package pdftex.def Info: figure/stAnne_tx_moyen_passages-2.pdf used on input li
-ne 4654.
-(pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
-
-<figure/stAnne_tx_moyen_passages-3.pdf, id=2410, 505.89pt x 361.35pt>
-Underfull \vbox (badness 3098) has occurred while \output is active []
-
- [171 <./figure/stAnne_tx_moyen_passages-1.pdf>]
-File: figure/stAnne_tx_moyen_passages-3.pdf Graphic file (type pdf)
-
-<use figure/stAnne_tx_moyen_passages-3.pdf>
-Package pdftex.def Info: figure/stAnne_tx_moyen_passages-3.pdf used on input li
-ne 4656.
-(pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
-
-
-Package xcolor Warning: Incompatible color definition on input line 4665.
-
-<figure/hospit_stAnne-1.pdf, id=2423, 505.89pt x 505.89pt>
-File: figure/hospit_stAnne-1.pdf Graphic file (type pdf)
-
-<use figure/hospit_stAnne-1.pdf>
-Package pdftex.def Info: figure/hospit_stAnne-1.pdf used on input line 4666.
-(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
- [172 <./figure/stAnne_tx_moyen_passages-2.pdf> <./figure/stAnne_tx_moyen_passa
-ges-3.pdf>]
-Overfull \hbox (33.16884pt too wide) in paragraph at lines 4678--4686
- [][] 
- []
-
-<figure/stAnne_tot_passages-1.pdf, id=2441, 505.89pt x 505.89pt>
-File: figure/stAnne_tot_passages-1.pdf Graphic file (type pdf)
-
-<use figure/stAnne_tot_passages-1.pdf>
-Package pdftex.def Info: figure/stAnne_tot_passages-1.pdf used on input line 46
-88.
-(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
-
-<figure/stAnne_tot_passages-2.pdf, id=2442, 505.89pt x 505.89pt>
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [173 <./figure/hospit_stAnne-1.pdf>]
-File: figure/stAnne_tot_passages-2.pdf Graphic file (type pdf)
- <use figure/stAnne_tot_passages-2.pdf>
-Package pdftex.def Info: figure/stAnne_tot_passages-2.pdf used on input line 46
-90.
-(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [174 <./figure/stAnne_tot_passages-1.pdf>]
-Overfull \hbox (78.27103pt too wide) in paragraph at lines 4701--4709
- [][] 
- []
-
-<figure/stAnne_1_75_passages-1.pdf, id=2464, 505.89pt x 505.89pt>
-File: figure/stAnne_1_75_passages-1.pdf Graphic file (type pdf)
-
-<use figure/stAnne_1_75_passages-1.pdf>
-Package pdftex.def Info: figure/stAnne_1_75_passages-1.pdf used on input line 4
-711.
-(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
-
-<figure/stAnne_1_75_passages-2.pdf, id=2465, 505.89pt x 505.89pt>
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [175 <./figure/stAnne_tot_passages-2.pdf>]
-File: figure/stAnne_1_75_passages-2.pdf Graphic file (type pdf)
- <use figure/stAnne_1_75_passages-2.pdf>
-Package pdftex.def Info: figure/stAnne_1_75_passages-2.pdf used on input line 4
-713.
-(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [176 <./figure/stAnne_1_75_passages-1.pdf>]
-Overfull \hbox (55.49446pt too wide) in paragraph at lines 4725--4733
- [][] 
- []
-
-<figure/stAnne_sup75_passages-1.pdf, id=2486, 505.89pt x 505.89pt>
-File: figure/stAnne_sup75_passages-1.pdf Graphic file (type pdf)
-
-<use figure/stAnne_sup75_passages-1.pdf>
-Package pdftex.def Info: figure/stAnne_sup75_passages-1.pdf used on input line 
-4735.
-(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
-
-<figure/stAnne_sup75_passages-2.pdf, id=2487, 505.89pt x 505.89pt>
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [177 <./figure/stAnne_1_75_passages-2.pdf>]
-File: figure/stAnne_sup75_passages-2.pdf Graphic file (type pdf)
- <use figure/stAnne_sup75_passages-2.pdf>
-Package pdftex.def Info: figure/stAnne_sup75_passages-2.pdf used on input line 
-4737.
-(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
-
-Overfull \hbox (49.87872pt too wide) in paragraph at lines 4746--4761
- [][] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [178 <./figure/stAnne_sup75_passages-1.pdf>] [179 <./figure/stAnne_sup75_passa
-ges-2.pdf>] [180
-
-]
-Chapitre 23.
-[181] [182
-
-]
-Chapitre 24.
-
-Package xcolor Warning: Incompatible color definition on input line 4862.
-
-<figure/graphe_p_sel-1.pdf, id=2532, 505.89pt x 433.62pt>
-File: figure/graphe_p_sel-1.pdf Graphic file (type pdf)
-
-<use figure/graphe_p_sel-1.pdf>
-Package pdftex.def Info: figure/graphe_p_sel-1.pdf used on input line 4863.
+<use figure/graphe_hus-1.pdf>
+Package pdftex.def Info: figure/graphe_hus-1.pdf used on input line 4826.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 1430) has occurred while \output is active []
 
- [183]
+ [171]
 
-Package xcolor Warning: Incompatible color definition on input line 4871.
+Package xcolor Warning: Incompatible color definition on input line 4834.
 
-<figure/compl_sel-1.pdf, id=2538, 578.16pt x 505.89pt>
-File: figure/compl_sel-1.pdf Graphic file (type pdf)
+<figure/compl_hus-1.pdf, id=2449, 578.16pt x 505.89pt>
+File: figure/compl_hus-1.pdf Graphic file (type pdf)
 
-<use figure/compl_sel-1.pdf>
-Package pdftex.def Info: figure/compl_sel-1.pdf used on input line 4872.
+<use figure/compl_hus-1.pdf>
+Package pdftex.def Info: figure/compl_hus-1.pdf used on input line 4835.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [184 <./figure/graphe_p_sel-1.pdf>] [185 <./figure/compl_sel-1.pdf>] [186
+ [172 <./figure/graphe_hus-1.pdf>] [173 <./figure/compl_hus-1.pdf>] [174
+
+]
+Chapitre 23.
+
+Overfull \hbox (24.36166pt too wide) in paragraph at lines 4853--4861
+ [][] 
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 4867.
+
+<figure/stAnne_tx_moyen_passages-1.pdf, id=2479, 505.89pt x 361.35pt>
+File: figure/stAnne_tx_moyen_passages-1.pdf Graphic file (type pdf)
+
+<use figure/stAnne_tx_moyen_passages-1.pdf>
+Package pdftex.def Info: figure/stAnne_tx_moyen_passages-1.pdf used on input li
+ne 4868.
+(pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
+
+<figure/stAnne_tx_moyen_passages-2.pdf, id=2480, 505.89pt x 361.35pt>
+File: figure/stAnne_tx_moyen_passages-2.pdf Graphic file (type pdf)
+
+<use figure/stAnne_tx_moyen_passages-2.pdf>
+Package pdftex.def Info: figure/stAnne_tx_moyen_passages-2.pdf used on input li
+ne 4870.
+(pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
+
+<figure/stAnne_tx_moyen_passages-3.pdf, id=2481, 505.89pt x 361.35pt>
+Underfull \vbox (badness 3098) has occurred while \output is active []
+
+ [175 <./figure/stAnne_tx_moyen_passages-1.pdf>]
+File: figure/stAnne_tx_moyen_passages-3.pdf Graphic file (type pdf)
+
+<use figure/stAnne_tx_moyen_passages-3.pdf>
+Package pdftex.def Info: figure/stAnne_tx_moyen_passages-3.pdf used on input li
+ne 4872.
+(pdftex.def)             Requested size: 415.12572pt x 296.52396pt.
+
+
+Package xcolor Warning: Incompatible color definition on input line 4881.
+
+<figure/hospit_stAnne-1.pdf, id=2495, 505.89pt x 505.89pt>
+File: figure/hospit_stAnne-1.pdf Graphic file (type pdf)
+
+<use figure/hospit_stAnne-1.pdf>
+Package pdftex.def Info: figure/hospit_stAnne-1.pdf used on input line 4882.
+(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
+ [176 <./figure/stAnne_tx_moyen_passages-2.pdf> <./figure/stAnne_tx_moyen_passa
+ges-3.pdf>]
+Overfull \hbox (33.16884pt too wide) in paragraph at lines 4894--4902
+ [][] 
+ []
+
+<figure/stAnne_tot_passages-1.pdf, id=2513, 505.89pt x 505.89pt>
+File: figure/stAnne_tot_passages-1.pdf Graphic file (type pdf)
+
+<use figure/stAnne_tot_passages-1.pdf>
+Package pdftex.def Info: figure/stAnne_tot_passages-1.pdf used on input line 49
+04.
+(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
+
+<figure/stAnne_tot_passages-2.pdf, id=2514, 505.89pt x 505.89pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [177 <./figure/hospit_stAnne-1.pdf>]
+File: figure/stAnne_tot_passages-2.pdf Graphic file (type pdf)
+ <use figure/stAnne_tot_passages-2.pdf>
+Package pdftex.def Info: figure/stAnne_tot_passages-2.pdf used on input line 49
+06.
+(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [178 <./figure/stAnne_tot_passages-1.pdf>]
+Overfull \hbox (78.27103pt too wide) in paragraph at lines 4917--4925
+ [][] 
+ []
+
+<figure/stAnne_1_75_passages-1.pdf, id=2535, 505.89pt x 505.89pt>
+File: figure/stAnne_1_75_passages-1.pdf Graphic file (type pdf)
+
+<use figure/stAnne_1_75_passages-1.pdf>
+Package pdftex.def Info: figure/stAnne_1_75_passages-1.pdf used on input line 4
+927.
+(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
+
+<figure/stAnne_1_75_passages-2.pdf, id=2536, 505.89pt x 505.89pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [179 <./figure/stAnne_tot_passages-2.pdf>]
+File: figure/stAnne_1_75_passages-2.pdf Graphic file (type pdf)
+ <use figure/stAnne_1_75_passages-2.pdf>
+Package pdftex.def Info: figure/stAnne_1_75_passages-2.pdf used on input line 4
+929.
+(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [180 <./figure/stAnne_1_75_passages-1.pdf>]
+Overfull \hbox (55.49446pt too wide) in paragraph at lines 4941--4949
+ [][] 
+ []
+
+<figure/stAnne_sup75_passages-1.pdf, id=2558, 505.89pt x 505.89pt>
+File: figure/stAnne_sup75_passages-1.pdf Graphic file (type pdf)
+
+<use figure/stAnne_sup75_passages-1.pdf>
+Package pdftex.def Info: figure/stAnne_sup75_passages-1.pdf used on input line 
+4951.
+(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
+
+<figure/stAnne_sup75_passages-2.pdf, id=2559, 505.89pt x 505.89pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [181 <./figure/stAnne_1_75_passages-2.pdf>]
+File: figure/stAnne_sup75_passages-2.pdf Graphic file (type pdf)
+ <use figure/stAnne_sup75_passages-2.pdf>
+Package pdftex.def Info: figure/stAnne_sup75_passages-2.pdf used on input line 
+4953.
+(pdftex.def)             Requested size: 415.12572pt x 415.13351pt.
+
+Overfull \hbox (49.87872pt too wide) in paragraph at lines 4962--4977
+ [][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [182 <./figure/stAnne_sup75_passages-1.pdf>] [183 <./figure/stAnne_sup75_passa
+ges-2.pdf>] [184
+
+]
+Chapitre 24.
+[185] [186
 
 ]
 Chapitre 25.
 
-Package xcolor Warning: Incompatible color definition on input line 4932.
+Package xcolor Warning: Incompatible color definition on input line 5078.
 
-<figure/graphe_p_col-1.pdf, id=2568, 505.89pt x 433.62pt>
-File: figure/graphe_p_col-1.pdf Graphic file (type pdf)
+<figure/graphe_p_sel-1.pdf, id=2603, 505.89pt x 433.62pt>
+File: figure/graphe_p_sel-1.pdf Graphic file (type pdf)
 
-<use figure/graphe_p_col-1.pdf>
-Package pdftex.def Info: figure/graphe_p_col-1.pdf used on input line 4933.
+<use figure/graphe_p_sel-1.pdf>
+Package pdftex.def Info: figure/graphe_p_sel-1.pdf used on input line 5079.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [187]
 
-Package xcolor Warning: Incompatible color definition on input line 4942.
+Package xcolor Warning: Incompatible color definition on input line 5087.
 
-<figure/compl_col-1.pdf, id=2575, 578.16pt x 505.89pt>
-File: figure/compl_col-1.pdf Graphic file (type pdf)
+<figure/compl_sel-1.pdf, id=2609, 578.16pt x 505.89pt>
+File: figure/compl_sel-1.pdf Graphic file (type pdf)
 
-<use figure/compl_col-1.pdf>
-Package pdftex.def Info: figure/compl_col-1.pdf used on input line 4943.
+<use figure/compl_sel-1.pdf>
+Package pdftex.def Info: figure/compl_sel-1.pdf used on input line 5088.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [188 <./figure/graphe_p_col-1.pdf>] [189 <./figure/compl_col-1.pdf>] [190
+ [188 <./figure/graphe_p_sel-1.pdf>] [189 <./figure/compl_sel-1.pdf>] [190
 
 ]
 Chapitre 26.
 
-Package xcolor Warning: Incompatible color definition on input line 4957.
+Package xcolor Warning: Incompatible color definition on input line 5148.
 
+<figure/graphe_p_col-1.pdf, id=2639, 505.89pt x 433.62pt>
+File: figure/graphe_p_col-1.pdf Graphic file (type pdf)
 
-Package xcolor Warning: Incompatible color definition on input line 5014.
-
-<figure/graphe_p_gueb-1.pdf, id=2604, 505.89pt x 433.62pt>
-File: figure/graphe_p_gueb-1.pdf Graphic file (type pdf)
-
-<use figure/graphe_p_gueb-1.pdf>
-Package pdftex.def Info: figure/graphe_p_gueb-1.pdf used on input line 5015.
+<use figure/graphe_p_col-1.pdf>
+Package pdftex.def Info: figure/graphe_p_col-1.pdf used on input line 5149.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [191]
 
-Package xcolor Warning: Incompatible color definition on input line 5112.
+Package xcolor Warning: Incompatible color definition on input line 5158.
 
-<figure/compl_geb2-1.pdf, id=2612, 578.16pt x 505.89pt>
-File: figure/compl_geb2-1.pdf Graphic file (type pdf)
+<figure/compl_col-1.pdf, id=2647, 578.16pt x 505.89pt>
+File: figure/compl_col-1.pdf Graphic file (type pdf)
 
-<use figure/compl_geb2-1.pdf>
-Package pdftex.def Info: figure/compl_geb2-1.pdf used on input line 5113.
+<use figure/compl_col-1.pdf>
+Package pdftex.def Info: figure/compl_col-1.pdf used on input line 5159.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [192 <./figure/graphe_p_gueb-1.pdf>] [193 <./figure/compl_geb2-1.pdf>] [194
+ [192 <./figure/graphe_p_col-1.pdf>] [193 <./figure/compl_col-1.pdf>] [194
 
 ]
 Chapitre 27.
-[195] [196
 
-]
-Chapitre 28.
+Package xcolor Warning: Incompatible color definition on input line 5173.
 
-Package xcolor Warning: Incompatible color definition on input line 5174.
 
-<figure/graphe_p_alk-1.pdf, id=2650, 505.89pt x 433.62pt>
-File: figure/graphe_p_alk-1.pdf Graphic file (type pdf)
+Package xcolor Warning: Incompatible color definition on input line 5230.
 
-<use figure/graphe_p_alk-1.pdf>
-Package pdftex.def Info: figure/graphe_p_alk-1.pdf used on input line 5175.
+<figure/graphe_p_gueb-1.pdf, id=2676, 505.89pt x 433.62pt>
+File: figure/graphe_p_gueb-1.pdf Graphic file (type pdf)
+
+<use figure/graphe_p_gueb-1.pdf>
+Package pdftex.def Info: figure/graphe_p_gueb-1.pdf used on input line 5231.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [197]
+ [195]
 
-Package xcolor Warning: Incompatible color definition on input line 5183.
+Package xcolor Warning: Incompatible color definition on input line 5328.
 
-<figure/compl_alk-1.pdf, id=2657, 578.16pt x 505.89pt>
-File: figure/compl_alk-1.pdf Graphic file (type pdf)
+<figure/compl_geb2-1.pdf, id=2683, 578.16pt x 505.89pt>
+File: figure/compl_geb2-1.pdf Graphic file (type pdf)
 
-<use figure/compl_alk-1.pdf>
-Package pdftex.def Info: figure/compl_alk-1.pdf used on input line 5184.
+<use figure/compl_geb2-1.pdf>
+Package pdftex.def Info: figure/compl_geb2-1.pdf used on input line 5329.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [198 <./figure/graphe_p_alk-1.pdf>] [199 <./figure/compl_alk-1.pdf>] [200
+ [196 <./figure/graphe_p_gueb-1.pdf>] [197 <./figure/compl_geb2-1.pdf>] [198
+
+]
+Chapitre 28.
+[199] [200
 
 ]
 Chapitre 29.
 
-Package xcolor Warning: Incompatible color definition on input line 5249.
+Package xcolor Warning: Incompatible color definition on input line 5390.
 
-<figure/graphe_p_mul-1.pdf, id=2686, 505.89pt x 433.62pt>
-File: figure/graphe_p_mul-1.pdf Graphic file (type pdf)
+<figure/graphe_p_alk-1.pdf, id=2721, 505.89pt x 433.62pt>
+File: figure/graphe_p_alk-1.pdf Graphic file (type pdf)
 
-<use figure/graphe_p_mul-1.pdf>
-Package pdftex.def Info: figure/graphe_p_mul-1.pdf used on input line 5250.
+<use figure/graphe_p_alk-1.pdf>
+Package pdftex.def Info: figure/graphe_p_alk-1.pdf used on input line 5391.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [201]
 
-Package xcolor Warning: Incompatible color definition on input line 5259.
+Package xcolor Warning: Incompatible color definition on input line 5399.
 
-<figure/compl_mul-1.pdf, id=2692, 578.16pt x 505.89pt>
-File: figure/compl_mul-1.pdf Graphic file (type pdf)
+<figure/compl_alk-1.pdf, id=2727, 578.16pt x 505.89pt>
+File: figure/compl_alk-1.pdf Graphic file (type pdf)
 
-<use figure/compl_mul-1.pdf>
-Package pdftex.def Info: figure/compl_mul-1.pdf used on input line 5260.
+<use figure/compl_alk-1.pdf>
+Package pdftex.def Info: figure/compl_alk-1.pdf used on input line 5400.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [202 <./figure/graphe_p_mul-1.pdf>] [203 <./figure/compl_mul-1.pdf>] [204
+ [202 <./figure/graphe_p_alk-1.pdf>] [203 <./figure/compl_alk-1.pdf>] [204
 
 ]
 Chapitre 30.
 
-Package xcolor Warning: Incompatible color definition on input line 5321.
+Package xcolor Warning: Incompatible color definition on input line 5465.
 
-<figure/graphe_fonderie-1.pdf, id=2722, 505.89pt x 433.62pt>
-File: figure/graphe_fonderie-1.pdf Graphic file (type pdf)
+<figure/graphe_p_mul-1.pdf, id=2758, 505.89pt x 433.62pt>
+File: figure/graphe_p_mul-1.pdf Graphic file (type pdf)
 
-<use figure/graphe_fonderie-1.pdf>
-Package pdftex.def Info: figure/graphe_fonderie-1.pdf used on input line 5322.
+<use figure/graphe_p_mul-1.pdf>
+Package pdftex.def Info: figure/graphe_p_mul-1.pdf used on input line 5466.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [205]
 
-Package xcolor Warning: Incompatible color definition on input line 5330.
+Package xcolor Warning: Incompatible color definition on input line 5475.
 
-<figure/compl_dia-1.pdf, id=2728, 578.16pt x 505.89pt>
-File: figure/compl_dia-1.pdf Graphic file (type pdf)
+<figure/compl_mul-1.pdf, id=2764, 578.16pt x 505.89pt>
+File: figure/compl_mul-1.pdf Graphic file (type pdf)
 
-<use figure/compl_dia-1.pdf>
-Package pdftex.def Info: figure/compl_dia-1.pdf used on input line 5331.
+<use figure/compl_mul-1.pdf>
+Package pdftex.def Info: figure/compl_mul-1.pdf used on input line 5476.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [206 <./figure/graphe_fonderie-1.pdf>] [207 <./figure/compl_dia-1.pdf>] [208
+ [206 <./figure/graphe_p_mul-1.pdf>] [207 <./figure/compl_mul-1.pdf>] [208
 
 ]
 Chapitre 31.
 
-Package xcolor Warning: Incompatible color definition on input line 5391.
+Package xcolor Warning: Incompatible color definition on input line 5537.
 
-<figure/graphe_3fr-1.pdf, id=2758, 505.89pt x 433.62pt>
-File: figure/graphe_3fr-1.pdf Graphic file (type pdf)
+<figure/graphe_fonderie-1.pdf, id=2793, 505.89pt x 433.62pt>
+File: figure/graphe_fonderie-1.pdf Graphic file (type pdf)
 
-<use figure/graphe_3fr-1.pdf>
-Package pdftex.def Info: figure/graphe_3fr-1.pdf used on input line 5392.
+<use figure/graphe_fonderie-1.pdf>
+Package pdftex.def Info: figure/graphe_fonderie-1.pdf used on input line 5538.
 (pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [209]
 
-Package xcolor Warning: Incompatible color definition on input line 5400.
+Package xcolor Warning: Incompatible color definition on input line 5546.
 
-<figure/compl_3fr-1.pdf, id=2765, 578.16pt x 505.89pt>
-File: figure/compl_3fr-1.pdf Graphic file (type pdf)
+<figure/compl_dia-1.pdf, id=2800, 578.16pt x 505.89pt>
+File: figure/compl_dia-1.pdf Graphic file (type pdf)
 
-<use figure/compl_3fr-1.pdf>
-Package pdftex.def Info: figure/compl_3fr-1.pdf used on input line 5401.
+<use figure/compl_dia-1.pdf>
+Package pdftex.def Info: figure/compl_dia-1.pdf used on input line 5547.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [210 <./figure/graphe_3fr-1.pdf>] [211 <./figure/compl_3fr-1.pdf>] [212
+ [210 <./figure/graphe_fonderie-1.pdf>] [211 <./figure/compl_dia-1.pdf>] [212
 
 ]
 Chapitre 32.
-[213] [214] [215] [216
 
+Package xcolor Warning: Incompatible color definition on input line 5607.
 
+<figure/graphe_3fr-1.pdf, id=2829, 505.89pt x 433.62pt>
+File: figure/graphe_3fr-1.pdf Graphic file (type pdf)
 
-] [217] [218]
+<use figure/graphe_3fr-1.pdf>
+Package pdftex.def Info: figure/graphe_3fr-1.pdf used on input line 5608.
+(pdftex.def)             Requested size: 415.12572pt x 355.82875pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [213]
+
+Package xcolor Warning: Incompatible color definition on input line 5616.
+
+<figure/compl_3fr-1.pdf, id=2835, 578.16pt x 505.89pt>
+File: figure/compl_3fr-1.pdf Graphic file (type pdf)
+
+<use figure/compl_3fr-1.pdf>
+Package pdftex.def Info: figure/compl_3fr-1.pdf used on input line 5617.
+(pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [214 <./figure/graphe_3fr-1.pdf>] [215 <./figure/compl_3fr-1.pdf>] [216
+
+]
 Chapitre 33.
+[217] [218] [219] [220
 
-Overfull \hbox (22.26128pt too wide) in paragraph at lines 5525--5537
+
+
+] [221] [222]
+Chapitre 34.
+
+Overfull \hbox (22.26128pt too wide) in paragraph at lines 5741--5753
  [][] 
  []
 
-<figure/samu_global-1.pdf, id=2841, 578.16pt x 505.89pt>
+<figure/samu_global-1.pdf, id=2913, 578.16pt x 505.89pt>
 File: figure/samu_global-1.pdf Graphic file (type pdf)
 
 <use figure/samu_global-1.pdf>
-Package pdftex.def Info: figure/samu_global-1.pdf used on input line 5539.
+Package pdftex.def Info: figure/samu_global-1.pdf used on input line 5755.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [219
+ [223
 
 ]
-<figure/smur-1.pdf, id=2847, 578.16pt x 505.89pt>
+<figure/smur-1.pdf, id=2919, 578.16pt x 505.89pt>
 File: figure/smur-1.pdf Graphic file (type pdf)
  <use figure/smur-1.pdf>
-Package pdftex.def Info: figure/smur-1.pdf used on input line 5545.
+Package pdftex.def Info: figure/smur-1.pdf used on input line 5761.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [220 <./figure/samu_global-1.pdf>]
+ [224 <./figure/samu_global-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 5562.
+Package xcolor Warning: Incompatible color definition on input line 5778.
 
-<figure/samu67-1.pdf, id=2858, 578.16pt x 505.89pt>
+<figure/samu67-1.pdf, id=2930, 578.16pt x 505.89pt>
 File: figure/samu67-1.pdf Graphic file (type pdf)
  <use figure/samu67-1.pdf>
-Package pdftex.def Info: figure/samu67-1.pdf used on input line 5563.
+Package pdftex.def Info: figure/samu67-1.pdf used on input line 5779.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 
-Package xcolor Warning: Incompatible color definition on input line 5568.
+Package xcolor Warning: Incompatible color definition on input line 5784.
 
-<figure/samu67_2-1.pdf, id=2859, 578.16pt x 505.89pt>
+<figure/samu67_2-1.pdf, id=2931, 578.16pt x 505.89pt>
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [221 <./figure/smur-1.pdf>]
+ [225 <./figure/smur-1.pdf>]
 File: figure/samu67_2-1.pdf Graphic file (type pdf)
  <use figure/samu67_2-1.pdf>
-Package pdftex.def Info: figure/samu67_2-1.pdf used on input line 5569.
+Package pdftex.def Info: figure/samu67_2-1.pdf used on input line 5785.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [222 <./figure/samu67-1.pdf>]
+ [226 <./figure/samu67-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 5576.
+Package xcolor Warning: Incompatible color definition on input line 5792.
 
-<figure/samu6768-1.pdf, id=2883, 578.16pt x 505.89pt>
+<figure/samu6768-1.pdf, id=2953, 578.16pt x 505.89pt>
 File: figure/samu6768-1.pdf Graphic file (type pdf)
 
 <use figure/samu6768-1.pdf>
-Package pdftex.def Info: figure/samu6768-1.pdf used on input line 5577.
+Package pdftex.def Info: figure/samu6768-1.pdf used on input line 5793.
 (pdftex.def)             Requested size: 415.12572pt x 363.2293pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [223 <./figure/samu67_2-1.pdf>] [224 <./figure/samu6768-1.pdf>] [225
+ [227 <./figure/samu67_2-1.pdf>] [228 <./figure/samu6768-1.pdf>] [229
 
-] [226]
+] [230]
 Annexe A.
 
-Overfull \hbox (141.03844pt too wide) detected at line 5649
+Overfull \hbox (141.03844pt too wide) detected at line 5865
 []
  []
 
 
-Overfull \hbox (101.02733pt too wide) detected at line 5655
+Overfull \hbox (101.02733pt too wide) detected at line 5871
 []
  []
 
-[227
+[231
 
-] [228] [229] [230
+] [232] [233] [234
 
 ]
 Annexe B.
-[231] [232] [233] [234
+[235] [236] [237] [238
 
 ]
 Annexe C.
-[235] [236
+[239] [240
 
 ]
 Annexe D.
-[237] [238
+[241] [242
 
 ]
 Annexe E.
-(./RPU2013.bbl [239] [240
+(./RPU2013.bbl [243] [244
 
 ]
 Underfull \hbox (badness 1688) in paragraph at lines 4--10
@@ -3454,28 +3458,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 47--52
 itions /
  []
 
-[241]
+[245]
 Underfull \hbox (badness 1132) in paragraph at lines 106--111
 []\T1/lmr/m/n/12 SFMU.  Thé-sau-rus des diag-nos-tics et actes des struc-tures 
 d'ur-gence
  []
 
-) [242] (./RPU2013.ind [243
+) [246] (./RPU2013.ind [247
 
 
-] [244
+] [248
 
-] [245] [246
+] [249] [250
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5816.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 5816.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 6032.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 6032.
  (./RPU2013.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5816.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5816.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 6032.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 6032.
 
 Package rerunfilecheck Info: File `RPU2013.out' has not changed.
-(rerunfilecheck)             Checksum: DF4B8E5EEDB46BD6093BA6FE8DE85A0F;6299.
+(rerunfilecheck)             Checksum: C04262F8FCDB2BE2CCBF8274CED17233;6852.
 
 
 LaTeX Warning: There were undefined references.
@@ -3483,13 +3487,13 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5816.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 6032.
  ) 
 Here is how much of TeX's memory you used:
- 21615 strings out of 494958
- 362792 string characters out of 6179213
- 450478 words of memory out of 5000000
- 23594 multiletter control sequences out of 15000+600000
+ 21644 strings out of 494958
+ 363160 string characters out of 6179213
+ 453558 words of memory out of 5000000
+ 23603 multiletter control sequences out of 15000+600000
  82484 words of font info for 68 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  56i,12n,65p,754b,975s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -3504,10 +3508,10 @@ usr/share/texmf/fonts/type1/public/lm/lmr17.pfb></usr/share/texmf/fonts/type1/p
 ublic/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmri12.pfb></usr/shar
 e/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/l
 m/lmtt12.pfb>
-Output written on RPU2013.pdf (248 pages, 1277167 bytes).
+Output written on RPU2013.pdf (252 pages, 1284098 bytes).
 PDF statistics:
- 3431 PDF objects out of 3580 (max. 8388607)
- 2881 compressed objects within 29 object streams
- 683 named destinations out of 1000 (max. 500000)
- 1412 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3509 PDF objects out of 3580 (max. 8388607)
+ 2954 compressed objects within 30 object streams
+ 703 named destinations out of 1000 (max. 500000)
+ 1476 words of extra memory for PDF output out of 10000 (max. 10000000)
 
