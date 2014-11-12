@@ -80,22 +80,26 @@ pt <- round(prop.table(t, margin=2)*100, 2)
 
 titre1 <- "CCMU et établissement (en pourcentages)"
 titre2 <- "CCMU et établissement "
-print(xtable(t(pt), caption = c(titre1, titre2), digits=2), format.args = list(big.mark = " ", decimal.mark = ","))
+print(xtable(t(pt), caption = c(titre1, titre2), label = "tab:ccmu_finess_p", digits=2), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
-On note des disparités importantes entre établissements.
+On note des disparités importantes entre établissements (voir le tableau \ref{tab:ccmu_finess_p} page \pageref{tab:ccmu_finess_p}).
 
 \section{CCMU et mode de sortie}
+
+voir le tableau \ref{tab:ccmu_mode_sortie} page \pageref{tab:ccmu_mode_sortie}
 
 <<ccmu_mode_sortie, echo=FALSE, fig.height=6, results='asis' >>=
 t3 <- table(d1$GRAVITE, d1$MODE_SORTIE)
 t3 <- t3[,-1]
-titre1 <- "CCMU et mode de sortie"
+titre1 <- "CCMU et mode de sortie. Si globalement les décisions sont cohérentes par rapport à la gravité estimée, certaines sont surprenantes notamment en ce qui concerne les décès ou les CCMU 4 et 5 qui rentrent à domicile."
 titre2 <- "CCMU et mode de sortie"
-print(xtable(t3, caption = c(titre1, titre2), digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
+print(xtable(t3, caption = c(titre1, titre2), label = "tab:ccmu_mode_sortie", digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 \section{CCMU et destination}
+
+voir le tableau \ref{tab:ccmu_dest} page \pageref{tab:ccmu_dest}
 
 <<ccmu_dest, echo=FALSE, fig.height=6, results='asis' >>=
 
@@ -103,15 +107,17 @@ t <- table(d1$GRAVITE, d1$DESTINATION)
 t <- t[,-1]
 titre1 <- "CCMU et destination"
 titre2 <- "CCMU et destination"
-print(xtable(t, caption = c(titre1, titre2), digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
+print(xtable(t, caption = c(titre1, titre2), label = "tab:ccmu_dest", digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
 @
 
 \section{CCMU et Orientation}
+
+voir le tableau \ref{tab:ccmu_orient} page \pageref{tab:ccmu_orient}
 
 <<ccmu_orient, echo=FALSE, fig.height=6, results='asis' >>=
 
 t2 <- table(d1$GRAVITE, d1$ORIENTATION)
 titre1 <- "CCMU et orientation"
 titre2 <- "CCMU et orientation"
-print(xtable(t(t2), caption = c(titre1, titre2), digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
+print(xtable(t(t2), caption = c(titre1, titre2), label = "tab:ccmu_orient", digits=0), format.args = list(big.mark = " ", decimal.mark = ","))
 @

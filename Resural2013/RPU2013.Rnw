@@ -1,5 +1,6 @@
 \documentclass[12pt,english,french,twoside]{book}
 \usepackage[francais]{babel}
+\DecimalMathComma
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 % \usepackage[utf8]{inputenc}

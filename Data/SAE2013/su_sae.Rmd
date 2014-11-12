@@ -9,7 +9,8 @@ output: html_document
 Exploitation des données SAE
 
 ```{r sae}
-file <- "Data/SAE2013/su_base_administrative_SAE 2013_2014_09_30.csv"
+apth <- "../Data/SAE2013/"
+file <- "su_base_administrative_SAE 2013_2014_09_30.csv"
 
 su1 <- read.csv(file, header=TRUE, skip=2, nrow=18)
 

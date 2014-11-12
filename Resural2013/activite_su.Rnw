@@ -26,9 +26,10 @@ a<-xsummary(q,xtable=TRUE,tl= paste0("Nombre de RPU transmis quotidiennement en 
 
 
 \section{Variation du pourcentage journalier de retour à domicile}
+
 \index{Retour à domicile}
 
-Le nombre de retours à domicile est obtenu à partir de la rubrique MODE\_SORTIE. Il s'agit en fait des patients qui n'ont pas été hospitalisés. Sont également comptabilisé dans cette rubrique les sorties atypiques.
+Le nombre de retours à domicile est obtenu à partir de la rubrique MODE\_SORTIE. Il s'agit en fait des patients qui n'ont pas été hospitalisés. Sont également comptabilisés dans cette rubrique les sorties atypiques.
 
 Les variations du retour journalier à domicile sont calculées de la manière suivante:
 \begin{description}
@@ -37,9 +38,14 @@ Les variations du retour journalier à domicile sont calculées de la manière s
 \end{description}
 
 <<retour_dom,echo=FALSE,results='asis'>>=
+
+# q nombre de passage par jour
+# q2 nombre de retour à domicile par jour
+# q3 % de retour à domicile
+
 q2<-tapply(d1[d1$MODE_SORTIE=="Domicile",6],yday(d1[d1$MODE_SORTIE == "Domicile", 6]),length)
 #head(q2)
-q3<-q2*100/q
+q3 <- q2 * 100 / q
 a<-xsummary(q3,xtable=TRUE,tl="Pourcentage de retours à domicile - patients n'ayant été ni hospitalisés, ni transférés dans un autre établissement. Ce taux est plus faible en début d'année, lorsque les épisodes de tension sont plus fréquents.",tc="Retour à domicile",lab="tab:rd")
 
 # plot(q3,type="l", main="Retours à domicile", ylab="% de retour à domicile", xlab = "jours")
@@ -53,34 +59,43 @@ lines(rollmean(xts(z), 7),col="blue",lwd=2)
 
 On refait le calcul de q en tenant compte des non réponses:
 <<retour_dom2,echo=FALSE,results='asis'>>=
-q4<-tapply(d1[!is.na(d1$MODE_SORTIE),6],yday(d1[!is.na(d1$MODE_SORTIE), 6]),length)
-#head(q4)
-q5<-q2/q4
+
+# q4 nombre de passage dont le mode de sortie est renseigné:
+q4 <- tapply(d1[!is.na(d1$MODE_SORTIE),6],yday(d1[!is.na(d1$MODE_SORTIE), 6]),length)
+# q5 % de retour à domicile (en tenant compte des non réponses)
+q5 <- q2 * 100 / q4
 #head(q5)
-a<-summary(q5,xtable=TRUE,tl="Retours à domicile sans les non réponses",tc="Passages totaux sans les non réponses",lab="tab:rdsansNA")
-plot(q3,type="l",main="Taux de retour à domicile\n(non réponses exclues)",ylab="Fréquence",xlab="Jours")
-abline(h = a["Moyenne"], lty=2, col="blue")
+a <- xsummary(q5, xtable=TRUE, tl="Retours à domicile sans les non réponses (en pourcentage du nombre de RPU renseignés)",tc="Retours à domicile sans les non réponses", lab="tab:rdsansNA")
+
+plot(q5, type="l",main="Taux de retour à domicile\n(non réponses exclues)",ylab="Fréquence",xlab="Jours")
+abline(h = as.numeric(a["Moyenne"]), lty=2, col="blue")
 legend("bottomright", legend="moyenne", col="blue", lty=2, bty="n")
 @
 
 Si on considère que tout ce qui n'est pas un retour à domicile constitue une hospitalisation, on peut tracer un graphique, miroir du précédent. La ligne bleue représente la moyenne lissée sur sept jours. On notera le taux d'hospitalisation élévé du début de l'année, correspondant à une période de forte tension. Les fluctuations de ce paramètre (comme le retour à domicile) sont une piste intéressante dans le cadre de la recherche d'indicateurs d'hôpital en tension, cependant les seuils d'alerte (triggers) restent à déterminer.
 
 <<hospit,echo=FALSE,results='asis'>>=
-q7<-1-q2/q4
+# q7 est le taux d'hospitalisation
+q7 <- 1 - q2/q4
 #head(q7)
-
-xsummary(q7,xtable=TRUE,tl="Hospitalisations (ou transferts) sans les non réponses",tc="Hospitalisations",lab="tab:hosp")
+titre_long <- paste0("Hospitalisations (ou transferts) sans les non réponses. En moyenne ", round(q7['Moyenne'], 2), " des passages entraînent une hospitalisation.")
+x <- xsummary(q7, xtable=TRUE, tl=titre_long, tc="Hospitalisations",lab="tab:hosp")
 
 z <- zoo(q7, unique(as.Date(d1$ENTREE)))
-plot(xts(z),main="Taux d'hospitalisation\n(non réponses exclues)",ylab="Fréquence",xlab="Période (moyenne lissée sur 7 jours")
+plot(xts(z),main="Taux d'hospitalisation\n(non réponses exclues)", ylab="Fréquence", xlab="Période (moyenne lissée sur 7 jours")
 lines(rollmean(xts(z), 7), col = "blue",lwd=2)
 @
 
 
-Le taux de réponse pour cet item est de
 <<retour_dom3,echo=FALSE,results='asis'>>=
-q6<-q4/q
-a<-summary(q6,xtable=TRUE,tl="Activité des SU et non réponses - dans environ 15% des cas, on ne sait pas ce que devient le patient.",tc="Activité des SU et non réponses",lab="tab:NAsu")
-plot(q6,type="l",main="Taux réponse à l'item 'MODE SORTIE'",col="light green")
+
+# q6 rapport passages renseignés sur passsages totaux
+q6 <- q4 / q
+m <- mean(q6)
+a <- xsummary(q6, xtable=TRUE, tl = paste0('Activité des SU et non réponses - dans environ ', round(100 - m*100, 2) ,' \\% des cas, on ne sait pas ce que devient le patient.'), tc= "Activité des SU et non réponses", lab="tab:NAsu")
+plot(q6, type="l", main="Taux réponse à l'item 'MODE SORTIE'", col = "green", xlab = "Jours", ylab = "Taux de réponse")
 @
+
+%Le taux de réponse pour cet item est de `r \Sexpr{round(q6 * 100, 2)}` \%.
+
 \index{exhaustivité@mode de sortie}

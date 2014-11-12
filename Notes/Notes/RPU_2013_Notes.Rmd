@@ -1,10 +1,39 @@
 Notes techniques
 ========================================================
+```{r}
+library(knitr)
+```
+
 Table des matières
 ------------------
 1. notes techniques
 2. cartographie
 3. population
+
+Notes Latex
+===========
+
+source: Arnaud Gazagnes, Latex pour le prof. de Maths
+
+Ecriture d'un nombre et virgule
+-------------------------------
+#### La commande \\np (pp 58)
+
+Package _numprint_
+
+\\Sexpr{\\np{3,14}} permet d'écrire la valeur sans qu'apparaisse un blanc entre 3 et 14. 
+
+
+#### La commande \\DecimalMathComma (pp 58)
+Mettre cette expression dans le préambule. Ne fonctionne qu'avec l'option _francais_ du package _babel_.
+
+#### Symbole %
+
+Dans un commentaire comme dans xtable utiliser un double échappement:
+```{}
+\\%
+```
+
 
 
 Notes techniques
