@@ -1,3 +1,14 @@
+---
+title: "Evènements remarquables 2014"
+author: "JcB"
+date: "12/11/2014"
+source: "aaaa"
+output:
+  pdf_document:
+    number_sections: yes
+    toc: yes
+---
+
 Evènements remarquables 2014
 ========================================================
 
@@ -153,6 +164,85 @@ wday(ouvrable.ferie$x, label = TRUE)
 Dimanches et jours fériés en Alsace
 ```{r}
 dim.and.ferie <- c(dim, ouvrable.ferie)
+
+```
+
+Vacances scolaires 2014
+=======================
+
+noel2013_debut <- as.Date("2013-12-22")
+noel2013_fin <- as.Date("2014-01-05")
+hiver2014_debut <- "2014-02-23"
+hiver2014_fin <- "2014-03-09"
+printemps_debut <- "2014-04-20"
+printemps_fin <- "2014-05-04"
+ete_debut <- "2014-07-06"
+ete_fin <- "2014-09-02"
+toussaint_debut <- "2014-10-18"
+toussaint_fin <- "2014-11-03"
+noel_ debut <- "2014-12-20"
+noel_fin <- "2015-01-05"
+
+faire un calendrier
+-------------------
+
+On peut créer une séquence de date avec la fonction __seq__ et des objets de type __Date__.
+
+seq(from, to, by, length.out = NULL, along.with = NULL, ...)
+
+Arguments:
+
+- from   date de départ [obligatoire]
+- to 	   date de fin [optionnel].
+- by 	   incrément. Il peut être spécifié de différentes manières:
+          - en nombre de jours
+          - un objet de la classe [difftime](https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html)
+          - une chaîne de caractères contenant l'un des mots suivant: "day", "week", "month", "quarter" or "year". On peut de manière optionnelle faire précéder chacun de ces mots par un entier (positif ou négatif) suivi d'un espace, puis le mot (ex "-1 week" à partir de la date de départ affiche les dates par saut en arrière de 1 semaine)
+- length.out 	nombre entier correspondant à la longueur de la séquence désirée [optionel]
+- along.with 	prend la longueur à partir de la longueur de cet argument
+
+voir [seq.POSIXt](https://stat.ethz.ch/R-manual/R-devel/library/base/html/seq.POSIXt.html) pour les détails de "month".
+
+Valeur retournée: un vecteur de la classe "Date".
+
+exemples
+```{r ex}
+# first days of years
+seq(as.Date("1910/1/1"), as.Date("1999/1/1"), "years")
+## by month
+seq(as.Date("2000/1/1"), by = "month", length.out = 12)
+## quarters
+seq(as.Date("2000/1/1"), as.Date("2003/1/1"), by = "quarter")
+
+## find all 7th of the month between two dates, the last being a 7th.
+st <- as.Date("1998-12-17")
+en <- as.Date("2000-1-7")
+ll <- seq(en, st, by = "-1 month")
+rev(ll[ll > st & ll < en])
+```
+
+
+```{r}
+# année 2014 avec les cacances de noel 2013 et 2014
+d <- seq(as.Date("2013-12-22"), as.Date("2015-01-05"), 1) 
+# un vecteur de 380 nombe aléatoire de moyenne 100 et etype 10
+a <- rnorm(length(d), 100, 10)
+# trace la courbe
+plot(d, a, type="l")
+# on ajoute des rectangles colorés pour la période des vacances. a métode rgb est nécessaire pour avoir des couleurs semi-transparantes. Le paramètre alpha gère la transparence
+rect(as.Date("2013-12-22"), 135, as.Date("2014-01-05"),0, col=rgb(1, 0, 0,0.2))
+
+# dessin courbe sous forme d'un polygone coloré. Le polygone nécessite 2 vecteurs, l'un pour les x, l'autre pour les y. 
+plot(d, a, type = "n") # dessine la courbe sans l'afficher
+polygon(c(d[1], d, d[380]), c(0, a, 0), col=rgb(1, 0, 0,0.2), border=rgb(1, 0, 0,0.2))
+
+# dessin de la courbe avec un polygone uniquement pendant la période des vacances
+plot(d, a, type="l")
+noel2013_debut <- as.Date("2013-12-22")
+noel2013_fin <- as.Date("2014-01-05")
+vacances_noel <- seq(noel2013_debut, noel2013_fin, 1) # vecteur de date
+dt <- difftime(noel2013_fin, noel2013_debut) + 1 # longueur des vacances en jour
+polygon(c(noel2013_debut, vacances_noel, noel2013_fin), c(0, a[1:dt], 0), col=rgb(1, 0, 0,0.2), border = "red")
 
 ```
 
