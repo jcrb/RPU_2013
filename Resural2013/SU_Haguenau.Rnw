@@ -1,6 +1,6 @@
 % Su_Haguenau
 
-\index{SU Hagenau}
+\index{SU Haguenau}
 \index{CH de Haguenau!SU}
 
 <<recap_hag,echo=FALSE,warning=FALSE>>=
@@ -57,6 +57,10 @@ CCMU 4 \& 5 & \np{\Sexpr{a["n_ccmu45"]}} (\Sexpr{a["p_ccmu45"]} \%) \tabularnewl
 
 \end{tabular}
 
+
+\\
+\textbf{Remarque:} les RPU de pédiatrie sont incomplets car ne sont pas pris en compte les admissions directes au service de pédiatrie, ce service n'étant pas encore informatisé (Cette informatisation sera effective au second semestre 2014). Ceci explique le pourcentage anormalement bas de RPU pédiatriques par rapport à la moyenne régionale. Il y a également un biais qualitatif dans la mesure où les RPU pédiatriques enregistrés ne concernent que la traumatologie.
+
 \section*{Durée de présence aux urgences}
 
 <<graphe_hag,echo=FALSE,fig.height=6>>=
@@ -64,7 +68,7 @@ presence_hist(hop,d1)
 @
 
 \section*{Taux de complétude}
-\index{Diaconat-Fonderie!taux de complétude}
+\index{SU Haguenau!taux de complétude}
 
 <<compl_hag, echo=FALSE, warning=FALSE,fig.width=8>>= 
 ch <- d1[d1$FINESS==hop,]
