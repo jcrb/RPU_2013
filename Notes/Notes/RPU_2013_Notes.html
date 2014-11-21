@@ -80,7 +80,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </div>
 <div id="symbole" class="section level4">
 <h4>Symbole %</h4>
-<p>Dans un commentaire comme dans xtable utiliser</p>
+<p>Dans un commentaire comme dans xtable utiliser un double échappement:</p>
 <pre><code>\\%</code></pre>
 </div>
 </div>
@@ -258,7 +258,7 @@ print(xtable(a$output.table,  caption=c(paste0(&quot;Horaires de passages des AV
 </div>
 <div id="supprimer-la-notation-scientifique" class="section level4">
 <h4>Supprimer la notation scientifique</h4>
-<p>Par défaut R transforme tout nombre supérieur à 10^5 en notation scientifique. Voir <strong>?option</strong> puis <em>scipen</em> pour explication (et <a href="http://yihui.name/knitr/demo/output/">http://yihui.name/knitr/demo/output/</a>). ex: options(scipen = 6, digits = 2) Accepté par knitr rt Sweave. A mettre en début de programme.</p>
+<p>Par défaut R transforme tout nombre supérieur à 10^5 en notation scientifique. Voir <strong>?option</strong> puis <em>scipen</em> pour explication (et <a href="http://yihui.name/knitr/demo/output/">http://yihui.name/knitr/demo/output/</a>). ex: options(scipen = 6, digits = 2) Accepté par knitr et Sweave. A mettre en début de programme.</p>
 </div>
 <div id="mettre-un-espace-comme-separateur-de-milliers" class="section level4">
 <h4>Mettre un espace comme séparateur de milliers</h4>

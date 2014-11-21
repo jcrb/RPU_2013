@@ -260,7 +260,7 @@ print(xtable(a$output.table,  caption=c(paste0("Horaires de passages des AVC en 
 #### Supprimer la notation scientifique
 
 Par défaut R transforme tout nombre supérieur à 10^5 en notation scientifique. Voir **?option** puis *scipen* pour explication (et http://yihui.name/knitr/demo/output/).
-ex: options(scipen = 6, digits = 2) Accepté par knitr rt Sweave. A mettre en début de programme.
+ex: options(scipen = 6, digits = 2) Accepté par knitr et Sweave. A mettre en début de programme.
 
 #### Mettre un espace comme séparateur de milliers
 A mettre en début de document. Source: http://stackoverflow.com/questions/18965637/set-global-thousand-separator-on-knitr
