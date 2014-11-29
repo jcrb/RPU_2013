@@ -7,6 +7,7 @@ source("../../../Routines/mes_fonctions.R")
 library("lubridate")
 library("epicalc")
 library("epitools")
+library("RColorBrewer")
 
 nrow(d1)
 ```
@@ -97,7 +98,7 @@ Les pneumonies bactériennes concernent les adultes agés des deux sexes. L'age 
 
 ```{r pneumo}
 # copyright<-"© 2013 Résural"
-seq3.r<-colorbrewer.palette(3,"seq","r")
+seq3.r <- colorbrewer.palette(3,"seq","r")
 
 a<-epigraphe(pneumo$ENTREE,min.date="2013-01-01", strata = pneumo$SEXE,col=seq3.r[3:1],main="Infections respiratoires",xlab="",ylab="Nombre de RPU")
 ```
@@ -139,7 +140,7 @@ tab1(h,missing=FALSE,main="Heures d'admission des AVC",col="yellow")
 
 nAvc <- nrow(AVC)
 sAvc_age <- summary(AVC$AGE)
-srAVC <- sr(AVC)
+srAVC <- summary(AVC)
 summary(AVC$TRANSPORT)
 tab1(AVC$TRANSPORT)
 ```
@@ -165,4 +166,17 @@ source: http://wiekvoet.blogspot.fr/2014/11/the-completeness-of-online-gun-shoot
 arme <- dpr[substr(dpr$DP,1,3) %in% c("X72","X73","X74","X93","X94","X95"),]
 
 ```
+
+Bronchiolites
+=============
+
+```{r bronchiolite}
+bron<-dpr[substr(dpr$DP,1,3)=="J21" ,]
+m<-month(bron$ENTREE,label=T)
+barplot(table(m),main="Bronchiolites - 2013",xlab="Mois")
+s<-week(bron$ENTREE)
+barplot(table(s),main="Bronchiolites - 2013",xlab="Semaines")
+# summary(bron)
+```
+
 
