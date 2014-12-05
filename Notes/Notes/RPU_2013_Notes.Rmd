@@ -10,6 +10,15 @@ Table des matières
 2. cartographie
 3. population
 
+Notes Pandoc
+============
+
+Transformer un fichier __md__ en __pdf__:
+-----------------------------------------
+FILE<-"EqulibreAB"
+system(paste("pandoc -o ", FILE, ".pdf ", FILE, ".md", sep=""))
+
+
 Notes Latex
 ===========
 
