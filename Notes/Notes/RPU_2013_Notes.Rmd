@@ -491,7 +491,7 @@ Packages installés
 
 source: http://www.ats.ucla.edu/stat/r/faq/packages.htm
 
-Liste de tous les packages installés sir la machine:
+Liste de tous les packages installés sur la machine:
 
 ```{}
 a <- installed.packages()
