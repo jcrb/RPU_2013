@@ -130,7 +130,7 @@ q7<-1-q2/q4
 head(q7)
 summary(q7)
 z <- zoo(q7, unique(as.Date(d1$ENTREE)))
-plot(xts(z),main="Taux d'hospitalisation en Alsace à partir des SU\n(non réponses exclues)",ylab="Fréquence",xlab="Période (moyenne lissée sur 7 jours")
+plot(xts(z),main="Taux d'hospitalisation en Alsace à partir des SU\n(non réponses exclues)",ylab="Fréquence",xlab="Période (moyenne lissée sur 7 jours)", minor.ticks = FALSE)
 lines(rollmean(xts(z), 7), col = "blue",lwd=2)
 copyright()
 ```
