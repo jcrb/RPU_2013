@@ -1,3 +1,13 @@
+---
+title: "Activité mensuelle"
+author: "jcb"
+date: "16 janvier 2015"
+output:
+  html_document:
+    fig_caption: yes
+    keep_md: yes
+---
+
 Répartition de l'activité
 ========================================================
 ```{r date}
@@ -16,6 +26,8 @@ mois_f <- c("Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","
 mois_c <- c("Jan","Fév","Mar","Avr","Mai","Jui","Jul","Aou","Sep","Oct","Nov","Déc")
 trimestre_f <- c("trim.1","trim.2","trim.3","trim.4")
 semaine_f <- c("Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi","Dimanche")
+
+anc <- "2013"
 ```
 Activité globale
 ----------------
@@ -64,6 +76,21 @@ mois_min <- names(which.min(tm[tm>0]))
 - Mois le moins actif: `r mois_min ` (`r min(tm[tm>0])`)
 - Moyenne mensuelle: `r mois_mean`
 
+Nombre de RPU par mois standards de 30 jours.
+--------------------------------------------
+
+```{r rpu_mois_standard}
+RPU.mois <- month(d1$ENTREE,label=TRUE)
+
+nb.jour.mois <- as.numeric(diff(seq(as.Date("2013-01-01"), as.Date("2014-01-01"), by = "month"))) # source: https://stat.ethz.ch/pipermail/r-help/2007-August/138113.html
+mois.normalise <- round(30 * table(RPU.mois) / nb.jour.mois, 0)
+names(mois.normalise) <- mois.short
+main <- paste0(anc, " - Nombre de RPU par mois standardisés de 30 jours")
+barplot(mois.normalise, main="RPU produits par mois standardisés")
+copyright()
+```
+
+
 Activité trimesrielle
 ---------------------
 
@@ -96,5 +123,15 @@ ts
 barplot(prop.table(ts) * 100, main="Répartition des passages (en pourcentage) selon le jour de la semaine")
 
 boxplot(as.numeric(as.Date(d1$ENTREE)) ~ sf, las=2, col="yellow", names=semaine_f, main="Activité selon le jour de la semaine", notch=TRUE)
+```
+
+Activité par semaine
+--------------------
+
+```{r activite_semaine}
+m<-week(d1$ENTREE)
+main <- paste0("Activité hebdomadaire en ", anc)
+barplot(table(m), main=main)
+copyright()
 ```
 
