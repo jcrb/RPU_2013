@@ -1,11 +1,24 @@
+---
+title: "Carte des tensions"
+author: "JcB"
+date: "24/01/2014"
+output:
+  html_document:
+    keep_md: yes
+---
+
 Carte des tensions
 ========================================================
 
 A partir des tensions déclarées par les établissements d'Alsace, une carte de situation est dessinée.
 
 Elements nécessaires:
+
 - un fond de carte rprésentant les douze secteurs de proximité
 - le fichier des villes siège de SU (coordonnées en Lambert étendu)
+- le fichier des tensions
+
+Le fichier des tensions, __tensions.csv__, comptabiise les tensions hebdomadaires pour chacun des 12 territoires de proximité. La tension est mesurée par une échelle allant de 1 à 3. La somme des 12 territoires varie de 12 à 36.
 
 ```{r zp_source}
 library("maptools")
@@ -13,6 +26,7 @@ library("lubridate")
 
 load("../RPU2013_Carto_Pop/zone_proximite.Rda")    # czps
 load("../RPU2013_Carto_Pop/zp_villes.Rda")         # d
+score <- read.csv("tensions.csv") # lecture du fichier des tensions
 source("../../../Routines/mes_fonctions.R")                                         # copyright
 
 # couleur du territoire de santé (par défaut tout est vert):
@@ -31,16 +45,21 @@ col <- rep("green",12)
 # 11 = Guebwiller
 # 12 = Thann
 
-j <- today()
-s <- week(j)
-date <- format(Sys.time(), "%A %d %B %Y %H:%M:%S")
-
-subtitle <- paste0("Semaine ", s, " (", date, ")")
-
-tension <- c(1,1,1,1,1,1,1,1,2,1,1,1)
+# pour un test
+# j <- today()  # date d'aujourd'hui
+# date <- format(Sys.time(), "%A %d %B %Y %H:%M:%S")
+# tension <- c(1,1,1,1,1,1,1,1,2,1,1,1)
 # subtitle <- "Semaine 5 (27-2 février 2014)"
 
-col <- rep("grey",12)
+# date de la carte
+ligne <- 12 # ligne du fichier score correspondant à la date du jour
+date <- as.Date(score[ligne, 1]) # récupère la date (1ère colonne)
+s <- week(date) # détermine le n° de la semaine
+subtitle <- paste0("Semaine ", s, " (", date, ")")
+
+tension <- score[ligne, c(2:13)] # liste des tensions
+
+col <- rep("grey",12) # par défaut toutes les territoires sont gris
 for(i in 1:12){
   if(tension[i] == 1){
     col[i] = "green"}
@@ -77,5 +96,5 @@ legend("topleft", legend=c("Pas de tension","Surcharge","Tension avérée","Pas 
 
 title("Carte des tensions en Alsace", sub = subtitle)
 
-copyright(an ="2013-2014", line=-3)
+copyright(an ="2013-2015", line=-3)
 ```
