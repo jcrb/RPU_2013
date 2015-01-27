@@ -64,7 +64,7 @@ col <- rep("green",12)
 
 # nouvelle formulation: utilise tension.R
 source("tensions.R")
-ligne <- 11 # ligne du fichier score correspondant à la date du jour
+ligne <- 13 # ligne du fichier score correspondant à la date du jour
 carte_tension(ligne, score, czps, d)
 ```
 
