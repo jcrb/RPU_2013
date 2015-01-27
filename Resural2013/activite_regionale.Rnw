@@ -170,11 +170,16 @@ En Lorraine, ce taux est estimé à 23,45\% en 2010 (\cite{2,3}).
 <<parmois, echo=FALSE, comment="", fig.height=8, results='asis'>>=
 RPU.mois <- month(d1$ENTREE,label=TRUE)
 levels(RPU.mois) <- mois.short # remplace les termes anglais
-t <- table(RPU.mois, dnn="RPU mensuels")
+t <- table(RPU.mois, dnn="RPU mensuels - 2013")
 
 # print(xtable(table(RPU.mois)), format.args = list(big.mark = " ", decimal.mark = ","))
 
 print(xtable(t, caption=c(paste0("Ativité mensuelle en nombre de RPU en ", anc,". ",  round(mean(t),0), " RPU en été produits en moyenne par mois en ", anc))), format.args = list(big.mark = " ", decimal.mark = ","))
+
+# pour récupérer les données dans un tableur (Shaeffer Julie). On verticalise le tableau avec cbind, mais il faut remettre le titre. Puis sauvegarde au format csv.
+# rpu.par.mois <- cbind(t)
+# colnames(rpu.par.mois) <- "RPU mensuels - 2013"
+# write.csv(rpu.par.mois, file = "rpu_par_mois_2013.csv")
 
 @
 

@@ -1,21 +1,22 @@
 ---
-title: "Evènements remarquables 2014"
+title: "Evènements remarquables 2014 - 2015"
 author: "JcB"
 date: "12/11/2014"
-source: "aaaa"
 output:
   pdf_document:
     number_sections: yes
     toc: yes
+source: aaaa
 ---
 
-Evènements remarquables 2014
+Evènements remarquables 2014-2015
 ========================================================
 
 - tensions hospitalières
 - pic de pollution: semaine 11 (10-16 mars, circulation alternée Paris le 17/3)
 - ponts ?
 - congés scolaires ?
+
 
 Jours fériés en France
 ----------------------
@@ -246,3 +247,45 @@ polygon(c(noel2013_debut, vacances_noel, noel2013_fin), c(0, a[1:dt], 0), col=rg
 
 ```
 
+Variations d'activité possible
+==============================
+
+Attentat contre Charlie Hebdo
+-----------------------------
+
+- 11 janvier 2015
+- augmentation du nombre de suicides ?
+
+Grève médecins
+--------------
+
+- généralistes: fêtes de fin d'année 2015
+- SOS médecins Strasbourg: dimanche 23 janvier 2015
+
+Epidémies
+---------
+
+- grippe: 
+
+
+Tensions Hospitalières
+======================
+
+23 janvier 2015
+---------------
+Suite à des signalements de tensions adressés à l’ARS ce jour, un point de situation a été effectué, dont il ressort :
+
+#### Territoire de santé 1 :
+Aucune tension signalée ce jour à l’ARS.
+
+#### Territoire de santé 2 :
+Hôpitaux Universitaires de Strasbourg : une tension signalée sur les lits de médecine
+
+#### Territoire de santé 3 :
+
+- CH de Sélestat : une saturation des lits de médecine, et des tensions sur les lits de chirurgie ;
+- HC de Colmar : une activité élevée au sein des urgences, une saturation des lits de médecine, des tensions sur les lits de chirurgie.
+
+#### Territoire de santé 4 :
+
+- GHR Mulhouse Sud Alsace : activité très soutenue, des tensions sur les lits médecine, mais qui restent maîtrisées à ce stade.
