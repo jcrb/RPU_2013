@@ -22,4 +22,9 @@ xtable
 plotrix
 openintro
 sp
+<<<<<<< HEAD
+=======
+grid
+lattice
+>>>>>>> 0eebf275a194c00563052db414b136564882cf48
 maptools
